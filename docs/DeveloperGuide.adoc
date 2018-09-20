@@ -995,11 +995,16 @@ _{More to be added}_
 [appendix]
 == Non Functional Requirements
 
-.  Should work on any <<mainstream-os,mainstream OS>> as long as it has Java `9` or higher installed.
-.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-_{More to be added}_
+.  	Should work on any <<mainstream-os,mainstream OS>> as long as it has Java `9` or higher installed.
+.  	Should be able to hold up to 1000 guests without a noticeable sluggishness in performance for typical usage.
+.	Command Line Interface is the primary mode of input. There is a preference for typing over mouse actions or key combinations. One-shot commands are preferred over multi-step commands.
+.  	A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+.	Incremental development: a reasonably consistent delivery rate is expected. 
+.	The data should be stored locally and should be in a human editable text file, so that advanced users can manipulate the data by editing the file.
+.	The software should follow the Object-oriented paradigm.
+.	The project will not use a DBMS.
+.	The software should be platform-independent.
+.	The software should work without requiring an installer.
 
 [appendix]
 == Glossary
