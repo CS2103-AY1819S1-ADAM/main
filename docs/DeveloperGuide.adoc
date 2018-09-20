@@ -849,44 +849,162 @@ _{More to be added}_
 [appendix]
 == Use Cases
 
-(For all use cases below, the *System* is the `AddressBook` and the *Actor* is the `user`, unless specified otherwise)
-
 [discrete]
-=== Use case: Delete person
+=== UC1.1: Check-in a Guest
+
+*System*: `Concierge`, *Actor*: `Receptionist`
 
 *MSS*
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.	Receptionist checks the room rates for all room types
+2. 	Receptionist checks available rooms (not occupied or reserved) of the type guest wants
+3.	Receptionist ensures that room has all necessary maintenance completed
+4. 	Receptionist assigns room to Guest
 +
 Use case ends.
 
 *Extensions*
 
 [none]
-* 2a. The list is empty.
+* 2a. System indicates that there are no rooms available
 +
 Use case ends.
 
-* 3a. The given index is invalid.
+* 4a. There are multiple Guests to be checked-in
 +
 [none]
-** 3a1. AddressBook shows an error message.
+** 4a1. Receptionist adds all Guests to System
 +
-Use case resumes at step 2.
+Use case resumes at step 4.
+
+[discrete]
+=== UC1.2: Retrieve room number of a Guest
+
+*System*: `Concierge`, *Actor*: `Receptionist`
+
+*MSS*
+
+1. 	Receptionist searches room number using Guest’s particulars (e.g. Name, ID, Phone Number, etc.)
+2. 	System returns room number
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. System indicates that the Guest is not staying in the hotel.
++
+Use case ends.
+
+[discrete]
+=== UC1.3: Send room service to a Guest
+
+*System*: `Concierge`, *Actor*: `Receptionist`
+
+*MSS*
+
+1. 	Receptionist retrieves room number of Guest (UC1.2)
+2. 	Receptionist specifies what type of room service to send to Guest
+3. 	System confirms room service sent to guest, with an ETA
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 3a. System indicates that there are no available hotel attendants at the moment
++
+[none]
+** 3a1. Receptionist puts Guest on a waiting queue
++
+Use case ends.
+
+[discrete]
+=== UC1.4: Swap Guest's room
+
+*System*: `Concierge`, *Actor*: `Receptionist`
+
+*MSS*
+
+1. 	Receptionist views listing of available rooms (UC1.2)
+2. 	Receptionist swaps guest’s room
+3. 	System prompts to mark the vacated room for housekeeping
+4. 	Receptionist sends for housekeeping service in vacated room
++
+Use case ends.
+
+[discrete]
+=== UC1.5: Edit Guest's personal particulars
+
+*System*: `Concierge`, *Actor*: `Receptionist`
+
+*MSS*
+
+1. 	Receptionist identifies Guest using personal particulars (e.g. name, ID, phone number)
+2. 	Receptionist updates Guest details
++
+Use case ends.
+
+[discrete]
+=== UC1.6: Reserve a room for Guest
+
+*System*: `Concierge`, *Actor*: `Receptionist`
+
+*MSS*
+
+1. 	Receptionist views listing of available rooms (UC1.2)
+2.	Receptionist specifies reservation dates
++
+Use case ends.
+
+[discrete]
+=== UC2.1: Edit room rates
+
+*System*: `Concierge`, *Actor*: `Hotel Manager`
+
+*MSS*
+
+1.	Hotel Manager checks the room rates for all room types
+2.	Hotel Manager specifies new room rate for a particular room type
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. Hotel Manager specifies an invalid room rate (has to be non-negative integer)
++
+[none]
+**	2a1. System displays an error message that no changes have been made
++
+Use case ends.
+
+[discrete]
+=== UC2.2: Check statistics
+
+*System*: `Concierge`, *Actor*: `Hotel Manager`
+
+*MSS*
+
+1.	Hotel Manager specifies periodicity of earnings to checked-in
++
+Use case ends.
 
 _{More to be added}_
 
 [appendix]
 == Non Functional Requirements
 
-.  Should work on any <<mainstream-os,mainstream OS>> as long as it has Java `9` or higher installed.
-.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-_{More to be added}_
+.  	Should work on any <<mainstream-os,mainstream OS>> as long as it has Java `9` or higher installed.
+.  	Should be able to hold up to 1000 guests without a noticeable sluggishness in performance for typical usage.
+.	Command Line Interface is the primary mode of input. There is a preference for typing over mouse actions or key combinations. One-shot commands are preferred over multi-step commands.
+.  	A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+.	Incremental development: a reasonably consistent delivery rate is expected. 
+.	The data should be stored locally and should be in a human editable text file, so that advanced users can manipulate the data by editing the file.
+.	The software should follow the Object-oriented paradigm.
+.	The project will not use a DBMS.
+.	The software should be platform-independent.
+.	The software should work without requiring an installer.
 
 [appendix]
 == Glossary
