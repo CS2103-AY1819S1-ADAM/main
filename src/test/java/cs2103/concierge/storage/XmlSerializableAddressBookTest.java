@@ -1,4 +1,4 @@
-package seedu.address.storage;
+package cs2103.concierge.storage;
 
 import static org.junit.Assert.assertEquals;
 
@@ -9,10 +9,10 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.commons.util.XmlUtil;
-import seedu.address.model.AddressBook;
-import seedu.address.testutil.TypicalPersons;
+import cs2103.concierge.commons.exceptions.IllegalValueException;
+import cs2103.concierge.commons.util.XmlUtil;
+import cs2103.concierge.model.AddressBook;
+import cs2103.concierge.testutil.TypicalPersons;
 
 public class XmlSerializableAddressBookTest {
 
@@ -47,7 +47,4 @@ public class XmlSerializableAddressBookTest {
                 XmlSerializableAddressBook.class);
         thrown.expect(IllegalValueException.class);
         thrown.expectMessage(XmlSerializableAddressBook.MESSAGE_DUPLICATE_PERSON);
-        dataFromFile.toModelType();
-    }
-
-}
+        dataFromFile.toModelType()

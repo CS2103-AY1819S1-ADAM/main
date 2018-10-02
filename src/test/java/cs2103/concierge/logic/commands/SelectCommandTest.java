@@ -1,27 +1,24 @@
-package seedu.address.logic.commands;
+package cs2103.concierge.logic.commands;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static cs2103.concierge.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static cs2103.concierge.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static cs2103.concierge.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
+import static cs2103.concierge.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.Rule;
 import org.junit.Test;
 
-import seedu.address.commons.core.Messages;
-import seedu.address.commons.core.index.Index;
-import seedu.address.commons.events.ui.JumpToListRequestEvent;
-import seedu.address.logic.CommandHistory;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.UserPrefs;
-import seedu.address.ui.testutil.EventsCollectorRule;
+import cs2103.concierge.commons.core.Messages;
+import cs2103.concierge.commons.core.index.Index;
+import cs2103.concierge.commons.events.ui.JumpToListRequestEvent;
+import cs2103.concierge.logic.CommandHistory;
+import cs2103.concierge.model.Model;
+import cs2103.concierge.model.ModelManager;
+import cs2103.concierge.model.UserPrefs;
+import cs2103.concierge.ui.testutil.EventsCollectorRule;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code SelectCommand}.
@@ -52,16 +49,16 @@ public class SelectCommandTest {
 
     @Test
     public void execute_validIndexFilteredList_success() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
-        showPersonAtIndex(expectedModel, INDEX_FIRST_PERSON);
+        CommandTestUtil.showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        CommandTestUtil.showPersonAtIndex(expectedModel, INDEX_FIRST_PERSON);
 
         assertExecutionSuccess(INDEX_FIRST_PERSON);
     }
 
     @Test
     public void execute_invalidIndexFilteredList_failure() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
-        showPersonAtIndex(expectedModel, INDEX_FIRST_PERSON);
+        CommandTestUtil.showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        CommandTestUtil.showPersonAtIndex(expectedModel, INDEX_FIRST_PERSON);
 
         Index outOfBoundsIndex = INDEX_SECOND_PERSON;
         // ensures that outOfBoundIndex is still in bounds of address book list
@@ -100,7 +97,7 @@ public class SelectCommandTest {
         SelectCommand selectCommand = new SelectCommand(index);
         String expectedMessage = String.format(SelectCommand.MESSAGE_SELECT_PERSON_SUCCESS, index.getOneBased());
 
-        assertCommandSuccess(selectCommand, model, commandHistory, expectedMessage, expectedModel);
+        CommandTestUtil.assertCommandSuccess(selectCommand, model, commandHistory, expectedMessage, expectedModel);
 
         JumpToListRequestEvent lastEvent = (JumpToListRequestEvent) eventsCollectorRule.eventsCollector.getMostRecent();
         assertEquals(index, Index.fromZeroBased(lastEvent.targetIndex));
@@ -112,7 +109,7 @@ public class SelectCommandTest {
      */
     private void assertExecutionFailure(Index index, String expectedMessage) {
         SelectCommand selectCommand = new SelectCommand(index);
-        assertCommandFailure(selectCommand, model, commandHistory, expectedMessage);
+        CommandTestUtil.assertCommandFailure(selectCommand, model, commandHistory, expectedMessage);
         assertTrue(eventsCollectorRule.eventsCollector.isEmpty());
     }
 }

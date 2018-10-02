@@ -1,15 +1,16 @@
-package seedu.address.model.person;
+package cs2103.concierge.model.person;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static cs2103.concierge.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
 
+import cs2103.concierge.commons.util.CollectionUtil;
+import cs2103.concierge.model.person.exceptions.DuplicatePersonException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
-import seedu.address.model.person.exceptions.PersonNotFoundException;
+import cs2103.concierge.model.person.exceptions.PersonNotFoundException;
 
 /**
  * A list of persons that enforces uniqueness between its elements and does not allow nulls.
@@ -52,7 +53,7 @@ public class UniquePersonList implements Iterable<Person> {
      * The person identity of {@code editedPerson} must not be the same as another existing person in the list.
      */
     public void setPerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
+        CollectionUtil.requireAllNonNull(target, editedPerson);
 
         int index = internalList.indexOf(target);
         if (index == -1) {
@@ -87,7 +88,7 @@ public class UniquePersonList implements Iterable<Person> {
      * {@code persons} must not contain duplicate persons.
      */
     public void setPersons(List<Person> persons) {
-        requireAllNonNull(persons);
+        CollectionUtil.requireAllNonNull(persons);
         if (!personsAreUnique(persons)) {
             throw new DuplicatePersonException();
         }

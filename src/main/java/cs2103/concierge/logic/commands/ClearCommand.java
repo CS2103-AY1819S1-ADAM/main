@@ -1,10 +1,10 @@
-package seedu.address.logic.commands;
+package cs2103.concierge.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import seedu.address.logic.CommandHistory;
-import seedu.address.model.AddressBook;
-import seedu.address.model.Model;
+import cs2103.concierge.model.AddressBook;
+import cs2103.concierge.model.Model;
+import cs2103.concierge.logic.CommandHistory;
 
 /**
  * Clears the address book.

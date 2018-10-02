@@ -1,12 +1,12 @@
-package seedu.address.model;
+package cs2103.concierge.model;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static cs2103.concierge.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static cs2103.concierge.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static cs2103.concierge.testutil.TypicalPersons.ALICE;
+import static cs2103.concierge.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -19,9 +19,9 @@ import org.junit.rules.ExpectedException;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
-import seedu.address.testutil.PersonBuilder;
+import cs2103.concierge.model.person.Person;
+import cs2103.concierge.model.person.exceptions.DuplicatePersonException;
+import cs2103.concierge.testutil.PersonBuilder;
 
 public class AddressBookTest {
 
