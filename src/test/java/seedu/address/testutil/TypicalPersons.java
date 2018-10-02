@@ -62,12 +62,12 @@ public class TypicalPersons {
     /**
      * Returns an {@code GuestList} with all the typical persons.
      */
-    public static GuestList getTypicalAddressBook() {
-        GuestList ab = new GuestList();
+    public static GuestList getTypicalGuestList() {
+        GuestList gl = new GuestList();
         for (Person person : getTypicalPersons()) {
-            ab.addPerson(person);
+            gl.addPerson(person);
         }
-        return ab;
+        return gl;
     }
 
     public static List<Person> getTypicalPersons() {

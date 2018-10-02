@@ -85,11 +85,11 @@ public class MainApp extends Application {
         Optional<ReadOnlyGuestList> addressBookOptional;
         ReadOnlyGuestList initialData;
         try {
-            addressBookOptional = storage.readAddressBook();
+            addressBookOptional = storage.readGuestList();
             if (!addressBookOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample GuestList");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleGuestList);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty GuestList");
             initialData = new GuestList();

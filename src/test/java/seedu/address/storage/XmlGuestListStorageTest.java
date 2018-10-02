@@ -5,7 +5,7 @@ import static org.junit.Assert.assertFalse;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.HOON;
 import static seedu.address.testutil.TypicalPersons.IDA;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalGuestList;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -32,11 +32,11 @@ public class XmlGuestListStorageTest {
     @Test
     public void readAddressBook_nullFilePath_throwsNullPointerException() throws Exception {
         thrown.expect(NullPointerException.class);
-        readAddressBook(null);
+        readGuestList(null);
     }
 
-    private java.util.Optional<ReadOnlyGuestList> readAddressBook(String filePath) throws Exception {
-        return new XmlGuestListStorage(Paths.get(filePath)).readAddressBook(addToTestDataPathIfNotNull(filePath));
+    private java.util.Optional<ReadOnlyGuestList> readGuestList(String filePath) throws Exception {
+        return new XmlGuestListStorage(Paths.get(filePath)).readGuestList(addToTestDataPathIfNotNull(filePath));
     }
 
     private Path addToTestDataPathIfNotNull(String prefsFileInTestDataFolder) {
@@ -47,14 +47,14 @@ public class XmlGuestListStorageTest {
 
     @Test
     public void read_missingFile_emptyResult() throws Exception {
-        assertFalse(readAddressBook("NonExistentFile.xml").isPresent());
+        assertFalse(readGuestList("NonExistentFile.xml").isPresent());
     }
 
     @Test
     public void read_notXmlFormat_exceptionThrown() throws Exception {
 
         thrown.expect(DataConversionException.class);
-        readAddressBook("NotXmlFormatGuestList.xml");
+        readGuestList("NotXmlFormatGuestList.xml");
 
         /* IMPORTANT: Any code below an exception-throwing line (like the one above) will be ignored.
          * That means you should not have more than one exception test in one method
@@ -64,37 +64,37 @@ public class XmlGuestListStorageTest {
     @Test
     public void readAddressBook_invalidPersonAddressBook_throwDataConversionException() throws Exception {
         thrown.expect(DataConversionException.class);
-        readAddressBook("invalidPersonGuestList.xml");
+        readGuestList("invalidPersonGuestList.xml");
     }
 
     @Test
     public void readAddressBook_invalidAndValidPersonAddressBook_throwDataConversionException() throws Exception {
         thrown.expect(DataConversionException.class);
-        readAddressBook("invalidAndValidPersonGuestList.xml");
+        readGuestList("invalidAndValidPersonGuestList.xml");
     }
 
     @Test
     public void readAndSaveAddressBook_allInOrder_success() throws Exception {
         Path filePath = testFolder.getRoot().toPath().resolve("TempAddressBook.xml");
-        GuestList original = getTypicalAddressBook();
+        GuestList original = getTypicalGuestList();
         XmlGuestListStorage xmlAddressBookStorage = new XmlGuestListStorage(filePath);
 
         //Save in new file and read back
-        xmlAddressBookStorage.saveAddressBook(original, filePath);
-        ReadOnlyGuestList readBack = xmlAddressBookStorage.readAddressBook(filePath).get();
+        xmlAddressBookStorage.saveGuestList(original, filePath);
+        ReadOnlyGuestList readBack = xmlAddressBookStorage.readGuestList(filePath).get();
         assertEquals(original, new GuestList(readBack));
 
         //Modify data, overwrite exiting file, and read back
         original.addPerson(HOON);
         original.removePerson(ALICE);
-        xmlAddressBookStorage.saveAddressBook(original, filePath);
-        readBack = xmlAddressBookStorage.readAddressBook(filePath).get();
+        xmlAddressBookStorage.saveGuestList(original, filePath);
+        readBack = xmlAddressBookStorage.readGuestList(filePath).get();
         assertEquals(original, new GuestList(readBack));
 
         //Save and read without specifying file path
         original.addPerson(IDA);
-        xmlAddressBookStorage.saveAddressBook(original); //file path not specified
-        readBack = xmlAddressBookStorage.readAddressBook().get(); //file path not specified
+        xmlAddressBookStorage.saveGuestList(original); //file path not specified
+        readBack = xmlAddressBookStorage.readGuestList().get(); //file path not specified
         assertEquals(original, new GuestList(readBack));
 
     }
@@ -102,16 +102,16 @@ public class XmlGuestListStorageTest {
     @Test
     public void saveAddressBook_nullAddressBook_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        saveAddressBook(null, "SomeFile.xml");
+        saveGuestList(null, "SomeFile.xml");
     }
 
     /**
-     * Saves {@code addressBook} at the specified {@code filePath}.
+     * Saves {@code guestList} at the specified {@code filePath}.
      */
-    private void saveAddressBook(ReadOnlyGuestList addressBook, String filePath) {
+    private void saveGuestList(ReadOnlyGuestList guestList, String filePath) {
         try {
             new XmlGuestListStorage(Paths.get(filePath))
-                    .saveAddressBook(addressBook, addToTestDataPathIfNotNull(filePath));
+                    .saveGuestList(guestList, addToTestDataPathIfNotNull(filePath));
         } catch (IOException ioe) {
             throw new AssertionError("There should not be an error writing to the file.", ioe);
         }
@@ -120,7 +120,7 @@ public class XmlGuestListStorageTest {
     @Test
     public void saveAddressBook_nullFilePath_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        saveAddressBook(new GuestList(), null);
+        saveGuestList(new GuestList(), null);
     }
 
 

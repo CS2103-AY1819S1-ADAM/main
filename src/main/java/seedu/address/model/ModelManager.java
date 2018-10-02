@@ -20,20 +20,20 @@ import seedu.address.model.person.Person;
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final VersionedGuestList versionedAddressBook;
+    private final VersionedGuestList versionedGuestList;
     private final FilteredList<Person> filteredPersons;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given guestList and userPrefs.
      */
-    public ModelManager(ReadOnlyGuestList addressBook, UserPrefs userPrefs) {
+    public ModelManager(ReadOnlyGuestList guestList, UserPrefs userPrefs) {
         super();
-        requireAllNonNull(addressBook, userPrefs);
+        requireAllNonNull(guestList, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with address book: " + guestList + " and user prefs " + userPrefs);
 
-        versionedAddressBook = new VersionedGuestList(addressBook);
-        filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
+        versionedGuestList = new VersionedGuestList(guestList);
+        filteredPersons = new FilteredList<>(versionedGuestList.getPersonList());
     }
 
     public ModelManager() {
@@ -42,52 +42,52 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void resetData(ReadOnlyGuestList newData) {
-        versionedAddressBook.resetData(newData);
-        indicateAddressBookChanged();
+        versionedGuestList.resetData(newData);
+        indicateGuestListChanged();
     }
 
     @Override
-    public ReadOnlyGuestList getAddressBook() {
-        return versionedAddressBook;
+    public ReadOnlyGuestList getGuestList() {
+        return versionedGuestList;
     }
 
     /** Raises an event to indicate the model has changed */
-    private void indicateAddressBookChanged() {
-        raise(new GuestListChangedEvent(versionedAddressBook));
+    private void indicateGuestListChanged() {
+        raise(new GuestListChangedEvent(versionedGuestList));
     }
 
     @Override
     public boolean hasPerson(Person person) {
         requireNonNull(person);
-        return versionedAddressBook.hasPerson(person);
+        return versionedGuestList.hasPerson(person);
     }
 
     @Override
     public void deletePerson(Person target) {
-        versionedAddressBook.removePerson(target);
-        indicateAddressBookChanged();
+        versionedGuestList.removePerson(target);
+        indicateGuestListChanged();
     }
 
     @Override
     public void addPerson(Person person) {
-        versionedAddressBook.addPerson(person);
+        versionedGuestList.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        indicateAddressBookChanged();
+        indicateGuestListChanged();
     }
 
     @Override
     public void updatePerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
 
-        versionedAddressBook.updatePerson(target, editedPerson);
-        indicateAddressBookChanged();
+        versionedGuestList.updatePerson(target, editedPerson);
+        indicateGuestListChanged();
     }
 
     //=========== Filtered Person List Accessors =============================================================
 
     /**
      * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
-     * {@code versionedAddressBook}
+     * {@code versionedGuestList}
      */
     @Override
     public ObservableList<Person> getFilteredPersonList() {
@@ -103,30 +103,30 @@ public class ModelManager extends ComponentManager implements Model {
     //=========== Undo/Redo =================================================================================
 
     @Override
-    public boolean canUndoAddressBook() {
-        return versionedAddressBook.canUndo();
+    public boolean canUndoGuestList() {
+        return versionedGuestList.canUndo();
     }
 
     @Override
-    public boolean canRedoAddressBook() {
-        return versionedAddressBook.canRedo();
+    public boolean canRedoGuestList() {
+        return versionedGuestList.canRedo();
     }
 
     @Override
-    public void undoAddressBook() {
-        versionedAddressBook.undo();
-        indicateAddressBookChanged();
+    public void undoGuestList() {
+        versionedGuestList.undo();
+        indicateGuestListChanged();
     }
 
     @Override
-    public void redoAddressBook() {
-        versionedAddressBook.redo();
-        indicateAddressBookChanged();
+    public void redoGuestList() {
+        versionedGuestList.redo();
+        indicateGuestListChanged();
     }
 
     @Override
-    public void commitAddressBook() {
-        versionedAddressBook.commit();
+    public void commitGuestList() {
+        versionedGuestList.commit();
     }
 
     @Override
@@ -143,7 +143,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        return versionedAddressBook.equals(other.versionedAddressBook)
+        return versionedGuestList.equals(other.versionedGuestList)
                 && filteredPersons.equals(other.filteredPersons);
     }
 

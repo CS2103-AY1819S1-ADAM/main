@@ -6,7 +6,7 @@ import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalGuestList;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -43,7 +43,7 @@ public class GuestListTest {
 
     @Test
     public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        GuestList newData = getTypicalAddressBook();
+        GuestList newData = getTypicalGuestList();
         guestList.resetData(newData);
         assertEquals(newData, guestList);
     }

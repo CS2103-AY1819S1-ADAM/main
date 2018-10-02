@@ -16,7 +16,7 @@ public interface Model {
     void resetData(ReadOnlyGuestList newData);
 
     /** Returns the GuestList */
-    ReadOnlyGuestList getAddressBook();
+    ReadOnlyGuestList getGuestList();
 
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
@@ -54,25 +54,25 @@ public interface Model {
     /**
      * Returns true if the model has previous address book states to restore.
      */
-    boolean canUndoAddressBook();
+    boolean canUndoGuestList();
 
     /**
      * Returns true if the model has undone address book states to restore.
      */
-    boolean canRedoAddressBook();
+    boolean canRedoGuestList();
 
     /**
      * Restores the model's address book to its previous state.
      */
-    void undoAddressBook();
+    void undoGuestList();
 
     /**
      * Restores the model's address book to its previously undone state.
      */
-    void redoAddressBook();
+    void redoGuestList();
 
     /**
      * Saves the current address book state for undo/redo.
      */
-    void commitAddressBook();
+    void commitGuestList();
 }

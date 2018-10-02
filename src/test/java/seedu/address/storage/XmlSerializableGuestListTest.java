@@ -29,7 +29,7 @@ public class XmlSerializableGuestListTest {
         XmlSerializableGuestList dataFromFile = XmlUtil.getDataFromFile(TYPICAL_PERSONS_FILE,
                 XmlSerializableGuestList.class);
         GuestList guestListFromFile = dataFromFile.toModelType();
-        GuestList typicalPersonsGuestList = TypicalPersons.getTypicalAddressBook();
+        GuestList typicalPersonsGuestList = TypicalPersons.getTypicalGuestList();
         assertEquals(guestListFromFile, typicalPersonsGuestList);
     }
 

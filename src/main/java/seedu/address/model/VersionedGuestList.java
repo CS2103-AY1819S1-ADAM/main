@@ -8,14 +8,14 @@ import java.util.List;
  */
 public class VersionedGuestList extends GuestList {
 
-    private final List<ReadOnlyGuestList> addressBookStateList;
+    private final List<ReadOnlyGuestList> guestListStateList;
     private int currentStatePointer;
 
     public VersionedGuestList(ReadOnlyGuestList initialState) {
         super(initialState);
 
-        addressBookStateList = new ArrayList<>();
-        addressBookStateList.add(new GuestList(initialState));
+        guestListStateList = new ArrayList<>();
+        guestListStateList.add(new GuestList(initialState));
         currentStatePointer = 0;
     }
 
@@ -25,12 +25,12 @@ public class VersionedGuestList extends GuestList {
      */
     public void commit() {
         removeStatesAfterCurrentPointer();
-        addressBookStateList.add(new GuestList(this));
+        guestListStateList.add(new GuestList(this));
         currentStatePointer++;
     }
 
     private void removeStatesAfterCurrentPointer() {
-        addressBookStateList.subList(currentStatePointer + 1, addressBookStateList.size()).clear();
+        guestListStateList.subList(currentStatePointer + 1, guestListStateList.size()).clear();
     }
 
     /**
@@ -41,7 +41,7 @@ public class VersionedGuestList extends GuestList {
             throw new NoUndoableStateException();
         }
         currentStatePointer--;
-        resetData(addressBookStateList.get(currentStatePointer));
+        resetData(guestListStateList.get(currentStatePointer));
     }
 
     /**
@@ -52,7 +52,7 @@ public class VersionedGuestList extends GuestList {
             throw new NoRedoableStateException();
         }
         currentStatePointer++;
-        resetData(addressBookStateList.get(currentStatePointer));
+        resetData(guestListStateList.get(currentStatePointer));
     }
 
     /**
@@ -66,7 +66,7 @@ public class VersionedGuestList extends GuestList {
      * Returns true if {@code redo()} has address book states to redo.
      */
     public boolean canRedo() {
-        return currentStatePointer < addressBookStateList.size() - 1;
+        return currentStatePointer < guestListStateList.size() - 1;
     }
 
     @Override
@@ -85,7 +85,7 @@ public class VersionedGuestList extends GuestList {
 
         // state check
         return super.equals(otherVersionedAddressBook)
-                && addressBookStateList.equals(otherVersionedAddressBook.addressBookStateList)
+                && guestListStateList.equals(otherVersionedAddressBook.guestListStateList)
                 && currentStatePointer == otherVersionedAddressBook.currentStatePointer;
     }
 

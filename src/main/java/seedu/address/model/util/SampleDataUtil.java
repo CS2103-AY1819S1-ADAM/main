@@ -40,12 +40,12 @@ public class SampleDataUtil {
         };
     }
 
-    public static ReadOnlyGuestList getSampleAddressBook() {
-        GuestList sampleAb = new GuestList();
+    public static ReadOnlyGuestList getSampleGuestList() {
+        GuestList sampleGl = new GuestList();
         for (Person samplePerson : getSamplePersons()) {
-            sampleAb.addPerson(samplePerson);
+            sampleGl.addPerson(samplePerson);
         }
-        return sampleAb;
+        return sampleGl;
     }
 
     /**

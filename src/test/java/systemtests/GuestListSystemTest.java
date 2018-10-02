@@ -85,7 +85,7 @@ public abstract class GuestListSystemTest {
      * Returns the data to be loaded into the file in {@link #getDataFileLocation()}.
      */
     protected GuestList getInitialData() {
-        return TypicalPersons.getTypicalAddressBook();
+        return TypicalPersons.getTypicalGuestList();
     }
 
     /**
@@ -143,7 +143,7 @@ public abstract class GuestListSystemTest {
      */
     protected void showAllPersons() {
         executeCommand(ListCommand.COMMAND_WORD);
-        assertEquals(getModel().getAddressBook().getPersonList().size(), getModel().getFilteredPersonList().size());
+        assertEquals(getModel().getGuestList().getPersonList().size(), getModel().getFilteredPersonList().size());
     }
 
     /**
@@ -151,7 +151,7 @@ public abstract class GuestListSystemTest {
      */
     protected void showPersonsWithName(String keyword) {
         executeCommand(FindCommand.COMMAND_WORD + " " + keyword);
-        assertTrue(getModel().getFilteredPersonList().size() < getModel().getAddressBook().getPersonList().size());
+        assertTrue(getModel().getFilteredPersonList().size() < getModel().getGuestList().getPersonList().size());
     }
 
     /**
@@ -167,7 +167,7 @@ public abstract class GuestListSystemTest {
      */
     protected void deleteAllPersons() {
         executeCommand(ClearCommand.COMMAND_WORD);
-        assertEquals(0, getModel().getAddressBook().getPersonList().size());
+        assertEquals(0, getModel().getGuestList().getPersonList().size());
     }
 
     /**
@@ -179,7 +179,7 @@ public abstract class GuestListSystemTest {
             Model expectedModel) {
         assertEquals(expectedCommandInput, getCommandBox().getInput());
         assertEquals(expectedResultMessage, getResultDisplay().getText());
-        assertEquals(new GuestList(expectedModel.getAddressBook()), testApp.readStorageAddressBook());
+        assertEquals(new GuestList(expectedModel.getGuestList()), testApp.readStorageGuestList());
         assertListMatching(getPersonListPanel(), expectedModel.getFilteredPersonList());
     }
 

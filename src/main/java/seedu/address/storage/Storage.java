@@ -22,13 +22,13 @@ public interface Storage extends GuestListStorage, UserPrefsStorage {
     void saveUserPrefs(UserPrefs userPrefs) throws IOException;
 
     @Override
-    Path getAddressBookFilePath();
+    Path getGuestListFilePath();
 
     @Override
-    Optional<ReadOnlyGuestList> readAddressBook() throws DataConversionException, IOException;
+    Optional<ReadOnlyGuestList> readGuestList() throws DataConversionException, IOException;
 
     @Override
-    void saveAddressBook(ReadOnlyGuestList addressBook) throws IOException;
+    void saveGuestList(ReadOnlyGuestList guestList) throws IOException;
 
     /**
      * Saves the current version of the Address Book to the hard disk.

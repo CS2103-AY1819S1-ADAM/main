@@ -3,7 +3,7 @@ package seedu.address.storage;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalGuestList;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -57,21 +57,21 @@ public class StorageManagerTest {
     }
 
     @Test
-    public void addressBookReadSave() throws Exception {
+    public void guestListReadSave() throws Exception {
         /*
          * Note: This is an integration test that verifies the StorageManager is properly wired to the
          * {@link XmlGuestListStorage} class.
          * More extensive testing of UserPref saving/reading is done in {@link XmlGuestListStorageTest} class.
          */
-        GuestList original = getTypicalAddressBook();
-        storageManager.saveAddressBook(original);
-        ReadOnlyGuestList retrieved = storageManager.readAddressBook().get();
+        GuestList original = getTypicalGuestList();
+        storageManager.saveGuestList(original);
+        ReadOnlyGuestList retrieved = storageManager.readGuestList().get();
         assertEquals(original, new GuestList(retrieved));
     }
 
     @Test
     public void getAddressBookFilePath() {
-        assertNotNull(storageManager.getAddressBookFilePath());
+        assertNotNull(storageManager.getGuestListFilePath());
     }
 
     @Test
@@ -94,7 +94,7 @@ public class StorageManagerTest {
         }
 
         @Override
-        public void saveAddressBook(ReadOnlyGuestList addressBook, Path filePath) throws IOException {
+        public void saveGuestList(ReadOnlyGuestList guestList, Path filePath) throws IOException {
             throw new IOException("dummy exception");
         }
     }
