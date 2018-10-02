@@ -30,7 +30,7 @@ public class XmlGuestListStorageTest {
     public TemporaryFolder testFolder = new TemporaryFolder();
 
     @Test
-    public void readAddressBook_nullFilePath_throwsNullPointerException() throws Exception {
+    public void readGuestList_nullFilePath_throwsNullPointerException() throws Exception {
         thrown.expect(NullPointerException.class);
         readGuestList(null);
     }
@@ -62,45 +62,46 @@ public class XmlGuestListStorageTest {
     }
 
     @Test
-    public void readAddressBook_invalidPersonAddressBook_throwDataConversionException() throws Exception {
+    public void readGuestList_invalidPersonGuestList_throwDataConversionException() throws Exception {
         thrown.expect(DataConversionException.class);
         readGuestList("invalidPersonGuestList.xml");
     }
 
     @Test
-    public void readAddressBook_invalidAndValidPersonAddressBook_throwDataConversionException() throws Exception {
+    public void readGuestList_invalidAndValidPersonGuestList_throwDataConversionException() throws Exception {
         thrown.expect(DataConversionException.class);
         readGuestList("invalidAndValidPersonGuestList.xml");
     }
 
     @Test
-    public void readAndSaveAddressBook_allInOrder_success() throws Exception {
-        Path filePath = testFolder.getRoot().toPath().resolve("TempAddressBook.xml");
+    public void readAndSaveGuestList_allInOrder_success() throws Exception {
+        Path filePath = testFolder.getRoot().toPath().resolve(
+                "TempGuestList.xml");
         GuestList original = getTypicalGuestList();
-        XmlGuestListStorage xmlAddressBookStorage = new XmlGuestListStorage(filePath);
+        XmlGuestListStorage xmlGuestListStorage = new XmlGuestListStorage(filePath);
 
         //Save in new file and read back
-        xmlAddressBookStorage.saveGuestList(original, filePath);
-        ReadOnlyGuestList readBack = xmlAddressBookStorage.readGuestList(filePath).get();
+        xmlGuestListStorage.saveGuestList(original, filePath);
+        ReadOnlyGuestList readBack = xmlGuestListStorage.readGuestList(filePath).get();
         assertEquals(original, new GuestList(readBack));
 
         //Modify data, overwrite exiting file, and read back
         original.addPerson(HOON);
         original.removePerson(ALICE);
-        xmlAddressBookStorage.saveGuestList(original, filePath);
-        readBack = xmlAddressBookStorage.readGuestList(filePath).get();
+        xmlGuestListStorage.saveGuestList(original, filePath);
+        readBack = xmlGuestListStorage.readGuestList(filePath).get();
         assertEquals(original, new GuestList(readBack));
 
         //Save and read without specifying file path
         original.addPerson(IDA);
-        xmlAddressBookStorage.saveGuestList(original); //file path not specified
-        readBack = xmlAddressBookStorage.readGuestList().get(); //file path not specified
+        xmlGuestListStorage.saveGuestList(original); //file path not specified
+        readBack = xmlGuestListStorage.readGuestList().get(); //file path not specified
         assertEquals(original, new GuestList(readBack));
 
     }
 
     @Test
-    public void saveAddressBook_nullAddressBook_throwsNullPointerException() {
+    public void saveGuestList_nullGuestList_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
         saveGuestList(null, "SomeFile.xml");
     }
@@ -118,7 +119,7 @@ public class XmlGuestListStorageTest {
     }
 
     @Test
-    public void saveAddressBook_nullFilePath_throwsNullPointerException() {
+    public void saveGuestList_nullFilePath_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
         saveGuestList(new GuestList(), null);
     }

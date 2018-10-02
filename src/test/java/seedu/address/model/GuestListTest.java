@@ -42,7 +42,7 @@ public class GuestListTest {
     }
 
     @Test
-    public void resetData_withValidReadOnlyAddressBook_replacesData() {
+    public void resetData_withValidReadOnlyGuestList_replacesData() {
         GuestList newData = getTypicalGuestList();
         guestList.resetData(newData);
         assertEquals(newData, guestList);
@@ -67,18 +67,18 @@ public class GuestListTest {
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
+    public void hasPerson_personNotInGuestList_returnsFalse() {
         assertFalse(guestList.hasPerson(ALICE));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
+    public void hasPerson_personInGuestList_returnsTrue() {
         guestList.addPerson(ALICE);
         assertTrue(guestList.hasPerson(ALICE));
     }
 
     @Test
-    public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
+    public void hasPerson_personWithSameIdentityFieldsInGuestList_returnsTrue() {
         guestList.addPerson(ALICE);
         Guest editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();

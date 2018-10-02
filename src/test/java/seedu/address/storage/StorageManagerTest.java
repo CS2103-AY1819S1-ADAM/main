@@ -32,9 +32,9 @@ public class StorageManagerTest {
 
     @Before
     public void setUp() {
-        XmlGuestListStorage addressBookStorage = new XmlGuestListStorage(getTempFilePath("ab"));
+        XmlGuestListStorage guestListStorage = new XmlGuestListStorage(getTempFilePath("ab"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
-        storageManager = new StorageManager(addressBookStorage, userPrefsStorage);
+        storageManager = new StorageManager(guestListStorage, userPrefsStorage);
     }
 
     private Path getTempFilePath(String fileName) {
@@ -70,12 +70,12 @@ public class StorageManagerTest {
     }
 
     @Test
-    public void getAddressBookFilePath() {
+    public void getGuestListFilePath() {
         assertNotNull(storageManager.getGuestListFilePath());
     }
 
     @Test
-    public void handleAddressBookChangedEvent_exceptionThrown_eventRaised() {
+    public void handleGuestListChangedEvent_exceptionThrown_eventRaised() {
         // Create a StorageManager while injecting a stub that  throws an exception when the save method is called
         Storage storage = new StorageManager(new XmlGuestListStorageExceptionThrowingStub(Paths.get("dummy")),
                                              new JsonUserPrefsStorage(Paths.get("dummy")));

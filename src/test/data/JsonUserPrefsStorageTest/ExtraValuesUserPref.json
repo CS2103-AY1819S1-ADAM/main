@@ -9,5 +9,5 @@
       "z" : 99
     }
   },
-  "addressBookFilePath" : "guestlist.xml"
+  "guestlistFilePath" : "guestlist.xml"
 }

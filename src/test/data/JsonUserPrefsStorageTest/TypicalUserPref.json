@@ -7,5 +7,5 @@
       "y" : 100
     }
   },
-  "addressBookFilePath" : "guestlist.xml"
+  "guestlistFilePath" : "guestlist.xml"
 }
