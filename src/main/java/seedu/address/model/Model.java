@@ -19,26 +19,28 @@ public interface Model {
     ReadOnlyGuestList getGuestList();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a person with the same identity as {@code person}
+     * exists in the guest list.
      */
     boolean hasPerson(Person person);
 
     /**
      * Deletes the given person.
-     * The person must exist in the address book.
+     * The person must exist in the guest list.
      */
     void deletePerson(Person target);
 
     /**
      * Adds the given person.
-     * {@code person} must not already exist in the address book.
+     * {@code person} must not already exist in the guest list.
      */
     void addPerson(Person person);
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * {@code target} must exist in the guest list.
+     * The person identity of {@code editedPerson} must not be the same as
+     * another existing person in the guest list.
      */
     void updatePerson(Person target, Person editedPerson);
 
@@ -52,27 +54,27 @@ public interface Model {
     void updateFilteredPersonList(Predicate<Person> predicate);
 
     /**
-     * Returns true if the model has previous address book states to restore.
+     * Returns true if the model has previous guest list states to restore.
      */
     boolean canUndoGuestList();
 
     /**
-     * Returns true if the model has undone address book states to restore.
+     * Returns true if the model has undone guest list states to restore.
      */
     boolean canRedoGuestList();
 
     /**
-     * Restores the model's address book to its previous state.
+     * Restores the model's guest list to its previous state.
      */
     void undoGuestList();
 
     /**
-     * Restores the model's address book to its previously undone state.
+     * Restores the model's guest list to its previously undone state.
      */
     void redoGuestList();
 
     /**
-     * Saves the current address book state for undo/redo.
+     * Saves the current guest list state for undo/redo.
      */
     void commitGuestList();
 }
