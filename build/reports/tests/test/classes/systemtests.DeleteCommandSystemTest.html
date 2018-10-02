@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=edge"/>
+<title>Test results - Class systemtests.DeleteCommandSystemTest</title>
+<link href="../css/base-style.css" rel="stylesheet" type="text/css"/>
+<link href="../css/style.css" rel="stylesheet" type="text/css"/>
+<script src="../js/report.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="content">
+<h1>Class systemtests.DeleteCommandSystemTest</h1>
+<div class="breadcrumbs">
+<a href="../index.html">all</a> &gt; 
+<a href="../packages/systemtests.html">systemtests</a> &gt; DeleteCommandSystemTest</div>
+<div id="summary">
+<table>
+<tr>
+<td>
+<div class="summaryGroup">
+<table>
+<tr>
+<td>
+<div class="infoBox" id="tests">
+<div class="counter">1</div>
+<p>tests</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="failures">
+<div class="counter">0</div>
+<p>failures</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="ignored">
+<div class="counter">0</div>
+<p>ignored</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="duration">
+<div class="counter">12.393s</div>
+<p>duration</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+<td>
+<div class="infoBox success" id="successRate">
+<div class="percent">100%</div>
+<p>successful</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div id="tabs">
+<ul class="tabLinks">
+<li>
+<a href="#tab0">Tests</a>
+</li>
+<li>
+<a href="#tab1">Standard error</a>
+</li>
+</ul>
+<div id="tab0" class="tab">
+<h2>Tests</h2>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>Duration</th>
+<th>Result</th>
+</tr>
+</thead>
+<tr>
+<td class="success">delete</td>
+<td class="success">12.393s</td>
+<td class="success">passed</td>
+</tr>
+</table>
+</div>
+<div id="tab1" class="tab">
+<h2>Standard error</h2>
+<span class="code">
+<pre>Oct 02, 2018 12:42:55 PM seedu.address.MainApp init
+INFO: =============================[ Initializing GuestList ]===========================
+Oct 02, 2018 12:42:55 PM seedu.address.MainApp initConfig
+INFO: Using config file : config.json
+Oct 02, 2018 12:42:55 PM seedu.address.MainApp initPrefs
+INFO: Using prefs file : src\test\data\sandbox\pref_testing.json
+Oct 02, 2018 12:42:55 PM seedu.address.commons.core.LogsCenter init
+INFO: currentLogLevel: INFO
+Oct 02, 2018 12:42:55 PM seedu.address.ui.UiManager start
+INFO: Starting UI...
+Oct 02, 2018 12:42:55 PM guitests.guihandles.StageHandle focus
+INFO: Focusing onTest App
+Oct 02, 2018 12:42:55 PM guitests.guihandles.StageHandle focus
+INFO: Finishing focus onTest App
+Oct 02, 2018 12:42:56 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.model.AddressBookChangedEvent: number of persons 6
+Oct 02, 2018 12:42:56 PM seedu.address.storage.StorageManager handleAddressBookChangedEvent
+INFO: ---[Event handled][number of persons 6]Local data changed, saving to file
+Oct 02, 2018 12:42:56 PM seedu.address.ui.StatusBarFooter handleAddressBookChangedEvent
+INFO: ---[Event handled][number of persons 6]Setting last updated status to Tue Oct 02 12:42:55 SRET 2018
+Oct 02, 2018 12:42:57 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][     delete      1       ]
+Oct 02, 2018 12:42:57 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.model.AddressBookChangedEvent: number of persons 6
+Oct 02, 2018 12:42:57 PM seedu.address.storage.StorageManager handleAddressBookChangedEvent
+INFO: ---[Event handled][number of persons 6]Local data changed, saving to file
+Oct 02, 2018 12:42:57 PM seedu.address.ui.StatusBarFooter handleAddressBookChangedEvent
+INFO: ---[Event handled][number of persons 6]Setting last updated status to Tue Oct 02 12:42:56 SRET 2018
+Oct 02, 2018 12:42:57 PM seedu.address.ui.CommandBox handleCommandEntered
+INFO: Result: Deleted Person: Alice Pauline Phone: 94351253 Email: alice@example.com Address: 123, Jurong West Ave 6, #08-111 Tags: [friends]
+Oct 02, 2018 12:42:57 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.ui.NewResultAvailableEvent: NewResultAvailableEvent
+Oct 02, 2018 12:42:57 PM seedu.address.ui.ResultDisplay handleNewResultAvailableEvent
+INFO: ---[Event handled][NewResultAvailableEvent]
+Oct 02, 2018 12:42:57 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.model.AddressBookChangedEvent: number of persons 5
+Oct 02, 2018 12:42:57 PM seedu.address.storage.StorageManager handleAddressBookChangedEvent
+INFO: ---[Event handled][number of persons 5]Local data changed, saving to file
+Oct 02, 2018 12:42:57 PM seedu.address.ui.StatusBarFooter handleAddressBookChangedEvent
+INFO: ---[Event handled][number of persons 5]Setting last updated status to Tue Oct 02 12:42:56 SRET 2018
+Oct 02, 2018 12:42:58 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][delete 6]
+Oct 02, 2018 12:42:58 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.model.AddressBookChangedEvent: number of persons 5
+Oct 02, 2018 12:42:58 PM seedu.address.storage.StorageManager handleAddressBookChangedEvent
+INFO: ---[Event handled][number of persons 5]Local data changed, saving to file
+Oct 02, 2018 12:42:58 PM seedu.address.ui.StatusBarFooter handleAddressBookChangedEvent
+INFO: ---[Event handled][number of persons 5]Setting last updated status to Tue Oct 02 12:42:57 SRET 2018
+Oct 02, 2018 12:42:58 PM seedu.address.ui.CommandBox handleCommandEntered
+INFO: Result: Deleted Person: George Best Phone: 9482442 Email: anna@example.com Address: 4th street Tags: 
+Oct 02, 2018 12:42:58 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.ui.NewResultAvailableEvent: NewResultAvailableEvent
+Oct 02, 2018 12:42:58 PM seedu.address.ui.ResultDisplay handleNewResultAvailableEvent
+INFO: ---[Event handled][NewResultAvailableEvent]
+Oct 02, 2018 12:42:58 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][undo]
+Oct 02, 2018 12:42:58 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.model.AddressBookChangedEvent: number of persons 6
+Oct 02, 2018 12:42:58 PM seedu.address.storage.StorageManager handleAddressBookChangedEvent
+INFO: ---[Event handled][number of persons 6]Local data changed, saving to file
+Oct 02, 2018 12:42:58 PM seedu.address.ui.StatusBarFooter handleAddressBookChangedEvent
+INFO: ---[Event handled][number of persons 6]Setting last updated status to Tue Oct 02 12:42:58 SRET 2018
+Oct 02, 2018 12:42:58 PM seedu.address.ui.CommandBox handleCommandEntered
+INFO: Result: Undo success!
+Oct 02, 2018 12:42:58 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.ui.NewResultAvailableEvent: NewResultAvailableEvent
+Oct 02, 2018 12:42:58 PM seedu.address.ui.ResultDisplay handleNewResultAvailableEvent
+INFO: ---[Event handled][NewResultAvailableEvent]
+Oct 02, 2018 12:42:59 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.model.AddressBookChangedEvent: number of persons 5
+Oct 02, 2018 12:42:59 PM seedu.address.storage.StorageManager handleAddressBookChangedEvent
+INFO: ---[Event handled][number of persons 5]Local data changed, saving to file
+Oct 02, 2018 12:42:59 PM seedu.address.ui.StatusBarFooter handleAddressBookChangedEvent
+INFO: ---[Event handled][number of persons 5]Setting last updated status to Tue Oct 02 12:42:58 SRET 2018
+Oct 02, 2018 12:42:59 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][redo]
+Oct 02, 2018 12:42:59 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.model.AddressBookChangedEvent: number of persons 5
+Oct 02, 2018 12:42:59 PM seedu.address.storage.StorageManager handleAddressBookChangedEvent
+INFO: ---[Event handled][number of persons 5]Local data changed, saving to file
+Oct 02, 2018 12:42:59 PM seedu.address.ui.StatusBarFooter handleAddressBookChangedEvent
+INFO: ---[Event handled][number of persons 5]Setting last updated status to Tue Oct 02 12:42:59 SRET 2018
+Oct 02, 2018 12:42:59 PM seedu.address.ui.CommandBox handleCommandEntered
+INFO: Result: Redo success!
+Oct 02, 2018 12:42:59 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.ui.NewResultAvailableEvent: NewResultAvailableEvent
+Oct 02, 2018 12:42:59 PM seedu.address.ui.ResultDisplay handleNewResultAvailableEvent
+INFO: ---[Event handled][NewResultAvailableEvent]
+Oct 02, 2018 12:43:00 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.model.AddressBookChangedEvent: number of persons 4
+Oct 02, 2018 12:43:00 PM seedu.address.storage.StorageManager handleAddressBookChangedEvent
+INFO: ---[Event handled][number of persons 4]Local data changed, saving to file
+Oct 02, 2018 12:43:00 PM seedu.address.ui.StatusBarFooter handleAddressBookChangedEvent
+INFO: ---[Event handled][number of persons 4]Setting last updated status to Tue Oct 02 12:42:59 SRET 2018
+Oct 02, 2018 12:43:00 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][delete 2]
+Oct 02, 2018 12:43:00 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.model.AddressBookChangedEvent: number of persons 4
+Oct 02, 2018 12:43:00 PM seedu.address.storage.StorageManager handleAddressBookChangedEvent
+INFO: ---[Event handled][number of persons 4]Local data changed, saving to file
+Oct 02, 2018 12:43:00 PM seedu.address.ui.StatusBarFooter handleAddressBookChangedEvent
+INFO: ---[Event handled][number of persons 4]Setting last updated status to Tue Oct 02 12:43:00 SRET 2018
+Oct 02, 2018 12:43:00 PM seedu.address.ui.CommandBox handleCommandEntered
+INFO: Result: Deleted Person: Carl Kurz Phone: 95352563 Email: heinz@example.com Address: wall street Tags: 
+Oct 02, 2018 12:43:00 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.ui.NewResultAvailableEvent: NewResultAvailableEvent
+Oct 02, 2018 12:43:00 PM seedu.address.ui.ResultDisplay handleNewResultAvailableEvent
+INFO: ---[Event handled][NewResultAvailableEvent]
+Oct 02, 2018 12:43:01 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][find Meier]
+Oct 02, 2018 12:43:01 PM seedu.address.ui.CommandBox handleCommandEntered
+INFO: Result: 2 persons listed!
+Oct 02, 2018 12:43:01 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.ui.NewResultAvailableEvent: NewResultAvailableEvent
+Oct 02, 2018 12:43:01 PM seedu.address.ui.ResultDisplay handleNewResultAvailableEvent
+INFO: ---[Event handled][NewResultAvailableEvent]
+Oct 02, 2018 12:43:01 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.model.AddressBookChangedEvent: number of persons 3
+Oct 02, 2018 12:43:01 PM seedu.address.storage.StorageManager handleAddressBookChangedEvent
+INFO: ---[Event handled][number of persons 3]Local data changed, saving to file
+Oct 02, 2018 12:43:01 PM seedu.address.ui.StatusBarFooter handleAddressBookChangedEvent
+INFO: ---[Event handled][number of persons 3]Setting last updated status to Tue Oct 02 12:43:00 SRET 2018
+Oct 02, 2018 12:43:01 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][delete 1]
+Oct 02, 2018 12:43:01 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.model.AddressBookChangedEvent: number of persons 3
+Oct 02, 2018 12:43:01 PM seedu.address.storage.StorageManager handleAddressBookChangedEvent
+INFO: ---[Event handled][number of persons 3]Local data changed, saving to file
+Oct 02, 2018 12:43:01 PM seedu.address.ui.StatusBarFooter handleAddressBookChangedEvent
+INFO: ---[Event handled][number of persons 3]Setting last updated status to Tue Oct 02 12:43:01 SRET 2018
+Oct 02, 2018 12:43:01 PM seedu.address.ui.CommandBox handleCommandEntered
+INFO: Result: Deleted Person: Benson Meier Phone: 98765432 Email: johnd@example.com Address: 311, Clementi Ave 2, #02-25 Tags: [owesMoney][friends]
+Oct 02, 2018 12:43:01 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.ui.NewResultAvailableEvent: NewResultAvailableEvent
+Oct 02, 2018 12:43:01 PM seedu.address.ui.ResultDisplay handleNewResultAvailableEvent
+INFO: ---[Event handled][NewResultAvailableEvent]
+Oct 02, 2018 12:43:01 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][find Meier]
+Oct 02, 2018 12:43:01 PM seedu.address.ui.CommandBox handleCommandEntered
+INFO: Result: 1 persons listed!
+Oct 02, 2018 12:43:01 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.ui.NewResultAvailableEvent: NewResultAvailableEvent
+Oct 02, 2018 12:43:01 PM seedu.address.ui.ResultDisplay handleNewResultAvailableEvent
+INFO: ---[Event handled][NewResultAvailableEvent]
+Oct 02, 2018 12:43:02 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][delete 3]
+Oct 02, 2018 12:43:02 PM seedu.address.ui.CommandBox handleCommandEntered
+INFO: Invalid command: delete 3
+Oct 02, 2018 12:43:02 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.ui.NewResultAvailableEvent: NewResultAvailableEvent
+Oct 02, 2018 12:43:02 PM seedu.address.ui.ResultDisplay handleNewResultAvailableEvent
+INFO: ---[Event handled][NewResultAvailableEvent]
+Oct 02, 2018 12:43:02 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][list]
+Oct 02, 2018 12:43:02 PM seedu.address.ui.CommandBox handleCommandEntered
+INFO: Result: Listed all persons
+Oct 02, 2018 12:43:02 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.ui.NewResultAvailableEvent: NewResultAvailableEvent
+Oct 02, 2018 12:43:02 PM seedu.address.ui.ResultDisplay handleNewResultAvailableEvent
+INFO: ---[Event handled][NewResultAvailableEvent]
+Oct 02, 2018 12:43:03 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][select 3]
+Oct 02, 2018 12:43:03 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.ui.JumpToListRequestEvent: JumpToListRequestEvent
+Oct 02, 2018 12:43:03 PM seedu.address.ui.PersonListPanel handleJumpToListRequestEvent
+INFO: ---[Event handled][JumpToListRequestEvent]
+Oct 02, 2018 12:43:03 PM seedu.address.ui.CommandBox handleCommandEntered
+INFO: Result: Selected Person: 3
+Oct 02, 2018 12:43:03 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.ui.NewResultAvailableEvent: NewResultAvailableEvent
+Oct 02, 2018 12:43:03 PM seedu.address.ui.ResultDisplay handleNewResultAvailableEvent
+INFO: ---[Event handled][NewResultAvailableEvent]
+Oct 02, 2018 12:43:03 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent: PersonPanelSelectionChangedEvent
+Oct 02, 2018 12:43:03 PM seedu.address.ui.BrowserPanel handlePersonPanelSelectionChangedEvent
+INFO: ---[Event handled][PersonPanelSelectionChangedEvent]
+Oct 02, 2018 12:43:03 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.model.AddressBookChangedEvent: number of persons 2
+Oct 02, 2018 12:43:03 PM seedu.address.storage.StorageManager handleAddressBookChangedEvent
+INFO: ---[Event handled][number of persons 2]Local data changed, saving to file
+Oct 02, 2018 12:43:03 PM seedu.address.ui.StatusBarFooter handleAddressBookChangedEvent
+INFO: ---[Event handled][number of persons 2]Setting last updated status to Tue Oct 02 12:43:02 SRET 2018
+Oct 02, 2018 12:43:03 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][delete 3]
+Oct 02, 2018 12:43:03 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent: PersonPanelSelectionChangedEvent
+Oct 02, 2018 12:43:03 PM seedu.address.ui.BrowserPanel handlePersonPanelSelectionChangedEvent
+INFO: ---[Event handled][PersonPanelSelectionChangedEvent]
+Oct 02, 2018 12:43:03 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.model.AddressBookChangedEvent: number of persons 2
+Oct 02, 2018 12:43:03 PM seedu.address.storage.StorageManager handleAddressBookChangedEvent
+INFO: ---[Event handled][number of persons 2]Local data changed, saving to file
+Oct 02, 2018 12:43:03 PM seedu.address.ui.StatusBarFooter handleAddressBookChangedEvent
+INFO: ---[Event handled][number of persons 2]Setting last updated status to Tue Oct 02 12:43:03 SRET 2018
+Oct 02, 2018 12:43:03 PM seedu.address.ui.CommandBox handleCommandEntered
+INFO: Result: Deleted Person: Fiona Kunz Phone: 9482427 Email: lydia@example.com Address: little tokyo Tags: 
+Oct 02, 2018 12:43:03 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.ui.NewResultAvailableEvent: NewResultAvailableEvent
+Oct 02, 2018 12:43:03 PM seedu.address.ui.ResultDisplay handleNewResultAvailableEvent
+INFO: ---[Event handled][NewResultAvailableEvent]
+Oct 02, 2018 12:43:05 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][delete 0]
+Oct 02, 2018 12:43:05 PM seedu.address.ui.CommandBox handleCommandEntered
+INFO: Invalid command: delete 0
+Oct 02, 2018 12:43:05 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.ui.NewResultAvailableEvent: NewResultAvailableEvent
+Oct 02, 2018 12:43:05 PM seedu.address.ui.ResultDisplay handleNewResultAvailableEvent
+INFO: ---[Event handled][NewResultAvailableEvent]
+Oct 02, 2018 12:43:05 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][delete -1]
+Oct 02, 2018 12:43:05 PM seedu.address.ui.CommandBox handleCommandEntered
+INFO: Invalid command: delete -1
+Oct 02, 2018 12:43:05 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.ui.NewResultAvailableEvent: NewResultAvailableEvent
+Oct 02, 2018 12:43:05 PM seedu.address.ui.ResultDisplay handleNewResultAvailableEvent
+INFO: ---[Event handled][NewResultAvailableEvent]
+Oct 02, 2018 12:43:06 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][delete 3]
+Oct 02, 2018 12:43:06 PM seedu.address.ui.CommandBox handleCommandEntered
+INFO: Invalid command: delete 3
+Oct 02, 2018 12:43:06 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.ui.NewResultAvailableEvent: NewResultAvailableEvent
+Oct 02, 2018 12:43:06 PM seedu.address.ui.ResultDisplay handleNewResultAvailableEvent
+INFO: ---[Event handled][NewResultAvailableEvent]
+Oct 02, 2018 12:43:06 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][delete abc]
+Oct 02, 2018 12:43:06 PM seedu.address.ui.CommandBox handleCommandEntered
+INFO: Invalid command: delete abc
+Oct 02, 2018 12:43:06 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.ui.NewResultAvailableEvent: NewResultAvailableEvent
+Oct 02, 2018 12:43:06 PM seedu.address.ui.ResultDisplay handleNewResultAvailableEvent
+INFO: ---[Event handled][NewResultAvailableEvent]
+Oct 02, 2018 12:43:06 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][delete 1 abc]
+Oct 02, 2018 12:43:06 PM seedu.address.ui.CommandBox handleCommandEntered
+INFO: Invalid command: delete 1 abc
+Oct 02, 2018 12:43:06 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.ui.NewResultAvailableEvent: NewResultAvailableEvent
+Oct 02, 2018 12:43:06 PM seedu.address.ui.ResultDisplay handleNewResultAvailableEvent
+INFO: ---[Event handled][NewResultAvailableEvent]
+Oct 02, 2018 12:43:07 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][DelETE 1]
+Oct 02, 2018 12:43:07 PM seedu.address.ui.CommandBox handleCommandEntered
+INFO: Invalid command: DelETE 1
+Oct 02, 2018 12:43:07 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.ui.NewResultAvailableEvent: NewResultAvailableEvent
+Oct 02, 2018 12:43:07 PM seedu.address.ui.ResultDisplay handleNewResultAvailableEvent
+INFO: ---[Event handled][NewResultAvailableEvent]
+</pre>
+</span>
+</div>
+</div>
+<div id="footer">
+<p>
+<div>
+<label class="hidden" id="label-for-line-wrapping-toggle" for="line-wrapping-toggle">Wrap lines
+<input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
+</label>
+</div>Generated by 
+<a href="http://www.gradle.org">Gradle 4.8.1</a> at 2 Oct 2018, 12:44:09 PM</p>
+</div>
+</div>
+</body>
+</html>

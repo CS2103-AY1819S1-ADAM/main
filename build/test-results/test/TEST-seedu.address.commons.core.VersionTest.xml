@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="seedu.address.commons.core.VersionTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2018-10-02T04:41:51" hostname="JOYCE" time="0.034">
+  <properties/>
+  <testcase name="versionComparable_validVersion_hashCodeIsCorrect" classname="seedu.address.commons.core.VersionTest" time="0.006"/>
+  <testcase name="versionToString_validVersion_correctStringRepresentation" classname="seedu.address.commons.core.VersionTest" time="0.002"/>
+  <testcase name="versionConstructor_correctParameter_valueAsExpected" classname="seedu.address.commons.core.VersionTest" time="0.001"/>
+  <testcase name="versionParsing_acceptableVersionString_parsedVersionCorrectly" classname="seedu.address.commons.core.VersionTest" time="0.001"/>
+  <testcase name="versionParsing_wrongVersionString_throwIllegalArgumentException" classname="seedu.address.commons.core.VersionTest" time="0.02"/>
+  <testcase name="versionComparable_validVersion_equalIsCorrect" classname="seedu.address.commons.core.VersionTest" time="0.001"/>
+  <testcase name="versionComparable_validVersion_compareToIsCorrect" classname="seedu.address.commons.core.VersionTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

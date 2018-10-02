@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="seedu.address.model.person.PhoneTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2018-10-02T04:41:55" hostname="JOYCE" time="0.008">
+  <properties/>
+  <testcase name="constructor_null_throwsNullPointerException" classname="seedu.address.model.person.PhoneTest" time="0.001"/>
+  <testcase name="constructor_invalidPhone_throwsIllegalArgumentException" classname="seedu.address.model.person.PhoneTest" time="0.003"/>
+  <testcase name="isValidPhone" classname="seedu.address.model.person.PhoneTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

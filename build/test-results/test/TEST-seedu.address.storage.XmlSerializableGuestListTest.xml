@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="seedu.address.storage.XmlSerializableGuestListTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2018-10-02T04:41:56" hostname="JOYCE" time="0.044">
+  <properties/>
+  <testcase name="toModelType_invalidPersonFile_throwsIllegalValueException" classname="seedu.address.storage.XmlSerializableGuestListTest" time="0.017"/>
+  <testcase name="toModelType_typicalPersonsFile_success" classname="seedu.address.storage.XmlSerializableGuestListTest" time="0.017"/>
+  <testcase name="toModelType_duplicatePersons_throwsIllegalValueException" classname="seedu.address.storage.XmlSerializableGuestListTest" time="0.01"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

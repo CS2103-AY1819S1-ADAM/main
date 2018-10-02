@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="seedu.address.logic.commands.EditCommandTest" tests="12" skipped="0" failures="0" errors="0" timestamp="2018-10-02T04:41:54" hostname="JOYCE" time="0.137">
+  <properties/>
+  <testcase name="execute_invalidPersonIndexUnfilteredList_failure" classname="seedu.address.logic.commands.EditCommandTest" time="0.047"/>
+  <testcase name="execute_duplicatePersonUnfilteredList_failure" classname="seedu.address.logic.commands.EditCommandTest" time="0.004"/>
+  <testcase name="equals" classname="seedu.address.logic.commands.EditCommandTest" time="0.001"/>
+  <testcase name="execute_allFieldsSpecifiedUnfilteredList_success" classname="seedu.address.logic.commands.EditCommandTest" time="0.017"/>
+  <testcase name="execute_invalidPersonIndexFilteredList_failure" classname="seedu.address.logic.commands.EditCommandTest" time="0.004"/>
+  <testcase name="execute_duplicatePersonFilteredList_failure" classname="seedu.address.logic.commands.EditCommandTest" time="0.005"/>
+  <testcase name="executeUndoRedo_validIndexUnfilteredList_success" classname="seedu.address.logic.commands.EditCommandTest" time="0.013"/>
+  <testcase name="execute_filteredList_success" classname="seedu.address.logic.commands.EditCommandTest" time="0.004"/>
+  <testcase name="execute_someFieldsSpecifiedUnfilteredList_success" classname="seedu.address.logic.commands.EditCommandTest" time="0.012"/>
+  <testcase name="executeUndoRedo_validIndexFilteredList_samePersonEdited" classname="seedu.address.logic.commands.EditCommandTest" time="0.011"/>
+  <testcase name="execute_noFieldSpecifiedUnfilteredList_success" classname="seedu.address.logic.commands.EditCommandTest" time="0.003"/>
+  <testcase name="executeUndoRedo_invalidIndexUnfilteredList_failure" classname="seedu.address.logic.commands.EditCommandTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[Oct 02, 2018 12:41:54 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.model.AddressBookChangedEvent: number of persons 7
+Oct 02, 2018 12:41:54 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.model.AddressBookChangedEvent: number of persons 7
+Oct 02, 2018 12:41:54 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.model.AddressBookChangedEvent: number of persons 7
+Oct 02, 2018 12:41:54 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.model.AddressBookChangedEvent: number of persons 7
+Oct 02, 2018 12:41:54 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.model.AddressBookChangedEvent: number of persons 7
+Oct 02, 2018 12:41:54 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.model.AddressBookChangedEvent: number of persons 7
+Oct 02, 2018 12:41:54 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.model.AddressBookChangedEvent: number of persons 7
+Oct 02, 2018 12:41:54 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.model.AddressBookChangedEvent: number of persons 7
+Oct 02, 2018 12:41:54 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.model.AddressBookChangedEvent: number of persons 7
+Oct 02, 2018 12:41:54 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.model.AddressBookChangedEvent: number of persons 7
+Oct 02, 2018 12:41:54 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.model.AddressBookChangedEvent: number of persons 7
+Oct 02, 2018 12:41:54 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.model.AddressBookChangedEvent: number of persons 7
+Oct 02, 2018 12:41:54 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.model.AddressBookChangedEvent: number of persons 7
+Oct 02, 2018 12:41:54 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.model.AddressBookChangedEvent: number of persons 7
+Oct 02, 2018 12:41:54 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.model.AddressBookChangedEvent: number of persons 7
+Oct 02, 2018 12:41:54 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.model.AddressBookChangedEvent: number of persons 7
+Oct 02, 2018 12:41:54 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.model.AddressBookChangedEvent: number of persons 7
+Oct 02, 2018 12:41:54 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.model.AddressBookChangedEvent: number of persons 7
+Oct 02, 2018 12:41:54 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.model.AddressBookChangedEvent: number of persons 7
+]]></system-err>
+</testsuite>

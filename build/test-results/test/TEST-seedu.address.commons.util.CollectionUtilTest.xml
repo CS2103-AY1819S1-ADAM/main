@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="seedu.address.commons.util.CollectionUtilTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2018-10-02T04:41:52" hostname="JOYCE" time="0.01">
+  <properties/>
+  <testcase name="requireAllNonNullCollection" classname="seedu.address.commons.util.CollectionUtilTest" time="0.004"/>
+  <testcase name="requireAllNonNullVarargs" classname="seedu.address.commons.util.CollectionUtilTest" time="0.003"/>
+  <testcase name="isAnyNonNull" classname="seedu.address.commons.util.CollectionUtilTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

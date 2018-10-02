@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="systemtests.ErrorDialogGuiTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2018-10-02T04:43:30" hostname="JOYCE" time="1.314">
+  <properties/>
+  <testcase name="showErrorDialogs" classname="systemtests.ErrorDialogGuiTest" time="1.314"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[Oct 02, 2018 12:43:30 PM seedu.address.MainApp init
+INFO: =============================[ Initializing GuestList ]===========================
+Oct 02, 2018 12:43:30 PM seedu.address.MainApp initConfig
+INFO: Using config file : config.json
+Oct 02, 2018 12:43:30 PM seedu.address.MainApp initPrefs
+INFO: Using prefs file : src\test\data\sandbox\pref_testing.json
+Oct 02, 2018 12:43:30 PM seedu.address.commons.core.LogsCenter init
+INFO: currentLogLevel: INFO
+Oct 02, 2018 12:43:30 PM seedu.address.ui.UiManager start
+INFO: Starting UI...
+Oct 02, 2018 12:43:30 PM guitests.guihandles.StageHandle focus
+INFO: Focusing onTest App
+Oct 02, 2018 12:43:31 PM guitests.guihandles.StageHandle focus
+INFO: Finishing focus onTest App
+Oct 02, 2018 12:43:31 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.storage.DataSavingExceptionEvent: java.io.IOException: Stub
+Oct 02, 2018 12:43:31 PM seedu.address.ui.UiManager handleDataSavingExceptionEvent
+INFO: ---[Event handled][java.io.IOException: Stub]
+]]></system-err>
+</testsuite>

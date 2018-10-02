@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="seedu.address.logic.parser.AddCommandParserTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2018-10-02T04:41:55" hostname="JOYCE" time="0.185">
+  <properties/>
+  <testcase name="parse_optionalFieldsMissing_success" classname="seedu.address.logic.parser.AddCommandParserTest" time="0.032"/>
+  <testcase name="parse_allFieldsPresent_success" classname="seedu.address.logic.parser.AddCommandParserTest" time="0.078"/>
+  <testcase name="parse_invalidValue_failure" classname="seedu.address.logic.parser.AddCommandParserTest" time="0.036"/>
+  <testcase name="parse_compulsoryFieldMissing_failure" classname="seedu.address.logic.parser.AddCommandParserTest" time="0.027"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

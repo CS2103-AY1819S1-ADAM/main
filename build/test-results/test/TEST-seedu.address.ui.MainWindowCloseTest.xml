@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="seedu.address.ui.MainWindowCloseTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2018-10-02T04:42:10" hostname="JOYCE" time="2.639">
+  <properties/>
+  <testcase name="close_menuBarExitButton_exitAppRequestEventPosted" classname="seedu.address.ui.MainWindowCloseTest" time="1.989"/>
+  <testcase name="close_externalRequest_exitAppRequestEventPosted" classname="seedu.address.ui.MainWindowCloseTest" time="0.65"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[Oct 02, 2018 12:42:10 PM guitests.guihandles.StageHandle focus
+INFO: Focusing onAddress App
+Oct 02, 2018 12:42:10 PM guitests.guihandles.StageHandle focus
+INFO: Finishing focus onAddress App
+Oct 02, 2018 12:42:12 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.ui.ExitAppRequestEvent: ExitAppRequestEvent
+Oct 02, 2018 12:42:12 PM guitests.guihandles.StageHandle focus
+INFO: Focusing onAddress App
+Oct 02, 2018 12:42:12 PM guitests.guihandles.StageHandle focus
+INFO: Finishing focus onAddress App
+Oct 02, 2018 12:42:12 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.ui.ExitAppRequestEvent: ExitAppRequestEvent
+]]></system-err>
+</testsuite>

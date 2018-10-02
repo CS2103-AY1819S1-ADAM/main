@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="seedu.address.storage.XmlGuestListStorageTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2018-10-02T04:41:56" hostname="JOYCE" time="0.151">
+  <properties/>
+  <testcase name="read_missingFile_emptyResult" classname="seedu.address.storage.XmlGuestListStorageTest" time="0.008"/>
+  <testcase name="saveAddressBook_nullAddressBook_throwsNullPointerException" classname="seedu.address.storage.XmlGuestListStorageTest" time="0.003"/>
+  <testcase name="saveAddressBook_nullFilePath_throwsNullPointerException" classname="seedu.address.storage.XmlGuestListStorageTest" time="0.003"/>
+  <testcase name="read_notXmlFormat_exceptionThrown" classname="seedu.address.storage.XmlGuestListStorageTest" time="0.017"/>
+  <testcase name="readAddressBook_invalidAndValidPersonAddressBook_throwDataConversionException" classname="seedu.address.storage.XmlGuestListStorageTest" time="0.013"/>
+  <testcase name="readAndSaveAddressBook_allInOrder_success" classname="seedu.address.storage.XmlGuestListStorageTest" time="0.079"/>
+  <testcase name="readAddressBook_nullFilePath_throwsNullPointerException" classname="seedu.address.storage.XmlGuestListStorageTest" time="0.003"/>
+  <testcase name="readAddressBook_invalidPersonAddressBook_throwDataConversionException" classname="seedu.address.storage.XmlGuestListStorageTest" time="0.02"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[Oct 02, 2018 12:41:56 PM seedu.address.storage.XmlAddressBookStorage readAddressBook
+INFO: GuestList file src\test\data\XmlGuestListStorageTest\NonExistentFile.xml not found
+Oct 02, 2018 12:41:56 PM seedu.address.storage.XmlAddressBookStorage readAddressBook
+INFO: Illegal values found in src\test\data\XmlGuestListStorageTest\invalidAndValidPersonAddressBook.xml: Phone numbers should only contain numbers, and it should be at least 3 digits long
+Oct 02, 2018 12:41:56 PM seedu.address.storage.XmlAddressBookStorage readAddressBook
+INFO: Illegal values found in src\test\data\XmlGuestListStorageTest\invalidPersonAddressBook.xml: Names should only contain alphanumeric characters and spaces, and it should not be blank
+]]></system-err>
+</testsuite>

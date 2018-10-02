@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="seedu.address.commons.util.XmlUtilTest" tests="12" skipped="0" failures="0" errors="0" timestamp="2018-10-02T04:41:53" hostname="JOYCE" time="0.79">
+  <properties/>
+  <testcase name="saveDataToFile_nullClass_throwsNullPointerException" classname="seedu.address.commons.util.XmlUtilTest" time="0.003"/>
+  <testcase name="xmlAdaptedPersonFromFile_fileWithMissingPersonField_validResult" classname="seedu.address.commons.util.XmlUtilTest" time="0.528"/>
+  <testcase name="xmlAdaptedPersonFromFile_fileWithInvalidPersonField_validResult" classname="seedu.address.commons.util.XmlUtilTest" time="0.012"/>
+  <testcase name="getDataFromFile_nullClass_throwsNullPointerException" classname="seedu.address.commons.util.XmlUtilTest" time="0.0"/>
+  <testcase name="saveDataToFile_validFile_dataSaved" classname="seedu.address.commons.util.XmlUtilTest" time="0.174"/>
+  <testcase name="getDataFromFile_nullFile_throwsNullPointerException" classname="seedu.address.commons.util.XmlUtilTest" time="0.001"/>
+  <testcase name="xmlAdaptedPersonFromFile_fileWithValidPerson_validResult" classname="seedu.address.commons.util.XmlUtilTest" time="0.011"/>
+  <testcase name="getDataFromFile_missingFile_fileNotFoundException" classname="seedu.address.commons.util.XmlUtilTest" time="0.003"/>
+  <testcase name="getDataFromFile_emptyFile_dataFormatMismatchException" classname="seedu.address.commons.util.XmlUtilTest" time="0.02"/>
+  <testcase name="saveDataToFile_missingFile_fileNotFoundException" classname="seedu.address.commons.util.XmlUtilTest" time="0.003"/>
+  <testcase name="getDataFromFile_validFile_validResult" classname="seedu.address.commons.util.XmlUtilTest" time="0.028"/>
+  <testcase name="saveDataToFile_nullFile_throwsNullPointerException" classname="seedu.address.commons.util.XmlUtilTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

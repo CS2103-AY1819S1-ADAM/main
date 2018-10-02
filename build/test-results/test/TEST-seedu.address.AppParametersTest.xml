@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="seedu.address.AppParametersTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2018-10-02T04:41:51" hostname="JOYCE" time="0.09">
+  <properties/>
+  <testcase name="parse_validConfigPath_success" classname="seedu.address.AppParametersTest" time="0.008"/>
+  <testcase name="parse_nullConfigPath_success" classname="seedu.address.AppParametersTest" time="0.001"/>
+  <testcase name="parse_invalidConfigPath_success" classname="seedu.address.AppParametersTest" time="0.079"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[Oct 02, 2018 12:41:51 PM seedu.address.AppParameters parse
+WARNING: Invalid config path a?. Using default config path.
+]]></system-err>
+</testsuite>

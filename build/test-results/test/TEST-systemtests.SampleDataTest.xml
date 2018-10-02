@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="systemtests.SampleDataTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2018-10-02T04:43:54" hostname="JOYCE" time="1.421">
+  <properties/>
+  <testcase name="addressBook_dataFileDoesNotExist_loadSampleData" classname="systemtests.SampleDataTest" time="1.421"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[Oct 02, 2018 12:43:54 PM seedu.address.MainApp init
+INFO: =============================[ Initializing GuestList ]===========================
+Oct 02, 2018 12:43:54 PM seedu.address.MainApp initConfig
+INFO: Using config file : config.json
+Oct 02, 2018 12:43:54 PM seedu.address.MainApp initPrefs
+INFO: Using prefs file : src\test\data\sandbox\pref_testing.json
+Oct 02, 2018 12:43:54 PM seedu.address.commons.core.LogsCenter init
+INFO: currentLogLevel: INFO
+Oct 02, 2018 12:43:54 PM seedu.address.storage.XmlAddressBookStorage readAddressBook
+INFO: GuestList file src\test\data\sandbox\SomeFileThatDoesNotExist1234567890.xml not found
+Oct 02, 2018 12:43:54 PM seedu.address.MainApp initModelManager
+INFO: Data file not found. Will be starting with a sample GuestList
+Oct 02, 2018 12:43:54 PM seedu.address.ui.UiManager start
+INFO: Starting UI...
+Oct 02, 2018 12:43:55 PM guitests.guihandles.StageHandle focus
+INFO: Focusing onTest App
+Oct 02, 2018 12:43:55 PM guitests.guihandles.StageHandle focus
+INFO: Finishing focus onTest App
+]]></system-err>
+</testsuite>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="seedu.address.ui.UiPartTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2018-10-02T04:42:26" hostname="JOYCE" time="0.047">
+  <properties/>
+  <testcase name="constructor_validFileUrl_loadsFile" classname="seedu.address.ui.UiPartTest" time="0.006"/>
+  <testcase name="constructor_missingFileUrl_throwsAssertionError" classname="seedu.address.ui.UiPartTest" time="0.004"/>
+  <testcase name="constructor_validFileWithFxRootUrl_loadsFile" classname="seedu.address.ui.UiPartTest" time="0.006"/>
+  <testcase name="constructor_nullFileUrl_throwsNullPointerException" classname="seedu.address.ui.UiPartTest" time="0.004"/>
+  <testcase name="constructor_invalidFileUrl_throwsAssertionError" classname="seedu.address.ui.UiPartTest" time="0.011"/>
+  <testcase name="constructor_invalidFileName_throwsAssertionError" classname="seedu.address.ui.UiPartTest" time="0.006"/>
+  <testcase name="constructor_nullFileName_throwsNullPointerException" classname="seedu.address.ui.UiPartTest" time="0.005"/>
+  <testcase name="constructor_missingFileName_throwsNullPointerException" classname="seedu.address.ui.UiPartTest" time="0.004"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

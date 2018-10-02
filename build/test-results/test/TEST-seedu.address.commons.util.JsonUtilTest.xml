@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="seedu.address.commons.util.JsonUtilTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2018-10-02T04:41:53" hostname="JOYCE" time="0.06">
+  <properties/>
+  <testcase name="deserializeObjectFromJsonFile_noExceptionThrown" classname="seedu.address.commons.util.JsonUtilTest" time="0.042"/>
+  <testcase name="serializeObjectToJsonFile_noExceptionThrown" classname="seedu.address.commons.util.JsonUtilTest" time="0.017"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

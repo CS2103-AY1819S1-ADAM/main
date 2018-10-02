@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="seedu.address.ui.CommandBoxTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2018-10-02T04:41:59" hostname="JOYCE" time="8.357">
+  <properties/>
+  <testcase name="handleKeyPress_startingWithUp" classname="seedu.address.ui.CommandBoxTest" time="3.067"/>
+  <testcase name="commandBox_startingWithFailedCommand" classname="seedu.address.ui.CommandBoxTest" time="1.979"/>
+  <testcase name="commandBox_handleKeyPress" classname="seedu.address.ui.CommandBoxTest" time="0.659"/>
+  <testcase name="handleKeyPress_startingWithDown" classname="seedu.address.ui.CommandBoxTest" time="1.749"/>
+  <testcase name="commandBox_startingWithSuccessfulCommand" classname="seedu.address.ui.CommandBoxTest" time="0.901"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[Oct 02, 2018 12:42:00 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][list]
+Oct 02, 2018 12:42:00 PM seedu.address.ui.CommandBox handleCommandEntered
+INFO: Result: Listed all persons
+Oct 02, 2018 12:42:00 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.ui.NewResultAvailableEvent: NewResultAvailableEvent
+Oct 02, 2018 12:42:01 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][invalid command]
+Oct 02, 2018 12:42:01 PM seedu.address.ui.CommandBox handleCommandEntered
+INFO: Invalid command: invalid command
+Oct 02, 2018 12:42:01 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.ui.NewResultAvailableEvent: NewResultAvailableEvent
+Oct 02, 2018 12:42:01 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][list]
+Oct 02, 2018 12:42:01 PM seedu.address.ui.CommandBox handleCommandEntered
+INFO: Result: Listed all persons
+Oct 02, 2018 12:42:01 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.ui.NewResultAvailableEvent: NewResultAvailableEvent
+Oct 02, 2018 12:42:02 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][invalid command]
+Oct 02, 2018 12:42:02 PM seedu.address.ui.CommandBox handleCommandEntered
+INFO: Invalid command: invalid command
+Oct 02, 2018 12:42:02 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.ui.NewResultAvailableEvent: NewResultAvailableEvent
+Oct 02, 2018 12:42:03 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][list]
+Oct 02, 2018 12:42:03 PM seedu.address.ui.CommandBox handleCommandEntered
+INFO: Result: Listed all persons
+Oct 02, 2018 12:42:03 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.ui.NewResultAvailableEvent: NewResultAvailableEvent
+Oct 02, 2018 12:42:03 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][list]
+Oct 02, 2018 12:42:03 PM seedu.address.ui.CommandBox handleCommandEntered
+INFO: Result: Listed all persons
+Oct 02, 2018 12:42:03 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.ui.NewResultAvailableEvent: NewResultAvailableEvent
+Oct 02, 2018 12:42:03 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][invalid command]
+Oct 02, 2018 12:42:03 PM seedu.address.ui.CommandBox handleCommandEntered
+INFO: Invalid command: invalid command
+Oct 02, 2018 12:42:03 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.ui.NewResultAvailableEvent: NewResultAvailableEvent
+Oct 02, 2018 12:42:04 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][invalid command]
+Oct 02, 2018 12:42:04 PM seedu.address.ui.CommandBox handleCommandEntered
+INFO: Invalid command: invalid command
+Oct 02, 2018 12:42:04 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.ui.NewResultAvailableEvent: NewResultAvailableEvent
+Oct 02, 2018 12:42:04 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][invalid command]
+Oct 02, 2018 12:42:04 PM seedu.address.ui.CommandBox handleCommandEntered
+INFO: Invalid command: invalid command
+Oct 02, 2018 12:42:04 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.ui.NewResultAvailableEvent: NewResultAvailableEvent
+Oct 02, 2018 12:42:05 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][list]
+Oct 02, 2018 12:42:05 PM seedu.address.ui.CommandBox handleCommandEntered
+INFO: Result: Listed all persons
+Oct 02, 2018 12:42:05 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.ui.NewResultAvailableEvent: NewResultAvailableEvent
+Oct 02, 2018 12:42:06 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][invalid command]
+Oct 02, 2018 12:42:06 PM seedu.address.ui.CommandBox handleCommandEntered
+INFO: Invalid command: invalid command
+Oct 02, 2018 12:42:06 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.ui.NewResultAvailableEvent: NewResultAvailableEvent
+Oct 02, 2018 12:42:06 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][list]
+Oct 02, 2018 12:42:06 PM seedu.address.ui.CommandBox handleCommandEntered
+INFO: Result: Listed all persons
+Oct 02, 2018 12:42:06 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.ui.NewResultAvailableEvent: NewResultAvailableEvent
+Oct 02, 2018 12:42:07 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][list]
+Oct 02, 2018 12:42:07 PM seedu.address.ui.CommandBox handleCommandEntered
+INFO: Result: Listed all persons
+Oct 02, 2018 12:42:07 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.ui.NewResultAvailableEvent: NewResultAvailableEvent
+Oct 02, 2018 12:42:07 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][invalid command]
+Oct 02, 2018 12:42:07 PM seedu.address.ui.CommandBox handleCommandEntered
+INFO: Invalid command: invalid command
+Oct 02, 2018 12:42:07 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.ui.NewResultAvailableEvent: NewResultAvailableEvent
+]]></system-err>
+</testsuite>

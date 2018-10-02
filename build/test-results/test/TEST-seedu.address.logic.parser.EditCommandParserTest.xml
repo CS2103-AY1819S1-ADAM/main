@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="seedu.address.logic.parser.EditCommandParserTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2018-10-02T04:41:55" hostname="JOYCE" time="0.114">
+  <properties/>
+  <testcase name="parse_resetTags_success" classname="seedu.address.logic.parser.EditCommandParserTest" time="0.008"/>
+  <testcase name="parse_someFieldsSpecified_success" classname="seedu.address.logic.parser.EditCommandParserTest" time="0.013"/>
+  <testcase name="parse_oneFieldSpecified_success" classname="seedu.address.logic.parser.EditCommandParserTest" time="0.003"/>
+  <testcase name="parse_missingParts_failure" classname="seedu.address.logic.parser.EditCommandParserTest" time="0.001"/>
+  <testcase name="parse_invalidPreamble_failure" classname="seedu.address.logic.parser.EditCommandParserTest" time="0.001"/>
+  <testcase name="parse_allFieldsSpecified_success" classname="seedu.address.logic.parser.EditCommandParserTest" time="0.016"/>
+  <testcase name="parse_invalidValue_failure" classname="seedu.address.logic.parser.EditCommandParserTest" time="0.015"/>
+  <testcase name="parse_multipleRepeatedFields_acceptsLast" classname="seedu.address.logic.parser.EditCommandParserTest" time="0.034"/>
+  <testcase name="parse_invalidValueFollowedByValidValue_success" classname="seedu.address.logic.parser.EditCommandParserTest" time="0.015"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

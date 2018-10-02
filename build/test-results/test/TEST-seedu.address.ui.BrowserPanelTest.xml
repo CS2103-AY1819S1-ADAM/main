@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="seedu.address.ui.BrowserPanelTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2018-10-02T04:41:56" hostname="JOYCE" time="3.031">
+  <properties/>
+  <testcase name="display" classname="seedu.address.ui.BrowserPanelTest" time="3.031"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[Oct 02, 2018 12:41:58 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent: PersonPanelSelectionChangedEvent
+Oct 02, 2018 12:41:58 PM seedu.address.ui.BrowserPanel handlePersonPanelSelectionChangedEvent
+INFO: ---[Event handled][PersonPanelSelectionChangedEvent]
+]]></system-err>
+</testsuite>
