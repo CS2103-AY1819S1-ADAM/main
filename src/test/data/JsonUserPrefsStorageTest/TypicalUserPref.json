@@ -7,5 +7,5 @@
       "y" : 100
     }
   },
-  "guestlistFilePath" : "guestlist.xml"
+  "guestlistFilePath" : "data\\guestlist.xml"
 }
