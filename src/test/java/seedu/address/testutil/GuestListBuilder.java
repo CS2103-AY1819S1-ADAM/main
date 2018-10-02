@@ -1,7 +1,7 @@
 package seedu.address.testutil;
 
 import seedu.address.model.GuestList;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.Guest;
 
 /**
  * A utility class to help with building GuestList objects.
@@ -23,8 +23,8 @@ public class GuestListBuilder {
     /**
      * Adds a new {@code Person} to the {@code GuestList} that we are building.
      */
-    public GuestListBuilder withPerson(Person person) {
-        guestList.addPerson(person);
+    public GuestListBuilder withPerson(Guest guest) {
+        guestList.addPerson(guest);
         return this;
     }
 

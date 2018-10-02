@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.GuestList;
 import seedu.address.model.ReadOnlyGuestList;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.Guest;
 
 /**
  * An Immutable GuestList that is serializable to XML format
@@ -18,17 +18,17 @@ import seedu.address.model.person.Person;
 @XmlRootElement(name = "guestlist")
 public class XmlSerializableGuestList {
 
-    public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
+    public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate guest(s).";
 
     @XmlElement
-    private List<XmlAdaptedPerson> persons;
+    private List<XmlAdaptedPerson> guests;
 
     /**
      * Creates an empty XmlSerializableGuestList.
      * This empty constructor is required for marshalling.
      */
     public XmlSerializableGuestList() {
-        persons = new ArrayList<>();
+        guests = new ArrayList<>();
     }
 
     /**
@@ -36,7 +36,7 @@ public class XmlSerializableGuestList {
      */
     public XmlSerializableGuestList(ReadOnlyGuestList src) {
         this();
-        persons.addAll(src.getPersonList().stream().map(XmlAdaptedPerson::new).collect(Collectors.toList()));
+        guests.addAll(src.getPersonList().stream().map(XmlAdaptedPerson::new).collect(Collectors.toList()));
     }
 
     /**
@@ -47,12 +47,12 @@ public class XmlSerializableGuestList {
      */
     public GuestList toModelType() throws IllegalValueException {
         GuestList guestList = new GuestList();
-        for (XmlAdaptedPerson p : persons) {
-            Person person = p.toModelType();
-            if (guestList.hasPerson(person)) {
+        for (XmlAdaptedPerson p : guests) {
+            Guest guest = p.toModelType();
+            if (guestList.hasPerson(guest)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
-            guestList.addPerson(person);
+            guestList.addPerson(guest);
         }
         return guestList;
     }
@@ -66,6 +66,6 @@ public class XmlSerializableGuestList {
         if (!(other instanceof XmlSerializableGuestList)) {
             return false;
         }
-        return persons.equals(((XmlSerializableGuestList) other).persons);
+        return guests.equals(((XmlSerializableGuestList) other).guests);
     }
 }

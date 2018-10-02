@@ -12,7 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.GuestListChangedEvent;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.Guest;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -21,7 +21,7 @@ public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final VersionedGuestList versionedGuestList;
-    private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Guest> filteredGuests;
 
     /**
      * Initializes a ModelManager with the given guestList and userPrefs.
@@ -33,7 +33,7 @@ public class ModelManager extends ComponentManager implements Model {
         logger.fine("Initializing with address book: " + guestList + " and user prefs " + userPrefs);
 
         versionedGuestList = new VersionedGuestList(guestList);
-        filteredPersons = new FilteredList<>(versionedGuestList.getPersonList());
+        filteredGuests = new FilteredList<>(versionedGuestList.getPersonList());
     }
 
     public ModelManager() {
@@ -57,47 +57,46 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return versionedGuestList.hasPerson(person);
+    public boolean hasPerson(Guest guest) {
+        requireNonNull(guest);
+        return versionedGuestList.hasPerson(guest);
     }
 
     @Override
-    public void deletePerson(Person target) {
+    public void deletePerson(Guest target) {
         versionedGuestList.removePerson(target);
         indicateGuestListChanged();
     }
 
     @Override
-    public void addPerson(Person person) {
-        versionedGuestList.addPerson(person);
+    public void addPerson(Guest guest) {
+        versionedGuestList.addPerson(guest);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         indicateGuestListChanged();
     }
 
     @Override
-    public void updatePerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
-
-        versionedGuestList.updatePerson(target, editedPerson);
+    public void updatePerson(Guest target, Guest editedGuest) {
+        requireAllNonNull(target, editedGuest);
+        versionedGuestList.updatePerson(target, editedGuest);
         indicateGuestListChanged();
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    //=========== Filtered Guest List Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
-     * {@code versionedGuestList}
+     * Returns an unmodifiable view of the list of {@code Guest} backed by the
+     * internal list of {@code versionedGuestList}
      */
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return FXCollections.unmodifiableObservableList(filteredPersons);
+    public ObservableList<Guest> getFilteredPersonList() {
+        return FXCollections.unmodifiableObservableList(filteredGuests);
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
+    public void updateFilteredPersonList(Predicate<Guest> predicate) {
         requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
+        filteredGuests.setPredicate(predicate);
     }
 
     //=========== Undo/Redo =================================================================================
@@ -144,7 +143,7 @@ public class ModelManager extends ComponentManager implements Model {
         // state check
         ModelManager other = (ModelManager) obj;
         return versionedGuestList.equals(other.versionedGuestList)
-                && filteredPersons.equals(other.filteredPersons);
+                && filteredGuests.equals(other.filteredGuests);
     }
 
 }

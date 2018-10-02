@@ -19,8 +19,8 @@ import org.junit.rules.ExpectedException;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.model.person.Guest;
+import seedu.address.model.person.exceptions.DuplicateGuestException;
 import seedu.address.testutil.PersonBuilder;
 
 public class GuestListTest {
@@ -50,13 +50,13 @@ public class GuestListTest {
 
     @Test
     public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
-        // Two persons with the same identity fields
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        // Two guests with the same identity fields
+        Guest editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
-        GuestListStub newData = new GuestListStub(newPersons);
+        List<Guest> newGuests = Arrays.asList(ALICE, editedAlice);
+        GuestListStub newData = new GuestListStub(newGuests);
 
-        thrown.expect(DuplicatePersonException.class);
+        thrown.expect(DuplicateGuestException.class);
         guestList.resetData(newData);
     }
 
@@ -80,7 +80,7 @@ public class GuestListTest {
     @Test
     public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
         guestList.addPerson(ALICE);
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Guest editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(guestList.hasPerson(editedAlice));
     }
@@ -92,18 +92,20 @@ public class GuestListTest {
     }
 
     /**
-     * A stub ReadOnlyGuestList whose persons list can violate interface constraints.
+     * A stub ReadOnlyGuestList whose guests list can violate interface
+     * constraints.
      */
     private static class GuestListStub implements ReadOnlyGuestList {
-        private final ObservableList<Person> persons = FXCollections.observableArrayList();
+        private final ObservableList<Guest> guests =
+                FXCollections.observableArrayList();
 
-        GuestListStub(Collection<Person> persons) {
-            this.persons.setAll(persons);
+        GuestListStub(Collection<Guest> guests) {
+            this.guests.setAll(guests);
         }
 
         @Override
-        public ObservableList<Person> getPersonList() {
-            return persons;
+        public ObservableList<Guest> getPersonList() {
+            return guests;
         }
     }
 
