@@ -9,14 +9,14 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.GuestList;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyGuestList;
 import seedu.address.model.person.Person;
 
 /**
  * An Immutable GuestList that is serializable to XML format
  */
-@XmlRootElement(name = "addressbook")
-public class XmlSerializableAddressBook {
+@XmlRootElement(name = "guestlist")
+public class XmlSerializableGuestList {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
 
@@ -24,17 +24,17 @@ public class XmlSerializableAddressBook {
     private List<XmlAdaptedPerson> persons;
 
     /**
-     * Creates an empty XmlSerializableAddressBook.
+     * Creates an empty XmlSerializableGuestList.
      * This empty constructor is required for marshalling.
      */
-    public XmlSerializableAddressBook() {
+    public XmlSerializableGuestList() {
         persons = new ArrayList<>();
     }
 
     /**
      * Conversion
      */
-    public XmlSerializableAddressBook(ReadOnlyAddressBook src) {
+    public XmlSerializableGuestList(ReadOnlyGuestList src) {
         this();
         persons.addAll(src.getPersonList().stream().map(XmlAdaptedPerson::new).collect(Collectors.toList()));
     }
@@ -63,9 +63,9 @@ public class XmlSerializableAddressBook {
             return true;
         }
 
-        if (!(other instanceof XmlSerializableAddressBook)) {
+        if (!(other instanceof XmlSerializableGuestList)) {
             return false;
         }
-        return persons.equals(((XmlSerializableAddressBook) other).persons);
+        return persons.equals(((XmlSerializableGuestList) other).persons);
     }
 }

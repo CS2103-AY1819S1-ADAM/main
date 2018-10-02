@@ -12,7 +12,7 @@ import seedu.address.model.person.UniquePersonList;
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .isSamePerson comparison)
  */
-public class GuestList implements ReadOnlyAddressBook {
+public class GuestList implements ReadOnlyGuestList {
 
     private final UniquePersonList persons;
 
@@ -32,7 +32,7 @@ public class GuestList implements ReadOnlyAddressBook {
     /**
      * Creates an GuestList using the Persons in the {@code toBeCopied}
      */
-    public GuestList(ReadOnlyAddressBook toBeCopied) {
+    public GuestList(ReadOnlyGuestList toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -50,7 +50,7 @@ public class GuestList implements ReadOnlyAddressBook {
     /**
      * Resets the existing data of this {@code GuestList} with {@code newData}.
      */
-    public void resetData(ReadOnlyAddressBook newData) {
+    public void resetData(ReadOnlyGuestList newData) {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());

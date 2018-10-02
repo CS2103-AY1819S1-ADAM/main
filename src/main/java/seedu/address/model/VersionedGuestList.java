@@ -8,10 +8,10 @@ import java.util.List;
  */
 public class VersionedGuestList extends GuestList {
 
-    private final List<ReadOnlyAddressBook> addressBookStateList;
+    private final List<ReadOnlyGuestList> addressBookStateList;
     private int currentStatePointer;
 
-    public VersionedGuestList(ReadOnlyAddressBook initialState) {
+    public VersionedGuestList(ReadOnlyGuestList initialState) {
         super(initialState);
 
         addressBookStateList = new ArrayList<>();

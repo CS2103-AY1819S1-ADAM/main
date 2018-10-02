@@ -14,14 +14,14 @@ import java.util.List;
 
 import org.junit.Test;
 
-import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.GuestListBuilder;
 
 public class VersionedGuestListTest {
 
-    private final ReadOnlyAddressBook addressBookWithAmy = new AddressBookBuilder().withPerson(AMY).build();
-    private final ReadOnlyAddressBook addressBookWithBob = new AddressBookBuilder().withPerson(BOB).build();
-    private final ReadOnlyAddressBook addressBookWithCarl = new AddressBookBuilder().withPerson(CARL).build();
-    private final ReadOnlyAddressBook emptyAddressBook = new AddressBookBuilder().build();
+    private final ReadOnlyGuestList addressBookWithAmy = new GuestListBuilder().withPerson(AMY).build();
+    private final ReadOnlyGuestList addressBookWithBob = new GuestListBuilder().withPerson(BOB).build();
+    private final ReadOnlyGuestList addressBookWithCarl = new GuestListBuilder().withPerson(CARL).build();
+    private final ReadOnlyGuestList emptyAddressBook = new GuestListBuilder().build();
 
     @Test
     public void commit_singleAddressBook_noStatesRemovedCurrentStateSaved() {
@@ -241,9 +241,9 @@ public class VersionedGuestListTest {
      * and states after {@code versionedAddressBook#currentStatePointer} is equal to {@code expectedStatesAfterPointer}.
      */
     private void assertAddressBookListStatus(VersionedGuestList versionedAddressBook,
-                                             List<ReadOnlyAddressBook> expectedStatesBeforePointer,
-                                             ReadOnlyAddressBook expectedCurrentState,
-                                             List<ReadOnlyAddressBook> expectedStatesAfterPointer) {
+                                             List<ReadOnlyGuestList> expectedStatesBeforePointer,
+                                             ReadOnlyGuestList expectedCurrentState,
+                                             List<ReadOnlyGuestList> expectedStatesAfterPointer) {
         // check state currently pointing at is correct
         assertEquals(new GuestList(versionedAddressBook), expectedCurrentState);
 
@@ -253,13 +253,13 @@ public class VersionedGuestListTest {
         }
 
         // check states before pointer are correct
-        for (ReadOnlyAddressBook expectedAddressBook : expectedStatesBeforePointer) {
+        for (ReadOnlyGuestList expectedAddressBook : expectedStatesBeforePointer) {
             assertEquals(expectedAddressBook, new GuestList(versionedAddressBook));
             versionedAddressBook.redo();
         }
 
         // check states after pointer are correct
-        for (ReadOnlyAddressBook expectedAddressBook : expectedStatesAfterPointer) {
+        for (ReadOnlyGuestList expectedAddressBook : expectedStatesAfterPointer) {
             versionedAddressBook.redo();
             assertEquals(expectedAddressBook, new GuestList(versionedAddressBook));
         }
@@ -275,7 +275,7 @@ public class VersionedGuestListTest {
      * Creates and returns a {@code VersionedGuestList} with the {@code addressBookStates} added into it, and the
      * {@code VersionedGuestList#currentStatePointer} at the end of list.
      */
-    private VersionedGuestList prepareAddressBookList(ReadOnlyAddressBook... addressBookStates) {
+    private VersionedGuestList prepareAddressBookList(ReadOnlyGuestList... addressBookStates) {
         assertFalse(addressBookStates.length == 0);
 
         VersionedGuestList versionedAddressBook = new VersionedGuestList(addressBookStates[0]);

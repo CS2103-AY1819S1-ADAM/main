@@ -6,12 +6,12 @@ import java.util.Optional;
 
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.GuestList;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyGuestList;
 
 /**
  * Represents a storage for {@link GuestList}.
  */
-public interface AddressBookStorage {
+public interface GuestListStorage {
 
     /**
      * Returns the file path of the data file.
@@ -19,28 +19,28 @@ public interface AddressBookStorage {
     Path getAddressBookFilePath();
 
     /**
-     * Returns GuestList data as a {@link ReadOnlyAddressBook}.
+     * Returns GuestList data as a {@link ReadOnlyGuestList}.
      *   Returns {@code Optional.empty()} if storage file is not found.
      * @throws DataConversionException if the data in storage is not in the expected format.
      * @throws IOException if there was any problem when reading from the storage.
      */
-    Optional<ReadOnlyAddressBook> readAddressBook() throws DataConversionException, IOException;
+    Optional<ReadOnlyGuestList> readAddressBook() throws DataConversionException, IOException;
 
     /**
      * @see #getAddressBookFilePath()
      */
-    Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) throws DataConversionException, IOException;
+    Optional<ReadOnlyGuestList> readAddressBook(Path filePath) throws DataConversionException, IOException;
 
     /**
-     * Saves the given {@link ReadOnlyAddressBook} to the storage.
+     * Saves the given {@link ReadOnlyGuestList} to the storage.
      * @param addressBook cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException;
+    void saveAddressBook(ReadOnlyGuestList addressBook) throws IOException;
 
     /**
-     * @see #saveAddressBook(ReadOnlyAddressBook)
+     * @see #saveAddressBook(ReadOnlyGuestList)
      */
-    void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException;
+    void saveAddressBook(ReadOnlyGuestList addressBook, Path filePath) throws IOException;
 
 }

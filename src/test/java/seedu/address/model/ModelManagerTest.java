@@ -14,7 +14,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.GuestListBuilder;
 
 public class ModelManagerTest {
     @Rule
@@ -47,7 +47,7 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        GuestList guestList = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
+        GuestList guestList = new GuestListBuilder().withPerson(ALICE).withPerson(BENSON).build();
         GuestList differentGuestList = new GuestList();
         UserPrefs userPrefs = new UserPrefs();
 
