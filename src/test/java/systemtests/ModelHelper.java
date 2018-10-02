@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
 
-import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import cs2103.concierge.model.Model;
+import cs2103.concierge.model.person.Person;
 
 /**
  * Contains helper methods to set up {@code Model} for testing.

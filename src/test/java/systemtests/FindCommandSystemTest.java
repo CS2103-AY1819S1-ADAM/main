@@ -1,25 +1,25 @@
 package systemtests;
 
 import static org.junit.Assert.assertFalse;
-import static seedu.address.commons.core.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
-import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.testutil.TypicalPersons.BENSON;
-import static seedu.address.testutil.TypicalPersons.CARL;
-import static seedu.address.testutil.TypicalPersons.DANIEL;
-import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
+import static cs2103.concierge.commons.core.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
+import static cs2103.concierge.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static cs2103.concierge.testutil.TypicalPersons.BENSON;
+import static cs2103.concierge.testutil.TypicalPersons.CARL;
+import static cs2103.concierge.testutil.TypicalPersons.DANIEL;
+import static cs2103.concierge.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
 
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.RedoCommand;
-import seedu.address.logic.commands.UndoCommand;
-import seedu.address.model.Model;
-import seedu.address.model.tag.Tag;
+import cs2103.concierge.commons.core.index.Index;
+import cs2103.concierge.logic.commands.DeleteCommand;
+import cs2103.concierge.logic.commands.FindCommand;
+import cs2103.concierge.logic.commands.RedoCommand;
+import cs2103.concierge.logic.commands.UndoCommand;
+import cs2103.concierge.model.Model;
+import cs2103.concierge.model.tag.Tag;
 
 public class FindCommandSystemTest extends AddressBookSystemTest {
 
