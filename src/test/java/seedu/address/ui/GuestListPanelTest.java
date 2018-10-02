@@ -21,8 +21,8 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.XmlUtil;
-import seedu.address.storage.XmlSerializableGuestList;
 import seedu.address.model.person.Guest;
+import seedu.address.storage.XmlSerializableGuestList;
 
 public class GuestListPanelTest extends GuiUnitTest {
     private static final ObservableList<Guest> TYPICAL_GUESTS =
