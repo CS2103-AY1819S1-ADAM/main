@@ -1,17 +1,17 @@
-package seedu.address.logic.commands;
+package cs2103.concierge.logic.commands;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.ExitCommand.MESSAGE_EXIT_ACKNOWLEDGEMENT;
+import static cs2103.concierge.logic.commands.ExitCommand.MESSAGE_EXIT_ACKNOWLEDGEMENT;
 
 import org.junit.Rule;
 import org.junit.Test;
 
-import seedu.address.commons.events.ui.ExitAppRequestEvent;
-import seedu.address.logic.CommandHistory;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.ui.testutil.EventsCollectorRule;
+import cs2103.concierge.commons.events.ui.ExitAppRequestEvent;
+import cs2103.concierge.logic.CommandHistory;
+import cs2103.concierge.model.Model;
+import cs2103.concierge.model.ModelManager;
+import cs2103.concierge.ui.testutil.EventsCollectorRule;
 
 public class ExitCommandTest {
     @Rule

@@ -1,12 +1,10 @@
-package seedu.address.logic.commands;
-
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+package cs2103.concierge.logic.commands;
 
 import org.junit.Test;
 
-import seedu.address.logic.CommandHistory;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
+import cs2103.concierge.logic.CommandHistory;
+import cs2103.concierge.model.Model;
+import cs2103.concierge.model.ModelManager;
 
 public class HistoryCommandTest {
     private CommandHistory history = new CommandHistory();
@@ -15,11 +13,11 @@ public class HistoryCommandTest {
 
     @Test
     public void execute() {
-        assertCommandSuccess(new HistoryCommand(), model, history, HistoryCommand.MESSAGE_NO_HISTORY, expectedModel);
+        CommandTestUtil.assertCommandSuccess(new HistoryCommand(), model, history, HistoryCommand.MESSAGE_NO_HISTORY, expectedModel);
 
         String command1 = "clear";
         history.add(command1);
-        assertCommandSuccess(new HistoryCommand(), model, history,
+        CommandTestUtil.assertCommandSuccess(new HistoryCommand(), model, history,
                 String.format(HistoryCommand.MESSAGE_SUCCESS, command1), expectedModel);
 
         String command2 = "randomCommand";
@@ -29,7 +27,7 @@ public class HistoryCommandTest {
 
         String expectedMessage = String.format(HistoryCommand.MESSAGE_SUCCESS,
                 String.join("\n", command3, command2, command1));
-        assertCommandSuccess(new HistoryCommand(), model, history, expectedMessage, expectedModel);
+        CommandTestUtil.assertCommandSuccess(new HistoryCommand(), model, history, expectedMessage, expectedModel);
     }
 
 }

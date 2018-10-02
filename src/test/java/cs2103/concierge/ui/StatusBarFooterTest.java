@@ -1,9 +1,9 @@
-package seedu.address.ui;
+package cs2103.concierge.ui;
 
 import static org.junit.Assert.assertEquals;
-import static seedu.address.testutil.EventsUtil.postNow;
-import static seedu.address.ui.StatusBarFooter.SYNC_STATUS_INITIAL;
-import static seedu.address.ui.StatusBarFooter.SYNC_STATUS_UPDATED;
+import static cs2103.concierge.testutil.EventsUtil.postNow;
+import static cs2103.concierge.ui.StatusBarFooter.SYNC_STATUS_INITIAL;
+import static cs2103.concierge.ui.StatusBarFooter.SYNC_STATUS_UPDATED;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -18,8 +18,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import guitests.guihandles.StatusBarFooterHandle;
-import seedu.address.commons.events.model.AddressBookChangedEvent;
-import seedu.address.model.AddressBook;
+import cs2103.concierge.commons.events.model.AddressBookChangedEvent;
+import cs2103.concierge.model.AddressBook;
 
 public class StatusBarFooterTest extends GuiUnitTest {
 

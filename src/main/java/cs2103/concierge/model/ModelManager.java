@@ -1,18 +1,19 @@
-package seedu.address.model;
+package cs2103.concierge.model;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static cs2103.concierge.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import cs2103.concierge.commons.core.ComponentManager;
+import cs2103.concierge.commons.core.LogsCenter;
+import cs2103.concierge.commons.events.model.AddressBookChangedEvent;
+import cs2103.concierge.commons.util.CollectionUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
-import seedu.address.commons.core.ComponentManager;
-import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.events.model.AddressBookChangedEvent;
-import seedu.address.model.person.Person;
+import cs2103.concierge.model.person.Person;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -28,7 +29,7 @@ public class ModelManager extends ComponentManager implements Model {
      */
     public ModelManager(ReadOnlyAddressBook addressBook, UserPrefs userPrefs) {
         super();
-        requireAllNonNull(addressBook, userPrefs);
+        CollectionUtil.requireAllNonNull(addressBook, userPrefs);
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
@@ -77,7 +78,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void updatePerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
+        CollectionUtil.requireAllNonNull(target, editedPerson);
 
         versionedAddressBook.updatePerson(target, editedPerson);
         indicateAddressBookChanged();

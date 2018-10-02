@@ -1,4 +1,4 @@
-package seedu.address.commons.core.index;
+package cs2103.concierge.commons.core.index;
 
 /**
  * Represents a zero-based or one-based index.

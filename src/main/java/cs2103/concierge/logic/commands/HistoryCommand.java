@@ -1,12 +1,12 @@
-package seedu.address.logic.commands;
+package cs2103.concierge.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
 import java.util.Collections;
 import java.util.List;
 
-import seedu.address.logic.CommandHistory;
-import seedu.address.model.Model;
+import cs2103.concierge.model.Model;
+import cs2103.concierge.logic.CommandHistory;
 
 /**
  * Lists all the commands entered by user from the start of app launch.

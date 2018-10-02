@@ -1,9 +1,9 @@
-package seedu.address.logic.commands;
+package cs2103.concierge.logic.commands;
 
-import seedu.address.commons.core.EventsCenter;
-import seedu.address.commons.events.ui.ShowHelpRequestEvent;
-import seedu.address.logic.CommandHistory;
-import seedu.address.model.Model;
+import cs2103.concierge.commons.core.EventsCenter;
+import cs2103.concierge.commons.events.ui.ShowHelpRequestEvent;
+import cs2103.concierge.model.Model;
+import cs2103.concierge.logic.CommandHistory;
 
 /**
  * Format full help instructions for every command for display.

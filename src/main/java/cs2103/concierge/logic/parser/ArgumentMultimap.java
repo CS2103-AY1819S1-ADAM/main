@@ -1,4 +1,4 @@
-package seedu.address.logic.parser;
+package cs2103.concierge.logic.parser;
 
 import java.util.ArrayList;
 import java.util.HashMap;

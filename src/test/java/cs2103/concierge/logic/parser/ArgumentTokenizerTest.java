@@ -1,4 +1,4 @@
-package seedu.address.logic.parser;
+package cs2103.concierge.logic.parser;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;

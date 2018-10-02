@@ -1,6 +1,6 @@
-package seedu.address.commons.events.ui;
+package cs2103.concierge.commons.events.ui;
 
-import seedu.address.commons.events.BaseEvent;
+import cs2103.concierge.commons.events.BaseEvent;
 
 /**
  * Indicates that a new result is available.

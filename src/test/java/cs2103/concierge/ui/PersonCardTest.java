@@ -1,15 +1,15 @@
-package seedu.address.ui;
+package cs2103.concierge.ui;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.ui.testutil.GuiTestAssert.assertCardDisplaysPerson;
 
 import org.junit.Test;
 
+import cs2103.concierge.ui.testutil.GuiTestAssert;
 import guitests.guihandles.PersonCardHandle;
-import seedu.address.model.person.Person;
-import seedu.address.testutil.PersonBuilder;
+import cs2103.concierge.model.person.Person;
+import cs2103.concierge.testutil.PersonBuilder;
 
 public class PersonCardTest extends GuiUnitTest {
 
@@ -67,6 +67,6 @@ public class PersonCardTest extends GuiUnitTest {
         assertEquals(Integer.toString(expectedId) + ". ", personCardHandle.getId());
 
         // verify person details are displayed correctly
-        assertCardDisplaysPerson(expectedPerson, personCardHandle);
+        GuiTestAssert.assertCardDisplaysPerson(expectedPerson, personCardHandle);
     }
 }

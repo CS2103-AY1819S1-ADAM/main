@@ -1,4 +1,4 @@
-package seedu.address.commons.exceptions;
+package cs2103.concierge.commons.exceptions;
 
 /**
  * Signals that some given data does not fulfill some constraints.

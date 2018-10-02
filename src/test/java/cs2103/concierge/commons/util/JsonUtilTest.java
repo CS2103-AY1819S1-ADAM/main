@@ -1,4 +1,4 @@
-package seedu.address.commons.util;
+package cs2103.concierge.commons.util;
 
 import static org.junit.Assert.assertEquals;
 
@@ -7,8 +7,8 @@ import java.nio.file.Path;
 
 import org.junit.Test;
 
-import seedu.address.testutil.SerializableTestClass;
-import seedu.address.testutil.TestUtil;
+import cs2103.concierge.testutil.SerializableTestClass;
+import cs2103.concierge.testutil.TestUtil;
 
 /**
  * Tests JSON Read and Write

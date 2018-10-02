@@ -1,4 +1,4 @@
-package seedu.address.ui;
+package cs2103.concierge.ui;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -11,8 +11,8 @@ import org.junit.rules.ExpectedException;
 import org.junit.rules.TemporaryFolder;
 
 import javafx.fxml.FXML;
-import seedu.address.MainApp;
-import seedu.address.testutil.Assert;
+import cs2103.concierge.MainApp;
+import cs2103.concierge.testutil.Assert;
 
 public class UiPartTest {
 

@@ -1,4 +1,4 @@
-package seedu.address.logic.commands;
+package cs2103.concierge.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 

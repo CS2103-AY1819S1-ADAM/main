@@ -1,4 +1,4 @@
-package seedu.address.commons.core;
+package cs2103.concierge.commons.core;
 
 /**
  * Container for user visible messages.

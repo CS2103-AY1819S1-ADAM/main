@@ -1,24 +1,24 @@
 package systemtests;
 
 import static org.junit.Assert.assertTrue;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
-import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.logic.commands.DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS;
-import static seedu.address.testutil.TestUtil.getLastIndex;
-import static seedu.address.testutil.TestUtil.getMidIndex;
-import static seedu.address.testutil.TestUtil.getPerson;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
+import static cs2103.concierge.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static cs2103.concierge.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static cs2103.concierge.logic.commands.DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS;
+import static cs2103.concierge.testutil.TestUtil.getLastIndex;
+import static cs2103.concierge.testutil.TestUtil.getMidIndex;
+import static cs2103.concierge.testutil.TestUtil.getPerson;
+import static cs2103.concierge.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static cs2103.concierge.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
 
 import org.junit.Test;
 
-import seedu.address.commons.core.Messages;
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.RedoCommand;
-import seedu.address.logic.commands.UndoCommand;
-import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import cs2103.concierge.commons.core.Messages;
+import cs2103.concierge.commons.core.index.Index;
+import cs2103.concierge.logic.commands.DeleteCommand;
+import cs2103.concierge.logic.commands.RedoCommand;
+import cs2103.concierge.logic.commands.UndoCommand;
+import cs2103.concierge.model.Model;
+import cs2103.concierge.model.person.Person;
 
 public class DeleteCommandSystemTest extends AddressBookSystemTest {
 

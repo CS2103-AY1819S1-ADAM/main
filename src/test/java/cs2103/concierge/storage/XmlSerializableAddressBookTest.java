@@ -47,4 +47,7 @@ public class XmlSerializableAddressBookTest {
                 XmlSerializableAddressBook.class);
         thrown.expect(IllegalValueException.class);
         thrown.expectMessage(XmlSerializableAddressBook.MESSAGE_DUPLICATE_PERSON);
-        dataFromFile.toModelType()
+        dataFromFile.toModelType();
+    }
+
+}

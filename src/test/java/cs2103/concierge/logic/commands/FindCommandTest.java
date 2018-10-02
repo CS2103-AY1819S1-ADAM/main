@@ -1,25 +1,24 @@
-package seedu.address.logic.commands;
+package cs2103.concierge.logic.commands;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.commons.core.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalPersons.CARL;
-import static seedu.address.testutil.TypicalPersons.ELLE;
-import static seedu.address.testutil.TypicalPersons.FIONA;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static cs2103.concierge.commons.core.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
+import static cs2103.concierge.testutil.TypicalPersons.CARL;
+import static cs2103.concierge.testutil.TypicalPersons.ELLE;
+import static cs2103.concierge.testutil.TypicalPersons.FIONA;
+import static cs2103.concierge.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
 import java.util.Collections;
 
 import org.junit.Test;
 
-import seedu.address.logic.CommandHistory;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.UserPrefs;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
+import cs2103.concierge.logic.CommandHistory;
+import cs2103.concierge.model.Model;
+import cs2103.concierge.model.ModelManager;
+import cs2103.concierge.model.UserPrefs;
+import cs2103.concierge.model.person.NameContainsKeywordsPredicate;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
@@ -62,7 +61,7 @@ public class FindCommandTest {
         NameContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
-        assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
+        CommandTestUtil.assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredPersonList());
     }
 
@@ -72,7 +71,7 @@ public class FindCommandTest {
         NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
-        assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
+        CommandTestUtil.assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredPersonList());
     }
 

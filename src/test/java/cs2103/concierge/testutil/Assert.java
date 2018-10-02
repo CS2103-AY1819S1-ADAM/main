@@ -1,4 +1,4 @@
-package seedu.address.testutil;
+package cs2103.concierge.testutil;
 
 /**
  * A set of assertion methods useful for writing tests.

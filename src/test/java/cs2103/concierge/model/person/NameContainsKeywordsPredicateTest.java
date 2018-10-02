@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package cs2103.concierge.model.person;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -9,7 +9,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-import seedu.address.testutil.PersonBuilder;
+import cs2103.concierge.testutil.PersonBuilder;
 
 public class NameContainsKeywordsPredicateTest {
 

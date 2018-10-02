@@ -1,10 +1,10 @@
-package seedu.address.model;
+package cs2103.concierge.model;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.BENSON;
+import static cs2103.concierge.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static cs2103.concierge.testutil.TypicalPersons.ALICE;
+import static cs2103.concierge.testutil.TypicalPersons.BENSON;
 
 import java.nio.file.Paths;
 import java.util.Arrays;
@@ -13,8 +13,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.testutil.AddressBookBuilder;
+import cs2103.concierge.model.person.NameContainsKeywordsPredicate;
+import cs2103.concierge.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
     @Rule

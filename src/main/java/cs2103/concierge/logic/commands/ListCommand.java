@@ -1,10 +1,9 @@
-package seedu.address.logic.commands;
+package cs2103.concierge.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import seedu.address.logic.CommandHistory;
-import seedu.address.model.Model;
+import cs2103.concierge.model.Model;
+import cs2103.concierge.logic.CommandHistory;
 
 /**
  * Lists all persons in the address book to the user.
@@ -19,7 +18,7 @@ public class ListCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

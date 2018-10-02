@@ -1,7 +1,7 @@
-package seedu.address.model;
+package cs2103.concierge.model;
 
 import javafx.collections.ObservableList;
-import seedu.address.model.person.Person;
+import cs2103.concierge.model.person.Person;
 
 /**
  * Unmodifiable view of an address book

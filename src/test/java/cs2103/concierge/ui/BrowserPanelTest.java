@@ -1,11 +1,11 @@
-package seedu.address.ui;
+package cs2103.concierge.ui;
 
 import static guitests.guihandles.WebViewUtil.waitUntilBrowserLoaded;
 import static org.junit.Assert.assertEquals;
-import static seedu.address.testutil.EventsUtil.postNow;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.ui.BrowserPanel.DEFAULT_PAGE;
-import static seedu.address.ui.UiPart.FXML_FILE_FOLDER;
+import static cs2103.concierge.testutil.EventsUtil.postNow;
+import static cs2103.concierge.testutil.TypicalPersons.ALICE;
+import static cs2103.concierge.ui.BrowserPanel.DEFAULT_PAGE;
+import static cs2103.concierge.ui.UiPart.FXML_FILE_FOLDER;
 
 import java.net.URL;
 
@@ -13,8 +13,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import guitests.guihandles.BrowserPanelHandle;
-import seedu.address.MainApp;
-import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
+import cs2103.concierge.MainApp;
+import cs2103.concierge.commons.events.ui.PersonPanelSelectionChangedEvent;
 
 public class BrowserPanelTest extends GuiUnitTest {
     private PersonPanelSelectionChangedEvent selectionChangedEventStub;

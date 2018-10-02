@@ -1,4 +1,4 @@
-package seedu.address.storage;
+package cs2103.concierge.storage;
 
 import static java.util.Objects.requireNonNull;
 
@@ -9,11 +9,11 @@ import java.nio.file.Path;
 import java.util.Optional;
 import java.util.logging.Logger;
 
-import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.exceptions.DataConversionException;
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.commons.util.FileUtil;
-import seedu.address.model.ReadOnlyAddressBook;
+import cs2103.concierge.commons.core.LogsCenter;
+import cs2103.concierge.commons.exceptions.DataConversionException;
+import cs2103.concierge.commons.exceptions.IllegalValueException;
+import cs2103.concierge.commons.util.FileUtil;
+import cs2103.concierge.model.ReadOnlyAddressBook;
 
 /**
  * A class to access AddressBook data stored as an xml file on the hard disk.

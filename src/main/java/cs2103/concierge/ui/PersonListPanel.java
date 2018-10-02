@@ -1,19 +1,19 @@
-package seedu.address.ui;
+package cs2103.concierge.ui;
 
 import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
 
+import cs2103.concierge.commons.core.LogsCenter;
+import cs2103.concierge.commons.events.ui.JumpToListRequestEvent;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
-import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.events.ui.JumpToListRequestEvent;
-import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
-import seedu.address.model.person.Person;
+import cs2103.concierge.commons.events.ui.PersonPanelSelectionChangedEvent;
+import cs2103.concierge.model.person.Person;
 
 /**
  * Panel containing the list of persons.

@@ -1,4 +1,4 @@
-package seedu.address.logic.parser;
+package cs2103.concierge.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
@@ -6,14 +6,14 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.commons.core.index.Index;
-import seedu.address.commons.util.StringUtil;
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import cs2103.concierge.commons.core.index.Index;
+import cs2103.concierge.commons.util.StringUtil;
+import cs2103.concierge.logic.parser.exceptions.ParseException;
+import cs2103.concierge.model.person.Address;
+import cs2103.concierge.model.person.Email;
+import cs2103.concierge.model.person.Name;
+import cs2103.concierge.model.person.Phone;
+import cs2103.concierge.model.tag.Tag;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.

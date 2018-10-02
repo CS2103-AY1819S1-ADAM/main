@@ -1,13 +1,13 @@
-package seedu.address.testutil;
+package cs2103.concierge.testutil;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import seedu.address.commons.core.index.Index;
-import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import cs2103.concierge.commons.core.index.Index;
+import cs2103.concierge.model.Model;
+import cs2103.concierge.model.person.Person;
 
 /**
  * A utility class for test cases.

@@ -1,10 +1,10 @@
-package seedu.address.model;
+package cs2103.concierge.model;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Objects;
 
-import seedu.address.commons.core.GuiSettings;
+import cs2103.concierge.commons.core.GuiSettings;
 
 /**
  * Represents User's preferences.

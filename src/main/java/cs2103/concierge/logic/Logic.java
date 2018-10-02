@@ -1,10 +1,10 @@
-package seedu.address.logic;
+package cs2103.concierge.logic;
 
+import cs2103.concierge.logic.commands.CommandResult;
+import cs2103.concierge.logic.commands.exceptions.CommandException;
+import cs2103.concierge.logic.parser.exceptions.ParseException;
 import javafx.collections.ObservableList;
-import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Person;
+import cs2103.concierge.model.person.Person;
 
 /**
  * API of the Logic component

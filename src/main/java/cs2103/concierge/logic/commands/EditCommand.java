@@ -1,12 +1,11 @@
-package seedu.address.logic.commands;
+package cs2103.concierge.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static cs2103.concierge.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static cs2103.concierge.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static cs2103.concierge.logic.parser.CliSyntax.PREFIX_NAME;
+import static cs2103.concierge.logic.parser.CliSyntax.PREFIX_PHONE;
+import static cs2103.concierge.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -14,18 +13,18 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-import seedu.address.commons.core.Messages;
-import seedu.address.commons.core.index.Index;
-import seedu.address.commons.util.CollectionUtil;
-import seedu.address.logic.CommandHistory;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Model;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import cs2103.concierge.commons.core.Messages;
+import cs2103.concierge.commons.core.index.Index;
+import cs2103.concierge.commons.util.CollectionUtil;
+import cs2103.concierge.logic.commands.exceptions.CommandException;
+import cs2103.concierge.model.Model;
+import cs2103.concierge.model.person.Address;
+import cs2103.concierge.model.person.Email;
+import cs2103.concierge.model.person.Name;
+import cs2103.concierge.model.person.Phone;
+import cs2103.concierge.model.tag.Tag;
+import cs2103.concierge.logic.CommandHistory;
+import cs2103.concierge.model.person.Person;
 
 /**
  * Edits the details of an existing person in the address book.
@@ -83,7 +82,7 @@ public class EditCommand extends Command {
         }
 
         model.updatePerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
         model.commitAddressBook();
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
     }

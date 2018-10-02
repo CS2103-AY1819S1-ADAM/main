@@ -1,19 +1,19 @@
-package seedu.address.ui;
+package cs2103.concierge.ui;
 
 import java.net.URL;
 import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
 
+import cs2103.concierge.commons.core.LogsCenter;
 import javafx.application.Platform;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Region;
 import javafx.scene.web.WebView;
-import seedu.address.MainApp;
-import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
-import seedu.address.model.person.Person;
+import cs2103.concierge.MainApp;
+import cs2103.concierge.commons.events.ui.PersonPanelSelectionChangedEvent;
+import cs2103.concierge.model.person.Person;
 
 /**
  * The Browser Panel of the App.

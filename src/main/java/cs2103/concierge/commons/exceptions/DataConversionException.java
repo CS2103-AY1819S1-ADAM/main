@@ -1,4 +1,4 @@
-package seedu.address.commons.exceptions;
+package cs2103.concierge.commons.exceptions;
 
 /**
  * Represents an error during conversion of data from one format to another

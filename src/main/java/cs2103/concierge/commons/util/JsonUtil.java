@@ -1,4 +1,4 @@
-package seedu.address.commons.util;
+package cs2103.concierge.commons.util;
 
 import static java.util.Objects.requireNonNull;
 
@@ -20,8 +20,8 @@ import com.fasterxml.jackson.databind.deser.std.FromStringDeserializer;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 
-import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.exceptions.DataConversionException;
+import cs2103.concierge.commons.exceptions.DataConversionException;
+import cs2103.concierge.commons.core.LogsCenter;
 
 /**
  * Converts a Java object instance to JSON and vice versa

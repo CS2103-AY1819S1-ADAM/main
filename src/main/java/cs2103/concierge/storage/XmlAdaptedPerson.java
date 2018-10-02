@@ -1,4 +1,4 @@
-package seedu.address.storage;
+package cs2103.concierge.storage;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -9,13 +9,13 @@ import java.util.stream.Collectors;
 
 import javax.xml.bind.annotation.XmlElement;
 
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import cs2103.concierge.commons.exceptions.IllegalValueException;
+import cs2103.concierge.model.person.Address;
+import cs2103.concierge.model.person.Email;
+import cs2103.concierge.model.person.Name;
+import cs2103.concierge.model.person.Person;
+import cs2103.concierge.model.person.Phone;
+import cs2103.concierge.model.tag.Tag;
 
 /**
  * JAXB-friendly version of the Person.

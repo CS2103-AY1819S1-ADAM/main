@@ -1,15 +1,14 @@
-package seedu.address.logic.commands;
+package cs2103.concierge.logic.commands;
 
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static cs2103.concierge.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.Test;
 
-import seedu.address.logic.CommandHistory;
-import seedu.address.model.AddressBook;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.UserPrefs;
+import cs2103.concierge.logic.CommandHistory;
+import cs2103.concierge.model.AddressBook;
+import cs2103.concierge.model.Model;
+import cs2103.concierge.model.ModelManager;
+import cs2103.concierge.model.UserPrefs;
 
 public class ClearCommandTest {
 
@@ -21,7 +20,7 @@ public class ClearCommandTest {
         Model expectedModel = new ModelManager();
         expectedModel.commitAddressBook();
 
-        assertCommandSuccess(new ClearCommand(), model, commandHistory, ClearCommand.MESSAGE_SUCCESS, expectedModel);
+        CommandTestUtil.assertCommandSuccess(new ClearCommand(), model, commandHistory, ClearCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test
@@ -31,7 +30,7 @@ public class ClearCommandTest {
         expectedModel.resetData(new AddressBook());
         expectedModel.commitAddressBook();
 
-        assertCommandSuccess(new ClearCommand(), model, commandHistory, ClearCommand.MESSAGE_SUCCESS, expectedModel);
+        CommandTestUtil.assertCommandSuccess(new ClearCommand(), model, commandHistory, ClearCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
 }

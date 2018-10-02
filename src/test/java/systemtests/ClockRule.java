@@ -8,7 +8,7 @@ import org.junit.rules.TestRule;
 import org.junit.runner.Description;
 import org.junit.runners.model.Statement;
 
-import seedu.address.ui.StatusBarFooter;
+import cs2103.concierge.ui.StatusBarFooter;
 
 /**
  * This rule makes the time stamp in the status bar predictable during a test.

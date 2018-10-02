@@ -1,7 +1,7 @@
-package seedu.address.commons.events.model;
+package cs2103.concierge.commons.events.model;
 
-import seedu.address.commons.events.BaseEvent;
-import seedu.address.model.ReadOnlyAddressBook;
+import cs2103.concierge.commons.events.BaseEvent;
+import cs2103.concierge.model.ReadOnlyAddressBook;
 
 /** Indicates the AddressBook in the model has changed*/
 public class AddressBookChangedEvent extends BaseEvent {

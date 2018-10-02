@@ -1,14 +1,14 @@
-package seedu.address.ui;
+package cs2103.concierge.ui;
 
 import static java.util.Objects.requireNonNull;
 
 import java.io.IOException;
 import java.net.URL;
 
+import cs2103.concierge.commons.core.EventsCenter;
+import cs2103.concierge.commons.events.BaseEvent;
 import javafx.fxml.FXMLLoader;
-import seedu.address.MainApp;
-import seedu.address.commons.core.EventsCenter;
-import seedu.address.commons.events.BaseEvent;
+import cs2103.concierge.MainApp;
 
 /**
  * Represents a distinct part of the UI. e.g. Windows, dialogs, panels, status bars, etc.

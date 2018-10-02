@@ -1,9 +1,9 @@
-package seedu.address.testutil;
+package cs2103.concierge.testutil;
 
+import cs2103.concierge.commons.core.EventsCenter;
+import cs2103.concierge.commons.events.BaseEvent;
 import guitests.GuiRobot;
 import javafx.application.Platform;
-import seedu.address.commons.core.EventsCenter;
-import seedu.address.commons.events.BaseEvent;
 
 /**
  * Helper methods related to events.

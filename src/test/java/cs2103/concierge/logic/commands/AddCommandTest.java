@@ -1,4 +1,4 @@
-package seedu.address.logic.commands;
+package cs2103.concierge.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.Assert.assertEquals;
@@ -14,13 +14,13 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import javafx.collections.ObservableList;
-import seedu.address.logic.CommandHistory;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
-import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.person.Person;
-import seedu.address.testutil.PersonBuilder;
+import cs2103.concierge.logic.CommandHistory;
+import cs2103.concierge.logic.commands.exceptions.CommandException;
+import cs2103.concierge.model.AddressBook;
+import cs2103.concierge.model.Model;
+import cs2103.concierge.model.ReadOnlyAddressBook;
+import cs2103.concierge.model.person.Person;
+import cs2103.concierge.testutil.PersonBuilder;
 
 public class AddCommandTest {
 

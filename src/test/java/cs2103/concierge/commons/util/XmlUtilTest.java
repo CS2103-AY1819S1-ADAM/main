@@ -1,4 +1,4 @@
-package seedu.address.commons.util;
+package cs2103.concierge.commons.util;
 
 import static org.junit.Assert.assertEquals;
 
@@ -15,13 +15,13 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.address.model.AddressBook;
-import seedu.address.storage.XmlAdaptedPerson;
-import seedu.address.storage.XmlAdaptedTag;
-import seedu.address.storage.XmlSerializableAddressBook;
-import seedu.address.testutil.AddressBookBuilder;
-import seedu.address.testutil.PersonBuilder;
-import seedu.address.testutil.TestUtil;
+import cs2103.concierge.model.AddressBook;
+import cs2103.concierge.storage.XmlAdaptedPerson;
+import cs2103.concierge.storage.XmlAdaptedTag;
+import cs2103.concierge.storage.XmlSerializableAddressBook;
+import cs2103.concierge.testutil.AddressBookBuilder;
+import cs2103.concierge.testutil.PersonBuilder;
+import cs2103.concierge.testutil.TestUtil;
 
 public class XmlUtilTest {
 

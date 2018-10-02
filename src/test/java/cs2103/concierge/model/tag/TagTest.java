@@ -1,8 +1,8 @@
-package seedu.address.model.tag;
+package cs2103.concierge.model.tag;
 
 import org.junit.Test;
 
-import seedu.address.testutil.Assert;
+import cs2103.concierge.testutil.Assert;
 
 public class TagTest {
 

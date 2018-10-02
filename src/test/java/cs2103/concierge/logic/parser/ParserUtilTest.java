@@ -1,10 +1,10 @@
-package seedu.address.logic.parser;
+package cs2103.concierge.logic.parser;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static cs2103.concierge.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
+import static cs2103.concierge.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -15,13 +15,13 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
-import seedu.address.testutil.Assert;
+import cs2103.concierge.logic.parser.exceptions.ParseException;
+import cs2103.concierge.model.person.Address;
+import cs2103.concierge.model.person.Email;
+import cs2103.concierge.model.person.Name;
+import cs2103.concierge.model.person.Phone;
+import cs2103.concierge.model.tag.Tag;
+import cs2103.concierge.testutil.Assert;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";

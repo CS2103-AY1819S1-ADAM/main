@@ -1,11 +1,11 @@
-package seedu.address.ui;
+package cs2103.concierge.ui;
 
 import java.util.logging.Logger;
 
+import cs2103.concierge.commons.core.LogsCenter;
 import javafx.fxml.FXML;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
-import seedu.address.commons.core.LogsCenter;
 
 /**
  * Controller for a help page

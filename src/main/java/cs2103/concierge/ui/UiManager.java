@@ -1,22 +1,22 @@
-package seedu.address.ui;
+package cs2103.concierge.ui;
 
 import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
 
+import cs2103.concierge.commons.core.ComponentManager;
+import cs2103.concierge.commons.core.Config;
+import cs2103.concierge.commons.core.LogsCenter;
+import cs2103.concierge.commons.events.storage.DataSavingExceptionEvent;
+import cs2103.concierge.commons.util.StringUtil;
+import cs2103.concierge.logic.Logic;
+import cs2103.concierge.model.UserPrefs;
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import seedu.address.MainApp;
-import seedu.address.commons.core.ComponentManager;
-import seedu.address.commons.core.Config;
-import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.events.storage.DataSavingExceptionEvent;
-import seedu.address.commons.util.StringUtil;
-import seedu.address.logic.Logic;
-import seedu.address.model.UserPrefs;
+import cs2103.concierge.MainApp;
 
 /**
  * The manager of the UI component.

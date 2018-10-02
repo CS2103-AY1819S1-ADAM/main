@@ -1,7 +1,9 @@
-package seedu.address.model.tag;
+package cs2103.concierge.model.tag;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
+import static cs2103.concierge.commons.util.AppUtil.checkArgument;
+
+import cs2103.concierge.commons.util.AppUtil;
 
 /**
  * Represents a Tag in the address book.
@@ -21,7 +23,7 @@ public class Tag {
      */
     public Tag(String tagName) {
         requireNonNull(tagName);
-        checkArgument(isValidTagName(tagName), MESSAGE_TAG_CONSTRAINTS);
+        AppUtil.checkArgument(isValidTagName(tagName), MESSAGE_TAG_CONSTRAINTS);
         this.tagName = tagName;
     }
 

@@ -1,12 +1,12 @@
-package seedu.address.storage;
+package cs2103.concierge.storage;
 
 import java.io.FileNotFoundException;
 import java.nio.file.Path;
 
 import javax.xml.bind.JAXBException;
 
-import seedu.address.commons.exceptions.DataConversionException;
-import seedu.address.commons.util.XmlUtil;
+import cs2103.concierge.commons.exceptions.DataConversionException;
+import cs2103.concierge.commons.util.XmlUtil;
 
 /**
  * Stores addressbook data in an XML file

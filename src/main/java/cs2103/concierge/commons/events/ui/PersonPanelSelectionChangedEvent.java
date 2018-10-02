@@ -1,7 +1,7 @@
-package seedu.address.commons.events.ui;
+package cs2103.concierge.commons.events.ui;
 
-import seedu.address.commons.events.BaseEvent;
-import seedu.address.model.person.Person;
+import cs2103.concierge.commons.events.BaseEvent;
+import cs2103.concierge.model.person.Person;
 
 /**
  * Represents a selection change in the Person List Panel

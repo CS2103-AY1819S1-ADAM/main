@@ -1,4 +1,4 @@
-package seedu.address.ui;
+package cs2103.concierge.ui;
 
 import javafx.beans.DefaultProperty;
 

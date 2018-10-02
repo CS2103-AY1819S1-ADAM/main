@@ -1,6 +1,6 @@
-package seedu.address.commons.core;
+package cs2103.concierge.commons.core;
 
-import seedu.address.commons.events.BaseEvent;
+import cs2103.concierge.commons.events.BaseEvent;
 
 /**
  * Base class for *Manager classes

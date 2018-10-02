@@ -1,4 +1,4 @@
-package seedu.address.storage;
+package cs2103.concierge.storage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,10 +7,10 @@ import java.util.stream.Collectors;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.person.Person;
+import cs2103.concierge.commons.exceptions.IllegalValueException;
+import cs2103.concierge.model.AddressBook;
+import cs2103.concierge.model.ReadOnlyAddressBook;
+import cs2103.concierge.model.person.Person;
 
 /**
  * An Immutable AddressBook that is serializable to XML format

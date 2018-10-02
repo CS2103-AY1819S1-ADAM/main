@@ -1,15 +1,15 @@
-package seedu.address.logic.commands;
+package cs2103.concierge.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
-import seedu.address.commons.core.Messages;
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.CommandHistory;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import cs2103.concierge.commons.core.Messages;
+import cs2103.concierge.commons.core.index.Index;
+import cs2103.concierge.logic.commands.exceptions.CommandException;
+import cs2103.concierge.model.Model;
+import cs2103.concierge.logic.CommandHistory;
+import cs2103.concierge.model.person.Person;
 
 /**
  * Deletes a person identified using it's displayed index from the address book.

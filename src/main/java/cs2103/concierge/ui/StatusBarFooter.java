@@ -1,4 +1,4 @@
-package seedu.address.ui;
+package cs2103.concierge.ui;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -10,11 +10,11 @@ import org.controlsfx.control.StatusBar;
 
 import com.google.common.eventbus.Subscribe;
 
+import cs2103.concierge.commons.core.LogsCenter;
+import cs2103.concierge.commons.events.model.AddressBookChangedEvent;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Region;
-import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.events.model.AddressBookChangedEvent;
 
 /**
  * A ui for the status bar that is displayed at the footer of the application.

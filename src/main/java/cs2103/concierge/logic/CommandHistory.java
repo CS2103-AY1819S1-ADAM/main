@@ -1,4 +1,4 @@
-package seedu.address.logic;
+package cs2103.concierge.logic;
 
 import static java.util.Objects.requireNonNull;
 

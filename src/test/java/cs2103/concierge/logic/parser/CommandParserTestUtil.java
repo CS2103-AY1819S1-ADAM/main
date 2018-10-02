@@ -1,9 +1,9 @@
-package seedu.address.logic.parser;
+package cs2103.concierge.logic.parser;
 
 import static org.junit.Assert.assertEquals;
 
-import seedu.address.logic.commands.Command;
-import seedu.address.logic.parser.exceptions.ParseException;
+import cs2103.concierge.logic.commands.Command;
+import cs2103.concierge.logic.parser.exceptions.ParseException;
 
 /**
  * Contains helper methods for testing command parsers.

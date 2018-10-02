@@ -1,4 +1,4 @@
-package seedu.address.commons.util;
+package cs2103.concierge.commons.util;
 
 import static org.junit.Assert.assertNotNull;
 

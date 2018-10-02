@@ -1,16 +1,16 @@
-package seedu.address.logic.commands;
+package cs2103.concierge.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static cs2103.concierge.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static cs2103.concierge.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static cs2103.concierge.logic.parser.CliSyntax.PREFIX_NAME;
+import static cs2103.concierge.logic.parser.CliSyntax.PREFIX_PHONE;
+import static cs2103.concierge.logic.parser.CliSyntax.PREFIX_TAG;
 
-import seedu.address.logic.CommandHistory;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import cs2103.concierge.logic.commands.exceptions.CommandException;
+import cs2103.concierge.model.Model;
+import cs2103.concierge.logic.CommandHistory;
+import cs2103.concierge.model.person.Person;
 
 /**
  * Adds a person to the address book.

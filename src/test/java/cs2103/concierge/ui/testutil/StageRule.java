@@ -1,4 +1,4 @@
-package seedu.address.ui.testutil;
+package cs2103.concierge.ui.testutil;
 
 import org.junit.rules.TestRule;
 import org.junit.runner.Description;

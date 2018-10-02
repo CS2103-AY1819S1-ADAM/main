@@ -1,6 +1,6 @@
-package seedu.address.commons.events.storage;
+package cs2103.concierge.commons.events.storage;
 
-import seedu.address.commons.events.BaseEvent;
+import cs2103.concierge.commons.events.BaseEvent;
 
 /**
  * Indicates an exception during a file saving

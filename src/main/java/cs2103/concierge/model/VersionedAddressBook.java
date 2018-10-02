@@ -1,4 +1,4 @@
-package seedu.address.model;
+package cs2103.concierge.model;
 
 import java.util.ArrayList;
 import java.util.List;

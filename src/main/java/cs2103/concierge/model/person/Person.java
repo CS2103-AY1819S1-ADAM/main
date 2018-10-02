@@ -1,13 +1,14 @@
-package seedu.address.model.person;
+package cs2103.concierge.model.person;
 
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static cs2103.concierge.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import seedu.address.model.tag.Tag;
+import cs2103.concierge.commons.util.CollectionUtil;
+import cs2103.concierge.model.tag.Tag;
 
 /**
  * Represents a Person in the address book.
@@ -28,7 +29,7 @@ public class Person {
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+        CollectionUtil.requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;

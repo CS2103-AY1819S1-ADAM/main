@@ -1,13 +1,13 @@
-package seedu.address.ui;
+package cs2103.concierge.ui;
 
 import static org.junit.Assert.assertEquals;
-import static seedu.address.testutil.EventsUtil.postNow;
+import static cs2103.concierge.testutil.EventsUtil.postNow;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import guitests.guihandles.ResultDisplayHandle;
-import seedu.address.commons.events.ui.NewResultAvailableEvent;
+import cs2103.concierge.commons.events.ui.NewResultAvailableEvent;
 
 public class ResultDisplayTest extends GuiUnitTest {
 

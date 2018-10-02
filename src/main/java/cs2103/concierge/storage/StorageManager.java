@@ -1,4 +1,4 @@
-package seedu.address.storage;
+package cs2103.concierge.storage;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -7,13 +7,13 @@ import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
 
-import seedu.address.commons.core.ComponentManager;
-import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.events.model.AddressBookChangedEvent;
-import seedu.address.commons.events.storage.DataSavingExceptionEvent;
-import seedu.address.commons.exceptions.DataConversionException;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.UserPrefs;
+import cs2103.concierge.commons.core.ComponentManager;
+import cs2103.concierge.commons.core.LogsCenter;
+import cs2103.concierge.commons.events.model.AddressBookChangedEvent;
+import cs2103.concierge.commons.events.storage.DataSavingExceptionEvent;
+import cs2103.concierge.commons.exceptions.DataConversionException;
+import cs2103.concierge.model.ReadOnlyAddressBook;
+import cs2103.concierge.model.UserPrefs;
 
 /**
  * Manages storage of AddressBook data in local storage.

@@ -1,17 +1,17 @@
-package seedu.address.logic;
+package cs2103.concierge.logic;
 
 import java.util.logging.Logger;
 
+import cs2103.concierge.commons.core.ComponentManager;
+import cs2103.concierge.commons.core.LogsCenter;
+import cs2103.concierge.logic.commands.Command;
+import cs2103.concierge.logic.commands.CommandResult;
+import cs2103.concierge.logic.commands.exceptions.CommandException;
+import cs2103.concierge.logic.parser.AddressBookParser;
+import cs2103.concierge.logic.parser.exceptions.ParseException;
+import cs2103.concierge.model.Model;
 import javafx.collections.ObservableList;
-import seedu.address.commons.core.ComponentManager;
-import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.AddressBookParser;
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import cs2103.concierge.model.person.Person;
 
 /**
  * The main LogicManager of the app.

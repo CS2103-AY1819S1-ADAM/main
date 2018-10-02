@@ -1,4 +1,4 @@
-package seedu.address.ui.testutil;
+package cs2103.concierge.ui.testutil;
 
 import static org.junit.Assert.assertEquals;
 
@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 import guitests.guihandles.PersonCardHandle;
 import guitests.guihandles.PersonListPanelHandle;
 import guitests.guihandles.ResultDisplayHandle;
-import seedu.address.model.person.Person;
+import cs2103.concierge.model.person.Person;
 
 /**
  * A set of assertion methods useful for writing GUI tests.

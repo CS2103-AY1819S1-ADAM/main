@@ -1,7 +1,7 @@
-package seedu.address.testutil;
+package cs2103.concierge.testutil;
 
-import seedu.address.model.AddressBook;
-import seedu.address.model.person.Person;
+import cs2103.concierge.model.AddressBook;
+import cs2103.concierge.model.person.Person;
 
 /**
  * A utility class to help with building Addressbook objects.

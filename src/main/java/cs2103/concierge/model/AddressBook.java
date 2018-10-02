@@ -1,12 +1,12 @@
-package seedu.address.model;
+package cs2103.concierge.model;
 
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
+import cs2103.concierge.model.person.UniquePersonList;
 import javafx.collections.ObservableList;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.UniquePersonList;
+import cs2103.concierge.model.person.Person;
 
 /**
  * Wraps all data at the address-book level

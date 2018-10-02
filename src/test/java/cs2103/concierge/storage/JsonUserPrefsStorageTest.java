@@ -1,4 +1,4 @@
-package seedu.address.storage;
+package cs2103.concierge.storage;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -13,8 +13,8 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.rules.TemporaryFolder;
 
-import seedu.address.commons.exceptions.DataConversionException;
-import seedu.address.model.UserPrefs;
+import cs2103.concierge.commons.exceptions.DataConversionException;
+import cs2103.concierge.model.UserPrefs;
 
 public class JsonUserPrefsStorageTest {
 

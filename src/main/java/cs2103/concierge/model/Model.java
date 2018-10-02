@@ -1,9 +1,9 @@
-package seedu.address.model;
+package cs2103.concierge.model;
 
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
-import seedu.address.model.person.Person;
+import cs2103.concierge.model.person.Person;
 
 /**
  * The API of the Model component.

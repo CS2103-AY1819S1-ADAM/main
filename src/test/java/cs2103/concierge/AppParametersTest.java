@@ -1,4 +1,4 @@
-package seedu.address;
+package cs2103.concierge;
 
 import static org.junit.Assert.assertEquals;
 

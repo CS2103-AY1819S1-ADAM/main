@@ -1,7 +1,9 @@
-package seedu.address.model.person;
+package cs2103.concierge.model.person;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
+import static cs2103.concierge.commons.util.AppUtil.checkArgument;
+
+import cs2103.concierge.commons.util.AppUtil;
 
 /**
  * Represents a Person's phone number in the address book.
@@ -22,7 +24,7 @@ public class Phone {
      */
     public Phone(String phone) {
         requireNonNull(phone);
-        checkArgument(isValidPhone(phone), MESSAGE_PHONE_CONSTRAINTS);
+        AppUtil.checkArgument(isValidPhone(phone), MESSAGE_PHONE_CONSTRAINTS);
         value = phone;
     }
 

@@ -1,28 +1,27 @@
-package seedu.address.ui;
+package cs2103.concierge.ui;
 
 import static java.time.Duration.ofMillis;
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTimeoutPreemptively;
-import static seedu.address.testutil.EventsUtil.postNow;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalPersons.getTypicalPersons;
-import static seedu.address.ui.testutil.GuiTestAssert.assertCardDisplaysPerson;
-import static seedu.address.ui.testutil.GuiTestAssert.assertCardEquals;
+import static cs2103.concierge.testutil.EventsUtil.postNow;
+import static cs2103.concierge.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static cs2103.concierge.testutil.TypicalPersons.getTypicalPersons;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import org.junit.Test;
 
+import cs2103.concierge.commons.events.ui.JumpToListRequestEvent;
+import cs2103.concierge.commons.util.FileUtil;
+import cs2103.concierge.commons.util.XmlUtil;
+import cs2103.concierge.storage.XmlSerializableAddressBook;
+import cs2103.concierge.ui.testutil.GuiTestAssert;
 import guitests.guihandles.PersonCardHandle;
 import guitests.guihandles.PersonListPanelHandle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.commons.events.ui.JumpToListRequestEvent;
-import seedu.address.commons.util.FileUtil;
-import seedu.address.commons.util.XmlUtil;
-import seedu.address.model.person.Person;
-import seedu.address.storage.XmlSerializableAddressBook;
+import cs2103.concierge.model.person.Person;
 
 public class PersonListPanelTest extends GuiUnitTest {
     private static final ObservableList<Person> TYPICAL_PERSONS =
@@ -45,7 +44,7 @@ public class PersonListPanelTest extends GuiUnitTest {
             Person expectedPerson = TYPICAL_PERSONS.get(i);
             PersonCardHandle actualCard = personListPanelHandle.getPersonCardHandle(i);
 
-            assertCardDisplaysPerson(expectedPerson, actualCard);
+            GuiTestAssert.assertCardDisplaysPerson(expectedPerson, actualCard);
             assertEquals(Integer.toString(i + 1) + ". ", actualCard.getId());
         }
     }
@@ -58,7 +57,7 @@ public class PersonListPanelTest extends GuiUnitTest {
 
         PersonCardHandle expectedPerson = personListPanelHandle.getPersonCardHandle(INDEX_SECOND_PERSON.getZeroBased());
         PersonCardHandle selectedPerson = personListPanelHandle.getHandleToSelectedCard();
-        assertCardEquals(expectedPerson, selectedPerson);
+        GuiTestAssert.assertCardEquals(expectedPerson, selectedPerson);
     }
 
     /**

@@ -1,4 +1,4 @@
-package seedu.address.ui;
+package cs2103.concierge.ui;
 
 import static org.junit.Assert.assertTrue;
 
@@ -10,12 +10,12 @@ import org.testfx.api.FxToolkit;
 import guitests.guihandles.StageHandle;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-import seedu.address.commons.core.Config;
-import seedu.address.commons.events.ui.ExitAppRequestEvent;
-import seedu.address.logic.LogicManager;
-import seedu.address.model.ModelManager;
-import seedu.address.model.UserPrefs;
-import seedu.address.ui.testutil.EventsCollectorRule;
+import cs2103.concierge.commons.core.Config;
+import cs2103.concierge.commons.events.ui.ExitAppRequestEvent;
+import cs2103.concierge.logic.LogicManager;
+import cs2103.concierge.model.ModelManager;
+import cs2103.concierge.model.UserPrefs;
+import cs2103.concierge.ui.testutil.EventsCollectorRule;
 
 /**
  * Contains tests for closing of the {@code MainWindow}.

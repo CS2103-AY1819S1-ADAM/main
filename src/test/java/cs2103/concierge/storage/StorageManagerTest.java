@@ -1,9 +1,8 @@
-package seedu.address.storage;
+package cs2103.concierge.storage;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -14,12 +13,13 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
-import seedu.address.commons.events.model.AddressBookChangedEvent;
-import seedu.address.commons.events.storage.DataSavingExceptionEvent;
-import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.UserPrefs;
-import seedu.address.ui.testutil.EventsCollectorRule;
+import cs2103.concierge.commons.events.model.AddressBookChangedEvent;
+import cs2103.concierge.commons.events.storage.DataSavingExceptionEvent;
+import cs2103.concierge.model.AddressBook;
+import cs2103.concierge.model.ReadOnlyAddressBook;
+import cs2103.concierge.model.UserPrefs;
+import cs2103.concierge.testutil.TypicalPersons;
+import cs2103.concierge.ui.testutil.EventsCollectorRule;
 
 public class StorageManagerTest {
 
@@ -63,7 +63,7 @@ public class StorageManagerTest {
          * {@link XmlAddressBookStorage} class.
          * More extensive testing of UserPref saving/reading is done in {@link XmlAddressBookStorageTest} class.
          */
-        AddressBook original = getTypicalAddressBook();
+        AddressBook original = TypicalPersons.getTypicalAddressBook();
         storageManager.saveAddressBook(original);
         ReadOnlyAddressBook retrieved = storageManager.readAddressBook().get();
         assertEquals(original, new AddressBook(retrieved));

@@ -1,4 +1,4 @@
-package seedu.address.commons.core.index;
+package cs2103.concierge.commons.core.index;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;

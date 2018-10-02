@@ -1,4 +1,4 @@
-package seedu.address;
+package cs2103.concierge;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -7,33 +7,33 @@ import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
 
+import cs2103.concierge.commons.core.Config;
+import cs2103.concierge.commons.core.EventsCenter;
+import cs2103.concierge.commons.core.LogsCenter;
+import cs2103.concierge.commons.core.Version;
+import cs2103.concierge.commons.events.ui.ExitAppRequestEvent;
+import cs2103.concierge.commons.exceptions.DataConversionException;
+import cs2103.concierge.commons.util.ConfigUtil;
+import cs2103.concierge.commons.util.StringUtil;
+import cs2103.concierge.logic.Logic;
+import cs2103.concierge.logic.LogicManager;
+import cs2103.concierge.model.AddressBook;
+import cs2103.concierge.model.Model;
+import cs2103.concierge.model.ModelManager;
+import cs2103.concierge.model.ReadOnlyAddressBook;
+import cs2103.concierge.model.UserPrefs;
+import cs2103.concierge.model.util.SampleDataUtil;
+import cs2103.concierge.storage.AddressBookStorage;
+import cs2103.concierge.storage.JsonUserPrefsStorage;
+import cs2103.concierge.storage.Storage;
+import cs2103.concierge.storage.StorageManager;
+import cs2103.concierge.storage.UserPrefsStorage;
+import cs2103.concierge.storage.XmlAddressBookStorage;
+import cs2103.concierge.ui.Ui;
+import cs2103.concierge.ui.UiManager;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
-import seedu.address.commons.core.Config;
-import seedu.address.commons.core.EventsCenter;
-import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.core.Version;
-import seedu.address.commons.events.ui.ExitAppRequestEvent;
-import seedu.address.commons.exceptions.DataConversionException;
-import seedu.address.commons.util.ConfigUtil;
-import seedu.address.commons.util.StringUtil;
-import seedu.address.logic.Logic;
-import seedu.address.logic.LogicManager;
-import seedu.address.model.AddressBook;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.UserPrefs;
-import seedu.address.model.util.SampleDataUtil;
-import seedu.address.storage.AddressBookStorage;
-import seedu.address.storage.JsonUserPrefsStorage;
-import seedu.address.storage.Storage;
-import seedu.address.storage.StorageManager;
-import seedu.address.storage.UserPrefsStorage;
-import seedu.address.storage.XmlAddressBookStorage;
-import seedu.address.ui.Ui;
-import seedu.address.ui.UiManager;
 
 /**
  * The main entry point to the application.

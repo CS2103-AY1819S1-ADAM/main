@@ -1,6 +1,6 @@
-package seedu.address.logic.parser.exceptions;
+package cs2103.concierge.logic.parser.exceptions;
 
-import seedu.address.commons.exceptions.IllegalValueException;
+import cs2103.concierge.commons.exceptions.IllegalValueException;
 
 /**
  * Represents a parse error encountered by a parser.

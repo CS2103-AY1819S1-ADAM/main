@@ -1,4 +1,4 @@
-package seedu.address.ui;
+package cs2103.concierge.ui;
 
 import static org.junit.Assert.assertEquals;
 
@@ -9,11 +9,11 @@ import org.junit.Test;
 
 import guitests.guihandles.CommandBoxHandle;
 import javafx.scene.input.KeyCode;
-import seedu.address.logic.Logic;
-import seedu.address.logic.LogicManager;
-import seedu.address.logic.commands.ListCommand;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
+import cs2103.concierge.logic.Logic;
+import cs2103.concierge.logic.LogicManager;
+import cs2103.concierge.logic.commands.ListCommand;
+import cs2103.concierge.model.Model;
+import cs2103.concierge.model.ModelManager;
 
 public class CommandBoxTest extends GuiUnitTest {
 

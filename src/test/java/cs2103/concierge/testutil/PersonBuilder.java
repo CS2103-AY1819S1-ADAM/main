@@ -1,15 +1,15 @@
-package seedu.address.testutil;
+package cs2103.concierge.testutil;
 
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.util.SampleDataUtil;
+import cs2103.concierge.model.person.Address;
+import cs2103.concierge.model.person.Email;
+import cs2103.concierge.model.person.Name;
+import cs2103.concierge.model.person.Phone;
+import cs2103.concierge.model.tag.Tag;
+import cs2103.concierge.model.util.SampleDataUtil;
+import cs2103.concierge.model.person.Person;
 
 /**
  * A utility class to help with building Person objects.

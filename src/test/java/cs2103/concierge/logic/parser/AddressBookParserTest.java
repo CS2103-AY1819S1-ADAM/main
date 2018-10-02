@@ -1,10 +1,10 @@
-package seedu.address.logic.parser;
+package cs2103.concierge.logic.parser;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static cs2103.concierge.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static cs2103.concierge.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static cs2103.concierge.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
 import java.util.List;
@@ -14,25 +14,25 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.HistoryCommand;
-import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.RedoCommand;
-import seedu.address.logic.commands.SelectCommand;
-import seedu.address.logic.commands.UndoCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.model.person.Person;
-import seedu.address.testutil.EditPersonDescriptorBuilder;
-import seedu.address.testutil.PersonBuilder;
-import seedu.address.testutil.PersonUtil;
+import cs2103.concierge.logic.commands.AddCommand;
+import cs2103.concierge.logic.commands.ClearCommand;
+import cs2103.concierge.logic.commands.DeleteCommand;
+import cs2103.concierge.logic.commands.EditCommand;
+import cs2103.concierge.logic.commands.EditCommand.EditPersonDescriptor;
+import cs2103.concierge.logic.commands.ExitCommand;
+import cs2103.concierge.logic.commands.FindCommand;
+import cs2103.concierge.logic.commands.HelpCommand;
+import cs2103.concierge.logic.commands.HistoryCommand;
+import cs2103.concierge.logic.commands.ListCommand;
+import cs2103.concierge.logic.commands.RedoCommand;
+import cs2103.concierge.logic.commands.SelectCommand;
+import cs2103.concierge.logic.commands.UndoCommand;
+import cs2103.concierge.logic.parser.exceptions.ParseException;
+import cs2103.concierge.model.person.NameContainsKeywordsPredicate;
+import cs2103.concierge.model.person.Person;
+import cs2103.concierge.testutil.EditPersonDescriptorBuilder;
+import cs2103.concierge.testutil.PersonBuilder;
+import cs2103.concierge.testutil.PersonUtil;
 
 public class AddressBookParserTest {
     @Rule

@@ -1,25 +1,23 @@
-package seedu.address.logic.parser;
-
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+package cs2103.concierge.logic.parser;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.HistoryCommand;
-import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.RedoCommand;
-import seedu.address.logic.commands.SelectCommand;
-import seedu.address.logic.commands.UndoCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
+import cs2103.concierge.commons.core.Messages;
+import cs2103.concierge.logic.commands.AddCommand;
+import cs2103.concierge.logic.commands.ClearCommand;
+import cs2103.concierge.logic.commands.Command;
+import cs2103.concierge.logic.commands.DeleteCommand;
+import cs2103.concierge.logic.commands.EditCommand;
+import cs2103.concierge.logic.commands.ExitCommand;
+import cs2103.concierge.logic.commands.FindCommand;
+import cs2103.concierge.logic.commands.HelpCommand;
+import cs2103.concierge.logic.commands.HistoryCommand;
+import cs2103.concierge.logic.commands.ListCommand;
+import cs2103.concierge.logic.commands.RedoCommand;
+import cs2103.concierge.logic.commands.SelectCommand;
+import cs2103.concierge.logic.commands.UndoCommand;
+import cs2103.concierge.logic.parser.exceptions.ParseException;
 
 /**
  * Parses user input.
@@ -41,7 +39,7 @@ public class AddressBookParser {
     public Command parseCommand(String userInput) throws ParseException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }
 
         final String commandWord = matcher.group("commandWord");
@@ -85,7 +83,7 @@ public class AddressBookParser {
             return new RedoCommand();
 
         default:
-            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+            throw new ParseException(Messages.MESSAGE_UNKNOWN_COMMAND);
         }
     }
 

@@ -1,9 +1,9 @@
-package seedu.address.storage;
+package cs2103.concierge.storage;
 
 import javax.xml.bind.annotation.XmlValue;
 
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.tag.Tag;
+import cs2103.concierge.commons.exceptions.IllegalValueException;
+import cs2103.concierge.model.tag.Tag;
 
 /**
  * JAXB-friendly adapted version of the Tag.

@@ -1,4 +1,4 @@
-package seedu.address.commons.events;
+package cs2103.concierge.commons.events;
 
 /**
  * The base class for all event classes.
