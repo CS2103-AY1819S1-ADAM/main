@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="seedu.address.logic.parser.GuestListParserTest" tests="14" skipped="0" failures="0" errors="0" timestamp="2018-10-02T04:41:55" hostname="JOYCE" time="0.085">
+  <properties/>
+  <testcase name="parseCommand_delete" classname="seedu.address.logic.parser.GuestListParserTest" time="0.001"/>
+  <testcase name="parseCommand_add" classname="seedu.address.logic.parser.GuestListParserTest" time="0.028"/>
+  <testcase name="parseCommand_unrecognisedInput_throwsParseException" classname="seedu.address.logic.parser.GuestListParserTest" time="0.001"/>
+  <testcase name="parseCommand_select" classname="seedu.address.logic.parser.GuestListParserTest" time="0.001"/>
+  <testcase name="parseCommand_clear" classname="seedu.address.logic.parser.GuestListParserTest" time="0.0"/>
+  <testcase name="parseCommand_edit" classname="seedu.address.logic.parser.GuestListParserTest" time="0.041"/>
+  <testcase name="parseCommand_exit" classname="seedu.address.logic.parser.GuestListParserTest" time="0.001"/>
+  <testcase name="parseCommand_find" classname="seedu.address.logic.parser.GuestListParserTest" time="0.002"/>
+  <testcase name="parseCommand_help" classname="seedu.address.logic.parser.GuestListParserTest" time="0.0"/>
+  <testcase name="parseCommand_list" classname="seedu.address.logic.parser.GuestListParserTest" time="0.0"/>
+  <testcase name="parseCommand_redoCommandWord_returnsRedoCommand" classname="seedu.address.logic.parser.GuestListParserTest" time="0.0"/>
+  <testcase name="parseCommand_undoCommandWord_returnsUndoCommand" classname="seedu.address.logic.parser.GuestListParserTest" time="0.0"/>
+  <testcase name="parseCommand_history" classname="seedu.address.logic.parser.GuestListParserTest" time="0.001"/>
+  <testcase name="parseCommand_unknownCommand_throwsParseException" classname="seedu.address.logic.parser.GuestListParserTest" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="seedu.address.model.person.UniquePersonListTest" tests="22" skipped="0" failures="0" errors="0" timestamp="2018-10-02T04:41:55" hostname="JOYCE" time="0.017">
+  <properties/>
+  <testcase name="asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException" classname="seedu.address.model.person.UniquePersonListTest" time="0.001"/>
+  <testcase name="setPerson_editedPersonHasSameIdentity_success" classname="seedu.address.model.person.UniquePersonListTest" time="0.001"/>
+  <testcase name="setPersons_list_replacesOwnListWithProvidedList" classname="seedu.address.model.person.UniquePersonListTest" time="0.001"/>
+  <testcase name="setPerson_targetPersonNotInList_throwsPersonNotFoundException" classname="seedu.address.model.person.UniquePersonListTest" time="0.001"/>
+  <testcase name="contains_nullPerson_throwsNullPointerException" classname="seedu.address.model.person.UniquePersonListTest" time="0.001"/>
+  <testcase name="setPerson_editedPersonHasDifferentIdentity_success" classname="seedu.address.model.person.UniquePersonListTest" time="0.0"/>
+  <testcase name="add_duplicatePerson_throwsDuplicatePersonException" classname="seedu.address.model.person.UniquePersonListTest" time="0.001"/>
+  <testcase name="setPerson_nullEditedPerson_throwsNullPointerException" classname="seedu.address.model.person.UniquePersonListTest" time="0.0"/>
+  <testcase name="contains_personNotInList_returnsFalse" classname="seedu.address.model.person.UniquePersonListTest" time="0.0"/>
+  <testcase name="setPersons_nullUniquePersonList_throwsNullPointerException" classname="seedu.address.model.person.UniquePersonListTest" time="0.0"/>
+  <testcase name="contains_personWithSameIdentityFieldsInList_returnsTrue" classname="seedu.address.model.person.UniquePersonListTest" time="0.001"/>
+  <testcase name="remove_existingPerson_removesPerson" classname="seedu.address.model.person.UniquePersonListTest" time="0.001"/>
+  <testcase name="setPersons_nullList_throwsNullPointerException" classname="seedu.address.model.person.UniquePersonListTest" time="0.0"/>
+  <testcase name="add_nullPerson_throwsNullPointerException" classname="seedu.address.model.person.UniquePersonListTest" time="0.001"/>
+  <testcase name="remove_nullPerson_throwsNullPointerException" classname="seedu.address.model.person.UniquePersonListTest" time="0.0"/>
+  <testcase name="setPerson_nullTargetPerson_throwsNullPointerException" classname="seedu.address.model.person.UniquePersonListTest" time="0.001"/>
+  <testcase name="setPersons_uniquePersonList_replacesOwnListWithProvidedUniquePersonList" classname="seedu.address.model.person.UniquePersonListTest" time="0.001"/>
+  <testcase name="remove_personDoesNotExist_throwsPersonNotFoundException" classname="seedu.address.model.person.UniquePersonListTest" time="0.001"/>
+  <testcase name="setPerson_editedPersonHasNonUniqueIdentity_throwsDuplicatePersonException" classname="seedu.address.model.person.UniquePersonListTest" time="0.0"/>
+  <testcase name="setPerson_editedPersonIsSamePerson_success" classname="seedu.address.model.person.UniquePersonListTest" time="0.001"/>
+  <testcase name="contains_personInList_returnsTrue" classname="seedu.address.model.person.UniquePersonListTest" time="0.0"/>
+  <testcase name="setPersons_listWithDuplicatePersons_throwsDuplicatePersonException" classname="seedu.address.model.person.UniquePersonListTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

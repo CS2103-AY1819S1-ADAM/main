@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="systemtests.SelectCommandSystemTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2018-10-02T04:43:56" hostname="JOYCE" time="12.442">
+  <properties/>
+  <testcase name="select" classname="systemtests.SelectCommandSystemTest" time="12.442"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[Oct 02, 2018 12:43:56 PM seedu.address.MainApp init
+INFO: =============================[ Initializing GuestList ]===========================
+Oct 02, 2018 12:43:56 PM seedu.address.MainApp initConfig
+INFO: Using config file : config.json
+Oct 02, 2018 12:43:56 PM seedu.address.MainApp initPrefs
+INFO: Using prefs file : src\test\data\sandbox\pref_testing.json
+Oct 02, 2018 12:43:56 PM seedu.address.commons.core.LogsCenter init
+INFO: currentLogLevel: INFO
+Oct 02, 2018 12:43:56 PM seedu.address.ui.UiManager start
+INFO: Starting UI...
+Oct 02, 2018 12:43:56 PM guitests.guihandles.StageHandle focus
+INFO: Focusing onTest App
+Oct 02, 2018 12:43:56 PM guitests.guihandles.StageHandle focus
+INFO: Finishing focus onTest App
+Oct 02, 2018 12:43:57 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][   select 1   ]
+Oct 02, 2018 12:43:57 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.ui.JumpToListRequestEvent: JumpToListRequestEvent
+Oct 02, 2018 12:43:57 PM seedu.address.ui.PersonListPanel handleJumpToListRequestEvent
+INFO: ---[Event handled][JumpToListRequestEvent]
+Oct 02, 2018 12:43:57 PM seedu.address.ui.CommandBox handleCommandEntered
+INFO: Result: Selected Person: 1
+Oct 02, 2018 12:43:57 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.ui.NewResultAvailableEvent: NewResultAvailableEvent
+Oct 02, 2018 12:43:57 PM seedu.address.ui.ResultDisplay handleNewResultAvailableEvent
+INFO: ---[Event handled][NewResultAvailableEvent]
+Oct 02, 2018 12:43:57 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent: PersonPanelSelectionChangedEvent
+Oct 02, 2018 12:43:57 PM seedu.address.ui.BrowserPanel handlePersonPanelSelectionChangedEvent
+INFO: ---[Event handled][PersonPanelSelectionChangedEvent]
+Oct 02, 2018 12:43:58 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][select 7]
+Oct 02, 2018 12:43:58 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.ui.JumpToListRequestEvent: JumpToListRequestEvent
+Oct 02, 2018 12:43:58 PM seedu.address.ui.PersonListPanel handleJumpToListRequestEvent
+INFO: ---[Event handled][JumpToListRequestEvent]
+Oct 02, 2018 12:43:58 PM seedu.address.ui.CommandBox handleCommandEntered
+INFO: Result: Selected Person: 7
+Oct 02, 2018 12:43:58 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.ui.NewResultAvailableEvent: NewResultAvailableEvent
+Oct 02, 2018 12:43:58 PM seedu.address.ui.ResultDisplay handleNewResultAvailableEvent
+INFO: ---[Event handled][NewResultAvailableEvent]
+Oct 02, 2018 12:43:58 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent: PersonPanelSelectionChangedEvent
+Oct 02, 2018 12:43:58 PM seedu.address.ui.BrowserPanel handlePersonPanelSelectionChangedEvent
+INFO: ---[Event handled][PersonPanelSelectionChangedEvent]
+Oct 02, 2018 12:43:59 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][undo]
+Oct 02, 2018 12:43:59 PM seedu.address.ui.CommandBox handleCommandEntered
+INFO: Invalid command: undo
+Oct 02, 2018 12:43:59 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.ui.NewResultAvailableEvent: NewResultAvailableEvent
+Oct 02, 2018 12:43:59 PM seedu.address.ui.ResultDisplay handleNewResultAvailableEvent
+INFO: ---[Event handled][NewResultAvailableEvent]
+Oct 02, 2018 12:44:00 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][redo]
+Oct 02, 2018 12:44:00 PM seedu.address.ui.CommandBox handleCommandEntered
+INFO: Invalid command: redo
+Oct 02, 2018 12:44:00 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.ui.NewResultAvailableEvent: NewResultAvailableEvent
+Oct 02, 2018 12:44:00 PM seedu.address.ui.ResultDisplay handleNewResultAvailableEvent
+INFO: ---[Event handled][NewResultAvailableEvent]
+Oct 02, 2018 12:44:01 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][select 3]
+Oct 02, 2018 12:44:01 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.ui.JumpToListRequestEvent: JumpToListRequestEvent
+Oct 02, 2018 12:44:01 PM seedu.address.ui.PersonListPanel handleJumpToListRequestEvent
+INFO: ---[Event handled][JumpToListRequestEvent]
+Oct 02, 2018 12:44:01 PM seedu.address.ui.CommandBox handleCommandEntered
+INFO: Result: Selected Person: 3
+Oct 02, 2018 12:44:01 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.ui.NewResultAvailableEvent: NewResultAvailableEvent
+Oct 02, 2018 12:44:01 PM seedu.address.ui.ResultDisplay handleNewResultAvailableEvent
+INFO: ---[Event handled][NewResultAvailableEvent]
+Oct 02, 2018 12:44:01 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent: PersonPanelSelectionChangedEvent
+Oct 02, 2018 12:44:01 PM seedu.address.ui.BrowserPanel handlePersonPanelSelectionChangedEvent
+INFO: ---[Event handled][PersonPanelSelectionChangedEvent]
+Oct 02, 2018 12:44:02 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][select 3]
+Oct 02, 2018 12:44:02 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.ui.JumpToListRequestEvent: JumpToListRequestEvent
+Oct 02, 2018 12:44:02 PM seedu.address.ui.PersonListPanel handleJumpToListRequestEvent
+INFO: ---[Event handled][JumpToListRequestEvent]
+Oct 02, 2018 12:44:02 PM seedu.address.ui.CommandBox handleCommandEntered
+INFO: Result: Selected Person: 3
+Oct 02, 2018 12:44:02 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.ui.NewResultAvailableEvent: NewResultAvailableEvent
+Oct 02, 2018 12:44:02 PM seedu.address.ui.ResultDisplay handleNewResultAvailableEvent
+INFO: ---[Event handled][NewResultAvailableEvent]
+Oct 02, 2018 12:44:03 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][find Meier]
+Oct 02, 2018 12:44:03 PM seedu.address.ui.CommandBox handleCommandEntered
+INFO: Result: 2 persons listed!
+Oct 02, 2018 12:44:03 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.ui.NewResultAvailableEvent: NewResultAvailableEvent
+Oct 02, 2018 12:44:03 PM seedu.address.ui.ResultDisplay handleNewResultAvailableEvent
+INFO: ---[Event handled][NewResultAvailableEvent]
+Oct 02, 2018 12:44:03 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][select 7]
+Oct 02, 2018 12:44:03 PM seedu.address.ui.CommandBox handleCommandEntered
+INFO: Invalid command: select 7
+Oct 02, 2018 12:44:03 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.ui.NewResultAvailableEvent: NewResultAvailableEvent
+Oct 02, 2018 12:44:03 PM seedu.address.ui.ResultDisplay handleNewResultAvailableEvent
+INFO: ---[Event handled][NewResultAvailableEvent]
+Oct 02, 2018 12:44:04 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][select 1]
+Oct 02, 2018 12:44:04 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.ui.JumpToListRequestEvent: JumpToListRequestEvent
+Oct 02, 2018 12:44:04 PM seedu.address.ui.PersonListPanel handleJumpToListRequestEvent
+INFO: ---[Event handled][JumpToListRequestEvent]
+Oct 02, 2018 12:44:04 PM seedu.address.ui.CommandBox handleCommandEntered
+INFO: Result: Selected Person: 1
+Oct 02, 2018 12:44:04 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.ui.NewResultAvailableEvent: NewResultAvailableEvent
+Oct 02, 2018 12:44:04 PM seedu.address.ui.ResultDisplay handleNewResultAvailableEvent
+INFO: ---[Event handled][NewResultAvailableEvent]
+Oct 02, 2018 12:44:04 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent: PersonPanelSelectionChangedEvent
+Oct 02, 2018 12:44:04 PM seedu.address.ui.BrowserPanel handlePersonPanelSelectionChangedEvent
+INFO: ---[Event handled][PersonPanelSelectionChangedEvent]
+Oct 02, 2018 12:44:05 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][select 0]
+Oct 02, 2018 12:44:05 PM seedu.address.ui.CommandBox handleCommandEntered
+INFO: Invalid command: select 0
+Oct 02, 2018 12:44:05 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.ui.NewResultAvailableEvent: NewResultAvailableEvent
+Oct 02, 2018 12:44:05 PM seedu.address.ui.ResultDisplay handleNewResultAvailableEvent
+INFO: ---[Event handled][NewResultAvailableEvent]
+Oct 02, 2018 12:44:06 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][select -1]
+Oct 02, 2018 12:44:06 PM seedu.address.ui.CommandBox handleCommandEntered
+INFO: Invalid command: select -1
+Oct 02, 2018 12:44:06 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.ui.NewResultAvailableEvent: NewResultAvailableEvent
+Oct 02, 2018 12:44:06 PM seedu.address.ui.ResultDisplay handleNewResultAvailableEvent
+INFO: ---[Event handled][NewResultAvailableEvent]
+Oct 02, 2018 12:44:06 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][select 3]
+Oct 02, 2018 12:44:06 PM seedu.address.ui.CommandBox handleCommandEntered
+INFO: Invalid command: select 3
+Oct 02, 2018 12:44:06 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.ui.NewResultAvailableEvent: NewResultAvailableEvent
+Oct 02, 2018 12:44:06 PM seedu.address.ui.ResultDisplay handleNewResultAvailableEvent
+INFO: ---[Event handled][NewResultAvailableEvent]
+Oct 02, 2018 12:44:06 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][select abc]
+Oct 02, 2018 12:44:06 PM seedu.address.ui.CommandBox handleCommandEntered
+INFO: Invalid command: select abc
+Oct 02, 2018 12:44:06 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.ui.NewResultAvailableEvent: NewResultAvailableEvent
+Oct 02, 2018 12:44:06 PM seedu.address.ui.ResultDisplay handleNewResultAvailableEvent
+INFO: ---[Event handled][NewResultAvailableEvent]
+Oct 02, 2018 12:44:07 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][select 1 abc]
+Oct 02, 2018 12:44:07 PM seedu.address.ui.CommandBox handleCommandEntered
+INFO: Invalid command: select 1 abc
+Oct 02, 2018 12:44:07 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.ui.NewResultAvailableEvent: NewResultAvailableEvent
+Oct 02, 2018 12:44:07 PM seedu.address.ui.ResultDisplay handleNewResultAvailableEvent
+INFO: ---[Event handled][NewResultAvailableEvent]
+Oct 02, 2018 12:44:07 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][SeLeCt 1]
+Oct 02, 2018 12:44:07 PM seedu.address.ui.CommandBox handleCommandEntered
+INFO: Invalid command: SeLeCt 1
+Oct 02, 2018 12:44:07 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.ui.NewResultAvailableEvent: NewResultAvailableEvent
+Oct 02, 2018 12:44:07 PM seedu.address.ui.ResultDisplay handleNewResultAvailableEvent
+INFO: ---[Event handled][NewResultAvailableEvent]
+Oct 02, 2018 12:44:08 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][clear]
+Oct 02, 2018 12:44:08 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.model.AddressBookChangedEvent: number of persons 0
+Oct 02, 2018 12:44:08 PM seedu.address.storage.StorageManager handleAddressBookChangedEvent
+INFO: ---[Event handled][number of persons 0]Local data changed, saving to file
+Oct 02, 2018 12:44:08 PM seedu.address.ui.StatusBarFooter handleAddressBookChangedEvent
+INFO: ---[Event handled][number of persons 0]Setting last updated status to Tue Oct 02 12:44:07 SRET 2018
+Oct 02, 2018 12:44:08 PM seedu.address.ui.CommandBox handleCommandEntered
+INFO: Result: Address book has been cleared!
+Oct 02, 2018 12:44:08 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.ui.NewResultAvailableEvent: NewResultAvailableEvent
+Oct 02, 2018 12:44:08 PM seedu.address.ui.ResultDisplay handleNewResultAvailableEvent
+INFO: ---[Event handled][NewResultAvailableEvent]
+Oct 02, 2018 12:44:08 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][select 1]
+Oct 02, 2018 12:44:08 PM seedu.address.ui.CommandBox handleCommandEntered
+INFO: Invalid command: select 1
+Oct 02, 2018 12:44:08 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.ui.NewResultAvailableEvent: NewResultAvailableEvent
+Oct 02, 2018 12:44:08 PM seedu.address.ui.ResultDisplay handleNewResultAvailableEvent
+INFO: ---[Event handled][NewResultAvailableEvent]
+]]></system-err>
+</testsuite>

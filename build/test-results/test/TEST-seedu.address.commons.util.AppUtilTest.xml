@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="seedu.address.commons.util.AppUtilTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2018-10-02T04:41:51" hostname="JOYCE" time="0.368">
+  <properties/>
+  <testcase name="getImage_exitingImage" classname="seedu.address.commons.util.AppUtilTest" time="0.357"/>
+  <testcase name="checkArgument_falseWithoutErrorMessage_throwsIllegalArgumentException" classname="seedu.address.commons.util.AppUtilTest" time="0.0"/>
+  <testcase name="getImage_nullGiven_throwsNullPointerException" classname="seedu.address.commons.util.AppUtilTest" time="0.0"/>
+  <testcase name="checkArgument_true_nothingHappens" classname="seedu.address.commons.util.AppUtilTest" time="0.0"/>
+  <testcase name="checkArgument_falseWithErrorMessage_throwsIllegalArgumentException" classname="seedu.address.commons.util.AppUtilTest" time="0.008"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

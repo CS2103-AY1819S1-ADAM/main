@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="seedu.address.commons.util.StringUtilTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2018-10-02T04:41:53" hostname="JOYCE" time="0.022">
+  <properties/>
+  <testcase name="containsWordIgnoreCase_nullSentence_throwsNullPointerException" classname="seedu.address.commons.util.StringUtilTest" time="0.003"/>
+  <testcase name="isUnsignedPositiveInteger" classname="seedu.address.commons.util.StringUtilTest" time="0.0"/>
+  <testcase name="containsWordIgnoreCase_nullWord_throwsNullPointerException" classname="seedu.address.commons.util.StringUtilTest" time="0.001"/>
+  <testcase name="containsWordIgnoreCase_validInputs_correctResult" classname="seedu.address.commons.util.StringUtilTest" time="0.002"/>
+  <testcase name="containsWordIgnoreCase_emptyWord_throwsIllegalArgumentException" classname="seedu.address.commons.util.StringUtilTest" time="0.001"/>
+  <testcase name="getDetails_exceptionGiven" classname="seedu.address.commons.util.StringUtilTest" time="0.008"/>
+  <testcase name="containsWordIgnoreCase_multipleWords_throwsIllegalArgumentException" classname="seedu.address.commons.util.StringUtilTest" time="0.001"/>
+  <testcase name="getDetails_nullGiven_throwsNullPointerException" classname="seedu.address.commons.util.StringUtilTest" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

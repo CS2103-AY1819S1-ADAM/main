@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="seedu.address.logic.parser.ArgumentTokenizerTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2018-10-02T04:41:55" hostname="JOYCE" time="0.006">
+  <properties/>
+  <testcase name="tokenize_emptyArgsString_noValues" classname="seedu.address.logic.parser.ArgumentTokenizerTest" time="0.001"/>
+  <testcase name="equalsMethod" classname="seedu.address.logic.parser.ArgumentTokenizerTest" time="0.0"/>
+  <testcase name="tokenize_multipleArgumentsWithRepeats" classname="seedu.address.logic.parser.ArgumentTokenizerTest" time="0.001"/>
+  <testcase name="tokenize_noPrefixes_allTakenAsPreamble" classname="seedu.address.logic.parser.ArgumentTokenizerTest" time="0.0"/>
+  <testcase name="tokenize_oneArgument" classname="seedu.address.logic.parser.ArgumentTokenizerTest" time="0.0"/>
+  <testcase name="tokenize_multipleArguments" classname="seedu.address.logic.parser.ArgumentTokenizerTest" time="0.001"/>
+  <testcase name="tokenize_multipleArgumentsJoined" classname="seedu.address.logic.parser.ArgumentTokenizerTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

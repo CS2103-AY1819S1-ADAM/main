@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="seedu.address.model.VersionedGuestListTest" tests="20" skipped="0" failures="0" errors="0" timestamp="2018-10-02T04:41:55" hostname="JOYCE" time="0.056">
+  <properties/>
+  <testcase name="canUndo_multipleAddressBookPointerAtEndOfStateList_returnsTrue" classname="seedu.address.model.VersionedGuestListTest" time="0.001"/>
+  <testcase name="canRedo_multipleAddressBookPointerNotAtEndOfStateList_returnsTrue" classname="seedu.address.model.VersionedGuestListTest" time="0.001"/>
+  <testcase name="undo_multipleAddressBookPointerNotAtStartOfStateList_success" classname="seedu.address.model.VersionedGuestListTest" time="0.001"/>
+  <testcase name="equals" classname="seedu.address.model.VersionedGuestListTest" time="0.002"/>
+  <testcase name="redo_singleAddressBook_throwsNoRedoableStateException" classname="seedu.address.model.VersionedGuestListTest" time="0.014"/>
+  <testcase name="undo_multipleAddressBookPointerAtEndOfStateList_success" classname="seedu.address.model.VersionedGuestListTest" time="0.002"/>
+  <testcase name="redo_multipleAddressBookPointerAtEndOfStateList_throwsNoRedoableStateException" classname="seedu.address.model.VersionedGuestListTest" time="0.001"/>
+  <testcase name="canRedo_singleAddressBook_returnsFalse" classname="seedu.address.model.VersionedGuestListTest" time="0.0"/>
+  <testcase name="undo_multipleAddressBookPointerAtStartOfStateList_throwsNoUndoableStateException" classname="seedu.address.model.VersionedGuestListTest" time="0.002"/>
+  <testcase name="commit_singleAddressBook_noStatesRemovedCurrentStateSaved" classname="seedu.address.model.VersionedGuestListTest" time="0.002"/>
+  <testcase name="commit_multipleAddressBookPointerAtEndOfStateList_noStatesRemovedCurrentStateSaved" classname="seedu.address.model.VersionedGuestListTest" time="0.001"/>
+  <testcase name="redo_multipleAddressBookPointerAtStartOfStateList_success" classname="seedu.address.model.VersionedGuestListTest" time="0.001"/>
+  <testcase name="undo_singleAddressBook_throwsNoUndoableStateException" classname="seedu.address.model.VersionedGuestListTest" time="0.001"/>
+  <testcase name="canRedo_multipleAddressBookPointerAtStartOfStateList_returnsTrue" classname="seedu.address.model.VersionedGuestListTest" time="0.0"/>
+  <testcase name="commit_multipleAddressBookPointerNotAtEndOfStateList_statesAfterPointerRemovedCurrentStateSaved" classname="seedu.address.model.VersionedGuestListTest" time="0.001"/>
+  <testcase name="redo_multipleAddressBookPointerNotAtEndOfStateList_success" classname="seedu.address.model.VersionedGuestListTest" time="0.0"/>
+  <testcase name="canUndo_singleAddressBook_returnsFalse" classname="seedu.address.model.VersionedGuestListTest" time="0.0"/>
+  <testcase name="canRedo_multipleAddressBookPointerAtEndOfStateList_returnsFalse" classname="seedu.address.model.VersionedGuestListTest" time="0.001"/>
+  <testcase name="canUndo_multipleAddressBookPointerAtStartOfStateList_returnsFalse" classname="seedu.address.model.VersionedGuestListTest" time="0.001"/>
+  <testcase name="canUndo_multipleAddressBookPointerAtStartOfStateList_returnsTrue" classname="seedu.address.model.VersionedGuestListTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

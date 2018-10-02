@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="seedu.address.ui.StatusBarFooterTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2018-10-02T04:42:25" hostname="JOYCE" time="0.327">
+  <properties/>
+  <testcase name="display" classname="seedu.address.ui.StatusBarFooterTest" time="0.327"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[Oct 02, 2018 12:42:26 PM seedu.address.commons.core.EventsCenter post
+INFO: ------[Event Posted] seedu.address.commons.events.model.AddressBookChangedEvent: number of persons 0
+Oct 02, 2018 12:42:26 PM seedu.address.ui.StatusBarFooter handleAddressBookChangedEvent
+INFO: ---[Event handled][number of persons 0]Setting last updated status to Tue Oct 02 12:42:25 SRET 2018
+]]></system-err>
+</testsuite>

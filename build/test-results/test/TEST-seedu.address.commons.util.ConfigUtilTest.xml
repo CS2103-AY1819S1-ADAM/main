@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="seedu.address.commons.util.ConfigUtilTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2018-10-02T04:41:52" hostname="JOYCE" time="1.312">
+  <properties/>
+  <testcase name="read_missingFile_emptyResult" classname="seedu.address.commons.util.ConfigUtilTest" time="1.059"/>
+  <testcase name="read_valuesMissingFromFile_defaultValuesUsed" classname="seedu.address.commons.util.ConfigUtilTest" time="0.151"/>
+  <testcase name="read_null_throwsNullPointerException" classname="seedu.address.commons.util.ConfigUtilTest" time="0.003"/>
+  <testcase name="read_fileInOrder_successfullyRead" classname="seedu.address.commons.util.ConfigUtilTest" time="0.005"/>
+  <testcase name="saveConfig_allInOrder_success" classname="seedu.address.commons.util.ConfigUtilTest" time="0.059"/>
+  <testcase name="read_extraValuesInFile_extraValuesIgnored" classname="seedu.address.commons.util.ConfigUtilTest" time="0.003"/>
+  <testcase name="save_nullConfig_throwsNullPointerException" classname="seedu.address.commons.util.ConfigUtilTest" time="0.003"/>
+  <testcase name="read_notJsonFormat_exceptionThrown" classname="seedu.address.commons.util.ConfigUtilTest" time="0.018"/>
+  <testcase name="save_nullFile_throwsNullPointerException" classname="seedu.address.commons.util.ConfigUtilTest" time="0.006"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[Oct 02, 2018 12:41:53 PM seedu.address.commons.util.JsonUtil readJsonFile
+INFO: Json file src\test\data\ConfigUtilTest\NonExistentFile.json not found
+Oct 02, 2018 12:41:53 PM seedu.address.commons.util.JsonUtil readJsonFile
+WARNING: Error reading from jsonFile file src\test\data\ConfigUtilTest\NotJsonFormatConfig.json: com.fasterxml.jackson.core.JsonParseException: Unrecognized token 'this': was expecting 'null', 'true', 'false' or NaN
+ at [Source: this file is not in json format!
+; line: 1, column: 5]
+]]></system-err>
+</testsuite>

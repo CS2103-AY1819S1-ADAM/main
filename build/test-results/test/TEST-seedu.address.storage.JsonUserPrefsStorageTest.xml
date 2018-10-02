@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="seedu.address.storage.JsonUserPrefsStorageTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2018-10-02T04:41:55" hostname="JOYCE" time="0.096">
+  <properties/>
+  <testcase name="savePrefs_nullPrefs_throwsNullPointerException" classname="seedu.address.storage.JsonUserPrefsStorageTest" time="0.007"/>
+  <testcase name="readUserPrefs_fileInOrder_successfullyRead" classname="seedu.address.storage.JsonUserPrefsStorageTest" time="0.016"/>
+  <testcase name="readUserPrefs_nullFilePath_throwsNullPointerException" classname="seedu.address.storage.JsonUserPrefsStorageTest" time="0.003"/>
+  <testcase name="readUserPrefs_notJsonFormat_exceptionThrown" classname="seedu.address.storage.JsonUserPrefsStorageTest" time="0.005"/>
+  <testcase name="saveUserPrefs_nullFilePath_throwsNullPointerException" classname="seedu.address.storage.JsonUserPrefsStorageTest" time="0.002"/>
+  <testcase name="readUserPrefs_valuesMissingFromFile_defaultValuesUsed" classname="seedu.address.storage.JsonUserPrefsStorageTest" time="0.003"/>
+  <testcase name="readUserPrefs_missingFile_emptyResult" classname="seedu.address.storage.JsonUserPrefsStorageTest" time="0.004"/>
+  <testcase name="saveUserPrefs_allInOrder_success" classname="seedu.address.storage.JsonUserPrefsStorageTest" time="0.048"/>
+  <testcase name="readUserPrefs_extraValuesInFile_extraValuesIgnored" classname="seedu.address.storage.JsonUserPrefsStorageTest" time="0.004"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[Oct 02, 2018 12:41:55 PM seedu.address.commons.util.JsonUtil readJsonFile
+WARNING: Error reading from jsonFile file src\test\data\JsonUserPrefsStorageTest\NotJsonFormatUserPrefs.json: com.fasterxml.jackson.core.JsonParseException: Unrecognized token 'Not': was expecting 'null', 'true', 'false' or NaN
+ at [Source: Not a json file!
+; line: 1, column: 4]
+Oct 02, 2018 12:41:55 PM seedu.address.commons.util.JsonUtil readJsonFile
+INFO: Json file src\test\data\JsonUserPrefsStorageTest\NonExistentFile.json not found
+]]></system-err>
+</testsuite>

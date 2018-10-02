@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="seedu.address.logic.LogicManagerTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2018-10-02T04:41:55" hostname="JOYCE" time="0.029">
+  <properties/>
+  <testcase name="execute_invalidCommandFormat_throwsParseException" classname="seedu.address.logic.LogicManagerTest" time="0.014"/>
+  <testcase name="execute_validCommand_success" classname="seedu.address.logic.LogicManagerTest" time="0.007"/>
+  <testcase name="execute_commandExecutionError_throwsCommandException" classname="seedu.address.logic.LogicManagerTest" time="0.005"/>
+  <testcase name="getFilteredPersonList_modifyList_throwsUnsupportedOperationException" classname="seedu.address.logic.LogicManagerTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[Oct 02, 2018 12:41:55 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][uicfhmowqewca]
+Oct 02, 2018 12:41:55 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][history]
+Oct 02, 2018 12:41:55 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][list]
+Oct 02, 2018 12:41:55 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][history]
+Oct 02, 2018 12:41:55 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][delete 9]
+Oct 02, 2018 12:41:55 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][history]
+]]></system-err>
+</testsuite>

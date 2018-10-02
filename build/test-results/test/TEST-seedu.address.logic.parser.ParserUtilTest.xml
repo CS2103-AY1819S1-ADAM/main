@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="seedu.address.logic.parser.ParserUtilTest" tests="27" skipped="0" failures="0" errors="0" timestamp="2018-10-02T04:41:55" hostname="JOYCE" time="0.047">
+  <properties/>
+  <testcase name="parseIndex_outOfRangeInput_throwsParseException" classname="seedu.address.logic.parser.ParserUtilTest" time="0.001"/>
+  <testcase name="parseTag_invalidValue_throwsParseException" classname="seedu.address.logic.parser.ParserUtilTest" time="0.0"/>
+  <testcase name="parseAddress_validValueWithoutWhitespace_returnsAddress" classname="seedu.address.logic.parser.ParserUtilTest" time="0.0"/>
+  <testcase name="parseTags_collectionWithInvalidTags_throwsParseException" classname="seedu.address.logic.parser.ParserUtilTest" time="0.001"/>
+  <testcase name="parseName_null_throwsNullPointerException" classname="seedu.address.logic.parser.ParserUtilTest" time="0.001"/>
+  <testcase name="parseTags_collectionWithValidTags_returnsTagSet" classname="seedu.address.logic.parser.ParserUtilTest" time="0.015"/>
+  <testcase name="parseEmail_invalidValue_throwsParseException" classname="seedu.address.logic.parser.ParserUtilTest" time="0.001"/>
+  <testcase name="parseTag_validValueWithWhitespace_returnsTrimmedTag" classname="seedu.address.logic.parser.ParserUtilTest" time="0.0"/>
+  <testcase name="parseIndex_validInput_success" classname="seedu.address.logic.parser.ParserUtilTest" time="0.001"/>
+  <testcase name="parseName_validValueWithoutWhitespace_returnsName" classname="seedu.address.logic.parser.ParserUtilTest" time="0.0"/>
+  <testcase name="parseAddress_invalidValue_throwsParseException" classname="seedu.address.logic.parser.ParserUtilTest" time="0.001"/>
+  <testcase name="parseTags_null_throwsNullPointerException" classname="seedu.address.logic.parser.ParserUtilTest" time="0.001"/>
+  <testcase name="parseIndex_invalidInput_throwsParseException" classname="seedu.address.logic.parser.ParserUtilTest" time="0.0"/>
+  <testcase name="parseName_invalidValue_throwsParseException" classname="seedu.address.logic.parser.ParserUtilTest" time="0.001"/>
+  <testcase name="parseTag_null_throwsNullPointerException" classname="seedu.address.logic.parser.ParserUtilTest" time="0.0"/>
+  <testcase name="parsePhone_null_throwsNullPointerException" classname="seedu.address.logic.parser.ParserUtilTest" time="0.001"/>
+  <testcase name="parsePhone_invalidValue_throwsParseException" classname="seedu.address.logic.parser.ParserUtilTest" time="0.006"/>
+  <testcase name="parseEmail_null_throwsNullPointerException" classname="seedu.address.logic.parser.ParserUtilTest" time="0.001"/>
+  <testcase name="parsePhone_validValueWithWhitespace_returnsTrimmedPhone" classname="seedu.address.logic.parser.ParserUtilTest" time="0.001"/>
+  <testcase name="parseAddress_validValueWithWhitespace_returnsTrimmedAddress" classname="seedu.address.logic.parser.ParserUtilTest" time="0.001"/>
+  <testcase name="parsePhone_validValueWithoutWhitespace_returnsPhone" classname="seedu.address.logic.parser.ParserUtilTest" time="0.001"/>
+  <testcase name="parseAddress_null_throwsNullPointerException" classname="seedu.address.logic.parser.ParserUtilTest" time="0.001"/>
+  <testcase name="parseTags_emptyCollection_returnsEmptySet" classname="seedu.address.logic.parser.ParserUtilTest" time="0.0"/>
+  <testcase name="parseTag_validValueWithoutWhitespace_returnsTag" classname="seedu.address.logic.parser.ParserUtilTest" time="0.0"/>
+  <testcase name="parseEmail_validValueWithoutWhitespace_returnsEmail" classname="seedu.address.logic.parser.ParserUtilTest" time="0.001"/>
+  <testcase name="parseEmail_validValueWithWhitespace_returnsTrimmedEmail" classname="seedu.address.logic.parser.ParserUtilTest" time="0.001"/>
+  <testcase name="parseName_validValueWithWhitespace_returnsTrimmedName" classname="seedu.address.logic.parser.ParserUtilTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

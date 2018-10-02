@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="seedu.address.ui.HelpWindowTest" tests="4" skipped="1" failures="0" errors="0" timestamp="2018-10-02T04:42:07" hostname="JOYCE" time="2.436">
+  <properties/>
+  <testcase name="focus_helpWindowNotFocused_focused" classname="seedu.address.ui.HelpWindowTest" time="0.99">
+    <skipped/>
+  </testcase>
+  <testcase name="isShowing_helpWindowIsShowing_returnsTrue" classname="seedu.address.ui.HelpWindowTest" time="0.721"/>
+  <testcase name="isShowing_helpWindowIsHiding_returnsFalse" classname="seedu.address.ui.HelpWindowTest" time="0.26"/>
+  <testcase name="display" classname="seedu.address.ui.HelpWindowTest" time="0.463"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

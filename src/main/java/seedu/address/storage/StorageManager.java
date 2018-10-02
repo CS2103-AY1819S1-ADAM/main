@@ -16,7 +16,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
 
 /**
- * Manages storage of AddressBook data in local storage.
+ * Manages storage of GuestList data in local storage.
  */
 public class StorageManager extends ComponentManager implements Storage {
 
@@ -49,7 +49,7 @@ public class StorageManager extends ComponentManager implements Storage {
     }
 
 
-    // ================ AddressBook methods ==============================
+    // ================ GuestList methods ==============================
 
     @Override
     public Path getAddressBookFilePath() {
