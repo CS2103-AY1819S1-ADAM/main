@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalGuests.getTypicalGuestList;
 
 import org.junit.Test;
 
@@ -26,8 +26,8 @@ public class ClearCommandTest {
 
     @Test
     public void execute_nonEmptyAddressBook_success() {
-        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        Model model = new ModelManager(getTypicalGuestList(), new UserPrefs());
+        Model expectedModel = new ModelManager(getTypicalGuestList(), new UserPrefs());
         expectedModel.resetData(new GuestList());
         expectedModel.commitGuestList();
 

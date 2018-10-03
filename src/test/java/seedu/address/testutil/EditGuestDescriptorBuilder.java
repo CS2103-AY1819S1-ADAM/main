@@ -16,22 +16,22 @@ import seedu.address.model.tag.Tag;
 /**
  * A utility class to help with building EditGuestDescriptor objects.
  */
-public class EditPersonDescriptorBuilder {
+public class EditGuestDescriptorBuilder {
 
     private EditCommand.EditGuestDescriptor descriptor;
 
-    public EditPersonDescriptorBuilder() {
+    public EditGuestDescriptorBuilder() {
         descriptor = new EditGuestDescriptor();
     }
 
-    public EditPersonDescriptorBuilder(EditCommand.EditGuestDescriptor descriptor) {
+    public EditGuestDescriptorBuilder(EditCommand.EditGuestDescriptor descriptor) {
         this.descriptor = new EditGuestDescriptor(descriptor);
     }
 
     /**
      * Returns an {@code EditGuestDescriptor} with fields containing {@code guest}'s details
      */
-    public EditPersonDescriptorBuilder(Guest guest) {
+    public EditGuestDescriptorBuilder(Guest guest) {
         descriptor = new EditGuestDescriptor();
         descriptor.setName(guest.getName());
         descriptor.setPhone(guest.getPhone());
@@ -43,7 +43,7 @@ public class EditPersonDescriptorBuilder {
     /**
      * Sets the {@code Name} of the {@code EditGuestDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withName(String name) {
+    public EditGuestDescriptorBuilder withName(String name) {
         descriptor.setName(new Name(name));
         return this;
     }
@@ -51,7 +51,7 @@ public class EditPersonDescriptorBuilder {
     /**
      * Sets the {@code Phone} of the {@code EditGuestDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withPhone(String phone) {
+    public EditGuestDescriptorBuilder withPhone(String phone) {
         descriptor.setPhone(new Phone(phone));
         return this;
     }
@@ -59,7 +59,7 @@ public class EditPersonDescriptorBuilder {
     /**
      * Sets the {@code Email} of the {@code EditGuestDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withEmail(String email) {
+    public EditGuestDescriptorBuilder withEmail(String email) {
         descriptor.setEmail(new Email(email));
         return this;
     }
@@ -67,7 +67,7 @@ public class EditPersonDescriptorBuilder {
     /**
      * Sets the {@code Address} of the {@code EditGuestDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withAddress(String address) {
+    public EditGuestDescriptorBuilder withAddress(String address) {
         descriptor.setAddress(new Address(address));
         return this;
     }
@@ -76,7 +76,7 @@ public class EditPersonDescriptorBuilder {
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditGuestDescriptor}
      * that we are building.
      */
-    public EditPersonDescriptorBuilder withTags(String... tags) {
+    public EditGuestDescriptorBuilder withTags(String... tags) {
         Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
         descriptor.setTags(tagSet);
         return this;

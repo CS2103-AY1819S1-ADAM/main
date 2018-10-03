@@ -12,7 +12,7 @@ import org.junit.rules.ExpectedException;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.XmlUtil;
 import seedu.address.model.GuestList;
-import seedu.address.testutil.TypicalPersons;
+import seedu.address.testutil.TypicalGuests;
 
 public class XmlSerializableGuestListTest {
 
@@ -29,7 +29,7 @@ public class XmlSerializableGuestListTest {
         XmlSerializableGuestList dataFromFile = XmlUtil.getDataFromFile(TYPICAL_PERSONS_FILE,
                 XmlSerializableGuestList.class);
         GuestList guestListFromFile = dataFromFile.toModelType();
-        GuestList typicalPersonsGuestList = TypicalPersons.getTypicalAddressBook();
+        GuestList typicalPersonsGuestList = TypicalGuests.getTypicalGuestList();
         assertEquals(guestListFromFile, typicalPersonsGuestList);
     }
 

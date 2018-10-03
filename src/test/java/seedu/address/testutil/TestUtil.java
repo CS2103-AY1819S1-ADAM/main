@@ -49,7 +49,7 @@ public class TestUtil {
     /**
      * Returns the guest in the {@code model}'s guest list at {@code index}.
      */
-    public static Guest getPerson(Model model, Index index) {
+    public static Guest getGuest(Model model, Index index) {
         return model.getFilteredGuestList().get(index.getZeroBased());
     }
 }

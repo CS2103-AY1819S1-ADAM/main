@@ -22,14 +22,14 @@ public class XmlSerializableGuestList {
             "Guest list contains duplicate guest(s).";
 
     @XmlElement
-    private List<XmlAdaptedGuest> guests;
+    private List<XmlAdaptedGuest> guest;
 
     /**
      * Creates an empty XmlSerializableGuestList.
      * This empty constructor is required for marshalling.
      */
     public XmlSerializableGuestList() {
-        guests = new ArrayList<>();
+        guest = new ArrayList<>();
     }
 
     /**
@@ -37,7 +37,7 @@ public class XmlSerializableGuestList {
      */
     public XmlSerializableGuestList(ReadOnlyGuestList src) {
         this();
-        guests.addAll(src.getListOfGuests().stream().map(XmlAdaptedGuest::new).collect(Collectors.toList()));
+        guest.addAll(src.getListOfGuests().stream().map(XmlAdaptedGuest::new).collect(Collectors.toList()));
     }
 
     /**
@@ -48,7 +48,7 @@ public class XmlSerializableGuestList {
      */
     public GuestList toModelType() throws IllegalValueException {
         GuestList guestList = new GuestList();
-        for (XmlAdaptedGuest p : guests) {
+        for (XmlAdaptedGuest p : guest) {
             Guest guest = p.toModelType();
             if (guestList.hasPerson(guest)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_GUEST);
@@ -67,6 +67,6 @@ public class XmlSerializableGuestList {
         if (!(other instanceof XmlSerializableGuestList)) {
             return false;
         }
-        return guests.equals(((XmlSerializableGuestList) other).guests);
+        return guest.equals(((XmlSerializableGuestList) other).guest);
     }
 }

@@ -4,9 +4,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static seedu.address.testutil.TypicalPersons.AMY;
-import static seedu.address.testutil.TypicalPersons.BOB;
-import static seedu.address.testutil.TypicalPersons.CARL;
+import static seedu.address.testutil.TypicalGuests.AMY;
+import static seedu.address.testutil.TypicalGuests.BOB;
+import static seedu.address.testutil.TypicalGuests.CARL;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -18,9 +18,9 @@ import seedu.address.testutil.GuestListBuilder;
 
 public class VersionedGuestListTest {
 
-    private final ReadOnlyGuestList addressBookWithAmy = new GuestListBuilder().withPerson(AMY).build();
-    private final ReadOnlyGuestList addressBookWithBob = new GuestListBuilder().withPerson(BOB).build();
-    private final ReadOnlyGuestList addressBookWithCarl = new GuestListBuilder().withPerson(CARL).build();
+    private final ReadOnlyGuestList addressBookWithAmy = new GuestListBuilder().withGuest(AMY).build();
+    private final ReadOnlyGuestList addressBookWithBob = new GuestListBuilder().withGuest(BOB).build();
+    private final ReadOnlyGuestList addressBookWithCarl = new GuestListBuilder().withGuest(CARL).build();
     private final ReadOnlyGuestList emptyAddressBook = new GuestListBuilder().build();
 
     @Test

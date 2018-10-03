@@ -6,9 +6,9 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.DeleteCommand.MESSAGE_DELETE_GUEST_SUCCESS;
 import static seedu.address.testutil.TestUtil.getLastIndex;
 import static seedu.address.testutil.TestUtil.getMidIndex;
-import static seedu.address.testutil.TestUtil.getPerson;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
+import static seedu.address.testutil.TestUtil.getGuest;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_GUEST;
+import static seedu.address.testutil.TypicalGuests.KEYWORD_MATCHING_MEIER;
 
 import org.junit.Test;
 
@@ -31,8 +31,8 @@ public class DeleteCommandSystemTest extends GuestListSystemTest {
 
         /* Case: delete the first guest in the list, command with leading spaces and trailing spaces -> deleted */
         Model expectedModel = getModel();
-        String command = "     " + DeleteCommand.COMMAND_WORD + "      " + INDEX_FIRST_PERSON.getOneBased() + "       ";
-        Guest deletedGuest = removePerson(expectedModel, INDEX_FIRST_PERSON);
+        String command = "     " + DeleteCommand.COMMAND_WORD + "      " + INDEX_FIRST_GUEST.getOneBased() + "       ";
+        Guest deletedGuest = removePerson(expectedModel, INDEX_FIRST_GUEST);
         String expectedResultMessage = String.format(MESSAGE_DELETE_GUEST_SUCCESS, deletedGuest);
         assertCommandSuccess(command, expectedModel, expectedResultMessage);
 
@@ -60,7 +60,7 @@ public class DeleteCommandSystemTest extends GuestListSystemTest {
 
         /* Case: filtered guest list, delete index within bounds of address book and guest list -> deleted */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
-        Index index = INDEX_FIRST_PERSON;
+        Index index = INDEX_FIRST_GUEST;
         assertTrue(index.getZeroBased() < getModel().getFilteredGuestList().size());
         assertCommandSuccess(index);
 
@@ -116,7 +116,7 @@ public class DeleteCommandSystemTest extends GuestListSystemTest {
      * @return the removed guest
      */
     private Guest removePerson(Model model, Index index) {
-        Guest targetGuest = getPerson(model, index);
+        Guest targetGuest = getGuest(model, index);
         model.deleteGuest(targetGuest);
         return targetGuest;
     }
