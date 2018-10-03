@@ -10,16 +10,17 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Guest;
+import seedu.address.model.guest.Guest;
 
 /**
- * Adds a guest to the address book.
+ * Adds a guest to the guest list.
  */
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a guest to the address book. "
+    public static final String MESSAGE_USAGE =
+            COMMAND_WORD + ": Adds a guest to the guest list. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
@@ -35,7 +36,8 @@ public class AddCommand extends Command {
             + PREFIX_TAG + "owesMoney";
 
     public static final String MESSAGE_SUCCESS = "New guest added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This guest already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_GUEST =
+            "This guest already exists in the guest list";
 
     private final Guest toAdd;
 
@@ -51,12 +53,12 @@ public class AddCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasPerson(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        if (model.hasGuest(toAdd)) {
+            throw new CommandException(MESSAGE_DUPLICATE_GUEST);
         }
 
-        model.addPerson(toAdd);
-        model.commitAddressBook();
+        model.addGuest(toAdd);
+        model.commitGuestList();
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 

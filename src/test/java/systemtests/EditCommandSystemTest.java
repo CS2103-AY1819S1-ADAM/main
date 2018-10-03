@@ -24,12 +24,12 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalPersons.AMY;
-import static seedu.address.testutil.TypicalPersons.BOB;
-import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_GUESTS;
+import static seedu.address.testutil.TypicalGuests.AMY;
+import static seedu.address.testutil.TypicalGuests.BOB;
+import static seedu.address.testutil.TypicalGuests.KEYWORD_MATCHING_MEIER;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_GUEST;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_GUEST;
 
 import org.junit.Test;
 
@@ -39,16 +39,16 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.model.Model;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Guest;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
+import seedu.address.model.guest.Address;
+import seedu.address.model.guest.Email;
+import seedu.address.model.guest.Guest;
+import seedu.address.model.guest.Name;
+import seedu.address.model.guest.Phone;
 import seedu.address.model.tag.Tag;
-import seedu.address.testutil.PersonBuilder;
-import seedu.address.testutil.PersonUtil;
+import seedu.address.testutil.GuestBuilder;
+import seedu.address.testutil.GuestUtil;
 
-public class EditCommandSystemTest extends AddressBookSystemTest {
+public class EditCommandSystemTest extends GuestListSystemTest {
 
     @Test
     public void edit() {
@@ -59,10 +59,10 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
         /* Case: edit all fields, command with leading spaces, trailing spaces and multiple spaces between each field
          * -> edited
          */
-        Index index = INDEX_FIRST_PERSON;
+        Index index = INDEX_FIRST_GUEST;
         String command = " " + EditCommand.COMMAND_WORD + "  " + index.getOneBased() + "  " + NAME_DESC_BOB + "  "
                 + PHONE_DESC_BOB + " " + EMAIL_DESC_BOB + "  " + ADDRESS_DESC_BOB + " " + TAG_DESC_HUSBAND + " ";
-        Guest editedGuest = new PersonBuilder(BOB).withTags(VALID_TAG_HUSBAND).build();
+        Guest editedGuest = new GuestBuilder(BOB).withTags(VALID_TAG_HUSBAND).build();
         assertCommandSuccess(command, index, editedGuest);
 
         /* Case: undo editing the last guest in the list -> last guest restored */
@@ -73,8 +73,8 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
         /* Case: redo editing the last guest in the list -> last guest edited again */
         command = RedoCommand.COMMAND_WORD;
         expectedResultMessage = RedoCommand.MESSAGE_SUCCESS;
-        model.updatePerson(
-                getModel().getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()), editedGuest);
+        model.updateGuest(
+                getModel().getFilteredGuestList().get(INDEX_FIRST_GUEST.getZeroBased()), editedGuest);
         assertCommandSuccess(command, model, expectedResultMessage);
 
         /* Case: edit a guest with new values same as existing values -> edited */
@@ -83,48 +83,48 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
         assertCommandSuccess(command, index, BOB);
 
         /* Case: edit a guest with new values same as another guest's values but with different name -> edited */
-        assertTrue(getModel().getAddressBook().getPersonList().contains(BOB));
-        index = INDEX_SECOND_PERSON;
-        assertNotEquals(getModel().getFilteredPersonList().get(index.getZeroBased()), BOB);
+        assertTrue(getModel().getGuestList().getListOfGuests().contains(BOB));
+        index = INDEX_SECOND_GUEST;
+        assertNotEquals(getModel().getFilteredGuestList().get(index.getZeroBased()), BOB);
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_AMY + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
-        editedGuest = new PersonBuilder(BOB).withName(VALID_NAME_AMY).build();
+        editedGuest = new GuestBuilder(BOB).withName(VALID_NAME_AMY).build();
         assertCommandSuccess(command, index, editedGuest);
 
         /* Case: edit a guest with new values same as another guest's values but with different phone and email
          * -> edited
          */
-        index = INDEX_SECOND_PERSON;
+        index = INDEX_SECOND_GUEST;
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + PHONE_DESC_AMY + EMAIL_DESC_AMY
                 + ADDRESS_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
-        editedGuest = new PersonBuilder(BOB).withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).build();
+        editedGuest = new GuestBuilder(BOB).withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).build();
         assertCommandSuccess(command, index, editedGuest);
 
         /* Case: clear tags -> cleared */
-        index = INDEX_FIRST_PERSON;
+        index = INDEX_FIRST_GUEST;
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + " " + PREFIX_TAG.getPrefix();
-        Guest guestToEdit = getModel().getFilteredPersonList().get(index.getZeroBased());
-        editedGuest = new PersonBuilder(guestToEdit).withTags().build();
+        Guest guestToEdit = getModel().getFilteredGuestList().get(index.getZeroBased());
+        editedGuest = new GuestBuilder(guestToEdit).withTags().build();
         assertCommandSuccess(command, index, editedGuest);
 
         /* ------------------ Performing edit operation while a filtered list is being shown ------------------------ */
 
         /* Case: filtered guest list, edit index within bounds of address book and guest list -> edited */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
-        index = INDEX_FIRST_PERSON;
-        assertTrue(index.getZeroBased() < getModel().getFilteredPersonList().size());
+        index = INDEX_FIRST_GUEST;
+        assertTrue(index.getZeroBased() < getModel().getFilteredGuestList().size());
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + " " + NAME_DESC_BOB;
-        guestToEdit = getModel().getFilteredPersonList().get(index.getZeroBased());
-        editedGuest = new PersonBuilder(guestToEdit).withName(VALID_NAME_BOB).build();
+        guestToEdit = getModel().getFilteredGuestList().get(index.getZeroBased());
+        editedGuest = new GuestBuilder(guestToEdit).withName(VALID_NAME_BOB).build();
         assertCommandSuccess(command, index, editedGuest);
 
         /* Case: filtered guest list, edit index within bounds of address book but out of bounds of guest list
          * -> rejected
          */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
-        int invalidIndex = getModel().getAddressBook().getPersonList().size();
+        int invalidIndex = getModel().getGuestList().getListOfGuests().size();
         assertCommandFailure(EditCommand.COMMAND_WORD + " " + invalidIndex + NAME_DESC_BOB,
-                Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+                Messages.MESSAGE_INVALID_GUEST_DISPLAYED_INDEX);
 
         /* --------------------- Performing edit operation while a guest card is selected -------------------------- */
 
@@ -132,7 +132,7 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
          * browser url changes
          */
         showAllPersons();
-        index = INDEX_FIRST_PERSON;
+        index = INDEX_FIRST_GUEST;
         selectPerson(index);
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
                 + ADDRESS_DESC_AMY + TAG_DESC_FRIEND;
@@ -151,66 +151,66 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
                 String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
 
         /* Case: invalid index (size + 1) -> rejected */
-        invalidIndex = getModel().getFilteredPersonList().size() + 1;
+        invalidIndex = getModel().getFilteredGuestList().size() + 1;
         assertCommandFailure(EditCommand.COMMAND_WORD + " " + invalidIndex + NAME_DESC_BOB,
-                Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+                Messages.MESSAGE_INVALID_GUEST_DISPLAYED_INDEX);
 
         /* Case: missing index -> rejected */
         assertCommandFailure(EditCommand.COMMAND_WORD + NAME_DESC_BOB,
                 String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
 
         /* Case: missing all fields -> rejected */
-        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased(),
+        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_GUEST.getOneBased(),
                 EditCommand.MESSAGE_NOT_EDITED);
 
         /* Case: invalid name -> rejected */
-        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + INVALID_NAME_DESC,
+        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_GUEST.getOneBased() + INVALID_NAME_DESC,
                 Name.MESSAGE_NAME_CONSTRAINTS);
 
         /* Case: invalid phone -> rejected */
-        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + INVALID_PHONE_DESC,
+        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_GUEST.getOneBased() + INVALID_PHONE_DESC,
                 Phone.MESSAGE_PHONE_CONSTRAINTS);
 
         /* Case: invalid email -> rejected */
-        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + INVALID_EMAIL_DESC,
+        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_GUEST.getOneBased() + INVALID_EMAIL_DESC,
                 Email.MESSAGE_EMAIL_CONSTRAINTS);
 
         /* Case: invalid address -> rejected */
-        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + INVALID_ADDRESS_DESC,
+        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_GUEST.getOneBased() + INVALID_ADDRESS_DESC,
                 Address.MESSAGE_ADDRESS_CONSTRAINTS);
 
         /* Case: invalid tag -> rejected */
-        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + INVALID_TAG_DESC,
+        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_GUEST.getOneBased() + INVALID_TAG_DESC,
                 Tag.MESSAGE_TAG_CONSTRAINTS);
 
         /* Case: edit a guest with new values same as another guest's values -> rejected */
-        executeCommand(PersonUtil.getAddCommand(BOB));
-        assertTrue(getModel().getAddressBook().getPersonList().contains(BOB));
-        index = INDEX_FIRST_PERSON;
-        assertFalse(getModel().getFilteredPersonList().get(index.getZeroBased()).equals(BOB));
+        executeCommand(GuestUtil.getAddCommand(BOB));
+        assertTrue(getModel().getGuestList().getListOfGuests().contains(BOB));
+        index = INDEX_FIRST_GUEST;
+        assertFalse(getModel().getFilteredGuestList().get(index.getZeroBased()).equals(BOB));
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
-        assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_GUEST);
 
         /* Case: edit a guest with new values same as another guest's values but with different tags -> rejected */
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND;
-        assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_GUEST);
 
         /* Case: edit a guest with new values same as another guest's values but with different address -> rejected */
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_AMY + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
-        assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_GUEST);
 
         /* Case: edit a guest with new values same as another guest's values but with different phone -> rejected */
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + PHONE_DESC_AMY + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
-        assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_GUEST);
 
         /* Case: edit a guest with new values same as another guest's values but with different email -> rejected */
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_AMY
                 + ADDRESS_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
-        assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_GUEST);
     }
 
     /**
@@ -234,11 +234,11 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
     private void assertCommandSuccess(String command, Index toEdit, Guest editedGuest,
             Index expectedSelectedCardIndex) {
         Model expectedModel = getModel();
-        expectedModel.updatePerson(expectedModel.getFilteredPersonList().get(toEdit.getZeroBased()), editedGuest);
-        expectedModel.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        expectedModel.updateGuest(expectedModel.getFilteredGuestList().get(toEdit.getZeroBased()), editedGuest);
+        expectedModel.updateFilteredGuestList(PREDICATE_SHOW_ALL_GUESTS);
 
         assertCommandSuccess(command, expectedModel,
-                String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedGuest), expectedSelectedCardIndex);
+                String.format(EditCommand.MESSAGE_EDIT_GUEST_SUCCESS, editedGuest), expectedSelectedCardIndex);
     }
 
     /**
@@ -259,14 +259,14 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
      * 4. Asserts that the status bar's sync status changes.<br>
      * 5. Asserts that the command box has the default style class.<br>
      * Verifications 1 and 2 are performed by
-     * {@code AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
-     * @see AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)
-     * @see AddressBookSystemTest#assertSelectedCardChanged(Index)
+     * {@code GuestListSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
+     * @see GuestListSystemTest#assertApplicationDisplaysExpected(String, String, Model)
+     * @see GuestListSystemTest#assertSelectedCardChanged(Index)
      */
     private void assertCommandSuccess(String command, Model expectedModel, String expectedResultMessage,
             Index expectedSelectedCardIndex) {
         executeCommand(command);
-        expectedModel.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        expectedModel.updateFilteredGuestList(PREDICATE_SHOW_ALL_GUESTS);
         assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);
         assertCommandBoxShowsDefaultStyle();
         if (expectedSelectedCardIndex != null) {
@@ -284,8 +284,8 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
      * 3. Asserts that the browser url, selected card and status bar remain unchanged.<br>
      * 4. Asserts that the command box has the error style.<br>
      * Verifications 1 and 2 are performed by
-     * {@code AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
-     * @see AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)
+     * {@code GuestListSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
+     * @see GuestListSystemTest#assertApplicationDisplaysExpected(String, String, Model)
      */
     private void assertCommandFailure(String command, String expectedResultMessage) {
         Model expectedModel = getModel();
