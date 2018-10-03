@@ -16,11 +16,11 @@ import org.junit.rules.ExpectedException;
 import javafx.collections.ObservableList;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
+import seedu.address.model.GuestList;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.person.Guest;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.model.ReadOnlyGuestList;
+import seedu.address.model.guest.Guest;
+import seedu.address.testutil.GuestBuilder;
 
 public class AddCommandTest {
 
@@ -40,7 +40,7 @@ public class AddCommandTest {
     @Test
     public void execute_personAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Guest validGuest = new PersonBuilder().build();
+        Guest validGuest = new GuestBuilder().build();
 
         CommandResult commandResult = new AddCommand(validGuest).execute(modelStub, commandHistory);
 
@@ -51,19 +51,19 @@ public class AddCommandTest {
 
     @Test
     public void execute_duplicatePerson_throwsCommandException() throws Exception {
-        Guest validGuest = new PersonBuilder().build();
+        Guest validGuest = new GuestBuilder().build();
         AddCommand addCommand = new AddCommand(validGuest);
         ModelStub modelStub = new ModelStubWithPerson(validGuest);
 
         thrown.expect(CommandException.class);
-        thrown.expectMessage(AddCommand.MESSAGE_DUPLICATE_PERSON);
+        thrown.expectMessage(AddCommand.MESSAGE_DUPLICATE_GUEST);
         addCommand.execute(modelStub, commandHistory);
     }
 
     @Test
     public void equals() {
-        Guest alice = new PersonBuilder().withName("Alice").build();
-        Guest bob = new PersonBuilder().withName("Bob").build();
+        Guest alice = new GuestBuilder().withName("Alice").build();
+        Guest bob = new GuestBuilder().withName("Bob").build();
         AddCommand addAliceCommand = new AddCommand(alice);
         AddCommand addBobCommand = new AddCommand(bob);
 
@@ -89,67 +89,67 @@ public class AddCommandTest {
      */
     private class ModelStub implements Model {
         @Override
-        public void addPerson(Guest guest) {
+        public void addGuest(Guest guest) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void resetData(ReadOnlyAddressBook newData) {
+        public void resetData(ReadOnlyGuestList newData) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
+        public ReadOnlyGuestList getGuestList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public boolean hasPerson(Guest guest) {
+        public boolean hasGuest(Guest guest) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void deletePerson(Guest target) {
+        public void deleteGuest(Guest target) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void updatePerson(Guest target, Guest editedGuest) {
+        public void updateGuest(Guest target, Guest editedGuest) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ObservableList<Guest> getFilteredPersonList() {
+        public ObservableList<Guest> getFilteredGuestList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void updateFilteredPersonList(Predicate<Guest> predicate) {
+        public void updateFilteredGuestList(Predicate<Guest> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public boolean canUndoAddressBook() {
+        public boolean canUndoGuestList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public boolean canRedoAddressBook() {
+        public boolean canRedoGuestList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void undoAddressBook() {
+        public void undoGuestList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void redoAddressBook() {
+        public void redoGuestList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void commitAddressBook() {
+        public void commitGuestList() {
             throw new AssertionError("This method should not be called.");
         }
     }
@@ -166,7 +166,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean hasPerson(Guest guest) {
+        public boolean hasGuest(Guest guest) {
             requireNonNull(guest);
             return this.guest.isSameGuest(guest);
         }
@@ -179,25 +179,25 @@ public class AddCommandTest {
         final ArrayList<Guest> personsAdded = new ArrayList<>();
 
         @Override
-        public boolean hasPerson(Guest guest) {
+        public boolean hasGuest(Guest guest) {
             requireNonNull(guest);
             return personsAdded.stream().anyMatch(guest::isSameGuest);
         }
 
         @Override
-        public void addPerson(Guest guest) {
+        public void addGuest(Guest guest) {
             requireNonNull(guest);
             personsAdded.add(guest);
         }
 
         @Override
-        public void commitAddressBook() {
+        public void commitGuestList() {
             // called by {@code AddCommand#execute()}
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+        public ReadOnlyGuestList getGuestList() {
+            return new GuestList();
         }
     }
 

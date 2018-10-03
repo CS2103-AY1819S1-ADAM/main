@@ -1,14 +1,14 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_GUESTS;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
 /**
- * Reverts the {@code model}'s address book to its previously undone state.
+ * Reverts the {@code model}'s guest list to its previously undone state.
  */
 public class RedoCommand extends Command {
 
@@ -20,12 +20,12 @@ public class RedoCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        if (!model.canRedoAddressBook()) {
+        if (!model.canRedoGuestList()) {
             throw new CommandException(MESSAGE_FAILURE);
         }
 
-        model.redoAddressBook();
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.redoGuestList();
+        model.updateFilteredGuestList(PREDICATE_SHOW_ALL_GUESTS);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }
