@@ -13,13 +13,14 @@ import seedu.address.model.Model;
 import seedu.address.model.guest.Guest;
 
 /**
- * Adds a guest to the address book.
+ * Adds a guest to the guest list.
  */
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a guest to the address book. "
+    public static final String MESSAGE_USAGE =
+            COMMAND_WORD + ": Adds a guest to the guest list. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
@@ -35,7 +36,8 @@ public class AddCommand extends Command {
             + PREFIX_TAG + "owesMoney";
 
     public static final String MESSAGE_SUCCESS = "New guest added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This guest already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_GUEST =
+            "This guest already exists in the guest list";
 
     private final Guest toAdd;
 
@@ -52,7 +54,7 @@ public class AddCommand extends Command {
         requireNonNull(model);
 
         if (model.hasGuest(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(MESSAGE_DUPLICATE_GUEST);
         }
 
         model.addGuest(toAdd);

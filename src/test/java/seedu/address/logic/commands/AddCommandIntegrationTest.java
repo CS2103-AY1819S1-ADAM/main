@@ -43,7 +43,7 @@ public class AddCommandIntegrationTest {
     public void execute_duplicatePerson_throwsCommandException() {
         Guest guestInList = model.getGuestList().getListOfGuests().get(0);
         assertCommandFailure(new AddCommand(guestInList), model, commandHistory,
-                AddCommand.MESSAGE_DUPLICATE_PERSON);
+                AddCommand.MESSAGE_DUPLICATE_GUEST);
     }
 
 }
