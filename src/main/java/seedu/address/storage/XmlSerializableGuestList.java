@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.GuestList;
 import seedu.address.model.ReadOnlyGuestList;
-import seedu.address.model.person.Guest;
+import seedu.address.model.guest.Guest;
 
 /**
  * An Immutable GuestList that is serializable to XML format
@@ -18,8 +18,8 @@ import seedu.address.model.person.Guest;
 @XmlRootElement(name = "guestlist")
 public class XmlSerializableGuestList {
 
-    public static final String MESSAGE_DUPLICATE_GUEST
-            = "Guest list contains duplicate guest(s).";
+    public static final String MESSAGE_DUPLICATE_GUEST =
+            "Guest list contains duplicate guest(s).";
 
     @XmlElement
     private List<XmlAdaptedGuest> guests;
