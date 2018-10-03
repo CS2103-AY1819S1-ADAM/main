@@ -3,7 +3,8 @@ package seedu.address.model;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
-import seedu.address.model.guest.Guest;
+import seedu.address.model.person.Guest;
+import seedu.address.model.room.RoomNumber;
 
 /**
  * The API of the Model component.
@@ -77,4 +78,21 @@ public interface Model {
      * Saves the current guest list state for undo/redo.
      */
     void commitGuestList();
+
+    /**
+     * Returns the RoomList
+     * @return
+     */
+    RoomList getRoomList();
+
+    /**
+     * Checks out the room.
+     * @param roomNumber
+     */
+    void checkoutRoom(RoomNumber roomNumber);
+
+    /**
+     * Saves the current room list state for undo/redo
+     */
+    void commitRoomList();
 }

@@ -11,8 +11,9 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.events.model.GuestListChangedEvent;
-import seedu.address.model.guest.Guest;
+import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.model.person.Guest;
+import seedu.address.model.room.RoomNumber;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -22,6 +23,8 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final VersionedGuestList versionedAddressBook;
     private final FilteredList<Guest> filteredGuests;
+    // Dummy variable for now. Delete when implemented.
+    private final RoomList roomList;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -34,6 +37,9 @@ public class ModelManager extends ComponentManager implements Model {
 
         versionedAddressBook = new VersionedGuestList(addressBook);
         filteredGuests = new FilteredList<>(versionedAddressBook.getListOfGuests());
+
+        // Dummy variable for now. Delete when implemented.
+        roomList = new RoomList();
     }
 
     public ModelManager() {
@@ -147,4 +153,12 @@ public class ModelManager extends ComponentManager implements Model {
                 && filteredGuests.equals(other.filteredGuests);
     }
 
+    @Override
+    public RoomList getRoomList() {
+        return roomList;
+    }
+    @Override
+    public void checkoutRoom(RoomNumber roomNumber) {}
+    @Override
+    public void commitRoomList() {}
 }

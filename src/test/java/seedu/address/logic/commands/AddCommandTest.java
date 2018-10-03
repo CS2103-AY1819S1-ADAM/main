@@ -19,7 +19,9 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.GuestList;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyGuestList;
+import seedu.address.model.RoomList;
 import seedu.address.model.guest.Guest;
+import seedu.address.model.room.RoomNumber;
 import seedu.address.testutil.GuestBuilder;
 
 public class AddCommandTest {
@@ -150,6 +152,20 @@ public class AddCommandTest {
 
         @Override
         public void commitGuestList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public RoomList getRoomList() {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public void checkoutRoom(RoomNumber roomNumber) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void commitRoomList() {
             throw new AssertionError("This method should not be called.");
         }
     }
