@@ -6,10 +6,10 @@ import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.testutil.TypicalGuests.getTypicalGuestList;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_GUEST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_GUEST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_GUEST;
-import static seedu.address.testutil.TypicalGuests.getTypicalGuestList;
 
 import org.junit.Rule;
 import org.junit.Test;
