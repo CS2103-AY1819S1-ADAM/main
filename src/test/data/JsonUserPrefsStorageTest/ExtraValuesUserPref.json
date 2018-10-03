@@ -9,5 +9,5 @@
       "z" : 99
     }
   },
-  "guestlistFilePath" : "data\\guestlist.xml"
+  "guestlistFilePath" : "guestlist.xml"
 }
