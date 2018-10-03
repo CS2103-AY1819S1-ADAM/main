@@ -4,33 +4,33 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * {@code AddressBook} that keeps track of its own history.
+ * {@code GuestList} that keeps track of its own history.
  */
-public class VersionedAddressBook extends AddressBook {
+public class VersionedGuestList extends GuestList {
 
-    private final List<ReadOnlyAddressBook> addressBookStateList;
+    private final List<ReadOnlyGuestList> guestListStateList;
     private int currentStatePointer;
 
-    public VersionedAddressBook(ReadOnlyAddressBook initialState) {
+    public VersionedGuestList(ReadOnlyGuestList initialState) {
         super(initialState);
 
-        addressBookStateList = new ArrayList<>();
-        addressBookStateList.add(new AddressBook(initialState));
+        guestListStateList = new ArrayList<>();
+        guestListStateList.add(new GuestList(initialState));
         currentStatePointer = 0;
     }
 
     /**
-     * Saves a copy of the current {@code AddressBook} state at the end of the state list.
+     * Saves a copy of the current {@code GuestList} state at the end of the state list.
      * Undone states are removed from the state list.
      */
     public void commit() {
         removeStatesAfterCurrentPointer();
-        addressBookStateList.add(new AddressBook(this));
+        guestListStateList.add(new GuestList(this));
         currentStatePointer++;
     }
 
     private void removeStatesAfterCurrentPointer() {
-        addressBookStateList.subList(currentStatePointer + 1, addressBookStateList.size()).clear();
+        guestListStateList.subList(currentStatePointer + 1, guestListStateList.size()).clear();
     }
 
     /**
@@ -41,7 +41,7 @@ public class VersionedAddressBook extends AddressBook {
             throw new NoUndoableStateException();
         }
         currentStatePointer--;
-        resetData(addressBookStateList.get(currentStatePointer));
+        resetData(guestListStateList.get(currentStatePointer));
     }
 
     /**
@@ -52,7 +52,7 @@ public class VersionedAddressBook extends AddressBook {
             throw new NoRedoableStateException();
         }
         currentStatePointer++;
-        resetData(addressBookStateList.get(currentStatePointer));
+        resetData(guestListStateList.get(currentStatePointer));
     }
 
     /**
@@ -66,7 +66,7 @@ public class VersionedAddressBook extends AddressBook {
      * Returns true if {@code redo()} has address book states to redo.
      */
     public boolean canRedo() {
-        return currentStatePointer < addressBookStateList.size() - 1;
+        return currentStatePointer < guestListStateList.size() - 1;
     }
 
     @Override
@@ -77,15 +77,15 @@ public class VersionedAddressBook extends AddressBook {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof VersionedAddressBook)) {
+        if (!(other instanceof VersionedGuestList)) {
             return false;
         }
 
-        VersionedAddressBook otherVersionedAddressBook = (VersionedAddressBook) other;
+        VersionedGuestList otherVersionedAddressBook = (VersionedGuestList) other;
 
         // state check
         return super.equals(otherVersionedAddressBook)
-                && addressBookStateList.equals(otherVersionedAddressBook.addressBookStateList)
+                && guestListStateList.equals(otherVersionedAddressBook.guestListStateList)
                 && currentStatePointer == otherVersionedAddressBook.currentStatePointer;
     }
 

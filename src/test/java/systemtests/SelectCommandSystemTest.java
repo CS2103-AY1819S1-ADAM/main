@@ -18,7 +18,7 @@ import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.model.Model;
 
-public class SelectCommandSystemTest extends AddressBookSystemTest {
+public class SelectCommandSystemTest extends GuestListSystemTest {
     @Test
     public void select() {
         /* ------------------------ Perform select operations on the shown unfiltered list -------------------------- */
@@ -58,7 +58,7 @@ public class SelectCommandSystemTest extends AddressBookSystemTest {
          * -> rejected
          */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
-        int invalidIndex = getModel().getAddressBook().getPersonList().size();
+        int invalidIndex = getModel().getGuestList().getPersonList().size();
         assertCommandFailure(SelectCommand.COMMAND_WORD + " " + invalidIndex, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
 
         /* Case: filtered guest list, select index within bounds of address book and guest list -> selected */
@@ -108,9 +108,9 @@ public class SelectCommandSystemTest extends AddressBookSystemTest {
      * 5. Selected card is at {@code expectedSelectedCardIndex} and the browser url is updated accordingly.<br>
      * 6. Status bar remains unchanged.<br>
      * Verifications 1, 3 and 4 are performed by
-     * {@code AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
-     * @see AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)
-     * @see AddressBookSystemTest#assertSelectedCardChanged(Index)
+     * {@code GuestListSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
+     * @see GuestListSystemTest#assertApplicationDisplaysExpected(String, String, Model)
+     * @see GuestListSystemTest#assertSelectedCardChanged(Index)
      */
     private void assertCommandSuccess(String command, Index expectedSelectedCardIndex) {
         Model expectedModel = getModel();
@@ -139,8 +139,8 @@ public class SelectCommandSystemTest extends AddressBookSystemTest {
      * 4. {@code Storage} and {@code PersonListPanel} remain unchanged.<br>
      * 5. Browser url, selected card and status bar remain unchanged.<br>
      * Verifications 1, 3 and 4 are performed by
-     * {@code AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
-     * @see AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)
+     * {@code GuestListSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
+     * @see GuestListSystemTest#assertApplicationDisplaysExpected(String, String, Model)
      */
     private void assertCommandFailure(String command, String expectedResultMessage) {
         Model expectedModel = getModel();

@@ -8,7 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalGuestList;
 
 import org.junit.Test;
 
@@ -26,7 +26,7 @@ import seedu.address.model.person.Guest;
  */
 public class DeleteCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalGuestList(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
@@ -36,9 +36,9 @@ public class DeleteCommandTest {
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, guestToDelete);
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getGuestList(), new UserPrefs());
         expectedModel.deletePerson(guestToDelete);
-        expectedModel.commitAddressBook();
+        expectedModel.commitGuestList();
 
         assertCommandSuccess(deleteCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -60,9 +60,9 @@ public class DeleteCommandTest {
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, guestToDelete);
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getGuestList(), new UserPrefs());
         expectedModel.deletePerson(guestToDelete);
-        expectedModel.commitAddressBook();
+        expectedModel.commitGuestList();
         showNoPerson(expectedModel);
 
         assertCommandSuccess(deleteCommand, model, commandHistory, expectedMessage, expectedModel);
@@ -74,7 +74,7 @@ public class DeleteCommandTest {
 
         Index outOfBoundIndex = INDEX_SECOND_PERSON;
         // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getGuestList().getPersonList().size());
 
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
 
@@ -85,19 +85,21 @@ public class DeleteCommandTest {
     public void executeUndoRedo_validIndexUnfilteredList_success() throws Exception {
         Guest guestToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getGuestList(), new UserPrefs());
         expectedModel.deletePerson(guestToDelete);
-        expectedModel.commitAddressBook();
+        expectedModel.commitGuestList();
 
         // delete -> first guest deleted
         deleteCommand.execute(model, commandHistory);
 
-        // undo -> reverts addressbook back to previous state and filtered guest list to show all persons
-        expectedModel.undoAddressBook();
+        // undo -> reverts guest list back to previous state and filtered
+        // guest list to show all persons
+        expectedModel.undoGuestList();
         assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
         // redo -> same first guest deleted again
-        expectedModel.redoAddressBook();
+        expectedModel.redoGuestList();
+
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
@@ -124,23 +126,25 @@ public class DeleteCommandTest {
     @Test
     public void executeUndoRedo_validIndexFilteredList_samePersonDeleted() throws Exception {
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getGuestList(), new UserPrefs());
 
         showPersonAtIndex(model, INDEX_SECOND_PERSON);
         Guest guestToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         expectedModel.deletePerson(guestToDelete);
-        expectedModel.commitAddressBook();
+        expectedModel.commitGuestList();
 
         // delete -> deletes second guest in unfiltered guest list / first guest in filtered guest list
         deleteCommand.execute(model, commandHistory);
 
-        // undo -> reverts addressbook back to previous state and filtered guest list to show all persons
-        expectedModel.undoAddressBook();
+        // undo -> reverts guestlist back to previous state and filtered guest
+        // list to show all persons
+        expectedModel.undoGuestList();
         assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
         assertNotEquals(guestToDelete, model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()));
         // redo -> deletes same second guest in unfiltered guest list
-        expectedModel.redoAddressBook();
+        expectedModel.redoGuestList();
+
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
     }
 

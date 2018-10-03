@@ -42,7 +42,7 @@ public class DeleteCommand extends Command {
 
         Guest guestToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deletePerson(guestToDelete);
-        model.commitAddressBook();
+        model.commitGuestList();
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, guestToDelete));
     }
 

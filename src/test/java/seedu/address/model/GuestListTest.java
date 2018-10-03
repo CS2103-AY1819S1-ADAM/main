@@ -6,7 +6,7 @@ import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalGuestList;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -23,29 +23,29 @@ import seedu.address.model.person.Guest;
 import seedu.address.model.person.exceptions.DuplicateGuestException;
 import seedu.address.testutil.PersonBuilder;
 
-public class AddressBookTest {
+public class GuestListTest {
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
-    private final AddressBook addressBook = new AddressBook();
+    private final GuestList guestList = new GuestList();
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), addressBook.getPersonList());
+        assertEquals(Collections.emptyList(), guestList.getPersonList());
     }
 
     @Test
     public void resetData_null_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        addressBook.resetData(null);
+        guestList.resetData(null);
     }
 
     @Test
-    public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        AddressBook newData = getTypicalAddressBook();
-        addressBook.resetData(newData);
-        assertEquals(newData, addressBook);
+    public void resetData_withValidReadOnlyGuestList_replacesData() {
+        GuestList newData = getTypicalGuestList();
+        guestList.resetData(newData);
+        assertEquals(newData, guestList);
     }
 
     @Test
@@ -54,50 +54,52 @@ public class AddressBookTest {
         Guest editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Guest> newGuests = Arrays.asList(ALICE, editedAlice);
-        AddressBookStub newData = new AddressBookStub(newGuests);
+        GuestListStub newData = new GuestListStub(newGuests);
 
         thrown.expect(DuplicateGuestException.class);
-        addressBook.resetData(newData);
+        guestList.resetData(newData);
     }
 
     @Test
     public void hasPerson_nullPerson_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        addressBook.hasPerson(null);
+        guestList.hasPerson(null);
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(addressBook.hasPerson(ALICE));
+    public void hasPerson_personNotInGuestList_returnsFalse() {
+        assertFalse(guestList.hasPerson(ALICE));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
-        addressBook.addPerson(ALICE);
-        assertTrue(addressBook.hasPerson(ALICE));
+    public void hasPerson_personInGuestList_returnsTrue() {
+        guestList.addPerson(ALICE);
+        assertTrue(guestList.hasPerson(ALICE));
     }
 
     @Test
-    public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        addressBook.addPerson(ALICE);
+    public void hasPerson_personWithSameIdentityFieldsInGuestList_returnsTrue() {
+        guestList.addPerson(ALICE);
         Guest editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        assertTrue(addressBook.hasPerson(editedAlice));
+        assertTrue(guestList.hasPerson(editedAlice));
     }
 
     @Test
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
-        addressBook.getPersonList().remove(0);
+        guestList.getPersonList().remove(0);
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose guests list can violate interface constraints.
+     * A stub ReadOnlyGuestList whose guests list can violate interface
+     * constraints.
      */
-    private static class AddressBookStub implements ReadOnlyAddressBook {
-        private final ObservableList<Guest> guests = FXCollections.observableArrayList();
+    private static class GuestListStub implements ReadOnlyGuestList {
+        private final ObservableList<Guest> guests =
+                FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Guest> guests) {
+        GuestListStub(Collection<Guest> guests) {
             this.guests.setAll(guests);
         }
 

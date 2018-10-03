@@ -11,7 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.commons.events.model.GuestListChangedEvent;
 import seedu.address.model.person.Guest;
 
 /**
@@ -20,74 +20,73 @@ import seedu.address.model.person.Guest;
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final VersionedAddressBook versionedAddressBook;
+    private final VersionedGuestList versionedGuestList;
     private final FilteredList<Guest> filteredGuests;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given guestList and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, UserPrefs userPrefs) {
+    public ModelManager(ReadOnlyGuestList guestList, UserPrefs userPrefs) {
         super();
-        requireAllNonNull(addressBook, userPrefs);
+        requireAllNonNull(guestList, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with address book: " + guestList + " and user prefs " + userPrefs);
 
-        versionedAddressBook = new VersionedAddressBook(addressBook);
-        filteredGuests = new FilteredList<>(versionedAddressBook.getPersonList());
+        versionedGuestList = new VersionedGuestList(guestList);
+        filteredGuests = new FilteredList<>(versionedGuestList.getPersonList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new GuestList(), new UserPrefs());
     }
 
     @Override
-    public void resetData(ReadOnlyAddressBook newData) {
-        versionedAddressBook.resetData(newData);
-        indicateAddressBookChanged();
+    public void resetData(ReadOnlyGuestList newData) {
+        versionedGuestList.resetData(newData);
+        indicateGuestListChanged();
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return versionedAddressBook;
+    public ReadOnlyGuestList getGuestList() {
+        return versionedGuestList;
     }
 
     /** Raises an event to indicate the model has changed */
-    private void indicateAddressBookChanged() {
-        raise(new AddressBookChangedEvent(versionedAddressBook));
+    private void indicateGuestListChanged() {
+        raise(new GuestListChangedEvent(versionedGuestList));
     }
 
     @Override
     public boolean hasPerson(Guest guest) {
         requireNonNull(guest);
-        return versionedAddressBook.hasPerson(guest);
+        return versionedGuestList.hasPerson(guest);
     }
 
     @Override
     public void deletePerson(Guest target) {
-        versionedAddressBook.removePerson(target);
-        indicateAddressBookChanged();
+        versionedGuestList.removePerson(target);
+        indicateGuestListChanged();
     }
 
     @Override
     public void addPerson(Guest guest) {
-        versionedAddressBook.addPerson(guest);
+        versionedGuestList.addPerson(guest);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        indicateAddressBookChanged();
+        indicateGuestListChanged();
     }
 
     @Override
     public void updatePerson(Guest target, Guest editedGuest) {
         requireAllNonNull(target, editedGuest);
-
-        versionedAddressBook.updatePerson(target, editedGuest);
-        indicateAddressBookChanged();
+        versionedGuestList.updatePerson(target, editedGuest);
+        indicateGuestListChanged();
     }
 
     //=========== Filtered Guest List Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Guest} backed by the internal list of
-     * {@code versionedAddressBook}
+     * Returns an unmodifiable view of the list of {@code Guest} backed by the
+     * internal list of {@code versionedGuestList}
      */
     @Override
     public ObservableList<Guest> getFilteredPersonList() {
@@ -103,30 +102,30 @@ public class ModelManager extends ComponentManager implements Model {
     //=========== Undo/Redo =================================================================================
 
     @Override
-    public boolean canUndoAddressBook() {
-        return versionedAddressBook.canUndo();
+    public boolean canUndoGuestList() {
+        return versionedGuestList.canUndo();
     }
 
     @Override
-    public boolean canRedoAddressBook() {
-        return versionedAddressBook.canRedo();
+    public boolean canRedoGuestList() {
+        return versionedGuestList.canRedo();
     }
 
     @Override
-    public void undoAddressBook() {
-        versionedAddressBook.undo();
-        indicateAddressBookChanged();
+    public void undoGuestList() {
+        versionedGuestList.undo();
+        indicateGuestListChanged();
     }
 
     @Override
-    public void redoAddressBook() {
-        versionedAddressBook.redo();
-        indicateAddressBookChanged();
+    public void redoGuestList() {
+        versionedGuestList.redo();
+        indicateGuestListChanged();
     }
 
     @Override
-    public void commitAddressBook() {
-        versionedAddressBook.commit();
+    public void commitGuestList() {
+        versionedGuestList.commit();
     }
 
     @Override
@@ -143,7 +142,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        return versionedAddressBook.equals(other.versionedAddressBook)
+        return versionedGuestList.equals(other.versionedGuestList)
                 && filteredGuests.equals(other.filteredGuests);
     }
 

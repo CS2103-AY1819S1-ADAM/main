@@ -16,9 +16,9 @@ import org.junit.rules.ExpectedException;
 import javafx.collections.ObservableList;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
+import seedu.address.model.GuestList;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyGuestList;
 import seedu.address.model.person.Guest;
 import seedu.address.testutil.PersonBuilder;
 
@@ -94,12 +94,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public void resetData(ReadOnlyAddressBook newData) {
+        public void resetData(ReadOnlyGuestList newData) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
+        public ReadOnlyGuestList getGuestList() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -129,27 +129,27 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean canUndoAddressBook() {
+        public boolean canUndoGuestList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public boolean canRedoAddressBook() {
+        public boolean canRedoGuestList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void undoAddressBook() {
+        public void undoGuestList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void redoAddressBook() {
+        public void redoGuestList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void commitAddressBook() {
+        public void commitGuestList() {
             throw new AssertionError("This method should not be called.");
         }
     }
@@ -191,13 +191,13 @@ public class AddCommandTest {
         }
 
         @Override
-        public void commitAddressBook() {
+        public void commitGuestList() {
             // called by {@code AddCommand#execute()}
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+        public ReadOnlyGuestList getGuestList() {
+            return new GuestList();
         }
     }
 

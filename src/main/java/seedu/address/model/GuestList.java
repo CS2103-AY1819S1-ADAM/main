@@ -12,7 +12,7 @@ import seedu.address.model.person.UniqueGuestList;
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .isSameGuest comparison)
  */
-public class AddressBook implements ReadOnlyAddressBook {
+public class GuestList implements ReadOnlyGuestList {
 
     private final UniqueGuestList persons;
 
@@ -27,12 +27,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons = new UniqueGuestList();
     }
 
-    public AddressBook() {}
+    public GuestList() {}
 
     /**
-     * Creates an AddressBook using the Persons in the {@code toBeCopied}
+     * Creates an GuestList using the Persons in the {@code toBeCopied}
      */
-    public AddressBook(ReadOnlyAddressBook toBeCopied) {
+    public GuestList(ReadOnlyGuestList toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -48,9 +48,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Resets the existing data of this {@code AddressBook} with {@code newData}.
+     * Resets the existing data of this {@code GuestList} with {@code newData}.
      */
-    public void resetData(ReadOnlyAddressBook newData) {
+    public void resetData(ReadOnlyGuestList newData) {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
@@ -86,7 +86,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
+     * Removes {@code key} from this {@code GuestList}.
      * {@code key} must exist in the address book.
      */
     public void removePerson(Guest key) {
@@ -109,8 +109,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof AddressBook // instanceof handles nulls
-                && persons.equals(((AddressBook) other).persons));
+                || (other instanceof GuestList // instanceof handles nulls
+                && persons.equals(((GuestList) other).persons));
     }
 
     @Override
