@@ -8,9 +8,9 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.guest.Guest;
 import seedu.address.model.GuestList;
 import seedu.address.model.ReadOnlyGuestList;
+import seedu.address.model.guest.Guest;
 
 /**
  * An Immutable GuestList that is serializable to XML format

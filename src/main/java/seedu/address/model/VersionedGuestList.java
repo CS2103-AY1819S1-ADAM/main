@@ -94,8 +94,8 @@ public class VersionedGuestList extends GuestList {
      */
     public static class NoUndoableStateException extends RuntimeException {
         private NoUndoableStateException() {
-            super("Current state pointer at start of guestListState list, " +
-                    "unable to undo.");
+            super("Current state pointer at start of guestListState list, "
+                    + "unable to undo.");
         }
     }
 
@@ -104,8 +104,8 @@ public class VersionedGuestList extends GuestList {
      */
     public static class NoRedoableStateException extends RuntimeException {
         private NoRedoableStateException() {
-            super("Current state pointer at end of guestListState list, " +
-                    "unable to redo.");
+            super("Current state pointer at end of guestListState list, "
+                    + "unable to redo.");
         }
     }
 }
