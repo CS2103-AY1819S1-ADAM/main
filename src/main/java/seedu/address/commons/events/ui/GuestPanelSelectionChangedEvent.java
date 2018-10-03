@@ -6,12 +6,12 @@ import seedu.address.model.guest.Guest;
 /**
  * Represents a selection change in the Guest List Panel
  */
-public class PersonPanelSelectionChangedEvent extends BaseEvent {
+public class GuestPanelSelectionChangedEvent extends BaseEvent {
 
 
     private final Guest newSelection;
 
-    public PersonPanelSelectionChangedEvent(Guest newSelection) {
+    public GuestPanelSelectionChangedEvent(Guest newSelection) {
         this.newSelection = newSelection;
     }
 
