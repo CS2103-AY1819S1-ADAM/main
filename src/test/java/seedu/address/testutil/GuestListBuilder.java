@@ -1,7 +1,7 @@
 package seedu.address.testutil;
 
 import seedu.address.model.GuestList;
-import seedu.address.model.person.Guest;
+import seedu.address.model.guest.Guest;
 
 /**
  * A utility class to help with building GuestList objects.

@@ -25,7 +25,7 @@ import seedu.address.model.GuestList;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Guest;
+import seedu.address.model.guest.Guest;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 
@@ -45,17 +45,17 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedGuest);
 
-        Model expectedModel = new ModelManager(new GuestList(model.getAddressBook()), new UserPrefs());
-        expectedModel.updatePerson(model.getFilteredPersonList().get(0), editedGuest);
-        expectedModel.commitAddressBook();
+        Model expectedModel = new ModelManager(new GuestList(model.getGuestList()), new UserPrefs());
+        expectedModel.updateGuest(model.getFilteredGuestList().get(0), editedGuest);
+        expectedModel.commitGuestList();
 
         assertCommandSuccess(editCommand, model, commandHistory, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_someFieldsSpecifiedUnfilteredList_success() {
-        Index indexLastPerson = Index.fromOneBased(model.getFilteredPersonList().size());
-        Guest lastGuest = model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
+        Index indexLastPerson = Index.fromOneBased(model.getFilteredGuestList().size());
+        Guest lastGuest = model.getFilteredGuestList().get(indexLastPerson.getZeroBased());
 
         PersonBuilder personInList = new PersonBuilder(lastGuest);
         Guest editedGuest = personInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
@@ -67,9 +67,9 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedGuest);
 
-        Model expectedModel = new ModelManager(new GuestList(model.getAddressBook()), new UserPrefs());
-        expectedModel.updatePerson(lastGuest, editedGuest);
-        expectedModel.commitAddressBook();
+        Model expectedModel = new ModelManager(new GuestList(model.getGuestList()), new UserPrefs());
+        expectedModel.updateGuest(lastGuest, editedGuest);
+        expectedModel.commitGuestList();
 
         assertCommandSuccess(editCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -77,12 +77,12 @@ public class EditCommandTest {
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, new EditPersonDescriptor());
-        Guest editedGuest = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Guest editedGuest = model.getFilteredGuestList().get(INDEX_FIRST_PERSON.getZeroBased());
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedGuest);
 
-        Model expectedModel = new ModelManager(new GuestList(model.getAddressBook()), new UserPrefs());
-        expectedModel.commitAddressBook();
+        Model expectedModel = new ModelManager(new GuestList(model.getGuestList()), new UserPrefs());
+        expectedModel.commitGuestList();
 
         assertCommandSuccess(editCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -91,23 +91,23 @@ public class EditCommandTest {
     public void execute_filteredList_success() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
-        Guest guestInFilteredList = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Guest guestInFilteredList = model.getFilteredGuestList().get(INDEX_FIRST_PERSON.getZeroBased());
         Guest editedGuest = new PersonBuilder(guestInFilteredList).withName(VALID_NAME_BOB).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON,
                 new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedGuest);
 
-        Model expectedModel = new ModelManager(new GuestList(model.getAddressBook()), new UserPrefs());
-        expectedModel.updatePerson(model.getFilteredPersonList().get(0), editedGuest);
-        expectedModel.commitAddressBook();
+        Model expectedModel = new ModelManager(new GuestList(model.getGuestList()), new UserPrefs());
+        expectedModel.updateGuest(model.getFilteredGuestList().get(0), editedGuest);
+        expectedModel.commitGuestList();
 
         assertCommandSuccess(editCommand, model, commandHistory, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_duplicatePersonUnfilteredList_failure() {
-        Guest firstGuest = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Guest firstGuest = model.getFilteredGuestList().get(INDEX_FIRST_PERSON.getZeroBased());
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(firstGuest).build();
         EditCommand editCommand = new EditCommand(INDEX_SECOND_PERSON, descriptor);
 
@@ -119,7 +119,7 @@ public class EditCommandTest {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
         // edit guest in filtered list into a duplicate in address book
-        Guest guestInList = model.getAddressBook().getPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+        Guest guestInList = model.getGuestList().getListOfGuests().get(INDEX_SECOND_PERSON.getZeroBased());
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON,
                 new EditPersonDescriptorBuilder(guestInList).build());
 
@@ -128,7 +128,7 @@ public class EditCommandTest {
 
     @Test
     public void execute_invalidPersonIndexUnfilteredList_failure() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredGuestList().size() + 1);
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build();
         EditCommand editCommand = new EditCommand(outOfBoundIndex, descriptor);
 
@@ -144,7 +144,7 @@ public class EditCommandTest {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
         Index outOfBoundIndex = INDEX_SECOND_PERSON;
         // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getGuestList().getListOfGuests().size());
 
         EditCommand editCommand = new EditCommand(outOfBoundIndex,
                 new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
@@ -155,28 +155,28 @@ public class EditCommandTest {
     @Test
     public void executeUndoRedo_validIndexUnfilteredList_success() throws Exception {
         Guest editedGuest = new PersonBuilder().build();
-        Guest guestToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Guest guestToEdit = model.getFilteredGuestList().get(INDEX_FIRST_PERSON.getZeroBased());
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedGuest).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
-        Model expectedModel = new ModelManager(new GuestList(model.getAddressBook()), new UserPrefs());
-        expectedModel.updatePerson(guestToEdit, editedGuest);
-        expectedModel.commitAddressBook();
+        Model expectedModel = new ModelManager(new GuestList(model.getGuestList()), new UserPrefs());
+        expectedModel.updateGuest(guestToEdit, editedGuest);
+        expectedModel.commitGuestList();
 
         // edit -> first guest edited
         editCommand.execute(model, commandHistory);
 
         // undo -> reverts addressbook back to previous state and filtered guest list to show all persons
-        expectedModel.undoAddressBook();
+        expectedModel.undoGuestList();
         assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
         // redo -> same first guest edited again
-        expectedModel.redoAddressBook();
+        expectedModel.redoGuestList();
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test
     public void executeUndoRedo_invalidIndexUnfilteredList_failure() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredGuestList().size() + 1);
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build();
         EditCommand editCommand = new EditCommand(outOfBoundIndex, descriptor);
 
@@ -200,23 +200,23 @@ public class EditCommandTest {
         Guest editedGuest = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedGuest).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
-        Model expectedModel = new ModelManager(new GuestList(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new GuestList(model.getGuestList()), new UserPrefs());
 
         showPersonAtIndex(model, INDEX_SECOND_PERSON);
-        Guest guestToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        expectedModel.updatePerson(guestToEdit, editedGuest);
-        expectedModel.commitAddressBook();
+        Guest guestToEdit = model.getFilteredGuestList().get(INDEX_FIRST_PERSON.getZeroBased());
+        expectedModel.updateGuest(guestToEdit, editedGuest);
+        expectedModel.commitGuestList();
 
         // edit -> edits second guest in unfiltered guest list / first guest in filtered guest list
         editCommand.execute(model, commandHistory);
 
         // undo -> reverts addressbook back to previous state and filtered guest list to show all persons
-        expectedModel.undoAddressBook();
+        expectedModel.undoGuestList();
         assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
-        assertNotEquals(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()), guestToEdit);
+        assertNotEquals(model.getFilteredGuestList().get(INDEX_FIRST_PERSON.getZeroBased()), guestToEdit);
         // redo -> edits same second guest in unfiltered guest list
-        expectedModel.redoAddressBook();
+        expectedModel.redoGuestList();
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
     }
 

@@ -17,8 +17,8 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.GuestList;
 import seedu.address.model.Model;
-import seedu.address.model.person.Guest;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.guest.Guest;
+import seedu.address.model.guest.NameContainsKeywordsPredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 /**
@@ -99,9 +99,9 @@ public class CommandTestUtil {
             String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
-        GuestList expectedGuestList = new GuestList(actualModel.getAddressBook());
+        GuestList expectedGuestList = new GuestList(actualModel.getGuestList());
         List<Guest> expectedFilteredList =
-                new ArrayList<>(actualModel.getFilteredPersonList());
+                new ArrayList<>(actualModel.getFilteredGuestList());
 
         CommandHistory expectedCommandHistory = new CommandHistory(actualCommandHistory);
 
@@ -110,8 +110,8 @@ public class CommandTestUtil {
             throw new AssertionError("The expected CommandException was not thrown.");
         } catch (CommandException e) {
             assertEquals(expectedMessage, e.getMessage());
-            assertEquals(expectedGuestList, actualModel.getAddressBook());
-            assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
+            assertEquals(expectedGuestList, actualModel.getGuestList());
+            assertEquals(expectedFilteredList, actualModel.getFilteredGuestList());
             assertEquals(expectedCommandHistory, actualCommandHistory);
         }
     }
@@ -121,22 +121,22 @@ public class CommandTestUtil {
      * {@code model}'s address book.
      */
     public static void showPersonAtIndex(Model model, Index targetIndex) {
-        assertTrue(targetIndex.getZeroBased() < model.getFilteredPersonList().size());
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredGuestList().size());
 
-        Guest guest = model.getFilteredPersonList().get(targetIndex.getZeroBased());
+        Guest guest = model.getFilteredGuestList().get(targetIndex.getZeroBased());
         final String[] splitName = guest.getName().fullName.split("\\s+");
-        model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        model.updateFilteredGuestList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
-        assertEquals(1, model.getFilteredPersonList().size());
+        assertEquals(1, model.getFilteredGuestList().size());
     }
 
     /**
      * Deletes the first guest in {@code model}'s filtered list from {@code model}'s address book.
      */
     public static void deleteFirstPerson(Model model) {
-        Guest firstGuest = model.getFilteredPersonList().get(0);
-        model.deletePerson(firstGuest);
-        model.commitAddressBook();
+        Guest firstGuest = model.getFilteredGuestList().get(0);
+        model.deleteGuest(firstGuest);
+        model.commitGuestList();
     }
 
 }

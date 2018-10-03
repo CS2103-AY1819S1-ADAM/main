@@ -72,7 +72,7 @@ public class XmlUtilTest {
     @Test
     public void getDataFromFile_validFile_validResult() throws Exception {
         GuestList dataFromFile = XmlUtil.getDataFromFile(VALID_FILE, XmlSerializableGuestList.class).toModelType();
-        assertEquals(9, dataFromFile.getPersonList().size());
+        assertEquals(9, dataFromFile.getListOfGuests().size());
     }
 
     @Test

@@ -16,10 +16,10 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
+import seedu.address.model.guest.Address;
+import seedu.address.model.guest.Email;
+import seedu.address.model.guest.Name;
+import seedu.address.model.guest.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.Assert;
 

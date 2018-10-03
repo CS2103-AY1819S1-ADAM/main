@@ -6,7 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_GUESTS;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -20,11 +20,11 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Guest;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
+import seedu.address.model.guest.Address;
+import seedu.address.model.guest.Email;
+import seedu.address.model.guest.Guest;
+import seedu.address.model.guest.Name;
+import seedu.address.model.guest.Phone;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -69,7 +69,7 @@ public class EditCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        List<Guest> lastShownList = model.getFilteredPersonList();
+        List<Guest> lastShownList = model.getFilteredGuestList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -78,13 +78,13 @@ public class EditCommand extends Command {
         Guest guestToEdit = lastShownList.get(index.getZeroBased());
         Guest editedGuest = createEditedPerson(guestToEdit, editPersonDescriptor);
 
-        if (!guestToEdit.isSameGuest(editedGuest) && model.hasPerson(editedGuest)) {
+        if (!guestToEdit.isSameGuest(editedGuest) && model.hasGuest(editedGuest)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        model.updatePerson(guestToEdit, editedGuest);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        model.commitAddressBook();
+        model.updateGuest(guestToEdit, editedGuest);
+        model.updateFilteredGuestList(PREDICATE_SHOW_ALL_GUESTS);
+        model.commitGuestList();
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedGuest));
     }
 

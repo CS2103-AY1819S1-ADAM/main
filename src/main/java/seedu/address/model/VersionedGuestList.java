@@ -8,14 +8,14 @@ import java.util.List;
  */
 public class VersionedGuestList extends GuestList {
 
-    private final List<ReadOnlyGuestList> addressBookStateList;
+    private final List<ReadOnlyGuestList> guestListStateList;
     private int currentStatePointer;
 
     public VersionedGuestList(ReadOnlyGuestList initialState) {
         super(initialState);
 
-        addressBookStateList = new ArrayList<>();
-        addressBookStateList.add(new GuestList(initialState));
+        guestListStateList = new ArrayList<>();
+        guestListStateList.add(new GuestList(initialState));
         currentStatePointer = 0;
     }
 
@@ -25,48 +25,48 @@ public class VersionedGuestList extends GuestList {
      */
     public void commit() {
         removeStatesAfterCurrentPointer();
-        addressBookStateList.add(new GuestList(this));
+        guestListStateList.add(new GuestList(this));
         currentStatePointer++;
     }
 
     private void removeStatesAfterCurrentPointer() {
-        addressBookStateList.subList(currentStatePointer + 1, addressBookStateList.size()).clear();
+        guestListStateList.subList(currentStatePointer + 1, guestListStateList.size()).clear();
     }
 
     /**
-     * Restores the address book to its previous state.
+     * Restores the guest list to its previous state.
      */
     public void undo() {
         if (!canUndo()) {
             throw new NoUndoableStateException();
         }
         currentStatePointer--;
-        resetData(addressBookStateList.get(currentStatePointer));
+        resetData(guestListStateList.get(currentStatePointer));
     }
 
     /**
-     * Restores the address book to its previously undone state.
+     * Restores the guest list to its previously undone state.
      */
     public void redo() {
         if (!canRedo()) {
             throw new NoRedoableStateException();
         }
         currentStatePointer++;
-        resetData(addressBookStateList.get(currentStatePointer));
+        resetData(guestListStateList.get(currentStatePointer));
     }
 
     /**
-     * Returns true if {@code undo()} has address book states to undo.
+     * Returns true if {@code undo()} has guest list states to undo.
      */
     public boolean canUndo() {
         return currentStatePointer > 0;
     }
 
     /**
-     * Returns true if {@code redo()} has address book states to redo.
+     * Returns true if {@code redo()} has guest list states to redo.
      */
     public boolean canRedo() {
-        return currentStatePointer < addressBookStateList.size() - 1;
+        return currentStatePointer < guestListStateList.size() - 1;
     }
 
     @Override
@@ -81,12 +81,12 @@ public class VersionedGuestList extends GuestList {
             return false;
         }
 
-        VersionedGuestList otherVersionedAddressBook = (VersionedGuestList) other;
+        VersionedGuestList otherVersionedGuestList = (VersionedGuestList) other;
 
         // state check
-        return super.equals(otherVersionedAddressBook)
-                && addressBookStateList.equals(otherVersionedAddressBook.addressBookStateList)
-                && currentStatePointer == otherVersionedAddressBook.currentStatePointer;
+        return super.equals(otherVersionedGuestList)
+                && guestListStateList.equals(otherVersionedGuestList.guestListStateList)
+                && currentStatePointer == otherVersionedGuestList.currentStatePointer;
     }
 
     /**
@@ -94,7 +94,8 @@ public class VersionedGuestList extends GuestList {
      */
     public static class NoUndoableStateException extends RuntimeException {
         private NoUndoableStateException() {
-            super("Current state pointer at start of addressBookState list, unable to undo.");
+            super("Current state pointer at start of guestListState list, " +
+                    "unable to undo.");
         }
     }
 
@@ -103,7 +104,8 @@ public class VersionedGuestList extends GuestList {
      */
     public static class NoRedoableStateException extends RuntimeException {
         private NoRedoableStateException() {
-            super("Current state pointer at end of addressBookState list, unable to redo.");
+            super("Current state pointer at end of guestListState list, " +
+                    "unable to redo.");
         }
     }
 }

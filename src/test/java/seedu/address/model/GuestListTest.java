@@ -19,8 +19,8 @@ import org.junit.rules.ExpectedException;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.person.Guest;
-import seedu.address.model.person.exceptions.DuplicateGuestException;
+import seedu.address.model.guest.Guest;
+import seedu.address.model.guest.exceptions.DuplicateGuestException;
 import seedu.address.testutil.PersonBuilder;
 
 public class GuestListTest {
@@ -32,7 +32,7 @@ public class GuestListTest {
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), guestList.getPersonList());
+        assertEquals(Collections.emptyList(), guestList.getListOfGuests());
     }
 
     @Test
@@ -88,7 +88,7 @@ public class GuestListTest {
     @Test
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
-        guestList.getPersonList().remove(0);
+        guestList.getListOfGuests().remove(0);
     }
 
     /**
@@ -104,7 +104,7 @@ public class GuestListTest {
         }
 
         @Override
-        public ObservableList<Guest> getPersonList() {
+        public ObservableList<Guest> getListOfGuests() {
             return guests;
         }
     }

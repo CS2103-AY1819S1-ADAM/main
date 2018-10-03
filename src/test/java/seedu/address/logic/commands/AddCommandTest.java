@@ -19,7 +19,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.GuestList;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyGuestList;
-import seedu.address.model.person.Guest;
+import seedu.address.model.guest.Guest;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -89,7 +89,7 @@ public class AddCommandTest {
      */
     private class ModelStub implements Model {
         @Override
-        public void addPerson(Guest guest) {
+        public void addGuest(Guest guest) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -99,57 +99,57 @@ public class AddCommandTest {
         }
 
         @Override
-        public ReadOnlyGuestList getAddressBook() {
+        public ReadOnlyGuestList getGuestList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public boolean hasPerson(Guest guest) {
+        public boolean hasGuest(Guest guest) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void deletePerson(Guest target) {
+        public void deleteGuest(Guest target) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void updatePerson(Guest target, Guest editedGuest) {
+        public void updateGuest(Guest target, Guest editedGuest) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ObservableList<Guest> getFilteredPersonList() {
+        public ObservableList<Guest> getFilteredGuestList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void updateFilteredPersonList(Predicate<Guest> predicate) {
+        public void updateFilteredGuestList(Predicate<Guest> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public boolean canUndoAddressBook() {
+        public boolean canUndoGuestList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public boolean canRedoAddressBook() {
+        public boolean canRedoGuestList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void undoAddressBook() {
+        public void undoGuestList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void redoAddressBook() {
+        public void redoGuestList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void commitAddressBook() {
+        public void commitGuestList() {
             throw new AssertionError("This method should not be called.");
         }
     }
@@ -166,7 +166,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean hasPerson(Guest guest) {
+        public boolean hasGuest(Guest guest) {
             requireNonNull(guest);
             return this.guest.isSameGuest(guest);
         }
@@ -179,24 +179,24 @@ public class AddCommandTest {
         final ArrayList<Guest> personsAdded = new ArrayList<>();
 
         @Override
-        public boolean hasPerson(Guest guest) {
+        public boolean hasGuest(Guest guest) {
             requireNonNull(guest);
             return personsAdded.stream().anyMatch(guest::isSameGuest);
         }
 
         @Override
-        public void addPerson(Guest guest) {
+        public void addGuest(Guest guest) {
             requireNonNull(guest);
             personsAdded.add(guest);
         }
 
         @Override
-        public void commitAddressBook() {
+        public void commitGuestList() {
             // called by {@code AddCommand#execute()}
         }
 
         @Override
-        public ReadOnlyGuestList getAddressBook() {
+        public ReadOnlyGuestList getGuestList() {
             return new GuestList();
         }
     }

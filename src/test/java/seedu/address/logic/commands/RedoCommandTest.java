@@ -24,23 +24,23 @@ public class RedoCommandTest {
         // set up of both models' undo/redo history
         deleteFirstPerson(model);
         deleteFirstPerson(model);
-        model.undoAddressBook();
-        model.undoAddressBook();
+        model.undoGuestList();
+        model.undoGuestList();
 
         deleteFirstPerson(expectedModel);
         deleteFirstPerson(expectedModel);
-        expectedModel.undoAddressBook();
-        expectedModel.undoAddressBook();
+        expectedModel.undoGuestList();
+        expectedModel.undoGuestList();
     }
 
     @Test
     public void execute() {
         // multiple redoable states in model
-        expectedModel.redoAddressBook();
+        expectedModel.redoGuestList();
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
 
         // single redoable state in model
-        expectedModel.redoAddressBook();
+        expectedModel.redoGuestList();
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
 
         // no redoable state in model

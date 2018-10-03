@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.address.model.guest;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
@@ -8,8 +8,8 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.person.exceptions.DuplicateGuestException;
-import seedu.address.model.person.exceptions.GuestNotFoundException;
+import seedu.address.model.guest.exceptions.DuplicateGuestException;
+import seedu.address.model.guest.exceptions.GuestNotFoundException;
 
 /**
  * A list of guests that enforces uniqueness between its elements and does not allow nulls.

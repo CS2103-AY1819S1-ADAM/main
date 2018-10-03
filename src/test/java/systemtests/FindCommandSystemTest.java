@@ -82,7 +82,7 @@ public class FindCommandSystemTest extends GuestListSystemTest {
 
         /* Case: find same persons in address book after deleting 1 of them -> 1 guest found */
         executeCommand(DeleteCommand.COMMAND_WORD + " 1");
-        assertFalse(getModel().getAddressBook().getPersonList().contains(BENSON));
+        assertFalse(getModel().getGuestList().getListOfGuests().contains(BENSON));
         command = FindCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_MEIER;
         expectedModel = getModel();
         ModelHelper.setFilteredList(expectedModel, DANIEL);
@@ -166,7 +166,7 @@ public class FindCommandSystemTest extends GuestListSystemTest {
      */
     private void assertCommandSuccess(String command, Model expectedModel) {
         String expectedResultMessage = String.format(
-                MESSAGE_PERSONS_LISTED_OVERVIEW, expectedModel.getFilteredPersonList().size());
+                MESSAGE_PERSONS_LISTED_OVERVIEW, expectedModel.getFilteredGuestList().size());
 
         executeCommand(command);
         assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);

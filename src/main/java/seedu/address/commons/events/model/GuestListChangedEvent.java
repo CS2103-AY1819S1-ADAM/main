@@ -14,6 +14,6 @@ public class GuestListChangedEvent extends BaseEvent {
 
     @Override
     public String toString() {
-        return "number of persons " + data.getPersonList().size();
+        return "number of persons " + data.getListOfGuests().size();
     }
 }

@@ -5,8 +5,8 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
-import seedu.address.model.person.Guest;
-import seedu.address.model.person.UniqueGuestList;
+import seedu.address.model.guest.Guest;
+import seedu.address.model.guest.UniqueGuestList;
 
 /**
  * Wraps all data at the address-book level
@@ -53,7 +53,7 @@ public class GuestList implements ReadOnlyGuestList {
     public void resetData(ReadOnlyGuestList newData) {
         requireNonNull(newData);
 
-        setPersons(newData.getPersonList());
+        setPersons(newData.getListOfGuests());
     }
 
     //// guest-level operations
@@ -102,7 +102,7 @@ public class GuestList implements ReadOnlyGuestList {
     }
 
     @Override
-    public ObservableList<Guest> getPersonList() {
+    public ObservableList<Guest> getListOfGuests() {
         return persons.asUnmodifiableObservableList();
     }
 
