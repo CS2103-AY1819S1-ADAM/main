@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import seedu.address.model.person.UniqueGuestList;
+import seedu.address.model.guest.UniqueGuestList;
 import seedu.address.model.tag.Tag;
 
 /**

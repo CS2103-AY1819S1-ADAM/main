@@ -11,8 +11,8 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.events.model.AddressBookChangedEvent;
-import seedu.address.model.person.Guest;
+import seedu.address.commons.events.model.GuestListChangedEvent;
+import seedu.address.model.guest.Guest;
 import seedu.address.model.room.RoomNumber;
 
 /**
@@ -157,8 +157,14 @@ public class ModelManager extends ComponentManager implements Model {
     public RoomList getRoomList() {
         return roomList;
     }
+
     @Override
-    public void checkoutRoom(RoomNumber roomNumber) {}
+    public void checkoutRoom(RoomNumber roomNumber) {
+
+    }
+
     @Override
-    public void commitRoomList() {}
+    public void commitRoomList() {
+
+    }
 }
