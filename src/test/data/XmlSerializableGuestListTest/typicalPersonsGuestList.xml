@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<!-- AddressBook save file which contains the same Guest values as in TypicalPersons#getTypicalAddressBook() -->
-<addressbook>
+<!-- AddressBook save file which contains the same Person values as in TypicalPersons#getTypicalAddressBook() -->
+<guestlist>
     <guests>
         <name>Alice Pauline</name>
         <phone>94351253</phone>
@@ -47,4 +47,4 @@
         <email>anna@example.com</email>
         <address>4th street</address>
     </guests>
-</addressbook>
+</guestlist>
