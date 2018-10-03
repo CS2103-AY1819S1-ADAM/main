@@ -10,10 +10,10 @@ import java.util.Set;
 import seedu.address.model.tag.Tag;
 
 /**
- * Represents a Person in the address book.
+ * Represents a Guest in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Person {
+public class Guest {
 
     // Identity fields
     private final Name name;
@@ -27,7 +27,7 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+    public Guest(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
@@ -61,22 +61,22 @@ public class Person {
     }
 
     /**
-     * Returns true if both persons of the same name have at least one other identity field that is the same.
-     * This defines a weaker notion of equality between two persons.
+     * Returns true if both guests of the same name have at least one other identity field that is the same.
+     * This defines a weaker notion of equality between two guests.
      */
-    public boolean isSamePerson(Person otherPerson) {
-        if (otherPerson == this) {
+    public boolean isSameGuest(Guest otherGuest) {
+        if (otherGuest == this) {
             return true;
         }
 
-        return otherPerson != null
-                && otherPerson.getName().equals(getName())
-                && (otherPerson.getPhone().equals(getPhone()) || otherPerson.getEmail().equals(getEmail()));
+        return otherGuest != null
+                && otherGuest.getName().equals(getName())
+                && (otherGuest.getPhone().equals(getPhone()) || otherGuest.getEmail().equals(getEmail()));
     }
 
     /**
-     * Returns true if both persons have the same identity and data fields.
-     * This defines a stronger notion of equality between two persons.
+     * Returns true if both guests have the same identity and data fields.
+     * This defines a stronger notion of equality between two guests.
      */
     @Override
     public boolean equals(Object other) {
@@ -84,16 +84,16 @@ public class Person {
             return true;
         }
 
-        if (!(other instanceof Person)) {
+        if (!(other instanceof Guest)) {
             return false;
         }
 
-        Person otherPerson = (Person) other;
-        return otherPerson.getName().equals(getName())
-                && otherPerson.getPhone().equals(getPhone())
-                && otherPerson.getEmail().equals(getEmail())
-                && otherPerson.getAddress().equals(getAddress())
-                && otherPerson.getTags().equals(getTags());
+        Guest otherGuest = (Guest) other;
+        return otherGuest.getName().equals(getName())
+                && otherGuest.getPhone().equals(getPhone())
+                && otherGuest.getEmail().equals(getEmail())
+                && otherGuest.getAddress().equals(getAddress())
+                && otherGuest.getTags().equals(getTags());
     }
 
     @Override
