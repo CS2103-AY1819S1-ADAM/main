@@ -64,14 +64,14 @@ public class StorageManagerTest {
          * More extensive testing of UserPref saving/reading is done in {@link XmlGuestListStorageTest} class.
          */
         GuestList original = getTypicalAddressBook();
-        storageManager.saveAddressBook(original);
-        ReadOnlyGuestList retrieved = storageManager.readAddressBook().get();
+        storageManager.saveGuestList(original);
+        ReadOnlyGuestList retrieved = storageManager.readGuestList().get();
         assertEquals(original, new GuestList(retrieved));
     }
 
     @Test
     public void getAddressBookFilePath() {
-        assertNotNull(storageManager.getAddressBookFilePath());
+        assertNotNull(storageManager.getGuestListFilePath());
     }
 
     @Test
@@ -79,7 +79,7 @@ public class StorageManagerTest {
         // Create a StorageManager while injecting a stub that  throws an exception when the save method is called
         Storage storage = new StorageManager(new XmlGuestListStorageExceptionThrowingStub(Paths.get("dummy")),
                                              new JsonUserPrefsStorage(Paths.get("dummy")));
-        storage.handleAddressBookChangedEvent(new GuestListChangedEvent(new GuestList()));
+        storage.handleGuestListChangedEvent(new GuestListChangedEvent(new GuestList()));
         assertTrue(eventsCollectorRule.eventsCollector.getMostRecent() instanceof DataSavingExceptionEvent);
     }
 
@@ -94,7 +94,7 @@ public class StorageManagerTest {
         }
 
         @Override
-        public void saveAddressBook(ReadOnlyGuestList addressBook, Path filePath) throws IOException {
+        public void saveGuestList(ReadOnlyGuestList guestList, Path filePath) throws IOException {
             throw new IOException("dummy exception");
         }
     }

@@ -85,7 +85,7 @@ public class MainApp extends Application {
         Optional<ReadOnlyGuestList> addressBookOptional;
         ReadOnlyGuestList initialData;
         try {
-            addressBookOptional = storage.readAddressBook();
+            addressBookOptional = storage.readGuestList();
             if (!addressBookOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample GuestList");
             }

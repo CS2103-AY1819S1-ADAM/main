@@ -18,10 +18,11 @@ import seedu.address.model.person.Guest;
 @XmlRootElement(name = "guestlist")
 public class XmlSerializableGuestList {
 
-    public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate guest(s).";
+    public static final String MESSAGE_DUPLICATE_GUEST
+            = "Guest list contains duplicate guest(s).";
 
     @XmlElement
-    private List<XmlAdaptedPerson> guests;
+    private List<XmlAdaptedGuest> guests;
 
     /**
      * Creates an empty XmlSerializableGuestList.
@@ -36,21 +37,21 @@ public class XmlSerializableGuestList {
      */
     public XmlSerializableGuestList(ReadOnlyGuestList src) {
         this();
-        guests.addAll(src.getPersonList().stream().map(XmlAdaptedPerson::new).collect(Collectors.toList()));
+        guests.addAll(src.getPersonList().stream().map(XmlAdaptedGuest::new).collect(Collectors.toList()));
     }
 
     /**
-     * Converts this addressbook into the model's {@code GuestList} object.
+     * Converts this guestlist into the model's {@code GuestList} object.
      *
      * @throws IllegalValueException if there were any data constraints violated or duplicates in the
-     * {@code XmlAdaptedPerson}.
+     * {@code XmlAdaptedGuest}.
      */
     public GuestList toModelType() throws IllegalValueException {
         GuestList guestList = new GuestList();
-        for (XmlAdaptedPerson p : guests) {
+        for (XmlAdaptedGuest p : guests) {
             Guest guest = p.toModelType();
             if (guestList.hasPerson(guest)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
+                throw new IllegalValueException(MESSAGE_DUPLICATE_GUEST);
             }
             guestList.addPerson(guest);
         }

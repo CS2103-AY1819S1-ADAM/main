@@ -16,7 +16,7 @@ public interface GuestListStorage {
     /**
      * Returns the file path of the data file.
      */
-    Path getAddressBookFilePath();
+    Path getGuestListFilePath();
 
     /**
      * Returns GuestList data as a {@link ReadOnlyGuestList}.
@@ -24,23 +24,23 @@ public interface GuestListStorage {
      * @throws DataConversionException if the data in storage is not in the expected format.
      * @throws IOException if there was any problem when reading from the storage.
      */
-    Optional<ReadOnlyGuestList> readAddressBook() throws DataConversionException, IOException;
+    Optional<ReadOnlyGuestList> readGuestList() throws DataConversionException, IOException;
 
     /**
-     * @see #getAddressBookFilePath()
+     * @see #getGuestListFilePath()
      */
-    Optional<ReadOnlyGuestList> readAddressBook(Path filePath) throws DataConversionException, IOException;
+    Optional<ReadOnlyGuestList> readGuestList(Path filePath) throws DataConversionException, IOException;
 
     /**
      * Saves the given {@link ReadOnlyGuestList} to the storage.
-     * @param addressBook cannot be null.
+     * @param guestList cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveAddressBook(ReadOnlyGuestList addressBook) throws IOException;
+    void saveGuestList(ReadOnlyGuestList guestList) throws IOException;
 
     /**
-     * @see #saveAddressBook(ReadOnlyGuestList)
+     * @see #saveGuestList(ReadOnlyGuestList)
      */
-    void saveAddressBook(ReadOnlyGuestList addressBook, Path filePath) throws IOException;
+    void saveGuestList(ReadOnlyGuestList guestList, Path filePath) throws IOException;
 
 }

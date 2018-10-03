@@ -36,7 +36,7 @@ public class XmlGuestListStorageTest {
     }
 
     private java.util.Optional<ReadOnlyGuestList> readAddressBook(String filePath) throws Exception {
-        return new XmlGuestListStorage(Paths.get(filePath)).readAddressBook(addToTestDataPathIfNotNull(filePath));
+        return new XmlGuestListStorage(Paths.get(filePath)).readGuestList(addToTestDataPathIfNotNull(filePath));
     }
 
     private Path addToTestDataPathIfNotNull(String prefsFileInTestDataFolder) {
@@ -80,21 +80,21 @@ public class XmlGuestListStorageTest {
         XmlGuestListStorage xmlAddressBookStorage = new XmlGuestListStorage(filePath);
 
         //Save in new file and read back
-        xmlAddressBookStorage.saveAddressBook(original, filePath);
-        ReadOnlyGuestList readBack = xmlAddressBookStorage.readAddressBook(filePath).get();
+        xmlAddressBookStorage.saveGuestList(original, filePath);
+        ReadOnlyGuestList readBack = xmlAddressBookStorage.readGuestList(filePath).get();
         assertEquals(original, new GuestList(readBack));
 
         //Modify data, overwrite exiting file, and read back
         original.addPerson(HOON);
         original.removePerson(ALICE);
-        xmlAddressBookStorage.saveAddressBook(original, filePath);
-        readBack = xmlAddressBookStorage.readAddressBook(filePath).get();
+        xmlAddressBookStorage.saveGuestList(original, filePath);
+        readBack = xmlAddressBookStorage.readGuestList(filePath).get();
         assertEquals(original, new GuestList(readBack));
 
         //Save and read without specifying file path
         original.addPerson(IDA);
-        xmlAddressBookStorage.saveAddressBook(original); //file path not specified
-        readBack = xmlAddressBookStorage.readAddressBook().get(); //file path not specified
+        xmlAddressBookStorage.saveGuestList(original); //file path not specified
+        readBack = xmlAddressBookStorage.readGuestList().get(); //file path not specified
         assertEquals(original, new GuestList(readBack));
 
     }
@@ -111,7 +111,7 @@ public class XmlGuestListStorageTest {
     private void saveAddressBook(ReadOnlyGuestList addressBook, String filePath) {
         try {
             new XmlGuestListStorage(Paths.get(filePath))
-                    .saveAddressBook(addressBook, addToTestDataPathIfNotNull(filePath));
+                    .saveGuestList(addressBook, addToTestDataPathIfNotNull(filePath));
         } catch (IOException ioe) {
             throw new AssertionError("There should not be an error writing to the file.", ioe);
         }

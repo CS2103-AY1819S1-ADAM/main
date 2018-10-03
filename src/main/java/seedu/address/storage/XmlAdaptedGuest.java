@@ -20,7 +20,7 @@ import seedu.address.model.tag.Tag;
 /**
  * JAXB-friendly version of the Guest.
  */
-public class XmlAdaptedPerson {
+public class XmlAdaptedGuest {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Guest's %s field is missing!";
 
@@ -37,15 +37,15 @@ public class XmlAdaptedPerson {
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
 
     /**
-     * Constructs an XmlAdaptedPerson.
+     * Constructs an XmlAdaptedGuest.
      * This is the no-arg constructor that is required by JAXB.
      */
-    public XmlAdaptedPerson() {}
+    public XmlAdaptedGuest() {}
 
     /**
-     * Constructs an {@code XmlAdaptedPerson} with the given guest details.
+     * Constructs an {@code XmlAdaptedGuest} with the given guest details.
      */
-    public XmlAdaptedPerson(String name, String phone, String email, String address, List<XmlAdaptedTag> tagged) {
+    public XmlAdaptedGuest(String name, String phone, String email, String address, List<XmlAdaptedTag> tagged) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -58,9 +58,9 @@ public class XmlAdaptedPerson {
     /**
      * Converts a given Guest into this class for JAXB use.
      *
-     * @param source future changes to this will not affect the created XmlAdaptedPerson
+     * @param source future changes to this will not affect the created XmlAdaptedGuest
      */
-    public XmlAdaptedPerson(Guest source) {
+    public XmlAdaptedGuest(Guest source) {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
@@ -76,9 +76,9 @@ public class XmlAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted guest
      */
     public Guest toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
+        final List<Tag> guestTags = new ArrayList<>();
         for (XmlAdaptedTag tag : tagged) {
-            personTags.add(tag.toModelType());
+            guestTags.add(tag.toModelType());
         }
 
         if (name == null) {
@@ -113,7 +113,7 @@ public class XmlAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
-        final Set<Tag> modelTags = new HashSet<>(personTags);
+        final Set<Tag> modelTags = new HashSet<>(guestTags);
         return new Guest(modelName, modelPhone, modelEmail, modelAddress, modelTags);
     }
 
@@ -123,15 +123,15 @@ public class XmlAdaptedPerson {
             return true;
         }
 
-        if (!(other instanceof XmlAdaptedPerson)) {
+        if (!(other instanceof XmlAdaptedGuest)) {
             return false;
         }
 
-        XmlAdaptedPerson otherPerson = (XmlAdaptedPerson) other;
-        return Objects.equals(name, otherPerson.name)
-                && Objects.equals(phone, otherPerson.phone)
-                && Objects.equals(email, otherPerson.email)
-                && Objects.equals(address, otherPerson.address)
-                && tagged.equals(otherPerson.tagged);
+        XmlAdaptedGuest otherGuest = (XmlAdaptedGuest) other;
+        return Objects.equals(name, otherGuest.name)
+                && Objects.equals(phone, otherGuest.phone)
+                && Objects.equals(email, otherGuest.email)
+                && Objects.equals(address, otherGuest.address)
+                && tagged.equals(otherGuest.tagged);
     }
 }

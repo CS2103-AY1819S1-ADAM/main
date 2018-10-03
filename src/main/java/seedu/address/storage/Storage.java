@@ -22,18 +22,18 @@ public interface Storage extends GuestListStorage, UserPrefsStorage {
     void saveUserPrefs(UserPrefs userPrefs) throws IOException;
 
     @Override
-    Path getAddressBookFilePath();
+    Path getGuestListFilePath();
 
     @Override
-    Optional<ReadOnlyGuestList> readAddressBook() throws DataConversionException, IOException;
+    Optional<ReadOnlyGuestList> readGuestList() throws DataConversionException, IOException;
 
     @Override
-    void saveAddressBook(ReadOnlyGuestList addressBook) throws IOException;
+    void saveGuestList(ReadOnlyGuestList guestList) throws IOException;
 
     /**
-     * Saves the current version of the Address Book to the hard disk.
+     * Saves the current version of the Guest List to the hard disk.
      *   Creates the data file if it is missing.
      * Raises {@link DataSavingExceptionEvent} if there was an error during saving.
      */
-    void handleAddressBookChangedEvent(GuestListChangedEvent abce);
+    void handleGuestListChangedEvent(GuestListChangedEvent abce);
 }

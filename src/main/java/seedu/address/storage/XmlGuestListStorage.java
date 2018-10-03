@@ -28,21 +28,21 @@ public class XmlGuestListStorage implements GuestListStorage {
         this.filePath = filePath;
     }
 
-    public Path getAddressBookFilePath() {
+    public Path getGuestListFilePath() {
         return filePath;
     }
 
     @Override
-    public Optional<ReadOnlyGuestList> readAddressBook() throws DataConversionException, IOException {
-        return readAddressBook(filePath);
+    public Optional<ReadOnlyGuestList> readGuestList() throws DataConversionException, IOException {
+        return readGuestList(filePath);
     }
 
     /**
-     * Similar to {@link #readAddressBook()}
+     * Similar to {@link #readGuestList()}
      * @param filePath location of the data. Cannot be null
      * @throws DataConversionException if the file is not in the correct format.
      */
-    public Optional<ReadOnlyGuestList> readAddressBook(Path filePath) throws DataConversionException,
+    public Optional<ReadOnlyGuestList> readGuestList(Path filePath) throws DataConversionException,
                                                                                  FileNotFoundException {
         requireNonNull(filePath);
 
@@ -51,9 +51,9 @@ public class XmlGuestListStorage implements GuestListStorage {
             return Optional.empty();
         }
 
-        XmlSerializableGuestList xmlAddressBook = XmlFileStorage.loadDataFromSaveFile(filePath);
+        XmlSerializableGuestList xmlGuestList = XmlFileStorage.loadDataFromSaveFile(filePath);
         try {
-            return Optional.of(xmlAddressBook.toModelType());
+            return Optional.of(xmlGuestList.toModelType());
         } catch (IllegalValueException ive) {
             logger.info("Illegal values found in " + filePath + ": " + ive.getMessage());
             throw new DataConversionException(ive);
@@ -61,20 +61,20 @@ public class XmlGuestListStorage implements GuestListStorage {
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyGuestList addressBook) throws IOException {
-        saveAddressBook(addressBook, filePath);
+    public void saveGuestList(ReadOnlyGuestList guestList) throws IOException {
+        saveGuestList(guestList, filePath);
     }
 
     /**
-     * Similar to {@link #saveAddressBook(ReadOnlyGuestList)}
+     * Similar to {@link #saveGuestList(ReadOnlyGuestList)}
      * @param filePath location of the data. Cannot be null
      */
-    public void saveAddressBook(ReadOnlyGuestList addressBook, Path filePath) throws IOException {
-        requireNonNull(addressBook);
+    public void saveGuestList(ReadOnlyGuestList guestList, Path filePath) throws IOException {
+        requireNonNull(guestList);
         requireNonNull(filePath);
 
         FileUtil.createIfMissing(filePath);
-        XmlFileStorage.saveDataToFile(filePath, new XmlSerializableGuestList(addressBook));
+        XmlFileStorage.saveDataToFile(filePath, new XmlSerializableGuestList(guestList));
     }
 
 }

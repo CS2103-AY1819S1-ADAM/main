@@ -73,7 +73,7 @@ public class TestApp extends MainApp {
      */
     public GuestList readStorageAddressBook() {
         try {
-            return new GuestList(storage.readAddressBook().get());
+            return new GuestList(storage.readGuestList().get());
         } catch (DataConversionException dce) {
             throw new AssertionError("Data is not in the GuestList format.", dce);
         } catch (IOException ioe) {
@@ -85,7 +85,7 @@ public class TestApp extends MainApp {
      * Returns the file path of the storage file.
      */
     public Path getStorageSaveLocation() {
-        return storage.getAddressBookFilePath();
+        return storage.getGuestListFilePath();
     }
 
     /**

@@ -52,39 +52,39 @@ public class StorageManager extends ComponentManager implements Storage {
     // ================ GuestList methods ==============================
 
     @Override
-    public Path getAddressBookFilePath() {
-        return guestListStorage.getAddressBookFilePath();
+    public Path getGuestListFilePath() {
+        return guestListStorage.getGuestListFilePath();
     }
 
     @Override
-    public Optional<ReadOnlyGuestList> readAddressBook() throws DataConversionException, IOException {
-        return readAddressBook(guestListStorage.getAddressBookFilePath());
+    public Optional<ReadOnlyGuestList> readGuestList() throws DataConversionException, IOException {
+        return readGuestList(guestListStorage.getGuestListFilePath());
     }
 
     @Override
-    public Optional<ReadOnlyGuestList> readAddressBook(Path filePath) throws DataConversionException, IOException {
+    public Optional<ReadOnlyGuestList> readGuestList(Path filePath) throws DataConversionException, IOException {
         logger.fine("Attempting to read data from file: " + filePath);
-        return guestListStorage.readAddressBook(filePath);
+        return guestListStorage.readGuestList(filePath);
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyGuestList addressBook) throws IOException {
-        saveAddressBook(addressBook, guestListStorage.getAddressBookFilePath());
+    public void saveGuestList(ReadOnlyGuestList guestList) throws IOException {
+        saveGuestList(guestList, guestListStorage.getGuestListFilePath());
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyGuestList addressBook, Path filePath) throws IOException {
+    public void saveGuestList(ReadOnlyGuestList guestList, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
-        guestListStorage.saveAddressBook(addressBook, filePath);
+        guestListStorage.saveGuestList(guestList, filePath);
     }
 
 
     @Override
     @Subscribe
-    public void handleAddressBookChangedEvent(GuestListChangedEvent event) {
+    public void handleGuestListChangedEvent(GuestListChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local data changed, saving to file"));
         try {
-            saveAddressBook(event.data);
+            saveGuestList(event.data);
         } catch (IOException e) {
             raise(new DataSavingExceptionEvent(e));
         }

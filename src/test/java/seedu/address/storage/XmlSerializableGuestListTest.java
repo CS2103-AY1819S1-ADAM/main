@@ -46,7 +46,7 @@ public class XmlSerializableGuestListTest {
         XmlSerializableGuestList dataFromFile = XmlUtil.getDataFromFile(DUPLICATE_PERSON_FILE,
                 XmlSerializableGuestList.class);
         thrown.expect(IllegalValueException.class);
-        thrown.expectMessage(XmlSerializableGuestList.MESSAGE_DUPLICATE_PERSON);
+        thrown.expectMessage(XmlSerializableGuestList.MESSAGE_DUPLICATE_GUEST);
         dataFromFile.toModelType();
     }
 
