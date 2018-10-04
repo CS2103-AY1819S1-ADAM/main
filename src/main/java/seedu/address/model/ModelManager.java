@@ -15,6 +15,7 @@ import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.model.person.Guest;
 import seedu.address.model.room.Room;
 import seedu.address.model.room.RoomNumber;
+import seedu.address.model.room.UniqueRoomList;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -24,6 +25,9 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final VersionedAddressBook versionedAddressBook;
     private final FilteredList<Guest> filteredGuests;
+  
+    // Dummy variable for now. Delete when implemented.
+    private final UniqueRoomList rooms;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -36,6 +40,21 @@ public class ModelManager extends ComponentManager implements Model {
 
         versionedAddressBook = new VersionedAddressBook(addressBook);
         filteredGuests = new FilteredList<>(versionedAddressBook.getPersonList());
+
+        // Dummy variable for now. Delete when implemented.
+        this.rooms = new UniqueRoomList();
+    }
+
+    public ModelManager(ReadOnlyAddressBook addressBook, UserPrefs userPrefs, UniqueRoomList rooms) {
+        super();
+        requireAllNonNull(addressBook, userPrefs);
+
+        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+
+        versionedAddressBook = new VersionedAddressBook(addressBook);
+        filteredGuests = new FilteredList<>(versionedAddressBook.getPersonList());
+        // Dummy variable for now. Delete when implemented.
+        this.rooms = rooms;
     }
 
     public ModelManager() {
@@ -156,6 +175,7 @@ public class ModelManager extends ComponentManager implements Model {
     public RoomList getRoomList() {
         return roomList;
     }*/
+  
     @Override
     public void checkoutRoom(RoomNumber roomNumber) {}
     @Override
