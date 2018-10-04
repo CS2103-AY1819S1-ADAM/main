@@ -7,6 +7,8 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Guest;
 import seedu.address.model.person.UniqueGuestList;
+import seedu.address.model.room.Room;
+import seedu.address.model.room.UniqueRoomList;
 
 /**
  * Wraps all data at the address-book level
@@ -25,6 +27,9 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniqueGuestList();
+    }
+    private final UniqueRoomList rooms;{
+        rooms = new UniqueRoomList();
     }
 
     public AddressBook() {}
@@ -105,6 +110,12 @@ public class AddressBook implements ReadOnlyAddressBook {
     public ObservableList<Guest> getPersonList() {
         return persons.asUnmodifiableObservableList();
     }
+
+    /*
+    @Override
+    public ObservableList<Room> getRoomList() {
+        return rooms.asUnmodifiableObservableList();
+    }*/
 
     @Override
     public boolean equals(Object other) {
