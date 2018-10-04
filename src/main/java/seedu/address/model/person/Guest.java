@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.model.room.Room;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -23,6 +24,7 @@ public class Guest {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private Room room;
 
     /**
      * Every field must be present and not null.
@@ -51,6 +53,14 @@ public class Guest {
     public Address getAddress() {
         return address;
     }
+
+    public boolean hasRoom() {
+        return this.room != null;
+    }
+
+    public Room getRoom() { return room; }
+
+    public void setRoom(Room room) { this.room = room; }
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
@@ -114,6 +124,14 @@ public class Guest {
                 .append(getAddress())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
+
+        if (this.hasRoom()) {
+            builder.append(" Staying in Room: ")
+                    .append(getRoom());
+        } else {
+            builder.append(" Currently not staying in Hotel ");
+        }
+
         return builder.toString();
     }
 
