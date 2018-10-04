@@ -8,14 +8,14 @@ import seedu.address.model.Model;
 import seedu.address.model.room.RoomNumber;
 
 /**
- * Deletes a guest identified using it's displayed index from the address book.
+ * Check out a room identified using its room number and remove its registered guest from the guest list.
  */
 public class CheckoutCommand extends Command {
 
     public static final String COMMAND_WORD = "checkout";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Checks out the room identified by the room number and its occupants.\n"
+            + ": Checks out the room identified by the room number, and remove its registered guest from guest list.\n"
             + "Parameters: ROOM_NUMBER (must be a 3-digit positive integer from 001 to 100)\n"
             + "Example: " + COMMAND_WORD + " 001";
 

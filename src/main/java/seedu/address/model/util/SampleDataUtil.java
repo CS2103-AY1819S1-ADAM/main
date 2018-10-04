@@ -1,8 +1,11 @@
 package seedu.address.model.util;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -11,6 +14,13 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Guest;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.room.DoubleRoom;
+import seedu.address.model.room.Expenses;
+import seedu.address.model.room.Reservations;
+import seedu.address.model.room.Room;
+import seedu.address.model.room.RoomNumber;
+import seedu.address.model.room.SingleRoom;
+import seedu.address.model.room.SuiteRoom;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -40,6 +50,25 @@ public class SampleDataUtil {
         };
     }
 
+    public static List<Room> getSampleRooms() {
+        return Stream.iterate(1, i -> i <= Integer.parseInt(RoomNumber.MAX_ROOM_NUMBER), i -> i + 1)
+            .map(i -> {
+                RoomNumber roomNumber = new RoomNumber(String.format("%03d", i));;
+                List<Guest> occupant = new ArrayList<>();
+                Expenses expenses = new Expenses();
+                Reservations reservations = new Reservations();
+                if (i % 10 == 0) { // All rooms with room number that is multiple of 10 is a SuiteRoom.
+                    return new SuiteRoom(roomNumber, occupant, expenses, reservations);
+                }
+                if (i % 2 == 0) { // All rooms with even room number is a DoubleRoom.
+                    return new DoubleRoom(roomNumber, occupant, expenses, reservations);
+                }
+                // ALl rooms with odd room number is a SingleRoom.
+                return new SingleRoom(roomNumber, occupant, expenses, reservations);
+            })
+            .collect(Collectors.toList());
+    }
+
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
         for (Guest sampleGuest : getSamplePersons()) {
@@ -56,5 +85,4 @@ public class SampleDataUtil {
                 .map(Tag::new)
                 .collect(Collectors.toSet());
     }
-
 }

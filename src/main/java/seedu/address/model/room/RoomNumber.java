@@ -40,7 +40,6 @@ public class RoomNumber {
         return test.matches(ROOM_NUMBER_VALIDATION_REGEX);
     }
 
-
     @Override
     public String toString() {
         return value;

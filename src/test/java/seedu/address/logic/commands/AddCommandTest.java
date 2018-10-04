@@ -156,9 +156,11 @@ public class AddCommandTest {
 
         /*
         @Override
+        
         public RoomList getRoomList() {
             throw new AssertionError("This method should not be called.");
         }*/
+      
         @Override
         public void checkoutRoom(RoomNumber roomNumber) {
             throw new AssertionError("This method should not be called.");
