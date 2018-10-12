@@ -78,14 +78,7 @@ public interface Model {
     void commitAddressBook();
 
     /**
-     * Returns the RoomList
-     * @return
-     */
-    RoomList getRoomList();
-
-    /**
-     * Checks out the room.
-     * @param roomNumber
+     * Checks out the room by its room number and removes its registered guest.
      */
     void checkoutRoom(RoomNumber roomNumber);
 

@@ -9,13 +9,13 @@ import java.time.format.DateTimeParseException;
 import java.util.Objects;
 
 /**
- * Represents a Room's reservation date in the address book.
+ * Represents a Room's reservation period in the address book.
  * Guarantees: immutable; is valid as declared in
- * {@link #isValidReservationDate(String testStartDate,String testEndDate)}
+ * {@link #isValidReservationPeriod(String testStartDate,String testEndDate)}
  */
-public class ReservationDate {
+public class ReservationPeriod {
 
-    public static final String MESSAGE_RESERVATION_DATE_CONSTRAINTS =
+    public static final String MESSAGE_RESERVATION_PERIOD_CONSTRAINTS =
             "Reservation dates should only contain two 8-digit numbers, each in the form dd/MM/yyyy, "
                 + "should be correct dates according to the calendar, and should not be blank.";
 
@@ -23,7 +23,7 @@ public class ReservationDate {
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String RESERVATION_DATE_VALIDATION_REGEX =
+    public static final String RESERVATION_PERIOD_VALIDATION_REGEX =
         "^(0[1-9]|[1-2]\\d|3[0-1])\\/(0[1-9]|1[0-2])\\/(\\d\\d\\d\\d)$";
 
     /**
@@ -35,34 +35,22 @@ public class ReservationDate {
     public final LocalDate endDate;
 
     /**
-     * Constructs a {@code Name}.
-     *
-     * @param startDate A valid name.
+     * Constructs a {@code ReservationPeriod} that encapsulates the period from start through end date (inclusive).
      */
-    private ReservationDate(LocalDate startDate, LocalDate endDate) {
-        this.startDate = startDate;
-        this.endDate = endDate;
-    }
-
-    /**
-     * Constructs a {@code ReservationDate} that encapsulates the period from start through end date (inclusive).
-     * @param startDate A valid start date.
-     * @param endDate A valid end date.
-     * @return A valid reservation date
-     */
-    public static ReservationDate of(String startDate, String endDate) {
+    public ReservationPeriod(String startDate, String endDate) {
         requireNonNull(startDate);
         requireNonNull(endDate);
-        checkArgument(isValidReservationDate(startDate, endDate), MESSAGE_RESERVATION_DATE_CONSTRAINTS);
-        return new ReservationDate(parseDate(startDate), parseDate(endDate));
+        checkArgument(isValidReservationPeriod(startDate, endDate), MESSAGE_RESERVATION_PERIOD_CONSTRAINTS);
+        this.startDate = parseDate(startDate);
+        this.endDate = parseDate(endDate);
     }
 
     /**
      * Returns true if a given string is a valid name.
      */
-    public static boolean isValidReservationDate(String testStartDate, String testEndDate) {
-        return (testStartDate.matches(RESERVATION_DATE_VALIDATION_REGEX)
-            && testEndDate.matches(RESERVATION_DATE_VALIDATION_REGEX))
+    public static boolean isValidReservationPeriod(String testStartDate, String testEndDate) {
+        return (testStartDate.matches(RESERVATION_PERIOD_VALIDATION_REGEX)
+            && testEndDate.matches(RESERVATION_PERIOD_VALIDATION_REGEX))
             && parsableDate(testStartDate)
             && parsableDate(testEndDate);
     }
@@ -91,11 +79,11 @@ public class ReservationDate {
     }
 
     /**
-     * Checks if the start and end dates of this {@code ReservationDate} overlaps with the other.
-     * @param other Other reservation date to be compared to.
+     * Checks if the start and end dates of this {@code ReservationPeriod} overlaps with the other.
+     * @param other Other reservation period to be compared to.
      * @return True if there is any overlap, false otherwise.
      */
-    public boolean isOverlapping(ReservationDate other) {
+    public boolean isOverlapping(ReservationPeriod other) {
         return (isLessThanOrEqual(this.startDate, other.endDate)
             && isLessThanOrEqual(other.startDate, this.endDate));
     }
@@ -118,9 +106,9 @@ public class ReservationDate {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof ReservationDate // instanceof handles nulls
-                && startDate.equals(((ReservationDate) other).startDate) // state check
-                && endDate.equals(((ReservationDate) other).endDate));
+                || (other instanceof ReservationPeriod // instanceof handles nulls
+                && startDate.equals(((ReservationPeriod) other).startDate) // state check
+                && endDate.equals(((ReservationPeriod) other).endDate));
     }
 
     @Override

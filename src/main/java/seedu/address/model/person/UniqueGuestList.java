@@ -77,6 +77,9 @@ public class UniqueGuestList implements Iterable<Guest> {
         }
     }
 
+    /**
+     * Replaces the contents of this list with {@code replacement}.
+     */
     public void setGuests(UniqueGuestList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);

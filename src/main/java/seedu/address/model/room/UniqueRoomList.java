@@ -47,26 +47,6 @@ public class UniqueRoomList implements Iterable<Room> {
     }
 
     /**
-     * Replaces the room {@code target} in the list with {@code editedRoom}.
-     * {@code target} must exist in the list.
-     * The room identity of {@code editedRoom} must not be the same as another existing room in the list.
-     */
-    public void setRoom(Room target, Room editedRoom) {
-        requireAllNonNull(target, editedRoom);
-
-        int index = internalList.indexOf(target);
-        if (index == -1) {
-            throw new RoomNotFoundException();
-        }
-
-        if (!target.isSameRoom(editedRoom) && contains(editedRoom)) {
-            throw new DuplicateRoomException();
-        }
-
-        internalList.set(index, editedRoom);
-    }
-
-    /**
      * Removes the equivalent room from the list.
      * The room must exist in the list.
      */
@@ -92,6 +72,29 @@ public class UniqueRoomList implements Iterable<Room> {
         throw new RoomNotFoundException();
     }
 
+    /**
+     * Replaces the room {@code target} in the list with {@code editedRoom}.
+     * {@code target} must exist in the list.
+     * The room identity of {@code editedRoom} must not be the same as another existing room in the list.
+     */
+    public void setRoom(Room target, Room editedRoom) {
+        requireAllNonNull(target, editedRoom);
+
+        int index = internalList.indexOf(target);
+        if (index == -1) {
+            throw new RoomNotFoundException();
+        }
+
+        if (!target.isSameRoom(editedRoom) && contains(editedRoom)) {
+            throw new DuplicateRoomException();
+        }
+
+        internalList.set(index, editedRoom);
+    }
+
+    /**
+     * Replaces the contents of this list with {@code replacement}.
+     */
     public void setRooms(UniqueRoomList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
@@ -108,6 +111,18 @@ public class UniqueRoomList implements Iterable<Room> {
         }
 
         internalList.setAll(rooms);
+    }
+
+    /**
+     * Checks out a room using its room number
+     * @param roomNumber
+     */
+    public void checkoutRoom(RoomNumber roomNumber) {
+        for (Room room : internalList) {
+            if (room.isRoom(roomNumber)) {
+                room.checkout();
+            }
+        }
     }
 
     /**
