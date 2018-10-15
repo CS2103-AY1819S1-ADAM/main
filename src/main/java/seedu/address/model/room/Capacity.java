@@ -24,10 +24,17 @@ public class Capacity {
     }
 
     /**
+     * Gets the integer value of this capacity
+     */
+    public Integer getValue() {
+        return value;
+    }
+
+    /**
      * Returns true if a given int is a valid capacity.
      */
-    public static boolean isValidCapacity(int test) {
-        return test > 0;
+    public static boolean isValidCapacity(int capacity) {
+        return capacity > 0;
     }
 
 

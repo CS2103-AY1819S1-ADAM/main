@@ -4,6 +4,7 @@ import static guitests.guihandles.WebViewUtil.waitUntilBrowserLoaded;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
 import static seedu.address.ui.BrowserPanel.DEFAULT_PAGE;
 import static seedu.address.ui.StatusBarFooter.SYNC_STATUS_INITIAL;
 import static seedu.address.ui.StatusBarFooter.SYNC_STATUS_UPDATED;
@@ -40,7 +41,6 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
-import seedu.address.testutil.TypicalPersons;
 import seedu.address.ui.BrowserPanel;
 import seedu.address.ui.CommandBox;
 
@@ -85,7 +85,7 @@ public abstract class AddressBookSystemTest {
      * Returns the data to be loaded into the file in {@link #getDataFileLocation()}.
      */
     protected AddressBook getInitialData() {
-        return TypicalPersons.getTypicalAddressBook();
+        return getTypicalAddressBook();
     }
 
     /**
@@ -142,9 +142,10 @@ public abstract class AddressBookSystemTest {
      * Displays all persons in the address book.
      */
     protected void showAllPersons() {
-        executeCommand(ListCommand.COMMAND_WORD);
+        executeCommand(ListCommand.COMMAND_WORD + " -g");
         assertEquals(getModel().getAddressBook().getPersonList().size(), getModel().getFilteredPersonList().size());
     }
+
 
     /**
      * Displays all persons with any parts of their names matching {@code keyword} (case-insensitive).

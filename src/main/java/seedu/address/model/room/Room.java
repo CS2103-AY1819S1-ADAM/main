@@ -2,15 +2,18 @@ package seedu.address.model.room;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.model.expenses.Expenses;
 import seedu.address.model.person.Guest;
-import seedu.address.model.room.exceptions.UnoccupiedRoomCheckoutException;
+import seedu.address.model.room.booking.Booking;
+import seedu.address.model.room.booking.Bookings;
+import seedu.address.model.room.booking.exceptions.NoActiveBookingException;
+import seedu.address.model.room.booking.exceptions.NoActiveOrExpiredBookingException;
+import seedu.address.model.room.exceptions.OccupiedRoomCheckinException;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -24,38 +27,30 @@ public abstract class Room {
 
     // Data fields
     protected final Capacity capacity;
-    protected final List<Guest> occupant; // Note: List must be at most size == 1
     protected final Expenses expenses;
-    protected final Reservations reservations;
-    protected final Set<Tag> tags = new HashSet<>();
+    protected final Bookings bookings;
+    protected final Set<Tag> tags;
 
-    /**
-     * NEVER USE THIS DEFAULT CONSTRUCTOR.
-     * I had to write this default constructor because Java necessitates that `final` fields must be
-     * instantiated. Between choosing this or removing `final` access modifier, I decided to go with this because
-     * the latter opens up the possibility for once-correct fields to be changed unintentionally.
-     * If you can find a better alternative, please let me know and I will replace this stain immediately.
-     */
-    public Room() {
-        this.roomNumber = new RoomNumber("001");
-        this.capacity = new Capacity(1);
-        this.occupant = new ArrayList<>();
-        this.expenses = new Expenses();
-        this.reservations = new Reservations();
+    protected Room(RoomNumber roomNumber, Capacity capacity) {
+        this(roomNumber, capacity, new Expenses(), new Bookings(), new HashSet<>());
     }
 
     /**
      * All parameters must be non-null.
-     * Note: {@code occupant}, {@code expenses}, or {@code reservations} may be empty, but not null.
      */
-    protected Room(RoomNumber roomNumber, Capacity capacity, List<Guest> occupant, Expenses expenses,
-                Reservations reservations) {
-        requireAllNonNull(roomNumber, capacity, occupant, expenses, reservations);
+    protected Room(RoomNumber roomNumber, Capacity capacity, Expenses expenses, Bookings bookings, Set<Tag> tags) {
+        requireAllNonNull(roomNumber, capacity, expenses, bookings, tags);
         this.roomNumber = roomNumber;
         this.capacity = capacity;
-        this.occupant = occupant;
         this.expenses = expenses;
-        this.reservations = reservations;
+        this.bookings = bookings;
+        this.tags = tags;
+    }
+
+    protected Room(Room room) {
+        this(room.getRoomNumber(), room.getCapacity());
+        // this.expenses.setExpenses(room.getExpenses()); // to be implemented when Expenses is implemented
+        this.bookings.setBookings(room.getBookings());
     }
 
     public RoomNumber getRoomNumber() {
@@ -66,16 +61,12 @@ public abstract class Room {
         return capacity;
     }
 
-    public List<Guest> getOccupant() {
-        return occupant;
-    }
-
     public Expenses getExpenses() {
         return expenses;
     }
 
-    public Reservations getReservations() {
-        return reservations;
+    public Bookings getBookings() {
+        return bookings;
     }
 
     /**
@@ -87,10 +78,104 @@ public abstract class Room {
     }
 
     /**
-     * Returns true if room is occupied.
+     * Clones this room with a deep copied Bookings object
      */
-    public boolean isOccupied() {
-        return occupant.isEmpty();
+    public abstract <T extends Room> T cloneRoom();
+
+    /**
+     * Adds a booking to this room's list of bookings
+     */
+    public void addBooking(Booking booking) {
+        bookings.add(booking);
+    }
+
+    /**
+     * Update a booking with the edited booking
+     */
+    public void updateBooking(Booking target, Booking editedBooking) {
+        bookings.setBooking(target, editedBooking);
+    }
+
+    /**
+     * Removes all expired bookings from the list.
+     */
+    public void clearExpiredBookings() {
+        bookings.clearExpiredBookings();
+    }
+
+    /**
+     * Reset this room's bookings
+     */
+    public void setBookings(Bookings replacementBookings) {
+        bookings.setBookings(replacementBookings);
+    }
+
+    public void resetExpenses(Expenses expenses) {
+        // to be filled in once Expenses is done by
+    }
+
+    /**
+     * Returns true if room's first booking has been checked in.
+     */
+    public boolean isCheckedIn() {
+        Booking firstBooking = bookings.getFirstBooking();
+        return firstBooking.isCheckedIn();
+    }
+
+    /**
+     * Returns true if this room's bookings is non-empty
+     */
+    public boolean hasBooking() {
+        return !bookings.isEmpty();
+    }
+
+    /**
+     * Returns true if room's first booking is active.
+     */
+    public boolean hasActiveBooking() {
+        Booking firstBooking = bookings.getFirstBooking();
+        return firstBooking.isActive();
+    }
+
+    /**
+     * Returns true if room's first booking is active or expired
+     */
+    public boolean hasActiveOrExpiredBooking() {
+        Booking firstBooking = bookings.getFirstBooking();
+        return firstBooking.isActiveOrExpired();
+    }
+
+    /**
+     * Checks in the first booking of this room and its occupant
+     */
+    public void checkIn() {
+        if (!hasActiveBooking()) {
+            throw new NoActiveBookingException();
+        }
+        if (isCheckedIn()) {
+            throw new OccupiedRoomCheckinException();
+        }
+        Booking firstBooking = bookings.getFirstBooking();
+        // For tests to pass, we need to deep copy the booking here and replace it with its updated version
+        // firstBooking.checkIn() returns a deep copy of the booking with check-in flag set to true
+        Booking updatedFirstBooking = firstBooking.checkIn();
+        updateBooking(firstBooking, updatedFirstBooking);
+    }
+
+    /**
+     * Checks out the first booking of this room and its current occupant.
+     * Future features to include exporting of receipt, setting room to housekeeping status for __x__ hours.
+     */
+    public void checkout() {
+        if (!hasActiveOrExpiredBooking()) {
+            throw new NoActiveOrExpiredBookingException();
+        }
+        Booking firstBooking = bookings.getFirstBooking();
+        Guest guest = firstBooking.getGuest();
+        // guest.checkout(); // joyce implement this later
+
+        bookings.remove(firstBooking);
+        // expenses.report(); // weizheng implement this later
     }
 
     /**
@@ -104,25 +189,6 @@ public abstract class Room {
 
         return otherRoom != null
             && otherRoom.getRoomNumber().equals(getRoomNumber());
-    }
-
-    /**
-     * Returns true if the room number identifies this room.
-     */
-    public boolean isRoom(RoomNumber roomNumber) {
-        return getRoomNumber().equals(roomNumber);
-    }
-
-    /**
-     * Checks out this room and its occupant.
-     * Future features to include exporting of receipt, setting room to housekeeping status for 1 hour.
-     */
-    public void checkout() {
-        if (occupant.isEmpty()) {
-            throw new UnoccupiedRoomCheckoutException();
-        }
-        // Add guest.checkout() once its implemented
-        occupant.clear();
     }
 
     /**
@@ -142,8 +208,7 @@ public abstract class Room {
         Room otherRoom = (Room) other;
         return otherRoom.getRoomNumber().equals(getRoomNumber())
                 && otherRoom.getCapacity().equals(getCapacity())
-                && otherRoom.getOccupant().equals(getOccupant())
-                && otherRoom.getReservations().equals(getReservations())
+                && otherRoom.getBookings().equals(getBookings())
                 && otherRoom.getExpenses().equals(getExpenses())
                 && otherRoom.getTags().equals(getTags());
     }
@@ -151,7 +216,7 @@ public abstract class Room {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(roomNumber, capacity, expenses, reservations, occupant, tags);
+        return Objects.hash(roomNumber, capacity, expenses, bookings, tags);
     }
 
     @Override
@@ -162,9 +227,8 @@ public abstract class Room {
                 .append(" Capacity: ")
                 .append(getCapacity())
                 .append(" Registered Guest: ");
-        getOccupant().forEach(builder::append);
-        builder.append(" Reservations: ")
-                .append(getReservations())
+        builder.append(" Bookings: ")
+                .append(getBookings())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();

@@ -18,7 +18,7 @@ import org.junit.rules.ExpectedException;
 
 import seedu.address.model.person.exceptions.DuplicateGuestException;
 import seedu.address.model.person.exceptions.GuestNotFoundException;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.GuestBuilder;
 
 public class UniqueGuestListTest {
     @Rule
@@ -46,7 +46,7 @@ public class UniqueGuestListTest {
     @Test
     public void contains_personWithSameIdentityFieldsInList_returnsTrue() {
         uniqueGuestList.add(ALICE);
-        Guest editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Guest editedAlice = new GuestBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(uniqueGuestList.contains(editedAlice));
     }
@@ -94,7 +94,7 @@ public class UniqueGuestListTest {
     @Test
     public void setPerson_editedPersonHasSameIdentity_success() {
         uniqueGuestList.add(ALICE);
-        Guest editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Guest editedAlice = new GuestBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         uniqueGuestList.setGuest(ALICE, editedAlice);
         UniqueGuestList expectedUniqueGuestList = new UniqueGuestList();

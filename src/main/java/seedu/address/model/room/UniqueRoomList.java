@@ -5,9 +5,12 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.room.booking.Booking;
 import seedu.address.model.room.exceptions.DuplicateRoomException;
 import seedu.address.model.room.exceptions.RoomNotFoundException;
 
@@ -25,6 +28,31 @@ import seedu.address.model.room.exceptions.RoomNotFoundException;
 public class UniqueRoomList implements Iterable<Room> {
 
     private final ObservableList<Room> internalList = FXCollections.observableArrayList();
+
+    /**
+     * Initializes an empty room list
+     */
+    public UniqueRoomList() {}
+
+    /**
+     * Initializes a room list with rooms ranging from 001 up to the maxRoomNumber
+     * @param maxRoomNumber The maximum room number as a string
+     */
+    public UniqueRoomList(String maxRoomNumber) {
+        this.internalList.setAll(Stream.iterate(1, i -> i <= Integer.parseInt(maxRoomNumber), i -> i + 1)
+            .map(i -> {
+                RoomNumber roomNumber = new RoomNumber(String.format("%03d", i));;
+                if (i % 10 == 0) { // All rooms with room number that is multiple of 10 is a SuiteRoom.
+                    return new SuiteRoom(roomNumber);
+                }
+                if (i % 2 == 0) { // All rooms with even room number is a DoubleRoom.
+                    return new DoubleRoom(roomNumber);
+                }
+                // ALl rooms with odd room number is a SingleRoom.
+                return new SingleRoom(roomNumber);
+            })
+            .collect(Collectors.toList()));
+    }
 
     /**
      * Returns true if the list contains an equivalent room as the given argument.
@@ -109,20 +137,73 @@ public class UniqueRoomList implements Iterable<Room> {
         if (!roomsAreUnique(rooms)) {
             throw new DuplicateRoomException();
         }
+        // We need to clear and add the cloned rooms in order to create a deep copy. Needed for tests to pass.
+        internalList.clear();
+        for (Room r: rooms) {
+            internalList.add(r.cloneRoom());
+        }
+    }
 
-        internalList.setAll(rooms);
+    /**
+     * Returns the room according to the room number
+     */
+    private Room getRoom(RoomNumber roomNumber) {
+        requireNonNull(roomNumber);
+        for (Room room : internalList) {
+            if (room.getRoomNumber().equals(roomNumber)) {
+                return room;
+            }
+        }
+        throw new RoomNotFoundException();
+    }
+
+    /**
+     * Add a booking to a room identified by its room number.
+     */
+    public void addBooking(RoomNumber roomNumber, Booking booking) {
+        getRoom(roomNumber).addBooking(booking);
+    }
+
+    /**
+     * Returns true if the room identified by its room number is checked in.
+     */
+    public boolean isRoomCheckedIn(RoomNumber roomNumber) {
+        return getRoom(roomNumber).isCheckedIn();
+    }
+
+    /**
+     * Returns true if the room's bookings is non-empty
+     */
+    public boolean roomHasBooking(RoomNumber roomNumber) {
+        return getRoom(roomNumber).hasBooking();
+    }
+
+    /**
+     * Returns true if the room's first booking is active.
+     */
+    public boolean roomHasActiveBooking(RoomNumber roomNumber) {
+        return getRoom(roomNumber).hasActiveBooking();
+    }
+
+    /**
+     * Returns true if the room's first booking is active or expired
+     */
+    public boolean roomHasActiveOrExpiredBooking(RoomNumber roomNumber) {
+        return getRoom(roomNumber).hasActiveOrExpiredBooking();
+    }
+
+    /**
+     * Checks in the room using its room number
+     */
+    public void checkinRoom(RoomNumber roomNumber) {
+        getRoom(roomNumber).checkIn();
     }
 
     /**
      * Checks out a room using its room number
-     * @param roomNumber
      */
     public void checkoutRoom(RoomNumber roomNumber) {
-        for (Room room : internalList) {
-            if (room.isRoom(roomNumber)) {
-                room.checkout();
-            }
-        }
+        getRoom(roomNumber).checkout();
     }
 
     /**

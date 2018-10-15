@@ -31,7 +31,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Guest;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.GuestBuilder;
 import seedu.address.testutil.PersonUtil;
 
 public class AddressBookParserTest {
@@ -42,7 +42,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_add() throws Exception {
-        Guest guest = new PersonBuilder().build();
+        Guest guest = new GuestBuilder().build();
         AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(guest));
         assertEquals(new AddCommand(guest), command);
     }
@@ -62,7 +62,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_edit() throws Exception {
-        Guest guest = new PersonBuilder().build();
+        Guest guest = new GuestBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(guest).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
@@ -104,8 +104,8 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_list() throws Exception {
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " -r") instanceof ListCommand);
+        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " -g") instanceof ListCommand);
     }
 
     @Test

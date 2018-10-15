@@ -17,6 +17,11 @@ public class Expenses {
         expenseList = new LinkedList<Expense>();
     }
 
+    public Expenses(Expenses expenses) {
+        this();
+        this.expenseList.addAll(expenses.expenseList);
+    }
+
     /**
      * Adds a new {@code Expense} to the current expenses.
      * New expense is added in front as it is more likely that recent expenses are accessed.
@@ -25,6 +30,11 @@ public class Expenses {
      */
     public void addExpense(Expense newExpense) {
         expenseList.add(0, newExpense);
+    }
+
+    public void setExpenses(Expenses expenses) {
+        this.expenseList.clear();
+        this.expenseList.addAll(expenses.expenseList);
     }
 
     /**

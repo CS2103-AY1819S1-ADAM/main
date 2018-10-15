@@ -1,8 +1,10 @@
 package seedu.address.model.room;
 
-import java.util.List;
+import java.util.Set;
 
-import seedu.address.model.person.Guest;
+import seedu.address.model.expenses.Expenses;
+import seedu.address.model.room.booking.Bookings;
+import seedu.address.model.tag.Tag;
 
 /**
  * Represents a Double Room in the hotel.
@@ -11,12 +13,27 @@ import seedu.address.model.person.Guest;
 public class DoubleRoom extends Room {
     public static final Capacity CAPACITY_DOUBLE_ROOM = new Capacity(2);
 
+    public DoubleRoom(RoomNumber roomNumber) {
+        super(roomNumber, CAPACITY_DOUBLE_ROOM);
+    }
+
     /**
      * All parameters must be non-null.
-     * Note: {@code occupant}, {@code expenses}, or {@code reservations} may be empty, but not null.
      */
-    public DoubleRoom(RoomNumber roomNumber, List<Guest> occupant, Expenses expenses,
-                      Reservations reservations) {
-        super(roomNumber, CAPACITY_DOUBLE_ROOM, occupant, expenses, reservations);
+    public DoubleRoom(RoomNumber roomNumber, Expenses expenses, Bookings bookings, Set<Tag> tags) {
+        super(roomNumber, CAPACITY_DOUBLE_ROOM, expenses, bookings, tags);
+    }
+
+    public DoubleRoom(DoubleRoom doubleRoom) {
+        super(doubleRoom);
+    }
+
+    public static int getCapacityValue() {
+        return CAPACITY_DOUBLE_ROOM.getValue();
+    }
+
+    @Override
+    public DoubleRoom cloneRoom() {
+        return new DoubleRoom(this);
     }
 }

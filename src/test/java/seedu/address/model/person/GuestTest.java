@@ -14,7 +14,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.GuestBuilder;
 
 public class GuestTest {
     @Rule
@@ -22,7 +22,7 @@ public class GuestTest {
 
     @Test
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
-        Guest guest = new PersonBuilder().build();
+        Guest guest = new GuestBuilder().build();
         thrown.expect(UnsupportedOperationException.class);
         guest.getTags().remove(0);
     }
@@ -36,32 +36,32 @@ public class GuestTest {
         assertFalse(ALICE.isSameGuest(null));
 
         // different phone and email -> returns false
-        Guest editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).build();
+        Guest editedAlice = new GuestBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).build();
         assertFalse(ALICE.isSameGuest(editedAlice));
 
         // different name -> returns false
-        editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).build();
+        editedAlice = new GuestBuilder(ALICE).withName(VALID_NAME_BOB).build();
         assertFalse(ALICE.isSameGuest(editedAlice));
 
         // same name, same phone, different attributes -> returns true
-        editedAlice = new PersonBuilder(ALICE).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
+        editedAlice = new GuestBuilder(ALICE).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withTags(VALID_TAG_HUSBAND).build();
         assertTrue(ALICE.isSameGuest(editedAlice));
 
         // same name, same email, different attributes -> returns true
-        editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withAddress(VALID_ADDRESS_BOB)
+        editedAlice = new GuestBuilder(ALICE).withPhone(VALID_PHONE_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withTags(VALID_TAG_HUSBAND).build();
         assertTrue(ALICE.isSameGuest(editedAlice));
 
         // same name, same phone, same email, different attributes -> returns true
-        editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
+        editedAlice = new GuestBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
         assertTrue(ALICE.isSameGuest(editedAlice));
     }
 
     @Test
     public void equals() {
         // same values -> returns true
-        Guest aliceCopy = new PersonBuilder(ALICE).build();
+        Guest aliceCopy = new GuestBuilder(ALICE).build();
         assertTrue(ALICE.equals(aliceCopy));
 
         // same object -> returns true
@@ -77,23 +77,23 @@ public class GuestTest {
         assertFalse(ALICE.equals(BOB));
 
         // different name -> returns false
-        Guest editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).build();
+        Guest editedAlice = new GuestBuilder(ALICE).withName(VALID_NAME_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different phone -> returns false
-        editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).build();
+        editedAlice = new GuestBuilder(ALICE).withPhone(VALID_PHONE_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different email -> returns false
-        editedAlice = new PersonBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
+        editedAlice = new GuestBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different address -> returns false
-        editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
+        editedAlice = new GuestBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different tags -> returns false
-        editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
+        editedAlice = new GuestBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
         assertFalse(ALICE.equals(editedAlice));
     }
 }

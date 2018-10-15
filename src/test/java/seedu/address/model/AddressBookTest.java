@@ -5,8 +5,8 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -21,7 +21,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Guest;
 import seedu.address.model.person.exceptions.DuplicateGuestException;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.model.room.Room;
+import seedu.address.testutil.GuestBuilder;
 
 public class AddressBookTest {
 
@@ -51,10 +52,11 @@ public class AddressBookTest {
     @Test
     public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
         // Two guests with the same identity fields
-        Guest editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Guest editedAlice = new GuestBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Guest> newGuests = Arrays.asList(ALICE, editedAlice);
-        AddressBookStub newData = new AddressBookStub(newGuests);
+
+        AddressBookStub newData = new AddressBookStub(newGuests, null);
 
         thrown.expect(DuplicateGuestException.class);
         addressBook.resetData(newData);
@@ -80,7 +82,7 @@ public class AddressBookTest {
     @Test
     public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
         addressBook.addPerson(ALICE);
-        Guest editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Guest editedAlice = new GuestBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(addressBook.hasPerson(editedAlice));
     }
@@ -96,14 +98,20 @@ public class AddressBookTest {
      */
     private static class AddressBookStub implements ReadOnlyAddressBook {
         private final ObservableList<Guest> guests = FXCollections.observableArrayList();
+        private final ObservableList<Room> rooms = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Guest> guests) {
+        AddressBookStub(Collection<Guest> guests, Collection<Room> rooms) {
             this.guests.setAll(guests);
         }
 
         @Override
         public ObservableList<Guest> getPersonList() {
             return guests;
+        }
+
+        @Override
+        public ObservableList<Room> getRoomList() {
+            return rooms;
         }
     }
 

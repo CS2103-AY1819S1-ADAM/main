@@ -21,8 +21,7 @@ public class CheckoutCommandParser implements Parser<CheckoutCommand> {
             RoomNumber roomNumber = ParserUtil.parseRoomNumber(args);
             return new CheckoutCommand(roomNumber);
         } catch (ParseException pe) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, CheckoutCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, CheckoutCommand.MESSAGE_USAGE), pe);
         }
     }
 

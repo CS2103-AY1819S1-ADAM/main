@@ -38,8 +38,13 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
-    public static final String VALID_ROOM = "074";
+    public static final String VALID_TAG_HANDICAP = "handicap";
     public static final String VALID_INDEX = "1";
+    public static final String VALID_ROOM_NUMBER_074 = "074";
+    public static final String VALID_ROOM_NUMBER_088 = "088";
+    public static final Integer VALID_CAPACITY_SINGLE = 1;
+    public static final Integer VALID_CAPACITY_DOUBLE = 2;
+    public static final Integer VALID_CAPACITY_SUITE = 5;
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -51,8 +56,9 @@ public class CommandTestUtil {
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
-    public static final String ROOM_DESC_BOB = " " + PREFIX_ROOM + VALID_ROOM;
     public static final String INDEX_DESC_BOB = " " + PREFIX_INDEX + VALID_INDEX;
+    public static final String ROOM_DESC_BOB = " " + PREFIX_ROOM + VALID_ROOM_NUMBER_074;
+
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
@@ -92,7 +98,7 @@ public class CommandTestUtil {
             assertEquals(expectedModel, actualModel);
             assertEquals(expectedCommandHistory, actualCommandHistory);
         } catch (CommandException ce) {
-            throw new AssertionError("Execution of command should not fail.", ce);
+            throw new AssertionError("Execution of command should not fail. Failure reason: " + ce.getMessage(), ce);
         }
     }
 

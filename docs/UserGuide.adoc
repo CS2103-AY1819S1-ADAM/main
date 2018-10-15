@@ -54,66 +54,66 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 * Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 ====
 
-=== Viewing help : `help`
-
-Format: `help`
-
-
-=== Clearing all entries : `avail`
-
-Lists all the available rooms of that type for the next NUM_DAYS days +
-Format: `avail r/ROOM TYPE num/NUM_DAYS`
-
-Lists all available rooms from start to end date. Dates have to be given in YYMMDD format
-
-=== Adding a guest: `add`
-
-Adds a guest to the address book +
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
-
-[TIP]
-A guest can have any number of tags (including 0)
-
-
-Examples:
-
-* `avail r/Double Room num/5`
-* `avail r/Double Room ds/20180910 de/21080912`
-
-=== Listing all guests : `list`
-
-
-Shows a list of all room types and cost of room +
-Format: `list`
-
 === Adding a person: `add`
 
 Adds a guest to the guest list for the purpose of assigning a room +
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]...`
-
-=== Adding a person: `addx`
-
-Adds a guest to the guest list NOT for the purpose of assigning a room +
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]...`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG] r/ROOM_NUMBER from/START_DATE to/END_DATE`
 
 [TIP]
 A guest can have any number of tags (including 0)
 
 Examples:
 
+* `add n/John Smith p/98765432 e/johnsmith@gmail.com t/VIP r/85 from/09/12/18 to/10/12/18`
+Add a guest "John Smith" to room 85 for a period of stay from 09/12/18 to 10/12/18.
+
+=== Listing all guests or rooms : `list`
+
+Displays a list of all rooms or guests (using flags -r/-g).
+Format: `list -r`, `list -g`
+
+=== Adding a person: `addx`
+
+Adds a guest to the guest list NOT for the purpose of assigning a room (perhaps add to archived guest list) +
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]...`
+
+Examples:
 * `add n/guest g/S9876543B`
 
-=== Display guest info: `guest`
+=== Checkout room: `checkout`
 
-Lists information about a specified guest +
-Format: `n/guest g/S9876543B`
+Checks out the room and the guest staying in it. The guest is deleted from the guest list and the room is then marked
+for housekeeping. +
+Format: `checkout ROOM_NUMBER`
 
-Shows a list of all guests in the address book. +
-Format: `list`
+Examples:
+
+* `checkout 85` +
+Checks out room 85 and the guest staying in it.
+
+=== Deleting a guest : `delete`
+
+Deletes the specified guest from the archived guest list. +
+Format: `delete INDEX`
+
+****
+* Deletes the guest at the specified `INDEX`.
+* The index refers to the index number shown in the displayed guest list.
+* The index *must be a positive integer* 1, 2, 3, ...
+****
+
+Examples:
+
+* `list -g` +
+`delete 2` +
+Deletes the 2nd guest in the displayed guest list.
+* `find -g Betsy` +
+`delete 1` +
+Deletes the 1st guest in the results of the `find` command.
 
 === Editing a guest : `edit`
 
-Edits an existing guest in the address book. +
+Edits an existing guest in the guest list. +
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
 
 ****
@@ -133,66 +133,66 @@ Edits the name of the 2nd guest to be `Betsy Crower` and clears all existing tag
 
 === Locating guests by name: `find`
 
-Finds guests whose names contain any of the given keywords. +
-Format: `find KEYWORD [MORE_KEYWORDS]`
-
-
-Guests are identified by their ID number
-
-=== Assigning a room to a guest: `assign`
-
-
-Assigns all guests added with the `add` command to the room with the given `ROOM_ID`  +
-Format: `assign rm/709`
-
-Assigns all guests given in the keywords to the room with the given `ROOM_ID`  +
-Format: `assign rm/709 g/S9876543B g/S9345678Z`
-
-If there are conflicting guest entries, the system will prompt for a selection decision
-Guests are identified by their ID number
-
-=== Reserving a room for a guest: `reserve`
-
-* `find John` +
-Returns `john` and `John Doe`
-* `find Betsy Tim John` +
-Returns any guest having names `Betsy`, `Tim`, or `John`
-
-=== Deleting a guest : `delete`
-
-Deletes the specified guest from the address book. +
-Format: `delete INDEX`
-
+Finds guests or rooms, depending on the input flag and the keywords. +
+Format: `find [flag] KEYWORD`
 ****
-* Deletes the guest at the specified `INDEX`.
-* The index refers to the index number shown in the displayed guest list.
-* The index *must be a positive integer* 1, 2, 3, ...
+* The search is case insensitive. e.g `hans` will match `Hans`
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* Only the name is searched.
+* Only full words will be matched e.g. `Han` will not match `Hans`
+* Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 ****
 
+Examples:
 
-Reserves the room given by `ROOM_ID` for all guests added with the add command.
-Dates have to be given in YYMMDD format  +
-Format: `reserve rm/709 ds/20180910 de/20180912`
+* `find -g n/John Smith` +
+Find guest(s) with "John" or "Smith" or both in their names.
+* `find -g r/85` +
+Find guest currently staying in room 85
+* `find -r 85` +
+Find room 85
+* `find -r g/John Smith` +
+Find room in which guest John Smith is currently staying
 
-Reserves the room given by `ROOM_ID` to all guests given in the keywords +
-Format: `assign rm/709 ds/20180910 de/20180912 g/S9876543B g/S9345678Z`
+=== Listing all guests : `list`
 
-If there are conflicting guest entries, the system will prompt for a selection decision.
-Dates have to be given on YYMMDD format.
-Guests are identified by their ID number.
+Shows a list of rooms or guests, depending on the input flag +
+Format: `list [flag]`
+
+Examples:
+
+* `list -r` +
+List all rooms (default)
+* `list -g` +
+List all guests
+* `list -r -d` +
+List all double rooms
+* `list -r -a` +
+List all available rooms today
+* `list -r -a 09/12/18 10/12/18` +
+Lists rooms that are available from 091218 101218. Input dates must be in DD/MM/YY format.
 
 
-=== Checkout room: `checkout`
+=== Selecting a guest : `select`
 
-Checks out all guests in the room and deletes all guests from the system. Room is then marked for
-housekeeping  +
-Format: `checkout rm/709`
+Selects the guest/room identified by the index number used in the displayed list. +
+Format: `select INDEX`
 
-Checks out the guest from his/her room and the guest is deleted from the system.
-If there no more guests in the room, room is marked for housekeeping +
-Format: `checkout g/S9876543B`
+****
+* Selects the guest/room and loads the information of the guest/room at the specified `INDEX`.
+* The index refers to the index number shown in the displayed list.
+* The index *must be a positive integer* `1, 2, 3, ...`
 
-Guests are identified by their ID number.
+****
+
+Examples:
+
+* `list` +
+`select 2` +
+Selects the 2nd room in the displayed list.
+* `find -g Betsy` +
+`select 1` +
+Selects the 1st guest in the results of the `find` command.
 
 === Provide Room Service: `service`
 
@@ -208,64 +208,7 @@ Marks the given room for maintenance +
 Format: `service rm/709 mt/wiring`
 
 mt refers to the type of maintenance required.
-Room will not be available for booking or reservation whilst in this state.
-
-=== List faulty rooms: `maintenance`
-
-Lists all rooms that require maintenance +
-Format: `maintenance`
-
-=== Export log: `export`
-
-Exports a log of all history of commands into a text file +
-Format: `export`
-
-=== Locating guest by name: `find`
-
-Finds guest whose names contain any of the given keywords. +
-Format: `find KEYWORD [MORE_KEYWORDS]`
-
-****
-* The search is case insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-****
-
-* `list` +
-`delete 2` +
-Deletes the 2nd guest in the address book.
-* `find Betsy` +
-`delete 1` +
-Deletes the 1st guest in the results of the `find` command.
-
-=== Selecting a guest : `select`
-
-Selects the guest identified by the index number used in the displayed guest list. +
-Format: `select INDEX`
-
-****
-* Selects the guest and loads the Google search page the guest at the specified `INDEX`.
-* The index refers to the index number shown in the displayed guest list.
-* The index *must be a positive integer* `1, 2, 3, ...`
-****
-
-Examples:
-
-
-* `find John` +
-Returns `john` and `John Doe`
-* `find Betsy Tim John` +
-Returns any person having names `Betsy`, `Tim`, or `John`
-
-* `list` +
-`select 2` +
-Selects the 2nd guest in the address book.
-* `find Betsy` +
-`select 1` +
-Selects the 1st guest in the results of the `find` command.
-
+Room will not be available for booking whilst in this state.
 
 === Listing entered commands : `history`
 
@@ -332,6 +275,15 @@ The `redo` command fails as there are no `undo` commands executed previously.
 Clears all entries from the application. +
 Format: `clear`
 
+=== Export log: `export`
+
+Exports a log of all history of commands into a text file +
+Format: `export`
+
+=== Viewing help : `help`
+
+Format: `help`
+
 === Exiting the program : `exit`
 
 Exits the program. +
@@ -355,30 +307,20 @@ _{explain how the user can enable/disable data encryption}_
 
 == Command Summary
 
-* *Clear* : `clear`
-* *Delete* : `delete INDEX` +
-e.g. `delete 3`
-* *Edit* : `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
-e.g. `edit 2 n/James Lee e/jameslee@example.com`
-* *Find* : `find KEYWORD [MORE_KEYWORDS]` +
-e.g. `find James Jake`
+* *Add a guest for assigning* : `add`
+* *Add a guest NOT for assigning* : `addx`
+* *Checkout* : `checkout`
+* *Delete* : `delete INDEX`
+* *Edit* : `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
+* *Find* : `find KEYWORD [MORE_KEYWORDS]`
 * *List* : `list`
-* *Help* : `help`
-* *Select* : `select INDEX` +
-e.g.`select 2`
+* *Select* : `select INDEX`
+* *Room Service* : `service`
+* *Mark Room as faulty* : `fault`
 * *History* : `history`
 * *Undo* : `undo`
 * *Redo* : `redo`
-* *Assign a room* : `assign`
-* *Check available rooms* : `avail`
-* *Add a guest for assigning* : `add`
-* *Add a guest NOT for assigning* : `addx`
-* *Reserve a room* : `reserve`
-* *Display guest info* : `guest`
-* *Checkout* : `checkout`
-* *Room Service* : `service`
-* *Mark Room as faulty* : `fault`
-* *List faulty rooms* : `maintenance`
+* *Clear* : `clear`
 * *Export log* : `export`
-
-
+* *Help* : `help`
+* *Exit* : `exit`

@@ -1,6 +1,7 @@
 package seedu.address.storage;
 
 import static org.junit.Assert.assertEquals;
+import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -12,7 +13,6 @@ import org.junit.rules.ExpectedException;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.XmlUtil;
 import seedu.address.model.AddressBook;
-import seedu.address.testutil.TypicalPersons;
 
 public class XmlSerializableAddressBookTest {
 
@@ -29,7 +29,7 @@ public class XmlSerializableAddressBookTest {
         XmlSerializableAddressBook dataFromFile = XmlUtil.getDataFromFile(TYPICAL_PERSONS_FILE,
                 XmlSerializableAddressBook.class);
         AddressBook addressBookFromFile = dataFromFile.toModelType();
-        AddressBook typicalPersonsAddressBook = TypicalPersons.getTypicalAddressBook();
+        AddressBook typicalPersonsAddressBook = getTypicalAddressBook();
         assertEquals(addressBookFromFile, typicalPersonsAddressBook);
     }
 

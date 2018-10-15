@@ -11,6 +11,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Guest;
+import seedu.address.model.room.Room;
 
 /**
  * An Immutable AddressBook that is serializable to XML format
@@ -19,9 +20,13 @@ import seedu.address.model.person.Guest;
 public class XmlSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate guest(s).";
+    public static final String MESSAGE_DUPLICATE_ROOM = "Room list contains duplicate room(s)";
 
     @XmlElement
     private List<XmlAdaptedPerson> guests;
+
+    @XmlElement
+    private List<XmlAdaptedRoom> rooms;
 
     /**
      * Creates an empty XmlSerializableAddressBook.
@@ -29,6 +34,7 @@ public class XmlSerializableAddressBook {
      */
     public XmlSerializableAddressBook() {
         guests = new ArrayList<>();
+        rooms = new ArrayList<>();
     }
 
     /**
@@ -37,13 +43,13 @@ public class XmlSerializableAddressBook {
     public XmlSerializableAddressBook(ReadOnlyAddressBook src) {
         this();
         guests.addAll(src.getPersonList().stream().map(XmlAdaptedPerson::new).collect(Collectors.toList()));
+        rooms.addAll(src.getRoomList().stream().map(XmlAdaptedRoom::new).collect(Collectors.toList()));
     }
 
     /**
      * Converts this addressbook into the model's {@code AddressBook} object.
-     *
      * @throws IllegalValueException if there were any data constraints violated or duplicates in the
-     * {@code XmlAdaptedPerson}.
+     * {@code XmlAdaptedPerson / XmlAdaptedRoom}
      */
     public AddressBook toModelType() throws IllegalValueException {
         AddressBook addressBook = new AddressBook();
@@ -54,6 +60,15 @@ public class XmlSerializableAddressBook {
             }
             addressBook.addPerson(guest);
         }
+
+        for (XmlAdaptedRoom r : rooms) {
+            Room room = r.toModelType();
+            if (addressBook.hasRoom(room)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_ROOM);
+            }
+            addressBook.addRoom(room);
+        }
+
         return addressBook;
     }
 

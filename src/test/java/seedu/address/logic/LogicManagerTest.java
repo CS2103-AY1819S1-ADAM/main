@@ -1,6 +1,7 @@
 package seedu.address.logic;
 
 import static org.junit.Assert.assertEquals;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
@@ -40,11 +41,25 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_validCommand_success() {
+    public void execute_invalidCommand_noFlag() {
         String listCommand = ListCommand.COMMAND_WORD;
+        assertParseException(listCommand, String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void execute_validCommand_roomListSuccess() {
+        String listCommand = ListCommand.COMMAND_WORD + " -r";
         assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS, model);
         assertHistoryCorrect(listCommand);
     }
+
+    @Test
+    public void execute_validCommand_guestListSuccess() {
+        String listCommand = ListCommand.COMMAND_WORD + " -g";
+        assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS, model);
+        assertHistoryCorrect(listCommand);
+    }
+
 
     @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {

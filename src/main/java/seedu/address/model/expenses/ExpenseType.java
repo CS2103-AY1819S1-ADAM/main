@@ -12,8 +12,9 @@ import seedu.address.model.expenses.exceptions.ItemNotFoundException;
  */
 public class ExpenseType {
 
-    public static final Map<String, String> numberToName;
-    public static final Map<String, Double> numberToPrice;
+    public static final Map<String, String> NUMBER_TO_NAME;
+    public static final Map<String, Double> NUMBER_TO_PRICE;
+
     static {
         Map<String, String> numberToNameDummy = new HashMap<>();
         Map<String, Double> numberToPriceDummy = new HashMap<>();
@@ -33,8 +34,8 @@ public class ExpenseType {
         numberToPriceDummy.put("MB01", 3.00);
         numberToPriceDummy.put("MB02", 3.00);
         numberToPriceDummy.put("MB03", 7.00);
-        numberToName = Collections.unmodifiableMap(numberToNameDummy);
-        numberToPrice = Collections.unmodifiableMap(numberToPriceDummy);
+        NUMBER_TO_NAME = Collections.unmodifiableMap(numberToNameDummy);
+        NUMBER_TO_PRICE = Collections.unmodifiableMap(numberToPriceDummy);
     }
 
     /**
@@ -45,7 +46,7 @@ public class ExpenseType {
      * @return True if the menuNumber exists in the menu, false otherwise.
      */
     public static boolean isValidMenuNumber(String menuNumber) {
-        return numberToName.containsKey(menuNumber);
+        return NUMBER_TO_NAME.containsKey(menuNumber);
     }
 
     /**
@@ -59,7 +60,7 @@ public class ExpenseType {
         if (!isValidMenuNumber(menuNumber)) {
             throw new ItemNotFoundException();
         }
-        return numberToName.get(menuNumber);
+        return NUMBER_TO_NAME.get(menuNumber);
     }
 
     /**
@@ -73,6 +74,6 @@ public class ExpenseType {
         if (!isValidMenuNumber(menuNumber)) {
             throw new ItemNotFoundException();
         }
-        return numberToPrice.get(menuNumber);
+        return NUMBER_TO_PRICE.get(menuNumber);
     }
 }

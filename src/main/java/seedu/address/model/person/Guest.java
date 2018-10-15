@@ -38,6 +38,14 @@ public class Guest {
         this.tags.addAll(tags);
     }
 
+    public Guest(Guest toBeCopied) {
+        this.name = new Name(toBeCopied.getName().toString());
+        this.phone = new Phone(toBeCopied.getPhone().toString());
+        this.email = new Email(toBeCopied.getEmail().toString());
+        this.address = new Address(toBeCopied.getAddress().toString());
+        this.tags.addAll(toBeCopied.getTags());
+    }
+
     public Name getName() {
         return name;
     }

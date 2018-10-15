@@ -4,14 +4,20 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Guest;
+import seedu.address.model.room.Room;
 import seedu.address.model.room.RoomNumber;
+import seedu.address.model.room.booking.Booking;
 
 /**
  * The API of the Model component.
  */
 public interface Model {
-    /** {@code Predicate} that always evaluate to true */
+    /** {@code Predicate} that always evaluate to true/false */
     Predicate<Guest> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Guest> PREDICATE_SHOW_NO_PERSONS = unused -> false;
+    Predicate<Room> PREDICATE_SHOW_ALL_ROOMS = unused -> true;
+    Predicate<Room> PREDICATE_SHOW_NO_ROOMS = unused -> false;
+
 
     /** Clears existing backing model and replaces with the provided new data. */
     void resetData(ReadOnlyAddressBook newData);
@@ -52,6 +58,15 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Guest> predicate);
 
+    /** Returns an unmodifiable view of the filtered room list */
+    ObservableList<Room> getFilteredRoomList();
+
+    /**
+     * Updates the filter of the filtered room list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredRoomList(Predicate<Room> predicate);
+
     /**
      * Returns true if the model has previous address book states to restore.
      */
@@ -78,12 +93,44 @@ public interface Model {
     void commitAddressBook();
 
     /**
-     * Checks out the room by its room number and removes its registered guest.
+     * Checks in the room by its room number
+     */
+    void checkinRoom(RoomNumber roomNumber);
+
+    /**
+     * Checks out the room.
+     * @param roomNumber
      */
     void checkoutRoom(RoomNumber roomNumber);
 
     /**
-     * Saves the current room list state for undo/redo
+     * Returns true if the room identified by its room number is checked in.
      */
-    void commitRoomList();
+    boolean isRoomCheckedIn(RoomNumber roomNumber);
+
+    /**
+     * Returns true if the room's bookings is non-empty
+     */
+    boolean roomHasBooking(RoomNumber roomNumber);
+
+    /**
+     * Returns true if the room's first booking is active.
+     */
+    boolean roomHasActiveBooking(RoomNumber roomNumber);
+
+
+    /**
+     * Returns true if the room's first booking is active or upcoming
+     */
+    public boolean roomHasActiveOrExpiredBooking(RoomNumber roomNumber);
+
+    /**
+     * Add a booking to a room identified by its room number.
+     */
+    public void addBooking(RoomNumber roomNumber, Booking booking);
+
+    /**
+     *  Displays room list instead of guest list
+     */
+    //void displayRoomList(Predicate<Room> predicate);
 }

@@ -39,14 +39,14 @@ import seedu.address.model.person.Guest;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.GuestBuilder;
 
 public class AddCommandParserTest {
     private AddCommandParser parser = new AddCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Guest expectedGuest = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND).build();
+        Guest expectedGuest = new GuestBuilder(BOB).withTags(VALID_TAG_FRIEND).build();
 
         // whitespace only preamble
         assertParseSuccess(parser,
@@ -75,7 +75,7 @@ public class AddCommandParserTest {
                 new AddCommand(expectedGuest));
 
         // multiple tags - all accepted
-        Guest expectedGuestMultipleTags = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
+        Guest expectedGuestMultipleTags = new GuestBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
                 .build();
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                         + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + ROOM_DESC_BOB,
@@ -85,7 +85,7 @@ public class AddCommandParserTest {
     @Test
     public void parse_optionalFieldsMissing_success() {
         // zero tags
-        Guest expectedGuest = new PersonBuilder(AMY).withTags().build();
+        Guest expectedGuest = new GuestBuilder(AMY).withTags().build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY
                         + EMAIL_DESC_AMY + ADDRESS_DESC_AMY,
                 new AddCommand(expectedGuest));

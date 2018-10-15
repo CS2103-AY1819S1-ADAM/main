@@ -8,7 +8,6 @@ import seedu.address.model.person.Guest;
  */
 public class PersonPanelSelectionChangedEvent extends BaseEvent {
 
-
     private final Guest newSelection;
 
     public PersonPanelSelectionChangedEvent(Guest newSelection) {
