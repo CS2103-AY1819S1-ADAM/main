@@ -1,13 +1,16 @@
 package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.StreamSupport;
 
 import seedu.address.model.room.Room;
+import seedu.address.model.room.booking.Bookings;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -24,18 +27,20 @@ public class Guest {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
-    private Room room;
+    private Bookings bookings;
 
     /**
      * Every field must be present and not null.
      */
-    public Guest(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+    public Guest(Name name, Phone phone, Email email, Address address,
+                 Set<Tag> tags, Bookings bookings) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.bookings = bookings;
     }
 
     public Guest(Guest toBeCopied) {
@@ -44,6 +49,7 @@ public class Guest {
         this.email = new Email(toBeCopied.getEmail().toString());
         this.address = new Address(toBeCopied.getAddress().toString());
         this.tags.addAll(toBeCopied.getTags());
+        this.bookings = new Bookings(toBeCopied.getBookings());
     }
 
     public Name getName() {
@@ -62,13 +68,19 @@ public class Guest {
         return address;
     }
 
+    public Bookings getBookings() { return bookings; }
+
+    /**
+     * Checks if the Guest is currently checked into any room.
+     * The Bookings are converted to a stream considered in parallel.
+     * @return true if the Guest currently has an active booking, false
+     * otherwise.
+     */
     public boolean hasRoom() {
-        return this.room != null;
+        return StreamSupport
+                .stream(getBookings().spliterator(), true)
+                .anyMatch(booking -> booking.isActive());
     }
-
-    public Room getRoom() { return room; }
-
-    public void setRoom(Room room) { this.room = room; }
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
@@ -130,15 +142,10 @@ public class Guest {
                 .append(getEmail())
                 .append(" Address: ")
                 .append(getAddress())
+                .append(" Staying in Room: ")
+                .append(getRoom())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
-
-        if (this.hasRoom()) {
-            builder.append(" Staying in Room: ")
-                    .append(getRoom());
-        } else {
-            builder.append(" Currently not staying in Hotel ");
-        }
 
         return builder.toString();
     }
