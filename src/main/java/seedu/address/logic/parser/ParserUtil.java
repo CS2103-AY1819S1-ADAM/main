@@ -17,6 +17,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.room.RoomNumber;
+import seedu.address.model.room.booking.BookingPeriod;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -136,6 +137,24 @@ public class ParserUtil {
             throw new ParseException(RoomNumber.MESSAGE_ROOM_NUMBER_CONSTRAINTS);
         }
         return new RoomNumber(trimmedRoomNumber);
+    }
+
+    /**
+     * Parses a {@code String startDate} and {@code String endDate} into a
+     * {@code BookingPeriod}.
+     * Leading and trailing whitespaces will be trimmed.
+     * @throws ParseException if either of the given {@code startDate} or
+     * {@code endDate} is invalid.
+     */
+    public static BookingPeriod parseBookingPeriod(String startDate,
+                                                   String endDate) throws ParseException {
+        requireNonNull(startDate, endDate);
+        String trimmedStartDate = startDate.trim();
+        String trimmedEndDate = endDate.trim();
+        if (!BookingPeriod.isValidBookingPeriod(trimmedStartDate, trimmedEndDate)) {
+            throw new ParseException(BookingPeriod.MESSAGE_BOOKING_PERIOD_CONSTRAINTS);
+        }
+        return new BookingPeriod(trimmedStartDate, trimmedEndDate);
     }
 
     /**
