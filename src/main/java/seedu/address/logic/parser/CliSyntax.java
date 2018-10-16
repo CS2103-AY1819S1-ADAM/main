@@ -13,5 +13,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_TAG = new Prefix("t/");
     public static final Prefix PREFIX_INDEX = new Prefix("-i");
     public static final Prefix PREFIX_ROOM = new Prefix("-r");
+    public static final Prefix PREFIX_DATE_START = new Prefix("from/");
+    public static final Prefix PREFIX_DATE_END = new Prefix("to/");
     public static final Prefix PREFIX_GUEST = new Prefix("-g");
 }
