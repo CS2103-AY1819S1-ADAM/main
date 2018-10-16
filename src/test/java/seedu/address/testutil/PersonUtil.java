@@ -1,5 +1,8 @@
 package seedu.address.testutil;
 
+import static seedu.address.logic.commands.CommandTestUtil.DATE_END_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.DATE_START_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.ROOM_DESC_BOB;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -22,7 +25,8 @@ public class PersonUtil {
      * Returns an add command string for adding the {@code guest}.
      */
     public static String getAddCommand(Guest guest) {
-        return AddCommand.COMMAND_WORD + " " + getPersonDetails(guest);
+        return AddCommand.COMMAND_WORD + " " + getPersonDetails(guest)
+                + ROOM_DESC_BOB + DATE_START_DESC_BOB + DATE_END_DESC_BOB;
     }
 
     /**

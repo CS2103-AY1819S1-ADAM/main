@@ -3,6 +3,8 @@ package seedu.address.logic.commands;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE_END;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE_START;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -39,12 +41,15 @@ public class CommandTestUtil {
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
     public static final String VALID_TAG_HANDICAP = "handicap";
-    public static final String VALID_INDEX = "1";
     public static final String VALID_ROOM_NUMBER_074 = "074";
     public static final String VALID_ROOM_NUMBER_088 = "088";
     public static final Integer VALID_CAPACITY_SINGLE = 1;
     public static final Integer VALID_CAPACITY_DOUBLE = 2;
     public static final Integer VALID_CAPACITY_SUITE = 5;
+    public static final String VALID_DATE_START_AMY = "14/11/2018";
+    public static final String VALID_DATE_END_AMY = "17/11/2018";
+    public static final String VALID_DATE_START_BOB = "03/11/2018";
+    public static final String VALID_DATE_END_BOB = "05/11/2018";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -56,9 +61,16 @@ public class CommandTestUtil {
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
-    public static final String INDEX_DESC_BOB = " " + PREFIX_INDEX + VALID_INDEX;
+    public static final String ROOM_DESC_AMY = " " + PREFIX_ROOM + VALID_ROOM_NUMBER_088;
     public static final String ROOM_DESC_BOB = " " + PREFIX_ROOM + VALID_ROOM_NUMBER_074;
-
+    public static final String DATE_START_DESC_AMY =
+            " " + PREFIX_DATE_START + VALID_DATE_START_AMY;
+    public static final String DATE_END_DESC_AMY =
+            " " + PREFIX_DATE_END + VALID_DATE_END_AMY;
+    public static final String DATE_START_DESC_BOB =
+            " " + PREFIX_DATE_START + VALID_DATE_START_BOB;
+    public static final String DATE_END_DESC_BOB =
+            " " + PREFIX_DATE_END + VALID_DATE_END_BOB;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
@@ -67,6 +79,10 @@ public class CommandTestUtil {
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
     public static final String INVALID_ROOM_DESC = " " + PREFIX_ROOM + "101"; // rooms only valid from 001 to 100.
     public static final String INVALID_INDEX_DESC = " " + PREFIX_INDEX + "-1"; // index has to be a counting number
+    public static final String INVALID_DATE_START_DESC =
+            " " + PREFIX_DATE_START + "138213"; // date has to be in dd/MM/yyyy format
+    public static final String INVALID_DATE_END_DESC =
+            " " + PREFIX_DATE_END + "33/33/3333"; // invalid month format
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
