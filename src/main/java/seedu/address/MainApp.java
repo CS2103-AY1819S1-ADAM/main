@@ -3,6 +3,7 @@ package seedu.address;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
@@ -10,10 +11,7 @@ import com.google.common.eventbus.Subscribe;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
-import seedu.address.commons.core.Config;
-import seedu.address.commons.core.EventsCenter;
-import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.core.Version;
+import seedu.address.commons.core.*;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.ConfigUtil;
@@ -203,6 +201,31 @@ public class MainApp extends Application {
     }
 
     public static void main(String[] args) {
+        try {
+            Log my_log = new Log("log.txt");
+
+            my_log.logger.setLevel(Level.FINE);
+            /*
+             Different Levels in order.
+              OFF
+              SEVERE
+              WARNING
+              INFO
+              CONFIG
+              FINE
+              FINER
+              FINEST
+              ALL
+            */
+
+            my_log.logger.info("INFO");
+            my_log.logger.warning("WARNING");
+            my_log.logger.severe("SEVERE");
+        } catch (Exception e) {
+
+        }
+
         launch(args);
+
     }
 }

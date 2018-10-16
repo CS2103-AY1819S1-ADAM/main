@@ -1,0 +1,6 @@
+Oct 04, 2018 11:26:50 PM seedu.address.MainApp main
+INFO: INFO
+Oct 04, 2018 11:26:51 PM seedu.address.MainApp main
+WARNING: WARNING
+Oct 04, 2018 11:26:51 PM seedu.address.MainApp main
+SEVERE: SEVERE
