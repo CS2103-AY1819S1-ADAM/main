@@ -4,7 +4,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.testutil.TypicalBookingPeriods.TODAY_NEXTWEEK;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalRoomNumbers.ROOM_NUMBER_002;
 
 import java.util.Arrays;
 import java.util.List;
@@ -30,6 +32,8 @@ import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Guest;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.room.RoomNumber;
+import seedu.address.model.room.booking.BookingPeriod;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.GuestBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -43,8 +47,13 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_add() throws Exception {
         Guest guest = new GuestBuilder().build();
-        AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(guest));
-        assertEquals(new AddCommand(guest), command);
+        RoomNumber roomNumber = ROOM_NUMBER_002;
+        BookingPeriod bookingPeriod = TODAY_NEXTWEEK;
+
+        AddCommand command =
+                (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(guest, roomNumber, bookingPeriod));
+        assertEquals(new AddCommand(guest, roomNumber, bookingPeriod),
+                command);
     }
 
     @Test
