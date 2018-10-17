@@ -90,7 +90,7 @@ public class AddCommandTest {
         assertTrue(addAliceCommand.equals(addAliceCommand));
 
         // same values -> returns true
-        AddCommand addAliceCommandCopy = new AddCommand(alice,validRoomNumber, validBookingPeriod);
+        AddCommand addAliceCommandCopy = new AddCommand(alice, validRoomNumber, validBookingPeriod);
         assertTrue(addAliceCommand.equals(addAliceCommandCopy));
 
         // different types -> returns false

@@ -50,8 +50,8 @@ public class AddressBookParserTest {
         RoomNumber roomNumber = ROOM_NUMBER_002;
         BookingPeriod bookingPeriod = TODAY_NEXTWEEK;
 
-        AddCommand command =
-                (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(guest, roomNumber, bookingPeriod));
+        AddCommand command = (AddCommand) parser.parseCommand(
+                PersonUtil.getAddCommand(guest, roomNumber, bookingPeriod));
         assertEquals(new AddCommand(guest, roomNumber, bookingPeriod),
                 command);
     }
