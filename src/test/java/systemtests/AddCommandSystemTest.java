@@ -17,6 +17,7 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.ROOM_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ROOM_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
@@ -80,9 +81,9 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
         BookingPeriod bookingPeriodToAdd = BOOKING_PERIOD_AMY;
 
         String command = "   " + AddCommand.COMMAND_WORD + "  " + NAME_DESC_AMY
-                + "  " + PHONE_DESC_AMY + " " + EMAIL_DESC_AMY + "   "
+                + "  " + PHONE_DESC_AMY + " " + EMAIL_DESC_AMY + " "
                 + ADDRESS_DESC_AMY + "   " + TAG_DESC_FRIEND + " "
-                + ROOM_DESC_AMY + " " + DATE_START_DESC_AMY + " " + DATE_END_DESC_AMY;
+                + ROOM_DESC_AMY + " " + DATE_START_DESC_AMY + " " + DATE_END_DESC_AMY + "   ";
         assertCommandSuccess(command, guestToAdd, roomNumberToAdd, bookingPeriodToAdd);
 
         /* Case: undo adding Amy to the list -> Amy deleted */
@@ -124,10 +125,11 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
         guestToAdd = BOB;
         roomNumberToAdd = ROOM_NUMBER_BOB;
         bookingPeriodToAdd = BOOKING_PERIOD_BOB;
-        command = AddCommand.COMMAND_WORD + TAG_DESC_FRIEND + DATE_END_DESC_BOB
-                + ADDRESS_DESC_BOB + NAME_DESC_BOB + TAG_DESC_HUSBAND
-                + DATE_START_DESC_BOB + ROOM_DESC_BOB + EMAIL_DESC_BOB;
-        assertCommandSuccess(command, guestToAdd, roomNumberToAdd, bookingPeriodToAdd);
+        command = AddCommand.COMMAND_WORD + TAG_DESC_FRIEND + ADDRESS_DESC_BOB
+                + DATE_END_DESC_BOB + TAG_DESC_HUSBAND + EMAIL_DESC_BOB + ROOM_DESC_BOB
+                + DATE_START_DESC_BOB + PHONE_DESC_BOB + NAME_DESC_BOB + DATE_END_DESC_BOB;
+        assertCommandSuccess(command, guestToAdd, roomNumberToAdd,
+                 bookingPeriodToAdd);
 
         /* Case: add a guest, missing tags -> added */
         roomNumberToAdd = ROOM_NUMBER_099;
@@ -208,29 +210,32 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
         /* Case: invalid name -> rejected */
         command =
                 AddCommand.COMMAND_WORD + INVALID_NAME_DESC + PHONE_DESC_AMY
-                        + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + DATE_START_DESC_AMY
-                        + DATE_END_DESC_AMY;
+                        + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + ROOM_DESC_AMY
+                        + DATE_START_DESC_AMY + DATE_END_DESC_AMY;
         assertCommandFailure(command, Name.MESSAGE_NAME_CONSTRAINTS);
 
         /* Case: invalid phone -> rejected */
         command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + INVALID_PHONE_DESC
-                + EMAIL_DESC_AMY + ADDRESS_DESC_AMY;
+                + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + ROOM_DESC_AMY + DATE_START_DESC_AMY
+                + DATE_END_DESC_AMY;
         assertCommandFailure(command, Phone.MESSAGE_PHONE_CONSTRAINTS);
 
         /* Case: invalid email -> rejected */
         command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY
-                + INVALID_EMAIL_DESC + ADDRESS_DESC_AMY;
+                + INVALID_EMAIL_DESC + ADDRESS_DESC_AMY + ROOM_DESC_AMY + DATE_START_DESC_AMY
+                + DATE_END_DESC_AMY;
         assertCommandFailure(command, Email.MESSAGE_EMAIL_CONSTRAINTS);
 
         /* Case: invalid address -> rejected */
         command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY
-                + EMAIL_DESC_AMY + INVALID_ADDRESS_DESC;
+                + EMAIL_DESC_AMY + INVALID_ADDRESS_DESC + ROOM_DESC_AMY + DATE_START_DESC_AMY
+                + DATE_END_DESC_AMY;
         assertCommandFailure(command, Address.MESSAGE_ADDRESS_CONSTRAINTS);
 
         /* Case: invalid tag -> rejected */
         command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY
-                + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
-                + INVALID_TAG_DESC;
+                + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + INVALID_TAG_DESC
+                + ROOM_DESC_AMY + DATE_START_DESC_AMY + DATE_END_DESC_AMY;
         assertCommandFailure(command, Tag.MESSAGE_TAG_CONSTRAINTS);
     }
 
