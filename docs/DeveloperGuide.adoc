@@ -346,6 +346,19 @@ We are using `java.util.logging` package for logging. The `LogsCenter` class is 
 
 Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: `config.json`).
 
+=== AddCommand
+
+We current accept a `Guest`, `RoomNumber` and `BookingPeriod` as parameters
+for the AddCommand constructor.
+
+The Guest is added to the AddressBook, which was already the case in
+AddressBook4.
+
+We then create a new `Booking` object with the `Guest` and `BookingPeriod`.
+This `Booking` is then added to the `Room` with the `RoomNumber` specified.
+
+We do not record the `Room` details in the `Guest` to minimise coupling.
+
 == Documentation
 
 We use asciidoc for writing documentation.
