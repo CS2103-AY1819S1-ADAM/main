@@ -3,7 +3,7 @@ package seedu.address.model.room;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CAPACITY_DOUBLE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ROOM_NUMBER_074;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ROOM_NUMBER_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HANDICAP;
 import static seedu.address.testutil.TypicalRooms.DOUBLE_002;
 import static seedu.address.testutil.TypicalRooms.SINGLE_001;
@@ -235,7 +235,7 @@ public class RoomTest {
         assertFalse(SINGLE_001.equals(DOUBLE_002));
 
         // different room number -> returns false
-        Room editedSingle001 = new RoomBuilder(SINGLE_001).withRoomNumber(VALID_ROOM_NUMBER_074).build();
+        Room editedSingle001 = new RoomBuilder(SINGLE_001).withRoomNumber(VALID_ROOM_NUMBER_BOB).build();
         assertFalse(SINGLE_001.equals(editedSingle001));
 
         // different capacity -> returns false
