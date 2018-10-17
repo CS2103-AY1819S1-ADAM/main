@@ -44,7 +44,7 @@ public class PersonUtil {
     public static String getBookingPeriodDesc(BookingPeriod bookingPeriod) {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_DATE_START + bookingPeriod.getStartDateAsFormattedString());
-        sb.append(PREFIX_DATE_END + bookingPeriod.getEndDateAsFormattedString());
+        sb.append(" " + PREFIX_DATE_END + bookingPeriod.getEndDateAsFormattedString());
         return sb.toString();
     }
 
