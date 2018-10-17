@@ -1,5 +1,10 @@
 package seedu.address.testutil;
 
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_END_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_END_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_START_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_START_BOB;
+
 import java.time.LocalDate;
 
 import seedu.address.model.room.booking.BookingPeriod;
@@ -23,4 +28,10 @@ public class TypicalBookingPeriods {
     public static final BookingPeriod TOMORROW_NEXTWEEK = new BookingPeriod(
         LocalDate.now().plusDays(1).format(BookingPeriod.FORMAT),
         LocalDate.now().plusWeeks(1).format(BookingPeriod.FORMAT));
+
+    // Manually added - BookingPeriod found in {@code CommandTestUtil}
+    public static final BookingPeriod BOOKING_PERIOD_AMY =
+            new BookingPeriod(VALID_DATE_START_AMY, VALID_DATE_END_AMY);
+    public static final BookingPeriod BOOKING_PERIOD_BOB =
+            new BookingPeriod(VALID_DATE_START_BOB, VALID_DATE_END_BOB);
 }

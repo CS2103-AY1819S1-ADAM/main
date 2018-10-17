@@ -1,12 +1,12 @@
 package seedu.address.testutil;
 
-import static seedu.address.logic.commands.CommandTestUtil.DATE_END_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.DATE_START_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.ROOM_DESC_BOB;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE_END;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE_START;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ROOM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
@@ -14,6 +14,8 @@ import java.util.Set;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Guest;
+import seedu.address.model.room.RoomNumber;
+import seedu.address.model.room.booking.BookingPeriod;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -24,9 +26,26 @@ public class PersonUtil {
     /**
      * Returns an add command string for adding the {@code guest}.
      */
-    public static String getAddCommand(Guest guest) {
-        return AddCommand.COMMAND_WORD + " " + getPersonDetails(guest)
-                + ROOM_DESC_BOB + DATE_START_DESC_BOB + DATE_END_DESC_BOB;
+    public static String getAddCommand(Guest guest, RoomNumber roomNumber,
+                                       BookingPeriod bookingPeriod) {
+        return AddCommand.COMMAND_WORD + " " + getPersonDetails(guest) + " "
+                + getRoomDesc(roomNumber) + " " + getBookingPeriodDesc(bookingPeriod);
+    }
+
+    /**
+     * Returns the part of command string for the given {@code roomNumber}.
+     */
+    public static String getRoomDesc(RoomNumber roomNumber) {
+        return PREFIX_ROOM + " " + roomNumber.value;
+    }
+    /**
+     * Returns the part of command string for the given {@code bookingPeriod}.
+     */
+    public static String getBookingPeriodDesc(BookingPeriod bookingPeriod) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(PREFIX_DATE_START + bookingPeriod.getStartDateAsFormattedString());
+        sb.append(PREFIX_DATE_END + bookingPeriod.getEndDateAsFormattedString());
+        return sb.toString();
     }
 
     /**
@@ -39,7 +58,7 @@ public class PersonUtil {
         sb.append(PREFIX_EMAIL + guest.getEmail().value + " ");
         sb.append(PREFIX_ADDRESS + guest.getAddress().value + " ");
         guest.getTags().stream().forEach(
-            s -> sb.append(PREFIX_TAG + s.tagName + " ")
+                s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
         return sb.toString();
     }
