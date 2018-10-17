@@ -60,7 +60,7 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         Guest guest = new Guest(name, phone, email, address, tagList);
 
-        return new AddCommand(guest);
+        return new AddCommand(guest, roomNumber, bookingPeriod);
     }
 
 }

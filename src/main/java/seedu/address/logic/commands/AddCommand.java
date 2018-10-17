@@ -14,6 +14,9 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Guest;
+import seedu.address.model.room.RoomNumber;
+import seedu.address.model.room.booking.Booking;
+import seedu.address.model.room.booking.BookingPeriod;
 
 /**
  * Adds a guest to the address book.
@@ -46,33 +49,38 @@ public class AddCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New guest added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This guest already exists in the address book";
 
-    private final Guest toAdd;
+    private final Guest guestToAdd;
+    private final Booking bookingToAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Guest}
+     * Creates an AddCommand to add the specified {@code Guest}.
+     * The {@code guest} is assigned to {@code roomNumber} for the duration of
+     * {@code bookingPeriod}.
      */
-    public AddCommand(Guest guest) {
+    public AddCommand(Guest guest, RoomNumber roomNumber,
+                      BookingPeriod bookingPeriod) {
         requireNonNull(guest);
-        toAdd = guest;
+        guestToAdd = guest;
+        bookingToAdd = new Booking(guest, bookingPeriod);
     }
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasPerson(toAdd)) {
+        if (model.hasPerson(guestToAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        model.addPerson(toAdd);
+        model.addPerson(guestToAdd);
         model.commitAddressBook();
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, guestToAdd));
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddCommand // instanceof handles nulls
-                && toAdd.equals(((AddCommand) other).toAdd));
+                && guestToAdd.equals(((AddCommand) other).guestToAdd));
     }
 }
