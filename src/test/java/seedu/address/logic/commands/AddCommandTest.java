@@ -23,7 +23,10 @@ import seedu.address.model.person.Guest;
 import seedu.address.model.room.Room;
 import seedu.address.model.room.RoomNumber;
 import seedu.address.model.room.booking.Booking;
+import seedu.address.model.room.booking.BookingPeriod;
 import seedu.address.testutil.GuestBuilder;
+import seedu.address.testutil.TypicalBookingPeriods;
+import seedu.address.testutil.TypicalRoomNumbers;
 
 public class AddCommandTest {
 
@@ -37,15 +40,22 @@ public class AddCommandTest {
     @Test
     public void constructor_nullPerson_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        new AddCommand(null);
+        RoomNumber validRoomNumber = TypicalRoomNumbers.ROOM_NUMBER_002;
+        BookingPeriod validBookingPeriod = TypicalBookingPeriods.TODAY_TOMORROW;
+
+        new AddCommand(null, validRoomNumber, validBookingPeriod);
     }
 
     @Test
     public void execute_personAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
         Guest validGuest = new GuestBuilder().build();
+        RoomNumber validRoomNumber = TypicalRoomNumbers.ROOM_NUMBER_002;
+        BookingPeriod validBookingPeriod = TypicalBookingPeriods.TODAY_TOMORROW;
 
-        CommandResult commandResult = new AddCommand(validGuest).execute(modelStub, commandHistory);
+        CommandResult commandResult =
+                new AddCommand(validGuest, validRoomNumber, validBookingPeriod)
+                        .execute(modelStub, commandHistory);
 
         assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validGuest), commandResult.feedbackToUser);
         assertEquals(Arrays.asList(validGuest), modelStub.personsAdded);
@@ -55,7 +65,10 @@ public class AddCommandTest {
     @Test
     public void execute_duplicatePerson_throwsCommandException() throws Exception {
         Guest validGuest = new GuestBuilder().build();
-        AddCommand addCommand = new AddCommand(validGuest);
+        RoomNumber validRoomNumber = TypicalRoomNumbers.ROOM_NUMBER_002;
+        BookingPeriod validBookingPeriod = TypicalBookingPeriods.TODAY_TOMORROW;
+
+        AddCommand addCommand = new AddCommand(validGuest, validRoomNumber, validBookingPeriod);
         ModelStub modelStub = new ModelStubWithPerson(validGuest);
 
         thrown.expect(CommandException.class);
@@ -67,14 +80,17 @@ public class AddCommandTest {
     public void equals() {
         Guest alice = new GuestBuilder().withName("Alice").build();
         Guest bob = new GuestBuilder().withName("Bob").build();
-        AddCommand addAliceCommand = new AddCommand(alice);
-        AddCommand addBobCommand = new AddCommand(bob);
+        RoomNumber validRoomNumber = TypicalRoomNumbers.ROOM_NUMBER_002;
+        BookingPeriod validBookingPeriod = TypicalBookingPeriods.TODAY_TOMORROW;
+
+        AddCommand addAliceCommand = new AddCommand(alice, validRoomNumber, validBookingPeriod);
+        AddCommand addBobCommand = new AddCommand(bob, validRoomNumber, validBookingPeriod);
 
         // same object -> returns true
         assertTrue(addAliceCommand.equals(addAliceCommand));
 
         // same values -> returns true
-        AddCommand addAliceCommandCopy = new AddCommand(alice);
+        AddCommand addAliceCommandCopy = new AddCommand(alice,validRoomNumber, validBookingPeriod);
         assertTrue(addAliceCommand.equals(addAliceCommandCopy));
 
         // different types -> returns false
@@ -85,6 +101,7 @@ public class AddCommandTest {
 
         // different guest -> returns false
         assertFalse(addAliceCommand.equals(addBobCommand));
+
     }
 
     /**
