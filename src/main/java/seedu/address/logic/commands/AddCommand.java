@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE_END;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE_START;
@@ -17,6 +18,7 @@ import seedu.address.model.person.Guest;
 import seedu.address.model.room.RoomNumber;
 import seedu.address.model.room.booking.Booking;
 import seedu.address.model.room.booking.BookingPeriod;
+import seedu.address.model.room.booking.exceptions.OverlappingBookingException;
 
 /**
  * Adds a guest to the address book.
@@ -50,6 +52,7 @@ public class AddCommand extends Command {
     public static final String MESSAGE_DUPLICATE_PERSON = "This guest already exists in the address book";
 
     private final Guest guestToAdd;
+    private final RoomNumber roomNumberToAdd;
     private final Booking bookingToAdd;
 
     /**
@@ -59,8 +62,9 @@ public class AddCommand extends Command {
      */
     public AddCommand(Guest guest, RoomNumber roomNumber,
                       BookingPeriod bookingPeriod) {
-        requireNonNull(guest);
+        requireAllNonNull(guest, roomNumber, bookingPeriod);
         guestToAdd = guest;
+        roomNumberToAdd = roomNumber;
         bookingToAdd = new Booking(guest, bookingPeriod);
     }
 
@@ -71,8 +75,14 @@ public class AddCommand extends Command {
         if (model.hasPerson(guestToAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
-
         model.addPerson(guestToAdd);
+
+        try {
+            model.addBooking(roomNumberToAdd, bookingToAdd);
+        } catch (OverlappingBookingException e) {
+            throw new CommandException(e.getMessage());
+        }
+
         model.commitAddressBook();
         return new CommandResult(String.format(MESSAGE_SUCCESS, guestToAdd));
     }
