@@ -31,10 +31,11 @@
 <ul class="sectlevel2">
 <li><a href="#undo-redo-feature">3.1. Undo/Redo feature</a></li>
 <li><a href="#command-archive-feature">3.2. Command Archive feature</a></li>
-<li><a href="#proposed-data-encryption">3.3. [Proposed] Data Encryption</a></li>
-<li><a href="#logging">3.4. Logging</a></li>
-<li><a href="#Implementation-Configuration">3.5. Configuration</a></li>
-<li><a href="#addcommand">3.6. AddCommand</a></li>
+<li><a href="#room-check-in-checkout-feature">3.3. Room Check-in/Checkout feature</a></li>
+<li><a href="#proposed-data-encryption">3.4. [Proposed] Data Encryption</a></li>
+<li><a href="#logging">3.5. Logging</a></li>
+<li><a href="#Implementation-Configuration">3.6. Configuration</a></li>
+<li><a href="#addcommand">3.7. AddCommand</a></li>
 </ul>
 </li>
 <li><a href="#documentation">4. Documentation</a>
@@ -914,20 +915,217 @@ hence would require more effort to implement.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">3.3. [Proposed] Data Encryption</a></h3>
+<h3 id="room-check-in-checkout-feature"><a class="link" href="#room-check-in-checkout-feature">3.3. Room Check-in/Checkout feature</a></h3>
+<div class="sect3">
+<h4 id="current-implementation-3"><a class="link" href="#current-implementation-3">3.3.1. Current Implementation</a></h4>
+<div class="paragraph">
+<p>The room check-in and checkout features are facilitated by <code>UniqueRoomList</code>.
+The logic that supports the check-in and checkout operations reside in the classes in the <code>Room</code> and <code>Booking</code> packages.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>UniqueRoomList#checkin(RoomNumber)</code>&#8201;&#8212;&#8201;Checks in the active booking of the room identified by the given room number</p>
+</li>
+<li>
+<p><code>UniqueRoomList#checkout(RoomNumber)</code>&#8201;&#8212;&#8201;Checks out the first booking in the list of bookings of the room identified by the given room number.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Note:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Active booking refers to a booking that includes today&#8217;s date.</p>
+</li>
+<li>
+<p>The room maintains a sorted list of bookings. The first booking refers to the first in chronological order.</p>
+</li>
+<li>
+<p>A room can be checked out regardless of its checked-in status. Thus, <code>checkout</code> doubles as a command to delete bookings.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>These operations are exposed in the <code>Model</code> interface as <code>Model#checkin()</code> and <code>Model#checkout()</code> respectively.</p>
+</div>
+<div class="paragraph">
+<p>Given below is an example usage scenario and how the check-in/checkout mechanism behaves at each step.</p>
+</div>
+<div class="paragraph">
+<p>Assuming there is a booking already added to room 001,</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The user executes <code>checkin 001</code> when the guest arrives.</p>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>The <code>checkin</code> command takes in a <code>RoomNumber</code> argument and calls <code>Model#checkinRoom</code> as such: <code>Model.checkinRoom(roomNumber)</code></p>
+</li>
+<li>
+<p><code>ModelManager#checkinRoom</code> (which implements Model) will call <code>VersionedAddressBook#checkinRoom</code></p>
+</li>
+<li>
+<p><code>VersionedAddressBook#checkinRoom</code> will call <code>UniqueRoomList#checkinRoom</code></p>
+</li>
+<li>
+<p><code>UniqueRoomList#checkinRoom</code> will call <code>UniqueRoomList#getRoom</code> to get the room using its RoomNumber, followed by
+<code>Room#checkin</code></p>
+</li>
+<li>
+<p><code>Room#checkin</code> will</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>throw <code>NoBookingException</code> if the room has no bookings</p>
+</li>
+<li>
+<p>throw <code>NoActiveBookingException</code> if the room has no active bookings</p>
+</li>
+<li>
+<p>throw <code>OccupiedRoomCheckInException</code> if the room&#8217;s active booking is already checked in</p>
+</li>
+<li>
+<p>update the active booking as checked-in</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>The user executes <code>checkout 001</code> when the guest leaves.</p>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>The <code>checkout</code> command follows step 1 to 4 of the <code>checkin</code> command, just replace occurences of "checkin" to "checkout"</p>
+</li>
+<li>
+<p><code>Room#checkout</code> will</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>throw <code>NoBookingException</code> if the room has no bookings</p>
+</li>
+<li>
+<p>throw <code>NoActiveOrExpiredBookingException</code> if the room has no active or expired bookings</p>
+</li>
+<li>
+<p>delete the first booking from the list of bookings</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.3.2. Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-how-check-in-checkout-executes"><a class="link" href="#aspect-how-check-in-checkout-executes">Aspect: How check-in/checkout executes</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Check-in only the active booking, and check-out only the first expired or active booking regardless of check-in status.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Natural, because the receptionist will only check-in guests who have a booking during their booking period, not before or after (even if the receptionist forgets).
+On the other hand, receptionist may forget to checkout a guest on the system, resulting in an expired booking. Thus, we allow checking out of a room with an expired booking.
+Checkout acts as a delete booking feature, since it ignores the check-in status of a room&#8217;s active booking.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The ability to delete upcoming bookings is planned for v1.3.
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Cons: Have to check for many exceptions.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Check-in only the active booking, and check-out only active booking.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Stricter checks on check-in/checkout, leading to less chance of error.</p>
+</li>
+<li>
+<p>Cons: Many various real-life situations to consider.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-immutability-of-check-in-command"><a class="link" href="#aspect-immutability-of-check-in-command">Aspect: Immutability of check-in command</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Check-in a room by creating a new copy of the room with the check-in flag set to true.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Debugging is easy. Consistent with the rest of the application.</p>
+</li>
+<li>
+<p>Cons: Check-in method becomes unintuitive, since a new room is returned from the operation, instead of a void method simply setting the room property.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Check-in a room by changing its check-in flag to true.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Check-in method is intuitive, and does not return a new room.</p>
+</li>
+<li>
+<p>Cons: Harder to debug. Tests also become troublesome since changes are made to the same referenced room.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">3.4. [Proposed] Data Encryption</a></h3>
 <div class="paragraph">
 <p><em>{Explain here how the data encryption feature will be implemented}</em></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">3.4. Logging</a></h3>
+<h3 id="logging"><a class="link" href="#logging">3.5. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.5, &#8220;Configuration&#8221;</a>)</p>
+<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.6, &#8220;Configuration&#8221;</a>)</p>
 </li>
 <li>
 <p>The <code>Logger</code> for a class can be obtained using <code>LogsCenter.getLogger(Class)</code> which will log messages according to the specified logging level</p>
@@ -958,13 +1156,13 @@ hence would require more effort to implement.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.5. Configuration</a></h3>
+<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.6. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="addcommand"><a class="link" href="#addcommand">3.6. AddCommand</a></h3>
+<h3 id="addcommand"><a class="link" href="#addcommand">3.7. AddCommand</a></h3>
 <div class="paragraph">
 <p>We current accept a <code>Guest</code>, <code>RoomNumber</code> and <code>BookingPeriod</code> as parameters
 for the AddCommand constructor.</p>
@@ -2839,4 +3037,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-18 15:24:55 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-18 15:31:12 UTC</div></div></div></body></html>
