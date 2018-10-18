@@ -42,10 +42,12 @@ public class CommandTestUtil {
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
     public static final String VALID_TAG_HANDICAP = "handicap";
-    public static final String VALID_ROOM_NUMBER_BOB =
-            TypicalRoomNumbers.ROOM_NUMBER_002.value;
     public static final String VALID_ROOM_NUMBER_AMY =
             TypicalRoomNumbers.ROOM_NUMBER_010.value;
+    public static final String VALID_ROOM_NUMBER_BOB =
+            TypicalRoomNumbers.ROOM_NUMBER_002.value;
+    public static final String VALID_ROOM_NUMBER_001 =
+            TypicalRoomNumbers.ROOM_NUMBER_001.value;
     public static final Integer VALID_CAPACITY_SINGLE = 1;
     public static final Integer VALID_CAPACITY_DOUBLE = 2;
     public static final Integer VALID_CAPACITY_SUITE = 5;
@@ -64,6 +66,8 @@ public class CommandTestUtil {
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String ROOM_DESC_001 =
+            " " + PREFIX_ROOM + " " + VALID_ROOM_NUMBER_001;
     public static final String ROOM_DESC_AMY = " " + PREFIX_ROOM + " " + VALID_ROOM_NUMBER_AMY;
     public static final String ROOM_DESC_BOB = " " + PREFIX_ROOM + " " + VALID_ROOM_NUMBER_BOB;
     public static final String DATE_START_DESC_AMY =
