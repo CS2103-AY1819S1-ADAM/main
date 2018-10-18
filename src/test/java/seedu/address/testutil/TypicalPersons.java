@@ -47,6 +47,9 @@ public class TypicalPersons {
             .withEmail("stefan@example.com").withAddress("little india").build();
     public static final Guest IDA = new GuestBuilder().withName("Ida Mueller").withPhone("8482131")
             .withEmail("hans@example.com").withAddress("chicago ave").build();
+    public static final Guest JAKOB =
+            new GuestBuilder().withName("Jakob Hitlier").withPhone("89817221")
+            .withEmail("naaazi@example.de").withAddress("experimental lab").build();
 
     // Manually added - Guest's details found in {@code CommandTestUtil}
     public static final Guest AMY = new GuestBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
