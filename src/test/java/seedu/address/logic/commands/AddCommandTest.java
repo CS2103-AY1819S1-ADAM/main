@@ -48,7 +48,7 @@ public class AddCommandTest {
 
     @Test
     public void execute_personAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
+        ModelStubAcceptingGuestAdded modelStub = new ModelStubAcceptingGuestAdded();
         Guest validGuest = new GuestBuilder().build();
         RoomNumber validRoomNumber = TypicalRoomNumbers.ROOM_NUMBER_002;
         BookingPeriod validBookingPeriod = TypicalBookingPeriods.TODAY_TOMORROW;
@@ -57,7 +57,8 @@ public class AddCommandTest {
                 new AddCommand(validGuest, validRoomNumber, validBookingPeriod)
                         .execute(modelStub, commandHistory);
 
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validGuest), commandResult.feedbackToUser);
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validGuest,
+                validRoomNumber, validBookingPeriod), commandResult.feedbackToUser);
         assertEquals(Arrays.asList(validGuest), modelStub.personsAdded);
         assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
     }
@@ -238,9 +239,9 @@ public class AddCommandTest {
     }
 
     /**
-     * A Model stub that always accept the guest being added.
+     * A Model stub that always accept the guest and assigns a room to him.
      */
-    private class ModelStubAcceptingPersonAdded extends ModelStub {
+    private class ModelStubAcceptingGuestAdded extends ModelStub {
         final ArrayList<Guest> personsAdded = new ArrayList<>();
 
         @Override
@@ -253,6 +254,11 @@ public class AddCommandTest {
         public void addPerson(Guest guest) {
             requireNonNull(guest);
             personsAdded.add(guest);
+        }
+
+        @Override
+        public void addBooking(RoomNumber roomNumber, Booking booking) {
+            // called by {@code AddCommand#execute()}
         }
 
         @Override
