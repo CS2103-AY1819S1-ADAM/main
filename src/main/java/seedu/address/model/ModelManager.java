@@ -122,6 +122,46 @@ public class ModelManager extends ComponentManager implements Model {
         filteredRooms.setPredicate(predicate);
     }
 
+    //=========== Room =======================================================
+
+    @Override
+    public void checkinRoom(RoomNumber roomNumber) {
+        versionedAddressBook.checkinRoom(roomNumber);
+        indicateAddressBookChanged();
+    }
+
+    @Override
+    public void checkoutRoom(RoomNumber roomNumber) {
+        versionedAddressBook.checkoutRoom(roomNumber);
+        indicateAddressBookChanged();
+    }
+
+    @Override
+    public boolean isRoomCheckedIn(RoomNumber roomNumber) {
+        return versionedAddressBook.isRoomCheckedIn(roomNumber);
+    }
+
+    public boolean roomHasBooking(RoomNumber roomNumber) {
+        return versionedAddressBook.roomHasBooking(roomNumber);
+    }
+
+    @Override
+    public boolean roomHasActiveBooking(RoomNumber roomNumber) {
+        return versionedAddressBook.roomHasActiveBooking(roomNumber);
+    }
+
+
+    @Override
+    public boolean roomHasActiveOrExpiredBooking(RoomNumber roomNumber) {
+        return versionedAddressBook.roomHasActiveOrExpiredBooking(roomNumber);
+    }
+
+    @Override
+    public void addBooking(RoomNumber roomNumber, Booking booking) {
+        versionedAddressBook.addBooking(roomNumber, booking);
+        indicateAddressBookChanged();
+    }
+
     //=========== Undo/Redo =================================================================================
 
     @Override
@@ -169,41 +209,4 @@ public class ModelManager extends ComponentManager implements Model {
                 && filteredGuests.equals(other.filteredGuests);
     }
 
-    @Override
-    public void checkinRoom(RoomNumber roomNumber) {
-        versionedAddressBook.checkinRoom(roomNumber);
-        indicateAddressBookChanged();
-    }
-
-    @Override
-    public void checkoutRoom(RoomNumber roomNumber) {
-        versionedAddressBook.checkoutRoom(roomNumber);
-        indicateAddressBookChanged();
-    }
-
-    @Override
-    public boolean isRoomCheckedIn(RoomNumber roomNumber) {
-        return versionedAddressBook.isRoomCheckedIn(roomNumber);
-    }
-
-    public boolean roomHasBooking(RoomNumber roomNumber) {
-        return versionedAddressBook.roomHasBooking(roomNumber);
-    }
-
-    @Override
-    public boolean roomHasActiveBooking(RoomNumber roomNumber) {
-        return versionedAddressBook.roomHasActiveBooking(roomNumber);
-    }
-
-
-    @Override
-    public boolean roomHasActiveOrExpiredBooking(RoomNumber roomNumber) {
-        return versionedAddressBook.roomHasActiveOrExpiredBooking(roomNumber);
-    }
-
-    @Override
-    public void addBooking(RoomNumber roomNumber, Booking booking) {
-        versionedAddressBook.addBooking(roomNumber, booking);
-        indicateAddressBookChanged();
-    }
 }

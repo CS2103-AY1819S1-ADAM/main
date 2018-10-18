@@ -25,6 +25,8 @@ public interface Model {
     /** Returns the AddressBook */
     ReadOnlyAddressBook getAddressBook();
 
+    // =========== Methods for guest. =========================================
+
     /**
      * Returns true if a guest with the same identity as {@code guest} exists in the address book.
      */
@@ -67,6 +69,51 @@ public interface Model {
      */
     void updateFilteredRoomList(Predicate<Room> predicate);
 
+    //=========== Methods for room. ===========================================
+
+    /**
+     * Returns true if the room's bookings is non-empty
+     */
+    boolean roomHasBooking(RoomNumber roomNumber);
+
+    /**
+     * Returns true if the room's first booking is active.
+     */
+    boolean roomHasActiveBooking(RoomNumber roomNumber);
+
+    /**
+     * Returns true if the room's first booking is active or upcoming
+     */
+    public boolean roomHasActiveOrExpiredBooking(RoomNumber roomNumber);
+
+    /**
+     * Add a booking to a room identified by its room number.
+     */
+    public void addBooking(RoomNumber roomNumber, Booking booking);
+
+    /**
+     *  Displays room list instead of guest list
+     */
+    //void displayRoomList(Predicate<Room> predicate);
+
+    /**
+     * Checks in the room by its room number
+     */
+    void checkinRoom(RoomNumber roomNumber);
+
+    /**
+     * Checks out the room.
+     * @param roomNumber
+     */
+    void checkoutRoom(RoomNumber roomNumber);
+
+    /**
+     * Returns true if the room identified by its room number is checked in.
+     */
+    boolean isRoomCheckedIn(RoomNumber roomNumber);
+
+    /* =========== Methods for undo and redo. =================================
+
     /**
      * Returns true if the model has previous address book states to restore.
      */
@@ -91,46 +138,4 @@ public interface Model {
      * Saves the current address book state for undo/redo.
      */
     void commitAddressBook();
-
-    /**
-     * Checks in the room by its room number
-     */
-    void checkinRoom(RoomNumber roomNumber);
-
-    /**
-     * Checks out the room.
-     * @param roomNumber
-     */
-    void checkoutRoom(RoomNumber roomNumber);
-
-    /**
-     * Returns true if the room identified by its room number is checked in.
-     */
-    boolean isRoomCheckedIn(RoomNumber roomNumber);
-
-    /**
-     * Returns true if the room's bookings is non-empty
-     */
-    boolean roomHasBooking(RoomNumber roomNumber);
-
-    /**
-     * Returns true if the room's first booking is active.
-     */
-    boolean roomHasActiveBooking(RoomNumber roomNumber);
-
-
-    /**
-     * Returns true if the room's first booking is active or upcoming
-     */
-    public boolean roomHasActiveOrExpiredBooking(RoomNumber roomNumber);
-
-    /**
-     * Add a booking to a room identified by its room number.
-     */
-    public void addBooking(RoomNumber roomNumber, Booking booking);
-
-    /**
-     *  Displays room list instead of guest list
-     */
-    //void displayRoomList(Predicate<Room> predicate);
 }
