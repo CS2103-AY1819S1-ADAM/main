@@ -88,7 +88,8 @@ public class AddCommand extends Command {
         }
 
         model.commitAddressBook();
-        return new CommandResult(String.format(MESSAGE_SUCCESS, guestToAdd));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, guestToAdd,
+                roomNumberToAdd, bookingToAdd.getBookingPeriod()));
     }
 
     @Override
