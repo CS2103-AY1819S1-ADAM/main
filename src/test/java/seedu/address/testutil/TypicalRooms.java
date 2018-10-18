@@ -42,9 +42,13 @@ public class TypicalRooms {
         .withRoomNumber(TypicalRoomNumbers.ROOM_NUMBER_020.toString()).withCapacity(CAPACITY_SUITE_ROOM)
         .build();
 
+    public static final Room SUITE_099 = new RoomBuilder()
+            .withRoomNumber(TypicalRoomNumbers.ROOM_NUMBER_099.toString()).withCapacity(CAPACITY_SUITE_ROOM)
+            .build();
+
     public static List<Room> getTypicalRooms() {
         return Arrays.asList(SINGLE_001, DOUBLE_002, SUITE_010, SINGLE_011,
-                DOUBLE_012, SUITE_020);
+                DOUBLE_012, SUITE_020, SUITE_099);
     }
 
     /**
