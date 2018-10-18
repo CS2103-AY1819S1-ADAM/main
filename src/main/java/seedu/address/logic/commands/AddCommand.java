@@ -19,6 +19,7 @@ import seedu.address.model.room.RoomNumber;
 import seedu.address.model.room.booking.Booking;
 import seedu.address.model.room.booking.BookingPeriod;
 import seedu.address.model.room.booking.exceptions.OverlappingBookingException;
+import seedu.address.model.room.exceptions.RoomNotFoundException;
 
 /**
  * Adds a guest to the address book.
@@ -48,7 +49,8 @@ public class AddCommand extends Command {
             + PREFIX_DATE_START + "03/11/2018"
             + PREFIX_DATE_END + "05/11/2018";
 
-    public static final String MESSAGE_SUCCESS = "New guest added: %1$s";
+    public static final String MESSAGE_SUCCESS =
+            "New guest added: %1$s \nAssigned to room: %2$s \n\tfrom %3$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This guest already exists in the address book";
 
     private final Guest guestToAdd;
@@ -79,6 +81,8 @@ public class AddCommand extends Command {
 
         try {
             model.addBooking(roomNumberToAdd, bookingToAdd);
+        } catch (RoomNotFoundException e) {
+            throw new CommandException(e.getMessage());
         } catch (OverlappingBookingException e) {
             throw new CommandException(e.getMessage());
         }
