@@ -43,7 +43,8 @@ public class TypicalRooms {
         .build();
 
     public static List<Room> getTypicalRooms() {
-        return Arrays.asList(SINGLE_001, DOUBLE_002, SUITE_010, SINGLE_011, DOUBLE_012, SUITE_020);
+        return Arrays.asList(SINGLE_001, DOUBLE_002, SUITE_010, SINGLE_011,
+                DOUBLE_012, SUITE_020);
     }
 
     /**
