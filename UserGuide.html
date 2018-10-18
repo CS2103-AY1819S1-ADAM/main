@@ -14,24 +14,25 @@
 <li><a href="#Features">3. Features</a>
 <ul class="sectlevel2">
 <li><a href="#adding-a-person-code-add-code">3.1. Adding a person: <code>add</code></a></li>
-<li><a href="#listing-all-guests-or-rooms-code-list-code">3.2. Listing all guests or rooms : <code>list</code></a></li>
-<li><a href="#checkout-room-code-checkout-code">3.3. Checkout room: <code>checkout</code></a></li>
-<li><a href="#deleting-a-guest-code-delete-code">3.4. Deleting a guest : <code>delete</code></a></li>
-<li><a href="#editing-a-guest-code-edit-code">3.5. Editing a guest : <code>edit</code></a></li>
-<li><a href="#locating-guests-by-name-code-find-code">3.6. Locating guests by name: <code>find</code></a></li>
-<li><a href="#listing-all-guests-code-list-code">3.7. Listing all guests : <code>list</code></a></li>
-<li><a href="#selecting-a-guest-code-select-code">3.8. Selecting a guest : <code>select</code></a></li>
-<li><a href="#provide-room-service-code-service-code">3.9. Provide Room Service: <code>service</code></a></li>
-<li><a href="#mark-room-as-faulty-code-fault-code">3.10. Mark Room as faulty: <code>fault</code></a></li>
-<li><a href="#listing-entered-commands-code-history-code">3.11. Listing entered commands : <code>history</code></a></li>
-<li><a href="#undoing-previous-command-code-undo-code">3.12. Undoing previous command : <code>undo</code></a></li>
-<li><a href="#redoing-the-previously-undone-command-code-redo-code">3.13. Redoing the previously undone command : <code>redo</code></a></li>
-<li><a href="#clearing-all-entries-code-clear-code">3.14. Clearing all entries : <code>clear</code></a></li>
-<li><a href="#export-log-code-export-code">3.15. Export log: <code>export</code></a></li>
-<li><a href="#viewing-help-code-help-code">3.16. Viewing help : <code>help</code></a></li>
-<li><a href="#exiting-the-program-code-exit-code">3.17. Exiting the program : <code>exit</code></a></li>
-<li><a href="#saving-the-data">3.18. Saving the data</a></li>
-<li><a href="#encrypting-data-files-code-coming-in-v2-0-code">3.19. Encrypting data files <code>[coming in v2.0]</code></a></li>
+<li><a href="#adding-a-person-code-addx-code-span-class-red-coming-in-v2-0-span">3.2. Adding a person: <code>addx</code> <span class="red">Coming in v2.0</span></a></li>
+<li><a href="#checkout-room-code-checkin-code">3.3. Checkout room: <code>checkin</code></a></li>
+<li><a href="#checkout-room-code-checkout-code">3.4. Checkout room: <code>checkout</code></a></li>
+<li><a href="#deleting-a-guest-code-delete-code-span-class-red-coming-in-v2-0-span">3.5. Deleting a guest : <code>delete</code> <span class="red">Coming in v2.0</span></a></li>
+<li><a href="#editing-a-guest-code-edit-code-span-class-red-coming-in-v1-3-span">3.6. Editing a guest : <code>edit</code> <span class="red">Coming in v1.3</span></a></li>
+<li><a href="#locating-guests-by-name-code-find-code-span-class-red-coming-in-v1-3-span">3.7. Locating guests by name: <code>find</code> <span class="red">Coming in v1.3</span></a></li>
+<li><a href="#listing-all-guests-code-list-code">3.8. Listing all guests : <code>list</code></a></li>
+<li><a href="#selecting-a-guest-code-select-code-span-class-red-coming-in-v1-3-span">3.9. Selecting a guest : <code>select</code> <span class="red">Coming in v1.3</span></a></li>
+<li><a href="#provide-room-service-code-service-code-span-class-red-coming-in-v1-3-span">3.10. Provide Room Service: <code>service</code> <span class="red">Coming in v1.3</span></a></li>
+<li><a href="#room-maintenance-code-maintenance-code-span-class-red-coming-in-v2-0-span">3.11. Room maintenance: <code>maintenance</code> <span class="red">Coming in v2.0</span></a></li>
+<li><a href="#listing-entered-commands-code-history-code">3.12. Listing entered commands : <code>history</code></a></li>
+<li><a href="#undoing-previous-command-code-undo-code">3.13. Undoing previous command : <code>undo</code></a></li>
+<li><a href="#redoing-the-previously-undone-command-code-redo-code">3.14. Redoing the previously undone command : <code>redo</code></a></li>
+<li><a href="#clearing-all-entries-code-clear-code">3.15. Clearing all entries : <code>clear</code></a></li>
+<li><a href="#export-log-code-export-code-span-class-red-coming-in-v1-3-span">3.16. Export log: <code>export</code> <span class="red">Coming in v1.3</span></a></li>
+<li><a href="#viewing-help-code-help-code-span-class-red-coming-in-v1-3-span">3.17. Viewing help : <code>help</code> <span class="red">Coming in v1.3</span></a></li>
+<li><a href="#exiting-the-program-code-exit-code">3.18. Exiting the program : <code>exit</code></a></li>
+<li><a href="#saving-the-data">3.19. Saving the data</a></li>
+<li><a href="#encrypting-data-files-span-class-red-coming-in-v2-0-span">3.20. Encrypting data files <span class="red">Coming in v2.0</span></a></li>
 </ul>
 </li>
 <li><a href="#faq">4. FAQ</a></li>
@@ -150,23 +151,43 @@ A guest can have any number of tags (including 0)
 <div class="ulist">
 <ul>
 <li>
-<p><code>add n/John Smith p/98765432 e/johnsmith@gmail.com a/17 River Road t/VIP r/85
-from/09/12/18 to/10/12/18</code>
-Adds a guest "John Smith" to room 85 for a period of stay from 09/12/18 to
-10/12/18.</p>
+<p><code>add n/John Smith p/98765432 e/johnsmith@gmail.com t/VIP r/085 from/09/12/18 to/10/12/18</code>
+Add a guest "John Smith" to room 085 for a period of stay from 09/12/18 to 10/12/18.</p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect2">
-<h3 id="listing-all-guests-or-rooms-code-list-code"><a class="link" href="#listing-all-guests-or-rooms-code-list-code">3.2. Listing all guests or rooms : <code>list</code></a></h3>
+<h3 id="adding-a-person-code-addx-code-span-class-red-coming-in-v2-0-span"><a class="link" href="#adding-a-person-code-addx-code-span-class-red-coming-in-v2-0-span">3.2. Adding a person: <code>addx</code> <span class="red">Coming in v2.0</span></a></h3>
 <div class="paragraph">
-<p>Displays a list of all rooms or guests (using flags -r/-g).
-Format: <code>list -r</code>, <code>list -g</code></p>
+<p>Adds a guest to the guest list NOT for the purpose of assigning a room (perhaps add to archived guest list)<br>
+Format: <code>add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]&#8230;&#8203;</code></p>
+</div>
+<div class="paragraph">
+<p>Examples:
+* <code>addx n/guest p/98765432 e/johntan@hotmail.com t/bro</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="checkout-room-code-checkout-code"><a class="link" href="#checkout-room-code-checkout-code">3.3. Checkout room: <code>checkout</code></a></h3>
+<h3 id="checkout-room-code-checkin-code"><a class="link" href="#checkout-room-code-checkin-code">3.3. Checkout room: <code>checkin</code></a></h3>
+<div class="paragraph">
+<p>Checks in the room, which marks the room&#8217;s current booking as checked-in.
+Format: <code>checkin ROOM_NUMBER</code></p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>checkin 085</code><br>
+Checks in room 085 and marks room 085&#8217;s current booking as checked-in.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="checkout-room-code-checkout-code"><a class="link" href="#checkout-room-code-checkout-code">3.4. Checkout room: <code>checkout</code></a></h3>
 <div class="paragraph">
 <p>Checks out the room and the guest staying in it. The guest is deleted from the guest list and the room is then marked
 for housekeeping.<br>
@@ -178,14 +199,14 @@ Format: <code>checkout ROOM_NUMBER</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>checkout 85</code><br>
-Checks out room 85 and the guest staying in it.</p>
+<p><code>checkout 085</code><br>
+Checks out room 085 and the guest staying in it.</p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect2">
-<h3 id="deleting-a-guest-code-delete-code"><a class="link" href="#deleting-a-guest-code-delete-code">3.4. Deleting a guest : <code>delete</code></a></h3>
+<h3 id="deleting-a-guest-code-delete-code-span-class-red-coming-in-v2-0-span"><a class="link" href="#deleting-a-guest-code-delete-code-span-class-red-coming-in-v2-0-span">3.5. Deleting a guest : <code>delete</code> <span class="red">Coming in v2.0</span></a></h3>
 <div class="paragraph">
 <p>Deletes the specified guest from the archived guest list.<br>
 Format: <code>delete INDEX</code></p>
@@ -226,7 +247,7 @@ Deletes the 1st guest in the results of the <code>find</code> command.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="editing-a-guest-code-edit-code"><a class="link" href="#editing-a-guest-code-edit-code">3.5. Editing a guest : <code>edit</code></a></h3>
+<h3 id="editing-a-guest-code-edit-code-span-class-red-coming-in-v1-3-span"><a class="link" href="#editing-a-guest-code-edit-code-span-class-red-coming-in-v1-3-span">3.6. Editing a guest : <code>edit</code> <span class="red">Coming in v1.3</span></a></h3>
 <div class="paragraph">
 <p>Edits an existing guest in the guest list.<br>
 Format: <code>edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]&#8230;&#8203;</code></p>
@@ -271,7 +292,7 @@ Edits the name of the 2nd guest to be <code>Betsy Crower</code> and clears all e
 </div>
 </div>
 <div class="sect2">
-<h3 id="locating-guests-by-name-code-find-code"><a class="link" href="#locating-guests-by-name-code-find-code">3.6. Locating guests by name: <code>find</code></a></h3>
+<h3 id="locating-guests-by-name-code-find-code-span-class-red-coming-in-v1-3-span"><a class="link" href="#locating-guests-by-name-code-find-code-span-class-red-coming-in-v1-3-span">3.7. Locating guests by name: <code>find</code> <span class="red">Coming in v1.3</span></a></h3>
 <div class="paragraph">
 <p>Finds guests or rooms, depending on the input flag and the keywords.<br>
 Format: <code>find [flag] KEYWORD</code></p>
@@ -305,28 +326,40 @@ Format: <code>find [flag] KEYWORD</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>find -g n/John Smith</code><br>
+<p><code>find -g John Smith</code><br>
 Find guest(s) with "John" or "Smith" or both in their names.</p>
 </li>
 <li>
-<p><code>find -g r/85</code><br>
-Find guest currently staying in room 85</p>
+<p><code>find -g r/085</code><br>
+Find guest currently staying in room 085</p>
 </li>
 <li>
-<p><code>find -r 85</code><br>
-Find room 85</p>
+<p><code>find -r 085</code><br>
+Find room 085</p>
 </li>
 <li>
 <p><code>find -r g/John Smith</code><br>
-Find room in which guest John Smith is currently staying</p>
+Find room for which guest(s) with "John" or "Smith" or both in their names, has made a booking</p>
+</li>
+<li>
+<p><code>find -r double</code><br>
+Find all double rooms</p>
+</li>
+<li>
+<p><code>find -r avail</code><br>
+Find all available rooms today</p>
+</li>
+<li>
+<p><code>find -r avail from/09/12/18 to/10/12/18</code><br>
+Find rooms that are available from 09/12/18 10/12/18. Input dates must be in DD/MM/YY format.</p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect2">
-<h3 id="listing-all-guests-code-list-code"><a class="link" href="#listing-all-guests-code-list-code">3.7. Listing all guests : <code>list</code></a></h3>
+<h3 id="listing-all-guests-code-list-code"><a class="link" href="#listing-all-guests-code-list-code">3.8. Listing all guests : <code>list</code></a></h3>
 <div class="paragraph">
-<p>Shows a list of rooms or guests, depending on the input flag<br>
+<p>Shows the entire list of rooms, or guests, depending on the input flag<br>
 Format: <code>list [flag]</code></p>
 </div>
 <div class="paragraph">
@@ -336,29 +369,17 @@ Format: <code>list [flag]</code></p>
 <ul>
 <li>
 <p><code>list -r</code><br>
-List all rooms (default)</p>
+List all rooms</p>
 </li>
 <li>
 <p><code>list -g</code><br>
 List all guests</p>
 </li>
-<li>
-<p><code>list -r -d</code><br>
-List all double rooms</p>
-</li>
-<li>
-<p><code>list -r -a</code><br>
-List all available rooms today</p>
-</li>
-<li>
-<p><code>list -r -a 09/12/18 10/12/18</code><br>
-Lists rooms that are available from 091218 101218. Input dates must be in DD/MM/YY format.</p>
-</li>
 </ul>
 </div>
 </div>
 <div class="sect2">
-<h3 id="selecting-a-guest-code-select-code"><a class="link" href="#selecting-a-guest-code-select-code">3.8. Selecting a guest : <code>select</code></a></h3>
+<h3 id="selecting-a-guest-code-select-code-span-class-red-coming-in-v1-3-span"><a class="link" href="#selecting-a-guest-code-select-code-span-class-red-coming-in-v1-3-span">3.9. Selecting a guest : <code>select</code> <span class="red">Coming in v1.3</span></a></h3>
 <div class="paragraph">
 <p>Selects the guest/room identified by the index number used in the displayed list.<br>
 Format: <code>select INDEX</code></p>
@@ -386,7 +407,7 @@ Format: <code>select INDEX</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>list</code><br>
+<p><code>list -g</code><br>
 <code>select 2</code><br>
 Selects the 2nd room in the displayed list.</p>
 </li>
@@ -399,29 +420,78 @@ Selects the 1st guest in the results of the <code>find</code> command.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="provide-room-service-code-service-code"><a class="link" href="#provide-room-service-code-service-code">3.9. Provide Room Service: <code>service</code></a></h3>
+<h3 id="provide-room-service-code-service-code-span-class-red-coming-in-v1-3-span"><a class="link" href="#provide-room-service-code-service-code-span-class-red-coming-in-v1-3-span">3.10. Provide Room Service: <code>service</code> <span class="red">Coming in v1.3</span></a></h3>
 <div class="paragraph">
-<p>Provides the given room service for the room and charges are tagged to the room <br>
-Format: <code>service rm/709 st/bath supplies</code></p>
+<p>Charges a room service to a room <br>
+Format: <code>service r/ROOM_NUMBER svc/SERVICE_TYPE</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>SERVICE_TYPE refers to the serial number given to each type of service offered by the hotel.</p>
+</li>
+<li>
+<p>This could be room service, on-demand video streaming, bath supplies, mini bar, etc.</p>
+</li>
+</ul>
+</div>
+</div>
 </div>
 <div class="paragraph">
-<p>st refers to the type of room service required. Could be bath supplies, mini bar, replacing sheets,
-vacuuming, general, etc.</p>
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>service r/085 svc/01</code><br>
+Adds a service with the serial number <strong>01</strong> to the room&#8217;s expenses.</p>
+</li>
+</ul>
 </div>
 </div>
 <div class="sect2">
-<h3 id="mark-room-as-faulty-code-fault-code"><a class="link" href="#mark-room-as-faulty-code-fault-code">3.10. Mark Room as faulty: <code>fault</code></a></h3>
+<h3 id="room-maintenance-code-maintenance-code-span-class-red-coming-in-v2-0-span"><a class="link" href="#room-maintenance-code-maintenance-code-span-class-red-coming-in-v2-0-span">3.11. Room maintenance: <code>maintenance</code> <span class="red">Coming in v2.0</span></a></h3>
 <div class="paragraph">
-<p>Marks the given room for maintenance<br>
-Format: <code>service rm/709 mt/wiring</code></p>
+<p>Sets the room to be under maintenance.<br>
+Format: <code>maintenance ROOM_NUMBER TRUE/FALSE</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>A room under maintenance does not affect any of the other system operations.</p>
+</li>
+<li>
+<p>The receptionist should handle this situation on the ground using his judgment, be it to swap rooms for the guest</p>
+</li>
+<li>
+<p>or ask the guest to wait until the maintenance is over (e.g. leave luggage at hotel and talk a walk outside).</p>
+</li>
+</ul>
+</div>
+</div>
 </div>
 <div class="paragraph">
-<p>mt refers to the type of maintenance required.
-Room will not be available for booking whilst in this state.</p>
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>maintenance 085 TRUE</code><br>
+Sets room 085 to be under maintenance.</p>
+</li>
+<li>
+<p><code>maintenance 085 FALSE</code><br>
+Lifts the maintenance status on room 085.</p>
+</li>
+</ul>
 </div>
 </div>
 <div class="sect2">
-<h3 id="listing-entered-commands-code-history-code"><a class="link" href="#listing-entered-commands-code-history-code">3.11. Listing entered commands : <code>history</code></a></h3>
+<h3 id="listing-entered-commands-code-history-code"><a class="link" href="#listing-entered-commands-code-history-code">3.12. Listing entered commands : <code>history</code></a></h3>
 <div class="paragraph">
 <p>Lists all the commands that you have entered in reverse chronological order.<br>
 Format: <code>history</code></p>
@@ -442,7 +512,7 @@ Format: <code>history</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">3.12. Undoing previous command : <code>undo</code></a></h3>
+<h3 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">3.13. Undoing previous command : <code>undo</code></a></h3>
 <div class="paragraph">
 <p>Restores the concierge application to the state before the previous <em>undoable</em> command was executed.<br>
 Format: <code>undo</code></p>
@@ -455,7 +525,7 @@ Format: <code>undo</code></p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>Undoable commands: those commands that modify the address book&#8217;s content (<code>add</code>, <code>delete</code>, <code>edit</code> and <code>clear</code>).</p>
+<p>Undoable commands: those commands that modify the address book&#8217;s content (<code>add</code>, <code>checkin</code>, <code>checkout</code>, <code>delete</code>, <code>edit</code> and <code>clear</code>).</p>
 </div>
 </td>
 </tr>
@@ -487,7 +557,7 @@ The <code>undo</code> command fails as there are no undoable commands executed p
 </div>
 </div>
 <div class="sect2">
-<h3 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">3.13. Redoing the previously undone command : <code>redo</code></a></h3>
+<h3 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">3.14. Redoing the previously undone command : <code>redo</code></a></h3>
 <div class="paragraph">
 <p>Reverses the most recent <code>undo</code> command.<br>
 Format: <code>redo</code></p>
@@ -519,41 +589,41 @@ The <code>redo</code> command fails as there are no <code>undo</code> commands e
 </div>
 </div>
 <div class="sect2">
-<h3 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">3.14. Clearing all entries : <code>clear</code></a></h3>
+<h3 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">3.15. Clearing all entries : <code>clear</code></a></h3>
 <div class="paragraph">
 <p>Clears all entries from the application.<br>
 Format: <code>clear</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="export-log-code-export-code"><a class="link" href="#export-log-code-export-code">3.15. Export log: <code>export</code></a></h3>
+<h3 id="export-log-code-export-code-span-class-red-coming-in-v1-3-span"><a class="link" href="#export-log-code-export-code-span-class-red-coming-in-v1-3-span">3.16. Export log: <code>export</code> <span class="red">Coming in v1.3</span></a></h3>
 <div class="paragraph">
 <p>Exports a log of all history of commands into a text file<br>
 Format: <code>export</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="viewing-help-code-help-code"><a class="link" href="#viewing-help-code-help-code">3.16. Viewing help : <code>help</code></a></h3>
+<h3 id="viewing-help-code-help-code-span-class-red-coming-in-v1-3-span"><a class="link" href="#viewing-help-code-help-code-span-class-red-coming-in-v1-3-span">3.17. Viewing help : <code>help</code> <span class="red">Coming in v1.3</span></a></h3>
 <div class="paragraph">
 <p>Format: <code>help</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">3.17. Exiting the program : <code>exit</code></a></h3>
+<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">3.18. Exiting the program : <code>exit</code></a></h3>
 <div class="paragraph">
 <p>Exits the program.<br>
 Format: <code>exit</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="saving-the-data"><a class="link" href="#saving-the-data">3.18. Saving the data</a></h3>
+<h3 id="saving-the-data"><a class="link" href="#saving-the-data">3.19. Saving the data</a></h3>
 <div class="paragraph">
 <p>Address book data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="encrypting-data-files-code-coming-in-v2-0-code"><a class="link" href="#encrypting-data-files-code-coming-in-v2-0-code">3.19. Encrypting data files <code>[coming in v2.0]</code></a></h3>
+<h3 id="encrypting-data-files-span-class-red-coming-in-v2-0-span"><a class="link" href="#encrypting-data-files-span-class-red-coming-in-v2-0-span">3.20. Encrypting data files <span class="red">Coming in v2.0</span></a></h3>
 <div class="paragraph">
 <p><em>{explain how the user can enable/disable data encryption}</em></p>
 </div>
@@ -576,6 +646,9 @@ There is no need to save manually.</p>
 <ul>
 <li>
 <p><strong>Add a Guest and assign a Room</strong> : <code>add</code></p>
+</li>
+<li>
+<p><strong>Checkin</strong> : <code>checkin</code></p>
 </li>
 <li>
 <p><strong>Checkout</strong> : <code>checkout</code></p>
@@ -625,4 +698,4 @@ There is no need to save manually.</p>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-18 15:49:00 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-18 16:26:15 UTC</div></div></div></body></html>
