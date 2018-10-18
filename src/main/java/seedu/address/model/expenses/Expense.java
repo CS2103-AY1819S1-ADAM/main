@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import seedu.address.model.expenses.exceptions.ItemNotFoundException;
 
@@ -12,9 +13,14 @@ import seedu.address.model.expenses.exceptions.ItemNotFoundException;
  */
 public class Expense {
 
+    /**
+     * Standard date-time format used for this hotel's expenses
+     */
+    public static final DateTimeFormatter DATETIME_FORMAT = DateTimeFormatter.ofPattern("d/M/u HH:mm:ss");
+
     private final double cost;
     private final ExpenseType type;
-    private final LocalDateTime date;
+    private final LocalDateTime dateTime;
 
     /**
      * Constructs an {@code Expense} object.
@@ -26,7 +32,7 @@ public class Expense {
         requireNonNull(type);
         this.type = type;
         this.cost = cost;
-        this.date = LocalDateTime.now();
+        this.dateTime = LocalDateTime.now();
     }
 
     /**
@@ -40,14 +46,14 @@ public class Expense {
         requireNonNull(type);
         this.type = type;
         this.cost = this.type.getItemCost();
-        this.date = LocalDateTime.now();
+        this.dateTime = LocalDateTime.now();
     }
 
-    public Expense(ExpenseType type, double cost, LocalDateTime date) {
-        requireAllNonNull(type, date);
+    public Expense(ExpenseType type, double cost, LocalDateTime dateTime) {
+        requireAllNonNull(type, dateTime);
         this.type = type;
         this.cost = cost;
-        this.date = date;
+        this.dateTime = dateTime;
     }
 
     /**
@@ -82,8 +88,8 @@ public class Expense {
      *
      * @return The date and time of this transaction.
      */
-    public LocalDateTime getDate() {
-        return date;
+    public LocalDateTime getDateTime() {
+        return dateTime;
     }
 
     /**
@@ -91,13 +97,13 @@ public class Expense {
      *
      * @return The date and time of this transaction in string.
      */
-    public String getDateString() {
-        return date.toString();
+    public String getDateTimeString() {
+        return dateTime.format(DATETIME_FORMAT);
     }
 
     @Override
     public String toString() {
-        return cost + " spent on " + type.getItemName() + " on " + getDateString();
+        return cost + " spent on " + type.getItemName() + " on " + getDateTimeString();
     }
 
     @Override
@@ -106,11 +112,11 @@ public class Expense {
                 || (other instanceof Expenses // instanceof handles nulls
                 && cost == ((Expense) other).cost
                 && type.equals(((Expense) other).type)
-                && date.equals(((Expense) other).date)); // state check
+                && dateTime.equals(((Expense) other).dateTime)); // state check
     }
 
     @Override
     public int hashCode() {
-        return date.hashCode();
+        return dateTime.hashCode();
     }
 }

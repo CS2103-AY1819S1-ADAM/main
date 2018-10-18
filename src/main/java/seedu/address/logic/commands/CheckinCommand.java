@@ -8,26 +8,28 @@ import seedu.address.model.Model;
 import seedu.address.model.room.RoomNumber;
 
 /**
- * Check out a room identified using its room number and remove its registered guest from the guest list.
+ * Check in a room identified using its room number.
  */
-public class CheckoutCommand extends Command {
+public class CheckinCommand extends Command {
 
-    public static final String COMMAND_WORD = "checkout";
+    public static final String COMMAND_WORD = "checkin";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Checks out the room identified by the room number, and remove its registered guest from guest list.\n"
+            + ": Checks in the room identified by the room number.\n"
             + "Parameters: ROOM_NUMBER (must be a 3-digit positive integer from 001 to "
             + RoomNumber.MAX_ROOM_NUMBER + " )\n"
             + "Example: " + COMMAND_WORD + " 001";
 
-    public static final String MESSAGE_CHECKOUT_ROOM_SUCCESS = "Checked out Room: %1$s";
-    public static final String MESSAGE_NO_ACTIVE_OR_EXPIRED_ROOM_BOOKING_CHECKOUT =
-        "Cannot checkout Room %1$s, as it does not have an active or expired booking.";
+    public static final String MESSAGE_CHECKIN_ROOM_SUCCESS = "Checked in Room: %1$s";
+    public static final String MESSAGE_NO_ACTIVE_BOOKING_CHECKIN =
+        "Cannot check in Room %1$s, as it does not have an active booking.";
+    public static final String MESSAGE_OCCUPIED_ROOM_CHECKIN =
+        "Cannot check in Room %1$s, as it is already checked in.";
     public static final String MESSAGE_NO_ROOM_BOOKING = "Room %1$s has no bookings.";
 
     private final RoomNumber roomNumber;
 
-    public CheckoutCommand(RoomNumber roomNumber) {
+    public CheckinCommand(RoomNumber roomNumber) {
         this.roomNumber = roomNumber;
     }
 
@@ -38,18 +40,21 @@ public class CheckoutCommand extends Command {
         if (!model.roomHasBooking(roomNumber)) {
             throw new CommandException(String.format(MESSAGE_NO_ROOM_BOOKING, roomNumber));
         }
-        if (!model.roomHasActiveOrExpiredBooking(roomNumber)) {
-            throw new CommandException(String.format(MESSAGE_NO_ACTIVE_OR_EXPIRED_ROOM_BOOKING_CHECKOUT, roomNumber));
+        if (!model.roomHasActiveBooking(roomNumber)) {
+            throw new CommandException(String.format(MESSAGE_NO_ACTIVE_BOOKING_CHECKIN, roomNumber));
         }
-        model.checkoutRoom(roomNumber);
+        if (model.isRoomCheckedIn(roomNumber)) {
+            throw new CommandException(String.format(MESSAGE_OCCUPIED_ROOM_CHECKIN, roomNumber));
+        }
+        model.checkinRoom(roomNumber);
         model.commitAddressBook();
-        return new CommandResult(String.format(MESSAGE_CHECKOUT_ROOM_SUCCESS, roomNumber));
+        return new CommandResult(String.format(MESSAGE_CHECKIN_ROOM_SUCCESS, roomNumber));
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof CheckoutCommand // instanceof handles nulls
-                && roomNumber.equals(((CheckoutCommand) other).roomNumber)); // state check
+                || (other instanceof CheckinCommand // instanceof handles nulls
+                && roomNumber.equals(((CheckinCommand) other).roomNumber)); // state check
     }
 }

@@ -46,7 +46,6 @@
     <rooms>
         <roomNumber>001</roomNumber>
         <capacity>1</capacity>
-        <expenses>seedu.address.model.room.Expenses@54ecf5e7</expenses>
         <bookings>
             <guest>
                 <name>Alex Yeoh</name>
@@ -56,505 +55,472 @@
                 <tagged>friends</tagged>
             </guest>
             <bookingPeriod>
-                <startDate>01/01/2019</startDate>
-                <endDate>02/01/2019</endDate>
+                <startDate>18/10/2018</startDate>
+                <endDate>19/10/2018</endDate>
             </bookingPeriod>
-            <checkin>false</checkin>
+            <checkin>true</checkin>
         </bookings>
     </rooms>
     <rooms>
         <roomNumber>002</roomNumber>
         <capacity>2</capacity>
-        <expenses>seedu.address.model.room.Expenses@6913424f</expenses>
     </rooms>
     <rooms>
         <roomNumber>003</roomNumber>
         <capacity>1</capacity>
-        <expenses>seedu.address.model.room.Expenses@2354e8ee</expenses>
     </rooms>
     <rooms>
         <roomNumber>004</roomNumber>
         <capacity>2</capacity>
-        <expenses>seedu.address.model.room.Expenses@72850d6d</expenses>
     </rooms>
     <rooms>
         <roomNumber>005</roomNumber>
         <capacity>1</capacity>
-        <expenses>seedu.address.model.room.Expenses@594d88f1</expenses>
     </rooms>
     <rooms>
         <roomNumber>006</roomNumber>
         <capacity>2</capacity>
-        <expenses>seedu.address.model.room.Expenses@7834377a</expenses>
     </rooms>
     <rooms>
         <roomNumber>007</roomNumber>
         <capacity>1</capacity>
-        <expenses>seedu.address.model.room.Expenses@1a1ef50b</expenses>
     </rooms>
     <rooms>
         <roomNumber>008</roomNumber>
         <capacity>2</capacity>
-        <expenses>seedu.address.model.room.Expenses@61d81ce7</expenses>
     </rooms>
     <rooms>
         <roomNumber>009</roomNumber>
         <capacity>1</capacity>
-        <expenses>seedu.address.model.room.Expenses@155049a3</expenses>
     </rooms>
     <rooms>
         <roomNumber>010</roomNumber>
         <capacity>5</capacity>
-        <expenses>seedu.address.model.room.Expenses@4c863394</expenses>
     </rooms>
     <rooms>
         <roomNumber>011</roomNumber>
         <capacity>1</capacity>
-        <expenses>seedu.address.model.room.Expenses@21dd31a2</expenses>
     </rooms>
     <rooms>
         <roomNumber>012</roomNumber>
         <capacity>2</capacity>
-        <expenses>seedu.address.model.room.Expenses@432e5a</expenses>
     </rooms>
     <rooms>
         <roomNumber>013</roomNumber>
         <capacity>1</capacity>
-        <expenses>seedu.address.model.room.Expenses@174972a0</expenses>
     </rooms>
     <rooms>
         <roomNumber>014</roomNumber>
         <capacity>2</capacity>
-        <expenses>seedu.address.model.room.Expenses@6aaee94e</expenses>
     </rooms>
     <rooms>
         <roomNumber>015</roomNumber>
         <capacity>1</capacity>
-        <expenses>seedu.address.model.room.Expenses@22369598</expenses>
     </rooms>
     <rooms>
         <roomNumber>016</roomNumber>
         <capacity>2</capacity>
-        <expenses>seedu.address.model.room.Expenses@3b9e4e7a</expenses>
     </rooms>
     <rooms>
         <roomNumber>017</roomNumber>
         <capacity>1</capacity>
-        <expenses>seedu.address.model.room.Expenses@679ee7db</expenses>
     </rooms>
     <rooms>
         <roomNumber>018</roomNumber>
         <capacity>2</capacity>
-        <expenses>seedu.address.model.room.Expenses@7a6786ff</expenses>
     </rooms>
     <rooms>
         <roomNumber>019</roomNumber>
         <capacity>1</capacity>
-        <expenses>seedu.address.model.room.Expenses@6ceb567e</expenses>
     </rooms>
     <rooms>
         <roomNumber>020</roomNumber>
         <capacity>5</capacity>
-        <expenses>seedu.address.model.room.Expenses@25cf3807</expenses>
     </rooms>
     <rooms>
         <roomNumber>021</roomNumber>
         <capacity>1</capacity>
-        <expenses>seedu.address.model.room.Expenses@357fa35a</expenses>
     </rooms>
     <rooms>
         <roomNumber>022</roomNumber>
         <capacity>2</capacity>
-        <expenses>seedu.address.model.room.Expenses@73e98b74</expenses>
     </rooms>
     <rooms>
         <roomNumber>023</roomNumber>
         <capacity>1</capacity>
-        <expenses>seedu.address.model.room.Expenses@45076bd1</expenses>
     </rooms>
     <rooms>
         <roomNumber>024</roomNumber>
         <capacity>2</capacity>
-        <expenses>seedu.address.model.room.Expenses@19546c76</expenses>
     </rooms>
     <rooms>
         <roomNumber>025</roomNumber>
         <capacity>1</capacity>
-        <expenses>seedu.address.model.room.Expenses@51f97975</expenses>
     </rooms>
     <rooms>
         <roomNumber>026</roomNumber>
         <capacity>2</capacity>
-        <expenses>seedu.address.model.room.Expenses@6ef4fa15</expenses>
     </rooms>
     <rooms>
         <roomNumber>027</roomNumber>
         <capacity>1</capacity>
-        <expenses>seedu.address.model.room.Expenses@10d34df9</expenses>
     </rooms>
     <rooms>
         <roomNumber>028</roomNumber>
         <capacity>2</capacity>
-        <expenses>seedu.address.model.room.Expenses@2a5ea449</expenses>
     </rooms>
     <rooms>
         <roomNumber>029</roomNumber>
         <capacity>1</capacity>
-        <expenses>seedu.address.model.room.Expenses@307652a6</expenses>
     </rooms>
     <rooms>
         <roomNumber>030</roomNumber>
         <capacity>5</capacity>
-        <expenses>seedu.address.model.room.Expenses@799b32ef</expenses>
     </rooms>
     <rooms>
         <roomNumber>031</roomNumber>
         <capacity>1</capacity>
-        <expenses>seedu.address.model.room.Expenses@73ad04a0</expenses>
     </rooms>
     <rooms>
         <roomNumber>032</roomNumber>
         <capacity>2</capacity>
-        <expenses>seedu.address.model.room.Expenses@2c8e8a70</expenses>
     </rooms>
     <rooms>
         <roomNumber>033</roomNumber>
         <capacity>1</capacity>
-        <expenses>seedu.address.model.room.Expenses@2e6f1e25</expenses>
     </rooms>
     <rooms>
         <roomNumber>034</roomNumber>
         <capacity>2</capacity>
-        <expenses>seedu.address.model.room.Expenses@ec34d4d</expenses>
     </rooms>
     <rooms>
         <roomNumber>035</roomNumber>
         <capacity>1</capacity>
-        <expenses>seedu.address.model.room.Expenses@15d0c031</expenses>
     </rooms>
     <rooms>
         <roomNumber>036</roomNumber>
         <capacity>2</capacity>
-        <expenses>seedu.address.model.room.Expenses@4dd505f1</expenses>
     </rooms>
     <rooms>
         <roomNumber>037</roomNumber>
         <capacity>1</capacity>
-        <expenses>seedu.address.model.room.Expenses@1b9da458</expenses>
     </rooms>
     <rooms>
         <roomNumber>038</roomNumber>
         <capacity>2</capacity>
-        <expenses>seedu.address.model.room.Expenses@f203b43</expenses>
     </rooms>
     <rooms>
         <roomNumber>039</roomNumber>
         <capacity>1</capacity>
-        <expenses>seedu.address.model.room.Expenses@1ce2b3de</expenses>
     </rooms>
     <rooms>
         <roomNumber>040</roomNumber>
         <capacity>5</capacity>
-        <expenses>seedu.address.model.room.Expenses@79fdd73e</expenses>
     </rooms>
     <rooms>
         <roomNumber>041</roomNumber>
         <capacity>1</capacity>
-        <expenses>seedu.address.model.room.Expenses@f34033d</expenses>
     </rooms>
     <rooms>
         <roomNumber>042</roomNumber>
         <capacity>2</capacity>
-        <expenses>seedu.address.model.room.Expenses@140dbbb</expenses>
     </rooms>
     <rooms>
         <roomNumber>043</roomNumber>
         <capacity>1</capacity>
-        <expenses>seedu.address.model.room.Expenses@8b5f40e</expenses>
     </rooms>
     <rooms>
         <roomNumber>044</roomNumber>
         <capacity>2</capacity>
-        <expenses>seedu.address.model.room.Expenses@1f669601</expenses>
     </rooms>
     <rooms>
         <roomNumber>045</roomNumber>
         <capacity>1</capacity>
-        <expenses>seedu.address.model.room.Expenses@30e4433b</expenses>
     </rooms>
     <rooms>
         <roomNumber>046</roomNumber>
         <capacity>2</capacity>
-        <expenses>seedu.address.model.room.Expenses@37fedb9f</expenses>
     </rooms>
     <rooms>
         <roomNumber>047</roomNumber>
         <capacity>1</capacity>
-        <expenses>seedu.address.model.room.Expenses@104c5cea</expenses>
     </rooms>
     <rooms>
         <roomNumber>048</roomNumber>
         <capacity>2</capacity>
-        <expenses>seedu.address.model.room.Expenses@3b31167c</expenses>
     </rooms>
     <rooms>
         <roomNumber>049</roomNumber>
         <capacity>1</capacity>
-        <expenses>seedu.address.model.room.Expenses@29de67ba</expenses>
     </rooms>
     <rooms>
         <roomNumber>050</roomNumber>
         <capacity>5</capacity>
-        <expenses>seedu.address.model.room.Expenses@68bd733d</expenses>
     </rooms>
     <rooms>
         <roomNumber>051</roomNumber>
         <capacity>1</capacity>
-        <expenses>seedu.address.model.room.Expenses@1a64c9cc</expenses>
     </rooms>
     <rooms>
         <roomNumber>052</roomNumber>
         <capacity>2</capacity>
-        <expenses>seedu.address.model.room.Expenses@29d5ae0a</expenses>
     </rooms>
     <rooms>
         <roomNumber>053</roomNumber>
         <capacity>1</capacity>
-        <expenses>seedu.address.model.room.Expenses@736cef3d</expenses>
     </rooms>
     <rooms>
         <roomNumber>054</roomNumber>
         <capacity>2</capacity>
-        <expenses>seedu.address.model.room.Expenses@704b4ef6</expenses>
     </rooms>
     <rooms>
         <roomNumber>055</roomNumber>
         <capacity>1</capacity>
-        <expenses>seedu.address.model.room.Expenses@4cddd39a</expenses>
     </rooms>
     <rooms>
         <roomNumber>056</roomNumber>
         <capacity>2</capacity>
-        <expenses>seedu.address.model.room.Expenses@487c81f5</expenses>
     </rooms>
     <rooms>
         <roomNumber>057</roomNumber>
         <capacity>1</capacity>
-        <expenses>seedu.address.model.room.Expenses@5cfd9ac0</expenses>
     </rooms>
     <rooms>
         <roomNumber>058</roomNumber>
         <capacity>2</capacity>
-        <expenses>seedu.address.model.room.Expenses@766b4357</expenses>
     </rooms>
     <rooms>
         <roomNumber>059</roomNumber>
         <capacity>1</capacity>
-        <expenses>seedu.address.model.room.Expenses@54880f03</expenses>
     </rooms>
     <rooms>
         <roomNumber>060</roomNumber>
         <capacity>5</capacity>
-        <expenses>seedu.address.model.room.Expenses@78574f4e</expenses>
     </rooms>
     <rooms>
         <roomNumber>061</roomNumber>
         <capacity>1</capacity>
-        <expenses>seedu.address.model.room.Expenses@484cf11e</expenses>
     </rooms>
     <rooms>
         <roomNumber>062</roomNumber>
         <capacity>2</capacity>
-        <expenses>seedu.address.model.room.Expenses@641172bb</expenses>
     </rooms>
     <rooms>
         <roomNumber>063</roomNumber>
         <capacity>1</capacity>
-        <expenses>seedu.address.model.room.Expenses@7075992d</expenses>
     </rooms>
     <rooms>
         <roomNumber>064</roomNumber>
         <capacity>2</capacity>
-        <expenses>seedu.address.model.room.Expenses@329a9552</expenses>
     </rooms>
     <rooms>
         <roomNumber>065</roomNumber>
         <capacity>1</capacity>
-        <expenses>seedu.address.model.room.Expenses@1d71561e</expenses>
     </rooms>
     <rooms>
         <roomNumber>066</roomNumber>
         <capacity>2</capacity>
-        <expenses>seedu.address.model.room.Expenses@721a7ba1</expenses>
     </rooms>
     <rooms>
         <roomNumber>067</roomNumber>
         <capacity>1</capacity>
-        <expenses>seedu.address.model.room.Expenses@2efa283e</expenses>
     </rooms>
     <rooms>
         <roomNumber>068</roomNumber>
         <capacity>2</capacity>
-        <expenses>seedu.address.model.room.Expenses@482c08b6</expenses>
     </rooms>
     <rooms>
         <roomNumber>069</roomNumber>
         <capacity>1</capacity>
-        <expenses>seedu.address.model.room.Expenses@5f7a660b</expenses>
     </rooms>
     <rooms>
         <roomNumber>070</roomNumber>
         <capacity>5</capacity>
-        <expenses>seedu.address.model.room.Expenses@7e9cc936</expenses>
     </rooms>
     <rooms>
         <roomNumber>071</roomNumber>
         <capacity>1</capacity>
-        <expenses>seedu.address.model.room.Expenses@158b503</expenses>
     </rooms>
     <rooms>
         <roomNumber>072</roomNumber>
         <capacity>2</capacity>
-        <expenses>seedu.address.model.room.Expenses@29197426</expenses>
     </rooms>
     <rooms>
         <roomNumber>073</roomNumber>
         <capacity>1</capacity>
-        <expenses>seedu.address.model.room.Expenses@255f1530</expenses>
     </rooms>
     <rooms>
         <roomNumber>074</roomNumber>
         <capacity>2</capacity>
-        <expenses>seedu.address.model.room.Expenses@3d92add4</expenses>
     </rooms>
     <rooms>
         <roomNumber>075</roomNumber>
         <capacity>1</capacity>
-        <expenses>seedu.address.model.room.Expenses@7926e7c8</expenses>
     </rooms>
     <rooms>
         <roomNumber>076</roomNumber>
         <capacity>2</capacity>
-        <expenses>seedu.address.model.room.Expenses@1bfc048e</expenses>
     </rooms>
     <rooms>
         <roomNumber>077</roomNumber>
         <capacity>1</capacity>
-        <expenses>seedu.address.model.room.Expenses@46577454</expenses>
     </rooms>
     <rooms>
         <roomNumber>078</roomNumber>
         <capacity>2</capacity>
-        <expenses>seedu.address.model.room.Expenses@6e839d47</expenses>
     </rooms>
     <rooms>
         <roomNumber>079</roomNumber>
         <capacity>1</capacity>
-        <expenses>seedu.address.model.room.Expenses@20553ff8</expenses>
     </rooms>
     <rooms>
         <roomNumber>080</roomNumber>
         <capacity>5</capacity>
-        <expenses>seedu.address.model.room.Expenses@5bf69708</expenses>
     </rooms>
     <rooms>
         <roomNumber>081</roomNumber>
         <capacity>1</capacity>
-        <expenses>seedu.address.model.room.Expenses@267ebdf6</expenses>
     </rooms>
     <rooms>
         <roomNumber>082</roomNumber>
         <capacity>2</capacity>
-        <expenses>seedu.address.model.room.Expenses@54e575db</expenses>
     </rooms>
     <rooms>
         <roomNumber>083</roomNumber>
         <capacity>1</capacity>
-        <expenses>seedu.address.model.room.Expenses@5dc63a40</expenses>
     </rooms>
     <rooms>
         <roomNumber>084</roomNumber>
         <capacity>2</capacity>
-        <expenses>seedu.address.model.room.Expenses@3267a827</expenses>
     </rooms>
     <rooms>
         <roomNumber>085</roomNumber>
         <capacity>1</capacity>
-        <expenses>seedu.address.model.room.Expenses@61252290</expenses>
     </rooms>
     <rooms>
         <roomNumber>086</roomNumber>
         <capacity>2</capacity>
-        <expenses>seedu.address.model.room.Expenses@1e91c8c2</expenses>
     </rooms>
     <rooms>
         <roomNumber>087</roomNumber>
         <capacity>1</capacity>
-        <expenses>seedu.address.model.room.Expenses@72e9f56a</expenses>
     </rooms>
     <rooms>
         <roomNumber>088</roomNumber>
         <capacity>2</capacity>
-        <expenses>seedu.address.model.room.Expenses@7d405d80</expenses>
     </rooms>
     <rooms>
         <roomNumber>089</roomNumber>
         <capacity>1</capacity>
-        <expenses>seedu.address.model.room.Expenses@3539c11a</expenses>
     </rooms>
     <rooms>
         <roomNumber>090</roomNumber>
         <capacity>5</capacity>
-        <expenses>seedu.address.model.room.Expenses@25fec8a7</expenses>
     </rooms>
     <rooms>
         <roomNumber>091</roomNumber>
         <capacity>1</capacity>
-        <expenses>seedu.address.model.room.Expenses@18012bd7</expenses>
     </rooms>
     <rooms>
         <roomNumber>092</roomNumber>
         <capacity>2</capacity>
-        <expenses>seedu.address.model.room.Expenses@67d2c90a</expenses>
     </rooms>
     <rooms>
         <roomNumber>093</roomNumber>
         <capacity>1</capacity>
-        <expenses>seedu.address.model.room.Expenses@1c18f5fb</expenses>
     </rooms>
     <rooms>
         <roomNumber>094</roomNumber>
         <capacity>2</capacity>
-        <expenses>seedu.address.model.room.Expenses@4f70bd2f</expenses>
     </rooms>
     <rooms>
         <roomNumber>095</roomNumber>
         <capacity>1</capacity>
-        <expenses>seedu.address.model.room.Expenses@5ebe6885</expenses>
     </rooms>
     <rooms>
         <roomNumber>096</roomNumber>
         <capacity>2</capacity>
-        <expenses>seedu.address.model.room.Expenses@2f5560c1</expenses>
     </rooms>
     <rooms>
         <roomNumber>097</roomNumber>
         <capacity>1</capacity>
-        <expenses>seedu.address.model.room.Expenses@7439fffd</expenses>
     </rooms>
     <rooms>
         <roomNumber>098</roomNumber>
         <capacity>2</capacity>
-        <expenses>seedu.address.model.room.Expenses@3eeabd90</expenses>
     </rooms>
     <rooms>
         <roomNumber>099</roomNumber>
         <capacity>1</capacity>
-        <expenses>seedu.address.model.room.Expenses@13bd1088</expenses>
     </rooms>
     <rooms>
         <roomNumber>100</roomNumber>
         <capacity>5</capacity>
-        <expenses>seedu.address.model.room.Expenses@176a2956</expenses>
     </rooms>
+    <menu>
+        <entry>
+            <key>RS03</key>
+            <value>
+                <itemNumber>RS03</itemNumber>
+                <itemName>Room service: Thai massage</itemName>
+                <itemCost>100.0</itemCost>
+            </value>
+        </entry>
+        <entry>
+            <key>RS01</key>
+            <value>
+                <itemNumber>RS01</itemNumber>
+                <itemName>Room service: Red wine</itemName>
+                <itemCost>50.0</itemCost>
+            </value>
+        </entry>
+        <entry>
+            <key>MB02</key>
+            <value>
+                <itemNumber>MB02</itemNumber>
+                <itemName>Minibar: Sprite</itemName>
+                <itemCost>3.0</itemCost>
+            </value>
+        </entry>
+        <entry>
+            <key>RS02</key>
+            <value>
+                <itemNumber>RS02</itemNumber>
+                <itemName>Room service: Beef steak</itemName>
+                <itemCost>70.0</itemCost>
+            </value>
+        </entry>
+        <entry>
+            <key>MB01</key>
+            <value>
+                <itemNumber>MB01</itemNumber>
+                <itemName>Minibar: Coca cola</itemName>
+                <itemCost>3.0</itemCost>
+            </value>
+        </entry>
+        <entry>
+            <key>SP01</key>
+            <value>
+                <itemNumber>SP01</itemNumber>
+                <itemName>Swimming pool: Entry</itemName>
+                <itemCost>5.0</itemCost>
+            </value>
+        </entry>
+        <entry>
+            <key>MB04</key>
+            <value>
+                <itemNumber>MB04</itemNumber>
+                <itemName>Minibar: Mineral water</itemName>
+                <itemCost>3.0</itemCost>
+            </value>
+        </entry>
+        <entry>
+            <key>MB03</key>
+            <value>
+                <itemNumber>MB03</itemNumber>
+                <itemName>Minibar: Tiger beer</itemName>
+                <itemCost>6.0</itemCost>
+            </value>
+        </entry>
+    </menu>
 </addressbook>

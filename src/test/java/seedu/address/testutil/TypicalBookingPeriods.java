@@ -14,20 +14,20 @@ import seedu.address.model.room.booking.BookingPeriod;
  */
 public class TypicalBookingPeriods {
     public static final BookingPeriod LASTWEEK_YESTERDAY = new BookingPeriod(
-        LocalDate.now().minusWeeks(1).format(BookingPeriod.FORMAT),
-        LocalDate.now().minusDays(1).format(BookingPeriod.FORMAT));
+        LocalDate.now().minusWeeks(1).format(BookingPeriod.DATE_TO_STRING_FORMAT),
+        LocalDate.now().minusDays(1).format(BookingPeriod.DATE_TO_STRING_FORMAT));
     public static final BookingPeriod YESTERDAY_TODAY = new BookingPeriod(
-        LocalDate.now().minusDays(1).format(BookingPeriod.FORMAT),
-        LocalDate.now().format(BookingPeriod.FORMAT));
+        LocalDate.now().minusDays(1).format(BookingPeriod.DATE_TO_STRING_FORMAT),
+        LocalDate.now().format(BookingPeriod.DATE_TO_STRING_FORMAT));
     public static final BookingPeriod TODAY_TOMORROW = new BookingPeriod(
-        LocalDate.now().format(BookingPeriod.FORMAT),
-        LocalDate.now().plusDays(1).format(BookingPeriod.FORMAT));
+        LocalDate.now().format(BookingPeriod.DATE_TO_STRING_FORMAT),
+        LocalDate.now().plusDays(1).format(BookingPeriod.DATE_TO_STRING_FORMAT));
     public static final BookingPeriod TODAY_NEXTWEEK = new BookingPeriod(
-        LocalDate.now().format(BookingPeriod.FORMAT),
-        LocalDate.now().plusWeeks(1).format(BookingPeriod.FORMAT));
+        LocalDate.now().format(BookingPeriod.DATE_TO_STRING_FORMAT),
+        LocalDate.now().plusWeeks(1).format(BookingPeriod.DATE_TO_STRING_FORMAT));
     public static final BookingPeriod TOMORROW_NEXTWEEK = new BookingPeriod(
-        LocalDate.now().plusDays(1).format(BookingPeriod.FORMAT),
-        LocalDate.now().plusWeeks(1).format(BookingPeriod.FORMAT));
+        LocalDate.now().plusDays(1).format(BookingPeriod.DATE_TO_STRING_FORMAT),
+        LocalDate.now().plusWeeks(1).format(BookingPeriod.DATE_TO_STRING_FORMAT));
 
     // Manually added - BookingPeriod found in {@code CommandTestUtil}
     public static final BookingPeriod BOOKING_PERIOD_AMY =

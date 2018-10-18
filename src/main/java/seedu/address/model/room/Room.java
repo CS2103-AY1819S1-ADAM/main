@@ -51,7 +51,7 @@ public abstract class Room {
 
     protected Room(Room room) {
         this(room.getRoomNumber(), room.getCapacity());
-        // this.expenses.setExpenses(room.getExpenses()); // to be implemented when Expenses is implemented
+        this.expenses.setExpenses(room.getExpenses());
         this.bookings.setBookings(room.getBookings());
     }
 
@@ -149,6 +149,13 @@ public abstract class Room {
     public boolean hasActiveOrExpiredBooking() {
         Booking firstBooking = bookings.getFirstBooking();
         return firstBooking.isActiveOrExpired();
+    }
+
+    /**
+     * Add an expense to this room's expenses
+     */
+    public void addExpense(Expense expense) {
+        expenses.addExpense(expense);
     }
 
     /**

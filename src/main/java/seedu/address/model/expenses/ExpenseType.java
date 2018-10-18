@@ -19,21 +19,27 @@ public class ExpenseType {
     /**
      * Constructor for an {@code ExpenseType} object.
      *
-     * @param number The menu number of the item.
-     * @param name The name of the item.
-     * @param cost The cost of the item.
+     * @param itemNumber The menu number of the item.
+     * @param itemName The name of the item.
+     * @param itemCost The cost of the item.
      */
-    public ExpenseType(String number, String name, double cost) {
-        requireAllNonNull(number, name);
-        if (number.equals("")) {
+    public ExpenseType(String itemNumber, String itemName, double itemCost) {
+        requireAllNonNull(itemNumber, itemName);
+        if (itemNumber.equals("")) {
             throw new IllegalArgumentException(MESSAGE_NUMBER_EMPTY);
         }
-        if (name.equals("")) {
+        if (itemName.equals("")) {
             throw new IllegalArgumentException(MESSAGE_NAME_EMPTY);
         }
-        itemNumber = number;
-        itemName = name;
-        itemCost = cost;
+        this.itemNumber = itemNumber;
+        this.itemName = itemName;
+        this.itemCost = itemCost;
+    }
+
+    public ExpenseType(ExpenseType expenseTypeToCopy) {
+        this.itemNumber = expenseTypeToCopy.getItemNumber();
+        this.itemName = expenseTypeToCopy.getItemName();
+        this.itemCost = expenseTypeToCopy.getItemCost();
     }
 
     public String getItemNumber() {

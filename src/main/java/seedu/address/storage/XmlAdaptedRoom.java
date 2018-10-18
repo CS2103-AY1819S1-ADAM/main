@@ -37,7 +37,7 @@ public class XmlAdaptedRoom {
     @XmlElement(required = true)
     private Integer capacity;
 
-    @XmlElement(required = true)
+    @XmlElement
     private List<XmlAdaptedBooking> bookings = new ArrayList<>();
     @XmlElement
     private List<XmlAdaptedExpense> expenses = new ArrayList<>();
