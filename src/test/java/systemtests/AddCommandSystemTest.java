@@ -29,9 +29,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.testutil.TypicalBookingPeriods.BOOKING_PERIOD_AMY;
 import static seedu.address.testutil.TypicalBookingPeriods.BOOKING_PERIOD_BOB;
-import static seedu.address.testutil.TypicalBookingPeriods.TODAY_NEXTWEEK;
 import static seedu.address.testutil.TypicalBookingPeriods.TOMORROW_NEXTWEEK;
-import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.AMY;
 import static seedu.address.testutil.TypicalPersons.BOB;
 import static seedu.address.testutil.TypicalPersons.CARL;
@@ -39,7 +37,6 @@ import static seedu.address.testutil.TypicalPersons.HOON;
 import static seedu.address.testutil.TypicalPersons.IDA;
 import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
 import static seedu.address.testutil.TypicalRoomNumbers.ROOM_NUMBER_001;
-import static seedu.address.testutil.TypicalRoomNumbers.ROOM_NUMBER_012;
 import static seedu.address.testutil.TypicalRoomNumbers.ROOM_NUMBER_020;
 import static seedu.address.testutil.TypicalRoomNumbers.ROOM_NUMBER_099;
 import static seedu.address.testutil.TypicalRoomNumbers.ROOM_NUMBER_AMY;
@@ -117,12 +114,6 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
 
         command = PersonUtil.getAddCommand(guestToAdd, roomNumberToAdd, bookingPeriodToAdd);
         assertCommandSuccess(command, guestToAdd, roomNumberToAdd, bookingPeriodToAdd);
-
-        /* Case: add to empty address book -> added */
-        deleteAllPersons();
-        roomNumberToAdd = ROOM_NUMBER_012;
-        bookingPeriodToAdd = TODAY_NEXTWEEK;
-        assertCommandSuccess(ALICE, roomNumberToAdd, bookingPeriodToAdd);
 
         /* Case: add a guest with tags, command with parameters in random order -> added */
         guestToAdd = BOB;
