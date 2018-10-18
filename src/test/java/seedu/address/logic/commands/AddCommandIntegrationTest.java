@@ -42,7 +42,9 @@ public class AddCommandIntegrationTest {
         expectedModel.commitAddressBook();
 
         assertCommandSuccess(new AddCommand(validGuest, validRoomNumber, validBookingPeriod),
-                model, commandHistory, String.format(AddCommand.MESSAGE_SUCCESS, validGuest),
+                model, commandHistory,
+                String.format(AddCommand.MESSAGE_SUCCESS, validGuest,
+                        validRoomNumber, validBookingPeriod),
                 expectedModel);
     }
 

@@ -57,6 +57,7 @@ import seedu.address.model.person.Guest;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.room.RoomNumber;
+import seedu.address.model.room.booking.Booking;
 import seedu.address.model.room.booking.BookingPeriod;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.BookingBuilder;
@@ -275,7 +276,12 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
                                        RoomNumber roomNumber, BookingPeriod bookingPeriod) {
         Model expectedModel = getModel();
         expectedModel.addPerson(guestToAdd);
-        String expectedResultMessage = String.format(AddCommand.MESSAGE_SUCCESS, guestToAdd);
+
+        Booking expectedBooking = new Booking(guestToAdd, bookingPeriod);
+        expectedModel.addBooking(roomNumber, expectedBooking);
+        String expectedResultMessage =
+                String.format(AddCommand.MESSAGE_SUCCESS, guestToAdd,
+                        roomNumber, bookingPeriod);
 
         assertCommandSuccess(command, expectedModel, expectedResultMessage);
     }
