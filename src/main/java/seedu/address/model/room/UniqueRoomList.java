@@ -161,7 +161,8 @@ public class UniqueRoomList implements Iterable<Room> {
      * Add a booking to a room identified by its room number.
      */
     public void addBooking(RoomNumber roomNumber, Booking booking) {
-        getRoom(roomNumber).addBooking(booking);
+        Room roomToAdd = getRoom(roomNumber);
+        roomToAdd.addBooking(booking);
     }
 
     /**
