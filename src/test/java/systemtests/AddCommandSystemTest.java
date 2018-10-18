@@ -18,6 +18,7 @@ import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.ROOM_DESC_001;
 import static seedu.address.logic.commands.CommandTestUtil.ROOM_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ROOM_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
@@ -39,9 +40,9 @@ import static seedu.address.testutil.TypicalPersons.IDA;
 import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
 import static seedu.address.testutil.TypicalRoomNumbers.ROOM_NUMBER_001;
 import static seedu.address.testutil.TypicalRoomNumbers.ROOM_NUMBER_012;
+import static seedu.address.testutil.TypicalRoomNumbers.ROOM_NUMBER_020;
 import static seedu.address.testutil.TypicalRoomNumbers.ROOM_NUMBER_099;
 import static seedu.address.testutil.TypicalRoomNumbers.ROOM_NUMBER_AMY;
-import static seedu.address.testutil.TypicalRoomNumbers.ROOM_NUMBER_BOB;
 
 import org.junit.Test;
 
@@ -98,19 +99,20 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
         expectedResultMessage = RedoCommand.MESSAGE_SUCCESS;
         assertCommandSuccess(command, model, expectedResultMessage);
 
-        /* Case: add a guest with all fields same as another guest in the address book except name -> added */
+        /* Case: add a guest with all fields same as another guest in the
+        address book except name and room -> added */
         guestToAdd = new GuestBuilder(AMY).withName(VALID_NAME_BOB).build();
-        roomNumberToAdd = TypicalRoomNumbers.ROOM_NUMBER_AMY;
+        roomNumberToAdd = TypicalRoomNumbers.ROOM_NUMBER_001;
         bookingPeriodToAdd = TypicalBookingPeriods.BOOKING_PERIOD_AMY;
         command = AddCommand.COMMAND_WORD + NAME_DESC_BOB + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
-                + TAG_DESC_FRIEND + ROOM_DESC_AMY + DATE_START_DESC_AMY + DATE_END_DESC_AMY;
+                + TAG_DESC_FRIEND + ROOM_DESC_001 + DATE_START_DESC_AMY + DATE_END_DESC_AMY;
         assertCommandSuccess(command, guestToAdd, roomNumberToAdd, bookingPeriodToAdd);
 
         /* Case: add a guest with all fields same as another guest in the address book except phone and email
          * -> added
          */
         guestToAdd = new GuestBuilder(AMY).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).build();
-        roomNumberToAdd = TypicalRoomNumbers.ROOM_NUMBER_AMY;
+        roomNumberToAdd = TypicalRoomNumbers.ROOM_NUMBER_011;
         bookingPeriodToAdd = TypicalBookingPeriods.BOOKING_PERIOD_AMY;
 
         command = PersonUtil.getAddCommand(guestToAdd, roomNumberToAdd, bookingPeriodToAdd);
@@ -124,7 +126,7 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
 
         /* Case: add a guest with tags, command with parameters in random order -> added */
         guestToAdd = BOB;
-        roomNumberToAdd = ROOM_NUMBER_BOB;
+        roomNumberToAdd = ROOM_NUMBER_020;
         bookingPeriodToAdd = BOOKING_PERIOD_BOB;
         command = AddCommand.COMMAND_WORD + TAG_DESC_FRIEND + ADDRESS_DESC_BOB
                 + DATE_END_DESC_BOB + TAG_DESC_HUSBAND + EMAIL_DESC_BOB + ROOM_DESC_BOB
