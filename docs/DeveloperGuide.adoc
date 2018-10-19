@@ -530,7 +530,6 @@ to restrict access to the collection, and only allow certain methods such as add
 `Expense` or displaying on screen.
 * **Alternative 2: Use a `Set<Expense>` object**: Having the expenses ordered (e.g.
 chronologically) will be useful for generating a nice view of all the expenses incurred.
-// end::dataencryption[]
 
 == Documentation
 
