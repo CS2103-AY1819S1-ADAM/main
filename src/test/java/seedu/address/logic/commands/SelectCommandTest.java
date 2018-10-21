@@ -7,9 +7,9 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_GUEST;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_GUEST;
+import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_GUEST;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -38,8 +38,8 @@ public class SelectCommandTest {
     public void execute_validIndexUnfilteredList_success() {
         Index lastPersonIndex = Index.fromOneBased(model.getFilteredGuestList().size());
 
-        assertExecutionSuccess(INDEX_FIRST_PERSON);
-        assertExecutionSuccess(INDEX_THIRD_PERSON);
+        assertExecutionSuccess(INDEX_FIRST_GUEST);
+        assertExecutionSuccess(INDEX_THIRD_GUEST);
         assertExecutionSuccess(lastPersonIndex);
     }
 
@@ -52,18 +52,18 @@ public class SelectCommandTest {
 
     @Test
     public void execute_validIndexFilteredList_success() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
-        showPersonAtIndex(expectedModel, INDEX_FIRST_PERSON);
+        showPersonAtIndex(model, INDEX_FIRST_GUEST);
+        showPersonAtIndex(expectedModel, INDEX_FIRST_GUEST);
 
-        assertExecutionSuccess(INDEX_FIRST_PERSON);
+        assertExecutionSuccess(INDEX_FIRST_GUEST);
     }
 
     @Test
     public void execute_invalidIndexFilteredList_failure() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
-        showPersonAtIndex(expectedModel, INDEX_FIRST_PERSON);
+        showPersonAtIndex(model, INDEX_FIRST_GUEST);
+        showPersonAtIndex(expectedModel, INDEX_FIRST_GUEST);
 
-        Index outOfBoundsIndex = INDEX_SECOND_PERSON;
+        Index outOfBoundsIndex = INDEX_SECOND_GUEST;
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundsIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
 
@@ -72,14 +72,14 @@ public class SelectCommandTest {
 
     @Test
     public void equals() {
-        SelectCommand selectFirstCommand = new SelectCommand(INDEX_FIRST_PERSON);
-        SelectCommand selectSecondCommand = new SelectCommand(INDEX_SECOND_PERSON);
+        SelectCommand selectFirstCommand = new SelectCommand(INDEX_FIRST_GUEST);
+        SelectCommand selectSecondCommand = new SelectCommand(INDEX_SECOND_GUEST);
 
         // same object -> returns true
         assertTrue(selectFirstCommand.equals(selectFirstCommand));
 
         // same values -> returns true
-        SelectCommand selectFirstCommandCopy = new SelectCommand(INDEX_FIRST_PERSON);
+        SelectCommand selectFirstCommandCopy = new SelectCommand(INDEX_FIRST_GUEST);
         assertTrue(selectFirstCommand.equals(selectFirstCommandCopy));
 
         // different types -> returns false

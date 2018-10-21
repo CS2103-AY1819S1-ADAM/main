@@ -3,8 +3,8 @@ package seedu.address.model;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_GUESTS;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalGuests.ALICE;
+import static seedu.address.testutil.TypicalGuests.BENSON;
 
 import java.nio.file.Paths;
 import java.util.Arrays;

@@ -9,13 +9,13 @@ import seedu.address.model.room.UniqueRoomList;
  */
 public class TypicalAddressBook {
 
-    public static final UniqueGuestList GUEST_LIST = TypicalPersons.getTypicalUniqueGuestList();
+    public static final UniqueGuestList GUEST_LIST = TypicalGuests.getTypicalUniqueGuestList();
     public static final UniqueRoomList ROOM_LIST = TypicalRooms.getTypicalUniqueRoomList();
 
     private TypicalAddressBook() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical persons.
+     * Returns an {@code AddressBook} with all the typical guests.
      */
     public static AddressBook getTypicalAddressBook() {
         AddressBook ab = new AddressBook();

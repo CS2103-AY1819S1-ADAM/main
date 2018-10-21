@@ -3,9 +3,9 @@ package seedu.address.storage;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.HOON;
-import static seedu.address.testutil.TypicalPersons.IDA;
+import static seedu.address.testutil.TypicalGuests.ALICE;
+import static seedu.address.testutil.TypicalGuests.HOON;
+import static seedu.address.testutil.TypicalGuests.IDA;
 
 import java.io.IOException;
 import java.nio.file.Path;

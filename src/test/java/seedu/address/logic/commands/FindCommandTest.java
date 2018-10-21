@@ -6,9 +6,9 @@ import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
-import static seedu.address.testutil.TypicalPersons.CARL;
-import static seedu.address.testutil.TypicalPersons.ELLE;
-import static seedu.address.testutil.TypicalPersons.FIONA;
+import static seedu.address.testutil.TypicalGuests.CARL;
+import static seedu.address.testutil.TypicalGuests.ELLE;
+import static seedu.address.testutil.TypicalGuests.FIONA;
 
 import java.util.Arrays;
 import java.util.Collections;

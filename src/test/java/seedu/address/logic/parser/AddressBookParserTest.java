@@ -5,7 +5,7 @@ import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.TypicalBookingPeriods.TODAY_NEXTWEEK;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_GUEST;
 import static seedu.address.testutil.TypicalRoomNumbers.ROOM_NUMBER_002;
 
 import java.util.Arrays;
@@ -36,7 +36,7 @@ import seedu.address.model.room.RoomNumber;
 import seedu.address.model.room.booking.BookingPeriod;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.GuestBuilder;
-import seedu.address.testutil.PersonUtil;
+import seedu.address.testutil.GuestUtil;
 
 public class AddressBookParserTest {
     @Rule
@@ -51,7 +51,7 @@ public class AddressBookParserTest {
         BookingPeriod bookingPeriod = TODAY_NEXTWEEK;
 
         AddCommand command = (AddCommand) parser.parseCommand(
-                PersonUtil.getAddCommand(guest, roomNumber, bookingPeriod));
+                GuestUtil.getAddCommand(guest, roomNumber, bookingPeriod));
         assertEquals(new AddCommand(guest, roomNumber, bookingPeriod),
                 command);
     }
@@ -65,8 +65,8 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_delete() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
+                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_GUEST.getOneBased());
+        assertEquals(new DeleteCommand(INDEX_FIRST_GUEST), command);
     }
 
     @Test
@@ -74,8 +74,8 @@ public class AddressBookParserTest {
         Guest guest = new GuestBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(guest).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
-        assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
+                + INDEX_FIRST_GUEST.getOneBased() + " " + GuestUtil.getEditPersonDescriptorDetails(descriptor));
+        assertEquals(new EditCommand(INDEX_FIRST_GUEST, descriptor), command);
     }
 
     @Test
@@ -120,8 +120,8 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_select() throws Exception {
         SelectCommand command = (SelectCommand) parser.parseCommand(
-                SelectCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new SelectCommand(INDEX_FIRST_PERSON), command);
+                SelectCommand.COMMAND_WORD + " " + INDEX_FIRST_GUEST.getOneBased());
+        assertEquals(new SelectCommand(INDEX_FIRST_GUEST), command);
     }
 
     @Test

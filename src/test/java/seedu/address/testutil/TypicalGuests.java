@@ -21,7 +21,7 @@ import seedu.address.model.guest.UniqueGuestList;
 /**
  * A utility class containing a list of {@code Guest} objects to be used in tests.
  */
-public class TypicalPersons {
+public class TypicalGuests {
 
     public static final Guest ALICE = new GuestBuilder().withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
@@ -60,7 +60,7 @@ public class TypicalPersons {
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
-    private TypicalPersons() {} // prevents instantiation
+    private TypicalGuests() {} // prevents instantiation
 
     public static List<Guest> getTypicalPersons() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));

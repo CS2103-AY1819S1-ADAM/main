@@ -30,12 +30,12 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.testutil.TypicalBookingPeriods.BOOKING_PERIOD_AMY;
 import static seedu.address.testutil.TypicalBookingPeriods.BOOKING_PERIOD_BOB;
 import static seedu.address.testutil.TypicalBookingPeriods.TOMORROW_NEXTWEEK;
-import static seedu.address.testutil.TypicalPersons.AMY;
-import static seedu.address.testutil.TypicalPersons.BOB;
-import static seedu.address.testutil.TypicalPersons.HOON;
-import static seedu.address.testutil.TypicalPersons.IDA;
-import static seedu.address.testutil.TypicalPersons.JAKOB;
-import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
+import static seedu.address.testutil.TypicalGuests.AMY;
+import static seedu.address.testutil.TypicalGuests.BOB;
+import static seedu.address.testutil.TypicalGuests.HOON;
+import static seedu.address.testutil.TypicalGuests.IDA;
+import static seedu.address.testutil.TypicalGuests.JAKOB;
+import static seedu.address.testutil.TypicalGuests.KEYWORD_MATCHING_MEIER;
 import static seedu.address.testutil.TypicalRoomNumbers.ROOM_NUMBER_001;
 import static seedu.address.testutil.TypicalRoomNumbers.ROOM_NUMBER_020;
 import static seedu.address.testutil.TypicalRoomNumbers.ROOM_NUMBER_023;
@@ -62,7 +62,7 @@ import seedu.address.model.room.booking.BookingPeriod;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.BookingBuilder;
 import seedu.address.testutil.GuestBuilder;
-import seedu.address.testutil.PersonUtil;
+import seedu.address.testutil.GuestUtil;
 import seedu.address.testutil.TypicalBookingPeriods;
 import seedu.address.testutil.TypicalRoomNumbers;
 
@@ -114,7 +114,7 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
         roomNumberToAdd = TypicalRoomNumbers.ROOM_NUMBER_011;
         bookingPeriodToAdd = TypicalBookingPeriods.BOOKING_PERIOD_AMY;
 
-        command = PersonUtil.getAddCommand(guestToAdd, roomNumberToAdd, bookingPeriodToAdd);
+        command = GuestUtil.getAddCommand(guestToAdd, roomNumberToAdd, bookingPeriodToAdd);
         assertCommandSuccess(command, guestToAdd, roomNumberToAdd, bookingPeriodToAdd);
 
         /* Case: add a guest with tags, command with parameters in random order -> added */
@@ -154,27 +154,27 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
                 BookingBuilder.DEFAULT_BOOKING_PERIOD_TODAY_TOMORROW;
 
         /* Case: add a duplicate guest -> rejected */
-        command = PersonUtil.getAddCommand(HOON, validRoomNumber, validBookingPeriod);
+        command = GuestUtil.getAddCommand(HOON, validRoomNumber, validBookingPeriod);
         assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_PERSON);
 
         /* Case: add a duplicate guest except with different phone -> rejected */
         guestToAdd = new GuestBuilder(HOON).withPhone(VALID_PHONE_BOB).build();
-        command = PersonUtil.getAddCommand(guestToAdd, validRoomNumber, validBookingPeriod);
+        command = GuestUtil.getAddCommand(guestToAdd, validRoomNumber, validBookingPeriod);
         assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_PERSON);
 
         /* Case: add a duplicate guest except with different email -> rejected */
         guestToAdd = new GuestBuilder(HOON).withEmail(VALID_EMAIL_BOB).build();
-        command = PersonUtil.getAddCommand(guestToAdd, validRoomNumber, validBookingPeriod);
+        command = GuestUtil.getAddCommand(guestToAdd, validRoomNumber, validBookingPeriod);
         assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_PERSON);
 
         /* Case: add a duplicate guest except with different address -> rejected */
         guestToAdd = new GuestBuilder(HOON).withAddress(VALID_ADDRESS_BOB).build();
-        command = PersonUtil.getAddCommand(guestToAdd, validRoomNumber, validBookingPeriod);
+        command = GuestUtil.getAddCommand(guestToAdd, validRoomNumber, validBookingPeriod);
         assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_PERSON);
 
         /* Case: add a duplicate guest except with different tags -> rejected */
         guestToAdd = new GuestBuilder(HOON).withTags("friends").build();
-        command = PersonUtil.getAddCommand(guestToAdd, validRoomNumber, validBookingPeriod);
+        command = GuestUtil.getAddCommand(guestToAdd, validRoomNumber, validBookingPeriod);
         assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_PERSON);
 
         /* Case: missing name -> rejected */
@@ -201,7 +201,7 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
         assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
 
         /* Case: invalid keyword -> rejected */
-        command = "adds " + PersonUtil.getAddCommand(validGuest,
+        command = "adds " + GuestUtil.getAddCommand(validGuest,
                 validRoomNumber, validBookingPeriod);
         assertCommandFailure(command, Messages.MESSAGE_UNKNOWN_COMMAND);
 
@@ -256,7 +256,7 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
                                       RoomNumber roomNumberToAdd,
                                       BookingPeriod bookingPeriodToAdd) {
 
-        String command = PersonUtil.getAddCommand(guestToAdd,
+        String command = GuestUtil.getAddCommand(guestToAdd,
                 roomNumberToAdd, bookingPeriodToAdd);
 
         assertCommandSuccess(command,

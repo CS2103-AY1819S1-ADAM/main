@@ -7,8 +7,8 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.SelectCommand.MESSAGE_SELECT_PERSON_SUCCESS;
 import static seedu.address.testutil.TestUtil.getLastIndex;
 import static seedu.address.testutil.TestUtil.getMidIndex;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_GUEST;
+import static seedu.address.testutil.TypicalGuests.KEYWORD_MATCHING_MEIER;
 
 import org.junit.Test;
 
@@ -26,8 +26,8 @@ public class SelectCommandSystemTest extends AddressBookSystemTest {
         /* Case: select the first card in the guest list, command with leading spaces and trailing spaces
          * -> selected
          */
-        String command = "   " + SelectCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + "   ";
-        assertCommandSuccess(command, INDEX_FIRST_PERSON);
+        String command = "   " + SelectCommand.COMMAND_WORD + " " + INDEX_FIRST_GUEST.getOneBased() + "   ";
+        assertCommandSuccess(command, INDEX_FIRST_GUEST);
 
         /* Case: select the last card in the guest list -> selected */
         Index personCount = getLastIndex(getModel());
@@ -94,7 +94,7 @@ public class SelectCommandSystemTest extends AddressBookSystemTest {
 
         /* Case: select from empty address book -> rejected */
         deleteAllPersons();
-        assertCommandFailure(SelectCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased(),
+        assertCommandFailure(SelectCommand.COMMAND_WORD + " " + INDEX_FIRST_GUEST.getOneBased(),
                 MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
