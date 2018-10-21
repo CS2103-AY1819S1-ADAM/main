@@ -4,7 +4,7 @@ import java.util.Map;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.expenses.ExpenseType;
-import seedu.address.model.person.Guest;
+import seedu.address.model.guest.Guest;
 import seedu.address.model.room.Room;
 
 /**

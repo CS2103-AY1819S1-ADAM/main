@@ -1,7 +1,7 @@
 package seedu.address.testutil;
 
 import seedu.address.model.AddressBook;
-import seedu.address.model.person.UniqueGuestList;
+import seedu.address.model.guest.UniqueGuestList;
 import seedu.address.model.room.UniqueRoomList;
 
 /**

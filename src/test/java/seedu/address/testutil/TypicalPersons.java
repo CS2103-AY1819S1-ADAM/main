@@ -15,8 +15,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.address.model.person.Guest;
-import seedu.address.model.person.UniqueGuestList;
+import seedu.address.model.guest.Guest;
+import seedu.address.model.guest.UniqueGuestList;
 
 /**
  * A utility class containing a list of {@code Guest} objects to be used in tests.

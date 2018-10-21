@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.address.model.guest;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -16,8 +16,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.address.model.person.exceptions.DuplicateGuestException;
-import seedu.address.model.person.exceptions.GuestNotFoundException;
+import seedu.address.model.guest.exceptions.DuplicateGuestException;
+import seedu.address.model.guest.exceptions.GuestNotFoundException;
 import seedu.address.testutil.GuestBuilder;
 
 public class UniqueGuestListTest {
