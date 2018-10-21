@@ -38,7 +38,7 @@ public class AddCommandIntegrationTest {
         BookingPeriod validBookingPeriod = TypicalBookingPeriods.TODAY_TOMORROW;
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.addPerson(validGuest);
+        expectedModel.addGuest(validGuest);
         expectedModel.commitAddressBook();
 
         assertCommandSuccess(new AddCommand(validGuest, validRoomNumber, validBookingPeriod),

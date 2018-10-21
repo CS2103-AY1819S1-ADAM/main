@@ -94,7 +94,7 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
 
         /* Case: redo adding Amy to the list -> Amy added again */
         command = RedoCommand.COMMAND_WORD;
-        model.addPerson(guestToAdd);
+        model.addGuest(guestToAdd);
         expectedResultMessage = RedoCommand.MESSAGE_SUCCESS;
         assertCommandSuccess(command, model, expectedResultMessage);
 
@@ -272,7 +272,7 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
     private void assertCommandSuccess(String command, Guest guestToAdd,
                                        RoomNumber roomNumber, BookingPeriod bookingPeriod) {
         Model expectedModel = getModel();
-        expectedModel.addPerson(guestToAdd);
+        expectedModel.addGuest(guestToAdd);
 
         Booking expectedBooking = new Booking(guestToAdd, bookingPeriod);
         expectedModel.addBooking(roomNumber, expectedBooking);

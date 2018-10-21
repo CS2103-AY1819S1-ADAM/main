@@ -61,7 +61,7 @@ public class DeleteCommandSystemTest extends AddressBookSystemTest {
         /* Case: filtered guest list, delete index within bounds of address book and guest list -> deleted */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
         Index index = INDEX_FIRST_PERSON;
-        assertTrue(index.getZeroBased() < getModel().getFilteredPersonList().size());
+        assertTrue(index.getZeroBased() < getModel().getFilteredGuestList().size());
         assertCommandSuccess(index);
 
         /* Case: filtered guest list, delete index within bounds of address book but out of bounds of guest list
@@ -117,7 +117,7 @@ public class DeleteCommandSystemTest extends AddressBookSystemTest {
      */
     private Guest removePerson(Model model, Index index) {
         Guest targetGuest = getPerson(model, index);
-        model.deletePerson(targetGuest);
+        model.deleteGuest(targetGuest);
         return targetGuest;
     }
 

@@ -62,26 +62,26 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public boolean hasPerson(Guest guest) {
+    public boolean hasGuest(Guest guest) {
         requireNonNull(guest);
         return versionedAddressBook.hasPerson(guest);
     }
 
     @Override
-    public void deletePerson(Guest target) {
+    public void deleteGuest(Guest target) {
         versionedAddressBook.removePerson(target);
         indicateAddressBookChanged();
     }
 
     @Override
-    public void addPerson(Guest guest) {
+    public void addGuest(Guest guest) {
         versionedAddressBook.addPerson(guest);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        updateFilteredGuestList(PREDICATE_SHOW_ALL_GUESTS);
         indicateAddressBookChanged();
     }
 
     @Override
-    public void updatePerson(Guest target, Guest editedGuest) {
+    public void updateGuest(Guest target, Guest editedGuest) {
         requireAllNonNull(target, editedGuest);
 
         versionedAddressBook.updatePerson(target, editedGuest);
@@ -95,12 +95,12 @@ public class ModelManager extends ComponentManager implements Model {
      * {@code versionedAddressBook}
      */
     @Override
-    public ObservableList<Guest> getFilteredPersonList() {
+    public ObservableList<Guest> getFilteredGuestList() {
         return FXCollections.unmodifiableObservableList(filteredGuests);
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Guest> predicate) {
+    public void updateFilteredGuestList(Predicate<Guest> predicate) {
         requireNonNull(predicate);
         filteredGuests.setPredicate(predicate);
     }

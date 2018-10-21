@@ -36,20 +36,20 @@ public class TestUtil {
      * Returns the middle index of the guest in the {@code model}'s guest list.
      */
     public static Index getMidIndex(Model model) {
-        return Index.fromOneBased(model.getFilteredPersonList().size() / 2);
+        return Index.fromOneBased(model.getFilteredGuestList().size() / 2);
     }
 
     /**
      * Returns the last index of the guest in the {@code model}'s guest list.
      */
     public static Index getLastIndex(Model model) {
-        return Index.fromOneBased(model.getFilteredPersonList().size());
+        return Index.fromOneBased(model.getFilteredGuestList().size());
     }
 
     /**
      * Returns the guest in the {@code model}'s guest list at {@code index}.
      */
     public static Guest getPerson(Model model, Index index) {
-        return model.getFilteredPersonList().get(index.getZeroBased());
+        return model.getFilteredGuestList().get(index.getZeroBased());
     }
 }

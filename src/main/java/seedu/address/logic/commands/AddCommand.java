@@ -74,10 +74,10 @@ public class AddCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasPerson(guestToAdd)) {
+        if (model.hasGuest(guestToAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
-        model.addPerson(guestToAdd);
+        model.addGuest(guestToAdd);
 
         try {
             model.addBooking(roomNumberToAdd, bookingToAdd);

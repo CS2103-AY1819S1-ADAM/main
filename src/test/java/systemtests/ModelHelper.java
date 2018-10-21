@@ -24,7 +24,7 @@ public class ModelHelper {
     public static void setFilteredGuestList(Model model, List<Guest> toDisplay) {
         Optional<Predicate<Guest>> predicate =
                 toDisplay.stream().map(ModelHelper::getPredicateMatchingGuest).reduce(Predicate::or);
-        model.updateFilteredPersonList(predicate.orElse(PREDICATE_MATCHING_NO_PERSONS));
+        model.updateFilteredGuestList(predicate.orElse(PREDICATE_MATCHING_NO_PERSONS));
     }
 
     /**
