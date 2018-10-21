@@ -49,7 +49,7 @@ public class XmlSerializableAddressBook {
      */
     public XmlSerializableAddressBook(ReadOnlyAddressBook src) {
         this();
-        guests.addAll(src.getPersonList().stream().map(XmlAdaptedPerson::new).collect(Collectors.toList()));
+        guests.addAll(src.getGuestList().stream().map(XmlAdaptedPerson::new).collect(Collectors.toList()));
         rooms.addAll(src.getRoomList().stream().map(XmlAdaptedRoom::new).collect(Collectors.toList()));
         for (Map.Entry<String, ExpenseType> mapping : src.getMenuMap().entrySet()) {
             menu.put(mapping.getKey(), new XmlAdaptedExpenseType(mapping.getValue()));
@@ -65,10 +65,10 @@ public class XmlSerializableAddressBook {
         AddressBook addressBook = new AddressBook();
         for (XmlAdaptedPerson p : guests) {
             Guest guest = p.toModelType();
-            if (addressBook.hasPerson(guest)) {
+            if (addressBook.hasGuest(guest)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
-            addressBook.addPerson(guest);
+            addressBook.addGuest(guest);
         }
 
         HashMap<String, ExpenseType> newMenu = new HashMap<>();

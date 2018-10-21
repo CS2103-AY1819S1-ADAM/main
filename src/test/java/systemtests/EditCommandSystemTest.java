@@ -85,7 +85,7 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
         assertCommandSuccess(command, index, BOB);
 
         /* Case: edit a guest with new values same as another guest's values but with different name -> edited */
-        assertTrue(getModel().getAddressBook().getPersonList().contains(BOB));
+        assertTrue(getModel().getAddressBook().getGuestList().contains(BOB));
         index = INDEX_SECOND_GUEST;
         assertNotEquals(getModel().getFilteredGuestList().get(index.getZeroBased()), BOB);
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_AMY + PHONE_DESC_BOB + EMAIL_DESC_BOB
@@ -124,7 +124,7 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
          * -> rejected
          */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
-        int invalidIndex = getModel().getAddressBook().getPersonList().size();
+        int invalidIndex = getModel().getAddressBook().getGuestList().size();
         assertCommandFailure(EditCommand.COMMAND_WORD + " " + invalidIndex + NAME_DESC_BOB,
                 Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
 
@@ -187,7 +187,7 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
 
         /* Case: edit a guest with new values same as another guest's values -> rejected */
         executeCommand(GuestUtil.getAddCommand(BOB, ROOM_NUMBER_BOB, BOOKING_PERIOD_BOB));
-        assertTrue(getModel().getAddressBook().getPersonList().contains(BOB));
+        assertTrue(getModel().getAddressBook().getGuestList().contains(BOB));
         index = INDEX_FIRST_GUEST;
         assertFalse(getModel().getFilteredGuestList().get(index.getZeroBased()).equals(BOB));
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB

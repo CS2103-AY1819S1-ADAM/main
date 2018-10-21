@@ -37,7 +37,7 @@ public class ModelManager extends ComponentManager implements Model {
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
         versionedAddressBook = new VersionedAddressBook(addressBook);
-        filteredGuests = new FilteredList<>(versionedAddressBook.getPersonList());
+        filteredGuests = new FilteredList<>(versionedAddressBook.getGuestList());
         filteredRooms = new FilteredList<>(versionedAddressBook.getRoomList());
     }
 
@@ -64,18 +64,18 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public boolean hasGuest(Guest guest) {
         requireNonNull(guest);
-        return versionedAddressBook.hasPerson(guest);
+        return versionedAddressBook.hasGuest(guest);
     }
 
     @Override
     public void deleteGuest(Guest target) {
-        versionedAddressBook.removePerson(target);
+        versionedAddressBook.removeGuest(target);
         indicateAddressBookChanged();
     }
 
     @Override
     public void addGuest(Guest guest) {
-        versionedAddressBook.addPerson(guest);
+        versionedAddressBook.addGuest(guest);
         updateFilteredGuestList(PREDICATE_SHOW_ALL_GUESTS);
         indicateAddressBookChanged();
     }
@@ -84,7 +84,7 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateGuest(Guest target, Guest editedGuest) {
         requireAllNonNull(target, editedGuest);
 
-        versionedAddressBook.updatePerson(target, editedGuest);
+        versionedAddressBook.updateGuest(target, editedGuest);
         indicateAddressBookChanged();
     }
 

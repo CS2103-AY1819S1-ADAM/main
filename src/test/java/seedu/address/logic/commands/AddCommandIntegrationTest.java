@@ -50,7 +50,7 @@ public class AddCommandIntegrationTest {
 
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
-        Guest guestInList = model.getAddressBook().getPersonList().get(0);
+        Guest guestInList = model.getAddressBook().getGuestList().get(0);
         RoomNumber validRoomNumber = TypicalRoomNumbers.ROOM_NUMBER_002;
         BookingPeriod validBookingPeriod = TypicalBookingPeriods.TODAY_TOMORROW;
 

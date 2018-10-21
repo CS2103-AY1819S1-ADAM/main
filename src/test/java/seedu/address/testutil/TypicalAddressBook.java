@@ -19,7 +19,7 @@ public class TypicalAddressBook {
      */
     public static AddressBook getTypicalAddressBook() {
         AddressBook ab = new AddressBook();
-        ab.setPersons(GUEST_LIST.asUnmodifiableObservableList());
+        ab.setGuests(GUEST_LIST.asUnmodifiableObservableList());
         ab.setRooms(ROOM_LIST.asUnmodifiableObservableList());
         return ab;
     }
