@@ -155,27 +155,27 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
 
         /* Case: add a duplicate guest -> rejected */
         command = GuestUtil.getAddCommand(HOON, validRoomNumber, validBookingPeriod);
-        assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_GUEST);
 
         /* Case: add a duplicate guest except with different phone -> rejected */
         guestToAdd = new GuestBuilder(HOON).withPhone(VALID_PHONE_BOB).build();
         command = GuestUtil.getAddCommand(guestToAdd, validRoomNumber, validBookingPeriod);
-        assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_GUEST);
 
         /* Case: add a duplicate guest except with different email -> rejected */
         guestToAdd = new GuestBuilder(HOON).withEmail(VALID_EMAIL_BOB).build();
         command = GuestUtil.getAddCommand(guestToAdd, validRoomNumber, validBookingPeriod);
-        assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_GUEST);
 
         /* Case: add a duplicate guest except with different address -> rejected */
         guestToAdd = new GuestBuilder(HOON).withAddress(VALID_ADDRESS_BOB).build();
         command = GuestUtil.getAddCommand(guestToAdd, validRoomNumber, validBookingPeriod);
-        assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_GUEST);
 
         /* Case: add a duplicate guest except with different tags -> rejected */
         guestToAdd = new GuestBuilder(HOON).withTags("friends").build();
         command = GuestUtil.getAddCommand(guestToAdd, validRoomNumber, validBookingPeriod);
-        assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_GUEST);
 
         /* Case: missing name -> rejected */
         command = AddCommand.COMMAND_WORD + PHONE_DESC_AMY + EMAIL_DESC_AMY

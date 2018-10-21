@@ -2,7 +2,6 @@ package seedu.address.logic.parser;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_GUEST;
 
 import java.util.Arrays;

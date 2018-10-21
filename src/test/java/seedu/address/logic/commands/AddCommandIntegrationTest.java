@@ -55,7 +55,7 @@ public class AddCommandIntegrationTest {
         BookingPeriod validBookingPeriod = TypicalBookingPeriods.TODAY_TOMORROW;
 
         assertCommandFailure(new AddCommand(guestInList, validRoomNumber, validBookingPeriod),
-                model, commandHistory, AddCommand.MESSAGE_DUPLICATE_PERSON);
+                model, commandHistory, AddCommand.MESSAGE_DUPLICATE_GUEST);
     }
 
 }
