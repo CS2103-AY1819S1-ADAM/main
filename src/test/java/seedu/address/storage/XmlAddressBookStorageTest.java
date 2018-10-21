@@ -70,7 +70,7 @@ public class XmlAddressBookStorageTest {
     @Test
     public void readAddressBook_invalidAndValidPersonAddressBook_throwDataConversionException() throws Exception {
         thrown.expect(DataConversionException.class);
-        readAddressBook("invalidAndValidPersonAddressBook.xml");
+        readAddressBook("invalidAndValidGuestAddressBook.xml");
     }
 
     @Test
