@@ -19,7 +19,7 @@ import java.util.List;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
+import seedu.address.model.Concierge;
 import seedu.address.model.Model;
 import seedu.address.model.person.Guest;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
@@ -140,7 +140,7 @@ public class CommandTestUtil {
             String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
-        AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
+        Concierge expectedAddressBook = new Concierge(actualModel.getAddressBook());
         List<Guest> expectedFilteredList = new ArrayList<>(actualModel.getFilteredPersonList());
 
         CommandHistory expectedCommandHistory = new CommandHistory(actualCommandHistory);

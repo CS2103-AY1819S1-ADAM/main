@@ -1,6 +1,6 @@
 package seedu.address.testutil;
 
-import seedu.address.model.AddressBook;
+import seedu.address.model.Concierge;
 import seedu.address.model.person.UniqueGuestList;
 import seedu.address.model.room.UniqueRoomList;
 
@@ -15,10 +15,10 @@ public class TypicalAddressBook {
     private TypicalAddressBook() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical persons.
+     * Returns an {@code Concierge} with all the typical persons.
      */
-    public static AddressBook getTypicalAddressBook() {
-        AddressBook ab = new AddressBook();
+    public static Concierge getTypicalAddressBook() {
+        Concierge ab = new Concierge();
         ab.setPersons(GUEST_LIST.asUnmodifiableObservableList());
         ab.setRooms(ROOM_LIST.asUnmodifiableObservableList());
         return ab;

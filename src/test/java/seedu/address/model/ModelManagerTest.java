@@ -47,8 +47,8 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
-        AddressBook differentAddressBook = new AddressBook();
+        Concierge addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
+        Concierge differentAddressBook = new Concierge();
         UserPrefs userPrefs = new UserPrefs();
 
         // same values -> returns true

@@ -20,10 +20,10 @@ public interface Model {
 
 
     /** Clears existing backing model and replaces with the provided new data. */
-    void resetData(ReadOnlyAddressBook newData);
+    void resetData(ReadOnlyConcierge newData);
 
-    /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
+    /** Returns the Concierge */
+    ReadOnlyConcierge getAddressBook();
 
     // =========== Methods for guest. =========================================
 

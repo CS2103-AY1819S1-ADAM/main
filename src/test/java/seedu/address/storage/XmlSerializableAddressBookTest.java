@@ -12,7 +12,7 @@ import org.junit.rules.ExpectedException;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.XmlUtil;
-import seedu.address.model.AddressBook;
+import seedu.address.model.Concierge;
 
 public class XmlSerializableAddressBookTest {
 
@@ -28,8 +28,8 @@ public class XmlSerializableAddressBookTest {
     public void toModelType_typicalPersonsFile_success() throws Exception {
         XmlSerializableAddressBook dataFromFile = XmlUtil.getDataFromFile(TYPICAL_PERSONS_FILE,
                 XmlSerializableAddressBook.class);
-        AddressBook addressBookFromFile = dataFromFile.toModelType();
-        AddressBook typicalPersonsAddressBook = getTypicalAddressBook();
+        Concierge addressBookFromFile = dataFromFile.toModelType();
+        Concierge typicalPersonsAddressBook = getTypicalAddressBook();
         assertEquals(addressBookFromFile, typicalPersonsAddressBook);
     }
 

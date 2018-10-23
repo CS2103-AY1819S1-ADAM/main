@@ -102,12 +102,12 @@ public class CheckoutCommandTest {
 
     @Test
     public void executeUndoRedo_validIndexUnfilteredList_success() {
-        // to be completed after AddressBook is refactored
+        // to be completed after Concierge is refactored
     }
 
     @Test
     public void executeUndoRedo_invalidIndexUnfilteredList_failure() {
-        // to be completed after AddressBook is refactored
+        // to be completed after Concierge is refactored
     }
 
     @Test

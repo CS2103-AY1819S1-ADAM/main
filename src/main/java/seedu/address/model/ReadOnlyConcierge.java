@@ -10,7 +10,7 @@ import seedu.address.model.room.Room;
 /**
  * Unmodifiable view of an address book
  */
-public interface ReadOnlyAddressBook {
+public interface ReadOnlyConcierge {
 
     /**
      * Returns an unmodifiable view of the persons list.

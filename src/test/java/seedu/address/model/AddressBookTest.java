@@ -32,7 +32,7 @@ public class AddressBookTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
-    private final AddressBook addressBook = new AddressBook();
+    private final Concierge addressBook = new Concierge();
 
     @Test
     public void constructor() {
@@ -47,7 +47,7 @@ public class AddressBookTest {
 
     @Test
     public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        AddressBook newData = getTypicalAddressBook();
+        Concierge newData = getTypicalAddressBook();
         addressBook.resetData(newData);
         assertEquals(newData, addressBook);
     }
@@ -59,7 +59,7 @@ public class AddressBookTest {
                 .build();
         List<Guest> newGuests = Arrays.asList(ALICE, editedAlice);
 
-        AddressBookStub newData = new AddressBookStub(newGuests, null);
+        ConciergeStub newData = new ConciergeStub(newGuests, null);
 
         thrown.expect(DuplicateGuestException.class);
         addressBook.resetData(newData);
@@ -103,13 +103,13 @@ public class AddressBookTest {
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose guests list can violate interface constraints.
+     * A stub ReadOnlyConcierge whose guests list can violate interface constraints.
      */
-    private static class AddressBookStub implements ReadOnlyAddressBook {
+    private static class ConciergeStub implements ReadOnlyConcierge {
         private final ObservableList<Guest> guests = FXCollections.observableArrayList();
         private final ObservableList<Room> rooms = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Guest> guests, Collection<Room> rooms) {
+        ConciergeStub(Collection<Guest> guests, Collection<Room> rooms) {
             this.guests.setAll(guests);
         }
 

@@ -10,14 +10,14 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.Concierge;
+import seedu.address.model.ReadOnlyConcierge;
 import seedu.address.model.expenses.ExpenseType;
 import seedu.address.model.person.Guest;
 import seedu.address.model.room.Room;
 
 /**
- * An Immutable AddressBook that is serializable to XML format
+ * An Immutable Concierge that is serializable to XML format
  */
 @XmlRootElement(name = "addressbook")
 public class XmlSerializableAddressBook {
@@ -47,7 +47,7 @@ public class XmlSerializableAddressBook {
     /**
      * Conversion
      */
-    public XmlSerializableAddressBook(ReadOnlyAddressBook src) {
+    public XmlSerializableAddressBook(ReadOnlyConcierge src) {
         this();
         guests.addAll(src.getPersonList().stream().map(XmlAdaptedPerson::new).collect(Collectors.toList()));
         rooms.addAll(src.getRoomList().stream().map(XmlAdaptedRoom::new).collect(Collectors.toList()));
@@ -57,12 +57,12 @@ public class XmlSerializableAddressBook {
     }
 
     /**
-     * Converts this addressbook into the model's {@code AddressBook} object.
+     * Converts this addressbook into the model's {@code Concierge} object.
      * @throws IllegalValueException if there were any data constraints violated or duplicates in the
      * {@code XmlAdaptedPerson / XmlAdaptedRoom}
      */
-    public AddressBook toModelType() throws IllegalValueException {
-        AddressBook addressBook = new AddressBook();
+    public Concierge toModelType() throws IllegalValueException {
+        Concierge addressBook = new Concierge();
         for (XmlAdaptedPerson p : guests) {
             Guest guest = p.toModelType();
             if (addressBook.hasPerson(guest)) {
