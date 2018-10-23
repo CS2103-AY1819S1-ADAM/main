@@ -120,7 +120,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public ReadOnlyConcierge getAddressBook() {
+        public ReadOnlyConcierge getConcierge() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -160,27 +160,27 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean canUndoAddressBook() {
+        public boolean canUndoConcierge() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public boolean canRedoAddressBook() {
+        public boolean canRedoConcierge() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void undoAddressBook() {
+        public void undoConcierge() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void redoAddressBook() {
+        public void redoConcierge() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void commitAddressBook() {
+        public void commitConcierge() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -262,12 +262,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public void commitAddressBook() {
+        public void commitConcierge() {
             // called by {@code AddCommand#execute()}
         }
 
         @Override
-        public ReadOnlyConcierge getAddressBook() {
+        public ReadOnlyConcierge getConcierge() {
             return new Concierge();
         }
     }

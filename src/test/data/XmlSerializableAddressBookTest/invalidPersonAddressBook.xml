@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addressbook>
+<concierge>
     <!-- Guest with invalid email field -->
     <guests>
         <name>Hans Muster</name>
@@ -7,4 +7,4 @@
         <email isPrivate="false">hans@exam!32ple</email>
         <address isPrivate="false">4th street</address>
     </guests>
-</addressbook>
+</concierge>

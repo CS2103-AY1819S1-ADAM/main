@@ -14,7 +14,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Guest;
 
 /**
- * Selects a guest identified using it's displayed index from the address book.
+ * Selects a guest identified using it's displayed index from Concierge.
  */
 public class SelectCommand extends Command {
 

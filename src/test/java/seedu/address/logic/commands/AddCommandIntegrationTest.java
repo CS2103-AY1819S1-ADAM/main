@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalConcierge.getTypicalConcierge;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -28,7 +28,7 @@ public class AddCommandIntegrationTest {
 
     @Before
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        model = new ModelManager(getTypicalConcierge(), new UserPrefs());
     }
 
     @Test
@@ -37,9 +37,9 @@ public class AddCommandIntegrationTest {
         RoomNumber validRoomNumber = TypicalRoomNumbers.ROOM_NUMBER_002;
         BookingPeriod validBookingPeriod = TypicalBookingPeriods.TODAY_TOMORROW;
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getConcierge(), new UserPrefs());
         expectedModel.addPerson(validGuest);
-        expectedModel.commitAddressBook();
+        expectedModel.commitConcierge();
 
         assertCommandSuccess(new AddCommand(validGuest, validRoomNumber, validBookingPeriod),
                 model, commandHistory,
@@ -50,7 +50,7 @@ public class AddCommandIntegrationTest {
 
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
-        Guest guestInList = model.getAddressBook().getPersonList().get(0);
+        Guest guestInList = model.getConcierge().getPersonList().get(0);
         RoomNumber validRoomNumber = TypicalRoomNumbers.ROOM_NUMBER_002;
         BookingPeriod validBookingPeriod = TypicalBookingPeriods.TODAY_TOMORROW;
 

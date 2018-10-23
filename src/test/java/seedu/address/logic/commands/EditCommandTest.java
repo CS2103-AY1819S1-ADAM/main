@@ -11,7 +11,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalConcierge.getTypicalConcierge;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 
@@ -34,7 +34,7 @@ import seedu.address.testutil.GuestBuilder;
  */
 public class EditCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalConcierge(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
@@ -45,9 +45,9 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedGuest);
 
-        Model expectedModel = new ModelManager(new Concierge(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new Concierge(model.getConcierge()), new UserPrefs());
         expectedModel.updatePerson(model.getFilteredPersonList().get(0), editedGuest);
-        expectedModel.commitAddressBook();
+        expectedModel.commitConcierge();
 
         assertCommandSuccess(editCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -67,9 +67,9 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedGuest);
 
-        Model expectedModel = new ModelManager(new Concierge(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new Concierge(model.getConcierge()), new UserPrefs());
         expectedModel.updatePerson(lastGuest, editedGuest);
-        expectedModel.commitAddressBook();
+        expectedModel.commitConcierge();
 
         assertCommandSuccess(editCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -81,8 +81,8 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedGuest);
 
-        Model expectedModel = new ModelManager(new Concierge(model.getAddressBook()), new UserPrefs());
-        expectedModel.commitAddressBook();
+        Model expectedModel = new ModelManager(new Concierge(model.getConcierge()), new UserPrefs());
+        expectedModel.commitConcierge();
 
         assertCommandSuccess(editCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -98,9 +98,9 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedGuest);
 
-        Model expectedModel = new ModelManager(new Concierge(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new Concierge(model.getConcierge()), new UserPrefs());
         expectedModel.updatePerson(model.getFilteredPersonList().get(0), editedGuest);
-        expectedModel.commitAddressBook();
+        expectedModel.commitConcierge();
 
         assertCommandSuccess(editCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -118,8 +118,8 @@ public class EditCommandTest {
     public void execute_duplicatePersonFilteredList_failure() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
-        // edit guest in filtered list into a duplicate in address book
-        Guest guestInList = model.getAddressBook().getPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+        // edit guest in filtered list into a duplicate in concierge
+        Guest guestInList = model.getConcierge().getPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON,
                 new EditPersonDescriptorBuilder(guestInList).build());
 
@@ -137,14 +137,14 @@ public class EditCommandTest {
 
     /**
      * Edit filtered list where index is larger than size of filtered list,
-     * but smaller than size of address book
+     * but smaller than size of concierge
      */
     @Test
     public void execute_invalidPersonIndexFilteredList_failure() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
         Index outOfBoundIndex = INDEX_SECOND_PERSON;
-        // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
+        // ensures that outOfBoundIndex is still in bounds of concierge list
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getConcierge().getPersonList().size());
 
         EditCommand editCommand = new EditCommand(outOfBoundIndex,
                 new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
@@ -158,19 +158,19 @@ public class EditCommandTest {
         Guest guestToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedGuest).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
-        Model expectedModel = new ModelManager(new Concierge(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new Concierge(model.getConcierge()), new UserPrefs());
         expectedModel.updatePerson(guestToEdit, editedGuest);
-        expectedModel.commitAddressBook();
+        expectedModel.commitConcierge();
 
         // edit -> first guest edited
         editCommand.execute(model, commandHistory);
 
-        // undo -> reverts addressbook back to previous state and filtered guest list to show all persons
-        expectedModel.undoAddressBook();
+        // undo -> reverts concierge back to previous state and filtered guest list to show all persons
+        expectedModel.undoConcierge();
         assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
         // redo -> same first guest edited again
-        expectedModel.redoAddressBook();
+        expectedModel.redoConcierge();
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
@@ -180,10 +180,10 @@ public class EditCommandTest {
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build();
         EditCommand editCommand = new EditCommand(outOfBoundIndex, descriptor);
 
-        // execution failed -> address book state not added into model
+        // execution failed -> concierge state not added into model
         assertCommandFailure(editCommand, model, commandHistory, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
 
-        // single address book state in model -> undoCommand and redoCommand fail
+        // single concierge state in model -> undoCommand and redoCommand fail
         assertCommandFailure(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_FAILURE);
         assertCommandFailure(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_FAILURE);
     }
@@ -200,23 +200,23 @@ public class EditCommandTest {
         Guest editedGuest = new GuestBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedGuest).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
-        Model expectedModel = new ModelManager(new Concierge(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new Concierge(model.getConcierge()), new UserPrefs());
 
         showPersonAtIndex(model, INDEX_SECOND_PERSON);
         Guest guestToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         expectedModel.updatePerson(guestToEdit, editedGuest);
-        expectedModel.commitAddressBook();
+        expectedModel.commitConcierge();
 
         // edit -> edits second guest in unfiltered guest list / first guest in filtered guest list
         editCommand.execute(model, commandHistory);
 
-        // undo -> reverts addressbook back to previous state and filtered guest list to show all persons
-        expectedModel.undoAddressBook();
+        // undo -> reverts concierge back to previous state and filtered guest list to show all persons
+        expectedModel.undoConcierge();
         assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
         assertNotEquals(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()), guestToEdit);
         // redo -> edits same second guest in unfiltered guest list
-        expectedModel.redoAddressBook();
+        expectedModel.redoConcierge();
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
     }
 

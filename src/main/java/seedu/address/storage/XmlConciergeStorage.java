@@ -18,31 +18,31 @@ import seedu.address.model.ReadOnlyConcierge;
 /**
  * A class to access Concierge data stored as an xml file on the hard disk.
  */
-public class XmlAddressBookStorage implements AddressBookStorage {
+public class XmlConciergeStorage implements ConciergeStorage {
 
-    private static final Logger logger = LogsCenter.getLogger(XmlAddressBookStorage.class);
+    private static final Logger logger = LogsCenter.getLogger(XmlConciergeStorage.class);
 
     private Path filePath;
 
-    public XmlAddressBookStorage(Path filePath) {
+    public XmlConciergeStorage(Path filePath) {
         this.filePath = filePath;
     }
 
-    public Path getAddressBookFilePath() {
+    public Path getConciergeFilePath() {
         return filePath;
     }
 
     @Override
-    public Optional<ReadOnlyConcierge> readAddressBook() throws DataConversionException, IOException {
-        return readAddressBook(filePath);
+    public Optional<ReadOnlyConcierge> readConcierge() throws DataConversionException, IOException {
+        return readConcierge(filePath);
     }
 
     /**
-     * Similar to {@link #readAddressBook()}
+     * Similar to {@link #readConcierge()}
      * @param filePath location of the data. Cannot be null
      * @throws DataConversionException if the file is not in the correct format.
      */
-    public Optional<ReadOnlyConcierge> readAddressBook(Path filePath) throws DataConversionException,
+    public Optional<ReadOnlyConcierge> readConcierge(Path filePath) throws DataConversionException,
                                                                                  FileNotFoundException {
         requireNonNull(filePath);
 
@@ -51,9 +51,9 @@ public class XmlAddressBookStorage implements AddressBookStorage {
             return Optional.empty();
         }
 
-        XmlSerializableAddressBook xmlAddressBook = XmlFileStorage.loadDataFromSaveFile(filePath);
+        XmlSerializableConcierge xmlConcierge = XmlFileStorage.loadDataFromSaveFile(filePath);
         try {
-            return Optional.of(xmlAddressBook.toModelType());
+            return Optional.of(xmlConcierge.toModelType());
         } catch (IllegalValueException ive) {
             logger.info("Illegal values found in " + filePath + ": " + ive.getMessage());
             throw new DataConversionException(ive);
@@ -61,20 +61,20 @@ public class XmlAddressBookStorage implements AddressBookStorage {
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyConcierge addressBook) throws IOException {
-        saveAddressBook(addressBook, filePath);
+    public void saveConcierge(ReadOnlyConcierge concierge) throws IOException {
+        saveConcierge(concierge, filePath);
     }
 
     /**
-     * Similar to {@link #saveAddressBook(ReadOnlyConcierge)}
+     * Similar to {@link #saveConcierge(ReadOnlyConcierge)}
      * @param filePath location of the data. Cannot be null
      */
-    public void saveAddressBook(ReadOnlyConcierge addressBook, Path filePath) throws IOException {
-        requireNonNull(addressBook);
+    public void saveConcierge(ReadOnlyConcierge concierge, Path filePath) throws IOException {
+        requireNonNull(concierge);
         requireNonNull(filePath);
 
         FileUtil.createIfMissing(filePath);
-        XmlFileStorage.saveDataToFile(filePath, new XmlSerializableAddressBook(addressBook));
+        XmlFileStorage.saveDataToFile(filePath, new XmlSerializableConcierge(concierge));
     }
 
 }

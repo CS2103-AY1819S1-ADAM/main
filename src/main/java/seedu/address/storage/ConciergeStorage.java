@@ -11,12 +11,12 @@ import seedu.address.model.ReadOnlyConcierge;
 /**
  * Represents a storage for {@link Concierge}.
  */
-public interface AddressBookStorage {
+public interface ConciergeStorage {
 
     /**
      * Returns the file path of the data file.
      */
-    Path getAddressBookFilePath();
+    Path getConciergeFilePath();
 
     /**
      * Returns Concierge data as a {@link ReadOnlyConcierge}.
@@ -24,23 +24,23 @@ public interface AddressBookStorage {
      * @throws DataConversionException if the data in storage is not in the expected format.
      * @throws IOException if there was any problem when reading from the storage.
      */
-    Optional<ReadOnlyConcierge> readAddressBook() throws DataConversionException, IOException;
+    Optional<ReadOnlyConcierge> readConcierge() throws DataConversionException, IOException;
 
     /**
-     * @see #getAddressBookFilePath()
+     * @see #getConciergeFilePath()
      */
-    Optional<ReadOnlyConcierge> readAddressBook(Path filePath) throws DataConversionException, IOException;
+    Optional<ReadOnlyConcierge> readConcierge(Path filePath) throws DataConversionException, IOException;
 
     /**
      * Saves the given {@link ReadOnlyConcierge} to the storage.
-     * @param addressBook cannot be null.
+     * @param concierge cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveAddressBook(ReadOnlyConcierge addressBook) throws IOException;
+    void saveConcierge(ReadOnlyConcierge concierge) throws IOException;
 
     /**
-     * @see #saveAddressBook(ReadOnlyConcierge)
+     * @see #saveConcierge(ReadOnlyConcierge)
      */
-    void saveAddressBook(ReadOnlyConcierge addressBook, Path filePath) throws IOException;
+    void saveConcierge(ReadOnlyConcierge concierge, Path filePath) throws IOException;
 
 }

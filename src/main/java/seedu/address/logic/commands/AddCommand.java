@@ -22,7 +22,7 @@ import seedu.address.model.room.booking.exceptions.OverlappingBookingException;
 import seedu.address.model.room.exceptions.RoomNotFoundException;
 
 /**
- * Adds a guest to the address book.
+ * Adds a guest to the concierge.
  */
 public class AddCommand extends Command {
 
@@ -51,7 +51,7 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_SUCCESS =
             "New guest added: %1$s \nAssigned to room: %2$s \n\tfrom %3$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This guest already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This guest already exists in Concierge";
 
     private final Guest guestToAdd;
     private final RoomNumber roomNumberToAdd;
@@ -87,7 +87,7 @@ public class AddCommand extends Command {
             throw new CommandException(e.getMessage());
         }
 
-        model.commitAddressBook();
+        model.commitConcierge();
         return new CommandResult(String.format(MESSAGE_SUCCESS, guestToAdd,
                 roomNumberToAdd, bookingToAdd.getBookingPeriod()));
     }

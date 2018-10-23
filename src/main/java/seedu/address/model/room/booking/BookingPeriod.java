@@ -9,7 +9,7 @@ import java.time.format.DateTimeParseException;
 import java.util.Objects;
 
 /**
- * Represents a Room's booking period in the address book.
+ * Represents a Room's booking period in the concierge.
  * Guarantees: immutable; is valid as declared in
  * {@link #isValidBookingPeriod(String testStartDate,String testEndDate)}
  */

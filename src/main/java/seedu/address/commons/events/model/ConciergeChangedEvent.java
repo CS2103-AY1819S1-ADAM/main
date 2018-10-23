@@ -4,11 +4,11 @@ import seedu.address.commons.events.BaseEvent;
 import seedu.address.model.ReadOnlyConcierge;
 
 /** Indicates the Concierge in the model has changed*/
-public class AddressBookChangedEvent extends BaseEvent {
+public class ConciergeChangedEvent extends BaseEvent {
 
     public final ReadOnlyConcierge data;
 
-    public AddressBookChangedEvent(ReadOnlyConcierge data) {
+    public ConciergeChangedEvent(ReadOnlyConcierge data) {
         this.data = data;
     }
 

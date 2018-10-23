@@ -17,7 +17,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyConcierge;
 import seedu.address.model.UserPrefs;
 import seedu.address.storage.UserPrefsStorage;
-import seedu.address.storage.XmlSerializableAddressBook;
+import seedu.address.storage.XmlSerializableConcierge;
 import seedu.address.testutil.TestUtil;
 import systemtests.ModelHelper;
 
@@ -45,7 +45,7 @@ public class TestApp extends MainApp {
 
         // If some initial local data has been provided, write those to the file
         if (initialDataSupplier.get() != null) {
-            createDataFileWithData(new XmlSerializableAddressBook(this.initialDataSupplier.get()),
+            createDataFileWithData(new XmlSerializableConcierge(this.initialDataSupplier.get()),
                     this.saveFileLocation);
         }
     }
@@ -64,16 +64,16 @@ public class TestApp extends MainApp {
         double x = Screen.getPrimary().getVisualBounds().getMinX();
         double y = Screen.getPrimary().getVisualBounds().getMinY();
         userPrefs.updateLastUsedGuiSetting(new GuiSettings(600.0, 600.0, (int) x, (int) y));
-        userPrefs.setAddressBookFilePath(saveFileLocation);
+        userPrefs.setConciergeFilePath(saveFileLocation);
         return userPrefs;
     }
 
     /**
-     * Returns a defensive copy of the address book data stored inside the storage file.
+     * Returns a defensive copy of the concierge data stored inside the storage file.
      */
-    public Concierge readStorageAddressBook() {
+    public Concierge readStorageConcierge() {
         try {
-            return new Concierge(storage.readAddressBook().get());
+            return new Concierge(storage.readConcierge().get());
         } catch (DataConversionException dce) {
             throw new AssertionError("Data is not in the Concierge format.", dce);
         } catch (IOException ioe) {
@@ -85,14 +85,14 @@ public class TestApp extends MainApp {
      * Returns the file path of the storage file.
      */
     public Path getStorageSaveLocation() {
-        return storage.getAddressBookFilePath();
+        return storage.getConciergeFilePath();
     }
 
     /**
      * Returns a defensive copy of the model.
      */
     public Model getModel() {
-        Model copy = new ModelManager((model.getAddressBook()), new UserPrefs());
+        Model copy = new ModelManager((model.getConcierge()), new UserPrefs());
         ModelHelper.setFilteredGuestList(copy, model.getFilteredPersonList());
         ModelHelper.setFilteredRoomList(copy, model.getFilteredRoomList());
         return copy;

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addressbook>
+<concierge>
 
     <guests>
         <name>Alice Pauline</name>
@@ -17,4 +17,4 @@
         <address>4th street</address>
     </guests>
 
-</addressbook>
+</concierge>

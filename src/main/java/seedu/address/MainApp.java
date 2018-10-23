@@ -26,12 +26,12 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyConcierge;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
-import seedu.address.storage.AddressBookStorage;
+import seedu.address.storage.ConciergeStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
 import seedu.address.storage.UserPrefsStorage;
-import seedu.address.storage.XmlAddressBookStorage;
+import seedu.address.storage.XmlConciergeStorage;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
 
@@ -62,8 +62,8 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         userPrefs = initPrefs(userPrefsStorage);
-        AddressBookStorage addressBookStorage = new XmlAddressBookStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        ConciergeStorage conciergeStorage = new XmlConciergeStorage(userPrefs.getConciergeFilePath());
+        storage = new StorageManager(conciergeStorage, userPrefsStorage);
 
         initLogging(config);
 
@@ -77,19 +77,19 @@ public class MainApp extends Application {
     }
 
     /**
-     * Returns a {@code ModelManager} with the data from {@code storage}'s address book and {@code userPrefs}. <br>
-     * The data from the sample address book will be used instead if {@code storage}'s address book is not found,
-     * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
+     * Returns a {@code ModelManager} with the data from {@code storage}'s concierge and {@code userPrefs}. <br>
+     * The data from the sample concierge will be used instead if {@code storage}'s concierge is not found,
+     * or an empty concierge will be used instead if errors occur when reading {@code storage}'s concierge.
      */
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
-        Optional<ReadOnlyConcierge> addressBookOptional;
+        Optional<ReadOnlyConcierge> conciergeOptional;
         ReadOnlyConcierge initialData;
         try {
-            addressBookOptional = storage.readAddressBook();
-            if (!addressBookOptional.isPresent()) {
+            conciergeOptional = storage.readConcierge();
+            if (!conciergeOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample Concierge");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            initialData = conciergeOptional.orElseGet(SampleDataUtil::getSampleConcierge);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty Concierge");
             initialData = new Concierge();
@@ -185,7 +185,7 @@ public class MainApp extends Application {
 
     @Override
     public void stop() {
-        logger.info("============================ [ Stopping Address Book ] =============================");
+        logger.info("============================ [ Stopping Concierge ] =============================");
         ui.stop();
         try {
             storage.saveUserPrefs(userPrefs);

@@ -12,7 +12,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 
 /**
- * Lists all persons in the address book to the user.
+ * Lists all persons in Concierge to the user.
  */
 public class ListCommand extends Command {
 

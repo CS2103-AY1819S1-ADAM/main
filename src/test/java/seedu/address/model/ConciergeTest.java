@@ -5,7 +5,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalConcierge.getTypicalConcierge;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 
 import java.util.Arrays;
@@ -27,29 +27,29 @@ import seedu.address.model.person.exceptions.DuplicateGuestException;
 import seedu.address.model.room.Room;
 import seedu.address.testutil.GuestBuilder;
 
-public class AddressBookTest {
+public class ConciergeTest {
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
-    private final Concierge addressBook = new Concierge();
+    private final Concierge concierge = new Concierge();
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), addressBook.getPersonList());
+        assertEquals(Collections.emptyList(), concierge.getPersonList());
     }
 
     @Test
     public void resetData_null_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        addressBook.resetData(null);
+        concierge.resetData(null);
     }
 
     @Test
-    public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        Concierge newData = getTypicalAddressBook();
-        addressBook.resetData(newData);
-        assertEquals(newData, addressBook);
+    public void resetData_withValidReadOnlyConcierge_replacesData() {
+        Concierge newData = getTypicalConcierge();
+        concierge.resetData(newData);
+        assertEquals(newData, concierge);
     }
 
     @Test
@@ -62,44 +62,44 @@ public class AddressBookTest {
         ConciergeStub newData = new ConciergeStub(newGuests, null);
 
         thrown.expect(DuplicateGuestException.class);
-        addressBook.resetData(newData);
+        concierge.resetData(newData);
     }
 
     @Test
     public void hasPerson_nullPerson_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        addressBook.hasPerson(null);
+        concierge.hasPerson(null);
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(addressBook.hasPerson(ALICE));
+    public void hasPerson_personNotInConcierge_returnsFalse() {
+        assertFalse(concierge.hasPerson(ALICE));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
-        addressBook.addPerson(ALICE);
-        assertTrue(addressBook.hasPerson(ALICE));
+    public void hasPerson_personInConcierge_returnsTrue() {
+        concierge.addPerson(ALICE);
+        assertTrue(concierge.hasPerson(ALICE));
     }
 
     @Test
-    public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        addressBook.addPerson(ALICE);
+    public void hasPerson_personWithSameIdentityFieldsInConcierge_returnsTrue() {
+        concierge.addPerson(ALICE);
         Guest editedAlice = new GuestBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        assertTrue(addressBook.hasPerson(editedAlice));
+        assertTrue(concierge.hasPerson(editedAlice));
     }
 
     @Test
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
-        addressBook.getPersonList().remove(0);
+        concierge.getPersonList().remove(0);
     }
 
     @Test
     public void getMenuMap_modifyMap_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
-        addressBook.getMenuMap().put("1", new ExpenseType("1", "-", 0));
+        concierge.getMenuMap().put("1", new ExpenseType("1", "-", 0));
     }
 
     /**

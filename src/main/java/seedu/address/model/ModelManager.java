@@ -11,34 +11,34 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.commons.events.model.ConciergeChangedEvent;
 import seedu.address.model.person.Guest;
 import seedu.address.model.room.Room;
 import seedu.address.model.room.RoomNumber;
 import seedu.address.model.room.booking.Booking;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of the concierge data.
  */
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final VersionedConcierge versionedAddressBook;
+    private final VersionedConcierge versionedConcierge;
     private final FilteredList<Guest> filteredGuests;
     private final FilteredList<Room> filteredRooms;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given concierge and userPrefs.
      */
-    public ModelManager(ReadOnlyConcierge addressBook, UserPrefs userPrefs) {
+    public ModelManager(ReadOnlyConcierge concierge, UserPrefs userPrefs) {
         super();
-        requireAllNonNull(addressBook, userPrefs);
+        requireAllNonNull(concierge, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with concierge: " + concierge + " and user prefs " + userPrefs);
 
-        versionedAddressBook = new VersionedConcierge(addressBook);
-        filteredGuests = new FilteredList<>(versionedAddressBook.getPersonList());
-        filteredRooms = new FilteredList<>(versionedAddressBook.getRoomList());
+        versionedConcierge = new VersionedConcierge(concierge);
+        filteredGuests = new FilteredList<>(versionedConcierge.getPersonList());
+        filteredRooms = new FilteredList<>(versionedConcierge.getRoomList());
     }
 
     public ModelManager() {
@@ -47,52 +47,52 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void resetData(ReadOnlyConcierge newData) {
-        versionedAddressBook.resetData(newData);
-        indicateAddressBookChanged();
+        versionedConcierge.resetData(newData);
+        indicateConciergeChanged();
     }
 
     @Override
-    public ReadOnlyConcierge getAddressBook() {
-        return versionedAddressBook;
+    public ReadOnlyConcierge getConcierge() {
+        return versionedConcierge;
     }
 
     /** Raises an event to indicate the model has changed */
-    private void indicateAddressBookChanged() {
-        raise(new AddressBookChangedEvent(versionedAddressBook));
+    private void indicateConciergeChanged() {
+        raise(new ConciergeChangedEvent(versionedConcierge));
     }
 
     @Override
     public boolean hasPerson(Guest guest) {
         requireNonNull(guest);
-        return versionedAddressBook.hasPerson(guest);
+        return versionedConcierge.hasPerson(guest);
     }
 
     @Override
     public void deletePerson(Guest target) {
-        versionedAddressBook.removePerson(target);
-        indicateAddressBookChanged();
+        versionedConcierge.removePerson(target);
+        indicateConciergeChanged();
     }
 
     @Override
     public void addPerson(Guest guest) {
-        versionedAddressBook.addPerson(guest);
+        versionedConcierge.addPerson(guest);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        indicateAddressBookChanged();
+        indicateConciergeChanged();
     }
 
     @Override
     public void updatePerson(Guest target, Guest editedGuest) {
         requireAllNonNull(target, editedGuest);
 
-        versionedAddressBook.updatePerson(target, editedGuest);
-        indicateAddressBookChanged();
+        versionedConcierge.updatePerson(target, editedGuest);
+        indicateConciergeChanged();
     }
 
     //=========== Filtered Guest List Accessors =============================================================
 
     /**
      * Returns an unmodifiable view of the list of {@code Guest} backed by the internal list of
-     * {@code versionedAddressBook}
+     * {@code versionedConcierge}
      */
     @Override
     public ObservableList<Guest> getFilteredPersonList() {
@@ -109,7 +109,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     /**
      * Returns an unmodifiable view of the list of {@code Room} backed by the internal list of
-     * {@code versionedAddressBook}
+     * {@code versionedConcierge}
      */
     @Override
     public ObservableList<Room> getFilteredRoomList() {
@@ -126,72 +126,72 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void checkinRoom(RoomNumber roomNumber) {
-        versionedAddressBook.checkinRoom(roomNumber);
+        versionedConcierge.checkinRoom(roomNumber);
         updateFilteredRoomList(PREDICATE_SHOW_ALL_ROOMS);
-        indicateAddressBookChanged();
+        indicateConciergeChanged();
     }
 
     @Override
     public void checkoutRoom(RoomNumber roomNumber) {
-        versionedAddressBook.checkoutRoom(roomNumber);
+        versionedConcierge.checkoutRoom(roomNumber);
         updateFilteredRoomList(PREDICATE_SHOW_ALL_ROOMS);
-        indicateAddressBookChanged();
+        indicateConciergeChanged();
     }
 
     @Override
     public boolean isRoomCheckedIn(RoomNumber roomNumber) {
-        return versionedAddressBook.isRoomCheckedIn(roomNumber);
+        return versionedConcierge.isRoomCheckedIn(roomNumber);
     }
 
     public boolean roomHasBooking(RoomNumber roomNumber) {
-        return versionedAddressBook.roomHasBooking(roomNumber);
+        return versionedConcierge.roomHasBooking(roomNumber);
     }
 
     @Override
     public boolean roomHasActiveBooking(RoomNumber roomNumber) {
-        return versionedAddressBook.roomHasActiveBooking(roomNumber);
+        return versionedConcierge.roomHasActiveBooking(roomNumber);
     }
 
 
     @Override
     public boolean roomHasActiveOrExpiredBooking(RoomNumber roomNumber) {
-        return versionedAddressBook.roomHasActiveOrExpiredBooking(roomNumber);
+        return versionedConcierge.roomHasActiveOrExpiredBooking(roomNumber);
     }
 
     @Override
     public void addBooking(RoomNumber roomNumber, Booking booking) {
-        versionedAddressBook.addBooking(roomNumber, booking);
+        versionedConcierge.addBooking(roomNumber, booking);
         updateFilteredRoomList(PREDICATE_SHOW_ALL_ROOMS);
-        indicateAddressBookChanged();
+        indicateConciergeChanged();
     }
 
     //=========== Undo/Redo =================================================================================
 
     @Override
-    public boolean canUndoAddressBook() {
-        return versionedAddressBook.canUndo();
+    public boolean canUndoConcierge() {
+        return versionedConcierge.canUndo();
     }
 
     @Override
-    public boolean canRedoAddressBook() {
-        return versionedAddressBook.canRedo();
+    public boolean canRedoConcierge() {
+        return versionedConcierge.canRedo();
     }
 
     @Override
-    public void undoAddressBook() {
-        versionedAddressBook.undo();
-        indicateAddressBookChanged();
+    public void undoConcierge() {
+        versionedConcierge.undo();
+        indicateConciergeChanged();
     }
 
     @Override
-    public void redoAddressBook() {
-        versionedAddressBook.redo();
-        indicateAddressBookChanged();
+    public void redoConcierge() {
+        versionedConcierge.redo();
+        indicateConciergeChanged();
     }
 
     @Override
-    public void commitAddressBook() {
-        versionedAddressBook.commit();
+    public void commitConcierge() {
+        versionedConcierge.commit();
     }
 
     @Override
@@ -208,7 +208,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        return versionedAddressBook.equals(other.versionedAddressBook)
+        return versionedConcierge.equals(other.versionedConcierge)
                 && filteredGuests.equals(other.filteredGuests);
     }
 

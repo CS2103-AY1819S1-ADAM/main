@@ -94,7 +94,7 @@ public class SampleDataUtil {
         return sampleMenuMap;
     }
 
-    public static ReadOnlyConcierge getSampleAddressBook() {
+    public static ReadOnlyConcierge getSampleConcierge() {
         Concierge sampleAb = new Concierge();
         for (Guest sampleGuest : getSamplePersons()) {
             sampleAb.addPerson(sampleGuest);

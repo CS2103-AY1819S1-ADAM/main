@@ -42,7 +42,7 @@ public class CheckoutCommand extends Command {
             throw new CommandException(String.format(MESSAGE_NO_ACTIVE_OR_EXPIRED_ROOM_BOOKING_CHECKOUT, roomNumber));
         }
         model.checkoutRoom(roomNumber);
-        model.commitAddressBook();
+        model.commitConcierge();
         return new CommandResult(String.format(MESSAGE_CHECKOUT_ROOM_SUCCESS, roomNumber));
     }
 

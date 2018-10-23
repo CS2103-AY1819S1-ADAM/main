@@ -47,7 +47,7 @@ public class CheckinCommand extends Command {
             throw new CommandException(String.format(MESSAGE_OCCUPIED_ROOM_CHECKIN, roomNumber));
         }
         model.checkinRoom(roomNumber);
-        model.commitAddressBook();
+        model.commitConcierge();
         return new CommandResult(String.format(MESSAGE_CHECKIN_ROOM_SUCCESS, roomNumber));
     }
 

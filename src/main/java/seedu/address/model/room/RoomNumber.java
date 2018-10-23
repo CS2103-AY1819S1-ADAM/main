@@ -6,7 +6,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import seedu.address.commons.core.index.Index;
 
 /**
- * Represents a Room's room number in the address book.
+ * Represents a Room's room number in the concierge.
  * Guarantees: immutable; is valid as declared in {@link #isValidRoomNumber(String)}
  */
 public class RoomNumber {

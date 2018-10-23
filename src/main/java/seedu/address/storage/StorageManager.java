@@ -9,7 +9,7 @@ import com.google.common.eventbus.Subscribe;
 
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.commons.events.model.ConciergeChangedEvent;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.ReadOnlyConcierge;
@@ -21,13 +21,13 @@ import seedu.address.model.UserPrefs;
 public class StorageManager extends ComponentManager implements Storage {
 
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
-    private AddressBookStorage addressBookStorage;
+    private ConciergeStorage conciergeStorage;
     private UserPrefsStorage userPrefsStorage;
 
 
-    public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage) {
+    public StorageManager(ConciergeStorage conciergeStorage, UserPrefsStorage userPrefsStorage) {
         super();
-        this.addressBookStorage = addressBookStorage;
+        this.conciergeStorage = conciergeStorage;
         this.userPrefsStorage = userPrefsStorage;
     }
 
@@ -52,39 +52,39 @@ public class StorageManager extends ComponentManager implements Storage {
     // ================ Concierge methods ==============================
 
     @Override
-    public Path getAddressBookFilePath() {
-        return addressBookStorage.getAddressBookFilePath();
+    public Path getConciergeFilePath() {
+        return conciergeStorage.getConciergeFilePath();
     }
 
     @Override
-    public Optional<ReadOnlyConcierge> readAddressBook() throws DataConversionException, IOException {
-        return readAddressBook(addressBookStorage.getAddressBookFilePath());
+    public Optional<ReadOnlyConcierge> readConcierge() throws DataConversionException, IOException {
+        return readConcierge(conciergeStorage.getConciergeFilePath());
     }
 
     @Override
-    public Optional<ReadOnlyConcierge> readAddressBook(Path filePath) throws DataConversionException, IOException {
+    public Optional<ReadOnlyConcierge> readConcierge(Path filePath) throws DataConversionException, IOException {
         logger.fine("Attempting to read data from file: " + filePath);
-        return addressBookStorage.readAddressBook(filePath);
+        return conciergeStorage.readConcierge(filePath);
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyConcierge addressBook) throws IOException {
-        saveAddressBook(addressBook, addressBookStorage.getAddressBookFilePath());
+    public void saveConcierge(ReadOnlyConcierge concierge) throws IOException {
+        saveConcierge(concierge, conciergeStorage.getConciergeFilePath());
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyConcierge addressBook, Path filePath) throws IOException {
+    public void saveConcierge(ReadOnlyConcierge concierge, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
-        addressBookStorage.saveAddressBook(addressBook, filePath);
+        conciergeStorage.saveConcierge(concierge, filePath);
     }
 
 
     @Override
     @Subscribe
-    public void handleAddressBookChangedEvent(AddressBookChangedEvent event) {
+    public void handleConciergeChangedEvent(ConciergeChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local data changed, saving to file"));
         try {
-            saveAddressBook(event.data);
+            saveConcierge(event.data);
         } catch (IOException e) {
             raise(new DataSavingExceptionEvent(e));
         }

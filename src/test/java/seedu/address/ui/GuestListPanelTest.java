@@ -22,7 +22,7 @@ import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.XmlUtil;
 import seedu.address.model.person.Guest;
-import seedu.address.storage.XmlSerializableAddressBook;
+import seedu.address.storage.XmlSerializableConcierge;
 
 public class GuestListPanelTest extends GuiUnitTest {
     private static final ObservableList<Guest> TYPICAL_GUESTS =
@@ -81,9 +81,9 @@ public class GuestListPanelTest extends GuiUnitTest {
      */
     private ObservableList<Guest> createBackingList(int personCount) throws Exception {
         Path xmlFile = createXmlFileWithPersons(personCount);
-        XmlSerializableAddressBook xmlAddressBook =
-                XmlUtil.getDataFromFile(xmlFile, XmlSerializableAddressBook.class);
-        return FXCollections.observableArrayList(xmlAddressBook.toModelType().getPersonList());
+        XmlSerializableConcierge xmlConcierge =
+                XmlUtil.getDataFromFile(xmlFile, XmlSerializableConcierge.class);
+        return FXCollections.observableArrayList(xmlConcierge.toModelType().getPersonList());
     }
 
     /**
@@ -92,7 +92,7 @@ public class GuestListPanelTest extends GuiUnitTest {
     private Path createXmlFileWithPersons(int personCount) throws Exception {
         StringBuilder builder = new StringBuilder();
         builder.append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n");
-        builder.append("<addressbook>\n");
+        builder.append("<concierge>\n");
         for (int i = 0; i < personCount; i++) {
             builder.append("<persons>\n");
             builder.append("<name>").append(i).append("a</name>\n");
@@ -101,7 +101,7 @@ public class GuestListPanelTest extends GuiUnitTest {
             builder.append("<address>a</address>\n");
             builder.append("</persons>\n");
         }
-        builder.append("</addressbook>\n");
+        builder.append("</concierge>\n");
 
         Path manyPersonsFile = Paths.get(TEST_DATA_FOLDER + "manyPersons.xml");
         FileUtil.createFile(manyPersonsFile);

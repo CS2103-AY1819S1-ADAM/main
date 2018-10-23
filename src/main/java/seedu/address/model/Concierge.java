@@ -70,7 +70,7 @@ public class Concierge implements ReadOnlyConcierge {
     //// guest-level operations
 
     /**
-     * Returns true if a guest with the same identity as {@code guest} exists in the address book.
+     * Returns true if a guest with the same identity as {@code guest} exists in the concierge.
      */
     public boolean hasPerson(Guest guest) {
         requireNonNull(guest);
@@ -78,8 +78,8 @@ public class Concierge implements ReadOnlyConcierge {
     }
 
     /**
-     * Adds a guest to the address book.
-     * The guest must not already exist in the address book.
+     * Adds a guest to the concierge.
+     * The guest must not already exist in the concierge.
      */
     public void addPerson(Guest p) {
         persons.add(p);
@@ -87,8 +87,8 @@ public class Concierge implements ReadOnlyConcierge {
 
     /**
      * Replaces the given guest {@code target} in the list with {@code editedGuest}.
-     * {@code target} must exist in the address book.
-     * The guest identity of {@code editedGuest} must not be the same as another existing guest in the address book.
+     * {@code target} must exist in the concierge.
+     * The guest identity of {@code editedGuest} must not be the same as another existing guest in the concierge.
      */
     public void updatePerson(Guest target, Guest editedGuest) {
         requireNonNull(editedGuest);
@@ -98,22 +98,22 @@ public class Concierge implements ReadOnlyConcierge {
 
     /**
      * Removes {@code key} from this {@code Concierge}.
-     * {@code key} must exist in the address book.
+     * {@code key} must exist in the concierge.
      */
     public void removePerson(Guest key) {
         persons.remove(key);
     }
 
     /**
-     * Adds a room to the address book.
-     * The room must not already exist in the address book.
+     * Adds a room to the concierge.
+     * The room must not already exist in the concierge.
      */
     public void addRoom(Room r) {
         rooms.add(r);
     }
 
     /**
-     * Returns true if a room with the same identity as {@code room} exists in the address book.
+     * Returns true if a room with the same identity as {@code room} exists in the concierge.
      */
     public boolean hasRoom(Room room) {
         requireNonNull(room);

@@ -18,8 +18,8 @@ import org.junit.rules.ExpectedException;
 import seedu.address.model.Concierge;
 import seedu.address.storage.XmlAdaptedPerson;
 import seedu.address.storage.XmlAdaptedTag;
-import seedu.address.storage.XmlSerializableAddressBook;
-import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.storage.XmlSerializableConcierge;
+import seedu.address.testutil.ConciergeBuilder;
 import seedu.address.testutil.GuestBuilder;
 import seedu.address.testutil.TestUtil;
 
@@ -28,11 +28,11 @@ public class XmlUtilTest {
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "XmlUtilTest");
     private static final Path EMPTY_FILE = TEST_DATA_FOLDER.resolve("empty.xml");
     private static final Path MISSING_FILE = TEST_DATA_FOLDER.resolve("missing.xml");
-    private static final Path VALID_FILE = TEST_DATA_FOLDER.resolve("validAddressBook.xml");
+    private static final Path VALID_FILE = TEST_DATA_FOLDER.resolve("validConcierge.xml");
     private static final Path MISSING_PERSON_FIELD_FILE = TEST_DATA_FOLDER.resolve("missingPersonField.xml");
     private static final Path INVALID_PERSON_FIELD_FILE = TEST_DATA_FOLDER.resolve("invalidPersonField.xml");
     private static final Path VALID_PERSON_FILE = TEST_DATA_FOLDER.resolve("validPerson.xml");
-    private static final Path TEMP_FILE = TestUtil.getFilePathInSandboxFolder("tempAddressBook.xml");
+    private static final Path TEMP_FILE = TestUtil.getFilePathInSandboxFolder("tempConcierge.xml");
 
     private static final String INVALID_PHONE = "9482asf424";
 
@@ -71,7 +71,7 @@ public class XmlUtilTest {
 
     @Test
     public void getDataFromFile_validFile_validResult() throws Exception {
-        Concierge dataFromFile = XmlUtil.getDataFromFile(VALID_FILE, XmlSerializableAddressBook.class).toModelType();
+        Concierge dataFromFile = XmlUtil.getDataFromFile(VALID_FILE, XmlSerializableConcierge.class).toModelType();
         assertEquals(9, dataFromFile.getPersonList().size());
     }
 
@@ -123,17 +123,17 @@ public class XmlUtilTest {
     @Test
     public void saveDataToFile_validFile_dataSaved() throws Exception {
         FileUtil.createFile(TEMP_FILE);
-        XmlSerializableAddressBook dataToWrite = new XmlSerializableAddressBook(new Concierge());
+        XmlSerializableConcierge dataToWrite = new XmlSerializableConcierge(new Concierge());
         XmlUtil.saveDataToFile(TEMP_FILE, dataToWrite);
-        XmlSerializableAddressBook dataFromFile = XmlUtil.getDataFromFile(TEMP_FILE, XmlSerializableAddressBook.class);
+        XmlSerializableConcierge dataFromFile = XmlUtil.getDataFromFile(TEMP_FILE, XmlSerializableConcierge.class);
         assertEquals(dataToWrite, dataFromFile);
 
-        AddressBookBuilder builder = new AddressBookBuilder(new Concierge());
-        dataToWrite = new XmlSerializableAddressBook(
+        ConciergeBuilder builder = new ConciergeBuilder(new Concierge());
+        dataToWrite = new XmlSerializableConcierge(
                 builder.withPerson(new GuestBuilder().build()).build());
 
         XmlUtil.saveDataToFile(TEMP_FILE, dataToWrite);
-        dataFromFile = XmlUtil.getDataFromFile(TEMP_FILE, XmlSerializableAddressBook.class);
+        dataFromFile = XmlUtil.getDataFromFile(TEMP_FILE, XmlSerializableConcierge.class);
         assertEquals(dataToWrite, dataFromFile);
     }
 

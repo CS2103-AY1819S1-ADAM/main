@@ -12,7 +12,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Guest;
 
 /**
- * Deletes a guest identified using it's displayed index from the address book.
+ * Deletes a guest identified using it's displayed index from the concierge.
  */
 public class DeleteCommand extends Command {
 
@@ -42,7 +42,7 @@ public class DeleteCommand extends Command {
 
         Guest guestToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deletePerson(guestToDelete);
-        model.commitAddressBook();
+        model.commitConcierge();
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, guestToDelete));
     }
 

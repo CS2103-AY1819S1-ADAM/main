@@ -133,14 +133,14 @@ public class CommandTestUtil {
      * Executes the given {@code command}, confirms that <br>
      * - a {@code CommandException} is thrown <br>
      * - the CommandException message matches {@code expectedMessage} <br>
-     * - the address book and the filtered guest list in the {@code actualModel} remain unchanged <br>
+     * - the concierge and the filtered guest list in the {@code actualModel} remain unchanged <br>
      * - {@code actualCommandHistory} remains unchanged.
      */
     public static void assertCommandFailure(Command command, Model actualModel, CommandHistory actualCommandHistory,
             String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
-        Concierge expectedAddressBook = new Concierge(actualModel.getAddressBook());
+        Concierge expectedConcierge = new Concierge(actualModel.getConcierge());
         List<Guest> expectedFilteredList = new ArrayList<>(actualModel.getFilteredPersonList());
 
         CommandHistory expectedCommandHistory = new CommandHistory(actualCommandHistory);
@@ -150,7 +150,7 @@ public class CommandTestUtil {
             throw new AssertionError("The expected CommandException was not thrown.");
         } catch (CommandException e) {
             assertEquals(expectedMessage, e.getMessage());
-            assertEquals(expectedAddressBook, actualModel.getAddressBook());
+            assertEquals(expectedConcierge, actualModel.getConcierge());
             assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
             assertEquals(expectedCommandHistory, actualCommandHistory);
         }
@@ -158,7 +158,7 @@ public class CommandTestUtil {
 
     /**
      * Updates {@code model}'s filtered list to show only the guest at the given {@code targetIndex} in the
-     * {@code model}'s address book.
+     * {@code model}'s concierge.
      */
     public static void showPersonAtIndex(Model model, Index targetIndex) {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredPersonList().size());
@@ -171,12 +171,12 @@ public class CommandTestUtil {
     }
 
     /**
-     * Deletes the first guest in {@code model}'s filtered list from {@code model}'s address book.
+     * Deletes the first guest in {@code model}'s filtered list from {@code model}'s concierge.
      */
     public static void deleteFirstPerson(Model model) {
         Guest firstGuest = model.getFilteredPersonList().get(0);
         model.deletePerson(firstGuest);
-        model.commitAddressBook();
+        model.commitConcierge();
     }
 
 }
