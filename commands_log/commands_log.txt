@@ -78,7 +78,7 @@
 23/10/2018 16:24:55  list
 23/10/2018 16:24:56  list -r
 23/10/2018 16:24:56  invalid command
-23/10/2018 16:25:12     add   n/Amy Bee   p/11111111  e/amy@example.com  a/Block 312, Amy Street 1    t/friend  -r 010  from/ 14/11/2018  to/ 17/11/2018   
+23/10/2018 16:25:12     add   n/Amy Bee   p/11111111  e/amy@example.com  a/Block 312, Amy Street 1    t/friend  -r 010  from/ 14/11/2018  to/ 17/11/2018
 23/10/2018 16:25:16  undo
 23/10/2018 16:25:19  redo
 23/10/2018 16:25:22  add n/Bob Choo p/11111111 e/amy@example.com a/Block 312, Amy Street 1 t/friend -r 001 from/ 14/11/2018 to/ 17/11/2018
@@ -104,7 +104,7 @@
 23/10/2018 16:26:55  add n/Amy Bee p/11111111 e/bob!yahoo a/Block 312, Amy Street 1 -r 010 from/ 14/11/2018 to/ 17/11/2018
 23/10/2018 16:27:00  add n/Amy Bee p/11111111 e/amy@example.com a/ -r 010 from/ 14/11/2018 to/ 17/11/2018
 23/10/2018 16:27:05  add n/Amy Bee p/11111111 e/amy@example.com a/Block 312, Amy Street 1 t/hubby* -r 010 from/ 14/11/2018 to/ 17/11/2018
-23/10/2018 16:27:14     clear ab12   
+23/10/2018 16:27:14     clear ab12
 23/10/2018 16:27:15  undo
 23/10/2018 16:27:18  redo
 23/10/2018 16:27:19  undo
@@ -115,7 +115,7 @@
 23/10/2018 16:27:23  clear
 23/10/2018 16:27:24  clear
 23/10/2018 16:27:25  ClEaR
-23/10/2018 16:27:29       delete      1       
+23/10/2018 16:27:29       delete      1
 23/10/2018 16:27:32  delete 6
 23/10/2018 16:27:34  undo
 23/10/2018 16:27:37  redo
@@ -133,7 +133,7 @@
 23/10/2018 16:27:53  delete abc
 23/10/2018 16:27:55  delete 1 abc
 23/10/2018 16:27:56  DelETE 1
-23/10/2018 16:28:01   edit  1   n/Bob Choo   p/22222222  e/bob@example.com   a/Block 123, Bobby Street 3  t/husband 
+23/10/2018 16:28:01   edit  1   n/Bob Choo   p/22222222  e/bob@example.com   a/Block 123, Bobby Street 3  t/husband
 23/10/2018 16:28:04  undo
 23/10/2018 16:28:07  redo
 23/10/2018 16:28:10  edit 1 n/Bob Choo p/22222222 e/bob@example.com a/Block 123, Bobby Street 3 t/friend t/husband
@@ -163,7 +163,7 @@
 23/10/2018 16:29:10  edit 1 n/Bob Choo p/22222222 e/bob@example.com a/Block 312, Amy Street 1 t/friend t/husband
 23/10/2018 16:29:13  edit 1 n/Bob Choo p/11111111 e/bob@example.com a/Block 123, Bobby Street 3 t/friend t/husband
 23/10/2018 16:29:17  edit 1 n/Bob Choo p/22222222 e/amy@example.com a/Block 123, Bobby Street 3 t/friend t/husband
-23/10/2018 16:29:27     find Meier   
+23/10/2018 16:29:27     find Meier
 23/10/2018 16:29:28  find Meier
 23/10/2018 16:29:30  find Carl
 23/10/2018 16:29:31  find Benson Daniel
@@ -193,7 +193,7 @@
 23/10/2018 16:30:09  help
 23/10/2018 16:30:09  select 1
 23/10/2018 16:30:13  delete 1
-23/10/2018 16:30:21     select 1   
+23/10/2018 16:30:21     select 1
 23/10/2018 16:30:24  select 7
 23/10/2018 16:30:28  undo
 23/10/2018 16:30:31  redo
