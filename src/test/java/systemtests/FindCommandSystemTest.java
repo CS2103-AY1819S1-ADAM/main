@@ -133,8 +133,8 @@ public class FindCommandSystemTest extends AddressBookSystemTest {
         assertSelectedCardUnchanged();
 
         /* Case: find while a guest is selected -> selected card deselected */
-        showAllPersons();
-        selectPerson(Index.fromOneBased(1));
+        showAllGuests();
+        selectGuest(Index.fromOneBased(1));
         assertFalse(getPersonListPanel().getHandleToSelectedCard().getName().equals(DANIEL.getName().fullName));
         command = FindCommand.COMMAND_WORD + " Daniel";
         ModelHelper.setFilteredGuestList(expectedModel, DANIEL);
@@ -142,7 +142,7 @@ public class FindCommandSystemTest extends AddressBookSystemTest {
         assertSelectedCardDeselected();
 
         /* Case: find guest in empty address book -> 0 persons found */
-        deleteAllPersons();
+        deleteAllGuests();
         command = FindCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_MEIER;
         expectedModel = getModel();
         ModelHelper.setFilteredGuestList(expectedModel, DANIEL);

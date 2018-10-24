@@ -59,7 +59,7 @@ public class DeleteCommandSystemTest extends AddressBookSystemTest {
         /* ------------------ Performing delete operation while a filtered list is being shown ---------------------- */
 
         /* Case: filtered guest list, delete index within bounds of address book and guest list -> deleted */
-        showPersonsWithName(KEYWORD_MATCHING_MEIER);
+        showGuestsWithName(KEYWORD_MATCHING_MEIER);
         Index index = INDEX_FIRST_GUEST;
         assertTrue(index.getZeroBased() < getModel().getFilteredGuestList().size());
         assertCommandSuccess(index);
@@ -67,7 +67,7 @@ public class DeleteCommandSystemTest extends AddressBookSystemTest {
         /* Case: filtered guest list, delete index within bounds of address book but out of bounds of guest list
          * -> rejected
          */
-        showPersonsWithName(KEYWORD_MATCHING_MEIER);
+        showGuestsWithName(KEYWORD_MATCHING_MEIER);
         int invalidIndex = getModel().getAddressBook().getGuestList().size();
         command = DeleteCommand.COMMAND_WORD + " " + invalidIndex;
         assertCommandFailure(command, MESSAGE_INVALID_GUEST_DISPLAYED_INDEX);
@@ -75,11 +75,11 @@ public class DeleteCommandSystemTest extends AddressBookSystemTest {
         /* --------------------- Performing delete operation while a guest card is selected ------------------------ */
 
         /* Case: delete the selected guest -> guest list panel selects the guest before the deleted guest */
-        showAllPersons();
+        showAllGuests();
         expectedModel = getModel();
         Index selectedIndex = getLastIndex(expectedModel);
         Index expectedIndex = Index.fromZeroBased(selectedIndex.getZeroBased() - 1);
-        selectPerson(selectedIndex);
+        selectGuest(selectedIndex);
         command = DeleteCommand.COMMAND_WORD + " " + selectedIndex.getOneBased();
         deletedGuest = removePerson(expectedModel, selectedIndex);
         expectedResultMessage = String.format(MESSAGE_DELETE_GUEST_SUCCESS, deletedGuest);

@@ -141,16 +141,16 @@ public abstract class AddressBookSystemTest {
     /**
      * Displays all persons in the address book.
      */
-    protected void showAllPersons() {
+    protected void showAllGuests() {
         executeCommand(ListCommand.COMMAND_WORD + " -g");
         assertEquals(getModel().getAddressBook().getGuestList().size(), getModel().getFilteredGuestList().size());
     }
 
 
     /**
-     * Displays all persons with any parts of their names matching {@code keyword} (case-insensitive).
+     * Displays all guests with any parts of their names matching {@code keyword} (case-insensitive).
      */
-    protected void showPersonsWithName(String keyword) {
+    protected void showGuestsWithName(String keyword) {
         executeCommand(FindCommand.COMMAND_WORD + " " + keyword);
         assertTrue(getModel().getFilteredGuestList().size() < getModel().getAddressBook().getGuestList().size());
     }
@@ -158,7 +158,7 @@ public abstract class AddressBookSystemTest {
     /**
      * Selects the guest at {@code index} of the displayed list.
      */
-    protected void selectPerson(Index index) {
+    protected void selectGuest(Index index) {
         executeCommand(SelectCommand.COMMAND_WORD + " " + index.getOneBased());
         assertEquals(index.getZeroBased(), getPersonListPanel().getSelectedCardIndex());
     }
@@ -166,7 +166,7 @@ public abstract class AddressBookSystemTest {
     /**
      * Deletes all persons in the address book.
      */
-    protected void deleteAllPersons() {
+    protected void deleteAllGuests() {
         executeCommand(ClearCommand.COMMAND_WORD);
         assertEquals(0, getModel().getAddressBook().getGuestList().size());
     }
@@ -174,7 +174,7 @@ public abstract class AddressBookSystemTest {
     /**
      * Asserts that the {@code CommandBox} displays {@code expectedCommandInput}, the {@code ResultDisplay} displays
      * {@code expectedResultMessage}, the storage contains the same guest objects as {@code expectedModel}
-     * and the guest list panel displays the persons in the model correctly.
+     * and the guest list panel displays the guests in the model correctly.
      */
     protected void assertApplicationDisplaysExpected(String expectedCommandInput, String expectedResultMessage,
             Model expectedModel) {

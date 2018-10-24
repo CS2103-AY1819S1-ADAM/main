@@ -135,14 +135,14 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
         /* -------------------------- Perform add operation on the shown filtered list ------------------------------ */
 
         /* Case: filters the guest list before adding -> added */
-        showPersonsWithName(KEYWORD_MATCHING_MEIER);
+        showGuestsWithName(KEYWORD_MATCHING_MEIER);
         roomNumberToAdd = ROOM_NUMBER_024;
         assertCommandSuccess(IDA, roomNumberToAdd, bookingPeriodToAdd);
 
         /* ------------------------ Perform add operation while a guest card is selected --------------------------- */
 
         /* Case: selects first card in the guest list, add a guest -> added, card selection remains unchanged */
-        selectPerson(Index.fromOneBased(1));
+        selectGuest(Index.fromOneBased(1));
         roomNumberToAdd = ROOM_NUMBER_099;
         assertCommandSuccess(JAKOB, roomNumberToAdd, bookingPeriodToAdd);
 

@@ -57,7 +57,7 @@ public class SelectCommandSystemTest extends AddressBookSystemTest {
         /* Case: filtered guest list, select index within bounds of address book but out of bounds of guest list
          * -> rejected
          */
-        showPersonsWithName(KEYWORD_MATCHING_MEIER);
+        showGuestsWithName(KEYWORD_MATCHING_MEIER);
         int invalidIndex = getModel().getAddressBook().getGuestList().size();
         assertCommandFailure(SelectCommand.COMMAND_WORD + " " + invalidIndex, MESSAGE_INVALID_GUEST_DISPLAYED_INDEX);
 
@@ -93,7 +93,7 @@ public class SelectCommandSystemTest extends AddressBookSystemTest {
         assertCommandFailure("SeLeCt 1", MESSAGE_UNKNOWN_COMMAND);
 
         /* Case: select from empty address book -> rejected */
-        deleteAllPersons();
+        deleteAllGuests();
         assertCommandFailure(SelectCommand.COMMAND_WORD + " " + INDEX_FIRST_GUEST.getOneBased(),
                 MESSAGE_INVALID_GUEST_DISPLAYED_INDEX);
     }

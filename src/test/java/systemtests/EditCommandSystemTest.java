@@ -112,7 +112,7 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
         /* ------------------ Performing edit operation while a filtered list is being shown ------------------------ */
 
         /* Case: filtered guest list, edit index within bounds of address book and guest list -> edited */
-        showPersonsWithName(KEYWORD_MATCHING_MEIER);
+        showGuestsWithName(KEYWORD_MATCHING_MEIER);
         index = INDEX_FIRST_GUEST;
         assertTrue(index.getZeroBased() < getModel().getFilteredGuestList().size());
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + " " + NAME_DESC_BOB;
@@ -123,7 +123,7 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
         /* Case: filtered guest list, edit index within bounds of address book but out of bounds of guest list
          * -> rejected
          */
-        showPersonsWithName(KEYWORD_MATCHING_MEIER);
+        showGuestsWithName(KEYWORD_MATCHING_MEIER);
         int invalidIndex = getModel().getAddressBook().getGuestList().size();
         assertCommandFailure(EditCommand.COMMAND_WORD + " " + invalidIndex + NAME_DESC_BOB,
                 Messages.MESSAGE_INVALID_GUEST_DISPLAYED_INDEX);
@@ -133,9 +133,9 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
         /* Case: selects first card in the guest list, edit a guest -> edited, card selection remains unchanged but
          * browser url changes
          */
-        showAllPersons();
+        showAllGuests();
         index = INDEX_FIRST_GUEST;
-        selectPerson(index);
+        selectGuest(index);
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
                 + ADDRESS_DESC_AMY + TAG_DESC_FRIEND;
         // this can be misleading: card selection actually remains unchanged but the
