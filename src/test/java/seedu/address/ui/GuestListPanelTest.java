@@ -14,8 +14,8 @@ import java.nio.file.Paths;
 
 import org.junit.Test;
 
-import guitests.guihandles.PersonCardHandle;
-import guitests.guihandles.PersonListPanelHandle;
+import guitests.guihandles.GuestListPanelHandle;
+import guitests.guihandles.GuestCardHandle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
@@ -34,16 +34,16 @@ public class GuestListPanelTest extends GuiUnitTest {
 
     private static final long CARD_CREATION_AND_DELETION_TIMEOUT = 2500;
 
-    private PersonListPanelHandle personListPanelHandle;
+    private GuestListPanelHandle guestListPanelHandle;
 
     @Test
     public void display() {
         initUi(TYPICAL_GUESTS);
 
         for (int i = 0; i < TYPICAL_GUESTS.size(); i++) {
-            personListPanelHandle.navigateToCard(TYPICAL_GUESTS.get(i));
+            guestListPanelHandle.navigateToCard(TYPICAL_GUESTS.get(i));
             Guest expectedGuest = TYPICAL_GUESTS.get(i);
-            PersonCardHandle actualCard = personListPanelHandle.getPersonCardHandle(i);
+            GuestCardHandle actualCard = guestListPanelHandle.getPersonCardHandle(i);
 
             assertCardDisplaysPerson(expectedGuest, actualCard);
             assertEquals(Integer.toString(i + 1) + ". ", actualCard.getId());
@@ -56,8 +56,8 @@ public class GuestListPanelTest extends GuiUnitTest {
         postNow(JUMP_TO_SECOND_EVENT);
         guiRobot.pauseForHuman();
 
-        PersonCardHandle expectedPerson = personListPanelHandle.getPersonCardHandle(INDEX_SECOND_GUEST.getZeroBased());
-        PersonCardHandle selectedPerson = personListPanelHandle.getHandleToSelectedCard();
+        GuestCardHandle expectedPerson = guestListPanelHandle.getPersonCardHandle(INDEX_SECOND_GUEST.getZeroBased());
+        GuestCardHandle selectedPerson = guestListPanelHandle.getHandleToSelectedCard();
         assertCardEquals(expectedPerson, selectedPerson);
     }
 
@@ -111,14 +111,14 @@ public class GuestListPanelTest extends GuiUnitTest {
     }
 
     /**
-     * Initializes {@code personListPanelHandle} with a {@code GuestListPanel} backed by {@code backingList}.
+     * Initializes {@code guestListPanelHandle} with a {@code GuestListPanel} backed by {@code backingList}.
      * Also shows the {@code Stage} that displays only {@code GuestListPanel}.
      */
     private void initUi(ObservableList<Guest> backingList) {
         GuestListPanel guestListPanel = new GuestListPanel(backingList);
         uiPartRule.setUiPart(guestListPanel);
 
-        personListPanelHandle = new PersonListPanelHandle(getChildNode(guestListPanel.getRoot(),
-                PersonListPanelHandle.PERSON_LIST_VIEW_ID));
+        guestListPanelHandle = new GuestListPanelHandle(getChildNode(guestListPanel.getRoot(),
+                GuestListPanelHandle.PERSON_LIST_VIEW_ID));
     }
 }

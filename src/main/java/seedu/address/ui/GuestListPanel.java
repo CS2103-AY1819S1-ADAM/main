@@ -16,7 +16,7 @@ import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.model.guest.Guest;
 
 /**
- * Panel containing the list of persons.
+ * Panel containing the list of guests.
  */
 public class GuestListPanel extends UiPart<Region> {
     private static final String FXML = "PersonListPanel.fxml";
@@ -48,7 +48,7 @@ public class GuestListPanel extends UiPart<Region> {
     }
 
     /**
-     * Scrolls to the {@code PersonCard} at the {@code index} and selects it.
+     * Scrolls to the {@code GuestCard} at the {@code index} and selects it.
      */
     private void scrollTo(int index) {
         Platform.runLater(() -> {
@@ -64,7 +64,7 @@ public class GuestListPanel extends UiPart<Region> {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Guest} using a {@code PersonCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code Guest} using a {@code GuestCard}.
      */
     class GuestListViewCell extends ListCell<Guest> {
         @Override
@@ -75,7 +75,7 @@ public class GuestListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new PersonCard(guest, getIndex() + 1).getRoot());
+                setGraphic(new GuestCard(guest, getIndex() + 1).getRoot());
             }
         }
     }
