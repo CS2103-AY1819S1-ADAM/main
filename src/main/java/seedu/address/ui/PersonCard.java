@@ -45,7 +45,7 @@ public class PersonCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(guest.getName().fullName);
         phone.setText(guest.getPhone().value);
-        address.setText(guest.getAddress().value);
+        address.setText("ADDRESS HAS BEEN REMOVED");
         email.setText(guest.getEmail().value);
         guest.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }

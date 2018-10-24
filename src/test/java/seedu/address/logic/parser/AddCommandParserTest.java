@@ -1,15 +1,12 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.DATE_END_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DATE_END_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.DATE_START_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DATE_START_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DATE_END_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DATE_START_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
@@ -47,7 +44,6 @@ import static seedu.address.testutil.TypicalPersons.BOB;
 import org.junit.Test;
 
 import seedu.address.logic.commands.AddCommand;
-import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Guest;
 import seedu.address.model.person.Name;
@@ -70,36 +66,32 @@ public class AddCommandParserTest {
         // whitespace only preamble
         assertParseSuccess(parser,
                 PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB
-                        + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_FRIEND
-                        + ROOM_DESC_BOB + DATE_START_DESC_BOB + DATE_END_DESC_BOB,
+                        + EMAIL_DESC_BOB + TAG_DESC_FRIEND + ROOM_DESC_BOB
+                        + DATE_START_DESC_BOB + DATE_END_DESC_BOB,
                 new AddCommand(expectedGuest, expectedRoomNumber, expectedBookingPeriod));
 
         // multiple names - last name accepted
         assertParseSuccess(parser, NAME_DESC_AMY + NAME_DESC_BOB
-                        + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                        + TAG_DESC_FRIEND + ROOM_DESC_BOB + DATE_START_DESC_BOB
-                        + DATE_END_DESC_BOB,
+                        + PHONE_DESC_BOB + EMAIL_DESC_BOB + TAG_DESC_FRIEND
+                        + ROOM_DESC_BOB + DATE_START_DESC_BOB + DATE_END_DESC_BOB,
                 new AddCommand(expectedGuest, expectedRoomNumber, expectedBookingPeriod));
 
         // multiple phones - last phone accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_AMY
-                        + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                        + TAG_DESC_FRIEND + ROOM_DESC_BOB + DATE_START_DESC_BOB
-                        + DATE_END_DESC_BOB,
+                        + PHONE_DESC_BOB + EMAIL_DESC_BOB + TAG_DESC_FRIEND
+                        + ROOM_DESC_BOB + DATE_START_DESC_BOB + DATE_END_DESC_BOB,
                 new AddCommand(expectedGuest, expectedRoomNumber, expectedBookingPeriod));
 
         // multiple emails - last email accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB
-                        + EMAIL_DESC_AMY + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                        + TAG_DESC_FRIEND + ROOM_DESC_BOB + DATE_START_DESC_BOB
-                        + DATE_END_DESC_BOB,
+                        + EMAIL_DESC_AMY + EMAIL_DESC_BOB + TAG_DESC_FRIEND
+                        + ROOM_DESC_BOB + DATE_START_DESC_BOB + DATE_END_DESC_BOB,
                 new AddCommand(expectedGuest, expectedRoomNumber, expectedBookingPeriod));
 
         // multiple addresses - last address accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB
-                        + EMAIL_DESC_BOB + ADDRESS_DESC_AMY + ADDRESS_DESC_BOB
-                        + TAG_DESC_FRIEND + ROOM_DESC_BOB + DATE_START_DESC_BOB
-                        + DATE_END_DESC_BOB,
+                        + EMAIL_DESC_BOB + TAG_DESC_FRIEND + ROOM_DESC_BOB
+                        + DATE_START_DESC_BOB + DATE_END_DESC_BOB,
                 new AddCommand(expectedGuest, expectedRoomNumber, expectedBookingPeriod));
 
         // multiple tags - all accepted
@@ -107,15 +99,14 @@ public class AddCommandParserTest {
                 .withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
                 .build();
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB
-                        + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND
-                        + TAG_DESC_FRIEND + ROOM_DESC_BOB + DATE_START_DESC_BOB
-                        + DATE_END_DESC_BOB,
+                        + EMAIL_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND
+                        + ROOM_DESC_BOB + DATE_START_DESC_BOB + DATE_END_DESC_BOB,
                 new AddCommand(expectedGuestMultipleTags, expectedRoomNumber,
                         expectedBookingPeriod));
 
         // multiple rooms - last room accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB
-                        + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_FRIEND
+                        + EMAIL_DESC_BOB + TAG_DESC_FRIEND
                         + ROOM_DESC_AMY + DATE_START_DESC_BOB + DATE_END_DESC_BOB,
                 new AddCommand(expectedGuest, expectedRoomNumber, expectedBookingPeriod));
     }
@@ -129,7 +120,7 @@ public class AddCommandParserTest {
                 new BookingPeriod(VALID_DATE_START_AMY, VALID_DATE_END_AMY);
 
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY
-                        + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + ROOM_DESC_AMY
+                        + EMAIL_DESC_AMY + ROOM_DESC_AMY
                         + DATE_START_DESC_AMY + DATE_END_DESC_AMY,
                 new AddCommand(expectedGuest, expectedRoomNumber, expectedBookingPeriod));
     }
@@ -141,17 +132,17 @@ public class AddCommandParserTest {
 
         // missing name prefix
         assertParseFailure(parser, VALID_NAME_BOB + PHONE_DESC_BOB
-                        + EMAIL_DESC_BOB + ADDRESS_DESC_BOB,
+                        + EMAIL_DESC_BOB,
                 expectedMessage);
 
         // missing phone prefix
         assertParseFailure(parser, NAME_DESC_BOB + VALID_PHONE_BOB
-                        + EMAIL_DESC_BOB + ADDRESS_DESC_BOB,
+                        + EMAIL_DESC_BOB,
                 expectedMessage);
 
         // missing email prefix
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB
-                        + VALID_EMAIL_BOB + ADDRESS_DESC_BOB,
+                        + VALID_EMAIL_BOB,
                 expectedMessage);
 
         // missing address prefix
@@ -169,66 +160,49 @@ public class AddCommandParserTest {
     public void parse_invalidValue_failure() {
         // invalid name
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB
-                        + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND
-                        + TAG_DESC_FRIEND + ROOM_DESC_BOB + DATE_START_DESC_BOB
-                        + DATE_END_DESC_BOB,
+                        + EMAIL_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND
+                        + ROOM_DESC_BOB + DATE_START_DESC_BOB + DATE_END_DESC_BOB,
                  Name.MESSAGE_NAME_CONSTRAINTS);
 
         // invalid phone
         assertParseFailure(parser, NAME_DESC_BOB + INVALID_PHONE_DESC
-                        + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND
-                        + TAG_DESC_FRIEND + ROOM_DESC_BOB + DATE_START_DESC_BOB
-                        + DATE_END_DESC_BOB,
+                        + EMAIL_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND
+                        + ROOM_DESC_BOB + DATE_START_DESC_BOB + DATE_END_DESC_BOB,
                  Phone.MESSAGE_PHONE_CONSTRAINTS);
 
         // invalid email
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB
-                        + INVALID_EMAIL_DESC + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND
-                        + TAG_DESC_FRIEND + ROOM_DESC_BOB + DATE_START_DESC_BOB
-                        + DATE_END_DESC_BOB,
+                        + INVALID_EMAIL_DESC + TAG_DESC_HUSBAND + TAG_DESC_FRIEND
+                        + ROOM_DESC_BOB + DATE_START_DESC_BOB + DATE_END_DESC_BOB,
                 Email.MESSAGE_EMAIL_CONSTRAINTS);
-
-        // invalid address
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB
-                        + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC + TAG_DESC_HUSBAND
-                        + TAG_DESC_FRIEND + ROOM_DESC_BOB + DATE_START_DESC_BOB
-                        + DATE_END_DESC_BOB,
-                 Address.MESSAGE_ADDRESS_CONSTRAINTS);
 
         // invalid tag
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB
-                        + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + INVALID_TAG_DESC
-                        + VALID_TAG_FRIEND + ROOM_DESC_BOB + DATE_START_DESC_BOB
-                        + DATE_END_DESC_BOB,
+                        + EMAIL_DESC_BOB + INVALID_TAG_DESC + VALID_TAG_FRIEND
+                        + ROOM_DESC_BOB + DATE_START_DESC_BOB + DATE_END_DESC_BOB,
                 Tag.MESSAGE_TAG_CONSTRAINTS);
 
         // invalid room number
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB
-                        + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND
-                        + INVALID_ROOM_DESC + DATE_START_DESC_BOB + DATE_END_DESC_BOB,
+                        + EMAIL_DESC_BOB + TAG_DESC_HUSBAND + INVALID_ROOM_DESC
+                        + DATE_START_DESC_BOB + DATE_END_DESC_BOB,
                 RoomNumber.MESSAGE_ROOM_NUMBER_CONSTRAINTS);
 
         // invalid start date
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB
-                        + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND
+                        + EMAIL_DESC_BOB + TAG_DESC_HUSBAND
                         + ROOM_DESC_BOB + INVALID_DATE_START_DESC + DATE_END_DESC_BOB,
                 BookingPeriod.MESSAGE_BOOKING_PERIOD_CONSTRAINTS);
 
         // invalid end date
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB
-                        + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND
+                        + EMAIL_DESC_BOB + TAG_DESC_HUSBAND
                         + ROOM_DESC_BOB + DATE_START_DESC_BOB + INVALID_DATE_END_DESC,
                 BookingPeriod.MESSAGE_BOOKING_PERIOD_CONSTRAINTS);
 
-        // two invalid values, only first invalid value reported
-        assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB
-                        + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC + ROOM_DESC_BOB
-                        + ROOM_DESC_BOB + DATE_START_DESC_BOB + DATE_END_DESC_BOB,
-                Name.MESSAGE_NAME_CONSTRAINTS);
-
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB
-                        + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                        + PHONE_DESC_BOB + EMAIL_DESC_BOB
                         + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + ROOM_DESC_BOB
                         + DATE_START_DESC_BOB + DATE_END_DESC_BOB,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));

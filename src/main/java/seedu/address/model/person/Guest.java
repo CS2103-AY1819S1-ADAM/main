@@ -21,18 +21,16 @@ public class Guest {
     private final Email email;
 
     // Data fields
-    private final Address address;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Guest(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Guest(Name name, Phone phone, Email email, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.address = address;
         this.tags.addAll(tags);
     }
 
@@ -40,7 +38,6 @@ public class Guest {
         this.name = new Name(toBeCopied.getName().toString());
         this.phone = new Phone(toBeCopied.getPhone().toString());
         this.email = new Email(toBeCopied.getEmail().toString());
-        this.address = new Address(toBeCopied.getAddress().toString());
         this.tags.addAll(toBeCopied.getTags());
     }
 
@@ -54,10 +51,6 @@ public class Guest {
 
     public Email getEmail() {
         return email;
-    }
-
-    public Address getAddress() {
-        return address;
     }
 
     /**
@@ -100,14 +93,13 @@ public class Guest {
         return otherGuest.getName().equals(getName())
                 && otherGuest.getPhone().equals(getPhone())
                 && otherGuest.getEmail().equals(getEmail())
-                && otherGuest.getAddress().equals(getAddress())
                 && otherGuest.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, tags);
     }
 
     @Override
@@ -118,8 +110,6 @@ public class Guest {
                 .append(getPhone())
                 .append(" Email: ")
                 .append(getEmail())
-                .append(" Address: ")
-                .append(getAddress())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
