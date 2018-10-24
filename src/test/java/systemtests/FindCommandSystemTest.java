@@ -14,7 +14,6 @@ import java.util.List;
 import org.junit.Test;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
@@ -79,15 +78,6 @@ public class FindCommandSystemTest extends AddressBookSystemTest {
         command = RedoCommand.COMMAND_WORD;
         expectedResultMessage = RedoCommand.MESSAGE_FAILURE;
         assertCommandFailure(command, expectedResultMessage);
-
-        /* Case: find same persons in address book after deleting 1 of them -> 1 guest found */
-        executeCommand(DeleteCommand.COMMAND_WORD + " 1");
-        assertFalse(getModel().getAddressBook().getPersonList().contains(BENSON));
-        command = FindCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_MEIER;
-        expectedModel = getModel();
-        ModelHelper.setFilteredGuestList(expectedModel, DANIEL);
-        assertCommandSuccess(command, expectedModel);
-        assertSelectedCardUnchanged();
 
         /* Case: find guest in address book, keyword is same as name but of different case -> 1 guest found */
         command = FindCommand.COMMAND_WORD + " MeIeR";
