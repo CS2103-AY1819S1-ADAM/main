@@ -43,7 +43,7 @@ public class GuestListPanelTest extends GuiUnitTest {
         for (int i = 0; i < TYPICAL_GUESTS.size(); i++) {
             guestListPanelHandle.navigateToCard(TYPICAL_GUESTS.get(i));
             Guest expectedGuest = TYPICAL_GUESTS.get(i);
-            GuestCardHandle actualCard = guestListPanelHandle.getPersonCardHandle(i);
+            GuestCardHandle actualCard = guestListPanelHandle.getGuestCardHandle(i);
 
             assertCardDisplaysPerson(expectedGuest, actualCard);
             assertEquals(Integer.toString(i + 1) + ". ", actualCard.getId());
@@ -56,7 +56,7 @@ public class GuestListPanelTest extends GuiUnitTest {
         postNow(JUMP_TO_SECOND_EVENT);
         guiRobot.pauseForHuman();
 
-        GuestCardHandle expectedPerson = guestListPanelHandle.getPersonCardHandle(INDEX_SECOND_GUEST.getZeroBased());
+        GuestCardHandle expectedPerson = guestListPanelHandle.getGuestCardHandle(INDEX_SECOND_GUEST.getZeroBased());
         GuestCardHandle selectedPerson = guestListPanelHandle.getHandleToSelectedCard();
         assertCardEquals(expectedPerson, selectedPerson);
     }
@@ -119,6 +119,6 @@ public class GuestListPanelTest extends GuiUnitTest {
         uiPartRule.setUiPart(guestListPanel);
 
         guestListPanelHandle = new GuestListPanelHandle(getChildNode(guestListPanel.getRoot(),
-                GuestListPanelHandle.PERSON_LIST_VIEW_ID));
+                GuestListPanelHandle.GUEST_LIST_VIEW_ID));
     }
 }
