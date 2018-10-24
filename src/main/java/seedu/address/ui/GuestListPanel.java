@@ -19,7 +19,7 @@ import seedu.address.model.guest.Guest;
  * Panel containing the list of guests.
  */
 public class GuestListPanel extends UiPart<Region> {
-    private static final String FXML = "PersonListPanel.fxml";
+    private static final String FXML = "GuestListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(GuestListPanel.class);
 
     @FXML
