@@ -12,14 +12,14 @@ import seedu.address.model.guest.Guest;
  * Provides a handle for {@code GuestListPanel} containing the list of {@code GuestCard}.
  */
 public class GuestListPanelHandle extends NodeHandle<ListView<Guest>> {
-    public static final String PERSON_LIST_VIEW_ID = "#guestListView";
+    public static final String GUEST_LIST_VIEW_ID = "#guestListView";
 
     private static final String CARD_PANE_ID = "#cardPane";
 
-    private Optional<Guest> lastRememberedSelectedPersonCard;
+    private Optional<Guest> lastRememberedSelectedGuestCard;
 
-    public GuestListPanelHandle(ListView<Guest> personListPanelNode) {
-        super(personListPanelNode);
+    public GuestListPanelHandle(ListView<Guest> guestListPanelNode) {
+        super(guestListPanelNode);
     }
 
     /**
@@ -101,15 +101,15 @@ public class GuestListPanelHandle extends NodeHandle<ListView<Guest>> {
      * Returns the guest card handle of a guest associated with the {@code index} in the list.
      * @throws IllegalStateException if the selected card is currently not in the scene graph.
      */
-    public GuestCardHandle getPersonCardHandle(int index) {
+    public GuestCardHandle getGuestCardHandle(int index) {
         return getAllCardNodes().stream()
                 .map(GuestCardHandle::new)
-                .filter(handle -> handle.equals(getPerson(index)))
+                .filter(handle -> handle.equals(getGuest(index)))
                 .findFirst()
                 .orElseThrow(IllegalStateException::new);
     }
 
-    private Guest getPerson(int index) {
+    private Guest getGuest(int index) {
         return getRootNode().getItems().get(index);
     }
 
@@ -125,28 +125,28 @@ public class GuestListPanelHandle extends NodeHandle<ListView<Guest>> {
     /**
      * Remembers the selected {@code GuestCard} in the list.
      */
-    public void rememberSelectedPersonCard() {
+    public void rememberSelectedGuestCard() {
         List<Guest> selectedItems = getRootNode().getSelectionModel().getSelectedItems();
 
         if (selectedItems.size() == 0) {
-            lastRememberedSelectedPersonCard = Optional.empty();
+            lastRememberedSelectedGuestCard = Optional.empty();
         } else {
-            lastRememberedSelectedPersonCard = Optional.of(selectedItems.get(0));
+            lastRememberedSelectedGuestCard = Optional.of(selectedItems.get(0));
         }
     }
 
     /**
      * Returns true if the selected {@code GuestCard} is different from the value remembered by the most recent
-     * {@code rememberSelectedPersonCard()} call.
+     * {@code rememberSelectedGuestCard()} call.
      */
-    public boolean isSelectedPersonCardChanged() {
+    public boolean isSelectedGuestCardChanged() {
         List<Guest> selectedItems = getRootNode().getSelectionModel().getSelectedItems();
 
         if (selectedItems.size() == 0) {
-            return lastRememberedSelectedPersonCard.isPresent();
+            return lastRememberedSelectedGuestCard.isPresent();
         } else {
-            return !lastRememberedSelectedPersonCard.isPresent()
-                    || !lastRememberedSelectedPersonCard.get().equals(selectedItems.get(0));
+            return !lastRememberedSelectedGuestCard.isPresent()
+                    || !lastRememberedSelectedGuestCard.get().equals(selectedItems.get(0));
         }
     }
 
