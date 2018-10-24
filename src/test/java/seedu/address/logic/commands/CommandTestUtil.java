@@ -6,7 +6,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE_END;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE_START;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROOM;
@@ -89,7 +88,6 @@ public class CommandTestUtil {
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
     public static final String INVALID_ROOM_DESC = " " + PREFIX_ROOM + "101"; // rooms only valid from 001 to 100.
-    public static final String INVALID_INDEX_DESC = " " + PREFIX_INDEX + "-1"; // index has to be a counting number
     public static final String INVALID_DATE_START_DESC =
             " " + PREFIX_DATE_START + "138213"; // date has to be in dd/MM/yyyy format
     public static final String INVALID_DATE_END_DESC =

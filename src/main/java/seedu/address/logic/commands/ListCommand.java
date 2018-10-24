@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_GUEST;
+import static seedu.address.logic.parser.CliSyntax.FLAG_GUEST;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROOM;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ROOMS;
@@ -22,7 +22,7 @@ public class ListCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows a list of guest or rooms. "
             + "Parameters: "
-            + PREFIX_GUEST + " for guests, "
+            + FLAG_GUEST + " for guests, "
             + PREFIX_ROOM + " for rooms. \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_ROOM;
@@ -41,7 +41,7 @@ public class ListCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
-        if (splitString[0].equals(PREFIX_GUEST.toString())) {
+        if (splitString[0].equals(FLAG_GUEST.toString())) {
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
             model.updateFilteredRoomList(PREDICATE_SHOW_NO_ROOMS);
         } else if (splitString[0].equals(PREFIX_ROOM.toString())) {
