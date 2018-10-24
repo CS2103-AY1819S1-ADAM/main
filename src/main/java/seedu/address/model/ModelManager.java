@@ -12,7 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
-import seedu.address.model.person.Guest;
+import seedu.address.model.guest.Guest;
 import seedu.address.model.room.Room;
 import seedu.address.model.room.RoomNumber;
 import seedu.address.model.room.booking.Booking;
@@ -37,7 +37,7 @@ public class ModelManager extends ComponentManager implements Model {
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
         versionedAddressBook = new VersionedAddressBook(addressBook);
-        filteredGuests = new FilteredList<>(versionedAddressBook.getPersonList());
+        filteredGuests = new FilteredList<>(versionedAddressBook.getGuestList());
         filteredRooms = new FilteredList<>(versionedAddressBook.getRoomList());
     }
 
@@ -62,29 +62,29 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public boolean hasPerson(Guest guest) {
+    public boolean hasGuest(Guest guest) {
         requireNonNull(guest);
-        return versionedAddressBook.hasPerson(guest);
+        return versionedAddressBook.hasGuest(guest);
     }
 
     @Override
-    public void deletePerson(Guest target) {
-        versionedAddressBook.removePerson(target);
+    public void deleteGuest(Guest target) {
+        versionedAddressBook.removeGuest(target);
         indicateAddressBookChanged();
     }
 
     @Override
-    public void addPerson(Guest guest) {
-        versionedAddressBook.addPerson(guest);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    public void addGuest(Guest guest) {
+        versionedAddressBook.addGuest(guest);
+        updateFilteredGuestList(PREDICATE_SHOW_ALL_GUESTS);
         indicateAddressBookChanged();
     }
 
     @Override
-    public void updatePerson(Guest target, Guest editedGuest) {
+    public void updateGuest(Guest target, Guest editedGuest) {
         requireAllNonNull(target, editedGuest);
 
-        versionedAddressBook.updatePerson(target, editedGuest);
+        versionedAddressBook.updateGuest(target, editedGuest);
         indicateAddressBookChanged();
     }
 
@@ -95,12 +95,12 @@ public class ModelManager extends ComponentManager implements Model {
      * {@code versionedAddressBook}
      */
     @Override
-    public ObservableList<Guest> getFilteredPersonList() {
+    public ObservableList<Guest> getFilteredGuestList() {
         return FXCollections.unmodifiableObservableList(filteredGuests);
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Guest> predicate) {
+    public void updateFilteredGuestList(Predicate<Guest> predicate) {
         requireNonNull(predicate);
         filteredGuests.setPredicate(predicate);
     }

@@ -1,10 +1,11 @@
 package seedu.address.storage;
 
 import java.util.Objects;
+
 import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.Guest;
+import seedu.address.model.guest.Guest;
 import seedu.address.model.room.Capacity;
 import seedu.address.model.room.booking.Booking;
 
@@ -16,7 +17,7 @@ public class XmlAdaptedBooking {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Booking's %s field is missing!";
 
     @XmlElement(required = true)
-    private XmlAdaptedPerson guest;
+    private XmlAdaptedGuest guest;
     @XmlElement(required = true)
     private XmlAdaptedBookingPeriod bookingPeriod;
     @XmlElement(required = true)
@@ -34,7 +35,7 @@ public class XmlAdaptedBooking {
      * @param source future changes to this will not affect the created XmlAdaptedBooking
      */
     public XmlAdaptedBooking(Booking source) {
-        guest = new XmlAdaptedPerson(source.getGuest());
+        guest = new XmlAdaptedGuest(source.getGuest());
         bookingPeriod = new XmlAdaptedBookingPeriod(source.getBookingPeriod());
         checkin = source.isCheckedIn();
     }

@@ -12,11 +12,11 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.expenses.Expense;
 import seedu.address.model.expenses.ExpenseType;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Guest;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
+import seedu.address.model.guest.Address;
+import seedu.address.model.guest.Email;
+import seedu.address.model.guest.Guest;
+import seedu.address.model.guest.Name;
+import seedu.address.model.guest.Phone;
 import seedu.address.model.room.Room;
 import seedu.address.model.room.RoomNumber;
 import seedu.address.model.room.UniqueRoomList;
@@ -28,7 +28,7 @@ import seedu.address.model.tag.Tag;
  * Contains utility methods for populating {@code AddressBook} with sample data.
  */
 public class SampleDataUtil {
-    public static Guest[] getSamplePersons() {
+    public static Guest[] getSampleGuests() {
         return new Guest[] {
             new Guest(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                 new Address("Blk 30 Geylang Street 29, #06-40"),
@@ -66,7 +66,7 @@ public class SampleDataUtil {
     public static List<Room> getSampleRoomsWithBookingsExpenses() {
         UniqueRoomList uniqueRoomList = new UniqueRoomList(RoomNumber.MAX_ROOM_NUMBER);
         uniqueRoomList.addBooking(new RoomNumber("001"),
-            new Booking(getSamplePersons()[0],
+            new Booking(getSampleGuests()[0],
             new BookingPeriod(LocalDate.now().format(BookingPeriod.DATE_TO_STRING_FORMAT),
                 LocalDate.now().plusDays(1).format(BookingPeriod.DATE_TO_STRING_FORMAT))));
         uniqueRoomList.addExpense(new RoomNumber("001"), new Expense(getSampleExpenseTypes()[0]));
@@ -96,8 +96,8 @@ public class SampleDataUtil {
 
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
-        for (Guest sampleGuest : getSamplePersons()) {
-            sampleAb.addPerson(sampleGuest);
+        for (Guest sampleGuest : getSampleGuests()) {
+            sampleAb.addGuest(sampleGuest);
         }
         sampleAb.setRooms(getSampleRooms());
         sampleAb.setMenu(getSampleMenuMap());

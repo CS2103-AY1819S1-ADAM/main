@@ -14,7 +14,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Guest;
+import seedu.address.model.guest.Guest;
 import seedu.address.model.room.RoomNumber;
 import seedu.address.model.room.booking.Booking;
 import seedu.address.model.room.booking.BookingPeriod;
@@ -51,7 +51,7 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_SUCCESS =
             "New guest added: %1$s \nAssigned to room: %2$s \n\tfrom %3$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This guest already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_GUEST = "This guest already exists in the address book";
 
     private final Guest guestToAdd;
     private final RoomNumber roomNumberToAdd;
@@ -74,10 +74,10 @@ public class AddCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasPerson(guestToAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        if (model.hasGuest(guestToAdd)) {
+            throw new CommandException(MESSAGE_DUPLICATE_GUEST);
         }
-        model.addPerson(guestToAdd);
+        model.addGuest(guestToAdd);
 
         try {
             model.addBooking(roomNumberToAdd, bookingToAdd);

@@ -6,7 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_GUESTS;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -20,11 +20,11 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Guest;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
+import seedu.address.model.guest.Address;
+import seedu.address.model.guest.Email;
+import seedu.address.model.guest.Guest;
+import seedu.address.model.guest.Name;
+import seedu.address.model.guest.Phone;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -47,59 +47,59 @@ public class EditCommand extends Command {
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Guest: %1$s";
+    public static final String MESSAGE_EDIT_GUEST_SUCCESS = "Edited Guest: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This guest already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_GUEST = "This guest already exists in the address book.";
 
     private final Index index;
-    private final EditPersonDescriptor editPersonDescriptor;
+    private final EditGuestDescriptor editGuestDescriptor;
 
     /**
      * @param index of the guest in the filtered guest list to edit
-     * @param editPersonDescriptor details to edit the guest with
+     * @param editGuestDescriptor details to edit the guest with
      */
-    public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
+    public EditCommand(Index index, EditGuestDescriptor editGuestDescriptor) {
         requireNonNull(index);
-        requireNonNull(editPersonDescriptor);
+        requireNonNull(editGuestDescriptor);
 
         this.index = index;
-        this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
+        this.editGuestDescriptor = new EditGuestDescriptor(editGuestDescriptor);
     }
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        List<Guest> lastShownList = model.getFilteredPersonList();
+        List<Guest> lastShownList = model.getFilteredGuestList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_GUEST_DISPLAYED_INDEX);
         }
 
         Guest guestToEdit = lastShownList.get(index.getZeroBased());
-        Guest editedGuest = createEditedPerson(guestToEdit, editPersonDescriptor);
+        Guest editedGuest = createEditedGuest(guestToEdit, editGuestDescriptor);
 
-        if (!guestToEdit.isSameGuest(editedGuest) && model.hasPerson(editedGuest)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        if (!guestToEdit.isSameGuest(editedGuest) && model.hasGuest(editedGuest)) {
+            throw new CommandException(MESSAGE_DUPLICATE_GUEST);
         }
 
-        model.updatePerson(guestToEdit, editedGuest);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.updateGuest(guestToEdit, editedGuest);
+        model.updateFilteredGuestList(PREDICATE_SHOW_ALL_GUESTS);
         model.commitAddressBook();
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedGuest));
+        return new CommandResult(String.format(MESSAGE_EDIT_GUEST_SUCCESS, editedGuest));
     }
 
     /**
      * Creates and returns a {@code Guest} with the details of {@code guestToEdit}
-     * edited with {@code editPersonDescriptor}.
+     * edited with {@code editGuestDescriptor}.
      */
-    private static Guest createEditedPerson(Guest guestToEdit, EditPersonDescriptor editPersonDescriptor) {
+    private static Guest createEditedGuest(Guest guestToEdit, EditGuestDescriptor editGuestDescriptor) {
         assert guestToEdit != null;
 
-        Name updatedName = editPersonDescriptor.getName().orElse(guestToEdit.getName());
-        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(guestToEdit.getPhone());
-        Email updatedEmail = editPersonDescriptor.getEmail().orElse(guestToEdit.getEmail());
-        Address updatedAddress = editPersonDescriptor.getAddress().orElse(guestToEdit.getAddress());
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(guestToEdit.getTags());
+        Name updatedName = editGuestDescriptor.getName().orElse(guestToEdit.getName());
+        Phone updatedPhone = editGuestDescriptor.getPhone().orElse(guestToEdit.getPhone());
+        Email updatedEmail = editGuestDescriptor.getEmail().orElse(guestToEdit.getEmail());
+        Address updatedAddress = editGuestDescriptor.getAddress().orElse(guestToEdit.getAddress());
+        Set<Tag> updatedTags = editGuestDescriptor.getTags().orElse(guestToEdit.getTags());
 
         return new Guest(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
     }
@@ -119,27 +119,27 @@ public class EditCommand extends Command {
         // state check
         EditCommand e = (EditCommand) other;
         return index.equals(e.index)
-                && editPersonDescriptor.equals(e.editPersonDescriptor);
+                && editGuestDescriptor.equals(e.editGuestDescriptor);
     }
 
     /**
      * Stores the details to edit the guest with. Each non-empty field value will replace the
      * corresponding field value of the guest.
      */
-    public static class EditPersonDescriptor {
+    public static class EditGuestDescriptor {
         private Name name;
         private Phone phone;
         private Email email;
         private Address address;
         private Set<Tag> tags;
 
-        public EditPersonDescriptor() {}
+        public EditGuestDescriptor() {}
 
         /**
          * Copy constructor.
          * A defensive copy of {@code tags} is used internally.
          */
-        public EditPersonDescriptor(EditPersonDescriptor toCopy) {
+        public EditGuestDescriptor(EditGuestDescriptor toCopy) {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
@@ -211,12 +211,12 @@ public class EditCommand extends Command {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof EditPersonDescriptor)) {
+            if (!(other instanceof EditGuestDescriptor)) {
                 return false;
             }
 
             // state check
-            EditPersonDescriptor e = (EditPersonDescriptor) other;
+            EditGuestDescriptor e = (EditGuestDescriptor) other;
 
             return getName().equals(e.getName())
                     && getPhone().equals(e.getPhone())

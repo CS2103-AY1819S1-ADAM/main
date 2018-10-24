@@ -30,12 +30,12 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.testutil.TypicalBookingPeriods.BOOKING_PERIOD_AMY;
 import static seedu.address.testutil.TypicalBookingPeriods.BOOKING_PERIOD_BOB;
 import static seedu.address.testutil.TypicalBookingPeriods.TOMORROW_NEXTWEEK;
-import static seedu.address.testutil.TypicalPersons.AMY;
-import static seedu.address.testutil.TypicalPersons.BOB;
-import static seedu.address.testutil.TypicalPersons.HOON;
-import static seedu.address.testutil.TypicalPersons.IDA;
-import static seedu.address.testutil.TypicalPersons.JAKOB;
-import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
+import static seedu.address.testutil.TypicalGuests.AMY;
+import static seedu.address.testutil.TypicalGuests.BOB;
+import static seedu.address.testutil.TypicalGuests.HOON;
+import static seedu.address.testutil.TypicalGuests.IDA;
+import static seedu.address.testutil.TypicalGuests.JAKOB;
+import static seedu.address.testutil.TypicalGuests.KEYWORD_MATCHING_MEIER;
 import static seedu.address.testutil.TypicalRoomNumbers.ROOM_NUMBER_001;
 import static seedu.address.testutil.TypicalRoomNumbers.ROOM_NUMBER_020;
 import static seedu.address.testutil.TypicalRoomNumbers.ROOM_NUMBER_023;
@@ -51,18 +51,18 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.model.Model;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Guest;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
+import seedu.address.model.guest.Address;
+import seedu.address.model.guest.Email;
+import seedu.address.model.guest.Guest;
+import seedu.address.model.guest.Name;
+import seedu.address.model.guest.Phone;
 import seedu.address.model.room.RoomNumber;
 import seedu.address.model.room.booking.Booking;
 import seedu.address.model.room.booking.BookingPeriod;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.BookingBuilder;
 import seedu.address.testutil.GuestBuilder;
-import seedu.address.testutil.PersonUtil;
+import seedu.address.testutil.GuestUtil;
 import seedu.address.testutil.TypicalBookingPeriods;
 import seedu.address.testutil.TypicalRoomNumbers;
 
@@ -94,7 +94,7 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
 
         /* Case: redo adding Amy to the list -> Amy added again */
         command = RedoCommand.COMMAND_WORD;
-        model.addPerson(guestToAdd);
+        model.addGuest(guestToAdd);
         expectedResultMessage = RedoCommand.MESSAGE_SUCCESS;
         assertCommandSuccess(command, model, expectedResultMessage);
 
@@ -114,7 +114,7 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
         roomNumberToAdd = TypicalRoomNumbers.ROOM_NUMBER_011;
         bookingPeriodToAdd = TypicalBookingPeriods.BOOKING_PERIOD_AMY;
 
-        command = PersonUtil.getAddCommand(guestToAdd, roomNumberToAdd, bookingPeriodToAdd);
+        command = GuestUtil.getAddCommand(guestToAdd, roomNumberToAdd, bookingPeriodToAdd);
         assertCommandSuccess(command, guestToAdd, roomNumberToAdd, bookingPeriodToAdd);
 
         /* Case: add a guest with tags, command with parameters in random order -> added */
@@ -135,14 +135,14 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
         /* -------------------------- Perform add operation on the shown filtered list ------------------------------ */
 
         /* Case: filters the guest list before adding -> added */
-        showPersonsWithName(KEYWORD_MATCHING_MEIER);
+        showGuestsWithName(KEYWORD_MATCHING_MEIER);
         roomNumberToAdd = ROOM_NUMBER_024;
         assertCommandSuccess(IDA, roomNumberToAdd, bookingPeriodToAdd);
 
         /* ------------------------ Perform add operation while a guest card is selected --------------------------- */
 
         /* Case: selects first card in the guest list, add a guest -> added, card selection remains unchanged */
-        selectPerson(Index.fromOneBased(1));
+        selectGuest(Index.fromOneBased(1));
         roomNumberToAdd = ROOM_NUMBER_099;
         assertCommandSuccess(JAKOB, roomNumberToAdd, bookingPeriodToAdd);
 
@@ -154,28 +154,28 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
                 BookingBuilder.DEFAULT_BOOKING_PERIOD_TODAY_TOMORROW;
 
         /* Case: add a duplicate guest -> rejected */
-        command = PersonUtil.getAddCommand(HOON, validRoomNumber, validBookingPeriod);
-        assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_PERSON);
+        command = GuestUtil.getAddCommand(HOON, validRoomNumber, validBookingPeriod);
+        assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_GUEST);
 
         /* Case: add a duplicate guest except with different phone -> rejected */
         guestToAdd = new GuestBuilder(HOON).withPhone(VALID_PHONE_BOB).build();
-        command = PersonUtil.getAddCommand(guestToAdd, validRoomNumber, validBookingPeriod);
-        assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_PERSON);
+        command = GuestUtil.getAddCommand(guestToAdd, validRoomNumber, validBookingPeriod);
+        assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_GUEST);
 
         /* Case: add a duplicate guest except with different email -> rejected */
         guestToAdd = new GuestBuilder(HOON).withEmail(VALID_EMAIL_BOB).build();
-        command = PersonUtil.getAddCommand(guestToAdd, validRoomNumber, validBookingPeriod);
-        assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_PERSON);
+        command = GuestUtil.getAddCommand(guestToAdd, validRoomNumber, validBookingPeriod);
+        assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_GUEST);
 
         /* Case: add a duplicate guest except with different address -> rejected */
         guestToAdd = new GuestBuilder(HOON).withAddress(VALID_ADDRESS_BOB).build();
-        command = PersonUtil.getAddCommand(guestToAdd, validRoomNumber, validBookingPeriod);
-        assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_PERSON);
+        command = GuestUtil.getAddCommand(guestToAdd, validRoomNumber, validBookingPeriod);
+        assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_GUEST);
 
         /* Case: add a duplicate guest except with different tags -> rejected */
         guestToAdd = new GuestBuilder(HOON).withTags("friends").build();
-        command = PersonUtil.getAddCommand(guestToAdd, validRoomNumber, validBookingPeriod);
-        assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_PERSON);
+        command = GuestUtil.getAddCommand(guestToAdd, validRoomNumber, validBookingPeriod);
+        assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_GUEST);
 
         /* Case: missing name -> rejected */
         command = AddCommand.COMMAND_WORD + PHONE_DESC_AMY + EMAIL_DESC_AMY
@@ -201,7 +201,7 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
         assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
 
         /* Case: invalid keyword -> rejected */
-        command = "adds " + PersonUtil.getAddCommand(validGuest,
+        command = "adds " + GuestUtil.getAddCommand(validGuest,
                 validRoomNumber, validBookingPeriod);
         assertCommandFailure(command, Messages.MESSAGE_UNKNOWN_COMMAND);
 
@@ -244,7 +244,7 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
      * 2. Command box has the default style class.<br>
      * 3. Result display box displays the success message of executing {@code AddCommand} with the details of
      * {@code guestToAdd}.<br>
-     * 4. {@code Storage} and {@code PersonListPanel} equal to the corresponding components in
+     * 4. {@code Storage} and {@code GuestListPanel} equal to the corresponding components in
      * the current model added with {@code guestToAdd}.<br>
      * 5. Browser url and selected card remain unchanged.<br>
      * 6. Status bar's sync status changes.<br>
@@ -256,7 +256,7 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
                                       RoomNumber roomNumberToAdd,
                                       BookingPeriod bookingPeriodToAdd) {
 
-        String command = PersonUtil.getAddCommand(guestToAdd,
+        String command = GuestUtil.getAddCommand(guestToAdd,
                 roomNumberToAdd, bookingPeriodToAdd);
 
         assertCommandSuccess(command,
@@ -272,7 +272,7 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
     private void assertCommandSuccess(String command, Guest guestToAdd,
                                        RoomNumber roomNumber, BookingPeriod bookingPeriod) {
         Model expectedModel = getModel();
-        expectedModel.addPerson(guestToAdd);
+        expectedModel.addGuest(guestToAdd);
 
         Booking expectedBooking = new Booking(guestToAdd, bookingPeriod);
         expectedModel.addBooking(roomNumber, expectedBooking);
@@ -287,7 +287,7 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
      * Performs the same verification as {@code assertCommandSuccess(String,
      * Guest, RoomNumber, BookingPeriod)} except asserts that the,<br>
      * 1. Result display box displays {@code expectedResultMessage}.<br>
-     * 2. {@code Storage} and {@code PersonListPanel} equal to the corresponding components in
+     * 2. {@code Storage} and {@code GuestListPanel} equal to the corresponding components in
      * {@code expectedModel}.<br>
      *
      * @see AddCommandSystemTest#assertCommandSuccess(String, Guest, RoomNumber, BookingPeriod)
@@ -305,7 +305,7 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
      * 1. Command box displays {@code command}.<br>
      * 2. Command box has the error style class.<br>
      * 3. Result display box displays {@code expectedResultMessage}.<br>
-     * 4. {@code Storage} and {@code PersonListPanel} remain unchanged.<br>
+     * 4. {@code Storage} and {@code GuestListPanel} remain unchanged.<br>
      * 5. Browser url, selected card and status bar remain unchanged.<br>
      * Verifications 1, 3 and 4 are performed by
      * {@code AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>

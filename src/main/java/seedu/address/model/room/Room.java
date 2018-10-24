@@ -11,7 +11,7 @@ import java.util.Set;
 
 import seedu.address.model.expenses.Expense;
 import seedu.address.model.expenses.Expenses;
-import seedu.address.model.person.Guest;
+import seedu.address.model.guest.Guest;
 import seedu.address.model.room.booking.Booking;
 import seedu.address.model.room.booking.Bookings;
 import seedu.address.model.room.booking.exceptions.NoActiveBookingException;

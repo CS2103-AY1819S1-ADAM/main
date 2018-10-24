@@ -2,7 +2,7 @@ package seedu.address.testutil;
 
 import java.time.LocalDate;
 
-import seedu.address.model.person.Guest;
+import seedu.address.model.guest.Guest;
 import seedu.address.model.room.booking.Booking;
 import seedu.address.model.room.booking.BookingPeriod;
 

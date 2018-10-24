@@ -11,7 +11,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Guest;
+import seedu.address.model.guest.Guest;
 import seedu.address.model.room.RoomNumber;
 import seedu.address.model.room.booking.BookingPeriod;
 import seedu.address.testutil.GuestBuilder;
@@ -32,13 +32,13 @@ public class AddCommandIntegrationTest {
     }
 
     @Test
-    public void execute_newPerson_success() {
+    public void execute_newGuest_success() {
         Guest validGuest = new GuestBuilder().build();
         RoomNumber validRoomNumber = TypicalRoomNumbers.ROOM_NUMBER_002;
         BookingPeriod validBookingPeriod = TypicalBookingPeriods.TODAY_TOMORROW;
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.addPerson(validGuest);
+        expectedModel.addGuest(validGuest);
         expectedModel.commitAddressBook();
 
         assertCommandSuccess(new AddCommand(validGuest, validRoomNumber, validBookingPeriod),
@@ -49,13 +49,13 @@ public class AddCommandIntegrationTest {
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() {
-        Guest guestInList = model.getAddressBook().getPersonList().get(0);
+    public void execute_duplicateGuest_throwsCommandException() {
+        Guest guestInList = model.getAddressBook().getGuestList().get(0);
         RoomNumber validRoomNumber = TypicalRoomNumbers.ROOM_NUMBER_002;
         BookingPeriod validBookingPeriod = TypicalBookingPeriods.TODAY_TOMORROW;
 
         assertCommandFailure(new AddCommand(guestInList, validRoomNumber, validBookingPeriod),
-                model, commandHistory, AddCommand.MESSAGE_DUPLICATE_PERSON);
+                model, commandHistory, AddCommand.MESSAGE_DUPLICATE_GUEST);
     }
 
 }
