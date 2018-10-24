@@ -57,8 +57,10 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 === Adding a person: `add`
 
 Adds a guest to the guest list for the purpose of assigning a room +
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG] -r ROOM_NUMBER
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG] r/ ROOM_NUMBER
 from/START_DATE to/END_DATE`
+
+A guest can only be assigned to one room. The RoomNumber must also be valid.
 
 [TIP]
 A guest can have any number of tags (including 0)
@@ -295,8 +297,11 @@ The `redo` command fails as there are no `undo` commands executed previously.
 
 === Clearing all entries : `clear`
 
-Clears all entries from the application. +
+Clears all guests from the application. +
 Format: `clear`
+
+The rooms are maintained - only all their current and future bookings are
+cleared. I.e. all maintenance requests and faults will still be recorded.
 
 === Export log: `export` [red]#Coming in v1.3#
 
