@@ -32,14 +32,14 @@ public class DeleteCommandSystemTest extends AddressBookSystemTest {
         /* Case: delete the first guest in the list, command with leading spaces and trailing spaces -> deleted */
         Model expectedModel = getModel();
         String command = "     " + DeleteCommand.COMMAND_WORD + "      " + INDEX_FIRST_GUEST.getOneBased() + "       ";
-        Guest deletedGuest = removePerson(expectedModel, INDEX_FIRST_GUEST);
+        Guest deletedGuest = removeGuest(expectedModel, INDEX_FIRST_GUEST);
         String expectedResultMessage = String.format(MESSAGE_DELETE_GUEST_SUCCESS, deletedGuest);
         assertCommandSuccess(command, expectedModel, expectedResultMessage);
 
         /* Case: delete the last guest in the list -> deleted */
         Model modelBeforeDeletingLast = getModel();
-        Index lastPersonIndex = getLastIndex(modelBeforeDeletingLast);
-        assertCommandSuccess(lastPersonIndex);
+        Index lastGuestIndex = getLastIndex(modelBeforeDeletingLast);
+        assertCommandSuccess(lastGuestIndex);
 
         /* Case: undo deleting the last guest in the list -> last guest restored */
         command = UndoCommand.COMMAND_WORD;
@@ -48,13 +48,13 @@ public class DeleteCommandSystemTest extends AddressBookSystemTest {
 
         /* Case: redo deleting the last guest in the list -> last guest deleted again */
         command = RedoCommand.COMMAND_WORD;
-        removePerson(modelBeforeDeletingLast, lastPersonIndex);
+        removeGuest(modelBeforeDeletingLast, lastGuestIndex);
         expectedResultMessage = RedoCommand.MESSAGE_SUCCESS;
         assertCommandSuccess(command, modelBeforeDeletingLast, expectedResultMessage);
 
         /* Case: delete the middle guest in the list -> deleted */
-        Index middlePersonIndex = getMidIndex(getModel());
-        assertCommandSuccess(middlePersonIndex);
+        Index middleGuestIndex = getMidIndex(getModel());
+        assertCommandSuccess(middleGuestIndex);
 
         /* ------------------ Performing delete operation while a filtered list is being shown ---------------------- */
 
@@ -81,7 +81,7 @@ public class DeleteCommandSystemTest extends AddressBookSystemTest {
         Index expectedIndex = Index.fromZeroBased(selectedIndex.getZeroBased() - 1);
         selectGuest(selectedIndex);
         command = DeleteCommand.COMMAND_WORD + " " + selectedIndex.getOneBased();
-        deletedGuest = removePerson(expectedModel, selectedIndex);
+        deletedGuest = removeGuest(expectedModel, selectedIndex);
         expectedResultMessage = String.format(MESSAGE_DELETE_GUEST_SUCCESS, deletedGuest);
         assertCommandSuccess(command, expectedModel, expectedResultMessage, expectedIndex);
 
@@ -115,7 +115,7 @@ public class DeleteCommandSystemTest extends AddressBookSystemTest {
      * Removes the {@code Guest} at the specified {@code index} in {@code model}'s address book.
      * @return the removed guest
      */
-    private Guest removePerson(Model model, Index index) {
+    private Guest removeGuest(Model model, Index index) {
         Guest targetGuest = getGuest(model, index);
         model.deleteGuest(targetGuest);
         return targetGuest;
@@ -128,7 +128,7 @@ public class DeleteCommandSystemTest extends AddressBookSystemTest {
      */
     private void assertCommandSuccess(Index toDelete) {
         Model expectedModel = getModel();
-        Guest deletedGuest = removePerson(expectedModel, toDelete);
+        Guest deletedGuest = removeGuest(expectedModel, toDelete);
         String expectedResultMessage = String.format(MESSAGE_DELETE_GUEST_SUCCESS, deletedGuest);
 
         assertCommandSuccess(

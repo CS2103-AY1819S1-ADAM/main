@@ -103,7 +103,7 @@ public abstract class AddressBookSystemTest {
         return mainWindowHandle.getCommandBox();
     }
 
-    public GuestListPanelHandle getPersonListPanel() {
+    public GuestListPanelHandle getGuestListPanel() {
         return mainWindowHandle.getGuestListPanel();
     }
 
@@ -139,7 +139,7 @@ public abstract class AddressBookSystemTest {
     }
 
     /**
-     * Displays all persons in the address book.
+     * Displays all guests in the address book.
      */
     protected void showAllGuests() {
         executeCommand(ListCommand.COMMAND_WORD + " -g");
@@ -160,11 +160,11 @@ public abstract class AddressBookSystemTest {
      */
     protected void selectGuest(Index index) {
         executeCommand(SelectCommand.COMMAND_WORD + " " + index.getOneBased());
-        assertEquals(index.getZeroBased(), getPersonListPanel().getSelectedCardIndex());
+        assertEquals(index.getZeroBased(), getGuestListPanel().getSelectedCardIndex());
     }
 
     /**
-     * Deletes all persons in the address book.
+     * Deletes all guests in the address book.
      */
     protected void deleteAllGuests() {
         executeCommand(ClearCommand.COMMAND_WORD);
@@ -182,7 +182,7 @@ public abstract class AddressBookSystemTest {
 
         assertEquals(expectedResultMessage, getResultDisplay().getText());
         assertEquals(new AddressBook(expectedModel.getAddressBook()), testApp.readStorageAddressBook());
-        assertListMatching(getPersonListPanel(), expectedModel.getFilteredGuestList());
+        assertListMatching(getGuestListPanel(), expectedModel.getFilteredGuestList());
     }
 
     /**
@@ -194,7 +194,7 @@ public abstract class AddressBookSystemTest {
         getBrowserPanel().rememberUrl();
         statusBarFooterHandle.rememberSaveLocation();
         statusBarFooterHandle.rememberSyncStatus();
-        getPersonListPanel().rememberSelectedGuestCard();
+        getGuestListPanel().rememberSelectedGuestCard();
     }
 
     /**
@@ -204,7 +204,7 @@ public abstract class AddressBookSystemTest {
      */
     protected void assertSelectedCardDeselected() {
         assertFalse(getBrowserPanel().isUrlChanged());
-        assertFalse(getPersonListPanel().isAnyCardSelected());
+        assertFalse(getGuestListPanel().isAnyCardSelected());
     }
 
     /**
@@ -214,8 +214,8 @@ public abstract class AddressBookSystemTest {
      * @see GuestListPanelHandle#isSelectedGuestCardChanged()
      */
     protected void assertSelectedCardChanged(Index expectedSelectedCardIndex) {
-        getPersonListPanel().navigateToCard(getPersonListPanel().getSelectedCardIndex());
-        String selectedCardName = getPersonListPanel().getHandleToSelectedCard().getName();
+        getGuestListPanel().navigateToCard(getGuestListPanel().getSelectedCardIndex());
+        String selectedCardName = getGuestListPanel().getHandleToSelectedCard().getName();
         URL expectedUrl;
         try {
             expectedUrl = new URL(BrowserPanel.SEARCH_PAGE_URL + selectedCardName.replaceAll(" ", "%20"));
@@ -224,7 +224,7 @@ public abstract class AddressBookSystemTest {
         }
         assertEquals(expectedUrl, getBrowserPanel().getLoadedUrl());
 
-        assertEquals(expectedSelectedCardIndex.getZeroBased(), getPersonListPanel().getSelectedCardIndex());
+        assertEquals(expectedSelectedCardIndex.getZeroBased(), getGuestListPanel().getSelectedCardIndex());
     }
 
     /**
@@ -234,7 +234,7 @@ public abstract class AddressBookSystemTest {
      */
     protected void assertSelectedCardUnchanged() {
         assertFalse(getBrowserPanel().isUrlChanged());
-        assertFalse(getPersonListPanel().isSelectedGuestCardChanged());
+        assertFalse(getGuestListPanel().isSelectedGuestCardChanged());
     }
 
     /**
@@ -278,7 +278,7 @@ public abstract class AddressBookSystemTest {
     private void assertApplicationStartingStateIsCorrect() {
         assertEquals("", getCommandBox().getInput());
         assertEquals("", getResultDisplay().getText());
-        assertListMatching(getPersonListPanel(), getModel().getFilteredGuestList());
+        assertListMatching(getGuestListPanel(), getModel().getFilteredGuestList());
         assertEquals(MainApp.class.getResource(FXML_FILE_FOLDER + DEFAULT_PAGE), getBrowserPanel().getLoadedUrl());
         assertEquals(Paths.get(".").resolve(testApp.getStorageSaveLocation()).toString(),
                 getStatusBarFooter().getSaveLocation());
