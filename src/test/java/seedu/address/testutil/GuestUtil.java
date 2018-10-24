@@ -66,7 +66,7 @@ public class GuestUtil {
     /**
      * Returns the part of command string for the given {@code EditGuestDescriptor}'s details.
      */
-    public static String getEditPersonDescriptorDetails(EditCommand.EditGuestDescriptor descriptor) {
+    public static String getEditGuestDescriptorDetails(EditCommand.EditGuestDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));

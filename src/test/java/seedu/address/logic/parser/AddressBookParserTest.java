@@ -34,7 +34,7 @@ import seedu.address.model.guest.Guest;
 import seedu.address.model.guest.NameContainsKeywordsPredicate;
 import seedu.address.model.room.RoomNumber;
 import seedu.address.model.room.booking.BookingPeriod;
-import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.EditGuestDescriptorBuilder;
 import seedu.address.testutil.GuestBuilder;
 import seedu.address.testutil.GuestUtil;
 
@@ -72,9 +72,9 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_edit() throws Exception {
         Guest guest = new GuestBuilder().build();
-        EditGuestDescriptor descriptor = new EditPersonDescriptorBuilder(guest).build();
+        EditGuestDescriptor descriptor = new EditGuestDescriptorBuilder(guest).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_GUEST.getOneBased() + " " + GuestUtil.getEditPersonDescriptorDetails(descriptor));
+                + INDEX_FIRST_GUEST.getOneBased() + " " + GuestUtil.getEditGuestDescriptorDetails(descriptor));
         assertEquals(new EditCommand(INDEX_FIRST_GUEST, descriptor), command);
     }
 

@@ -76,9 +76,9 @@ public class XmlAdaptedGuest {
      * @throws IllegalValueException if there were any data constraints violated in the adapted guest
      */
     public Guest toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
+        final List<Tag> guestTags = new ArrayList<>();
         for (XmlAdaptedTag tag : tagged) {
-            personTags.add(tag.toModelType());
+            guestTags.add(tag.toModelType());
         }
 
         if (name == null) {
@@ -113,7 +113,7 @@ public class XmlAdaptedGuest {
         }
         final Address modelAddress = new Address(address);
 
-        final Set<Tag> modelTags = new HashSet<>(personTags);
+        final Set<Tag> modelTags = new HashSet<>(guestTags);
         return new Guest(modelName, modelPhone, modelEmail, modelAddress, modelTags);
     }
 
@@ -127,11 +127,11 @@ public class XmlAdaptedGuest {
             return false;
         }
 
-        XmlAdaptedGuest otherPerson = (XmlAdaptedGuest) other;
-        return Objects.equals(name, otherPerson.name)
-                && Objects.equals(phone, otherPerson.phone)
-                && Objects.equals(email, otherPerson.email)
-                && Objects.equals(address, otherPerson.address)
-                && tagged.equals(otherPerson.tagged);
+        XmlAdaptedGuest otherGuest = (XmlAdaptedGuest) other;
+        return Objects.equals(name, otherGuest.name)
+                && Objects.equals(phone, otherGuest.phone)
+                && Objects.equals(email, otherGuest.email)
+                && Objects.equals(address, otherGuest.address)
+                && tagged.equals(otherGuest.tagged);
     }
 }

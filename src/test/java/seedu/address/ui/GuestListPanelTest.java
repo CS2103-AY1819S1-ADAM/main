@@ -94,12 +94,12 @@ public class GuestListPanelTest extends GuiUnitTest {
         builder.append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n");
         builder.append("<addressbook>\n");
         for (int i = 0; i < personCount; i++) {
-            builder.append("<persons>\n");
+            builder.append("<guest>\n");
             builder.append("<name>").append(i).append("a</name>\n");
             builder.append("<phone>000</phone>\n");
             builder.append("<email>a@aa</email>\n");
             builder.append("<address>a</address>\n");
-            builder.append("</persons>\n");
+            builder.append("</guest>\n");
         }
         builder.append("</addressbook>\n");
 

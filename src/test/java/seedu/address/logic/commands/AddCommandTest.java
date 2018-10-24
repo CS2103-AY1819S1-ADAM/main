@@ -38,7 +38,7 @@ public class AddCommandTest {
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
-    public void constructor_nullPerson_throwsNullPointerException() {
+    public void constructor_nullGuest_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
         RoomNumber validRoomNumber = TypicalRoomNumbers.ROOM_NUMBER_002;
         BookingPeriod validBookingPeriod = TypicalBookingPeriods.TODAY_TOMORROW;
@@ -47,7 +47,7 @@ public class AddCommandTest {
     }
 
     @Test
-    public void execute_personAcceptedByModel_addSuccessful() throws Exception {
+    public void execute_guestAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingGuestAdded modelStub = new ModelStubAcceptingGuestAdded();
         Guest validGuest = new GuestBuilder().build();
         RoomNumber validRoomNumber = TypicalRoomNumbers.ROOM_NUMBER_002;
@@ -59,18 +59,18 @@ public class AddCommandTest {
 
         assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validGuest,
                 validRoomNumber, validBookingPeriod), commandResult.feedbackToUser);
-        assertEquals(Arrays.asList(validGuest), modelStub.personsAdded);
+        assertEquals(Arrays.asList(validGuest), modelStub.guestsAdded);
         assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() throws Exception {
+    public void execute_duplicateGuest_throwsCommandException() throws Exception {
         Guest validGuest = new GuestBuilder().build();
         RoomNumber validRoomNumber = TypicalRoomNumbers.ROOM_NUMBER_002;
         BookingPeriod validBookingPeriod = TypicalBookingPeriods.TODAY_TOMORROW;
 
         AddCommand addCommand = new AddCommand(validGuest, validRoomNumber, validBookingPeriod);
-        ModelStub modelStub = new ModelStubWithPerson(validGuest);
+        ModelStub modelStub = new ModelStubWithGuest(validGuest);
 
         thrown.expect(CommandException.class);
         thrown.expectMessage(AddCommand.MESSAGE_DUPLICATE_GUEST);
@@ -223,10 +223,10 @@ public class AddCommandTest {
     /**
      * A Model stub that contains a single guest.
      */
-    private class ModelStubWithPerson extends ModelStub {
+    private class ModelStubWithGuest extends ModelStub {
         private final Guest guest;
 
-        ModelStubWithPerson(Guest guest) {
+        ModelStubWithGuest(Guest guest) {
             requireNonNull(guest);
             this.guest = guest;
         }
@@ -242,18 +242,18 @@ public class AddCommandTest {
      * A Model stub that always accept the guest and assigns a room to him.
      */
     private class ModelStubAcceptingGuestAdded extends ModelStub {
-        final ArrayList<Guest> personsAdded = new ArrayList<>();
+        final ArrayList<Guest> guestsAdded = new ArrayList<>();
 
         @Override
         public boolean hasGuest(Guest guest) {
             requireNonNull(guest);
-            return personsAdded.stream().anyMatch(guest::isSameGuest);
+            return guestsAdded.stream().anyMatch(guest::isSameGuest);
         }
 
         @Override
         public void addGuest(Guest guest) {
             requireNonNull(guest);
-            personsAdded.add(guest);
+            guestsAdded.add(guest);
         }
 
         @Override
