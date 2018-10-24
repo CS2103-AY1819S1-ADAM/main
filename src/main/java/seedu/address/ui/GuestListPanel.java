@@ -23,7 +23,7 @@ public class GuestListPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(GuestListPanel.class);
 
     @FXML
-    private ListView<Guest> personListView;
+    private ListView<Guest> guestListView;
 
     public GuestListPanel(ObservableList<Guest> guestList) {
         super(FXML);
@@ -32,13 +32,13 @@ public class GuestListPanel extends UiPart<Region> {
     }
 
     private void setConnections(ObservableList<Guest> guestList) {
-        personListView.setItems(guestList);
-        personListView.setCellFactory(listView -> new PersonListViewCell());
+        guestListView.setItems(guestList);
+        guestListView.setCellFactory(listView -> new GuestListViewCell());
         setEventHandlerForSelectionChangeEvent();
     }
 
     private void setEventHandlerForSelectionChangeEvent() {
-        personListView.getSelectionModel().selectedItemProperty()
+        guestListView.getSelectionModel().selectedItemProperty()
                 .addListener((observable, oldValue, newValue) -> {
                     if (newValue != null) {
                         logger.fine("Selection in guest list panel changed to : '" + newValue + "'");
@@ -52,8 +52,8 @@ public class GuestListPanel extends UiPart<Region> {
      */
     private void scrollTo(int index) {
         Platform.runLater(() -> {
-            personListView.scrollTo(index);
-            personListView.getSelectionModel().clearAndSelect(index);
+            guestListView.scrollTo(index);
+            guestListView.getSelectionModel().clearAndSelect(index);
         });
     }
 
@@ -66,7 +66,7 @@ public class GuestListPanel extends UiPart<Region> {
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Guest} using a {@code PersonCard}.
      */
-    class PersonListViewCell extends ListCell<Guest> {
+    class GuestListViewCell extends ListCell<Guest> {
         @Override
         protected void updateItem(Guest guest, boolean empty) {
             super.updateItem(guest, empty);

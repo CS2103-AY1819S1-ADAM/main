@@ -12,7 +12,7 @@ import seedu.address.model.guest.Guest;
  * Provides a handle for {@code GuestListPanel} containing the list of {@code PersonCard}.
  */
 public class PersonListPanelHandle extends NodeHandle<ListView<Guest>> {
-    public static final String PERSON_LIST_VIEW_ID = "#personListView";
+    public static final String PERSON_LIST_VIEW_ID = "#guestListView";
 
     private static final String CARD_PANE_ID = "#cardPane";
 
