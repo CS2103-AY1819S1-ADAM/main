@@ -35,7 +35,7 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private BrowserPanel browserPanel;
-    private PersonListPanel personListPanel;
+    private GuestListPanel guestListPanel;
     private RoomListPanel roomListPanel;
     private Config config;
     private UserPrefs prefs;
@@ -51,7 +51,7 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane guestListPanelPlaceholder;
 
     @FXML
     private StackPane roomListPanelPlaceholder;
@@ -126,8 +126,8 @@ public class MainWindow extends UiPart<Stage> {
         browserPanel = new BrowserPanel();
         browserPlaceholder.getChildren().add(browserPanel.getRoot());
 
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        guestListPanel = new GuestListPanel(logic.getFilteredGuestList());
+        guestListPanelPlaceholder.getChildren().add(guestListPanel.getRoot());
 
         roomListPanel = new RoomListPanel(logic.getFilteredRoomList());
         roomListPanelPlaceholder.getChildren().add(roomListPanel.getRoot());
@@ -194,8 +194,8 @@ public class MainWindow extends UiPart<Stage> {
         raise(new ExitAppRequestEvent());
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
+    public GuestListPanel getGuestListPanel() {
+        return guestListPanel;
     }
 
     public RoomListPanel getRoomListPane() {

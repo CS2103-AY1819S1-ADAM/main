@@ -3,7 +3,7 @@ package seedu.address.model;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
-import seedu.address.model.person.Guest;
+import seedu.address.model.guest.Guest;
 import seedu.address.model.room.Room;
 import seedu.address.model.room.RoomNumber;
 import seedu.address.model.room.booking.Booking;
@@ -13,8 +13,8 @@ import seedu.address.model.room.booking.Booking;
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true/false */
-    Predicate<Guest> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
-    Predicate<Guest> PREDICATE_SHOW_NO_PERSONS = unused -> false;
+    Predicate<Guest> PREDICATE_SHOW_ALL_GUESTS = unused -> true;
+    Predicate<Guest> PREDICATE_SHOW_NO_GUESTS = unused -> false;
     Predicate<Room> PREDICATE_SHOW_ALL_ROOMS = unused -> true;
     Predicate<Room> PREDICATE_SHOW_NO_ROOMS = unused -> false;
 
@@ -30,35 +30,35 @@ public interface Model {
     /**
      * Returns true if a guest with the same identity as {@code guest} exists in the address book.
      */
-    boolean hasPerson(Guest guest);
+    boolean hasGuest(Guest guest);
 
     /**
      * Deletes the given guest.
      * The guest must exist in the address book.
      */
-    void deletePerson(Guest target);
+    void deleteGuest(Guest target);
 
     /**
      * Adds the given guest.
      * {@code guest} must not already exist in the address book.
      */
-    void addPerson(Guest guest);
+    void addGuest(Guest guest);
 
     /**
      * Replaces the given guest {@code target} with {@code editedGuest}.
      * {@code target} must exist in the address book.
      * The guest identity of {@code editedGuest} must not be the same as another existing guest in the address book.
      */
-    void updatePerson(Guest target, Guest editedGuest);
+    void updateGuest(Guest target, Guest editedGuest);
 
     /** Returns an unmodifiable view of the filtered guest list */
-    ObservableList<Guest> getFilteredPersonList();
+    ObservableList<Guest> getFilteredGuestList();
 
     /**
      * Updates the filter of the filtered guest list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredPersonList(Predicate<Guest> predicate);
+    void updateFilteredGuestList(Predicate<Guest> predicate);
 
     /** Returns an unmodifiable view of the filtered room list */
     ObservableList<Room> getFilteredRoomList();
