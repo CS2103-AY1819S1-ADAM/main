@@ -62,13 +62,13 @@ public class TypicalGuests {
 
     private TypicalGuests() {} // prevents instantiation
 
-    public static List<Guest> getTypicalPersons() {
+    public static List<Guest> getTypicalGuests() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
     }
 
     public static UniqueGuestList getTypicalUniqueGuestList() {
         UniqueGuestList uniqueGuestList = new UniqueGuestList();
-        uniqueGuestList.setGuests(getTypicalPersons());
+        uniqueGuestList.setGuests(getTypicalGuests());
         return uniqueGuestList;
     }
 }
