@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<!-- AddressBook save file which contains the same Guest values as in TypicalPersons#getTypicalAddressBook() -->
+<!-- AddressBook save file which contains the same Guest values as in TypicalGuests#getTypicalAddressBook() -->
 <addressbook>
     <guest>
         <name>Alice Pauline</name>
