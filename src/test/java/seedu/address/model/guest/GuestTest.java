@@ -28,7 +28,7 @@ public class GuestTest {
     }
 
     @Test
-    public void isSamePerson() {
+    public void isSameGuest() {
         // same object -> returns true
         assertTrue(ALICE.isSameGuest(ALICE));
 

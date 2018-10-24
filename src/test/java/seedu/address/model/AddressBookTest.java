@@ -53,7 +53,7 @@ public class AddressBookTest {
     }
 
     @Test
-    public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
+    public void resetData_withDuplicateGuests_throwsDuplicateGuestException() {
         // Two guests with the same identity fields
         Guest editedAlice = new GuestBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
@@ -66,24 +66,24 @@ public class AddressBookTest {
     }
 
     @Test
-    public void hasPerson_nullPerson_throwsNullPointerException() {
+    public void hasGuest_nullGuest_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
         addressBook.hasGuest(null);
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
+    public void hasGuest_guestNotInAddressBook_returnsFalse() {
         assertFalse(addressBook.hasGuest(ALICE));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
+    public void hasGuest_guestInAddressBook_returnsTrue() {
         addressBook.addGuest(ALICE);
         assertTrue(addressBook.hasGuest(ALICE));
     }
 
     @Test
-    public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
+    public void hasGuest_guestWithSameIdentityFieldsInAddressBook_returnsTrue() {
         addressBook.addGuest(ALICE);
         Guest editedAlice = new GuestBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
@@ -91,7 +91,7 @@ public class AddressBookTest {
     }
 
     @Test
-    public void getPersonList_modifyList_throwsUnsupportedOperationException() {
+    public void getGuestList_modifyList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
         addressBook.getGuestList().remove(0);
     }

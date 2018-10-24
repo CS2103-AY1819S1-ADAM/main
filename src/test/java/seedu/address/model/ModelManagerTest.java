@@ -23,24 +23,24 @@ public class ModelManagerTest {
     private ModelManager modelManager = new ModelManager();
 
     @Test
-    public void hasPerson_nullPerson_throwsNullPointerException() {
+    public void hasGuest_nullGuest_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
         modelManager.hasGuest(null);
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
+    public void hasGuest_guestNotInAddressBook_returnsFalse() {
         assertFalse(modelManager.hasGuest(ALICE));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
+    public void hasGuest_guestInAddressBook_returnsTrue() {
         modelManager.addGuest(ALICE);
         assertTrue(modelManager.hasGuest(ALICE));
     }
 
     @Test
-    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
+    public void getFilteredGuestList_modifyList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
         modelManager.getFilteredGuestList().remove(0);
     }
