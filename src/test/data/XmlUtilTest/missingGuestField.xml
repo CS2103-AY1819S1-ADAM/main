@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- Guest with missing name field -->
+<guests>
+    <phone>9482424</phone>
+    <email>hans@example</email>
+    <address>4th street</address>
+    <tagged>friends</tagged>
+</guests>

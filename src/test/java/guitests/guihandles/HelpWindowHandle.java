@@ -31,4 +31,5 @@ public class HelpWindowHandle extends StageHandle {
     public URL getLoadedUrl() {
         return WebViewUtil.getLoadedUrl(getChildNode(HELP_WINDOW_BROWSER_ID));
     }
+
 }

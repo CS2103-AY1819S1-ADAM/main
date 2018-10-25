@@ -46,25 +46,6 @@
     <rooms>
         <roomNumber>001</roomNumber>
         <capacity>1</capacity>
-        <bookings>
-            <guest>
-                <name>Alex Yeoh</name>
-                <phone>87438807</phone>
-                <email>alexyeoh@example.com</email>
-                <address>Blk 30 Geylang Street 29, #06-40</address>
-                <tagged>friends</tagged>
-            </guest>
-            <bookingPeriod>
-                <startDate>18/10/2018</startDate>
-                <endDate>19/10/2018</endDate>
-            </bookingPeriod>
-            <checkin>true</checkin>
-        </bookings>
-        <expenses>
-            <item>RS01</item>
-            <cost>50.0</cost>
-            <datetime>16/10/2018 03:23:42</datetime>
-        </expenses>
     </rooms>
     <rooms>
         <roomNumber>002</roomNumber>

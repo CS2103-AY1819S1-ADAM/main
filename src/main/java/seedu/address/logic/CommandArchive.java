@@ -1,13 +1,17 @@
 package seedu.address.logic;
 
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.time.LocalDateTime;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import seedu.address.commons.util.FileUtil;
+import seedu.address.model.expenses.Expense;
 
 /**
  * Append all commands that user entered into command archive
@@ -23,34 +27,24 @@ public class CommandArchive {
      * Takes in the userInputHistory string, extracts the latest command and writes it to commandFile.txt with a
      */
     public static void stringToFile (String inputString) {
-        File commandHistory = new File("commandFile.txt");
-        String latestUserCommand = inputString.substring(0, inputString.indexOf('\n'));
-        String timeStamp = new SimpleDateFormat("dd/MM/yyyy " + "HH:mm:ss  ").format(new java.util.Date());
-
+        Path commandHistory = Paths.get("commands_log", "commands_log.txt");
         try {
-            FileWriter fileWriter = new FileWriter(commandHistory, true);
+            FileUtil.createIfMissing(commandHistory);
+
+            String latestUserCommand = inputString.substring(0, inputString.indexOf(
+                System.getProperty("line.separator")));
+            String timeStamp = LocalDateTime.now().format(Expense.DATETIME_FORMAT) + "  ";
+
+            FileWriter fileWriter = new FileWriter(commandHistory.toFile(), true);
             BufferedWriter buffer = new BufferedWriter(fileWriter);
             PrintWriter printWriter = new PrintWriter(buffer);
             printWriter.print(timeStamp);
             printWriter.print(latestUserCommand);
-            printWriter.print('\n');
+            printWriter.print(System.getProperty("line.separator"));
             printWriter.close();
 
         } catch (IOException e) {
-            System.err.println("An IOException was caught :" + e.getMessage());
             LOGGER.log(Level.INFO, "An IOException was caught", e);
-        }
-
-        if (commandHistory.exists()) {
-            System.out.println("The file already exists");
-        } else {
-            try {
-                commandHistory.createNewFile();
-                System.out.println("The file has been created");
-            } catch (IOException e) {
-                System.err.println("An IOException was caught :" + e.getMessage());
-                LOGGER.log(Level.INFO, "An IOException was caught", e);
-            }
         }
     }
 

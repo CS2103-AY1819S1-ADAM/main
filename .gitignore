@@ -17,3 +17,5 @@ classes/
 /bin/
 src/main/resources/docs/
 out/
+data/
+commands_log/

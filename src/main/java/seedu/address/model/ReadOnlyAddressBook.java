@@ -4,7 +4,7 @@ import java.util.Map;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.expenses.ExpenseType;
-import seedu.address.model.person.Guest;
+import seedu.address.model.guest.Guest;
 import seedu.address.model.room.Room;
 
 /**
@@ -13,10 +13,10 @@ import seedu.address.model.room.Room;
 public interface ReadOnlyAddressBook {
 
     /**
-     * Returns an unmodifiable view of the persons list.
-     * This list will not contain any duplicate persons.
+     * Returns an unmodifiable view of the guest list.
+     * This list will not contain any duplicate guests.
      */
-    ObservableList<Guest> getPersonList();
+    ObservableList<Guest> getGuestList();
 
     /**
      * Returns an unmodifiable view of the room list.

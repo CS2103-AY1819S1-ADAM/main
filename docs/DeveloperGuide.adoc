@@ -209,11 +209,11 @@ The `Model`,
 
 * stores a `UserPref` object that represents the user's preferences.
 * stores the Address Book data.
-* exposes an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* exposes an unmodifiable `ObservableList<Guest>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
 [NOTE]
-As a more OOP model, we can store a `Tag` list in `Address Book`, which `Person` can reference. This would allow `Address Book` to only require one `Tag` object per unique `Tag`, instead of each `Person` needing their own `Tag` object. An example of how such a model may look like is given below. +
+As a more OOP model, we can store a `Tag` list in `Address Book`, which `Guest` can reference. This would allow `Address Book` to only require one `Tag` object per unique `Tag`, instead of each `Guest` needing their own `Tag` object. An example of how such a model may look like is given below. +
  +
 image:ModelClassBetterOopDiagram.png[width="800"]
 
@@ -319,7 +319,140 @@ image::UndoRedoActivityDiagram.png[width="650"]
 ** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things.
 // end::undoredo[]
 
+=== AddCommand
+
+The `add` command is used by the receptionist to add the guest to the hotel,
+and assign him a room.
+
+==== Current Implementation
+We currently accept a `Guest`, `RoomNumber` and `BookingPeriod`
+as parameters for the `AddCommand` constructor.
+
+An example of its usage:
+* `add n/Madith p/83141592 e/madith@themyth.com a/Recluse Street -r 041 from/
+29/10/2018 to/ 03/11/2018`
+
+The parsing of the `AddCommand` is very similar to what was already
+implemented in AddressBook4. More parameters were added, namely the
+`RoomNumber` and `BookingPeriod`. These are parsed to create the respective
+objects - `Guest`, `RoomNumber` and `BookingPeriod`.
+
+As in AddressBook4, the `Logic` component parses the `AddCommand`, and the
+`Model` handles its execution.
+
+* In the `Model`, the `Guest` is added to Concierge. This was already
+implemented in AddressBook4.
+* A new `Booking` object is created with the `Guest` and `BookingPeriod` as
+its parameters.
+* This `Booking` is then added to the `Room` with the `RoomNumber` specified.
+
+An Activity Diagram for the execution of `execute(Model model, CommandHistory
+ history)` is shown below.
+
+image::AddCommand-activity-diagram.png[width="600"]
+
+==== Design Considerations
+===== Aspect: How to recognise a `BookingPeriod` from the user input?
+
+The relationship we defined between a `Room` and `Booking` is that a `Room`
+has a `Booking`. The `Booking` then comprises a `Guest` and `BookingPeriod`
+field.
+
+However, it is troublesome to enter a `BookingPeriod` manually, as it entails
+ entering two dates in the DD/MM/YYYY format.
+
+* **Alternative 1 (current choice):** Enter the start and end date of
+`BookingPeriod`
+** Pros: Very easy to parse. The checks for dates all occur at the
+`BookingPeriod` class. There is no conversion needed to track the exact date,
+ which is useful to check for the booking status of rooms on a particular date.
+** Cons: Not user-friendly. Requires user to enter two dates.
+
+* **Alternative 2 (coming in v1.5):** Enter the start date and a duration
+** Pros: Very intuitive and user-friendly.
+** Cons: The duration has to be parsed and converted to an end date. The
+current implementation of `BookingPeriod` does not support this method.
+
+===== Aspect: Reducing redundancy in `UniqueGuestList` and `UniqueRoomList`
+
+As one can observe in the current implementation, `Guest` is added to the
+guest list of Concierge and is then used again to make a `Booking`. The
+`Booking` is added to Concierge, this time under the room list.
+
+There is a repetition of the addition of a guest - it is added to both the
+`UniqueGuestList` and the `UniqueRoomList`. In an actual use case of
+Concierge, we rarely if not never add the `Guest` to the `UniqueGuestList`
+without assigning him a `Room` under the `UniqueRoomList`.
+
+In its cleanest case, the structure of Concierge would be as follows:
+
+Concierge contains a `UniqueRoomList`. Each room in this internalList may
+consist multiple `Booking` s. Each `Booking` is tagged to one `Guest` and one
+`BookingPeriod`. An illustration of this relationship is shown below.
+
+image::addCommand-class-diagram.png[width="800"]
+
+* **Alternative 1 (current choice):** Keep both the `UniqueGuestList` and
+`UniqueRoomList`
+** Pros: Maintaining a separate list of guests currently allows us to quickly
+ check for the `DuplicateGuestException`.
+** Cons: The list is only useful for guest-specific functions. To find the
+`Room` the guest is assigned to, we still have to work through the
+`UniqueRoomList`.
+
+* **Alternative 2:** Remove the `UniqueGuestList`
+** Pros: Remove the redundancy in maintaining two lists. Improved storage space.
+** Cons: Unable to quickly check for a `DuplicateGuestException`. However, we
+ must also note that the `DuplicateGuestException` is something we may want
+ to remove in future iterations. That is, a `Guest` should be able to make
+ multiple `Booking` s. However, this would lead to more complications -
+ during `checkout`, we have to look through all the `Booking` s and ensure
+ that the `Guest` is no longer needed in the Concierge system. Only then can
+ we move the `Guest` to an archive or remove him from the system.
+
+==== Aspect: Reduce coupling between `Room` and `Guest`
+
+Semantically, we can observe a strong coupling and dependency between `Room`
+and `Guest`. A `Room` contains a `Guest`, and a `Guest` also has a `Room`.
+This coupling is more binding than that between `UniqueGuestList` and
+`UniqueRoomList` as described above.
+
+Having to keep track of both sides of the coin introduces an unnecessary
+coupling between these two classes. Our team decided to record `Guest` in
+`Room` instead of recording `Room` in `Guest`. The difference between these
+two selections lies in the time needed for different operations.
+
+* **Alternative 1 (current choice):** Add `Guest` as a field in `Room`
+** Pros: An efficient for managing bookings. All the `Booking` s tied to a
+particular `Room` can be put together, allowing the Receptionist to determine
+ if a `Room` can be booked in `O(m)` time, where `m` is the number of
+ `Booking` s in a room. In the context of Concierge, there is a rare chance
+ that a `Room` will have a large number of advanced bookings being made.
+** Cons: It is difficult to find the `Room` given the `Guest`. When a
+`Guest` has made and advanced booking and wishes to cancel it, we have
+to search through all the `Room` s for bookings on the particular date
+tagged to the `Guest`. However, given the `BookingPeriod` of the
+`Guest`, this can be done in `O(1)` time since the number of `Room` s is
+constant.
+*** For most uses of Concierge, we expect `Guest` s to be aware of their
+ `Room` s. When the `Guest` calls for room service, we can tag the service
+ to the `Room` instead.
+
+* **Alternative 2:** Add `Room` as a field in `Guest`
+** Pros: Very customer-centric design. Allows the receptionist to find the
+`Room` or `Booking` details of a `Guest` in `O(1)` time.
+** Cons: Making a new `Booking` with a new `Guest` is highly inefficient.
+Because the `Booking` information is now scattered across individual
+`Guest` s, the search space for `Concierge` to decide if a `Room` is free to
+book is the entire `UniqueGuestList`.
+
 === Rooms List Feature
+The rooms list feature builds upon, and reuses functions from the originally implemented ListCommand.
+
+The UML Diagram for the current implementation of ListCommand is as follows:
+
+image::ListCommandUml.png[width="600"]
+
 ==== Current Implementation
 The list function is facilitated by a modified `ListCommand` class, of which the input from the CommandBox is parsed by a `ListCommandParser` class.
 
@@ -328,13 +461,20 @@ The list function now requires a flag after the 'list' command. Below are the tw
 * `list -g` - Lists all guests.
 * `list -r` - Lists all rooms.
 
+A `ListCommandParser` class was created to obtain and compare the flags from inputs, which required a different approach to the rest of the commands. The input string is simply split using a String function, obtaining an array of strings, of which the flags will be at index 1.
+
+Modification of existing FXML files, and creation of new FXML files was done to achieve separate listing of guests and rooms, and the browser panel was replaced with a panel to focus on, and display more detailed information on the selected guest/room.
+
+In order to stack the UI elements on top of one another to reuse and display the separate lists under the same column, modifications were made to the `MainWindow.fxml` file.
+The GuestListPanel and RoomListPanel each has a "VBox" element encapsulating them, which visibility is toggled and the element itself enabled or disabled based on the flag that was obtained from the parser. This feature extends to the GuestDetailedPanel and RoomDetailedPanel and is achieved in the same way.
+
 ==== Design Considerations
 ===== Aspect: How to display each list
-* **Alternative 1 (current choice):** Maintain two columns on the MainWindow UI to display both rooms and guests
+* **Alternative 1 :** Maintain two columns on the MainWindow UI to display both rooms and guests
 ** Pros: Easier to modify UI by adding on instead of modifying and replacing, and modifications in the future will not be too tedious.
 ** Cons: UI looks cluttered with an empty column when not displaying the other, not an efficient use of screen space.
 
-* **Alternative 2 :** Separately display the two lists within the same MainWindow UI space/column.
+* **Alternative 2 (current choice):** Separately display the two lists within the same MainWindow UI space/column.
 ** Pros: Cleaner looking, fully utilises empty spaces. Better visual feedback from commands as inputs.
 ** Cons: Requires heavy modification of MainWindow UI files, future features must stick with the restriction of having a list of either guests or rooms.
 
@@ -489,25 +629,12 @@ We are using `java.util.logging` package for logging. The `LogsCenter` class is 
 
 Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: `config.json`).
 
-=== AddCommand
-
-We current accept a `Guest`, `RoomNumber` and `BookingPeriod` as parameters
-for the AddCommand constructor.
-
-The Guest is added to the AddressBook, which was already the case in
-AddressBook4.
-
-We then create a new `Booking` object with the `Guest` and `BookingPeriod`.
-This `Booking` is then added to the `Room` with the `RoomNumber` specified.
-
-We do not record the `Room` details in the `Guest` to minimise coupling.
-
 // tag::expenses[]
 === Expense, Expenses and ExpenseType
 In Concierge, users will be given the feature of tracking the expenditure of each individual
 guest, in order to facilitate checkout charges. Hence, the three classes, `Expenses`, `Expense`
-and `ExpenseType` have been created for this purpose. In addition, the hotel also has a menu of
-goods and services available.
+and `ExpenseType` have been created for this purpose. In addition, the hotel also has a
+`menu` of goods and services available.
 
 ==== Current Implementation
 `ExpenseType` objects are essentially immutable objects that represent a single item or service
@@ -516,9 +643,10 @@ usual price, and description. The main purpose of this class is for convenience;
 charge a customer by simply providing the menu number of the item and the cost and description
 of the item will be able to be referenced. `ExpenseType` information is stored in a `Menu`
 object, which is then stored on the hard disk, since users should have the ability to modify
-the menu at any time. The `Menu` object is internally represented with a `HashMap<String, ExpenseType>`,
+the menu manually. The `Menu` object is internally represented with a `HashMap<String, ExpenseType>`,
 with the menu number as keys and the `ExpenseType` objects as values. This allows for the
 serialisation of the `Menu` into XML, since `HashMap` is supported by JAXB.
+
 * **Alternative 1: Use a List<ExpenseType> to store the menu.** While there may be negligible
 differences for a small menu, searching for an `ExpenseType` object still takes linear time
 and there may be significant performance drops for a large menu.
@@ -529,12 +657,43 @@ of expenditure.
 
 The `Expenses` object is essentially a `List<Expense>`. Every room contains an `Expenses`
 object, to represent the collection of all the expenses of the guests in the room.
+
 * **Alternative 1: Use a `List<Expense>` object**: Defining the `Expenses` class allows us
 to restrict access to the collection, and only allow certain methods such as adding an
 `Expense` or displaying on screen.
 * **Alternative 2: Use a `Set<Expense>` object**: Having the expenses ordered (e.g.
 chronologically) will be useful for generating a nice view of all the expenses incurred.
-// end::dataencryption[]
+
+Here is a simple UML describing the roles of these classes.
+
+image::expense_uml.png[width="600"]
+
+==== Design Considerations
+
+===== Aspect: Immutability of Menu
+While it is conceivable that the items sold may change from time to time,
+for various reasons such as unpopularity or seasonal products, giving users
+the ability to add and remove items from the menu may result in more
+problems than benefits. We expect that alterations to the menu will not be
+performed frequently, and that the majority of our users, receptionists,
+will not be required to add and remove items to the menu. The menu also does
+not have to be altered during operational hours. Hence, by making
+`Menu` immutable, we eliminate the possibility of making accidental or
+unwarranted changes to the menu. The only method to modify `Menu` would
+thus be through the XML file, which we believe is suitable for these
+purposes.
+
+===== Aspect: Immutability of ExpenseType
+The `ExpenseType` object is meant to hold the default values of the name and
+price of each item. In other words, since an `Expense` object references an
+`ExpenseType` object, the `Expense` object is allowed to have a cost that
+is different from the cost in the corresponding `ExpenseType` object, to
+account for cases such as the guest having a personalised discount due to
+the usage of vouchers or certain credit cards. Thus, ExpenseType does not
+need to be modified by users in the application. Nonetheless, it is still
+possible to modify the default information through editing the XML file.
+
+// end::expense[]
 
 == Documentation
 
@@ -772,7 +931,7 @@ Do take a look at <<Design-Model>> before attempting to modify the `Model` compo
 * Hints
 ** The link:{repoURL}/src/main/java/seedu/address/model/Model.java[`Model`] and the link:{repoURL}/src/main/java/seedu/address/model/AddressBook.java[`AddressBook`] API need to be updated.
 ** Think about how you can use SLAP to design the method. Where should we place the main logic of deleting tags?
-**  Find out which of the existing API methods in  link:{repoURL}/src/main/java/seedu/address/model/AddressBook.java[`AddressBook`] and link:{repoURL}/src/main/java/seedu/address/model/person/Guest.java[`Person`] classes can be used to implement the tag removal logic. link:{repoURL}/src/main/java/seedu/address/model/AddressBook.java[`AddressBook`] allows you to update a guest, and link:{repoURL}/src/main/java/seedu/address/model/person/Guest.java[`Person`] allows you to update the tags.
+**  Find out which of the existing API methods in  link:{repoURL}/src/main/java/seedu/address/model/AddressBook.java[`AddressBook`] and link:{repoURL}/src/main/java/seedu/address/model/guest/Guest.java[`Guest`] classes can be used to implement the tag removal logic. link:{repoURL}/src/main/java/seedu/address/model/AddressBook.java[`AddressBook`] allows you to update a guest, and link:{repoURL}/src/main/java/seedu/address/model/guest/Guest.java[`Guest`] allows you to update the tags.
 * Solution
 ** Implement a `removeTag(Tag)` method in link:{repoURL}/src/main/java/seedu/address/model/AddressBook.java[`AddressBook`]. Loop through each guest, and remove the `tag` from each guest.
 ** Add a new API method `deleteTag(Tag)` in link:{repoURL}/src/main/java/seedu/address/model/ModelManager.java[`ModelManager`]. Your link:{repoURL}/src/main/java/seedu/address/model/ModelManager.java[`ModelManager`] should call `AddressBook#removeTag(Tag)`.
@@ -800,11 +959,11 @@ image::getting-started-ui-tag-after.png[width="300"]
 +
 ****
 * Hints
-** The tag labels are created inside link:{repoURL}/src/main/java/seedu/address/ui/PersonCard.java[the `PersonCard` constructor] (`new Label(tag.tagName)`). https://docs.oracle.com/javase/8/javafx/api/javafx/scene/control/Label.html[JavaFX's `Label` class] allows you to modify the style of each Label, such as changing its color.
+** The tag labels are created inside link:{repoURL}/src/main/java/seedu/address/ui/GuestCard.java[the `GuestCard` constructor] (`new Label(tag.tagName)`). https://docs.oracle.com/javase/8/javafx/api/javafx/scene/control/Label.html[JavaFX's `Label` class] allows you to modify the style of each Label, such as changing its color.
 ** Use the .css attribute `-fx-background-color` to add a color.
 ** You may wish to modify link:{repoURL}/src/main/resources/view/DarkTheme.css[`DarkTheme.css`] to include some pre-defined colors using css, especially if you have experience with web-based css.
 * Solution
-** You can modify the existing test methods for `PersonCard` 's to include testing the tag's color as well.
+** You can modify the existing test methods for `GuestCard` 's to include testing the tag's color as well.
 ** See this https://github.com/se-edu/addressbook-level4/pull/798[PR] for the full solution.
 *** The PR uses the hash code of the tag names to generate a color. This is deliberately designed to ensure consistent colors each time the application runs. You may wish to expand on this design to include additional features, such as allowing users to set their own tag colors, and directly saving the colors to storage, so that tags retain their colors even if the hash code algorithm changes.
 ****
@@ -922,20 +1081,20 @@ Let's teach the application to parse arguments that our `remark` command will ac
 for `RemarkCommandParser`.
 . Modify link:{repoURL}/src/test/java/seedu/address/logic/parser/AddressBookParserTest.java[`AddressBookParserTest`] to test that the correct command is generated according to the user input.
 
-===== [Step 3] Ui: Add a placeholder for remark in `PersonCard`
-Let's add a placeholder on all our link:{repoURL}/src/main/java/seedu/address/ui/PersonCard.java[`PersonCard`] s to display a remark for each guest later.
+===== [Step 3] Ui: Add a placeholder for remark in `GuestCard`
+Let's add a placeholder on all our link:{repoURL}/src/main/java/seedu/address/ui/GuestCard.java[`GuestCard`] s to display a remark for each guest later.
 
 **Main:**
 
-. Add a `Label` with any random text inside link:{repoURL}/src/main/resources/view/PersonListCard.fxml[`PersonListCard.fxml`].
-. Add FXML annotation in link:{repoURL}/src/main/java/seedu/address/ui/PersonCard.java[`PersonCard`] to tie the variable to the actual label.
+. Add a `Label` with any random text inside link:{repoURL}/src/main/resources/view/GuestListCard.fxml[`GuestListCard.fxml`].
+. Add FXML annotation in link:{repoURL}/src/main/java/seedu/address/ui/GuestCard.java[`GuestCard`] to tie the variable to the actual label.
 
 **Tests:**
 
-. Modify link:{repoURL}/src/test/java/guitests/guihandles/PersonCardHandle.java[`PersonCardHandle`] so that future tests can read the contents of the remark label.
+. Modify link:{repoURL}/src/test/java/guitests/guihandles/GuestCardHandle.java[`GuestCardHandle`] so that future tests can read the contents of the remark label.
 
 ===== [Step 4] Model: Add `Remark` class
-We have to properly encapsulate the remark in our link:{repoURL}/src/main/java/seedu/address/model/person/Guest.java[`Person`] class. Instead of just using a `String`, let's follow the conventional class structure that the codebase already uses by adding a `Remark` class.
+We have to properly encapsulate the remark in our link:{repoURL}/src/main/java/seedu/address/model/guest/Guest.java[`Guest`] class. Instead of just using a `String`, let's follow the conventional class structure that the codebase already uses by adding a `Remark` class.
 
 **Main:**
 
@@ -946,17 +1105,17 @@ We have to properly encapsulate the remark in our link:{repoURL}/src/main/java/s
 
 . Add test for `Remark`, to test the `Remark#equals()` method.
 
-===== [Step 5] Model: Modify `Person` to support a `Remark` field
-Now we have the `Remark` class, we need to actually use it inside link:{repoURL}/src/main/java/seedu/address/model/person/Guest.java[`Person`].
+===== [Step 5] Model: Modify `Guest` to support a `Remark` field
+Now we have the `Remark` class, we need to actually use it inside link:{repoURL}/src/main/java/seedu/address/model/guest/Guest.java[`Guest`].
 
 **Main:**
 
-. Add `getRemark()` in link:{repoURL}/src/main/java/seedu/address/model/person/Guest.java[`Person`].
+. Add `getRemark()` in link:{repoURL}/src/main/java/seedu/address/model/guest/Guest.java[`Guest`].
 . You may assume that the user will not be able to use the `add` and `edit` commands to modify the remarks field (i.e. the guest will be created without a remark).
 . Modify link:{repoURL}/src/main/java/seedu/address/model/util/SampleDataUtil.java/[`SampleDataUtil`] to add remarks for the sample data (delete your `addressBook.xml` so that the application will load the sample data when you launch it.)
 
-===== [Step 6] Storage: Add `Remark` field to `XmlAdaptedPerson` class
-We now have `Remark` s for `Person` s, but they will be gone when we exit the application. Let's modify link:{repoURL}/src/main/java/seedu/address/storage/XmlAdaptedPerson.java[`XmlAdaptedPerson`] to include a `Remark` field so that it will be saved.
+===== [Step 6] Storage: Add `Remark` field to `XmlAdaptedGuest` class
+We now have `Remark` s for `Guest` s, but they will be gone when we exit the application. Let's modify link:{repoURL}/src/main/java/seedu/address/storage/XmlAdaptedGuest.java[`XmlAdaptedGuest`] to include a `Remark` field so that it will be saved.
 
 **Main:**
 
@@ -964,26 +1123,26 @@ We now have `Remark` s for `Person` s, but they will be gone when we exit the ap
 
 **Tests:**
 
-. Fix `invalidAndValidPersonAddressBook.xml`, `typicalPersonsAddressBook.xml`, `validAddressBook.xml` etc., such that the XML tests will not fail due to a missing `<remark>` element.
+. Fix `invalidAndValidGuestAddressBook.xml`, `typicalGuestsAddressBook.xml`, `validAddressBook.xml` etc., such that the XML tests will not fail due to a missing `<remark>` element.
 
-===== [Step 6b] Test: Add withRemark() for `PersonBuilder`
-Since `Person` can now have a `Remark`, we should add a helper method to link:{repoURL}/src/test/java/seedu/address/testutil/PersonBuilder.java[`PersonBuilder`], so that users are able to create remarks when building a link:{repoURL}/src/main/java/seedu/address/model/person/Guest.java[`Person`].
+===== [Step 6b] Test: Add withRemark() for `GuestBuilder`
+Since `Guest` can now have a `Remark`, we should add a helper method to link:{repoURL}/src/test/java/seedu/address/testutil/GuestBuilder.java[`GuestBuilder`], so that users are able to create remarks when building a link:{repoURL}/src/main/java/seedu/address/model/guest/Guest.java[`Guest`].
 
 **Tests:**
 
-. Add a new method `withRemark()` for link:{repoURL}/src/test/java/seedu/address/testutil/PersonBuilder.java[`PersonBuilder`]. This method will create a new `Remark` for the guest that it is currently building.
-. Try and use the method on any sample `Person` in link:{repoURL}/src/test/java/seedu/address/testutil/TypicalPersons.java[`TypicalPersons`].
+. Add a new method `withRemark()` for link:{repoURL}/src/test/java/seedu/address/testutil/GuestBuilder.java[`GuestBuilder`]. This method will create a new `Remark` for the guest that it is currently building.
+. Try and use the method on any sample `Guest` in link:{repoURL}/src/test/java/seedu/address/testutil/TypicalGuests.java[`TypicalGuests`].
 
-===== [Step 7] Ui: Connect `Remark` field to `PersonCard`
-Our remark label in link:{repoURL}/src/main/java/seedu/address/ui/PersonCard.java[`PersonCard`] is still a placeholder. Let's bring it to life by binding it with the actual `remark` field.
+===== [Step 7] Ui: Connect `Remark` field to `GuestCard`
+Our remark label in link:{repoURL}/src/main/java/seedu/address/ui/GuestCard.java[`GuestCard`] is still a placeholder. Let's bring it to life by binding it with the actual `remark` field.
 
 **Main:**
 
-. Modify link:{repoURL}/src/main/java/seedu/address/ui/PersonCard.java[`PersonCard`]'s constructor to bind the `Remark` field to the `Person` 's remark.
+. Modify link:{repoURL}/src/main/java/seedu/address/ui/GuestCard.java[`GuestCard`]'s constructor to bind the `Remark` field to the `Guest` 's remark.
 
 **Tests:**
 
-. Modify link:{repoURL}/src/test/java/seedu/address/ui/testutil/GuiTestAssert.java[`GuiTestAssert#assertCardDisplaysPerson(...)`] so that it will compare the now-functioning remark label.
+. Modify link:{repoURL}/src/test/java/seedu/address/ui/testutil/GuiTestAssert.java[`GuiTestAssert#assertCardDisplaysGuest(...)`] so that it will compare the now-functioning remark label.
 
 ===== [Step 8] Logic: Implement `RemarkCommand#execute()` logic
 We now have everything set up... but we still can't modify the remarks. Let's finish it up by adding in actual logic for our `remark` command.

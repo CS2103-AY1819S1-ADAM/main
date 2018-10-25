@@ -6,11 +6,8 @@
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<?import javafx.scene.text.Text?>
-<?import javafx.scene.text.TextFlow?>
 <HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
   <GridPane HBox.hgrow="ALWAYS">
     <columnConstraints>
@@ -22,7 +19,6 @@
       </padding>
         <Label fx:id="roomNumber" text="\$first" styleClass="cell_big_label" />
          <Label fx:id="capacity" styleClass="cell_small_label" text="\$capacity" />
-         <Label fx:id="expenses" styleClass="cell_small_label" text="\$expenses" />
          <FlowPane fx:id="bookings" />
          <FlowPane fx:id="occupant" />
          <FlowPane fx:id="tags" />

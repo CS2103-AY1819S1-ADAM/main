@@ -18,5 +18,4 @@ public abstract class Command {
      * @throws CommandException If an error occurs during command execution.
      */
     public abstract CommandResult execute(Model model, CommandHistory history) throws CommandException;
-
 }

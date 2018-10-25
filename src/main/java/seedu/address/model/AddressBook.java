@@ -7,8 +7,8 @@ import java.util.Map;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.expenses.ExpenseType;
-import seedu.address.model.person.Guest;
-import seedu.address.model.person.UniqueGuestList;
+import seedu.address.model.guest.Guest;
+import seedu.address.model.guest.UniqueGuestList;
 import seedu.address.model.room.Room;
 import seedu.address.model.room.RoomNumber;
 import seedu.address.model.room.UniqueRoomList;
@@ -20,7 +20,7 @@ import seedu.address.model.room.booking.Booking;
  */
 public class AddressBook implements ReadOnlyAddressBook {
 
-    private final UniqueGuestList persons;
+    private final UniqueGuestList guests;
     private final UniqueRoomList rooms;
     private final Menu menu;
     /*
@@ -31,7 +31,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      *   among constructors.
      */
     {
-        persons = new UniqueGuestList();
+        guests = new UniqueGuestList();
         rooms = new UniqueRoomList();
         menu = new Menu();
     }
@@ -39,7 +39,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public AddressBook() {}
 
     /**
-     * Creates an AddressBook using the Persons in the {@code toBeCopied}
+     * Creates an AddressBook using the Guests in the {@code toBeCopied}
      */
     public AddressBook(ReadOnlyAddressBook toBeCopied) {
         this();
@@ -52,8 +52,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Replaces the contents of the guest list with {@code guests}.
      * {@code guests} must not contain duplicate guests.
      */
-    public void setPersons(List<Guest> guests) {
-        this.persons.setGuests(guests);
+    public void setGuests(List<Guest> guests) {
+        this.guests.setGuests(guests);
     }
 
     /**
@@ -62,7 +62,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
 
-        setPersons(newData.getPersonList());
+        setGuests(newData.getGuestList());
         setRooms(newData.getRoomList());
         setMenu(newData.getMenuMap());
     }
@@ -72,17 +72,17 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Returns true if a guest with the same identity as {@code guest} exists in the address book.
      */
-    public boolean hasPerson(Guest guest) {
+    public boolean hasGuest(Guest guest) {
         requireNonNull(guest);
-        return persons.contains(guest);
+        return guests.contains(guest);
     }
 
     /**
      * Adds a guest to the address book.
      * The guest must not already exist in the address book.
      */
-    public void addPerson(Guest p) {
-        persons.add(p);
+    public void addGuest(Guest g) {
+        guests.add(g);
     }
 
     /**
@@ -90,18 +90,18 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code target} must exist in the address book.
      * The guest identity of {@code editedGuest} must not be the same as another existing guest in the address book.
      */
-    public void updatePerson(Guest target, Guest editedGuest) {
+    public void updateGuest(Guest target, Guest editedGuest) {
         requireNonNull(editedGuest);
 
-        persons.setGuest(target, editedGuest);
+        guests.setGuest(target, editedGuest);
     }
 
     /**
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
      */
-    public void removePerson(Guest key) {
-        persons.remove(key);
+    public void removeGuest(Guest key) {
+        guests.remove(key);
     }
 
     /**
@@ -184,15 +184,14 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     @Override
     public String toString() {
-        return persons.asUnmodifiableObservableList().size() + " persons";
+        return guests.asUnmodifiableObservableList().size() + " guests";
         // TODO: refine later
     }
 
     @Override
-    public ObservableList<Guest> getPersonList() {
-        return persons.asUnmodifiableObservableList();
+    public ObservableList<Guest> getGuestList() {
+        return guests.asUnmodifiableObservableList();
     }
-
 
     @Override
     public ObservableList<Room> getRoomList() {
@@ -213,11 +212,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddressBook // instanceof handles nulls
-                && persons.equals(((AddressBook) other).persons));
+                && guests.equals(((AddressBook) other).guests));
     }
 
     @Override
     public int hashCode() {
-        return persons.hashCode();
+        return guests.hashCode();
     }
 }
