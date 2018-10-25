@@ -30,13 +30,13 @@
 <li><a href="#implementation">3. Implementation</a>
 <ul class="sectlevel2">
 <li><a href="#undo-redo-feature">3.1. Undo/Redo feature</a></li>
-<li><a href="#rooms-list-feature">3.2. Rooms List Feature</a></li>
-<li><a href="#command-archive-feature">3.3. Command Archive feature</a></li>
-<li><a href="#room-check-in-checkout-feature">3.4. Room Check-in/Checkout feature</a></li>
-<li><a href="#proposed-data-encryption">3.5. [Proposed] Data Encryption</a></li>
-<li><a href="#logging">3.6. Logging</a></li>
-<li><a href="#Implementation-Configuration">3.7. Configuration</a></li>
-<li><a href="#addcommand">3.8. AddCommand</a></li>
+<li><a href="#addcommand">3.2. AddCommand</a></li>
+<li><a href="#rooms-list-feature">3.3. Rooms List Feature</a></li>
+<li><a href="#command-archive-feature">3.4. Command Archive feature</a></li>
+<li><a href="#room-check-in-checkout-feature">3.5. Room Check-in/Checkout feature</a></li>
+<li><a href="#proposed-data-encryption">3.6. [Proposed] Data Encryption</a></li>
+<li><a href="#logging">3.7. Logging</a></li>
+<li><a href="#Implementation-Configuration">3.8. Configuration</a></li>
 <li><a href="#expense-expenses-and-expensetype">3.9. Expense, Expenses and ExpenseType</a></li>
 </ul>
 </li>
@@ -793,7 +793,243 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 </div>
 </div>
 <div class="sect2">
-<h3 id="rooms-list-feature"><a class="link" href="#rooms-list-feature">3.2. Rooms List Feature</a></h3>
+<h3 id="addcommand"><a class="link" href="#addcommand">3.2. AddCommand</a></h3>
+<div class="paragraph">
+<p>The <code>add</code> command is used by the receptionist to add the guest to the hotel,
+and assign him a room.</p>
+</div>
+<div class="sect3">
+<h4 id="current-implementation-2"><a class="link" href="#current-implementation-2">3.2.1. Current Implementation</a></h4>
+<div class="paragraph">
+<p>We currently accept a <code>Guest</code>, <code>RoomNumber</code> and <code>BookingPeriod</code>
+as parameters for the <code>AddCommand</code> constructor.</p>
+</div>
+<div class="paragraph">
+<p>An example of its usage:
+* <code>add n/Madith p/83141592 e/madith@themyth.com a/Recluse Street -r 041 from/
+29/10/2018 to/ 03/11/2018</code></p>
+</div>
+<div class="paragraph">
+<p>The parsing of the <code>AddCommand</code> is very similar to what was already
+implemented in AddressBook4. More parameters were added, namely the
+<code>RoomNumber</code> and <code>BookingPeriod</code>. These are parsed to create the respective
+objects - <code>Guest</code>, <code>RoomNumber</code> and <code>BookingPeriod</code>.</p>
+</div>
+<div class="paragraph">
+<p>As in AddressBook4, the <code>Logic</code> component parses the <code>AddCommand</code>, and the
+<code>Model</code> handles its execution.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>In the <code>Model</code>, the <code>Guest</code> is added to Concierge. This was already
+implemented in AddressBook4.</p>
+</li>
+<li>
+<p>A new <code>Booking</code> object is created with the <code>Guest</code> and <code>BookingPeriod</code> as
+its parameters.</p>
+</li>
+<li>
+<p>This <code>Booking</code> is then added to the <code>Room</code> with the <code>RoomNumber</code> specified.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>An Activity Diagram for the execution of <code>execute(Model model, CommandHistory
+ history)</code> is shown below.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/AddCommand-activity-diagram.png" alt="AddCommand activity diagram" width="600">
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">3.2.2. Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-how-to-recognise-a-code-bookingperiod-code-from-the-user-input"><a class="link" href="#aspect-how-to-recognise-a-code-bookingperiod-code-from-the-user-input">Aspect: How to recognise a <code>BookingPeriod</code> from the user input?</a></h5>
+<div class="paragraph">
+<p>The relationship we defined between a <code>Room</code> and <code>Booking</code> is that a <code>Room</code>
+has a <code>Booking</code>. The <code>Booking</code> then comprises a <code>Guest</code> and <code>BookingPeriod</code>
+field.</p>
+</div>
+<div class="paragraph">
+<p>However, it is troublesome to enter a <code>BookingPeriod</code> manually, as it entails
+ entering two dates in the DD/MM/YYYY format.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Enter the start and end date of
+<code>BookingPeriod</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Very easy to parse. The checks for dates all occur at the
+<code>BookingPeriod</code> class. There is no conversion needed to track the exact date,
+ which is useful to check for the booking status of rooms on a particular date.</p>
+</li>
+<li>
+<p>Cons: Not user-friendly. Requires user to enter two dates.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2 (coming in v1.5):</strong> Enter the start date and a duration</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Very intuitive and user-friendly.</p>
+</li>
+<li>
+<p>Cons: The duration has to be parsed and converted to an end date. The
+current implementation of <code>BookingPeriod</code> does not support this method.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-reducing-redundancy-in-code-uniqueguestlist-code-and-code-uniqueroomlist-code"><a class="link" href="#aspect-reducing-redundancy-in-code-uniqueguestlist-code-and-code-uniqueroomlist-code">Aspect: Reducing redundancy in <code>UniqueGuestList</code> and <code>UniqueRoomList</code></a></h5>
+<div class="paragraph">
+<p>As one can observe in the current implementation, <code>Guest</code> is added to the
+guest list of Concierge and is then used again to make a <code>Booking</code>. The
+<code>Booking</code> is added to Concierge, this time under the room list.</p>
+</div>
+<div class="paragraph">
+<p>There is a repetition of the addition of a guest - it is added to both the
+<code>UniqueGuestList</code> and the <code>UniqueRoomList</code>. In an actual use case of
+Concierge, we rarely if not never add the <code>Guest</code> to the <code>UniqueGuestList</code>
+without assigning him a <code>Room</code> under the <code>UniqueRoomList</code>.</p>
+</div>
+<div class="paragraph">
+<p>In its cleanest case, the structure of Concierge would be as follows:</p>
+</div>
+<div class="paragraph">
+<p>Concierge contains a <code>UniqueRoomList</code>. Each room in this internalList may
+consist multiple <code>Booking</code> s. Each <code>Booking</code> is tagged to one <code>Guest</code> and one
+<code>BookingPeriod</code>. An illustration of this relationship is shown below.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/addCommand-class-diagram.png" alt="addCommand class diagram" width="800">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Keep both the <code>UniqueGuestList</code> and
+<code>UniqueRoomList</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Maintaining a separate list of guests currently allows us to quickly
+check for the <code>DuplicateGuestException</code>.</p>
+</li>
+<li>
+<p>Cons: The list is only useful for guest-specific functions. To find the
+<code>Room</code> the guest is assigned to, we still have to work through the
+<code>UniqueRoomList</code>.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Remove the <code>UniqueGuestList</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Remove the redundancy in maintaining two lists. Improved storage space.</p>
+</li>
+<li>
+<p>Cons: Unable to quickly check for a <code>DuplicateGuestException</code>. However, we
+must also note that the <code>DuplicateGuestException</code> is something we may want
+to remove in future iterations. That is, a <code>Guest</code> should be able to make
+multiple <code>Booking</code> s. However, this would lead to more complications -
+during <code>checkout</code>, we have to look through all the <code>Booking</code> s and ensure
+that the <code>Guest</code> is no longer needed in the Concierge system. Only then can
+we move the <code>Guest</code> to an archive or remove him from the system.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="aspect-reduce-coupling-between-code-room-code-and-code-guest-code"><a class="link" href="#aspect-reduce-coupling-between-code-room-code-and-code-guest-code">3.2.3. Aspect: Reduce coupling between <code>Room</code> and <code>Guest</code></a></h4>
+<div class="paragraph">
+<p>Semantically, we can observe a strong coupling and dependency between <code>Room</code>
+and <code>Guest</code>. A <code>Room</code> contains a <code>Guest</code>, and a <code>Guest</code> also has a <code>Room</code>.
+This coupling is more binding than that between <code>UniqueGuestList</code> and
+<code>UniqueRoomList</code> as described above.</p>
+</div>
+<div class="paragraph">
+<p>Having to keep track of both sides of the coin introduces an unnecessary
+coupling between these two classes. Our team decided to record <code>Guest</code> in
+<code>Room</code> instead of recording <code>Room</code> in <code>Guest</code>. The difference between these
+two selections lies in the time needed for different operations.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Add <code>Guest</code> as a field in <code>Room</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: An efficient for managing bookings. All the <code>Booking</code> s tied to a
+particular <code>Room</code> can be put together, allowing the Receptionist to determine
+ if a <code>Room</code> can be booked in <code>O(m)</code> time, where <code>m</code> is the number of
+ <code>Booking</code> s in a room. In the context of Concierge, there is a rare chance
+ that a <code>Room</code> will have a large number of advanced bookings being made.</p>
+</li>
+<li>
+<p>Cons: It is difficult to find the <code>Room</code> given the <code>Guest</code>. When a
+<code>Guest</code> has made and advanced booking and wishes to cancel it, we have
+to search through all the <code>Room</code> s for bookings on the particular date
+tagged to the <code>Guest</code>. However, given the <code>BookingPeriod</code> of the
+<code>Guest</code>, this can be done in <code>O(1)</code> time since the number of <code>Room</code> s is
+constant.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>For most uses of Concierge, we expect <code>Guest</code> s to be aware of their
+<code>Room</code> s. When the <code>Guest</code> calls for room service, we can tag the service
+to the <code>Room</code> instead.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Add <code>Room</code> as a field in <code>Guest</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Very customer-centric design. Allows the receptionist to find the
+<code>Room</code> or <code>Booking</code> details of a <code>Guest</code> in <code>O(1)</code> time.</p>
+</li>
+<li>
+<p>Cons: Making a new <code>Booking</code> with a new <code>Guest</code> is highly inefficient.
+Because the <code>Booking</code> information is now scattered across individual
+<code>Guest</code> s, the search space for <code>Concierge</code> to decide if a <code>Room</code> is free to
+book is the entire <code>UniqueGuestList</code>.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="rooms-list-feature"><a class="link" href="#rooms-list-feature">3.3. Rooms List Feature</a></h3>
 <div class="paragraph">
 <p>The rooms list feature builds upon, and reuses functions from the originally implemented ListCommand.</p>
 </div>
@@ -806,7 +1042,7 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 </div>
 </div>
 <div class="sect3">
-<h4 id="current-implementation-2"><a class="link" href="#current-implementation-2">3.2.1. Current Implementation</a></h4>
+<h4 id="current-implementation-3"><a class="link" href="#current-implementation-3">3.3.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>The list function is facilitated by a modified <code>ListCommand</code> class, of which the input from the CommandBox is parsed by a <code>ListCommandParser</code> class.</p>
 </div>
@@ -835,7 +1071,7 @@ The GuestListPanel and RoomListPanel each has a "VBox" element encapsulating the
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">3.2.2. Design Considerations</a></h4>
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.3.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-how-to-display-each-list"><a class="link" href="#aspect-how-to-display-each-list">Aspect: How to display each list</a></h5>
 <div class="ulist">
@@ -872,7 +1108,7 @@ The GuestListPanel and RoomListPanel each has a "VBox" element encapsulating the
 </div>
 </div>
 <div class="sect2">
-<h3 id="command-archive-feature"><a class="link" href="#command-archive-feature">3.3. Command Archive feature</a></h3>
+<h3 id="command-archive-feature"><a class="link" href="#command-archive-feature">3.4. Command Archive feature</a></h3>
 <div class="paragraph">
 <p>Given below is the UML diagram for the <code>CommandArchive</code> Class:</p>
 </div>
@@ -890,7 +1126,7 @@ The GuestListPanel and RoomListPanel each has a "VBox" element encapsulating the
 </div>
 </div>
 <div class="sect3">
-<h4 id="current-implementation-3"><a class="link" href="#current-implementation-3">3.3.1. Current Implementation</a></h4>
+<h4 id="current-implementation-4"><a class="link" href="#current-implementation-4">3.4.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>The Command Archive mechanism is facilitated by <code>CommandArchive</code>.
 It utilises the <code>userInputHistory</code> to extract the latest command that the user has input and passes the <code>inputString</code>
@@ -932,7 +1168,7 @@ in CommandArchive`.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.3.2. Design Considerations</a></h4>
+<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">3.4.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-how-to-extract-userinputhistory"><a class="link" href="#aspect-how-to-extract-userinputhistory">Aspect: How to extract userInputHistory</a></h5>
 <div class="ulist">
@@ -996,9 +1232,9 @@ hence would require more effort to implement.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="room-check-in-checkout-feature"><a class="link" href="#room-check-in-checkout-feature">3.4. Room Check-in/Checkout feature</a></h3>
+<h3 id="room-check-in-checkout-feature"><a class="link" href="#room-check-in-checkout-feature">3.5. Room Check-in/Checkout feature</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-4"><a class="link" href="#current-implementation-4">3.4.1. Current Implementation</a></h4>
+<h4 id="current-implementation-5"><a class="link" href="#current-implementation-5">3.5.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>The room check-in and checkout features are facilitated by <code>UniqueRoomList</code>.
 The logic that supports the check-in and checkout operations reside in the classes in the <code>Room</code> and <code>Booking</code> packages.</p>
@@ -1109,7 +1345,7 @@ The logic that supports the check-in and checkout operations reside in the class
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">3.4.2. Design Considerations</a></h4>
+<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">3.5.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-how-check-in-checkout-executes"><a class="link" href="#aspect-how-check-in-checkout-executes">Aspect: How check-in/checkout executes</a></h5>
 <div class="ulist">
@@ -1193,20 +1429,20 @@ The ability to delete upcoming bookings is planned for v1.3.
 </div>
 </div>
 <div class="sect2">
-<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">3.5. [Proposed] Data Encryption</a></h3>
+<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">3.6. [Proposed] Data Encryption</a></h3>
 <div class="paragraph">
 <p><em>{Explain here how the data encryption feature will be implemented}</em></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">3.6. Logging</a></h3>
+<h3 id="logging"><a class="link" href="#logging">3.7. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.7, &#8220;Configuration&#8221;</a>)</p>
+<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.8, &#8220;Configuration&#8221;</a>)</p>
 </li>
 <li>
 <p>The <code>Logger</code> for a class can be obtained using <code>LogsCenter.getLogger(Class)</code> which will log messages according to the specified logging level</p>
@@ -1237,27 +1473,9 @@ The ability to delete upcoming bookings is planned for v1.3.
 </div>
 </div>
 <div class="sect2">
-<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.7. Configuration</a></h3>
+<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.8. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: <code>config.json</code>).</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="addcommand"><a class="link" href="#addcommand">3.8. AddCommand</a></h3>
-<div class="paragraph">
-<p>We current accept a <code>Guest</code>, <code>RoomNumber</code> and <code>BookingPeriod</code> as parameters
-for the AddCommand constructor.</p>
-</div>
-<div class="paragraph">
-<p>The Guest is added to the AddressBook, which was already the case in
-AddressBook4.</p>
-</div>
-<div class="paragraph">
-<p>We then create a new <code>Booking</code> object with the <code>Guest</code> and <code>BookingPeriod</code>.
-This <code>Booking</code> is then added to the <code>Room</code> with the <code>RoomNumber</code> specified.</p>
-</div>
-<div class="paragraph">
-<p>We do not record the <code>Room</code> details in the <code>Guest</code> to minimise coupling.</p>
 </div>
 </div>
 <div class="sect2">
@@ -1269,7 +1487,7 @@ and <code>ExpenseType</code> have been created for this purpose. In addition, th
 <code>menu</code> of goods and services available.</p>
 </div>
 <div class="sect3">
-<h4 id="current-implementation-5"><a class="link" href="#current-implementation-5">3.9.1. Current Implementation</a></h4>
+<h4 id="current-implementation-6"><a class="link" href="#current-implementation-6">3.9.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p><code>ExpenseType</code> objects are essentially immutable objects that represent a single item or service
 being sold at the hotel. An <code>ExpenseType</code> object contains information about its menu number,
@@ -1322,7 +1540,7 @@ chronologically) will be useful for generating a nice view of all the expenses i
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">3.9.2. Design Considerations</a></h4>
+<h4 id="design-considerations-6"><a class="link" href="#design-considerations-6">3.9.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-immutability-of-menu"><a class="link" href="#aspect-immutability-of-menu">Aspect: Immutability of Menu</a></h5>
 <div class="paragraph">
@@ -3212,4 +3430,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-25 11:24:22 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-25 12:28:24 UTC</div></div></div></body></html>
