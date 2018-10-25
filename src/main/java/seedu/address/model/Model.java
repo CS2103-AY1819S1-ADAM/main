@@ -99,7 +99,7 @@ public interface Model {
     /**
      * Checks in the room by its room number
      */
-    void checkinRoom(RoomNumber roomNumber);
+    void checkInRoom(RoomNumber roomNumber);
 
     /**
      * Checks out the room.

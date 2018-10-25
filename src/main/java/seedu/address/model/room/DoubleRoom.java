@@ -24,16 +24,12 @@ public class DoubleRoom extends Room {
         super(roomNumber, CAPACITY_DOUBLE_ROOM, expenses, bookings, tags);
     }
 
-    public DoubleRoom(DoubleRoom doubleRoom) {
-        super(doubleRoom);
-    }
-
     public static int getCapacityValue() {
         return CAPACITY_DOUBLE_ROOM.getValue();
     }
 
     @Override
-    public DoubleRoom cloneRoom() {
-        return new DoubleRoom(this);
+    DoubleRoom makeRoom(RoomNumber roomNumber, Expenses expenses, Bookings bookings, Set<Tag> tags) {
+        return new DoubleRoom(roomNumber, expenses, bookings, tags);
     }
 }

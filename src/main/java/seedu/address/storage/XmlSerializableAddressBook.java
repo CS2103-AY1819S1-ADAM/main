@@ -26,10 +26,10 @@ public class XmlSerializableAddressBook {
     public static final String MESSAGE_DUPLICATE_ROOM = "Room list contains duplicate room(s)";
 
     @XmlElement
-    private List<XmlAdaptedGuest> guest;
+    private List<XmlAdaptedGuest> guests;
 
     @XmlElement
-    private List<XmlAdaptedRoom> room;
+    private List<XmlAdaptedRoom> rooms;
 
     @XmlElement
     private HashMap<String, XmlAdaptedExpenseType> menu;
@@ -39,8 +39,8 @@ public class XmlSerializableAddressBook {
      * This empty constructor is required for marshalling.
      */
     public XmlSerializableAddressBook() {
-        guest = new ArrayList<>();
-        room = new ArrayList<>();
+        guests = new ArrayList<>();
+        rooms = new ArrayList<>();
         menu = new HashMap<>();
     }
 
@@ -49,8 +49,8 @@ public class XmlSerializableAddressBook {
      */
     public XmlSerializableAddressBook(ReadOnlyAddressBook src) {
         this();
-        guest.addAll(src.getGuestList().stream().map(XmlAdaptedGuest::new).collect(Collectors.toList()));
-        room.addAll(src.getRoomList().stream().map(XmlAdaptedRoom::new).collect(Collectors.toList()));
+        guests.addAll(src.getGuestList().stream().map(XmlAdaptedGuest::new).collect(Collectors.toList()));
+        rooms.addAll(src.getRoomList().stream().map(XmlAdaptedRoom::new).collect(Collectors.toList()));
         for (Map.Entry<String, ExpenseType> mapping : src.getMenuMap().entrySet()) {
             menu.put(mapping.getKey(), new XmlAdaptedExpenseType(mapping.getValue()));
         }
@@ -63,7 +63,7 @@ public class XmlSerializableAddressBook {
      */
     public AddressBook toModelType() throws IllegalValueException {
         AddressBook addressBook = new AddressBook();
-        for (XmlAdaptedGuest p : guest) {
+        for (XmlAdaptedGuest p : guests) {
             Guest guest = p.toModelType();
             if (addressBook.hasGuest(guest)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_GUEST);
@@ -77,7 +77,7 @@ public class XmlSerializableAddressBook {
         }
         addressBook.setMenu(newMenu);
 
-        for (XmlAdaptedRoom r : room) {
+        for (XmlAdaptedRoom r : rooms) {
             Room room = r.toModelType(addressBook.getMenu());
             if (addressBook.hasRoom(room)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_ROOM);
@@ -97,6 +97,6 @@ public class XmlSerializableAddressBook {
         if (!(other instanceof XmlSerializableAddressBook)) {
             return false;
         }
-        return guest.equals(((XmlSerializableAddressBook) other).guest);
+        return guests.equals(((XmlSerializableAddressBook) other).guests);
     }
 }

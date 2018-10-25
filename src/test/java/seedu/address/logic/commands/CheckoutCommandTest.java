@@ -29,10 +29,13 @@ public class CheckoutCommandTest {
     @Before
     public void initialize() {
         model.addBooking(TypicalRoomNumbers.ROOM_NUMBER_001, TypicalBookings.LASTWEEK_YESTERDAY);
+
         model.addBooking(TypicalRoomNumbers.ROOM_NUMBER_002, TypicalBookings.YESTERDAY_TODAY);
-        model.checkinRoom(TypicalRoomNumbers.ROOM_NUMBER_002);
+        model.checkInRoom(TypicalRoomNumbers.ROOM_NUMBER_002);
+
         model.addBooking(TypicalRoomNumbers.ROOM_NUMBER_010, TypicalBookings.TODAY_TOMORROW);
-        model.checkinRoom(TypicalRoomNumbers.ROOM_NUMBER_010);
+        model.checkInRoom(TypicalRoomNumbers.ROOM_NUMBER_010);
+
         model.addBooking(TypicalRoomNumbers.ROOM_NUMBER_011, TypicalBookings.TOMORROW_NEXTWEEK);
         model.addBooking(TypicalRoomNumbers.ROOM_NUMBER_012, TypicalBookings.TODAY_TOMORROW);
     }

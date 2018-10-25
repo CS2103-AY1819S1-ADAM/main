@@ -4,14 +4,12 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.model.expenses.Expense;
 import seedu.address.model.expenses.Expenses;
-import seedu.address.model.guest.Guest;
 import seedu.address.model.room.booking.Booking;
 import seedu.address.model.room.booking.Bookings;
 import seedu.address.model.room.booking.exceptions.NoActiveBookingException;
@@ -51,11 +49,16 @@ public abstract class Room {
         this.tags = tags;
     }
 
-    protected Room(Room room) {
-        this(room.getRoomNumber(), room.getCapacity());
-        this.expenses.setExpenses(room.getExpenses());
-        this.bookings.setBookings(room.getBookings());
-    }
+    //=========== Special constructor method !IMPORTANT =============================================================
+
+    /**
+     * Method to edit a room by passing arguments and getting a new Room with those arguments
+     * Abstract to allow subclass to override and return a {@code Room} of their own type
+     * Package-private to hide it from outside classes
+     */
+    abstract Room makeRoom(RoomNumber roomNumber, Expenses expenses, Bookings bookings, Set<Tag> tags);
+
+    //=========== Getters =============================================================
 
     public RoomNumber getRoomNumber() {
         return roomNumber;
@@ -67,10 +70,6 @@ public abstract class Room {
 
     public Expenses getExpenses() {
         return expenses;
-    }
-
-    public List<Expense> getExpensesList() {
-        return expenses.getExpensesList();
     }
 
     public Bookings getBookings() {
@@ -86,54 +85,86 @@ public abstract class Room {
     }
 
     /**
-     * Clones this room with a deep copied Bookings object
+     * Returns an {@code Optional} of the first booking of this room
      */
-    public abstract <T extends Room> T cloneRoom();
+    public Optional<Booking> getFirstBooking() {
+        Booking firstBooking;
+        try {
+            firstBooking = bookings.getFirstBooking();
+        } catch (NoBookingException e) {
+            firstBooking = null;
+        }
+        return Optional.ofNullable(firstBooking);
+    }
+
+    //=========== Bookings operations =============================================================
 
     /**
-     * Adds a booking to this room's list of bookings
+     * Adds a booking to a copy of this room's set of bookings
      */
-    public void addBooking(Booking booking) {
-        bookings.add(booking);
+    public Room addBooking(Booking booking) {
+        Bookings editedBookings = bookings.add(booking);
+        return makeRoom(this.roomNumber, this.expenses, editedBookings, this.tags);
     }
 
     /**
      * Update a booking with the edited booking
      */
-    public void updateBooking(Booking target, Booking editedBooking) {
-        bookings.setBooking(target, editedBooking);
+    public Room updateBooking(Booking target, Booking editedBooking) {
+        Bookings editedBookings = bookings.updateBooking(target, editedBooking);
+        return makeRoom(this.roomNumber, this.expenses, editedBookings, this.tags);
     }
 
     /**
-     * Removes all expired bookings from the list.
+     * Checks in the first booking of this room and its occupant
      */
-    public void clearExpiredBookings() {
-        bookings.clearExpiredBookings();
+    public Room checkIn() {
+        if (!hasActiveBooking()) {
+            throw new NoActiveBookingException();
+        }
+        if (isCheckedIn()) {
+            throw new OccupiedRoomCheckinException();
+        }
+        Booking firstBooking = bookings.getFirstBooking();
+        return updateBooking(firstBooking, firstBooking.checkIn());
     }
 
     /**
-     * Reset this room's bookings
+     * Checks out the first booking of this room and its current occupant.
+     * Future features to include exporting of receipt, setting room to housekeeping status for __x__ hours.
      */
-    public void setBookings(Bookings replacementBookings) {
-        bookings.setBookings(replacementBookings);
+    public Room checkout() {
+        if (!hasActiveOrExpiredBooking()) {
+            throw new NoActiveOrExpiredBookingException();
+        }
+        Booking firstBooking = bookings.getFirstBooking();
+        return makeRoom(this.roomNumber, this.expenses, bookings.remove(firstBooking), this.tags);
+        // expenses.report(); // weizheng implement this later
     }
 
-    public void resetExpenses(Expenses expenses) {
-        // to be filled in once Expenses is done by
+    //=========== Expenses operations =============================================================
+
+    /**
+     * Add an expense to this room's expenses
+     */
+    public void addExpense(Expense expense) {
+        expenses.addExpense(expense);
     }
+
+    //=========== Boolean checkers =============================================================
 
     /**
      * Returns true if room's first booking has been checked in.
      */
     public boolean isCheckedIn() {
         Booking firstBooking = bookings.getFirstBooking();
-        return firstBooking.isCheckedIn();
+        return firstBooking.getIsCheckedIn();
     }
 
     /**
      * Returns true if this room's bookings is non-empty
      */
-    public boolean hasBooking() {
+    public boolean hasBookings() {
         return !bookings.isEmpty();
     }
 
@@ -150,57 +181,7 @@ public abstract class Room {
      */
     public boolean hasActiveOrExpiredBooking() {
         Booking firstBooking = bookings.getFirstBooking();
-        return firstBooking.isActiveOrExpired();
-    }
-
-    public Optional<Booking> getFirstBooking() {
-        Booking firstBooking;
-        try {
-            firstBooking = bookings.getFirstBooking();
-        } catch (NoBookingException e) {
-            firstBooking = null;
-        }
-        return Optional.ofNullable(firstBooking);
-    }
-
-    /**
-     * Add an expense to this room's expenses
-     */
-    public void addExpense(Expense expense) {
-        expenses.addExpense(expense);
-    }
-
-    /**
-     * Checks in the first booking of this room and its occupant
-     */
-    public void checkIn() {
-        if (!hasActiveBooking()) {
-            throw new NoActiveBookingException();
-        }
-        if (isCheckedIn()) {
-            throw new OccupiedRoomCheckinException();
-        }
-        Booking firstBooking = bookings.getFirstBooking();
-        // For tests to pass, we need to deep copy the booking here and replace it with its updated version
-        // firstBooking.checkIn() returns a deep copy of the booking with check-in flag set to true
-        Booking updatedFirstBooking = firstBooking.checkIn();
-        updateBooking(firstBooking, updatedFirstBooking);
-    }
-
-    /**
-     * Checks out the first booking of this room and its current occupant.
-     * Future features to include exporting of receipt, setting room to housekeeping status for __x__ hours.
-     */
-    public void checkout() {
-        if (!hasActiveOrExpiredBooking()) {
-            throw new NoActiveOrExpiredBookingException();
-        }
-        Booking firstBooking = bookings.getFirstBooking();
-        Guest guest = firstBooking.getGuest();
-        // guest.checkout(); // joyce implement this later
-
-        bookings.remove(firstBooking);
-        // expenses.report(); // weizheng implement this later
+        return firstBooking.isActive() || firstBooking.isExpired();
     }
 
     /**

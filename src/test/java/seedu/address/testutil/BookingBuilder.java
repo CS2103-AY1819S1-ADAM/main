@@ -33,7 +33,7 @@ public class BookingBuilder {
     public BookingBuilder(Booking bookingToCopy) {
         guest = bookingToCopy.getGuest();
         bookingPeriod = bookingToCopy.getBookingPeriod();
-        checkIn = bookingToCopy.isCheckedIn();
+        checkIn = bookingToCopy.getIsCheckedIn();
     }
 
     /**
@@ -48,7 +48,8 @@ public class BookingBuilder {
      * Sets the {@code BookingPeriod} of the {@code Booking} that we are building.
      */
     public BookingBuilder withBookingPeriod(BookingPeriod bookingPeriod) {
-        this.bookingPeriod = new BookingPeriod(bookingPeriod);
+        this.bookingPeriod = new BookingPeriod(bookingPeriod.getStartDateAsFormattedString(),
+            bookingPeriod.getEndDateAsFormattedString());
         return this;
     }
 

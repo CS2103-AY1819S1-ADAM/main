@@ -125,8 +125,15 @@ public class ModelManager extends ComponentManager implements Model {
     //=========== Room =======================================================
 
     @Override
-    public void checkinRoom(RoomNumber roomNumber) {
-        versionedAddressBook.checkinRoom(roomNumber);
+    public void addBooking(RoomNumber roomNumber, Booking booking) {
+        versionedAddressBook.addBooking(roomNumber, booking);
+        updateFilteredRoomList(PREDICATE_SHOW_ALL_ROOMS);
+        indicateAddressBookChanged();
+    }
+
+    @Override
+    public void checkInRoom(RoomNumber roomNumber) {
+        versionedAddressBook.checkInRoom(roomNumber);
         updateFilteredRoomList(PREDICATE_SHOW_ALL_ROOMS);
         indicateAddressBookChanged();
     }
@@ -144,7 +151,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     public boolean roomHasBooking(RoomNumber roomNumber) {
-        return versionedAddressBook.roomHasBooking(roomNumber);
+        return versionedAddressBook.roomHasBookings(roomNumber);
     }
 
     @Override
@@ -156,13 +163,6 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public boolean roomHasActiveOrExpiredBooking(RoomNumber roomNumber) {
         return versionedAddressBook.roomHasActiveOrExpiredBooking(roomNumber);
-    }
-
-    @Override
-    public void addBooking(RoomNumber roomNumber, Booking booking) {
-        versionedAddressBook.addBooking(roomNumber, booking);
-        updateFilteredRoomList(PREDICATE_SHOW_ALL_ROOMS);
-        indicateAddressBookChanged();
     }
 
     //=========== Undo/Redo =================================================================================

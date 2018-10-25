@@ -33,9 +33,8 @@ public class GuestCard extends UiPart<Region> {
     @FXML
     private Label phone;
     @FXML
-    private Label email;
-    @FXML
     private FlowPane tags;
+
 
     public GuestCard(Guest guest, int displayedIndex) {
         super(FXML);
@@ -43,7 +42,6 @@ public class GuestCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(guest.getName().fullName);
         phone.setText(guest.getPhone().value);
-        email.setText(guest.getEmail().value);
         guest.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 
