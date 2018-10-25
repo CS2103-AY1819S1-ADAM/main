@@ -18,4 +18,4 @@ classes/
 src/main/resources/docs/
 out/
 data/
-commands_log/
+commands_log/*

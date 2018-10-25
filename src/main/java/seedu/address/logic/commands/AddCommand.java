@@ -21,6 +21,7 @@ import seedu.address.model.room.booking.BookingPeriod;
 import seedu.address.model.room.booking.exceptions.OverlappingBookingException;
 import seedu.address.model.room.exceptions.RoomNotFoundException;
 
+
 /**
  * Adds a guest to the address book.
  */

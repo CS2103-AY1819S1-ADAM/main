@@ -65,11 +65,13 @@ public class SampleDataUtil {
      */
     public static List<Room> getSampleRoomsWithBookingsExpenses() {
         UniqueRoomList uniqueRoomList = new UniqueRoomList(RoomNumber.MAX_ROOM_NUMBER);
-        uniqueRoomList.addBooking(new RoomNumber("001"),
-            new Booking(getSampleGuests()[0],
-            new BookingPeriod(LocalDate.now().format(BookingPeriod.DATE_TO_STRING_FORMAT),
-                LocalDate.now().plusDays(1).format(BookingPeriod.DATE_TO_STRING_FORMAT))));
-        uniqueRoomList.addExpense(new RoomNumber("001"), new Expense(getSampleExpenseTypes()[0]));
+        uniqueRoomList.getRoom(new RoomNumber("001"))
+            .addBooking(
+                new Booking(getSampleGuests()[0],
+                new BookingPeriod(
+                    LocalDate.now().format(BookingPeriod.DATE_TO_STRING_FORMAT),
+                    LocalDate.now().plusDays(1).format(BookingPeriod.DATE_TO_STRING_FORMAT))));
+        uniqueRoomList.getRoom(new RoomNumber("001")).addExpense(new Expense(getSampleExpenseTypes()[0]));
         return uniqueRoomList.asUnmodifiableObservableList();
     }
 

@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE_END;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE_START;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GUEST;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -100,6 +101,9 @@ public class CommandTestUtil {
 
     public static final EditCommand.EditGuestDescriptor DESC_AMY;
     public static final EditCommand.EditGuestDescriptor DESC_BOB;
+
+    public static final String VALID_FLAG_ROOM = PREFIX_ROOM.toString();
+    public static final String VALID_FLAG_GUEST = PREFIX_GUEST.toString();
 
     static {
         DESC_AMY = new EditGuestDescriptorBuilder().withName(VALID_NAME_AMY)

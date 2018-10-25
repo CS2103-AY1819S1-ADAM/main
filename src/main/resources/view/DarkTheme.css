@@ -120,10 +120,25 @@
     -fx-text-fill: white;
 }
 
+.cell_header {
+   -fx-font-family: "Segoe UI Semibold";
+   -fx-font-size: 18px;
+   -fx-text-fill: #010504;
+   -fx-underline: true;
+}
+
+.cell_name_label {
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-size: 18px;
+    -fx-text-fill: #010504;
+    -fx-padding: -2 0 -2 0;
+}
+
 .cell_big_label {
     -fx-font-family: "Segoe UI Semibold";
     -fx-font-size: 16px;
     -fx-text-fill: #010504;
+    -fx-padding: -2 0 -2 0;
 }
 
 .cell_small_label {
@@ -337,6 +352,7 @@
 }
 
 #tags {
+    -fx-padding: 3 0 3 0;
     -fx-hgap: 7;
     -fx-vgap: 3;
 }
@@ -351,6 +367,7 @@
 }
 
 #bookings {
+    -fx-padding: 3 0 3 0;
     -fx-hgap: 7;
     -fx-vgap: 3;
 }

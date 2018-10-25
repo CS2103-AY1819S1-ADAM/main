@@ -1,8 +1,11 @@
 package seedu.address.testutil;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.SortedSet;
 
+import seedu.address.model.expenses.Expense;
 import seedu.address.model.expenses.Expenses;
 import seedu.address.model.room.Capacity;
 import seedu.address.model.room.DoubleRoom;
@@ -10,6 +13,7 @@ import seedu.address.model.room.Room;
 import seedu.address.model.room.RoomNumber;
 import seedu.address.model.room.SingleRoom;
 import seedu.address.model.room.SuiteRoom;
+import seedu.address.model.room.booking.Booking;
 import seedu.address.model.room.booking.Bookings;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
@@ -74,15 +78,15 @@ public class RoomBuilder {
     /**
      * Sets the {@code Expenses} of the {@code Room} that we are building.
      */
-    public RoomBuilder withExpenses(Expenses expenses) {
-        this.expenses = new Expenses(expenses.getExpensesList());
+    public RoomBuilder withExpenses(List<Expense> expenses) {
+        this.expenses = new Expenses(expenses);
         return this;
     }
 
     /**
      * Sets the {@code Bookings} of the {@code Room} that we are building.
      */
-    public RoomBuilder withBookings(Bookings bookings) {
+    public RoomBuilder withBookings(SortedSet<Booking> bookings) {
         this.bookings = new Bookings(bookings);
         return this;
     }

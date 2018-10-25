@@ -1,6 +1,5 @@
 package seedu.address.ui;
 
-import static guitests.guihandles.WebViewUtil.waitUntilBrowserLoaded;
 import static org.junit.Assert.assertEquals;
 import static seedu.address.testutil.EventsUtil.postNow;
 import static seedu.address.testutil.TypicalGuests.ALICE;
@@ -41,8 +40,7 @@ public class BrowserPanelTest extends GuiUnitTest {
         // associated web page of a guest
         postNow(selectionChangedEventStub);
         URL expectedGuestUrl = new URL(BrowserPanel.SEARCH_PAGE_URL + ALICE.getName().fullName.replaceAll(" ", "%20"));
-
-        waitUntilBrowserLoaded(browserPanelHandle);
         assertEquals(expectedGuestUrl, browserPanelHandle.getLoadedUrl());
+
     }
 }

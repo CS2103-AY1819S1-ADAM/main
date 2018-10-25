@@ -60,8 +60,8 @@ public class GuestCardTest extends GuiUnitTest {
      */
     private void assertCardDisplay(GuestCard guestCard, Guest expectedGuest, int expectedId) {
         guiRobot.pauseForHuman();
-
         GuestCardHandle guestCardHandle = new GuestCardHandle(guestCard.getRoot());
+
 
         // verify id is displayed correctly
         assertEquals(Integer.toString(expectedId) + ". ", guestCardHandle.getId());

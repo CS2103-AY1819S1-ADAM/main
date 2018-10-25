@@ -171,7 +171,8 @@ public class ParserUtil {
      * in the given input {@code String[]}
      */
     public static boolean areFlagsPresent(String[] splitString) {
-        if (splitString[0].equals(PREFIX_GUEST.toString()) || splitString[0].equals(PREFIX_ROOM.toString())) {
+        if ((splitString[0].equals(PREFIX_GUEST.toString()) || splitString[0].equals(PREFIX_ROOM.toString()))
+            && splitString.length == 1) {
             return true;
         }
         return false;

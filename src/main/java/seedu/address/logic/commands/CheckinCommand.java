@@ -46,7 +46,7 @@ public class CheckinCommand extends Command {
         if (model.isRoomCheckedIn(roomNumber)) {
             throw new CommandException(String.format(MESSAGE_OCCUPIED_ROOM_CHECKIN, roomNumber));
         }
-        model.checkinRoom(roomNumber);
+        model.checkInRoom(roomNumber);
         model.commitAddressBook();
         return new CommandResult(String.format(MESSAGE_CHECKIN_ROOM_SUCCESS, roomNumber));
     }

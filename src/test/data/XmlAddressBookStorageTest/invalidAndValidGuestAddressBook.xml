@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addressbook>
     <!-- Valid Guest -->
-    <guest>
+    <guests>
         <name>Hans Muster</name>
         <phone isPrivate="false">9482424</phone>
         <email isPrivate="false">hans@example.com</email>
         <address isPrivate="false">4th street</address>
-    </guest>
+    </guests>
     <!-- Guest with invalid phone field -->
-    <guest>
+    <guests>
         <name>Hans Muster</name>
         <phone isPrivate="false">948asdf2424</phone>
         <email isPrivate="false">hans@example.com</email>
         <address isPrivate="false">4th street</address>
-    </guest>
+    </guests>
 </addressbook>
