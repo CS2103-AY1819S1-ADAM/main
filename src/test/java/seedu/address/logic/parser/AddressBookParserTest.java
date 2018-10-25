@@ -61,7 +61,7 @@ public class AddressBookParserTest {
         assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD + " 3") instanceof ClearCommand);
     }
 
-     @Test
+    @Test
     public void parseCommand_edit() throws Exception {
         Guest guest = new GuestBuilder().build();
         EditGuestDescriptor descriptor = new EditGuestDescriptorBuilder(guest).build();
