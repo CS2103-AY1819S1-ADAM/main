@@ -13,7 +13,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.expenses.ExpenseType;
-import seedu.address.model.person.Guest;
+import seedu.address.model.guest.Guest;
 import seedu.address.model.room.Room;
 
 /**
@@ -22,14 +22,14 @@ import seedu.address.model.room.Room;
 @XmlRootElement(name = "addressbook")
 public class XmlSerializableAddressBook {
 
-    public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate guest(s).";
+    public static final String MESSAGE_DUPLICATE_GUEST = "Guest list contains duplicate guest(s).";
     public static final String MESSAGE_DUPLICATE_ROOM = "Room list contains duplicate room(s)";
 
     @XmlElement
-    private List<XmlAdaptedPerson> guests;
+    private List<XmlAdaptedGuest> guest;
 
     @XmlElement
-    private List<XmlAdaptedRoom> rooms;
+    private List<XmlAdaptedRoom> room;
 
     @XmlElement
     private HashMap<String, XmlAdaptedExpenseType> menu;
@@ -39,8 +39,8 @@ public class XmlSerializableAddressBook {
      * This empty constructor is required for marshalling.
      */
     public XmlSerializableAddressBook() {
-        guests = new ArrayList<>();
-        rooms = new ArrayList<>();
+        guest = new ArrayList<>();
+        room = new ArrayList<>();
         menu = new HashMap<>();
     }
 
@@ -49,8 +49,8 @@ public class XmlSerializableAddressBook {
      */
     public XmlSerializableAddressBook(ReadOnlyAddressBook src) {
         this();
-        guests.addAll(src.getPersonList().stream().map(XmlAdaptedPerson::new).collect(Collectors.toList()));
-        rooms.addAll(src.getRoomList().stream().map(XmlAdaptedRoom::new).collect(Collectors.toList()));
+        guest.addAll(src.getGuestList().stream().map(XmlAdaptedGuest::new).collect(Collectors.toList()));
+        room.addAll(src.getRoomList().stream().map(XmlAdaptedRoom::new).collect(Collectors.toList()));
         for (Map.Entry<String, ExpenseType> mapping : src.getMenuMap().entrySet()) {
             menu.put(mapping.getKey(), new XmlAdaptedExpenseType(mapping.getValue()));
         }
@@ -59,16 +59,16 @@ public class XmlSerializableAddressBook {
     /**
      * Converts this addressbook into the model's {@code AddressBook} object.
      * @throws IllegalValueException if there were any data constraints violated or duplicates in the
-     * {@code XmlAdaptedPerson / XmlAdaptedRoom}
+     * {@code XmlAdaptedGuest / XmlAdaptedRoom}
      */
     public AddressBook toModelType() throws IllegalValueException {
         AddressBook addressBook = new AddressBook();
-        for (XmlAdaptedPerson p : guests) {
+        for (XmlAdaptedGuest p : guest) {
             Guest guest = p.toModelType();
-            if (addressBook.hasPerson(guest)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
+            if (addressBook.hasGuest(guest)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_GUEST);
             }
-            addressBook.addPerson(guest);
+            addressBook.addGuest(guest);
         }
 
         HashMap<String, ExpenseType> newMenu = new HashMap<>();
@@ -77,7 +77,7 @@ public class XmlSerializableAddressBook {
         }
         addressBook.setMenu(newMenu);
 
-        for (XmlAdaptedRoom r : rooms) {
+        for (XmlAdaptedRoom r : room) {
             Room room = r.toModelType(addressBook.getMenu());
             if (addressBook.hasRoom(room)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_ROOM);
@@ -97,6 +97,6 @@ public class XmlSerializableAddressBook {
         if (!(other instanceof XmlSerializableAddressBook)) {
             return false;
         }
-        return guests.equals(((XmlSerializableAddressBook) other).guests);
+        return guest.equals(((XmlSerializableAddressBook) other).guest);
     }
 }

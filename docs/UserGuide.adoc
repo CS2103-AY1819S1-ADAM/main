@@ -54,7 +54,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 * Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 ====
 
-=== Adding a person: `add`
+=== Adding a guest: `add`
 
 Adds a guest to the guest list for the purpose of assigning a room +
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG] -r ROOM_NUMBER
@@ -68,7 +68,7 @@ Examples:
 * `add n/John Smith p/98765432 e/johnsmith@gmail.com t/VIP r/085 from/09/12/18 to/10/12/18`
 Add a guest "John Smith" to room 085 for a period of stay from 09/12/18 to 10/12/18.
 
-=== Adding a person: `addx` [red]#Coming in v2.0#
+=== Adding a guest: `addx` [red]#Coming in v2.0#
 
 Adds a guest to the guest list NOT for the purpose of assigning a room (perhaps add to archived guest list) +
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]...`
@@ -146,7 +146,7 @@ Format: `find [flag] KEYWORD`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* Guests matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 ****
 
 Examples:
