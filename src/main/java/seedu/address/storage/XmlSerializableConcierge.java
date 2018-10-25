@@ -13,7 +13,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.Concierge;
 import seedu.address.model.ReadOnlyConcierge;
 import seedu.address.model.expenses.ExpenseType;
-import seedu.address.model.person.Guest;
+import seedu.address.model.guest.Guest;
 import seedu.address.model.room.Room;
 
 /**
@@ -22,11 +22,11 @@ import seedu.address.model.room.Room;
 @XmlRootElement(name = "concierge")
 public class XmlSerializableConcierge {
 
-    public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate guest(s).";
+    public static final String MESSAGE_DUPLICATE_GUEST = "Guest list contains duplicate guest(s).";
     public static final String MESSAGE_DUPLICATE_ROOM = "Room list contains duplicate room(s)";
 
     @XmlElement
-    private List<XmlAdaptedPerson> guests;
+    private List<XmlAdaptedGuest> guests;
 
     @XmlElement
     private List<XmlAdaptedRoom> rooms;
@@ -49,7 +49,7 @@ public class XmlSerializableConcierge {
      */
     public XmlSerializableConcierge(ReadOnlyConcierge src) {
         this();
-        guests.addAll(src.getPersonList().stream().map(XmlAdaptedPerson::new).collect(Collectors.toList()));
+        guests.addAll(src.getGuestList().stream().map(XmlAdaptedGuest::new).collect(Collectors.toList()));
         rooms.addAll(src.getRoomList().stream().map(XmlAdaptedRoom::new).collect(Collectors.toList()));
         for (Map.Entry<String, ExpenseType> mapping : src.getMenuMap().entrySet()) {
             menu.put(mapping.getKey(), new XmlAdaptedExpenseType(mapping.getValue()));
@@ -59,16 +59,16 @@ public class XmlSerializableConcierge {
     /**
      * Converts this concierge into the model's {@code Concierge} object.
      * @throws IllegalValueException if there were any data constraints violated or duplicates in the
-     * {@code XmlAdaptedPerson / XmlAdaptedRoom}
+     * {@code XmlAdaptedGuest / XmlAdaptedRoom}
      */
     public Concierge toModelType() throws IllegalValueException {
         Concierge concierge = new Concierge();
-        for (XmlAdaptedPerson p : guests) {
+        for (XmlAdaptedGuest p : guests) {
             Guest guest = p.toModelType();
-            if (concierge.hasPerson(guest)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
+            if (concierge.hasGuest(guest)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_GUEST);
             }
-            concierge.addPerson(guest);
+            concierge.addGuest(guest);
         }
 
         HashMap<String, ExpenseType> newMenu = new HashMap<>();

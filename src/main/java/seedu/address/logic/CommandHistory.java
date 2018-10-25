@@ -41,7 +41,8 @@ public class CommandHistory {
         }
         String inputString = string.toString();
         System.out.println(inputString);
-        CommandArchive.stringToFile(inputString);
+        // Fix this!!!
+        // CommandArchive.stringToFile(inputString);
     }
 
     /**

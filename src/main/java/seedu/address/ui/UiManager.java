@@ -1,5 +1,8 @@
 package seedu.address.ui;
 
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GUEST;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ROOM;
+
 import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
@@ -14,6 +17,7 @@ import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
+import seedu.address.commons.events.ui.ListingChangedEvent;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
@@ -66,7 +70,6 @@ public class UiManager extends ComponentManager implements Ui {
     public void stop() {
         prefs.updateLastUsedGuiSetting(mainWindow.getCurrentGuiSetting());
         mainWindow.hide();
-        mainWindow.releaseResources();
     }
 
     private void showFileOperationAlertAndWait(String description, String details, Throwable cause) {
@@ -116,5 +119,36 @@ public class UiManager extends ComponentManager implements Ui {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         showFileOperationAlertAndWait(FILE_OPS_ERROR_DIALOG_HEADER_MESSAGE, FILE_OPS_ERROR_DIALOG_CONTENT_MESSAGE,
                 event.exception);
+    }
+
+    @Subscribe
+    private void handleListingChangeEvent(ListingChangedEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+
+        if (event.getFlag() == PREFIX_GUEST.toString()) {
+            showGuestList();
+            showGuestDetailedPanel();
+        } else if (event.getFlag() == PREFIX_ROOM.toString()) {
+            showRoomList();
+            showRoomDetailedPanel();
+        }
+    }
+
+    //==================== UI Visibility Functions ============================================================
+
+    private void showGuestList() {
+        mainWindow.showGuestList();
+    }
+
+    private void showRoomList() {
+        mainWindow.showRoomList();
+    }
+
+    private void showGuestDetailedPanel() {
+        mainWindow.showGuestDetailedPanel();
+    }
+
+    private void showRoomDetailedPanel() {
+        mainWindow.showRoomDetailedPanel();
     }
 }

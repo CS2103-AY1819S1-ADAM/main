@@ -47,27 +47,43 @@
         </StackPane>
 
         <SplitPane id="splitPane" fx:id="splitPane" dividerPositions="0.4" VBox.vgrow="ALWAYS">
-          <VBox fx:id="guestList" minWidth="340" prefWidth="340" SplitPane.resizableWithParent="false">
-            <padding>
-              <Insets top="10" right="10" bottom="10" left="10" />
-            </padding>
-            <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
-          </VBox>
-
-            <VBox fx:id="roomList" minWidth="170" prefWidth="170" SplitPane.resizableWithParent="false">
-                <padding>
-                    <Insets top="10" right="10" bottom="10" left="10" />
-                </padding>
-                <StackPane fx:id="roomListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+          <StackPane VBox.vgrow="NEVER" fx:id="displayRegion" styleClass="pane-with-border"
+                     minHeight="500" prefHeight="900" maxHeight="900">
+            <VBox fx:id="guestListBox" minWidth="340" prefWidth="340" SplitPane.resizableWithParent="false">
+              <padding>
+                <Insets top="10" right="10" bottom="10" left="10" />
+              </padding>
+              <StackPane fx:id="guestListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
             </VBox>
-
-          <StackPane fx:id="browserPlaceholder" prefWidth="340" >
+            <VBox fx:id="roomListBox" minWidth="340" prefWidth="340" SplitPane.resizableWithParent="false">
+              <padding>
+                <Insets top="10" right="10" bottom="10" left="10" />
+              </padding>
+              <StackPane fx:id="roomListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+            </VBox>
             <padding>
-              <Insets top="10" right="10" bottom="10" left="10" />
+              <Insets top="5" right="10" bottom="5" left="10" />
+            </padding>
+          </StackPane>
+          <StackPane VBox.vgrow="NEVER" fx:id="SelectionRegion" styleClass="pane-with-border"
+                     minHeight="500" prefHeight="900" maxHeight="900">
+            <VBox fx:id="guestDetailedBox" minWidth="340" prefWidth="340" SplitPane.resizableWithParent="false">
+              <padding>
+                <Insets top="10" right="10" bottom="10" left="10" />
+              </padding>
+              <StackPane fx:id="guestDetailedPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+            </VBox>
+            <VBox fx:id="roomDetailedBox" minWidth="340" prefWidth="340" SplitPane.resizableWithParent="false">
+              <padding>
+                <Insets top="10" right="10" bottom="10" left="10" />
+              </padding>
+                <StackPane fx:id="roomDetailedPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+            </VBox>
+            <padding>
+              <Insets top="5" right="10" bottom="5" left="10" />
             </padding>
           </StackPane>
         </SplitPane>
-
         <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
       </VBox>
     </Scene>

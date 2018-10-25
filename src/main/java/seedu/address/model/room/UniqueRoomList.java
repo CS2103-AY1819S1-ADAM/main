@@ -10,8 +10,6 @@ import java.util.stream.Stream;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.expenses.Expense;
-import seedu.address.model.room.booking.Booking;
 import seedu.address.model.room.exceptions.DuplicateRoomException;
 import seedu.address.model.room.exceptions.RoomNotFoundException;
 
@@ -42,7 +40,7 @@ public class UniqueRoomList implements Iterable<Room> {
     public UniqueRoomList(String maxRoomNumber) {
         this.internalList.setAll(Stream.iterate(1, i -> i <= Integer.parseInt(maxRoomNumber), i -> i + 1)
             .map(i -> {
-                RoomNumber roomNumber = new RoomNumber(String.format("%03d", i));;
+                RoomNumber roomNumber = new RoomNumber(String.format("%03d", i));
                 if (i % 10 == 0) { // All rooms with room number that is multiple of 10 is a SuiteRoom.
                     return new SuiteRoom(roomNumber);
                 }
@@ -54,14 +52,22 @@ public class UniqueRoomList implements Iterable<Room> {
             })
             .collect(Collectors.toList()));
     }
+    //=========== Getters =============================================================
 
     /**
-     * Returns true if the list contains an equivalent room as the given argument.
+     * Returns the room according to the room number
      */
-    public boolean contains(Room toCheck) {
-        requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::isSameRoom);
+    public Room getRoom(RoomNumber roomNumber) {
+        requireNonNull(roomNumber);
+        for (Room room : internalList) {
+            if (room.getRoomNumber().equals(roomNumber)) {
+                return room;
+            }
+        }
+        throw new RoomNotFoundException();
     }
+
+    //=========== Operations =============================================================
 
     /**
      * Adds a room to the list.
@@ -87,21 +93,6 @@ public class UniqueRoomList implements Iterable<Room> {
     }
 
     /**
-     * Removes the room corresponding to the room number
-     * The room must exist in the list.
-     */
-    public void remove(RoomNumber toRemove) {
-        requireNonNull(toRemove);
-        for (Room room : internalList) {
-            if (room.getRoomNumber().equals(toRemove)) {
-                internalList.remove(room);
-                return;
-            }
-        }
-        throw new RoomNotFoundException();
-    }
-
-    /**
      * Replaces the room {@code target} in the list with {@code editedRoom}.
      * {@code target} must exist in the list.
      * The room identity of {@code editedRoom} must not be the same as another existing room in the list.
@@ -122,14 +113,6 @@ public class UniqueRoomList implements Iterable<Room> {
     }
 
     /**
-     * Replaces the contents of this list with {@code replacement}.
-     */
-    public void setRooms(UniqueRoomList replacement) {
-        requireNonNull(replacement);
-        internalList.setAll(replacement.internalList);
-    }
-
-    /**
      * Replaces the contents of this list with {@code rooms}.
      * {@code rooms} must not contain duplicate rooms.
      */
@@ -138,81 +121,17 @@ public class UniqueRoomList implements Iterable<Room> {
         if (!roomsAreUnique(rooms)) {
             throw new DuplicateRoomException();
         }
-        // We need to clear and add the cloned rooms in order to create a deep copy. Needed for tests to pass.
-        internalList.clear();
-        for (Room r: rooms) {
-            internalList.add(r.cloneRoom());
-        }
+        internalList.setAll(rooms);
     }
 
-    /**
-     * Returns the room according to the room number
-     */
-    private Room getRoom(RoomNumber roomNumber) {
-        requireNonNull(roomNumber);
-        for (Room room : internalList) {
-            if (room.getRoomNumber().equals(roomNumber)) {
-                return room;
-            }
-        }
-        throw new RoomNotFoundException();
-    }
+    //=========== Boolean checkers =============================================================
 
     /**
-     * Add a booking to a room identified by its room number.
+     * Returns true if the list contains an equivalent room as the given argument.
      */
-    public void addBooking(RoomNumber roomNumber, Booking booking) {
-        Room roomToAdd = getRoom(roomNumber);
-        roomToAdd.addBooking(booking);
-    }
-
-    /**
-     * Returns true if the room identified by its room number is checked in.
-     */
-    public boolean isRoomCheckedIn(RoomNumber roomNumber) {
-        return getRoom(roomNumber).isCheckedIn();
-    }
-
-    /**
-     * Returns true if the room's bookings is non-empty
-     */
-    public boolean roomHasBooking(RoomNumber roomNumber) {
-        return getRoom(roomNumber).hasBooking();
-    }
-
-    /**
-     * Returns true if the room's first booking is active.
-     */
-    public boolean roomHasActiveBooking(RoomNumber roomNumber) {
-        return getRoom(roomNumber).hasActiveBooking();
-    }
-
-    /**
-     * Returns true if the room's first booking is active or expired
-     */
-    public boolean roomHasActiveOrExpiredBooking(RoomNumber roomNumber) {
-        return getRoom(roomNumber).hasActiveOrExpiredBooking();
-    }
-
-    /**
-     * Checks in the room using its room number
-     */
-    public void checkinRoom(RoomNumber roomNumber) {
-        getRoom(roomNumber).checkIn();
-    }
-
-    /**
-     * Checks out a room using its room number
-     */
-    public void checkoutRoom(RoomNumber roomNumber) {
-        getRoom(roomNumber).checkout();
-    }
-
-    /**
-     * Adds an expense to the room using its room number
-     */
-    public void addExpense(RoomNumber roomNumber, Expense expense) {
-        getRoom(roomNumber).addExpense(expense);
+    public boolean contains(Room toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(toCheck::isSameRoom);
     }
 
     /**

@@ -1,7 +1,7 @@
 package systemtests;
 
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
+import static seedu.address.testutil.TypicalGuests.KEYWORD_MATCHING_MEIER;
 
 import org.junit.Test;
 
@@ -38,13 +38,13 @@ public class ClearCommandSystemTest extends ConciergeSystemTest {
 
         /* Case: selects first card in guest list and clears concierge -> cleared and no card selected */
         executeCommand(UndoCommand.COMMAND_WORD); // restores the original concierge
-        selectPerson(Index.fromOneBased(1));
+        selectGuest(Index.fromOneBased(1));
         assertCommandSuccess(ClearCommand.COMMAND_WORD);
         assertSelectedCardDeselected();
 
         /* Case: filters the guest list before clearing -> entire concierge cleared */
         executeCommand(UndoCommand.COMMAND_WORD); // restores the original concierge
-        showPersonsWithName(KEYWORD_MATCHING_MEIER);
+        showGuestsWithName(KEYWORD_MATCHING_MEIER);
         assertCommandSuccess(ClearCommand.COMMAND_WORD);
         assertSelectedCardUnchanged();
 

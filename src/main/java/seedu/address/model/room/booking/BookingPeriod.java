@@ -1,7 +1,7 @@
 package seedu.address.model.room.booking;
 
-import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -33,22 +33,10 @@ public class BookingPeriod implements Comparable<BookingPeriod> {
      * Constructs a {@code BookingPeriod} that encapsulates the period from start through end date (inclusive).
      */
     public BookingPeriod(String startDate, String endDate) {
-        requireNonNull(startDate);
-        requireNonNull(endDate);
+        requireAllNonNull(startDate, endDate);
         checkArgument(isValidBookingPeriod(startDate, endDate), MESSAGE_BOOKING_PERIOD_CONSTRAINTS);
         this.startDate = parseDate(startDate);
         this.endDate = parseDate(endDate);
-    }
-
-    public BookingPeriod(BookingPeriod toBeCopied) {
-        this(toBeCopied.getStartDateAsFormattedString(), toBeCopied.getEndDateAsFormattedString());
-    }
-
-    /**
-     * Returns true if a given string is a valid name.
-     */
-    public static boolean isValidBookingPeriod(String testStartDate, String testEndDate) {
-        return parsableDate(testStartDate) && parsableDate(testEndDate);
     }
 
     public LocalDate getStartDate() {
@@ -65,6 +53,13 @@ public class BookingPeriod implements Comparable<BookingPeriod> {
 
     public String getEndDateAsFormattedString() {
         return endDate.format(DATE_TO_STRING_FORMAT);
+    }
+
+    /**
+     * Returns true if a given string is a valid name.
+     */
+    public static boolean isValidBookingPeriod(String testStartDate, String testEndDate) {
+        return parsableDate(testStartDate) && parsableDate(testEndDate);
     }
 
     /**
@@ -128,7 +123,7 @@ public class BookingPeriod implements Comparable<BookingPeriod> {
     }
 
     /**
-     * Checks if the given date is within this booking period's start and end dates.
+     * Checks if the given date is within this booking period's start and end dates, inclusively
      */
     public boolean includesDate(LocalDate date) {
         return date.compareTo(startDate) >= 0

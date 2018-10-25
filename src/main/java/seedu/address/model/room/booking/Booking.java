@@ -5,7 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.time.LocalDate;
 import java.util.Objects;
 
-import seedu.address.model.person.Guest;
+import seedu.address.model.guest.Guest;
 
 /**
  * Represents a Booking of a room in the hotel.
@@ -16,7 +16,7 @@ public class Booking implements Comparable<Booking> {
     // Identity fields
     private final Guest guest;
     private final BookingPeriod bookingPeriod;
-    private final Boolean checkIn;
+    private final Boolean isCheckedIn;
 
     /**
      * Guest and BookingPeriod must be present and not null.
@@ -25,37 +25,17 @@ public class Booking implements Comparable<Booking> {
         requireAllNonNull(guest, bookingPeriod);
         this.guest = guest;
         this.bookingPeriod = bookingPeriod;
-        this.checkIn = false;
+        this.isCheckedIn = false;
     }
 
     /**
-     * Every field must be present and not null.
+     * Private constructor used to check-in a booking
      */
-    public Booking(Guest guest, BookingPeriod bookingPeriod, boolean checkin) {
+    public Booking(Guest guest, BookingPeriod bookingPeriod, boolean isCheckedIn) {
         requireAllNonNull(guest, bookingPeriod);
         this.guest = guest;
         this.bookingPeriod = bookingPeriod;
-        this.checkIn = checkin;
-    }
-
-    /**
-     * Copies the given Booking to this one
-     */
-    public Booking(Booking toBeCopied) {
-        this.guest = toBeCopied.getGuest();
-        this.bookingPeriod = toBeCopied.getBookingPeriod();
-        this.checkIn = toBeCopied.isCheckedIn();
-    }
-
-    /**
-     * Private constructor used to check in a booking
-     * @param toBeCheckedIn Copy of the original booking
-     * @param checkIn Flag for setting room check-in
-     */
-    private Booking(Booking toBeCheckedIn, boolean checkIn) {
-        this.guest = toBeCheckedIn.getGuest();
-        this.bookingPeriod = toBeCheckedIn.getBookingPeriod();
-        this.checkIn = checkIn;
+        this.isCheckedIn = isCheckedIn;
     }
 
     public Guest getGuest() {
@@ -66,8 +46,8 @@ public class Booking implements Comparable<Booking> {
         return bookingPeriod;
     }
 
-    public Boolean isCheckedIn() {
-        return checkIn;
+    public Boolean getIsCheckedIn() {
+        return isCheckedIn;
     }
 
     /**
@@ -75,7 +55,7 @@ public class Booking implements Comparable<Booking> {
      * This is needed to maintain immutability of objects in Concierge
      */
     public Booking checkIn() {
-        return new Booking(this, true);
+        return new Booking(this.getGuest(), this.getBookingPeriod(), true);
     }
 
     /**
@@ -107,13 +87,6 @@ public class Booking implements Comparable<Booking> {
     }
 
     /**
-     * Checks if this booking is active or expired
-     */
-    public boolean isActiveOrExpired() {
-        return isActive() || isExpired();
-    }
-
-    /**
      * Checks if this booking includes the given date
      */
     public boolean includesDate(LocalDate date) {
@@ -134,24 +107,6 @@ public class Booking implements Comparable<Booking> {
             && otherBooking.getBookingPeriod().equals(getBookingPeriod());
     }
 
-
-    /**
-     * Gets the short description of this room, which comprises of
-     * 1) Guest's name
-     * 2) Booking period
-     * 3) Checked-in status
-     */
-    public String toStringShortDescription() {
-        final StringBuilder builder = new StringBuilder();
-        builder.append("Guest: ")
-            .append(getGuest().getName())
-            .append("\nBooking period: ")
-            .append(getBookingPeriod())
-            .append("\nChecked-in: ")
-            .append(isCheckedIn() ? "Yes" : "No");
-        return builder.toString();
-    }
-
     /**
      * Returns true if both bookings have the same identity and data fields.
      * This defines a stronger notion of equality between two bookings.
@@ -168,8 +123,26 @@ public class Booking implements Comparable<Booking> {
 
         Booking otherBooking = (Booking) other;
         return otherBooking.getGuest().equals(getGuest())
-                && otherBooking.getBookingPeriod().equals(getBookingPeriod())
-                && (otherBooking.isCheckedIn().equals(isCheckedIn()));
+            && otherBooking.getBookingPeriod().equals(getBookingPeriod())
+            && (otherBooking.getIsCheckedIn().equals(getIsCheckedIn()));
+    }
+
+
+    /**
+     * Gets the short description of this room, which comprises of
+     * 1) Guest's name
+     * 2) Booking period
+     * 3) Checked-in status
+     */
+    public String toStringShortDescription() {
+        final StringBuilder builder = new StringBuilder();
+        builder.append("Guest: ")
+            .append(getGuest().getName())
+            .append("\nBooking period: ")
+            .append(getBookingPeriod())
+            .append("\nChecked-in: ")
+            .append(getIsCheckedIn() ? "Yes" : "No");
+        return builder.toString();
     }
 
     @Override
@@ -186,7 +159,7 @@ public class Booking implements Comparable<Booking> {
                 .append(" BookingPeriod: ")
                 .append(getBookingPeriod())
                 .append(" Checked-in: ")
-                .append(isCheckedIn());
+                .append(getIsCheckedIn());
         return builder.toString();
     }
 

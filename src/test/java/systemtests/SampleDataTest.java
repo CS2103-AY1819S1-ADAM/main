@@ -9,7 +9,7 @@ import java.nio.file.Path;
 import org.junit.Test;
 
 import seedu.address.model.Concierge;
-import seedu.address.model.person.Guest;
+import seedu.address.model.guest.Guest;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.testutil.TestUtil;
 
@@ -45,7 +45,7 @@ public class SampleDataTest extends ConciergeSystemTest {
 
     @Test
     public void concierge_dataFileDoesNotExist_loadSampleData() {
-        Guest[] expectedList = SampleDataUtil.getSamplePersons();
-        assertListMatching(getPersonListPanel(), expectedList);
+        Guest[] expectedList = SampleDataUtil.getSampleGuests();
+        assertListMatching(getGuestListPanel(), expectedList);
     }
 }

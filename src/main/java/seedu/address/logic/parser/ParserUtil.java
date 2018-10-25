@@ -12,10 +12,9 @@ import java.util.stream.Stream;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
+import seedu.address.model.guest.Email;
+import seedu.address.model.guest.Name;
+import seedu.address.model.guest.Phone;
 import seedu.address.model.room.RoomNumber;
 import seedu.address.model.room.booking.BookingPeriod;
 import seedu.address.model.tag.Tag;
@@ -66,21 +65,6 @@ public class ParserUtil {
             throw new ParseException(Phone.MESSAGE_PHONE_CONSTRAINTS);
         }
         return new Phone(trimmedPhone);
-    }
-
-    /**
-     * Parses a {@code String address} into an {@code Address}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code address} is invalid.
-     */
-    public static Address parseAddress(String address) throws ParseException {
-        requireNonNull(address);
-        String trimmedAddress = address.trim();
-        if (!Address.isValidAddress(trimmedAddress)) {
-            throw new ParseException(Address.MESSAGE_ADDRESS_CONSTRAINTS);
-        }
-        return new Address(trimmedAddress);
     }
 
     /**
@@ -171,7 +155,8 @@ public class ParserUtil {
      * in the given input {@code String[]}
      */
     public static boolean areFlagsPresent(String[] splitString) {
-        if (splitString[0].equals(PREFIX_GUEST.toString()) || splitString[0].equals(PREFIX_ROOM.toString())) {
+        if ((splitString[0].equals(PREFIX_GUEST.toString()) || splitString[0].equals(PREFIX_ROOM.toString()))
+            && splitString.length == 1) {
             return true;
         }
         return false;

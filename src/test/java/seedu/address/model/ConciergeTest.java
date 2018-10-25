@@ -3,10 +3,9 @@ package seedu.address.model;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.TypicalConcierge.getTypicalConcierge;
-import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalGuests.ALICE;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -22,8 +21,8 @@ import org.junit.rules.ExpectedException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.expenses.ExpenseType;
-import seedu.address.model.person.Guest;
-import seedu.address.model.person.exceptions.DuplicateGuestException;
+import seedu.address.model.guest.Guest;
+import seedu.address.model.guest.exceptions.DuplicateGuestException;
 import seedu.address.model.room.Room;
 import seedu.address.testutil.GuestBuilder;
 
@@ -36,7 +35,7 @@ public class ConciergeTest {
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), concierge.getPersonList());
+        assertEquals(Collections.emptyList(), concierge.getGuestList());
     }
 
     @Test
@@ -53,9 +52,9 @@ public class ConciergeTest {
     }
 
     @Test
-    public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
+    public void resetData_withDuplicateGuests_throwsDuplicateGuestException() {
         // Two guests with the same identity fields
-        Guest editedAlice = new GuestBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Guest editedAlice = new GuestBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Guest> newGuests = Arrays.asList(ALICE, editedAlice);
 
@@ -66,34 +65,34 @@ public class ConciergeTest {
     }
 
     @Test
-    public void hasPerson_nullPerson_throwsNullPointerException() {
+    public void hasGuest_nullGuest_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        concierge.hasPerson(null);
+        concierge.hasGuest(null);
     }
 
     @Test
-    public void hasPerson_personNotInConcierge_returnsFalse() {
-        assertFalse(concierge.hasPerson(ALICE));
+    public void hasGuest_guestNotInConcierge_returnsFalse() {
+        assertFalse(concierge.hasGuest(ALICE));
     }
 
     @Test
-    public void hasPerson_personInConcierge_returnsTrue() {
-        concierge.addPerson(ALICE);
-        assertTrue(concierge.hasPerson(ALICE));
+    public void hasGuest_guestInConcierge_returnsTrue() {
+        concierge.addGuest(ALICE);
+        assertTrue(concierge.hasGuest(ALICE));
     }
 
     @Test
-    public void hasPerson_personWithSameIdentityFieldsInConcierge_returnsTrue() {
-        concierge.addPerson(ALICE);
-        Guest editedAlice = new GuestBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+    public void hasGuest_guestWithSameIdentityFieldsInConcierge_returnsTrue() {
+        concierge.addGuest(ALICE);
+        Guest editedAlice = new GuestBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
                 .build();
-        assertTrue(concierge.hasPerson(editedAlice));
+        assertTrue(concierge.hasGuest(editedAlice));
     }
 
     @Test
-    public void getPersonList_modifyList_throwsUnsupportedOperationException() {
+    public void getGuestList_modifyList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
-        concierge.getPersonList().remove(0);
+        concierge.getGuestList().remove(0);
     }
 
     @Test
@@ -114,7 +113,7 @@ public class ConciergeTest {
         }
 
         @Override
-        public ObservableList<Guest> getPersonList() {
+        public ObservableList<Guest> getGuestList() {
             return guests;
         }
 

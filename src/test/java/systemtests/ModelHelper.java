@@ -6,7 +6,7 @@ import java.util.Optional;
 import java.util.function.Predicate;
 
 import seedu.address.model.Model;
-import seedu.address.model.person.Guest;
+import seedu.address.model.guest.Guest;
 import seedu.address.model.room.Room;
 
 /**
@@ -14,7 +14,7 @@ import seedu.address.model.room.Room;
  */
 public class ModelHelper {
 
-    private static final Predicate<Guest> PREDICATE_MATCHING_NO_PERSONS = unused -> false;
+    private static final Predicate<Guest> PREDICATE_MATCHING_NO_GUESTS = unused -> false;
     private static final Predicate<Room> PREDICATE_MATCHING_NO_ROOMS = unused -> false;
 
     /**
@@ -24,7 +24,7 @@ public class ModelHelper {
     public static void setFilteredGuestList(Model model, List<Guest> toDisplay) {
         Optional<Predicate<Guest>> predicate =
                 toDisplay.stream().map(ModelHelper::getPredicateMatchingGuest).reduce(Predicate::or);
-        model.updateFilteredPersonList(predicate.orElse(PREDICATE_MATCHING_NO_PERSONS));
+        model.updateFilteredGuestList(predicate.orElse(PREDICATE_MATCHING_NO_GUESTS));
     }
 
     /**
@@ -38,7 +38,7 @@ public class ModelHelper {
      * Returns a predicate that evaluates to true if this {@code Guest} equals to {@code other}.
      */
     private static Predicate<Guest> getPredicateMatchingGuest(Guest other) {
-        return person -> person.equals(other);
+        return guest -> guest.equals(other);
     }
 
     /**

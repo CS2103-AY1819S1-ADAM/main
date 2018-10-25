@@ -12,7 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.ConciergeChangedEvent;
-import seedu.address.model.person.Guest;
+import seedu.address.model.guest.Guest;
 import seedu.address.model.room.Room;
 import seedu.address.model.room.RoomNumber;
 import seedu.address.model.room.booking.Booking;
@@ -37,7 +37,7 @@ public class ModelManager extends ComponentManager implements Model {
         logger.fine("Initializing with concierge: " + concierge + " and user prefs " + userPrefs);
 
         versionedConcierge = new VersionedConcierge(concierge);
-        filteredGuests = new FilteredList<>(versionedConcierge.getPersonList());
+        filteredGuests = new FilteredList<>(versionedConcierge.getGuestList());
         filteredRooms = new FilteredList<>(versionedConcierge.getRoomList());
     }
 
@@ -62,29 +62,29 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public boolean hasPerson(Guest guest) {
+    public boolean hasGuest(Guest guest) {
         requireNonNull(guest);
-        return versionedConcierge.hasPerson(guest);
+        return versionedConcierge.hasGuest(guest);
     }
 
     @Override
-    public void deletePerson(Guest target) {
-        versionedConcierge.removePerson(target);
+    public void deleteGuest(Guest target) {
+        versionedConcierge.removeGuest(target);
         indicateConciergeChanged();
     }
 
     @Override
-    public void addPerson(Guest guest) {
-        versionedConcierge.addPerson(guest);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    public void addGuest(Guest guest) {
+        versionedConcierge.addGuest(guest);
+        updateFilteredGuestList(PREDICATE_SHOW_ALL_GUESTS);
         indicateConciergeChanged();
     }
 
     @Override
-    public void updatePerson(Guest target, Guest editedGuest) {
+    public void updateGuest(Guest target, Guest editedGuest) {
         requireAllNonNull(target, editedGuest);
 
-        versionedConcierge.updatePerson(target, editedGuest);
+        versionedConcierge.updateGuest(target, editedGuest);
         indicateConciergeChanged();
     }
 
@@ -95,12 +95,12 @@ public class ModelManager extends ComponentManager implements Model {
      * {@code versionedConcierge}
      */
     @Override
-    public ObservableList<Guest> getFilteredPersonList() {
+    public ObservableList<Guest> getFilteredGuestList() {
         return FXCollections.unmodifiableObservableList(filteredGuests);
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Guest> predicate) {
+    public void updateFilteredGuestList(Predicate<Guest> predicate) {
         requireNonNull(predicate);
         filteredGuests.setPredicate(predicate);
     }
@@ -125,10 +125,17 @@ public class ModelManager extends ComponentManager implements Model {
     //=========== Room =======================================================
 
     @Override
-    public void checkinRoom(RoomNumber roomNumber) {
-        versionedConcierge.checkinRoom(roomNumber);
+    public void addBooking(RoomNumber roomNumber, Booking booking) {
+        versionedConcierge.addBooking(roomNumber, booking);
         updateFilteredRoomList(PREDICATE_SHOW_ALL_ROOMS);
         indicateConciergeChanged();
+    }
+
+    @Override
+    public void checkInRoom(RoomNumber roomNumber) {
+        versionedAddressBook.checkInRoom(roomNumber);
+        updateFilteredRoomList(PREDICATE_SHOW_ALL_ROOMS);
+        indicateAddressBookChanged();
     }
 
     @Override
@@ -144,7 +151,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     public boolean roomHasBooking(RoomNumber roomNumber) {
-        return versionedConcierge.roomHasBooking(roomNumber);
+        return versionedConcierge.roomHasBookings(roomNumber);
     }
 
     @Override
@@ -156,13 +163,6 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public boolean roomHasActiveOrExpiredBooking(RoomNumber roomNumber) {
         return versionedConcierge.roomHasActiveOrExpiredBooking(roomNumber);
-    }
-
-    @Override
-    public void addBooking(RoomNumber roomNumber, Booking booking) {
-        versionedConcierge.addBooking(roomNumber, booking);
-        updateFilteredRoomList(PREDICATE_SHOW_ALL_ROOMS);
-        indicateConciergeChanged();
     }
 
     //=========== Undo/Redo =================================================================================

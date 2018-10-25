@@ -1,7 +1,7 @@
 package seedu.address.testutil;
 
 import seedu.address.model.Concierge;
-import seedu.address.model.person.UniqueGuestList;
+import seedu.address.model.guest.UniqueGuestList;
 import seedu.address.model.room.UniqueRoomList;
 
 /**
@@ -9,17 +9,17 @@ import seedu.address.model.room.UniqueRoomList;
  */
 public class TypicalConcierge {
 
-    public static final UniqueGuestList GUEST_LIST = TypicalPersons.getTypicalUniqueGuestList();
+    public static final UniqueGuestList GUEST_LIST = TypicalGuests.getTypicalUniqueGuestList();
     public static final UniqueRoomList ROOM_LIST = TypicalRooms.getTypicalUniqueRoomList();
 
     private TypicalConcierge() {} // prevents instantiation
 
     /**
-     * Returns an {@code Concierge} with all the typical persons.
+     * Returns an {@code Concierge} with all the typical guests.
      */
     public static Concierge getTypicalConcierge() {
         Concierge ab = new Concierge();
-        ab.setPersons(GUEST_LIST.asUnmodifiableObservableList());
+        ab.setGuests(GUEST_LIST.asUnmodifiableObservableList());
         ab.setRooms(ROOM_LIST.asUnmodifiableObservableList());
         return ab;
     }

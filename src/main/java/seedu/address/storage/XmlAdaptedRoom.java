@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 import javax.xml.bind.annotation.XmlElement;
@@ -60,11 +62,9 @@ public class XmlAdaptedRoom {
         capacity = source.getCapacity().getValue();
         expenses.addAll(source.getExpenses().getExpensesList().stream().map(XmlAdaptedExpense::new)
             .collect(Collectors.toList()));
-        bookings.addAll(source.getBookings().asUnmodifiableSortedList().stream().map(XmlAdaptedBooking::new)
+        bookings.addAll(source.getBookings().getSortedBookingsSet().stream().map(XmlAdaptedBooking::new)
             .collect(Collectors.toList()));
-        tagged = source.getTags().stream()
-                .map(XmlAdaptedTag::new)
-                .collect(Collectors.toList());
+        tagged = source.getTags().stream().map(XmlAdaptedTag::new).collect(Collectors.toList());
     }
 
     /**
@@ -73,15 +73,6 @@ public class XmlAdaptedRoom {
      * @throws IllegalValueException if there were any data constraints violated in the adapted room
      */
     public Room toModelType(Menu menu) throws IllegalValueException {
-        final List<Tag> roomTags = new ArrayList<>();
-        for (XmlAdaptedTag tag : tagged) {
-            roomTags.add(tag.toModelType());
-        }
-
-        final List<Expense> expenseList = new ArrayList<>();
-        for (XmlAdaptedExpense expense : expenses) {
-            expenseList.add(expense.toModelType(menu));
-        }
 
         if (roomNumber == null) {
             throw new IllegalValueException(
@@ -101,34 +92,30 @@ public class XmlAdaptedRoom {
         }
         final Capacity modelCapacity = new Capacity(capacity);
 
-        final Bookings modelBookings = new Bookings();
+        final SortedSet<Booking> bookingsSet = new TreeSet<>();
         for (XmlAdaptedBooking b : bookings) {
-            Booking booking = b.toModelType();
-            if (modelBookings.canAcceptBooking(booking)) {
-                throw new IllegalValueException(MESSAGE_OVERLAPPING_BOOKING);
-            }
-            modelBookings.add(booking);
+            bookingsSet.add(b.toModelType());
         }
+        final Bookings modelBookings = new Bookings(bookingsSet);
 
+        final List<Expense> expenseList = new ArrayList<>();
+        for (XmlAdaptedExpense expense : expenses) {
+            expenseList.add(expense.toModelType(menu));
+        }
         final Expenses modelExpenses = new Expenses(expenseList);
 
+        final List<Tag> roomTags = new ArrayList<>();
+        for (XmlAdaptedTag tag : tagged) {
+            roomTags.add(tag.toModelType());
+        }
         final Set<Tag> modelTags = new HashSet<>(roomTags);
 
         if (modelCapacity.equals(SingleRoom.CAPACITY_SINGLE_ROOM)) {
-            SingleRoom singleRoom = new SingleRoom(modelRoomNumber);
-            singleRoom.setBookings(modelBookings);
-            singleRoom.resetExpenses(modelExpenses);
-            return singleRoom;
+            return new SingleRoom(modelRoomNumber, modelExpenses, modelBookings, modelTags);
         } else if (modelCapacity.equals(DoubleRoom.CAPACITY_DOUBLE_ROOM)) {
-            DoubleRoom doubleRoom = new DoubleRoom(modelRoomNumber);
-            doubleRoom.setBookings(modelBookings);
-            doubleRoom.resetExpenses(modelExpenses);
-            return doubleRoom;
+            return new DoubleRoom(modelRoomNumber, modelExpenses, modelBookings, modelTags);
         } else if (modelCapacity.equals(SuiteRoom.CAPACITY_SUITE_ROOM)) {
-            SuiteRoom suiteRoom = new SuiteRoom(modelRoomNumber);
-            suiteRoom.setBookings(modelBookings);
-            suiteRoom.resetExpenses(modelExpenses);
-            return suiteRoom;
+            return new SuiteRoom(modelRoomNumber, modelExpenses, modelBookings, modelTags);
         } else {
             throw new IllegalValueException(String.format(MESSAGE_NO_SUCH_ROOM_WITH_CAPACITY, capacity));
         }

@@ -27,16 +27,12 @@ public class SuiteRoom extends Room {
         super(roomNumber, CAPACITY_SUITE_ROOM, expenses, bookings, tags);
     }
 
-    public SuiteRoom(SuiteRoom suiteRoom) {
-        super(suiteRoom);
-    }
-
     public static int getCapacityValue() {
         return CAPACITY_SUITE_ROOM.getValue();
     }
 
     @Override
-    public SuiteRoom cloneRoom() {
-        return new SuiteRoom(this);
+    public SuiteRoom makeRoom(RoomNumber roomNumber, Expenses expenses, Bookings bookings, Set<Tag> tags) {
+        return new SuiteRoom(roomNumber, expenses, bookings, tags);
     }
 }
