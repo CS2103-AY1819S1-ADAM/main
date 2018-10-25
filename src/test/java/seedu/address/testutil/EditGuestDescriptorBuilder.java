@@ -6,7 +6,6 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditGuestDescriptor;
-import seedu.address.model.guest.Address;
 import seedu.address.model.guest.Email;
 import seedu.address.model.guest.Guest;
 import seedu.address.model.guest.Name;
@@ -36,7 +35,6 @@ public class EditGuestDescriptorBuilder {
         descriptor.setName(guest.getName());
         descriptor.setPhone(guest.getPhone());
         descriptor.setEmail(guest.getEmail());
-        descriptor.setAddress(guest.getAddress());
         descriptor.setTags(guest.getTags());
     }
 
@@ -61,14 +59,6 @@ public class EditGuestDescriptorBuilder {
      */
     public EditGuestDescriptorBuilder withEmail(String email) {
         descriptor.setEmail(new Email(email));
-        return this;
-    }
-
-    /**
-     * Sets the {@code Address} of the {@code EditGuestDescriptor} that we are building.
-     */
-    public EditGuestDescriptorBuilder withAddress(String address) {
-        descriptor.setAddress(new Address(address));
         return this;
     }
 

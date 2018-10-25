@@ -163,7 +163,7 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
         assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_GUEST);
 
         /* Case: add a duplicate guest except with different address -> rejected */
-        guestToAdd = new GuestBuilder(HOON).withAddress(VALID_ADDRESS_BOB).build();
+        guestToAdd = new GuestBuilder(HOON).build();
         command = GuestUtil.getAddCommand(guestToAdd, validRoomNumber, validBookingPeriod);
         assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_GUEST);
 
