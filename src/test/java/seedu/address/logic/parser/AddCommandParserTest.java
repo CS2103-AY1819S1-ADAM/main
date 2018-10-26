@@ -24,7 +24,6 @@ import static seedu.address.logic.commands.CommandTestUtil.ROOM_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ROOM_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_END_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_END_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_START_AMY;
@@ -147,12 +146,12 @@ public class AddCommandParserTest {
 
         // missing address prefix
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB
-                        + EMAIL_DESC_BOB + VALID_ADDRESS_BOB,
+                        + EMAIL_DESC_BOB ,
                 expectedMessage);
 
         // all prefixes missing
         assertParseFailure(parser, VALID_NAME_BOB + VALID_PHONE_BOB
-                        + VALID_EMAIL_BOB + VALID_ADDRESS_BOB,
+                        + VALID_EMAIL_BOB,
                 expectedMessage);
     }
 
