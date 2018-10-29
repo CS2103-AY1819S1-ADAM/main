@@ -42,7 +42,7 @@ public class Concierge implements ReadOnlyConcierge {
     public Concierge() {}
 
     /**
-     * Creates an Concierge using the Guests in the {@code toBeCopied}
+     * Creates an Concierge using the data in the {@code toBeCopied}
      */
     public Concierge(ReadOnlyConcierge toBeCopied) {
         this();

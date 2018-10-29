@@ -144,8 +144,9 @@ public class Room {
     /**
      * Add an expense to this room's expenses
      */
-    public void addExpense(Expense expense) {
-        expenses.addExpense(expense);
+    public Room addExpense(Expense expense) {
+        Expenses editedExpenses = expenses.addExpense(expense);
+        return new Room(this.roomNumber, this.capacity, editedExpenses, this.bookings, this.tags);
     }
 
     //=========== Boolean checkers =============================================================

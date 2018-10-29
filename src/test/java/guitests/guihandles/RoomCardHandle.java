@@ -15,7 +15,7 @@ import seedu.address.model.room.Room;
  * Provides a handle to a room card in the room list panel.
  */
 public class RoomCardHandle extends NodeHandle<Node> {
-    private static final String ROOMNUMBER_FIELD_ID = "#roomNumber";
+    private static final String ROOM_NUMBER_FIELD_ID = "#roomNumber";
     private static final String CAPACITY_FIELD_ID = "#capacity";
     private static final String ACTIVE_BOOKING_FIELD_ID = "#activeBooking";
     private static final String TAGS_FIELD_ID = "#tags";
@@ -28,7 +28,7 @@ public class RoomCardHandle extends NodeHandle<Node> {
     public RoomCardHandle(Node cardNode) {
         super(cardNode);
 
-        roomNumberLabel = getChildNode(ROOMNUMBER_FIELD_ID);
+        roomNumberLabel = getChildNode(ROOM_NUMBER_FIELD_ID);
         capacityLabel = getChildNode(CAPACITY_FIELD_ID);
 
         Region bookingsContainer = getChildNode(ACTIVE_BOOKING_FIELD_ID);
