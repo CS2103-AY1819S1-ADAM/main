@@ -8,11 +8,8 @@ import java.util.SortedSet;
 import seedu.address.model.expenses.Expense;
 import seedu.address.model.expenses.Expenses;
 import seedu.address.model.room.Capacity;
-import seedu.address.model.room.DoubleRoom;
 import seedu.address.model.room.Room;
 import seedu.address.model.room.RoomNumber;
-import seedu.address.model.room.SingleRoom;
-import seedu.address.model.room.SuiteRoom;
 import seedu.address.model.room.booking.Booking;
 import seedu.address.model.room.booking.Bookings;
 import seedu.address.model.tag.Tag;
@@ -24,7 +21,7 @@ import seedu.address.model.util.SampleDataUtil;
 public class RoomBuilder {
 
     public static final String DEFAULT_ROOM_NUMBER = "001";
-    public static final int DEFAULT_CAPACITY = 1;
+    public static final Capacity DEFAULT_CAPACITY = Capacity.SINGLE;
 
     private RoomNumber roomNumber;
     private Capacity capacity;
@@ -34,7 +31,7 @@ public class RoomBuilder {
 
     public RoomBuilder() {
         roomNumber = new RoomNumber(DEFAULT_ROOM_NUMBER);
-        capacity = new Capacity(DEFAULT_CAPACITY);
+        capacity = DEFAULT_CAPACITY;
         expenses = new Expenses();
         bookings = new Bookings();
         tags = new HashSet<>();
@@ -70,8 +67,8 @@ public class RoomBuilder {
     /**
      * Sets the {@code Capacity} of the {@code Room} that we are building.
      */
-    public RoomBuilder withCapacity(int capacity) {
-        this.capacity = new Capacity(capacity);
+    public RoomBuilder withCapacity(Capacity capacity) {
+        this.capacity = capacity;
         return this;
     }
 
@@ -95,14 +92,6 @@ public class RoomBuilder {
      * Builds the room type depending on the capacity
      */
     public Room build() {
-        if (capacity.equals(SingleRoom.CAPACITY_SINGLE_ROOM)) {
-            return new SingleRoom(this.roomNumber, this.expenses, this.bookings, this.tags);
-        } else if (capacity.equals(DoubleRoom.CAPACITY_DOUBLE_ROOM)) {
-            return new DoubleRoom(this.roomNumber, this.expenses, this.bookings, this.tags);
-        } else if (capacity.equals(SuiteRoom.CAPACITY_SUITE_ROOM)) {
-            return new SuiteRoom(this.roomNumber, this.expenses, this.bookings, this.tags);
-        } else {
-            throw new IllegalArgumentException(Capacity.MESSAGE_CAPACITY_CONSTRAINTS);
-        }
+        return new Room(this.roomNumber, this.capacity, this.expenses, this.bookings, this.tags);
     }
 }

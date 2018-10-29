@@ -17,12 +17,12 @@ import seedu.address.model.room.Room;
 public class RoomCardHandle extends NodeHandle<Node> {
     private static final String ROOMNUMBER_FIELD_ID = "#roomNumber";
     private static final String CAPACITY_FIELD_ID = "#capacity";
-    private static final String BOOKING_FIELD_ID = "#bookings";
+    private static final String ACTIVE_BOOKING_FIELD_ID = "#activeBooking";
     private static final String TAGS_FIELD_ID = "#tags";
 
     private final Label roomNumberLabel;
     private final Label capacityLabel;
-    private final List<Label> firstBookingLabels;
+    private final List<Label> activeBookingLabels;
     private final List<Label> tagLabels;
 
     public RoomCardHandle(Node cardNode) {
@@ -31,14 +31,14 @@ public class RoomCardHandle extends NodeHandle<Node> {
         roomNumberLabel = getChildNode(ROOMNUMBER_FIELD_ID);
         capacityLabel = getChildNode(CAPACITY_FIELD_ID);
 
-        Region bookingsContainer = getChildNode(BOOKING_FIELD_ID);
-        firstBookingLabels = bookingsContainer
+        Region bookingsContainer = getChildNode(ACTIVE_BOOKING_FIELD_ID);
+        activeBookingLabels = bookingsContainer
                 .getChildrenUnmodifiable()
                 .stream()
                 .map(Label.class::cast)
                 .collect(Collectors.toList());
 
-        firstBookingLabels.remove(0);
+        activeBookingLabels.remove(0);
 
         Region tagsContainer = getChildNode(TAGS_FIELD_ID);
         tagLabels = tagsContainer
@@ -57,14 +57,14 @@ public class RoomCardHandle extends NodeHandle<Node> {
     }
 
     public List<String> getBookings() {
-        return firstBookingLabels
+        return activeBookingLabels
                 .stream()
                 .map(Label::getText)
                 .collect(Collectors.toList());
     }
 
-    public List<String> getFirstBooking() {
-        return firstBookingLabels
+    public List<String> getActiveBooking() {
+        return activeBookingLabels
                 .stream()
                 .map(Label::getText)
                 .collect(Collectors.toList());

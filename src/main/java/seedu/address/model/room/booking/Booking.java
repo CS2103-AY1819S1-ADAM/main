@@ -2,7 +2,6 @@ package seedu.address.model.room.booking;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.time.LocalDate;
 import java.util.Objects;
 
 import seedu.address.model.guest.Guest;
@@ -19,20 +18,17 @@ public class Booking implements Comparable<Booking> {
     private final Boolean isCheckedIn;
 
     /**
-     * Guest and BookingPeriod must be present and not null.
+     * Guest and BookingPeriod must be present and not null. Constructs a non-checked-in booking by default
      */
     public Booking(Guest guest, BookingPeriod bookingPeriod) {
-        requireAllNonNull(guest, bookingPeriod);
-        this.guest = guest;
-        this.bookingPeriod = bookingPeriod;
-        this.isCheckedIn = false;
+        this(guest, bookingPeriod, false);
     }
 
     /**
-     * Private constructor used to check-in a booking
+     * Constructs a booking with specified guest, booking period and checked in status
      */
-    public Booking(Guest guest, BookingPeriod bookingPeriod, boolean isCheckedIn) {
-        requireAllNonNull(guest, bookingPeriod);
+    public Booking(Guest guest, BookingPeriod bookingPeriod, Boolean isCheckedIn) {
+        requireAllNonNull(guest, bookingPeriod, isCheckedIn);
         this.guest = guest;
         this.bookingPeriod = bookingPeriod;
         this.isCheckedIn = isCheckedIn;
@@ -80,20 +76,6 @@ public class Booking implements Comparable<Booking> {
     }
 
     /**
-     * Checks if this booking is upcoming.
-     */
-    public boolean isUpcoming() {
-        return getBookingPeriod().isUpcoming();
-    }
-
-    /**
-     * Checks if this booking includes the given date
-     */
-    public boolean includesDate(LocalDate date) {
-        return getBookingPeriod().includesDate(date);
-    }
-
-    /**
      * Returns true if both bookings have the same guest and booking period.
      * This defines a weaker notion of equality between two rooms, as it does not need checkIn to be the same.
      */
@@ -136,10 +118,10 @@ public class Booking implements Comparable<Booking> {
      */
     public String toStringShortDescription() {
         final StringBuilder builder = new StringBuilder();
-        builder.append("Guest: ")
-            .append(getGuest().getName())
-            .append("\nBooking period: ")
+        builder.append("Booking period: ")
             .append(getBookingPeriod())
+            .append("\nGuest: ")
+            .append(getGuest().getName())
             .append("\nChecked-in: ")
             .append(getIsCheckedIn() ? "Yes" : "No");
         return builder.toString();
@@ -154,17 +136,25 @@ public class Booking implements Comparable<Booking> {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append("Guest: ")
-                .append(getGuest())
-                .append(" BookingPeriod: ")
+        builder.append("Booking period: ")
                 .append(getBookingPeriod())
-                .append(" Checked-in: ")
-                .append(getIsCheckedIn());
+                .append("\nGuest: ")
+                .append(getGuest())
+                .append("\nChecked-in: ")
+                .append(getIsCheckedIn() ? "Yes" : "No");
         return builder.toString();
     }
 
     @Override
     public int compareTo(Booking other) {
-        return bookingPeriod.compareTo(other.getBookingPeriod());
+        int result = bookingPeriod.compareTo(other.getBookingPeriod());
+        if (result != 0) {
+            return result;
+        }
+        result = guest.compareTo(other.guest);
+        if (result != 0) {
+            return result;
+        }
+        return isCheckedIn.compareTo(other.isCheckedIn);
     }
 }

@@ -1,8 +1,8 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_GUEST;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ROOM;
+import static seedu.address.logic.parser.CliSyntax.FLAG_GUEST;
+import static seedu.address.logic.parser.CliSyntax.FLAG_ROOM;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -155,7 +155,7 @@ public class ParserUtil {
      * in the given input {@code String[]}
      */
     public static boolean areFlagsPresent(String[] splitString) {
-        if ((splitString[0].equals(PREFIX_GUEST.toString()) || splitString[0].equals(PREFIX_ROOM.toString()))
+        if ((splitString[0].equals(FLAG_GUEST.toString()) || splitString[0].equals(FLAG_ROOM.toString()))
             && splitString.length == 1) {
             return true;
         }

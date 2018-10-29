@@ -47,7 +47,7 @@ public class XmlAdaptedBookingPeriod {
             throw new IllegalValueException(
                     String.format(MISSING_FIELD_MESSAGE_FORMAT, LocalDate.class.getSimpleName()));
         }
-        if (!BookingPeriod.parsableDate(startDate) || !BookingPeriod.parsableDate(endDate)) {
+        if (!BookingPeriod.isValidBookingPeriod(startDate, endDate)) {
             throw new IllegalValueException(BookingPeriod.MESSAGE_BOOKING_PERIOD_CONSTRAINTS);
         }
 

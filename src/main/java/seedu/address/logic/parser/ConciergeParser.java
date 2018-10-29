@@ -7,7 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.CheckinCommand;
+import seedu.address.logic.commands.CheckInCommand;
 import seedu.address.logic.commands.CheckoutCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
@@ -52,8 +52,8 @@ public class ConciergeParser {
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
 
-        case CheckinCommand.COMMAND_WORD:
-            return new CheckinCommandParser().parse(arguments);
+        case CheckInCommand.COMMAND_WORD:
+            return new CheckInCommandParser().parse(arguments);
 
         case CheckoutCommand.COMMAND_WORD:
             return new CheckoutCommandParser().parse(arguments);

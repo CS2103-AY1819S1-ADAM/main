@@ -11,10 +11,11 @@ import java.util.Set;
 import seedu.address.model.expenses.Expense;
 import seedu.address.model.expenses.Expenses;
 import seedu.address.model.room.booking.Booking;
+import seedu.address.model.room.booking.BookingPeriod;
 import seedu.address.model.room.booking.Bookings;
+import seedu.address.model.room.booking.exceptions.BookingNotFoundException;
+import seedu.address.model.room.booking.exceptions.ExpiredBookingsFoundException;
 import seedu.address.model.room.booking.exceptions.NoActiveBookingException;
-import seedu.address.model.room.booking.exceptions.NoActiveOrExpiredBookingException;
-import seedu.address.model.room.booking.exceptions.NoBookingException;
 import seedu.address.model.room.exceptions.OccupiedRoomCheckinException;
 import seedu.address.model.tag.Tag;
 
@@ -22,25 +23,25 @@ import seedu.address.model.tag.Tag;
  * Represents a room in the hotel.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public abstract class Room {
+public class Room {
 
     // Identity fields
-    protected final RoomNumber roomNumber;
+    public final RoomNumber roomNumber;
 
     // Data fields
-    protected final Capacity capacity;
-    protected final Expenses expenses;
-    protected final Bookings bookings;
-    protected final Set<Tag> tags;
+    public final Capacity capacity;
+    public final Expenses expenses;
+    public final Bookings bookings;
+    public final Set<Tag> tags;
 
-    protected Room(RoomNumber roomNumber, Capacity capacity) {
+    public Room(RoomNumber roomNumber, Capacity capacity) {
         this(roomNumber, capacity, new Expenses(), new Bookings(), new HashSet<>());
     }
 
     /**
      * All parameters must be non-null.
      */
-    protected Room(RoomNumber roomNumber, Capacity capacity, Expenses expenses, Bookings bookings, Set<Tag> tags) {
+    public Room(RoomNumber roomNumber, Capacity capacity, Expenses expenses, Bookings bookings, Set<Tag> tags) {
         requireAllNonNull(roomNumber, capacity, expenses, bookings, tags);
         this.roomNumber = roomNumber;
         this.capacity = capacity;
@@ -48,15 +49,6 @@ public abstract class Room {
         this.bookings = bookings;
         this.tags = tags;
     }
-
-    //=========== Special constructor method !IMPORTANT =============================================================
-
-    /**
-     * Method to edit a room by passing arguments and getting a new Room with those arguments
-     * Abstract to allow subclass to override and return a {@code Room} of their own type
-     * Package-private to hide it from outside classes
-     */
-    abstract Room makeRoom(RoomNumber roomNumber, Expenses expenses, Bookings bookings, Set<Tag> tags);
 
     //=========== Getters =============================================================
 
@@ -84,19 +76,6 @@ public abstract class Room {
         return Collections.unmodifiableSet(tags);
     }
 
-    /**
-     * Returns an {@code Optional} of the first booking of this room
-     */
-    public Optional<Booking> getFirstBooking() {
-        Booking firstBooking;
-        try {
-            firstBooking = bookings.getFirstBooking();
-        } catch (NoBookingException e) {
-            firstBooking = null;
-        }
-        return Optional.ofNullable(firstBooking);
-    }
-
     //=========== Bookings operations =============================================================
 
     /**
@@ -104,42 +83,60 @@ public abstract class Room {
      */
     public Room addBooking(Booking booking) {
         Bookings editedBookings = bookings.add(booking);
-        return makeRoom(this.roomNumber, this.expenses, editedBookings, this.tags);
+        return new Room(this.roomNumber, this.capacity, this.expenses, editedBookings, this.tags);
     }
 
     /**
      * Update a booking with the edited booking
      */
-    public Room updateBooking(Booking target, Booking editedBooking) {
+    private Room updateBooking(Booking target, Booking editedBooking) {
         Bookings editedBookings = bookings.updateBooking(target, editedBooking);
-        return makeRoom(this.roomNumber, this.expenses, editedBookings, this.tags);
+        return new Room(this.roomNumber, this.capacity, this.expenses, editedBookings, this.tags);
     }
 
     /**
-     * Checks in the first booking of this room and its occupant
+     * Checks in the first (earliest) booking of this room, only if:
+     * 1) there are no expired bookings
+     * 2) it is active
+     * 3) not already checked-in,
      */
     public Room checkIn() {
-        if (!hasActiveBooking()) {
+        if (bookings.hasExpiredBookings()) {
+            throw new ExpiredBookingsFoundException();
+        }
+        Optional<Booking> optionalActiveBooking = bookings.getActiveBooking();
+        if (!optionalActiveBooking.isPresent()) {
             throw new NoActiveBookingException();
         }
-        if (isCheckedIn()) {
+        Booking activeBooking = optionalActiveBooking.get();
+        if (activeBooking.getIsCheckedIn()) {
             throw new OccupiedRoomCheckinException();
         }
-        Booking firstBooking = bookings.getFirstBooking();
-        return updateBooking(firstBooking, firstBooking.checkIn());
+        return updateBooking(activeBooking, activeBooking.checkIn());
     }
 
     /**
-     * Checks out the first booking of this room and its current occupant.
-     * Future features to include exporting of receipt, setting room to housekeeping status for __x__ hours.
+     * Checks out the first booking of this room.
+     * KIV: Future features to include exporting of receipt, setting room to housekeeping status for __x__ hours.
      */
     public Room checkout() {
-        if (!hasActiveOrExpiredBooking()) {
-            throw new NoActiveOrExpiredBookingException();
-        }
         Booking firstBooking = bookings.getFirstBooking();
-        return makeRoom(this.roomNumber, this.expenses, bookings.remove(firstBooking), this.tags);
-        // expenses.report(); // weizheng implement this later
+        return new Room(this.roomNumber, this.capacity, this.expenses, bookings.remove(firstBooking), this.tags);
+        // expenses.report(); // KIV: wait for WZ to implement
+    }
+
+    /**
+     * Checks out the booking identified by the booking period
+     * KIV: Future features to include exporting of receipt, setting room to housekeeping status for __x__ hours.
+     */
+    public Room checkout(BookingPeriod bookingPeriod) {
+        for (Booking booking : bookings.getSortedBookingsSet()) {
+            if (booking.getBookingPeriod().equals(bookingPeriod)) {
+                return new Room(this.roomNumber, this.capacity, this.expenses, bookings.remove(booking), this.tags);
+            }
+        }
+        throw new BookingNotFoundException();
+        // expenses.report(); // KIV: wait for WZ to implement
     }
 
     //=========== Expenses operations =============================================================
@@ -152,37 +149,6 @@ public abstract class Room {
     }
 
     //=========== Boolean checkers =============================================================
-
-    /**
-     * Returns true if room's first booking has been checked in.
-     */
-    public boolean isCheckedIn() {
-        Booking firstBooking = bookings.getFirstBooking();
-        return firstBooking.getIsCheckedIn();
-    }
-
-    /**
-     * Returns true if this room's bookings is non-empty
-     */
-    public boolean hasBookings() {
-        return !bookings.isEmpty();
-    }
-
-    /**
-     * Returns true if room's first booking is active.
-     */
-    public boolean hasActiveBooking() {
-        Booking firstBooking = bookings.getFirstBooking();
-        return firstBooking.isActive();
-    }
-
-    /**
-     * Returns true if room's first booking is active or expired
-     */
-    public boolean hasActiveOrExpiredBooking() {
-        Booking firstBooking = bookings.getFirstBooking();
-        return firstBooking.isActive() || firstBooking.isExpired();
-    }
 
     /**
      * Returns true if both rooms of the same name have the same room number.
@@ -230,13 +196,17 @@ public abstract class Room {
         final StringBuilder builder = new StringBuilder();
         builder.append("Room: ")
                 .append(getRoomNumber())
-                .append(" Capacity: ")
+                .append("\n")
+                .append("Capacity: ")
                 .append(getCapacity())
+                .append("\n")
                 .append("Expenses: ")
                 .append(getExpenses())
-                .append(" Bookings: ")
+                .append("\n")
+                .append("Bookings: ")
                 .append(getBookings())
-                .append(" Tags: ");
+                .append("\n")
+                .append("Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
     }

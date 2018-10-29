@@ -18,7 +18,7 @@ public class Expense {
      */
     public static final DateTimeFormatter DATETIME_FORMAT = DateTimeFormatter.ofPattern("d/M/u HH:mm:ss");
 
-    private final double cost;
+    private final Money cost;
     private final ExpenseType type;
     private final LocalDateTime dateTime;
 
@@ -28,7 +28,7 @@ public class Expense {
      * @param type The menu number of the product or service exchanged for with this expense.
      * @param cost The monetary value of the expense.
      */
-    public Expense(ExpenseType type, double cost) {
+    public Expense(ExpenseType type, Money cost) {
         requireNonNull(type);
         this.type = type;
         this.cost = cost;
@@ -49,7 +49,7 @@ public class Expense {
         this.dateTime = LocalDateTime.now();
     }
 
-    public Expense(ExpenseType type, double cost, LocalDateTime dateTime) {
+    public Expense(ExpenseType type, Money cost, LocalDateTime dateTime) {
         requireAllNonNull(type, dateTime);
         this.type = type;
         this.cost = cost;
@@ -61,7 +61,7 @@ public class Expense {
      *
      * @return The monetary value of the expense.
      */
-    public double getCost() {
+    public Money getCost() {
         return cost;
     }
 
@@ -110,7 +110,7 @@ public class Expense {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Expenses // instanceof handles nulls
-                && cost == ((Expense) other).cost
+                && cost.equals(((Expense) other).cost)
                 && type.equals(((Expense) other).type)
                 && dateTime.equals(((Expense) other).dateTime)); // state check
     }

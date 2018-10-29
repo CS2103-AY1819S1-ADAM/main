@@ -1,7 +1,7 @@
 package seedu.address.ui;
 
-import static seedu.address.logic.parser.CliSyntax.PREFIX_GUEST;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ROOM;
+import static seedu.address.logic.parser.CliSyntax.FLAG_GUEST;
+import static seedu.address.logic.parser.CliSyntax.FLAG_ROOM;
 
 import java.util.logging.Logger;
 
@@ -125,10 +125,10 @@ public class UiManager extends ComponentManager implements Ui {
     private void handleListingChangeEvent(ListingChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
 
-        if (event.getFlag() == PREFIX_GUEST.toString()) {
+        if (event.getFlag() == FLAG_GUEST.toString()) {
             showGuestList();
             showGuestDetailedPanel();
-        } else if (event.getFlag() == PREFIX_ROOM.toString()) {
+        } else if (event.getFlag() == FLAG_ROOM.toString()) {
             showRoomList();
             showRoomDetailedPanel();
         }

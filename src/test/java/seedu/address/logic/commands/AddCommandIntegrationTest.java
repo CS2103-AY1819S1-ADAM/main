@@ -13,6 +13,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.guest.Guest;
 import seedu.address.model.room.RoomNumber;
+import seedu.address.model.room.booking.Booking;
 import seedu.address.model.room.booking.BookingPeriod;
 import seedu.address.testutil.GuestBuilder;
 import seedu.address.testutil.TypicalBookingPeriods;
@@ -39,6 +40,7 @@ public class AddCommandIntegrationTest {
 
         Model expectedModel = new ModelManager(model.getConcierge(), new UserPrefs());
         expectedModel.addGuest(validGuest);
+        expectedModel.addBooking(validRoomNumber, new Booking(validGuest, validBookingPeriod));
         expectedModel.commitConcierge();
 
         assertCommandSuccess(new AddCommand(validGuest, validRoomNumber, validBookingPeriod),
