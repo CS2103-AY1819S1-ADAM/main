@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_GUEST;
+import static seedu.address.logic.parser.CliSyntax.FLAG_GUEST;
 
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.Messages;
@@ -33,7 +33,7 @@ public class FindCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
         model.updateFilteredGuestList(predicate);
-        EventsCenter.getInstance().post(new ListingChangedEvent(PREFIX_GUEST.toString()));
+        EventsCenter.getInstance().post(new ListingChangedEvent(FLAG_GUEST.toString()));
 
         return new CommandResult(
                 String.format(Messages.MESSAGE_GUESTS_LISTED_OVERVIEW, model.getFilteredGuestList().size()));
