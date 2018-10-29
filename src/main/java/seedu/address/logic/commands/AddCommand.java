@@ -48,7 +48,7 @@ public class AddCommand extends Command {
             + PREFIX_DATE_END + "05/11/2018";
 
     public static final String MESSAGE_SUCCESS =
-            "New guest added: %1$s \nAssigned to room: %2$s \n\tfrom %3$s";
+            "New guest added: %1$s \nMade a booking for room: %2$s \n\tfrom %3$s";
     public static final String MESSAGE_DUPLICATE_GUEST = "This guest already exists in Concierge";
 
     private final Guest guestToAdd;
