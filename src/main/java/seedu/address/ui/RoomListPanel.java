@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 import com.google.common.eventbus.Subscribe;
 
 import javafx.application.Platform;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
@@ -12,6 +13,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
+import seedu.address.commons.events.ui.RoomListChangedEvent;
 import seedu.address.commons.events.ui.RoomPanelSelectionChangedEvent;
 import seedu.address.model.room.Room;
 
@@ -32,6 +34,7 @@ public class RoomListPanel extends UiPart<Region> {
     }
 
     private void setConnections(ObservableList<Room> roomList) {
+        roomList.addListener((ListChangeListener) unusedChange -> raise(new RoomListChangedEvent(roomList)));
         roomListView.setItems(roomList);
         roomListView.setCellFactory(listView -> new RoomListViewCell());
         setEventHandlerForSelectionChangeEvent();

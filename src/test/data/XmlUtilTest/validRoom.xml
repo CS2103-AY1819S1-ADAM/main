@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<rooms>
+    <roomNumber>001</roomNumber>
+    <capacity>SINGLE</capacity>
+    <bookings>
+        <guest>
+            <name>naruto</name>
+            <phone>123</phone>
+            <email>naruto@konoha</email>
+        </guest>
+        <bookingPeriod>
+            <startDate>28/10/2018</startDate>
+            <endDate>29/10/2018</endDate>
+        </bookingPeriod>
+        <checkin>false</checkin>
+    </bookings>
+</rooms>

@@ -7,7 +7,6 @@ import static seedu.address.logic.parser.CliSyntax.FLAG_ROOM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE_END;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE_START;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -37,8 +36,6 @@ public class CommandTestUtil {
     public static final String VALID_PHONE_BOB = "22222222";
     public static final String VALID_EMAIL_AMY = "amy@example.com";
     public static final String VALID_EMAIL_BOB = "bob@example.com";
-    public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
-    public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
     public static final String VALID_TAG_HANDICAP = "handicap";
@@ -50,9 +47,6 @@ public class CommandTestUtil {
             TypicalRoomNumbers.ROOM_NUMBER_001.value;
     public static final String VALID_ROOM_NUMBER_020 =
             TypicalRoomNumbers.ROOM_NUMBER_020.value;
-    public static final Integer VALID_CAPACITY_SINGLE = 1;
-    public static final Integer VALID_CAPACITY_DOUBLE = 2;
-    public static final Integer VALID_CAPACITY_SUITE = 5;
     public static final String VALID_DATE_START_AMY = "14/11/2018";
     public static final String VALID_DATE_END_AMY = "17/11/2018";
     public static final String VALID_DATE_START_BOB = "03/11/2018";
@@ -67,11 +61,11 @@ public class CommandTestUtil {
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
     public static final String ROOM_DESC_001 =
-            " " + FLAG_ROOM + " " + VALID_ROOM_NUMBER_001;
+            " " + PREFIX_ROOM + VALID_ROOM_NUMBER_001;
     public static final String ROOM_DESC_020 =
-            " " + FLAG_ROOM + " " + VALID_ROOM_NUMBER_020;
-    public static final String ROOM_DESC_AMY = " " + FLAG_ROOM + " " + VALID_ROOM_NUMBER_AMY;
-    public static final String ROOM_DESC_BOB = " " + FLAG_ROOM + " " + VALID_ROOM_NUMBER_BOB;
+            " " + PREFIX_ROOM + VALID_ROOM_NUMBER_020;
+    public static final String ROOM_DESC_AMY = " " + PREFIX_ROOM + " " + VALID_ROOM_NUMBER_AMY;
+    public static final String ROOM_DESC_BOB = " " + PREFIX_ROOM + " " + VALID_ROOM_NUMBER_BOB;
     public static final String DATE_START_DESC_AMY =
             " " + PREFIX_DATE_START + " " + VALID_DATE_START_AMY;
     public static final String DATE_END_DESC_AMY =
@@ -85,8 +79,7 @@ public class CommandTestUtil {
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
-    public static final String INVALID_ROOM_DESC = " " + FLAG_ROOM + "101"; // rooms only valid from 001 to 100.
-    public static final String INVALID_INDEX_DESC = " " + PREFIX_INDEX + "-1"; // index has to be a counting number
+    public static final String INVALID_ROOM_DESC = " " + PREFIX_ROOM + "101"; // rooms only valid from 001 to 100.
     public static final String INVALID_DATE_START_DESC =
             " " + PREFIX_DATE_START + "138213"; // date has to be in dd/MM/yyyy format
     public static final String INVALID_DATE_END_DESC =

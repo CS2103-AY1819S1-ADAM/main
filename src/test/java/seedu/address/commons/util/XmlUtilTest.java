@@ -19,9 +19,8 @@ import seedu.address.model.Concierge;
 import seedu.address.storage.XmlAdaptedGuest;
 import seedu.address.storage.XmlAdaptedTag;
 import seedu.address.storage.XmlSerializableConcierge;
-import seedu.address.testutil.ConciergeBuilder;
-import seedu.address.testutil.GuestBuilder;
 import seedu.address.testutil.TestUtil;
+import seedu.address.testutil.TypicalConcierge;
 
 public class XmlUtilTest {
 
@@ -72,7 +71,7 @@ public class XmlUtilTest {
     @Test
     public void getDataFromFile_validFile_validResult() throws Exception {
         Concierge dataFromFile = XmlUtil.getDataFromFile(VALID_FILE, XmlSerializableConcierge.class).toModelType();
-        assertEquals(9, dataFromFile.getGuestList().size());
+        assertEquals(7, dataFromFile.getGuestList().size());
     }
 
     @Test
@@ -128,10 +127,7 @@ public class XmlUtilTest {
         XmlSerializableConcierge dataFromFile = XmlUtil.getDataFromFile(TEMP_FILE, XmlSerializableConcierge.class);
         assertEquals(dataToWrite, dataFromFile);
 
-        ConciergeBuilder builder = new ConciergeBuilder(new Concierge());
-        dataToWrite = new XmlSerializableConcierge(
-                builder.withGuest(new GuestBuilder().build()).build());
-
+        dataToWrite = new XmlSerializableConcierge(TypicalConcierge.getTypicalConcierge());
         XmlUtil.saveDataToFile(TEMP_FILE, dataToWrite);
         dataFromFile = XmlUtil.getDataFromFile(TEMP_FILE, XmlSerializableConcierge.class);
         assertEquals(dataToWrite, dataFromFile);

@@ -11,6 +11,7 @@ import java.util.stream.Stream;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.room.exceptions.DuplicateRoomException;
+import seedu.address.model.room.exceptions.RoomMissingException;
 import seedu.address.model.room.exceptions.RoomNotFoundException;
 
 /**
@@ -29,26 +30,29 @@ public class UniqueRoomList implements Iterable<Room> {
     private final ObservableList<Room> internalList = FXCollections.observableArrayList();
 
     /**
-     * Initializes an empty room list
+     * Initializes a room list with default RoomNumber.MAX_ROOM_NUMBER
      */
-    public UniqueRoomList() {}
+    public UniqueRoomList() {
+        this(RoomNumber.MAX_ROOM_NUMBER);
+    }
 
     /**
-     * Initializes a room list with rooms ranging from 001 up to the maxRoomNumber
+     * Initializes a room list with rooms ranging from 001 up to the given maxRoomNumber.
+     * Note: the maxRoomNumber here IS LIMITED BY Room.MAX_ROOM_NUMBER
      * @param maxRoomNumber The maximum room number as a string
      */
-    public UniqueRoomList(String maxRoomNumber) {
+    private UniqueRoomList(String maxRoomNumber) {
         this.internalList.setAll(Stream.iterate(1, i -> i <= Integer.parseInt(maxRoomNumber), i -> i + 1)
             .map(i -> {
                 RoomNumber roomNumber = new RoomNumber(String.format("%03d", i));
-                if (i % 10 == 0) { // All rooms with room number that is multiple of 10 is a SuiteRoom.
-                    return new SuiteRoom(roomNumber);
+                if (i % 10 == 0) { // All rooms with room number that is multiple of 10 is a Suite Room.
+                    return new Room(roomNumber, Capacity.SUITE);
                 }
-                if (i % 2 == 0) { // All rooms with even room number is a DoubleRoom.
-                    return new DoubleRoom(roomNumber);
+                if (i % 2 == 0) { // All rooms with even room number is a Double Room.
+                    return new Room(roomNumber, Capacity.DOUBLE);
                 }
-                // ALl rooms with odd room number is a SingleRoom.
-                return new SingleRoom(roomNumber);
+                // ALl rooms with odd room number is a Single Room.
+                return new Room(roomNumber, Capacity.SINGLE);
             })
             .collect(Collectors.toList()));
     }
@@ -70,29 +74,6 @@ public class UniqueRoomList implements Iterable<Room> {
     //=========== Operations =============================================================
 
     /**
-     * Adds a room to the list.
-     * The room must not already exist in the list.
-     */
-    public void add(Room toAdd) {
-        requireNonNull(toAdd);
-        if (contains(toAdd)) {
-            throw new DuplicateRoomException();
-        }
-        internalList.add(toAdd);
-    }
-
-    /**
-     * Removes the equivalent room from the list.
-     * The room must exist in the list.
-     */
-    public void remove(Room toRemove) {
-        requireNonNull(toRemove);
-        if (!internalList.remove(toRemove)) {
-            throw new RoomNotFoundException();
-        }
-    }
-
-    /**
      * Replaces the room {@code target} in the list with {@code editedRoom}.
      * {@code target} must exist in the list.
      * The room identity of {@code editedRoom} must not be the same as another existing room in the list.
@@ -104,7 +85,6 @@ public class UniqueRoomList implements Iterable<Room> {
         if (index == -1) {
             throw new RoomNotFoundException();
         }
-
         if (!target.isSameRoom(editedRoom) && contains(editedRoom)) {
             throw new DuplicateRoomException();
         }
@@ -120,6 +100,9 @@ public class UniqueRoomList implements Iterable<Room> {
         requireAllNonNull(rooms);
         if (!roomsAreUnique(rooms)) {
             throw new DuplicateRoomException();
+        }
+        if (rooms.size() != Integer.parseInt(RoomNumber.MAX_ROOM_NUMBER)) {
+            throw new RoomMissingException();
         }
         internalList.setAll(rooms);
     }
@@ -151,6 +134,13 @@ public class UniqueRoomList implements Iterable<Room> {
         return other == this // short circuit if same object
                 || (other instanceof UniqueRoomList // instanceof handles nulls
                         && internalList.equals(((UniqueRoomList) other).internalList));
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        internalList.forEach(sb::append);
+        return sb.toString();
     }
 
     @Override

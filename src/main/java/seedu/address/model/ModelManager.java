@@ -16,6 +16,7 @@ import seedu.address.model.guest.Guest;
 import seedu.address.model.room.Room;
 import seedu.address.model.room.RoomNumber;
 import seedu.address.model.room.booking.Booking;
+import seedu.address.model.room.booking.BookingPeriod;
 
 /**
  * Represents the in-memory model of Concierge data.
@@ -48,6 +49,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void resetData(ReadOnlyConcierge newData) {
         versionedConcierge.resetData(newData);
+        updateFilteredGuestList(PREDICATE_SHOW_ALL_GUESTS);
         indicateConciergeChanged();
     }
 
@@ -145,24 +147,12 @@ public class ModelManager extends ComponentManager implements Model {
         indicateConciergeChanged();
     }
 
+    /**
+     * Checks out a room's booking using its room number and the specified booking period
+     */
     @Override
-    public boolean isRoomCheckedIn(RoomNumber roomNumber) {
-        return versionedConcierge.isRoomCheckedIn(roomNumber);
-    }
-
-    public boolean roomHasBooking(RoomNumber roomNumber) {
-        return versionedConcierge.roomHasBookings(roomNumber);
-    }
-
-    @Override
-    public boolean roomHasActiveBooking(RoomNumber roomNumber) {
-        return versionedConcierge.roomHasActiveBooking(roomNumber);
-    }
-
-
-    @Override
-    public boolean roomHasActiveOrExpiredBooking(RoomNumber roomNumber) {
-        return versionedConcierge.roomHasActiveOrExpiredBooking(roomNumber);
+    public void checkoutRoom(RoomNumber roomNumber, BookingPeriod bookingPeriod) {
+        versionedConcierge.checkoutRoom(roomNumber, bookingPeriod);
     }
 
     //=========== Undo/Redo =================================================================================

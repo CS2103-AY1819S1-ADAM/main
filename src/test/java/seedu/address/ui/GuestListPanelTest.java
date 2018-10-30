@@ -22,6 +22,7 @@ import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.XmlUtil;
 import seedu.address.model.guest.Guest;
+import seedu.address.model.room.RoomNumber;
 import seedu.address.storage.XmlSerializableConcierge;
 
 public class GuestListPanelTest extends GuiUnitTest {
@@ -80,7 +81,7 @@ public class GuestListPanelTest extends GuiUnitTest {
      * {@code GuestListPanel}.
      */
     private ObservableList<Guest> createBackingList(int guestCount) throws Exception {
-        Path xmlFile = createXmlFileWithGuests(guestCount);
+        Path xmlFile = createXmlFileWithGuestsAndRooms(guestCount);
         XmlSerializableConcierge xmlConcierge =
                 XmlUtil.getDataFromFile(xmlFile, XmlSerializableConcierge.class);
         return FXCollections.observableArrayList(xmlConcierge.toModelType().getGuestList());
@@ -90,7 +91,7 @@ public class GuestListPanelTest extends GuiUnitTest {
      * Returns a .xml file containing {@code guestCount} guests.
      * This file will be deleted when the JVM terminates.
      */
-    private Path createXmlFileWithGuests(int guestCount) throws Exception {
+    private Path createXmlFileWithGuestsAndRooms(int guestCount) throws Exception {
         StringBuilder builder = new StringBuilder();
         builder.append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n");
         builder.append("<concierge>\n");
@@ -102,9 +103,15 @@ public class GuestListPanelTest extends GuiUnitTest {
             builder.append("<address>a</address>\n");
             builder.append("</guest>\n");
         }
+        for (int r = 1; r <= Integer.parseInt(RoomNumber.MAX_ROOM_NUMBER); r++) {
+            builder.append("<rooms>\n");
+            builder.append("<roomNumber>").append(String.format("%03d", r)).append("</roomNumber>\n");
+            builder.append("<capacity>SINGLE</capacity>\n");
+            builder.append("</rooms>\n");
+        }
         builder.append("</concierge>\n");
 
-        Path manyGuestsFile = Paths.get(TEST_DATA_FOLDER + "manyGuests.xml");
+        Path manyGuestsFile = Paths.get(TEST_DATA_FOLDER + "manyGuestsAndRooms.xml");
         FileUtil.createFile(manyGuestsFile);
         FileUtil.writeToFile(manyGuestsFile, builder.toString());
         manyGuestsFile.toFile().deleteOnExit();

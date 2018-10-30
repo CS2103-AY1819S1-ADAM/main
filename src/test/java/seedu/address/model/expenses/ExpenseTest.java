@@ -14,9 +14,12 @@ public class ExpenseTest {
     @Test
     public void constructor_null_throwsNullPointerException() {
         Assert.assertThrows(NullPointerException.class, () -> new Expense(null));
-        Assert.assertThrows(NullPointerException.class, () -> new Expense(null, 0));
-        Assert.assertThrows(NullPointerException.class, () -> new Expense(null, 0, LocalDateTime.now()));
+        Assert.assertThrows(NullPointerException.class, () -> new Expense(null, new Money(0, 0)));
+        Assert.assertThrows(NullPointerException.class, () -> new Expense(
+                null, new Money(0, 0), LocalDateTime.now()));
         Assert.assertThrows(NullPointerException.class, () ->
-                new Expense(new ExpenseType("1", "-", 0), 0, null));
+                new Expense(new ExpenseType(
+                        "1", "-", new Money(0, 0)),
+                        new Money(0, 0), null));
     }
 }

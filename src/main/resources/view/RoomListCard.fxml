@@ -19,8 +19,7 @@
       </padding>
         <Label fx:id="roomNumber" text="\$first" styleClass="cell_big_label" />
          <Label fx:id="capacity" styleClass="cell_small_label" text="\$capacity" />
-         <FlowPane fx:id="bookings" />
-         <FlowPane fx:id="occupant" />
+         <FlowPane fx:id="activeBooking" />
          <FlowPane fx:id="tags" />
     </VBox>
   </GridPane>

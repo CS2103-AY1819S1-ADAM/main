@@ -17,7 +17,7 @@ import seedu.address.model.Concierge;
 public class XmlSerializableConciergeTest {
 
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "XmlSerializableConciergeTest");
-    private static final Path TYPICAL_GUESTS_FILE = TEST_DATA_FOLDER.resolve("typicalGuestsConcierge.xml");
+    private static final Path TYPICAL_CONCIERGE_FILE = TEST_DATA_FOLDER.resolve("typicalConcierge.xml");
     private static final Path INVALID_GUEST_FILE = TEST_DATA_FOLDER.resolve("invalidGuestConcierge.xml");
     private static final Path DUPLICATE_GUEST_FILE = TEST_DATA_FOLDER.resolve("duplicateGuestConcierge.xml");
 
@@ -26,7 +26,7 @@ public class XmlSerializableConciergeTest {
 
     @Test
     public void toModelType_typicalGuestsFile_success() throws Exception {
-        XmlSerializableConcierge dataFromFile = XmlUtil.getDataFromFile(TYPICAL_GUESTS_FILE,
+        XmlSerializableConcierge dataFromFile = XmlUtil.getDataFromFile(TYPICAL_CONCIERGE_FILE,
                 XmlSerializableConcierge.class);
         Concierge conciergeFromFile = dataFromFile.toModelType();
         Concierge typicalGuestsConcierge = getTypicalConcierge();

@@ -15,8 +15,10 @@ public class TypicalRoomNumbers {
     public static final RoomNumber ROOM_NUMBER_011 = new RoomNumber("011");
     public static final RoomNumber ROOM_NUMBER_012 = new RoomNumber("012");
     public static final RoomNumber ROOM_NUMBER_020 = new RoomNumber("020");
-    public static final RoomNumber ROOM_NUMBER_023 = new RoomNumber("023");
-    public static final RoomNumber ROOM_NUMBER_024 = new RoomNumber("024");
+    public static final RoomNumber ROOM_NUMBER_021 = new RoomNumber("021");
+    public static final RoomNumber ROOM_NUMBER_022 = new RoomNumber("022");
+    public static final RoomNumber ROOM_NUMBER_030 = new RoomNumber("030");
+    public static final RoomNumber ROOM_NUMBER_031 = new RoomNumber("031");
     public static final RoomNumber ROOM_NUMBER_099 = new RoomNumber("099");
 
     // Manually added - RoomNumber found in {@code CommandTestUtil}
