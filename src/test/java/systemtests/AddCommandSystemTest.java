@@ -34,8 +34,8 @@ import static seedu.address.testutil.TypicalGuests.JAKOB;
 import static seedu.address.testutil.TypicalGuests.KEYWORD_MATCHING_MEIER;
 import static seedu.address.testutil.TypicalRoomNumbers.ROOM_NUMBER_001;
 import static seedu.address.testutil.TypicalRoomNumbers.ROOM_NUMBER_020;
-import static seedu.address.testutil.TypicalRoomNumbers.ROOM_NUMBER_023;
-import static seedu.address.testutil.TypicalRoomNumbers.ROOM_NUMBER_024;
+import static seedu.address.testutil.TypicalRoomNumbers.ROOM_NUMBER_021;
+import static seedu.address.testutil.TypicalRoomNumbers.ROOM_NUMBER_022;
 import static seedu.address.testutil.TypicalRoomNumbers.ROOM_NUMBER_099;
 import static seedu.address.testutil.TypicalRoomNumbers.ROOM_NUMBER_AMY;
 
@@ -75,6 +75,7 @@ public class AddCommandSystemTest extends ConciergeSystemTest {
         Guest guestToAdd = AMY;
         RoomNumber roomNumberToAdd = ROOM_NUMBER_AMY;
         BookingPeriod bookingPeriodToAdd = BOOKING_PERIOD_AMY;
+        Booking bookingToAdd = new BookingBuilder().withGuest(AMY).withBookingPeriod(BOOKING_PERIOD_AMY).build();
 
         String command = "   " + AddCommand.COMMAND_WORD + "  " + NAME_DESC_AMY
                 + "  " + PHONE_DESC_AMY + " " + EMAIL_DESC_AMY + " "
@@ -89,7 +90,8 @@ public class AddCommandSystemTest extends ConciergeSystemTest {
 
         /* Case: redo adding Amy to the list -> Amy added again */
         command = RedoCommand.COMMAND_WORD;
-        model.addGuest(guestToAdd);
+        model.addGuest(AMY);
+        model.addBooking(ROOM_NUMBER_AMY, bookingToAdd);
         expectedResultMessage = RedoCommand.MESSAGE_SUCCESS;
         assertCommandSuccess(command, model, expectedResultMessage);
 
@@ -123,7 +125,7 @@ public class AddCommandSystemTest extends ConciergeSystemTest {
                  bookingPeriodToAdd);
 
         /* Case: add a guest, missing tags -> added */
-        roomNumberToAdd = ROOM_NUMBER_023;
+        roomNumberToAdd = ROOM_NUMBER_021;
         bookingPeriodToAdd = TOMORROW_NEXTWEEK;
         assertCommandSuccess(HOON, roomNumberToAdd, bookingPeriodToAdd);
 
@@ -131,7 +133,7 @@ public class AddCommandSystemTest extends ConciergeSystemTest {
 
         /* Case: filters the guest list before adding -> added */
         showGuestsWithName(KEYWORD_MATCHING_MEIER);
-        roomNumberToAdd = ROOM_NUMBER_024;
+        roomNumberToAdd = ROOM_NUMBER_022;
         assertCommandSuccess(IDA, roomNumberToAdd, bookingPeriodToAdd);
 
         /* ------------------------ Perform add operation while a guest card is selected --------------------------- */

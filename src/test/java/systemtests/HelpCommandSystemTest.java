@@ -5,7 +5,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_GUEST;
-import static seedu.address.ui.testutil.GuiTestAssert.assertListMatching;
+import static seedu.address.ui.testutil.GuiTestAssert.assertGuestListMatching;
 
 import org.junit.Test;
 
@@ -57,7 +57,7 @@ public class HelpCommandSystemTest extends ConciergeSystemTest {
         assertEquals("", getCommandBox().getInput());
         assertCommandBoxShowsDefaultStyle();
         assertNotEquals(HelpCommand.SHOWING_HELP_MESSAGE, getResultDisplay().getText());
-        assertListMatching(getGuestListPanel(), getModel().getFilteredGuestList());
+        assertGuestListMatching(getGuestListPanel(), getModel().getFilteredGuestList());
 
         // note: the select command tested above does not update the status bar
     }

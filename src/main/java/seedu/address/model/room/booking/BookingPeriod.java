@@ -6,6 +6,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 import java.util.Objects;
 
 /**
@@ -23,8 +24,10 @@ public class BookingPeriod implements Comparable<BookingPeriod> {
     /**
      * Standard date format used for this hotel's bookings.
      */
-    public static final DateTimeFormatter STRING_TO_DATE_FORMAT = DateTimeFormatter.ofPattern("d/M/[uuuu][uu]");
-    public static final DateTimeFormatter DATE_TO_STRING_FORMAT = DateTimeFormatter.ofPattern("d/M/u");
+    public static final DateTimeFormatter STRING_TO_DATE_FORMAT = DateTimeFormatter.ofPattern("d/M/[uuuu][uu]")
+            .withResolverStyle(ResolverStyle.STRICT);
+    public static final DateTimeFormatter DATE_TO_STRING_FORMAT = DateTimeFormatter.ofPattern("d/M/u")
+            .withResolverStyle(ResolverStyle.STRICT);
 
     public final LocalDate startDate;
     public final LocalDate endDate;
@@ -56,21 +59,14 @@ public class BookingPeriod implements Comparable<BookingPeriod> {
     }
 
     /**
-     * Returns true if a given string is a valid name.
+     * Returns true if given string can be parsed into LocalDates using the formatter,
+     * and if startDate is strictly before endDate. Thus, startDate CANNOT BE EQUALS to endDate
      */
-    public static boolean isValidBookingPeriod(String testStartDate, String testEndDate) {
-        return parsableDate(testStartDate) && parsableDate(testEndDate);
-    }
-
-    /**
-     * Checks whether the given date can be constructed into {@code LocalDate} object.
-     * @param date A date of the correct format.
-     * @return True if given date is of correct format and can be constructed into LocalDate object, false otherwise.
-     */
-    public static boolean parsableDate(String date) {
+    public static boolean isValidBookingPeriod(String startDate, String endDate) {
         try {
-            parseDate(date);
-            return true;
+            LocalDate start = parseDate(startDate);
+            LocalDate end = parseDate(endDate);
+            return start.isBefore(end);
         } catch (DateTimeParseException e) {
             return false;
         }
@@ -92,17 +88,15 @@ public class BookingPeriod implements Comparable<BookingPeriod> {
      * @return True if there is any overlap, false otherwise.
      */
     public boolean isOverlapping(BookingPeriod other) {
-        return startDate.isBefore(other.endDate)
-            && other.startDate.isBefore(this.endDate);
+        return this.equals(other)
+                || (startDate.isBefore(other.endDate) && other.startDate.isBefore(this.endDate));
     }
 
     /**
      * Checks if this booking period is expired.
-     * Expired means being before today's date.
      */
     public boolean isExpired() {
-        LocalDate today = LocalDate.now();
-        return startDate.isBefore(today);
+        return endDate.isBefore(LocalDate.now());
     }
 
     /**
@@ -111,15 +105,6 @@ public class BookingPeriod implements Comparable<BookingPeriod> {
     public boolean isActive() {
         LocalDate today = LocalDate.now();
         return includesDate(today);
-    }
-
-    /**
-     * Checks if this booking period is upcoming.
-     * Upcoming is defined as strictly after today's date.
-     */
-    public boolean isUpcoming() {
-        LocalDate today = LocalDate.now();
-        return endDate.isAfter(today);
     }
 
     /**
@@ -152,6 +137,10 @@ public class BookingPeriod implements Comparable<BookingPeriod> {
 
     @Override
     public int compareTo(BookingPeriod other) {
-        return startDate.compareTo(other.startDate);
+        int result = startDate.compareTo(other.startDate);
+        if (result != 0) {
+            return result;
+        }
+        return endDate.compareTo(other.endDate);
     }
 }

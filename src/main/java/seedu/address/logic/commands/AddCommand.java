@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE_START;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ROOM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.logic.CommandHistory;
@@ -35,8 +36,7 @@ public class AddCommand extends Command {
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
-            + PREFIX_ADDRESS + "ADDRESS "
-            + FLAG_ROOM + " ROOM NUMBER "
+            + PREFIX_ROOM + " ROOM NUMBER "
             + PREFIX_DATE_START + " dd/MM/yyyy "
             + PREFIX_DATE_END + " dd/MM/yyyy "
             + "[" + PREFIX_TAG + "TAG]...\n"
@@ -44,14 +44,13 @@ public class AddCommand extends Command {
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
-            + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
             + PREFIX_TAG + "friends "
             + FLAG_ROOM + "056"
             + PREFIX_DATE_START + "03/11/2018"
             + PREFIX_DATE_END + "05/11/2018";
 
     public static final String MESSAGE_SUCCESS =
-            "New guest added: %1$s \nAssigned to room: %2$s \n\tfrom %3$s";
+            "New guest added: %1$s \nMade a booking for room: %2$s \n\tfrom %3$s";
     public static final String MESSAGE_DUPLICATE_GUEST = "This guest already exists in Concierge";
 
     private final Guest guestToAdd;

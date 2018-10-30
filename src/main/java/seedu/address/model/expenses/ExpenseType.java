@@ -14,16 +14,15 @@ public class ExpenseType {
 
     private final String itemNumber;
     private final String itemName;
-    private final double itemCost;
+    private final Money itemCost;
 
     /**
      * Constructor for an {@code ExpenseType} object.
-     *
-     * @param itemNumber The menu number of the item.
+     *  @param itemNumber The menu number of the item.
      * @param itemName The name of the item.
      * @param itemCost The cost of the item.
      */
-    public ExpenseType(String itemNumber, String itemName, double itemCost) {
+    public ExpenseType(String itemNumber, String itemName, Money itemCost) {
         requireAllNonNull(itemNumber, itemName);
         if (itemNumber.equals("")) {
             throw new IllegalArgumentException(MESSAGE_NUMBER_EMPTY);
@@ -50,7 +49,7 @@ public class ExpenseType {
         return itemName;
     }
 
-    public double getItemCost() {
+    public Money getItemCost() {
         return itemCost;
     }
 
@@ -65,7 +64,7 @@ public class ExpenseType {
                 || (other instanceof ExpenseType // instanceof handles nulls
                 && itemNumber.equals(((ExpenseType) other).itemNumber)
                 && itemName.equals(((ExpenseType) other).itemName)
-                && itemCost == ((ExpenseType) other).itemCost); // state check
+                && itemCost.equals(((ExpenseType) other).itemCost)); // state check
     }
 
     @Override

@@ -16,14 +16,16 @@ import seedu.address.model.room.Room;
 public class RoomDetailedCardHandle extends NodeHandle<Node> {
     private static final String ROOMNUMBER_FIELD_ID = "#roomNumber";
     private static final String CAPACITY_FIELD_ID = "#capacity";
-    private static final String BOOKING_FIELD_ID = "#bookings";
+    private static final String ACTIVE_BOOKING_FIELD_ID = "#activeBooking";
+    private static final String ALL_OTHER_BOOKING_FIELD_ID = "#allOtherBookings";
     private static final String EXPENSES_FIELD_ID = "#expenses";
     private static final String TAGS_FIELD_ID = "#tags";
 
     private final Label roomNumberLabel;
     private final Label capacityLabel;
     private final Label expensesLabel;
-    private final List<Label> firstBookingLabels;
+    private final List<Label> activeBookingLabels;
+    private final List<Label> allOtherBookingsLabels;
     private final List<Label> tagLabels;
 
     public RoomDetailedCardHandle(Node cardNode) {
@@ -33,14 +35,23 @@ public class RoomDetailedCardHandle extends NodeHandle<Node> {
         capacityLabel = getChildNode(CAPACITY_FIELD_ID);
         expensesLabel = getChildNode(EXPENSES_FIELD_ID);
 
-        Region bookingsContainer = getChildNode(BOOKING_FIELD_ID);
-        firstBookingLabels = bookingsContainer
+        Region activeBookingContainer = getChildNode(ACTIVE_BOOKING_FIELD_ID);
+        activeBookingLabels = activeBookingContainer
                 .getChildrenUnmodifiable()
                 .stream()
                 .map(Label.class::cast)
                 .collect(Collectors.toList());
 
-        firstBookingLabels.remove(0);
+        activeBookingLabels.remove(0);
+
+        Region allOtherBookingsContainer = getChildNode(ALL_OTHER_BOOKING_FIELD_ID);
+        allOtherBookingsLabels = allOtherBookingsContainer
+            .getChildrenUnmodifiable()
+            .stream()
+            .map(Label.class::cast)
+            .collect(Collectors.toList());
+
+        allOtherBookingsLabels.remove(0);
 
         Region tagsContainer = getChildNode(TAGS_FIELD_ID);
         tagLabels = tagsContainer
@@ -62,15 +73,15 @@ public class RoomDetailedCardHandle extends NodeHandle<Node> {
         return expensesLabel.getText();
     }
 
-    public List<String> getBookings() {
-        return firstBookingLabels
+    public List<String> getActiveBooking() {
+        return activeBookingLabels
                 .stream()
                 .map(Label::getText)
                 .collect(Collectors.toList());
     }
 
-    public List<String> getFirstBooking() {
-        return firstBookingLabels
+    public List<String> getAllOtherBookings() {
+        return allOtherBookingsLabels
                 .stream()
                 .map(Label::getText)
                 .collect(Collectors.toList());
@@ -89,7 +100,7 @@ public class RoomDetailedCardHandle extends NodeHandle<Node> {
     public boolean equals(Room room) {
         return getRoomNumber().equals("Room: " + room.getRoomNumber())
                 && getCapacity().equals("Capacity: " + room.getCapacity())
-                && getExpenses().equals("Expenses: " + room.getExpenses().getTotalCost())
+                && getExpenses().equals("Expenses: " + room.getExpenses().toStringTotalCost())
                 && ImmutableMultiset.copyOf(getTags()).equals(ImmutableMultiset.copyOf(room.getTags().stream()
                 .map(tag -> tag.tagName)
                 .collect(Collectors.toList())));

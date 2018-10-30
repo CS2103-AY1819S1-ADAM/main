@@ -4,17 +4,19 @@ import java.time.LocalDateTime;
 
 import seedu.address.model.expenses.Expense;
 import seedu.address.model.expenses.ExpenseType;
+import seedu.address.model.expenses.Money;
 
 /**
  * A utility class to help with building Expense objects.
  */
 public class ExpenseBuilder {
 
-    public static final double DEFAULT_COST = 0.99;
-    public static final ExpenseType DEFAULT_EXPENSETYPE = new ExpenseType("1.99", "-", 1);
+    public static final Money DEFAULT_COST = new Money(0, 99);
+    public static final ExpenseType DEFAULT_EXPENSETYPE = new ExpenseType(
+            "1.99", "-", new Money(1, 0));
     public static final LocalDateTime DEFAULT_DATETIME = LocalDateTime.now();
 
-    private double cost;
+    private Money cost;
     private ExpenseType expenseType;
     private LocalDateTime dateTime;
 
@@ -44,7 +46,7 @@ public class ExpenseBuilder {
     /**
      * Sets the {@code double} of the {@code Expense} that we are building.
      */
-    public ExpenseBuilder withCost(double cost) {
+    public ExpenseBuilder withCost(Money cost) {
         this.cost = cost;
         return this;
     }

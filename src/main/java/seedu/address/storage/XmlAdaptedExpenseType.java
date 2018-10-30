@@ -1,12 +1,15 @@
 package seedu.address.storage;
 
+import static seedu.address.storage.XmlAdaptedExpense.MESSAGE_INVALID_COST;
+
 import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.expenses.ExpenseType;
+import seedu.address.model.expenses.Money;
 
 /**
- * JAXB-friendly adapted version of Expense.
+ * JAXB-friendly adapted version of ExpenseType.
  */
 public class XmlAdaptedExpenseType {
 
@@ -19,7 +22,7 @@ public class XmlAdaptedExpenseType {
     @XmlElement (required = true)
     private String itemName;
     @XmlElement (required = true)
-    private Double itemCost;
+    private String itemCost;
 
     /**
      * Constructs an XmlAdaptedExpenseType.
@@ -33,7 +36,7 @@ public class XmlAdaptedExpenseType {
      * @param itemName The cost incurred in this expense.
      * @param itemCost The date and time of this transaction.
      */
-    public XmlAdaptedExpenseType(String itemNumber, String itemName, Double itemCost) {
+    public XmlAdaptedExpenseType(String itemNumber, String itemName, String itemCost) {
         this.itemNumber = itemNumber;
         this.itemName = itemName;
         this.itemCost = itemCost;
@@ -47,7 +50,7 @@ public class XmlAdaptedExpenseType {
     public XmlAdaptedExpenseType(ExpenseType source) {
         this.itemNumber = source.getItemNumber();
         this.itemName = source.getItemName();
-        this.itemCost = source.getItemCost();
+        this.itemCost = source.getItemCost().toString();
     }
 
     /**
@@ -64,8 +67,11 @@ public class XmlAdaptedExpenseType {
         if (itemCost == null) {
             throw new IllegalValueException(MESSAGE_COST_MISSING);
         }
+        if (!Money.isValidMoneyFormat(itemCost)) {
+            throw new IllegalValueException(MESSAGE_INVALID_COST);
+        }
         try {
-            return new ExpenseType(itemNumber, itemName, itemCost);
+            return new ExpenseType(itemNumber, itemName, new Money(itemCost));
         } catch (IllegalArgumentException iae) {
             throw new IllegalValueException(iae.getMessage());
         }

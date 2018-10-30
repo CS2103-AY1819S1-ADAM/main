@@ -7,6 +7,7 @@ import seedu.address.model.guest.Guest;
 import seedu.address.model.room.Room;
 import seedu.address.model.room.RoomNumber;
 import seedu.address.model.room.booking.Booking;
+import seedu.address.model.room.booking.BookingPeriod;
 
 /**
  * The API of the Model component.
@@ -72,21 +73,6 @@ public interface Model {
     //=========== Methods for room. ===========================================
 
     /**
-     * Returns true if the room's bookings is non-empty
-     */
-    boolean roomHasBooking(RoomNumber roomNumber);
-
-    /**
-     * Returns true if the room's first booking is active.
-     */
-    boolean roomHasActiveBooking(RoomNumber roomNumber);
-
-    /**
-     * Returns true if the room's first booking is active or upcoming
-     */
-    public boolean roomHasActiveOrExpiredBooking(RoomNumber roomNumber);
-
-    /**
      * Add a booking to a room identified by its room number.
      */
     public void addBooking(RoomNumber roomNumber, Booking booking);
@@ -108,9 +94,9 @@ public interface Model {
     void checkoutRoom(RoomNumber roomNumber);
 
     /**
-     * Returns true if the room identified by its room number is checked in.
+     * Checks out a room's booking using its room number and the specified booking period
      */
-    boolean isRoomCheckedIn(RoomNumber roomNumber);
+    public void checkoutRoom(RoomNumber roomNumber, BookingPeriod bookingPeriod);
 
     /* =========== Methods for undo and redo. =================================
 

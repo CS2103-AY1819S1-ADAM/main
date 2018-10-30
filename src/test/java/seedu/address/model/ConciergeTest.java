@@ -21,6 +21,7 @@ import org.junit.rules.ExpectedException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.expenses.ExpenseType;
+import seedu.address.model.expenses.Money;
 import seedu.address.model.guest.Guest;
 import seedu.address.model.guest.exceptions.DuplicateGuestException;
 import seedu.address.model.room.Room;
@@ -64,6 +65,8 @@ public class ConciergeTest {
         concierge.resetData(newData);
     }
 
+    /*===================== Guests Test =========================================================== */
+
     @Test
     public void hasGuest_nullGuest_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
@@ -95,10 +98,23 @@ public class ConciergeTest {
         concierge.getGuestList().remove(0);
     }
 
+    /*===================== Rooms Test =========================================================== */
+
+    // Note: no need to test the other room methods, because they only call the methods that belong to the following
+    // class, which have all already been tested in the classes' own tests.
+
+    @Test
+    public void getRoomList_modifyList_throwsUnsupportedOperationException() {
+        thrown.expect(UnsupportedOperationException.class);
+        concierge.getRoomList().remove(0);
+    }
+
+    /*===================== Menu Test =========================================================== */
+
     @Test
     public void getMenuMap_modifyMap_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
-        concierge.getMenuMap().put("1", new ExpenseType("1", "-", 0));
+        concierge.getMenuMap().put("1", new ExpenseType("1", "-", new Money(0, 0)));
     }
 
     /**
