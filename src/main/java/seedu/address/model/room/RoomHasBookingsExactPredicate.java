@@ -14,7 +14,7 @@ public class RoomHasBookingsExactPredicate implements Predicate<Room> {
 
     @Override
     public boolean test(Room room) {
-        return room.getBookings().isEmpty() == !hasBookings;
+        return room.getBookings().sortedBookingsSet.isEmpty() == !hasBookings;
     }
 
     @Override

@@ -14,7 +14,7 @@ public class RoomCapacityExactPredicate implements Predicate<Room> {
 
     @Override
     public boolean test(Room room) {
-        return room.getCapacity().value.toString().equals(capacity);
+        return room.getCapacity().value == Integer.parseInt(capacity);
     }
 
     @Override
