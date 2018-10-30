@@ -5,6 +5,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_GUESTS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GUEST;
 import static seedu.address.testutil.TypicalConcierge.getTypicalConcierge;
 import static seedu.address.testutil.TypicalGuests.CARL;
 import static seedu.address.testutil.TypicalGuests.ELLE;
@@ -12,6 +13,9 @@ import static seedu.address.testutil.TypicalGuests.FIONA;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.function.Predicate;
 
 import org.junit.Test;
 
@@ -19,7 +23,9 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.guest.NameContainsKeywordsPredicate;
+import seedu.address.model.guest.Guest;
+import seedu.address.model.guest.GuestNameContainsKeywordsPredicate;
+
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
@@ -31,19 +37,19 @@ public class FindCommandTest {
 
     @Test
     public void equals() {
-        NameContainsKeywordsPredicate firstPredicate =
-                new NameContainsKeywordsPredicate(Collections.singletonList("first"));
-        NameContainsKeywordsPredicate secondPredicate =
-                new NameContainsKeywordsPredicate(Collections.singletonList("second"));
+        List<Predicate<Guest>> firstList = new LinkedList<Predicate<Guest>>();
+        List<Predicate<Guest>> secondList = new LinkedList<>();
+        firstList.add(new GuestNameContainsKeywordsPredicate(Collections.singletonList("first")));
+        secondList.add(new GuestNameContainsKeywordsPredicate(Collections.singletonList("second")));
 
-        FindCommand findFirstCommand = new FindCommand(firstPredicate);
-        FindCommand findSecondCommand = new FindCommand(secondPredicate);
+        FindCommand findFirstCommand = new FindCommand(PREFIX_GUEST.toString(), firstList, null);
+        FindCommand findSecondCommand = new FindCommand(PREFIX_GUEST.toString(), secondList, null);
 
         // same object -> returns true
         assertTrue(findFirstCommand.equals(findFirstCommand));
 
         // same values -> returns true
-        FindCommand findFirstCommandCopy = new FindCommand(firstPredicate);
+        FindCommand findFirstCommandCopy = new FindCommand(PREFIX_GUEST.toString(), firstList, null);
         assertTrue(findFirstCommand.equals(findFirstCommandCopy));
 
         // different types -> returns false
@@ -59,8 +65,10 @@ public class FindCommandTest {
     @Test
     public void execute_zeroKeywords_noGuestFound() {
         String expectedMessage = String.format(MESSAGE_GUESTS_LISTED_OVERVIEW, 0);
-        NameContainsKeywordsPredicate predicate = preparePredicate(" ");
-        FindCommand command = new FindCommand(predicate);
+        GuestNameContainsKeywordsPredicate predicate = preparePredicate(" ");
+        List<Predicate<Guest>> guestListPredicates = new LinkedList<>();
+        guestListPredicates.add(predicate);
+        FindCommand command = new FindCommand(PREFIX_GUEST.toString(), guestListPredicates, null);
         expectedModel.updateFilteredGuestList(predicate);
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredGuestList());
@@ -69,17 +77,19 @@ public class FindCommandTest {
     @Test
     public void execute_multipleKeywords_multipleGuestsFound() {
         String expectedMessage = String.format(MESSAGE_GUESTS_LISTED_OVERVIEW, 3);
-        NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
-        FindCommand command = new FindCommand(predicate);
+        GuestNameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
+        List<Predicate<Guest>> guestListPredicates = new LinkedList<>();
+        guestListPredicates.add(predicate);
+        FindCommand command = new FindCommand(PREFIX_GUEST.toString(), guestListPredicates, null);
         expectedModel.updateFilteredGuestList(predicate);
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredGuestList());
     }
 
     /**
-     * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
+     * Parses {@code userInput} into a {@code GuestNameContainsKeywordsPredicate}.
      */
-    private NameContainsKeywordsPredicate preparePredicate(String userInput) {
-        return new NameContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
+    private GuestNameContainsKeywordsPredicate preparePredicate(String userInput) {
+        return new GuestNameContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
     }
 }
