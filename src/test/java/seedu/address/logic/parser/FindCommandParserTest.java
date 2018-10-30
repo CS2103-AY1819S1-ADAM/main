@@ -1,6 +1,5 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.FLAG_GUEST;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -24,7 +23,8 @@ public class FindCommandParserTest {
 
     @Test
     public void parse_emptyArg_throwsParseException() {
-        assertParseFailure(parser, "     ", String.format(FindCommandParser.MESSAGE_NO_FLAGS, FindCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "     ",
+                String.format(FindCommandParser.MESSAGE_NO_FLAGS, FindCommand.MESSAGE_USAGE));
     }
 
     @Test

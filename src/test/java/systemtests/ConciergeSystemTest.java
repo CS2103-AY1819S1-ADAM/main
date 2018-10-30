@@ -140,7 +140,7 @@ public abstract class ConciergeSystemTest {
      * Displays all guests with any parts of their names matching {@code keyword} (case-insensitive).
      */
     protected void showGuestsWithName(String keyword) {
-        executeCommand(FindCommand.COMMAND_WORD + " " + FLAG_GUEST + " " +  PREFIX_NAME + keyword);
+        executeCommand(FindCommand.COMMAND_WORD + " " + FLAG_GUEST + " " + PREFIX_NAME + keyword);
         assertTrue(getModel().getFilteredGuestList().size() < getModel().getConcierge().getGuestList().size());
     }
 

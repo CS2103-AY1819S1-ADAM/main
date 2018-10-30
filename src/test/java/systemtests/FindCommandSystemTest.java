@@ -29,7 +29,8 @@ public class FindCommandSystemTest extends ConciergeSystemTest {
         /* Case: find multiple guests in Concierge, command with leading spaces and trailing spaces
          * -> 2 guests found
          */
-        String command = "   " + FindCommand.COMMAND_WORD + " " + FLAG_GUEST + " " + PREFIX_NAME + KEYWORD_MATCHING_MEIER + "   ";
+        String command = "   " + FindCommand.COMMAND_WORD + " " + FLAG_GUEST + " "
+                + PREFIX_NAME + KEYWORD_MATCHING_MEIER + "   ";
         Model expectedModel = getModel();
         ModelHelper.setFilteredGuestList(expectedModel, BENSON, DANIEL); // first names of Benson and Daniel are "Meier"
         assertCommandSuccess(command, expectedModel);
