@@ -1,15 +1,16 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.parser.CliSyntax.FLAG_GUEST;
+import static seedu.address.logic.parser.CliSyntax.FLAG_ROOM;
+import static seedu.address.logic.parser.CliSyntax.FLAG_ROOM_HAS_BOOKINGS;
+import static seedu.address.logic.parser.CliSyntax.FLAG_ROOM_NO_BOOKINGS;
+
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE_END;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE_START;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_GUEST;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ROOM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROOM_CAPACITY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ROOM_HAS_BOOKINGS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ROOM_NO_BOOKINGS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROOM_NUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -72,7 +73,7 @@ public class FindCommandParser implements Parser<FindCommand> {
         String flag = suffixFilters[0];
 
         if (suffixFilters.length < 2) {
-            if (flag.equals(PREFIX_GUEST.toString()) || (flag.equals(PREFIX_ROOM.toString()))) {
+            if (flag.equals(FLAG_GUEST.toString()) || (flag.equals(FLAG_ROOM.toString()))) {
                 throw new ParseException(
                         String.format(MESSAGE_NO_FILTERS, FindCommand.MESSAGE_USAGE));
             } else {
@@ -83,14 +84,14 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         suffixFilters = Arrays.copyOfRange(suffixFilters, 1, suffixFilters.length);
 
-        if (flag.equals(PREFIX_GUEST.toString())) {
+        if (flag.equals(FLAG_GUEST.toString())) {
             getGuestPredicates(suffixFilters);
             if (guestPredicates.size() == 0) {
                 throw new ParseException(
                         String.format(MESSAGE_NO_FILTERS, FindCommand.MESSAGE_USAGE));
             }
 
-        } else if (flag.equals(PREFIX_ROOM.toString())) {
+        } else if (flag.equals(FLAG_ROOM.toString())) {
             getRoomPredicates(suffixFilters);
             if (roomPredicates.size() == 0) {
                 throw new ParseException(
@@ -167,7 +168,7 @@ public class FindCommandParser implements Parser<FindCommand> {
         String endDateFilter = "";
 
         for (int i = 0; i < suffixFilters.length; i++) {
-            if (suffixFilters[i].toLowerCase().contains(PREFIX_ROOM_HAS_BOOKINGS.toString().toLowerCase())) {
+            if (suffixFilters[i].toLowerCase().contains(FLAG_ROOM_HAS_BOOKINGS.toString().toLowerCase())) {
                 if (!bookingsFlagFound) {
                     bookingsFlagFound = true;
                     lookForDateRange = true;
@@ -178,7 +179,7 @@ public class FindCommandParser implements Parser<FindCommand> {
                 }
             }
 
-            if (suffixFilters[i].toLowerCase().contains(PREFIX_ROOM_NO_BOOKINGS.toString().toLowerCase())) {
+            if (suffixFilters[i].toLowerCase().contains(FLAG_ROOM_NO_BOOKINGS.toString().toLowerCase())) {
                 if (!bookingsFlagFound) {
                     bookingsFlagFound = true;
                     lookForDateRange = true;
@@ -288,7 +289,7 @@ public class FindCommandParser implements Parser<FindCommand> {
      * Checks whether {@code arg} contains a valid flag/prefix belonging to Guest class
      */
     private boolean hasValidGuestFlagOrPrefix(String arg) {
-        return (arg.toLowerCase().contains(PREFIX_GUEST.toString().toLowerCase())
+        return (arg.toLowerCase().contains(FLAG_GUEST.toString().toLowerCase())
                 || arg.toLowerCase().contains(PREFIX_EMAIL.toString().toLowerCase())
                 || arg.toLowerCase().contains(PREFIX_PHONE.toString().toLowerCase())
                 || arg.toLowerCase().contains(PREFIX_NAME.toString().toLowerCase())
@@ -302,10 +303,10 @@ public class FindCommandParser implements Parser<FindCommand> {
         return (arg.toLowerCase().contains(PREFIX_ROOM_CAPACITY.toString().toLowerCase())
                 || arg.toLowerCase().contains(PREFIX_ROOM_NUMBER.toString().toLowerCase())
                 || arg.toLowerCase().contains(PREFIX_TAG.toString().toLowerCase())
-                || arg.toLowerCase().contains(PREFIX_ROOM_NO_BOOKINGS.toString().toLowerCase())
-                || arg.toLowerCase().contains(PREFIX_ROOM_HAS_BOOKINGS.toString().toLowerCase())
-                || arg.toLowerCase().contains(PREFIX_ROOM.toString().toLowerCase())
                 || arg.toLowerCase().contains(PREFIX_DATE_START.toString().toLowerCase())
-                || arg.toLowerCase().contains(PREFIX_DATE_END.toString().toLowerCase()));
+                || arg.toLowerCase().contains(PREFIX_DATE_END.toString().toLowerCase())
+                || arg.toLowerCase().contains(FLAG_ROOM_HAS_BOOKINGS.toString().toLowerCase())
+                || arg.toLowerCase().contains(FLAG_ROOM_NO_BOOKINGS.toString().toLowerCase())
+                || arg.toLowerCase().contains(FLAG_ROOM.toString().toLowerCase()));
     }
 }

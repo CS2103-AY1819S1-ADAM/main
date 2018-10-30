@@ -1,8 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_GUEST;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ROOM;
+import static seedu.address.logic.parser.CliSyntax.FLAG_GUEST;
+import static seedu.address.logic.parser.CliSyntax.FLAG_ROOM;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_GUESTS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ROOMS;
 import static seedu.address.model.Model.PREDICATE_SHOW_NO_GUESTS;
@@ -24,10 +24,10 @@ public class ListCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows a list of guest or rooms. "
             + "Parameters: "
-            + PREFIX_GUEST + " for guests, "
-            + PREFIX_ROOM + " for rooms. \n"
+            + FLAG_GUEST + " for guests, "
+            + FLAG_ROOM + " for rooms. \n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_ROOM;
+            + FLAG_ROOM;
 
     private final String[] splitString;
 
@@ -44,15 +44,15 @@ public class ListCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
 
-        if (splitString[0].equals(PREFIX_GUEST.toString())) {
+        if (splitString[0].equals(FLAG_GUEST.toString())) {
             model.updateFilteredGuestList(PREDICATE_SHOW_ALL_GUESTS);
             model.updateFilteredRoomList(PREDICATE_SHOW_NO_ROOMS);
-            EventsCenter.getInstance().post(new ListingChangedEvent(PREFIX_GUEST.toString()));
+            EventsCenter.getInstance().post(new ListingChangedEvent(FLAG_GUEST.toString()));
 
-        } else if (splitString[0].equals(PREFIX_ROOM.toString())) {
+        } else if (splitString[0].equals(FLAG_ROOM.toString())) {
             model.updateFilteredGuestList(PREDICATE_SHOW_NO_GUESTS);
             model.updateFilteredRoomList(PREDICATE_SHOW_ALL_ROOMS);
-            EventsCenter.getInstance().post(new ListingChangedEvent(PREFIX_ROOM.toString()));
+            EventsCenter.getInstance().post(new ListingChangedEvent(FLAG_ROOM.toString()));
         }
 
         return new CommandResult(MESSAGE_SUCCESS);

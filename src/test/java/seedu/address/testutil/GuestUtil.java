@@ -1,11 +1,11 @@
 package seedu.address.testutil;
 
+import static seedu.address.logic.parser.CliSyntax.FLAG_ROOM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE_END;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE_START;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ROOM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
@@ -35,7 +35,7 @@ public class GuestUtil {
      * Returns the part of command string for the given {@code roomNumber}.
      */
     public static String getRoomDesc(RoomNumber roomNumber) {
-        return PREFIX_ROOM + " " + roomNumber.value;
+        return FLAG_ROOM + " " + roomNumber.value;
     }
     /**
      * Returns the part of command string for the given {@code bookingPeriod}.

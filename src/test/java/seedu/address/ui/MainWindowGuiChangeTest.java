@@ -1,7 +1,7 @@
 package seedu.address.ui;
 
-import static seedu.address.logic.parser.CliSyntax.PREFIX_GUEST;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ROOM;
+import static seedu.address.logic.parser.CliSyntax.FLAG_GUEST;
+import static seedu.address.logic.parser.CliSyntax.FLAG_ROOM;
 import static seedu.address.testutil.EventsUtil.postNow;
 import static seedu.address.ui.testutil.GuiTestAssert.assertMainWindowDisplaysGuestList;
 import static seedu.address.ui.testutil.GuiTestAssert.assertMainWindowDisplaysRoomList;
@@ -44,9 +44,9 @@ public class MainWindowGuiChangeTest extends GuiUnitTest {
             @Override
             public void run() {
                 mainWindow.fillInnerParts();
-                postNow(new ListingChangedEvent(PREFIX_GUEST.toString()));
+                postNow(new ListingChangedEvent(FLAG_GUEST.toString()));
                 assertMainWindowDisplaysGuestList(mainWindow);
-                postNow(new ListingChangedEvent(PREFIX_ROOM.toString()));
+                postNow(new ListingChangedEvent(FLAG_ROOM.toString()));
                 assertMainWindowDisplaysRoomList(mainWindow);
             }
         });

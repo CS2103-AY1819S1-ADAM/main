@@ -1,8 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_GUEST;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ROOM;
+import static seedu.address.logic.parser.CliSyntax.FLAG_GUEST;
+import static seedu.address.logic.parser.CliSyntax.FLAG_ROOM;
 
 import java.util.List;
 import java.util.function.Predicate;
@@ -26,9 +26,9 @@ public class FindCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all guests or rooms with the specified "
             + "attributes and displays them as a list. There must be at least one attribute present.\n"
             + "Parameters: GUEST/ROOMFLAG ATTRIBUTES [MORE ATTRIBUTES]...\n"
-            + "Example (Guest): " + COMMAND_WORD + " " + PREFIX_GUEST + " n/Alex p/82542133 e/alex@gmail.com t/friend "
+            + "Example (Guest): " + COMMAND_WORD + " " + FLAG_GUEST + " n/Alex p/82542133 e/alex@gmail.com t/friend "
             + "t/colleagues \n"
-            + "Example (Room): " + COMMAND_WORD + " " + PREFIX_ROOM + " r/001 c/2 t/vacant -hb from/ 01/11/2018 to/ "
+            + "Example (Room): " + COMMAND_WORD + " " + FLAG_ROOM + " r/001 c/2 t/vacant -hb from/ 01/11/2018 to/ "
             + "03/11/2018 \n";
 
     private final List<Predicate<Guest>> guestPredicates;
@@ -47,17 +47,17 @@ public class FindCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
 
-        if (flag.equals(PREFIX_GUEST.toString())) {
+        if (flag.equals(FLAG_GUEST.toString())) {
             Predicate<Guest> combinedGuestPredicate = combineGuestFilters();
             model.updateFilteredGuestList(combinedGuestPredicate);
-            EventsCenter.getInstance().post(new ListingChangedEvent(PREFIX_GUEST.toString()));
+            EventsCenter.getInstance().post(new ListingChangedEvent(FLAG_GUEST.toString()));
 
             return new CommandResult(
                     String.format(Messages.MESSAGE_GUESTS_LISTED_OVERVIEW, model.getFilteredGuestList().size()));
         } else {
             Predicate<Room> combinedRoomPredicate = combineRoomFilters();
             model.updateFilteredRoomList(combinedRoomPredicate);
-            EventsCenter.getInstance().post(new ListingChangedEvent(PREFIX_ROOM.toString()));
+            EventsCenter.getInstance().post(new ListingChangedEvent(FLAG_ROOM.toString()));
 
             return new CommandResult(
                     String.format(Messages.MESSAGE_ROOMS_LISTED_OVERVIEW, model.getFilteredRoomList().size()));

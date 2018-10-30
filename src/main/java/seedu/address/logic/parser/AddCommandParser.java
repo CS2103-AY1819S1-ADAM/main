@@ -1,12 +1,12 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.FLAG_ROOM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE_END;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE_START;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ROOM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
@@ -34,10 +34,10 @@ public class AddCommandParser implements Parser<AddCommand> {
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
             ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE,
-                    PREFIX_EMAIL, PREFIX_TAG, PREFIX_ROOM,
+                    PREFIX_EMAIL, PREFIX_TAG, FLAG_ROOM,
                     PREFIX_DATE_START, PREFIX_DATE_END);
         if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_NAME,
-                PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ROOM,
+                PREFIX_PHONE, PREFIX_EMAIL, FLAG_ROOM,
                 PREFIX_DATE_START,
                 PREFIX_DATE_END)
                 || !argMultimap.getPreamble().isEmpty()) {
@@ -50,7 +50,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         RoomNumber roomNumber =
-                ParserUtil.parseRoomNumber(argMultimap.getValue(PREFIX_ROOM).get());
+                ParserUtil.parseRoomNumber(argMultimap.getValue(FLAG_ROOM).get());
         BookingPeriod bookingPeriod =
                 ParserUtil.parseBookingPeriod(argMultimap.getValue(PREFIX_DATE_START).get(),
                         argMultimap.getValue(PREFIX_DATE_END).get());

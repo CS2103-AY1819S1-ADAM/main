@@ -5,7 +5,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_GUESTS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_GUEST;
+import static seedu.address.logic.parser.CliSyntax.FLAG_GUEST;
 import static seedu.address.testutil.TypicalConcierge.getTypicalConcierge;
 import static seedu.address.testutil.TypicalGuests.CARL;
 import static seedu.address.testutil.TypicalGuests.ELLE;
@@ -25,6 +25,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.guest.Guest;
 import seedu.address.model.guest.GuestNameContainsKeywordsPredicate;
+import seedu.address.model.room.Room;
 
 
 /**
@@ -39,17 +40,18 @@ public class FindCommandTest {
     public void equals() {
         List<Predicate<Guest>> firstList = new LinkedList<Predicate<Guest>>();
         List<Predicate<Guest>> secondList = new LinkedList<>();
+        List<Predicate<Room>> emptyRoomPredicates = new LinkedList<>();
         firstList.add(new GuestNameContainsKeywordsPredicate(Collections.singletonList("first")));
         secondList.add(new GuestNameContainsKeywordsPredicate(Collections.singletonList("second")));
 
-        FindCommand findFirstCommand = new FindCommand(PREFIX_GUEST.toString(), firstList, null);
-        FindCommand findSecondCommand = new FindCommand(PREFIX_GUEST.toString(), secondList, null);
+        FindCommand findFirstCommand = new FindCommand(FLAG_GUEST.toString(), firstList, emptyRoomPredicates);
+        FindCommand findSecondCommand = new FindCommand(FLAG_GUEST.toString(), secondList, emptyRoomPredicates);
 
         // same object -> returns true
         assertTrue(findFirstCommand.equals(findFirstCommand));
 
         // same values -> returns true
-        FindCommand findFirstCommandCopy = new FindCommand(PREFIX_GUEST.toString(), firstList, null);
+        FindCommand findFirstCommandCopy = new FindCommand(FLAG_GUEST.toString(), firstList, emptyRoomPredicates);
         assertTrue(findFirstCommand.equals(findFirstCommandCopy));
 
         // different types -> returns false
@@ -68,7 +70,7 @@ public class FindCommandTest {
         GuestNameContainsKeywordsPredicate predicate = preparePredicate(" ");
         List<Predicate<Guest>> guestListPredicates = new LinkedList<>();
         guestListPredicates.add(predicate);
-        FindCommand command = new FindCommand(PREFIX_GUEST.toString(), guestListPredicates, null);
+        FindCommand command = new FindCommand(FLAG_GUEST.toString(), guestListPredicates, null);
         expectedModel.updateFilteredGuestList(predicate);
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredGuestList());
@@ -80,7 +82,7 @@ public class FindCommandTest {
         GuestNameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
         List<Predicate<Guest>> guestListPredicates = new LinkedList<>();
         guestListPredicates.add(predicate);
-        FindCommand command = new FindCommand(PREFIX_GUEST.toString(), guestListPredicates, null);
+        FindCommand command = new FindCommand(FLAG_GUEST.toString(), guestListPredicates, null);
         expectedModel.updateFilteredGuestList(predicate);
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredGuestList());
