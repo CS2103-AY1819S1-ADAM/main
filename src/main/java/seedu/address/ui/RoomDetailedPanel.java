@@ -6,11 +6,13 @@ import com.google.common.eventbus.Subscribe;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.events.ui.RoomListChangedEvent;
 import seedu.address.commons.events.ui.RoomPanelSelectionChangedEvent;
 import seedu.address.model.room.Room;
 
@@ -20,6 +22,7 @@ import seedu.address.model.room.Room;
 public class RoomDetailedPanel extends UiPart<Region> {
     private static final String FXML = "RoomDetailedPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(RoomDetailedPanel.class);
+    private ObservableList<Room> displayedRoomList = FXCollections.observableArrayList();
 
     @FXML
     private ListView<Room> roomDetailedView;
@@ -27,6 +30,8 @@ public class RoomDetailedPanel extends UiPart<Region> {
     public RoomDetailedPanel() {
         super(FXML);
         registerAsAnEventHandler(this);
+        // Ignore events caused by typing inside the details pane.
+        getRoot().setOnKeyPressed(Event::consume);
     }
 
     /**
@@ -34,9 +39,9 @@ public class RoomDetailedPanel extends UiPart<Region> {
      * displayed via UI.
      */
     private void setRoomDetails(Room room) {
-        ObservableList<Room> roomList = FXCollections.observableArrayList();
-        roomList.add(room);
-        roomDetailedView.setItems(roomList);
+        displayedRoomList.clear();
+        displayedRoomList.add(room);
+        roomDetailedView.setItems(displayedRoomList);
         roomDetailedView.setCellFactory(listView -> new RoomListViewCell());
     }
 
@@ -65,6 +70,21 @@ public class RoomDetailedPanel extends UiPart<Region> {
     private void handleRoomPanelSelectionChangedEvent(RoomPanelSelectionChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         setRoomDetails(event.getNewSelection());
+    }
+
+    @Subscribe
+    private void handleRoomListChangedEvent(RoomListChangedEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        if (displayedRoomList.isEmpty()) {
+            return;
+        }
+        Room displayedRoom = displayedRoomList.get(0);
+        ObservableList<Room> changedRoomList = event.getRoomList();
+        for (Room room : changedRoomList) {
+            if (room.isSameRoom(displayedRoom)) {
+                setRoomDetails(room);
+            }
+        }
     }
 
 }

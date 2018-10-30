@@ -5,10 +5,12 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.FLAG_GUEST;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+
+import static seedu.address.testutil.ListUtil.getListRoomCommand;
 import static seedu.address.testutil.TypicalConcierge.getTypicalConcierge;
 import static seedu.address.ui.StatusBarFooter.SYNC_STATUS_INITIAL;
 import static seedu.address.ui.StatusBarFooter.SYNC_STATUS_UPDATED;
-import static seedu.address.ui.testutil.GuiTestAssert.assertListMatching;
+import static seedu.address.ui.testutil.GuiTestAssert.assertGuestListMatching;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -27,6 +29,7 @@ import guitests.guihandles.GuestListPanelHandle;
 import guitests.guihandles.MainMenuHandle;
 import guitests.guihandles.MainWindowHandle;
 import guitests.guihandles.ResultDisplayHandle;
+import guitests.guihandles.RoomListPanelHandle;
 import guitests.guihandles.StatusBarFooterHandle;
 import seedu.address.TestApp;
 import seedu.address.commons.core.EventsCenter;
@@ -101,6 +104,11 @@ public abstract class ConciergeSystemTest {
         return mainWindowHandle.getGuestListPanel();
     }
 
+    public RoomListPanelHandle getRoomListPanel() {
+        mainWindowHandle.getCommandBox().run(getListRoomCommand());
+        return mainWindowHandle.getRoomListPanel();
+    }
+
     public MainMenuHandle getMainMenu() {
         return mainWindowHandle.getMainMenu();
     }
@@ -171,7 +179,8 @@ public abstract class ConciergeSystemTest {
 
         assertEquals(expectedResultMessage, getResultDisplay().getText());
         assertEquals(new Concierge(expectedModel.getConcierge()), testApp.readStorageConcierge());
-        assertListMatching(getGuestListPanel(), expectedModel.getFilteredGuestList());
+        assertGuestListMatching(getGuestListPanel(),
+                expectedModel.getFilteredGuestList());
     }
 
     /**
@@ -256,7 +265,8 @@ public abstract class ConciergeSystemTest {
     private void assertApplicationStartingStateIsCorrect() {
         assertEquals("", getCommandBox().getInput());
         assertEquals("", getResultDisplay().getText());
-        assertListMatching(getGuestListPanel(), getModel().getFilteredGuestList());
+        assertGuestListMatching(getGuestListPanel(),
+                getModel().getFilteredGuestList());
 
         assertEquals(Paths.get(".").resolve(testApp.getStorageSaveLocation()).toString(),
                 getStatusBarFooter().getSaveLocation());

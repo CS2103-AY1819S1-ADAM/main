@@ -22,6 +22,8 @@ public class ModelManagerTest {
 
     private ModelManager modelManager = new ModelManager();
 
+    /*===================== Guests Test =========================================================== */
+
     @Test
     public void hasGuest_nullGuest_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
@@ -44,6 +46,19 @@ public class ModelManagerTest {
         thrown.expect(UnsupportedOperationException.class);
         modelManager.getFilteredGuestList().remove(0);
     }
+
+    /*===================== Rooms Test =========================================================== */
+
+    // Note: no need to test the other room methods, because they only call the methods that belong to the following
+    // class, which have all already been tested in the classes' own tests.
+
+    @Test
+    public void getFilteredRoomList_modifyList_throwsUnsupportedOperationException() {
+        thrown.expect(UnsupportedOperationException.class);
+        modelManager.getFilteredRoomList().remove(0);
+    }
+
+    /*===================== Utils Test =========================================================== */
 
     @Test
     public void equals() {
