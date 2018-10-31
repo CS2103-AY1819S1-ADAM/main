@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import static seedu.address.logic.parser.CliSyntax.FLAG_ROOM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE_END;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE_START;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -45,7 +44,7 @@ public class AddCommand extends Command {
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_TAG + "friends "
-            + FLAG_ROOM + "056"
+            + PREFIX_ROOM + "056"
             + PREFIX_DATE_START + "03/11/2018"
             + PREFIX_DATE_END + "05/11/2018";
 
