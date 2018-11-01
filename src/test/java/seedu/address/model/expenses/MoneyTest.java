@@ -1,8 +1,8 @@
 package seedu.address.model.expenses;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
@@ -20,14 +20,10 @@ public class MoneyTest {
 
     @Test
     public void constructor_validDollarsAndCents_success() {
-        try {
-            Money m1 = new Money(123, 45);
-            Money m2 = new Money(-678, 90);
-            Money m3 = new Money(Integer.MAX_VALUE, 99);
-            Money m4 = new Money(Integer.MIN_VALUE + 1, 0);
-        } catch (Exception e) {
-            fail();
-        }
+        new Money(123, 45);
+        new Money(-678, 90);
+        new Money(Integer.MAX_VALUE, 99);
+        new Money(Integer.MIN_VALUE + 1, 0);
     }
 
     @Test
@@ -40,14 +36,10 @@ public class MoneyTest {
 
     @Test
     public void constructor_validString_success() {
-        try {
-            Money m = new Money("123.45");
-            assertTrue(m.equals(new Money(123, 45)));
-            Money n = new Money("987654321.01");
-            assertTrue(n.equals(new Money(987654321, 1)));
-        } catch (Exception e) {
-            fail();
-        }
+        Money m = new Money("123.45");
+        assertEquals(m, new Money(123, 45));
+        Money n = new Money("987654321.01");
+        assertEquals(n, new Money(987654321, 1));
     }
 
     @Test
@@ -95,13 +87,13 @@ public class MoneyTest {
         Money d = new Money(-97, 68);
         Money e = new Money(-765, 80);
         Money f = new Money(-890, 10);
-        assertTrue(a.add(b).equals(new Money(598, 98)));
-        assertTrue(b.add(c).equals(new Money(808, 23)));
-        assertTrue(a.add(d).equals(new Money(377, 41)));
-        assertTrue(d.add(b).equals(new Money(26, 21)));
-        assertTrue(d.add(e).equals(new Money(-863, 48)));
-        assertTrue(e.add(c).equals(new Money(-81, 46)));
-        assertTrue(b.add(f).equals(new Money(-766, 21)));
-        assertTrue(e.add(f).equals(new Money(-1655, 90)));
+        assertEquals(a.add(b), new Money(598, 98));
+        assertEquals(b.add(c), new Money(808, 23));
+        assertEquals(a.add(d), new Money(377, 41));
+        assertEquals(d.add(b), new Money(26, 21));
+        assertEquals(d.add(e), new Money(-863, 48));
+        assertEquals(e.add(c), new Money(-81, 46));
+        assertEquals(b.add(f), new Money(-766, 21));
+        assertEquals(e.add(f), new Money(-1655, 90));
     }
 }

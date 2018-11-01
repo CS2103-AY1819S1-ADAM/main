@@ -10,6 +10,7 @@ import static seedu.address.testutil.TypicalRoomNumbers.ROOM_NUMBER_002;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.junit.Rule;
@@ -17,6 +18,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.CheckInCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditGuestDescriptor;
@@ -27,6 +29,7 @@ import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectCommand;
+import seedu.address.logic.commands.ServiceCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.guest.Guest;
@@ -36,6 +39,9 @@ import seedu.address.model.room.booking.BookingPeriod;
 import seedu.address.testutil.EditGuestDescriptorBuilder;
 import seedu.address.testutil.GuestBuilder;
 import seedu.address.testutil.GuestUtil;
+import seedu.address.testutil.TypicalExpenseTypes;
+import seedu.address.testutil.TypicalExpenses;
+import seedu.address.testutil.TypicalRoomNumbers;
 
 public class ConciergeParserTest {
     @Rule
@@ -114,6 +120,38 @@ public class ConciergeParserTest {
         SelectCommand command = (SelectCommand) parser.parseCommand(
                 SelectCommand.COMMAND_WORD + " " + INDEX_FIRST_GUEST.getOneBased());
         assertEquals(new SelectCommand(INDEX_FIRST_GUEST), command);
+    }
+
+    @Test
+    public void parseCommand_service() throws Exception {
+        String argsWithoutCost = CliSyntax.PREFIX_ROOM + TypicalRoomNumbers.ROOM_NUMBER_001.toString() + " "
+                + CliSyntax.PREFIX_ITEM_NUMBER + TypicalExpenseTypes.EXPENSE_TYPE_RS01.getItemNumber();
+        String argsWithCost = argsWithoutCost + " " + CliSyntax.PREFIX_COST
+                + TypicalExpenses.EXPENSE_RS01.getCost().toString();
+        ServiceCommand commandWithoutCost = (ServiceCommand) parser.parseCommand(
+                ServiceCommand.COMMAND_WORD + " " + argsWithoutCost);
+        ServiceCommand commandWithCost = (ServiceCommand) parser.parseCommand(
+                ServiceCommand.COMMAND_WORD + " " + argsWithCost);
+        assertEquals(new ServiceCommand(TypicalRoomNumbers.ROOM_NUMBER_001,
+                TypicalExpenseTypes.EXPENSE_TYPE_RS01.getItemNumber(),
+                Optional.of(TypicalExpenses.EXPENSE_RS01.getCost())), commandWithCost);
+        assertEquals(new ServiceCommand(TypicalRoomNumbers.ROOM_NUMBER_001,
+                TypicalExpenseTypes.EXPENSE_TYPE_RS01.getItemNumber(),
+                Optional.empty()), commandWithoutCost);
+    }
+
+    @Test
+    public void parseCommand_checkIn() throws Exception {
+        CheckInCommand command = (CheckInCommand) parser.parseCommand(
+                CheckInCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_ROOM
+                        + TypicalRoomNumbers.ROOM_NUMBER_001.toString());
+        assertEquals(new CheckInCommand(TypicalRoomNumbers.ROOM_NUMBER_001), command);
+    }
+
+    @Test
+    public void parseCommand_checkout() throws Exception {
+        // TODO whoever made checkout command
+        assertEquals(1, 1);
     }
 
     @Test

@@ -103,7 +103,5 @@ public class AddCommandTest {
 
         // different guest -> returns false
         assertFalse(addAliceCommand.equals(addBobCommand));
-
     }
-
 }
