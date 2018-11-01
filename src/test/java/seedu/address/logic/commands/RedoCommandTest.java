@@ -3,7 +3,7 @@ package seedu.address.logic.commands;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.deleteFirstGuest;
-import static seedu.address.testutil.TypicalConcierge.getTypicalConcierge;
+import static seedu.address.testutil.TypicalConcierge.getTypicalConciergeClean;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -15,8 +15,8 @@ import seedu.address.model.UserPrefs;
 
 public class RedoCommandTest {
 
-    private final Model model = new ModelManager(getTypicalConcierge(), new UserPrefs());
-    private final Model expectedModel = new ModelManager(getTypicalConcierge(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalConciergeClean(), new UserPrefs());
+    private final Model expectedModel = new ModelManager(getTypicalConciergeClean(), new UserPrefs());
     private final CommandHistory commandHistory = new CommandHistory();
 
     @Before

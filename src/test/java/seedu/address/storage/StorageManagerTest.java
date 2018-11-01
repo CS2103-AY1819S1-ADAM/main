@@ -3,7 +3,7 @@ package seedu.address.storage;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.testutil.TypicalConcierge.getTypicalConcierge;
+import static seedu.address.testutil.TypicalConcierge.getTypicalConciergeClean;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -63,7 +63,7 @@ public class StorageManagerTest {
          * {@link XmlConciergeStorage} class.
          * More extensive testing of UserPref saving/reading is done in {@link XmlConciergeStorageTest} class.
          */
-        Concierge original = getTypicalConcierge();
+        Concierge original = getTypicalConciergeClean();
         storageManager.saveConcierge(original);
         ReadOnlyConcierge retrieved = storageManager.readConcierge().get();
         assertEquals(original, new Concierge(retrieved));

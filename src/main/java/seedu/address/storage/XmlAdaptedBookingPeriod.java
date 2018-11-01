@@ -27,6 +27,14 @@ public class XmlAdaptedBookingPeriod {
     public XmlAdaptedBookingPeriod() {}
 
     /**
+     * Constructor FOR TESTING in XmlAdaptedBookingPeriodTest
+     */
+    public XmlAdaptedBookingPeriod(String startDate, String endDate) {
+        this.startDate = startDate;
+        this.endDate = endDate;
+    }
+
+    /**
      * Converts a given booking into this class for JAXB use.
      *
      * @param source future changes to this will not affect the created XmlAdaptedBookingPeriod

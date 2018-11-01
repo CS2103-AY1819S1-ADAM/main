@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <concierge>
-    <!-- Guest with invalid email field -->
     <guests>
         <name>Alice Pauline</name>
         <phone>94351253</phone>
-        <email>alice@examp!e.com</email>
+        <email>alice@example.com</email>
         <tagged>vip</tagged>
     </guests>
     <guests>
@@ -40,6 +39,7 @@
         <phone>9482442</phone>
         <email>anna@example.com</email>
     </guests>
+    <!-- Room with invalid isCheckedIn flag -->
     <rooms>
         <roomNumber>001</roomNumber>
         <capacity>SINGLE</capacity>
@@ -50,8 +50,8 @@
                 <email>alice@example.com</email>
             </guest>
             <bookingPeriod>
-                <startDate>23/10/2018</startDate>
-                <endDate>29/10/2018</endDate>
+                <startDate>2018/10/23</startDate>
+                <endDate>2018/10/29</endDate>
             </bookingPeriod>
             <isCheckedIn>false</isCheckedIn>
         </bookings>
@@ -62,11 +62,9 @@
         <capacity>DOUBLE</capacity>
         <bookings>
             <guest>
-                <name>Benson Meier</name>
-                <phone>98765432</phone>
-                <email>johnd@example.com</email>
-                <tagged>vip</tagged>
-                <tagged>specialNeeds</tagged>
+                <name>Alice Pauline</name>
+                <phone>94351253</phone>
+                <email>alice@example.com</email>
             </guest>
             <bookingPeriod>
                 <startDate>23/10/2018</startDate>
@@ -109,9 +107,9 @@
         <capacity>SUITE</capacity>
         <bookings>
             <guest>
-                <name>Carl Kurz</name>
-                <phone>95352563</phone>
-                <email>heinz@example.com</email>
+                <name>Alice Pauline</name>
+                <phone>94351253</phone>
+                <email>alice@example.com</email>
             </guest>
             <bookingPeriod>
                 <startDate>29/10/2018</startDate>
@@ -125,10 +123,9 @@
         <capacity>SINGLE</capacity>
         <bookings>
             <guest>
-                <name>Daniel Meier</name>
-                <phone>87652533</phone>
-                <email>cornelia@example.com</email>
-                <tagged>friends</tagged>
+                <name>Alice Pauline</name>
+                <phone>94351253</phone>
+                <email>alice@example.com</email>
             </guest>
             <bookingPeriod>
                 <startDate>30/10/2018</startDate>
@@ -142,9 +139,9 @@
         <capacity>DOUBLE</capacity>
         <bookings>
             <guest>
-                <name>Elle Meyer</name>
-                <phone>9482224</phone>
-                <email>werner@example.com</email>
+                <name>Alice Pauline</name>
+                <phone>94351253</phone>
+                <email>alice@example.com</email>
             </guest>
             <bookingPeriod>
                 <startDate>30/10/2018</startDate>
@@ -186,9 +183,9 @@
         <capacity>SUITE</capacity>
         <bookings>
             <guest>
-                <name>Fiona Kunz</name>
-                <phone>9482427</phone>
-                <email>lydia@example.com</email>
+                <name>Alice Pauline</name>
+                <phone>94351253</phone>
+                <email>alice@example.com</email>
             </guest>
             <bookingPeriod>
                 <startDate>30/10/2018</startDate>
@@ -202,9 +199,9 @@
         <capacity>SINGLE</capacity>
         <bookings>
             <guest>
-                <name>George Best</name>
-                <phone>9482442</phone>
-                <email>anna@example.com</email>
+                <name>Alice Pauline</name>
+                <phone>94351253</phone>
+                <email>alice@example.com</email>
             </guest>
             <bookingPeriod>
                 <startDate>31/10/2018</startDate>
@@ -230,9 +227,9 @@
         </bookings>
         <bookings>
             <guest>
-                <name>Carl Kurz</name>
-                <phone>95352563</phone>
-                <email>heinz@example.com</email>
+                <name>Alice Pauline</name>
+                <phone>94351253</phone>
+                <email>alice@example.com</email>
             </guest>
             <bookingPeriod>
                 <startDate>29/10/2018</startDate>
@@ -242,10 +239,9 @@
         </bookings>
         <bookings>
             <guest>
-                <name>Daniel Meier</name>
-                <phone>87652533</phone>
-                <email>cornelia@example.com</email>
-                <tagged>friends</tagged>
+                <name>Alice Pauline</name>
+                <phone>94351253</phone>
+                <email>alice@example.com</email>
             </guest>
             <bookingPeriod>
                 <startDate>30/10/2018</startDate>
@@ -255,9 +251,9 @@
         </bookings>
         <bookings>
             <guest>
-                <name>George Best</name>
-                <phone>9482442</phone>
-                <email>anna@example.com</email>
+                <name>Alice Pauline</name>
+                <phone>94351253</phone>
+                <email>alice@example.com</email>
             </guest>
             <bookingPeriod>
                 <startDate>31/10/2018</startDate>
@@ -311,9 +307,9 @@
         </bookings>
         <bookings>
             <guest>
-                <name>Carl Kurz</name>
-                <phone>95352563</phone>
-                <email>heinz@example.com</email>
+                <name>Alice Pauline</name>
+                <phone>94351253</phone>
+                <email>alice@example.com</email>
             </guest>
             <bookingPeriod>
                 <startDate>29/10/2018</startDate>
@@ -323,9 +319,9 @@
         </bookings>
         <bookings>
             <guest>
-                <name>Elle Meyer</name>
-                <phone>9482224</phone>
-                <email>werner@example.com</email>
+                <name>Alice Pauline</name>
+                <phone>94351253</phone>
+                <email>alice@example.com</email>
             </guest>
             <bookingPeriod>
                 <startDate>30/10/2018</startDate>
@@ -335,9 +331,9 @@
         </bookings>
         <bookings>
             <guest>
-                <name>George Best</name>
-                <phone>9482442</phone>
-                <email>anna@example.com</email>
+                <name>Alice Pauline</name>
+                <phone>94351253</phone>
+                <email>alice@example.com</email>
             </guest>
             <bookingPeriod>
                 <startDate>31/10/2018</startDate>

@@ -8,6 +8,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.Menu;
@@ -22,7 +23,9 @@ import seedu.address.model.tag.Tag;
 
 /**
  * JAXB-friendly version of the Room.
+ * Note: Tagged as XmlRootElement for XML tests to be able to write XML files for just this class
  */
+@XmlRootElement(name = "room")
 public class XmlAdaptedRoom {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Room's %s field is missing!";
@@ -45,6 +48,18 @@ public class XmlAdaptedRoom {
      * This is the no-arg constructor that is required by JAXB.
      */
     public XmlAdaptedRoom() {}
+
+    /**
+     * Constructor FOR TESTING in XmlAdaptedRoomTest
+     */
+    public XmlAdaptedRoom(String roomNumber, Capacity capacity, List<XmlAdaptedBooking> bookings,
+                          List<XmlAdaptedExpense> expenses, List<XmlAdaptedTag> tagged) {
+        this.roomNumber = roomNumber;
+        this.capacity = capacity;
+        this.bookings = bookings;
+        this.expenses = expenses;
+        this.tagged = tagged;
+    }
 
     /**
      * Converts a given room into this class for JAXB use.
@@ -89,7 +104,7 @@ public class XmlAdaptedRoom {
                 modelBookings = modelBookings.add(b.toModelType());
             }
         } catch (OverlappingBookingException e) {
-            throw new IllegalValueException(e.getMessage());
+            throw new IllegalValueException(MESSAGE_OVERLAPPING_BOOKING);
         }
 
         final List<Expense> expenseList = new ArrayList<>();
@@ -105,6 +120,11 @@ public class XmlAdaptedRoom {
         final Set<Tag> modelTags = new HashSet<>(roomTags);
 
         return new Room(modelRoomNumber, modelCapacity, modelExpenses, modelBookings, modelTags);
+    }
+
+    @Override
+    public String toString() {
+        return roomNumber + capacity + expenses + bookings + tagged;
     }
 
     @Override

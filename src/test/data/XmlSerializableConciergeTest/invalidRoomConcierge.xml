@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <concierge>
-    <!-- Guest with invalid email field -->
     <guests>
         <name>Alice Pauline</name>
         <phone>94351253</phone>
-        <email>alice@examp!e.com</email>
+        <email>alice@example.com</email>
         <tagged>vip</tagged>
     </guests>
     <guests>
@@ -40,9 +39,9 @@
         <phone>9482442</phone>
         <email>anna@example.com</email>
     </guests>
+	<!-- Room is missing capacity field -->
     <rooms>
         <roomNumber>001</roomNumber>
-        <capacity>SINGLE</capacity>
         <bookings>
             <guest>
                 <name>Alice Pauline</name>

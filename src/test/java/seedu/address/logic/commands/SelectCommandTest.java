@@ -6,7 +6,7 @@ import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showGuestAtIndex;
-import static seedu.address.testutil.TypicalConcierge.getTypicalConcierge;
+import static seedu.address.testutil.TypicalConcierge.getTypicalConciergeClean;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_GUEST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_GUEST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_GUEST;
@@ -30,8 +30,8 @@ public class SelectCommandTest {
     @Rule
     public final EventsCollectorRule eventsCollectorRule = new EventsCollectorRule();
 
-    private Model model = new ModelManager(getTypicalConcierge(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalConcierge(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalConciergeClean(), new UserPrefs());
+    private Model expectedModel = new ModelManager(getTypicalConciergeClean(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test

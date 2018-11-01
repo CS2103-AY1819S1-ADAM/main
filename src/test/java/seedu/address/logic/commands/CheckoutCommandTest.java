@@ -23,7 +23,7 @@ import seedu.address.testutil.TypicalRoomNumbers;
  */
 public class CheckoutCommandTest {
 
-    private Model model = new ModelManager(TypicalConcierge.getTypicalConciergeWithRoomBookings(), new UserPrefs());
+    private Model model = new ModelManager(TypicalConcierge.getTypicalConcierge(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test

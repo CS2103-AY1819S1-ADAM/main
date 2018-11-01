@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.address.testutil.TypicalConcierge.getTypicalConcierge;
+import static seedu.address.testutil.TypicalConcierge.getTypicalConciergeClean;
 import static seedu.address.testutil.TypicalGuests.ALICE;
 
 import java.util.Arrays;
@@ -47,7 +47,7 @@ public class ConciergeTest {
 
     @Test
     public void resetData_withValidReadOnlyConcierge_replacesData() {
-        Concierge newData = getTypicalConcierge();
+        Concierge newData = getTypicalConciergeClean();
         concierge.resetData(newData);
         assertEquals(newData, concierge);
     }

@@ -49,9 +49,9 @@ public class SampleDataUtil {
     }
 
     /**
-     * Returns a room list initialized with the maximum number of rooms, and 1 sample booking for testing
-     * Use to see if xml file reflects changes
-     * DELETE WHEN TESTED IN UNIT TESTS
+     * Returns a room list initialized with the maximum number of rooms, and a few sample bookings
+     * Use to see if XML file reflects changes
+     * TODO DELETE WHEN TESTED IN UNIT TESTS
      */
     public static List<Room> getSampleRoomsWithBookingsExpenses() {
         UniqueRoomList uniqueRoomList = new UniqueRoomList();

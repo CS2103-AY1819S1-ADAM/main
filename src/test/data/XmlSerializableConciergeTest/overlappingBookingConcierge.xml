@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <concierge>
-    <!-- Guest with invalid email field -->
     <guests>
         <name>Alice Pauline</name>
         <phone>94351253</phone>
-        <email>alice@examp!e.com</email>
+        <email>alice@example.com</email>
         <tagged>vip</tagged>
     </guests>
     <guests>
@@ -48,6 +47,19 @@
                 <name>Alice Pauline</name>
                 <phone>94351253</phone>
                 <email>alice@example.com</email>
+            </guest>
+            <bookingPeriod>
+                <startDate>23/10/2018</startDate>
+                <endDate>29/10/2018</endDate>
+            </bookingPeriod>
+            <isCheckedIn>false</isCheckedIn>
+        </bookings>
+		<!-- Room has bookings whose booking period overlap with each other -->
+        <bookings>
+            <guest>
+                <name>Mary Jane</name>
+                <phone>12345678</phone>
+                <email>mary@example.com</email>
             </guest>
             <bookingPeriod>
                 <startDate>23/10/2018</startDate>
