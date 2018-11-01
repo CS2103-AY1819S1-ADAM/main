@@ -1,5 +1,6 @@
 package seedu.address;
 
+import static seedu.address.model.login.PasswordHashList.getEmptyPasswordHashList;
 import static seedu.address.model.util.SampleDataUtil.getSampleConcierge;
 
 import java.io.IOException;
@@ -26,9 +27,12 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyConcierge;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.login.PasswordHashList;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.ConciergeStorage;
+import seedu.address.storage.JsonPasswordsStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
+import seedu.address.storage.PasswordsStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
 import seedu.address.storage.UserPrefsStorage;
@@ -64,7 +68,8 @@ public class MainApp extends Application {
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         userPrefs = initPrefs(userPrefsStorage);
         ConciergeStorage conciergeStorage = new XmlConciergeStorage(userPrefs.getConciergeFilePath());
-        storage = new StorageManager(conciergeStorage, userPrefsStorage);
+        PasswordsStorage passwordsStorage = new JsonPasswordsStorage(userPrefs.getPasswordsFilePath());
+        storage = new StorageManager(conciergeStorage, userPrefsStorage, passwordsStorage);
 
         initLogging(config);
 
@@ -85,6 +90,8 @@ public class MainApp extends Application {
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
         Optional<ReadOnlyConcierge> conciergeOptional;
         ReadOnlyConcierge initialData;
+        PasswordHashList passwordRef;
+
         try {
             conciergeOptional = storage.readConcierge();
             if (!conciergeOptional.isPresent()) {
@@ -92,15 +99,20 @@ public class MainApp extends Application {
             }
             initialData =
                     conciergeOptional.orElseGet(SampleDataUtil::getSampleConcierge);
+            passwordRef = storage.getPasswordHashList();
         } catch (DataConversionException e) {
-            logger.warning("Data file not in the correct format. Will be starting with a sample Concierge");
+            logger.warning("Data file not in the correct format. "
+                    + "Will be starting with a sample Concierge and empty password list");
             initialData = getSampleConcierge();
+            passwordRef = getEmptyPasswordHashList();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with a sample Concierge");
+            logger.warning("Problem while reading from the file. "
+                    + "Will be starting with a sample Concierge and empty password list");
             initialData = getSampleConcierge();
+            passwordRef = getEmptyPasswordHashList();
         }
 
-        return new ModelManager(initialData, userPrefs);
+        return new ModelManager(initialData, userPrefs, passwordRef);
     }
 
     private void initLogging(Config config) {

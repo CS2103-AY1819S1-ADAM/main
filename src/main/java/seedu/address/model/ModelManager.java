@@ -2,7 +2,9 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.model.login.PasswordHashList.getEmptyPasswordHashList;
 
+import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -12,7 +14,12 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.ConciergeChangedEvent;
+import seedu.address.model.expenses.Expense;
 import seedu.address.model.guest.Guest;
+import seedu.address.model.login.InvalidLogInException;
+import seedu.address.model.login.InvalidLogOutException;
+import seedu.address.model.login.LogInManager;
+import seedu.address.model.login.PasswordHashList;
 import seedu.address.model.room.Room;
 import seedu.address.model.room.RoomNumber;
 import seedu.address.model.room.booking.Booking;
@@ -29,19 +36,34 @@ public class ModelManager extends ComponentManager implements Model {
     private final FilteredList<Guest> filteredGuests;
     private final FilteredList<Room> filteredRooms;
     private final FilteredList<Guest> filteredCheckedInGuests;
+    private final LogInManager logInManager;
 
     /**
      * Initializes a ModelManager with the given concierge and userPrefs.
+     * This method remains to support existing tests which do not require the
+     * LogInHelper module.
      */
     public ModelManager(ReadOnlyConcierge concierge, UserPrefs userPrefs) {
+        this(concierge, userPrefs, getEmptyPasswordHashList());
+    }
+
+    /**
+     * Initializes a ModelManager with the given {@code concierge},
+     * {@code userPrefs} and {@code passwordRef}.
+     */
+    public ModelManager(ReadOnlyConcierge concierge, UserPrefs userPrefs,
+                        PasswordHashList passwordRef) {
         super();
         requireAllNonNull(concierge, userPrefs);
 
-        logger.fine("Initializing with Concierge: " + concierge + " and user prefs " + userPrefs);
+        logger.fine("Initializing with Concierge: " + concierge
+                + " and user prefs " + userPrefs
+                + " and password list " + passwordRef);
 
         versionedConcierge = new VersionedConcierge(concierge);
         filteredGuests = new FilteredList<>(versionedConcierge.getGuestList());
         filteredRooms = new FilteredList<>(versionedConcierge.getRoomList());
+        logInManager = new LogInManager(passwordRef);
         filteredCheckedInGuests = new FilteredList<>(versionedConcierge.getCheckedInGuestList());
     }
 
@@ -61,9 +83,34 @@ public class ModelManager extends ComponentManager implements Model {
         return versionedConcierge;
     }
 
+    @Override
+    public Menu getMenu() {
+        return versionedConcierge.getMenu();
+    }
+
     /** Raises an event to indicate the model has changed */
     private void indicateConciergeChanged() {
         raise(new ConciergeChangedEvent(versionedConcierge));
+    }
+
+    @Override
+    public boolean isSignedIn() {
+        return logInManager.isSignedIn();
+    }
+
+    @Override
+    public Optional<String> getUsername() {
+        return logInManager.getUsername();
+    }
+
+    @Override
+    public void signIn(String userName, String hashedPassword) throws InvalidLogInException {
+        logInManager.signIn(userName, hashedPassword);
+    }
+
+    @Override
+    public void signOut() throws InvalidLogOutException {
+        logInManager.signOut();
     }
 
     @Override
@@ -182,7 +229,16 @@ public class ModelManager extends ComponentManager implements Model {
         versionedConcierge.checkoutRoom(roomNumber, bookingPeriod);
     }
 
-    //=========== Undo/Redo =================================================================================
+    // ========= Expenses =================================================
+
+    @Override
+    public void addExpense(RoomNumber roomNumber, Expense expense) {
+        versionedConcierge.addExpense(roomNumber, expense);
+        updateFilteredRoomList(PREDICATE_SHOW_ALL_ROOMS);
+        indicateConciergeChanged();
+    }
+
+    //=========== Undo/Redo ================================================
 
     @Override
     public boolean canUndoConcierge() {

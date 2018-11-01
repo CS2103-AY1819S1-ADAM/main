@@ -38,20 +38,37 @@ public class CheckoutCommandParserTest {
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
+        // empty string
         assertParseFailure(parser, "", String.format(MESSAGE_INVALID_COMMAND_FORMAT, CheckoutCommand.MESSAGE_USAGE));
+
+        // invalid room numbers
         assertParseFailure(parser, "1", String.format(MESSAGE_INVALID_COMMAND_FORMAT, CheckoutCommand.MESSAGE_USAGE));
         assertParseFailure(parser, "01", String.format(MESSAGE_INVALID_COMMAND_FORMAT, CheckoutCommand.MESSAGE_USAGE));
+
+        // missing room flag prefix
         assertParseFailure(parser, "001", String.format(MESSAGE_INVALID_COMMAND_FORMAT, CheckoutCommand.MESSAGE_USAGE));
+
+        // invalid room flag prefix
         assertParseFailure(parser, "-r 001",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, CheckoutCommand.MESSAGE_USAGE));
+
+        // missing end date
         assertParseFailure(parser, ROOM_DESC_AMY + DATE_START_DESC_AMY,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, CheckoutCommand.MESSAGE_USAGE));
+
+        // missing start date
         assertParseFailure(parser, ROOM_DESC_AMY + DATE_END_DESC_AMY,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, CheckoutCommand.MESSAGE_USAGE));
+
+        // missing room description
         assertParseFailure(parser, DATE_START_DESC_AMY + DATE_END_DESC_AMY,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, CheckoutCommand.MESSAGE_USAGE));
+
+        // invalid calendar dates (30 Feb does not exist)
         assertParseFailure(parser, " r/001 from/01/01/18 to/30/02/18",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, CheckoutCommand.MESSAGE_USAGE));
+
+        // invalid date format (needs to be d/M/y)
         assertParseFailure(parser, " r/001 from/2018/01/01 to/2018/01/02",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, CheckoutCommand.MESSAGE_USAGE));
     }

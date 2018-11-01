@@ -524,7 +524,7 @@ These predicate classes are collected into a list of predicates before they are 
 
 ===== Aspect: OR/AND Searching
 When searching, a few things have to be considered. Does the filter specified have an OR relationship with one another, or an AND relationship.
-An example is this: find -g n/Alex t/VIP, this can be interpreted in two ways. Finding guests with name as "Alex" AND with tag "VIP", or name "Alex" or tag "VIP. 
+An example is this: find -g n/Alex t/VIP, this can be interpreted in two ways. Finding guests with name as "Alex" AND with tag "VIP", or name "Alex" or tag "VIP.
 
 === Command Archive feature
 Given below is the UML diagram for the `CommandArchive` Class:

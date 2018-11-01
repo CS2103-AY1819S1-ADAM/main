@@ -34,7 +34,8 @@ public class StorageManagerTest {
     public void setUp() {
         XmlConciergeStorage conciergeStorage = new XmlConciergeStorage(getTempFilePath("ab"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
-        storageManager = new StorageManager(conciergeStorage, userPrefsStorage);
+        JsonPasswordsStorage passwordsStorage = new JsonPasswordsStorage(getTempFilePath("pws"));
+        storageManager = new StorageManager(conciergeStorage, userPrefsStorage, passwordsStorage);
     }
 
     private Path getTempFilePath(String fileName) {
@@ -76,9 +77,12 @@ public class StorageManagerTest {
 
     @Test
     public void handleConciergeChangedEvent_exceptionThrown_eventRaised() {
+        Path dummyPath = Paths.get("dummy");
         // Create a StorageManager while injecting a stub that  throws an exception when the save method is called
-        Storage storage = new StorageManager(new XmlConciergeStorageExceptionThrowingStub(Paths.get("dummy")),
-                                             new JsonUserPrefsStorage(Paths.get("dummy")));
+        Storage storage = new StorageManager(
+                new XmlConciergeStorageExceptionThrowingStub(dummyPath),
+                new JsonUserPrefsStorage(dummyPath),
+                new JsonPasswordsStorage(dummyPath));
         storage.handleConciergeChangedEvent(new ConciergeChangedEvent(new Concierge()));
         assertTrue(eventsCollectorRule.eventsCollector.getMostRecent() instanceof DataSavingExceptionEvent);
     }

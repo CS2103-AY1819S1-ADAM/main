@@ -1,7 +1,10 @@
 package seedu.address.model.expenses;
 
+import static seedu.address.commons.util.AppUtil.checkArgument;
+
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.Objects;
 
 import seedu.address.model.expenses.exceptions.MoneyLimitExceededException;
 
@@ -13,9 +16,14 @@ import seedu.address.model.expenses.exceptions.MoneyLimitExceededException;
  */
 public class Money {
 
+    public static final String MESSAGE_MONEY_CONSTRAINTS =
+            "Money should be written with at least one dollars digit and two cents digits.\n"
+            + "The magnitude of each amount is limited to 2^32 - 1.\n"
+            + "Unnecessary leading zeroes are also not allowed.";
+
     private int dollars;
     private int cents;
-    //v2.0: implement exchange rates
+    // TODO implement exchange rates
 
     public Money(int dollars, int cents) {
         if (cents >= 100 || cents < 0 || dollars == Integer.MIN_VALUE) {
@@ -30,9 +38,7 @@ public class Money {
      * @param toConvert The string to convert to a Money object.
      */
     public Money(String toConvert) {
-        if (!isValidMoneyFormat(toConvert)) {
-            throw new IllegalArgumentException();
-        }
+        checkArgument(isValidMoneyFormat(toConvert), MESSAGE_MONEY_CONSTRAINTS);
         String[] parts = toConvert.split("\\.");
         dollars = Integer.parseInt(parts[0]);
         cents = Integer.parseInt(parts[1]);
@@ -40,12 +46,17 @@ public class Money {
 
     /**
      * Checks that a string is a valid representation of money.
+     * A valid string representation must be of the format "xxx.yy",
+     * i.e. must always represent with two decimal places.
+     * String cannot contain unnecessary leading zeroes, e.g. "012.34".
+     * Actual magnitude of monetary value cannot exceed Integer.MAX_VALUE.
+     * Negative amounts are accepted.
      * @param money The string to be checked.
      * @return True if the string is in money format, false otherwise.
      */
     public static boolean isValidMoneyFormat(String money) {
         // check 1: if negative value, make a new string without negative sign
-        String positiveMoney = new String(money);
+        String positiveMoney = money;
         if (money.toCharArray()[0] == '-') {
             positiveMoney = money.substring(1);
         }
@@ -102,6 +113,6 @@ public class Money {
 
     @Override
     public int hashCode() {
-        return (dollars * 100) + cents;
+        return Objects.hash(dollars, cents);
     }
 }

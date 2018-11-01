@@ -62,13 +62,11 @@ public class GuestDetailedCardHandle extends NodeHandle<Node> {
      * Returns true if this handle contains {@code guest}.
      */
     public boolean equals(Guest guest) {
-        boolean name = getName().equals(guest.getName().fullName);
-        boolean phone = getPhone().equals(guest.getPhone().value);
-        boolean email = getEmail().equals(guest.getEmail().value);
+        boolean isNameEquals = getName().equals(guest.getName().fullName);
+        boolean isPhoneEquals = getPhone().equals(guest.getPhone().value);
+        boolean isEmailEquals = getEmail().equals(guest.getEmail().value);
 
-        return getName().equals(guest.getName().fullName)
-                && getPhone().equals(guest.getPhone().value)
-                && getEmail().equals(guest.getEmail().value)
+        return isNameEquals && isPhoneEquals && isEmailEquals
                 && ImmutableMultiset.copyOf(getTags()).equals(ImmutableMultiset.copyOf(guest.getTags().stream()
                 .map(tag -> tag.tagName)
                 .collect(Collectors.toList())));

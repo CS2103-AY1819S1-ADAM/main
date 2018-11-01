@@ -4,15 +4,18 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.expenses.Money;
 import seedu.address.model.guest.Email;
 import seedu.address.model.guest.Name;
 import seedu.address.model.guest.Phone;
+import seedu.address.model.login.HashingException;
 import seedu.address.model.room.RoomNumber;
 import seedu.address.model.room.booking.BookingPeriod;
 import seedu.address.model.tag.Tag;
@@ -137,6 +140,34 @@ public class ParserUtil {
             throw new ParseException(BookingPeriod.MESSAGE_BOOKING_PERIOD_CONSTRAINTS);
         }
         return new BookingPeriod(trimmedStartDate, trimmedEndDate);
+    }
+
+    /**
+     * Parses a cost string that may or may not be present into an {@code Optional<Money>}
+     * @param cost The cost that may or may not be present as an argument.
+     * @return A Money representation of the cost that may or may not be present.
+     * @throws ParseException if the cost is present but in the wrong format.
+     */
+    public static Optional<Money> parseCost(Optional<String> cost) throws ParseException {
+        requireNonNull(cost);
+        if (cost.isPresent() && !Money.isValidMoneyFormat(cost.get())) {
+            throw new ParseException(Money.MESSAGE_MONEY_CONSTRAINTS);
+        }
+        return cost.map(s -> new Money(s));
+    }
+
+    /**
+     * Parses a {@code String password} into a hashed password.
+     * Strips whitespace off the password, so passwords cannot begin with a
+     * whitespace.
+     */
+    public static String parseAndHashPassword(String pw) throws ParseException {
+        requireNonNull(pw);
+        try {
+            return PasswordHashUtil.hash(pw.trim());
+        } catch (HashingException e) {
+            throw new ParseException(e.getMessage());
+        }
     }
 
     /**
