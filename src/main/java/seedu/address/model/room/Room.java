@@ -117,17 +117,17 @@ public class Room {
 
     /**
      * Checks out the first booking of this room.
-     * KIV: Future features to include exporting of receipt, setting room to housekeeping status for __x__ hours.
+     * TODO: Future features to include exporting of receipt, setting room to housekeeping status for __x__ hours.
      */
     public Room checkout() {
         Booking firstBooking = bookings.getFirstBooking();
         return new Room(this.roomNumber, this.capacity, this.expenses, bookings.remove(firstBooking), this.tags);
-        // expenses.report(); // KIV: wait for WZ to implement
+        // expenses.report(); // TODO: wait for WZ to implement
     }
 
     /**
      * Checks out the booking identified by the booking period
-     * KIV: Future features to include exporting of receipt, setting room to housekeeping status for __x__ hours.
+     * TODO: Future features to include exporting of receipt, setting room to housekeeping status for __x__ hours.
      */
     public Room checkout(BookingPeriod bookingPeriod) {
         for (Booking booking : bookings.getSortedBookingsSet()) {
@@ -136,7 +136,7 @@ public class Room {
             }
         }
         throw new BookingNotFoundException();
-        // expenses.report(); // KIV: wait for WZ to implement
+        // expenses.report(); // TODO: wait for WZ to implement
     }
 
     //=========== Expenses operations =============================================================
@@ -209,6 +209,7 @@ public class Room {
                 .append("\n")
                 .append("Tags: ");
         getTags().forEach(builder::append);
+        builder.append("\n\n");
         return builder.toString();
     }
 

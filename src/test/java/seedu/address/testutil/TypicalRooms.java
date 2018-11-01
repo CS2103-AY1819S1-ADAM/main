@@ -6,6 +6,7 @@ import seedu.address.model.room.UniqueRoomList;
 
 /**
  * A utility class containing a list of {@code Room} objects to be used in tests.
+ * TODO Incorporate expenses into rooms once WEI ZHENG has implemented it
  */
 public class TypicalRooms {
 
@@ -13,12 +14,14 @@ public class TypicalRooms {
         .withRoomNumber(TypicalRoomNumbers.ROOM_NUMBER_001.toString())
         .withCapacity(Capacity.SINGLE)
         .withBookings(TypicalBookings.getTypicalBookingsLastWeekYesterday())
+        .withTags("maintenance")
         .build();
 
     public static final Room DOUBLE_002 = new RoomBuilder()
         .withRoomNumber(TypicalRoomNumbers.ROOM_NUMBER_002.toString())
         .withCapacity(Capacity.DOUBLE)
         .withBookings(TypicalBookings.getTypicalBookingsLastWeekYesterdayCheckedIn())
+        .withTags("maintenance")
         .build();
 
     public static final Room SUITE_010 = new RoomBuilder()
@@ -80,16 +83,16 @@ public class TypicalRooms {
     }
 
     /**
-     * Returns a {@code UniqueRoomList} with rooms that are preset with bookings:
-     * Room 001: last week - Yesterday
-     * Room 002: Last week - Yesterday (checked-in)
-     * Room 010: Yesterday - Today
-     * Room 011: Today - Tomorrow
-     * Room 012: Today - Tomorrow (checked-in)
-     * Room 020: Today - Next week
-     * Room 021: Tomorrow - Next week
-     * Room 022: Last week - Yesterday, Yesterday - Today, Today - Tomorrow, Tomorrow - Next week
-     * Room 030: Last week - Yesterday, Yesterday - Today, Today - Tomorrow (checked-in), Tomorrow - Next week
+     * Returns a {@code UniqueRoomList} with rooms that are preset with bookings:<br/>
+     * Room 001: last week - Yesterday<br/>
+     * Room 002: Last week - Yesterday (checked-in)<br/>
+     * Room 010: Yesterday - Today<br/>
+     * Room 011: Today - Tomorrow<br/>
+     * Room 012: Today - Tomorrow (checked-in)<br/>
+     * Room 020: Today - Next week<br/>
+     * Room 021: Tomorrow - Next week<br/>
+     * Room 022: Last week - Yesterday, Yesterday - Today, Today - Tomorrow, Tomorrow - Next week<br/>
+     * Room 030: Last week - Yesterday, Yesterday - Today, Today - Tomorrow (checked-in), Tomorrow - Next week<br/>
      * Room 031: No bookings
      */
     public static UniqueRoomList getTypicalUniqueRoomListWithBookings() {

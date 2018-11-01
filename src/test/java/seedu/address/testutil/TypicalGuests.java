@@ -24,10 +24,10 @@ public class TypicalGuests {
     public static final Guest ALICE = new GuestBuilder().withName("Alice Pauline")
             .withEmail("alice@example.com")
             .withPhone("94351253")
-            .withTags("friends").build();
+            .withTags("vip").build();
     public static final Guest BENSON = new GuestBuilder().withName("Benson Meier")
             .withEmail("johnd@example.com").withPhone("98765432")
-            .withTags("owesMoney", "friends").build();
+            .withTags("specialNeeds", "vip").build();
     public static final Guest CARL = new GuestBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").build();
     public static final Guest DANIEL = new GuestBuilder().withName("Daniel Meier").withPhone("87652533")

@@ -25,7 +25,7 @@ public class RoomCard extends UiPart<Region> {
     public final Room room;
 
     @FXML
-    private HBox cardPane;
+    private HBox roomCardPane;
     @FXML
     private Label roomNumber;
     @FXML

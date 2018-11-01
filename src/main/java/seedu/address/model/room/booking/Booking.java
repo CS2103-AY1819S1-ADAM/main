@@ -141,7 +141,8 @@ public class Booking implements Comparable<Booking> {
                 .append("\nGuest: ")
                 .append(getGuest())
                 .append("\nChecked-in: ")
-                .append(getIsCheckedIn() ? "Yes" : "No");
+                .append(getIsCheckedIn() ? "Yes" : "No")
+                .append("\n");
         return builder.toString();
     }
 

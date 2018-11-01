@@ -202,7 +202,7 @@ public class Bookings {
         final StringBuilder builder = new StringBuilder();
         int index = 1;
         for (Booking booking : sortedBookingsSet) {
-            builder.append(index).append(". ").append(booking).append("\n\n");
+            builder.append(index).append(". ").append(booking);
             index++;
         }
         return builder.toString();

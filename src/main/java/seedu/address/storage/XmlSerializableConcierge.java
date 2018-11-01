@@ -34,7 +34,7 @@ public class XmlSerializableConcierge {
     @XmlElement
     private List<XmlAdaptedGuest> guests;
 
-    @XmlElement
+    @XmlElement(required = true)
     private List<XmlAdaptedRoom> rooms;
 
     @XmlElement

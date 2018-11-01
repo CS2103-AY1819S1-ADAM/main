@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <concierge>
-    <!-- Guest with invalid email field -->
     <guests>
         <name>Alice Pauline</name>
         <phone>94351253</phone>
-        <email>alice@examp!e.com</email>
+        <email>alice@example.com</email>
         <tagged>vip</tagged>
     </guests>
     <guests>
@@ -57,8 +56,9 @@
         </bookings>
         <tagged>maintenance</tagged>
     </rooms>
+	<!-- Room with same room number as room above -->
     <rooms>
-        <roomNumber>002</roomNumber>
+        <roomNumber>001</roomNumber>
         <capacity>DOUBLE</capacity>
         <bookings>
             <guest>

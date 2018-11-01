@@ -1,66 +1,80 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <concierge>
     <guests>
-        <name>Alex Yeoh</name>
-        <phone>87438807</phone>
-        <email>alexyeoh@example.com</email>
+        <name>Alice Pauline</name>
+        <phone>94351253</phone>
+        <email>alice@example.com</email>
+        <tagged>vip</tagged>
+    </guests>
+    <guests>
+        <name>Benson Meier</name>
+        <phone>98765432</phone>
+        <email>johnd@example.com</email>
+        <tagged>vip</tagged>
+        <tagged>specialNeeds</tagged>
+    </guests>
+    <guests>
+        <name>Carl Kurz</name>
+        <phone>95352563</phone>
+        <email>heinz@example.com</email>
+    </guests>
+    <guests>
+        <name>Daniel Meier</name>
+        <phone>87652533</phone>
+        <email>cornelia@example.com</email>
         <tagged>friends</tagged>
     </guests>
     <guests>
-        <name>Bernice Yu</name>
-        <phone>99272758</phone>
-        <email>berniceyu@example.com</email>
-        <tagged>colleagues</tagged>
-        <tagged>friends</tagged>
+        <name>Elle Meyer</name>
+        <phone>9482224</phone>
+        <email>werner@example.com</email>
     </guests>
     <guests>
-        <name>Charlotte Oliveiro</name>
-        <phone>93210283</phone>
-        <email>charlotte@example.com</email>
-        <tagged>neighbours</tagged>
+        <name>Fiona Kunz</name>
+        <phone>9482427</phone>
+        <email>lydia@example.com</email>
     </guests>
     <guests>
-        <name>David Li</name>
-        <phone>91031282</phone>
-        <email>lidavid@example.com</email>
-        <tagged>family</tagged>
-    </guests>
-    <guests>
-        <name>Irfan Ibrahim</name>
-        <phone>92492021</phone>
-        <email>irfan@example.com</email>
-        <tagged>classmates</tagged>
-    </guests>
-    <guests>
-        <name>Roy Balakrishnan</name>
-        <phone>92624417</phone>
-        <email>royb@example.com</email>
-        <tagged>colleagues</tagged>
-    </guests>
-    <guests>
-        <name>bodo</name>
-        <phone>123</phone>
-        <email>bodo@bodo</email>
+        <name>George Best</name>
+        <phone>9482442</phone>
+        <email>anna@example.com</email>
     </guests>
     <rooms>
         <roomNumber>001</roomNumber>
         <capacity>SINGLE</capacity>
         <bookings>
             <guest>
-                <name>bodo</name>
-                <phone>123</phone>
-                <email>bodo@bodo</email>
+                <name>Alice Pauline</name>
+                <phone>94351253</phone>
+                <email>alice@example.com</email>
+                <tagged>vip</tagged>
             </guest>
             <bookingPeriod>
-                <startDate>29/10/2018</startDate>
+                <startDate>24/10/2018</startDate>
                 <endDate>30/10/2018</endDate>
             </bookingPeriod>
-            <checkin>false</checkin>
+            <isCheckedIn>false</isCheckedIn>
         </bookings>
+        <tagged>maintenance</tagged>
     </rooms>
     <rooms>
         <roomNumber>002</roomNumber>
         <capacity>DOUBLE</capacity>
+        <bookings>
+            <guest>
+                <name>Benson Meier</name>
+                <phone>98765432</phone>
+                <email>johnd@example.com</email>
+                <tagged>vip</tagged>
+                <tagged>specialNeeds</tagged>
+            </guest>
+            <bookingPeriod>
+                <startDate>24/10/2018</startDate>
+                <endDate>30/10/2018</endDate>
+            </bookingPeriod>
+            <isCheckedIn>true</isCheckedIn>
+        </bookings>
+        <tagged>maintenance</tagged>
     </rooms>
     <rooms>
         <roomNumber>003</roomNumber>
@@ -93,14 +107,51 @@
     <rooms>
         <roomNumber>010</roomNumber>
         <capacity>SUITE</capacity>
+        <bookings>
+            <guest>
+                <name>Carl Kurz</name>
+                <phone>95352563</phone>
+                <email>heinz@example.com</email>
+            </guest>
+            <bookingPeriod>
+                <startDate>30/10/2018</startDate>
+                <endDate>31/10/2018</endDate>
+            </bookingPeriod>
+            <isCheckedIn>false</isCheckedIn>
+        </bookings>
     </rooms>
     <rooms>
         <roomNumber>011</roomNumber>
         <capacity>SINGLE</capacity>
+        <bookings>
+            <guest>
+                <name>Daniel Meier</name>
+                <phone>87652533</phone>
+                <email>cornelia@example.com</email>
+                <tagged>friends</tagged>
+            </guest>
+            <bookingPeriod>
+                <startDate>31/10/2018</startDate>
+                <endDate>1/11/2018</endDate>
+            </bookingPeriod>
+            <isCheckedIn>false</isCheckedIn>
+        </bookings>
     </rooms>
     <rooms>
         <roomNumber>012</roomNumber>
         <capacity>DOUBLE</capacity>
+        <bookings>
+            <guest>
+                <name>Elle Meyer</name>
+                <phone>9482224</phone>
+                <email>werner@example.com</email>
+            </guest>
+            <bookingPeriod>
+                <startDate>31/10/2018</startDate>
+                <endDate>1/11/2018</endDate>
+            </bookingPeriod>
+            <isCheckedIn>true</isCheckedIn>
+        </bookings>
     </rooms>
     <rooms>
         <roomNumber>013</roomNumber>
@@ -133,14 +184,88 @@
     <rooms>
         <roomNumber>020</roomNumber>
         <capacity>SUITE</capacity>
+        <bookings>
+            <guest>
+                <name>Fiona Kunz</name>
+                <phone>9482427</phone>
+                <email>lydia@example.com</email>
+            </guest>
+            <bookingPeriod>
+                <startDate>31/10/2018</startDate>
+                <endDate>7/11/2018</endDate>
+            </bookingPeriod>
+            <isCheckedIn>false</isCheckedIn>
+        </bookings>
     </rooms>
     <rooms>
         <roomNumber>021</roomNumber>
         <capacity>SINGLE</capacity>
+        <bookings>
+            <guest>
+                <name>George Best</name>
+                <phone>9482442</phone>
+                <email>anna@example.com</email>
+            </guest>
+            <bookingPeriod>
+                <startDate>1/11/2018</startDate>
+                <endDate>7/11/2018</endDate>
+            </bookingPeriod>
+            <isCheckedIn>false</isCheckedIn>
+        </bookings>
     </rooms>
     <rooms>
         <roomNumber>022</roomNumber>
         <capacity>DOUBLE</capacity>
+        <bookings>
+            <guest>
+                <name>Alice Pauline</name>
+                <phone>94351253</phone>
+                <email>alice@example.com</email>
+                <tagged>vip</tagged>
+            </guest>
+            <bookingPeriod>
+                <startDate>24/10/2018</startDate>
+                <endDate>30/10/2018</endDate>
+            </bookingPeriod>
+            <isCheckedIn>false</isCheckedIn>
+        </bookings>
+        <bookings>
+            <guest>
+                <name>Carl Kurz</name>
+                <phone>95352563</phone>
+                <email>heinz@example.com</email>
+            </guest>
+            <bookingPeriod>
+                <startDate>30/10/2018</startDate>
+                <endDate>31/10/2018</endDate>
+            </bookingPeriod>
+            <isCheckedIn>false</isCheckedIn>
+        </bookings>
+        <bookings>
+            <guest>
+                <name>Daniel Meier</name>
+                <phone>87652533</phone>
+                <email>cornelia@example.com</email>
+                <tagged>friends</tagged>
+            </guest>
+            <bookingPeriod>
+                <startDate>31/10/2018</startDate>
+                <endDate>1/11/2018</endDate>
+            </bookingPeriod>
+            <isCheckedIn>false</isCheckedIn>
+        </bookings>
+        <bookings>
+            <guest>
+                <name>George Best</name>
+                <phone>9482442</phone>
+                <email>anna@example.com</email>
+            </guest>
+            <bookingPeriod>
+                <startDate>1/11/2018</startDate>
+                <endDate>7/11/2018</endDate>
+            </bookingPeriod>
+            <isCheckedIn>false</isCheckedIn>
+        </bookings>
     </rooms>
     <rooms>
         <roomNumber>023</roomNumber>
@@ -173,6 +298,55 @@
     <rooms>
         <roomNumber>030</roomNumber>
         <capacity>SUITE</capacity>
+        <bookings>
+            <guest>
+                <name>Alice Pauline</name>
+                <phone>94351253</phone>
+                <email>alice@example.com</email>
+                <tagged>vip</tagged>
+            </guest>
+            <bookingPeriod>
+                <startDate>24/10/2018</startDate>
+                <endDate>30/10/2018</endDate>
+            </bookingPeriod>
+            <isCheckedIn>false</isCheckedIn>
+        </bookings>
+        <bookings>
+            <guest>
+                <name>Carl Kurz</name>
+                <phone>95352563</phone>
+                <email>heinz@example.com</email>
+            </guest>
+            <bookingPeriod>
+                <startDate>30/10/2018</startDate>
+                <endDate>31/10/2018</endDate>
+            </bookingPeriod>
+            <isCheckedIn>false</isCheckedIn>
+        </bookings>
+        <bookings>
+            <guest>
+                <name>Elle Meyer</name>
+                <phone>9482224</phone>
+                <email>werner@example.com</email>
+            </guest>
+            <bookingPeriod>
+                <startDate>31/10/2018</startDate>
+                <endDate>1/11/2018</endDate>
+            </bookingPeriod>
+            <isCheckedIn>true</isCheckedIn>
+        </bookings>
+        <bookings>
+            <guest>
+                <name>George Best</name>
+                <phone>9482442</phone>
+                <email>anna@example.com</email>
+            </guest>
+            <bookingPeriod>
+                <startDate>1/11/2018</startDate>
+                <endDate>7/11/2018</endDate>
+            </bookingPeriod>
+            <isCheckedIn>false</isCheckedIn>
+        </bookings>
     </rooms>
     <rooms>
         <roomNumber>031</roomNumber>
@@ -454,70 +628,5 @@
         <roomNumber>100</roomNumber>
         <capacity>SUITE</capacity>
     </rooms>
-    <menu>
-        <entry>
-            <key>RS03</key>
-            <value>
-                <itemNumber>RS03</itemNumber>
-                <itemName>Room service: Thai massage</itemName>
-                <itemCost>100.00</itemCost>
-            </value>
-        </entry>
-        <entry>
-            <key>RS01</key>
-            <value>
-                <itemNumber>RS01</itemNumber>
-                <itemName>Room service: Red wine</itemName>
-                <itemCost>50.00</itemCost>
-            </value>
-        </entry>
-        <entry>
-            <key>MB02</key>
-            <value>
-                <itemNumber>MB02</itemNumber>
-                <itemName>Minibar: Sprite</itemName>
-                <itemCost>3.00</itemCost>
-            </value>
-        </entry>
-        <entry>
-            <key>RS02</key>
-            <value>
-                <itemNumber>RS02</itemNumber>
-                <itemName>Room service: Beef steak</itemName>
-                <itemCost>70.00</itemCost>
-            </value>
-        </entry>
-        <entry>
-            <key>MB01</key>
-            <value>
-                <itemNumber>MB01</itemNumber>
-                <itemName>Minibar: Coca cola</itemName>
-                <itemCost>3.00</itemCost>
-            </value>
-        </entry>
-        <entry>
-            <key>SP01</key>
-            <value>
-                <itemNumber>SP01</itemNumber>
-                <itemName>Swimming pool: Entry</itemName>
-                <itemCost>5.00</itemCost>
-            </value>
-        </entry>
-        <entry>
-            <key>MB04</key>
-            <value>
-                <itemNumber>MB04</itemNumber>
-                <itemName>Minibar: Mineral water</itemName>
-                <itemCost>3.00</itemCost>
-            </value>
-        </entry>
-        <entry>
-            <key>MB03</key>
-            <value>
-                <itemNumber>MB03</itemNumber>
-                <itemName>Minibar: Tiger beer</itemName>
-                <itemCost>6.00</itemCost>
-            </value>
-        </entry>
-    </menu>
+    <menu/>
 </concierge>

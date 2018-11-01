@@ -14,7 +14,7 @@ import seedu.address.model.room.Room;
 public class RoomListPanelHandle extends NodeHandle<ListView<Room>> {
     public static final String ROOM_LIST_VIEW_ID = "#roomListView";
 
-    private static final String CARD_PANE_ID = "#cardPane";
+    private static final String CARD_PANE_ID = "#roomCardPane";
 
     private Optional<Room> lastRememberedSelectedRoomCard;
 

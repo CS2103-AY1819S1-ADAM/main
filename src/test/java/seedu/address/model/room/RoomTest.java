@@ -138,7 +138,7 @@ public class RoomTest {
         editedRoom = new RoomBuilder(testRoomWithYesterdayTodayBooking).withCapacity(Capacity.DOUBLE).build();
         assertTrue(testRoomWithYesterdayTodayBooking.isSameRoom(editedRoom));
 
-        /* KIV Expenses
+        /* TODO Expenses
         // same room number, different expenses -> returns true
         editedSingle001 = new RoomBuilder(testRoomWithYesterdayTodayBooking).withExpenses(new Expenses()).build();
         assertTrue(testRoomWithYesterdayTodayBooking.isSameRoom(editedSingle001));
@@ -182,7 +182,7 @@ public class RoomTest {
             .build();
         assertFalse(testRoomWithYesterdayTodayBooking.equals(editedRoom));
 
-        /* KIV Expenses
+        /* TODO Expenses
         // different capacity -> returns false
         editedSingle001 = new RoomBuilder(testRoomWithYesterdayTodayBooking).withExpenses(new Expenses()).build();
         assertFalse(testRoomWithYesterdayTodayBooking.equals(editedSingle001));

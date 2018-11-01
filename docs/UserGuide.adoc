@@ -57,8 +57,17 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 === Adding a guest: `add`
 
 Adds a guest to the guest list for the purpose of assigning a room +
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG] -r ROOM_NUMBER
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG] r/ ROOM_NUMBER
 from/START_DATE to/END_DATE`
+
+The room number must be a 3-digit number from 001 to 100. For example, 074 is
+valid but 128 is not.
+
+The dates can be expressed in DD/MM/YY or DD/MM/YYYY.
+
+Currently, a guest can only make one booking with the hotel. This will
+subsequently be modified such that a guest can make an unlimited number of
+bookings.
 
 [TIP]
 A guest can have any number of tags (including 0)
@@ -71,7 +80,7 @@ Add a guest "John Smith" to room 085 for a period of stay from 09/12/18 to 10/12
 === Adding a guest: `addx` [red]#Coming in v2.0#
 
 Adds a guest to the guest list NOT for the purpose of assigning a room (perhaps add to archived guest list) +
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]...`
+Format: `addx n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]...`
 
 Examples:
 * `addx n/guest p/98765432 e/johntan@hotmail.com t/bro`
@@ -97,30 +106,10 @@ Examples:
 * `checkout 085` +
 Checks out room 085 and the guest staying in it.
 
-=== Deleting a guest : `delete` [red]#Coming in v2.0#
-
-Deletes the specified guest from the archived guest list. +
-Format: `delete INDEX`
-
-****
-* Deletes the guest at the specified `INDEX`.
-* The index refers to the index number shown in the displayed guest list.
-* The index *must be a positive integer* 1, 2, 3, ...
-****
-
-Examples:
-
-* `list -g` +
-`delete 2` +
-Deletes the 2nd guest in the displayed guest list.
-* `find -g Betsy` +
-`delete 1` +
-Deletes the 1st guest in the results of the `find` command.
-
-=== Editing a guest : `edit` [red]#Coming in v1.3#
+=== Editing a guest : `edit`
 
 Edits an existing guest in the guest list. +
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]...`
 
 ****
 * Edits the guest at the specified `INDEX`. The index refers to the index number shown in the displayed guest list. The index *must be a positive integer* 1, 2, 3, ...
@@ -178,6 +167,16 @@ List all rooms
 * `list -g` +
 List all guests
 
+=== Login : `login`
+
+Logs in to the Concierge application. +
+Format: `login user/USERNAME pw/PASSWORD`
+
+Note: the username and password are both case-sensitive.
+
+Examples:
+
+* login user/damithz pw/forgotpassword
 
 === Selecting a guest : `select` [red]#Coming in v1.3#
 
@@ -298,6 +297,9 @@ The `redo` command fails as there are no `undo` commands executed previously.
 Clears all entries from the application. +
 Format: `clear`
 
+The rooms are maintained - only all their current and future bookings are
+cleared. I.e. all maintenance requests and faults will still be recorded.
+
 === Export log: `export` [red]#Coming in v1.3#
 
 Exports a log of all history of commands into a text file +
@@ -330,13 +332,14 @@ _{explain how the user can enable/disable data encryption}_
 
 == Command Summary
 
-* *Add a Guest and assign a Room* : `add`
+* *Add a Guest and assign a Room* : `add n/NAME p/PHONE_NUMBER e/EMAIL
+t/TAG r/ROOMNUMBER from/START_DATE to/END_DATE`
 * *Checkin* : `checkin`
 * *Checkout* : `checkout`
-* *Delete* : `delete INDEX`
-* *Edit* : `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
+* *Edit* : `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]...`
 * *Find* : `find KEYWORD [MORE_KEYWORDS]`
 * *List* : `list`
+* *Login* : `login user/USERNAME pw/PASSWORD`
 * *Select* : `select INDEX`
 * *Room Service* : `service`
 * *Mark Room as faulty* : `fault`

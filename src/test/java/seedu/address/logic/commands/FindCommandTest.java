@@ -6,7 +6,7 @@ import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_GUESTS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.parser.CliSyntax.FLAG_GUEST;
-import static seedu.address.testutil.TypicalConcierge.getTypicalConcierge;
+import static seedu.address.testutil.TypicalConcierge.getTypicalConciergeClean;
 import static seedu.address.testutil.TypicalGuests.CARL;
 import static seedu.address.testutil.TypicalGuests.ELLE;
 import static seedu.address.testutil.TypicalGuests.FIONA;
@@ -32,8 +32,8 @@ import seedu.address.model.room.Room;
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
  */
 public class FindCommandTest {
-    private Model model = new ModelManager(getTypicalConcierge(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalConcierge(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalConciergeClean(), new UserPrefs());
+    private Model expectedModel = new ModelManager(getTypicalConciergeClean(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
