@@ -333,15 +333,15 @@ An example of its usage:
 29/10/2018 to/ 03/11/2018`
 
 The parsing of the `AddCommand` is very similar to what was already
-implemented in Concierge4. More parameters were added, namely the
+implemented in AddressBook4. More parameters were added, namely the
 `RoomNumber` and `BookingPeriod`. These are parsed to create the respective
 objects - `Guest`, `RoomNumber` and `BookingPeriod`.
 
-As in Concierge4, the `Logic` component parses the `AddCommand`, and the
+As in AddressBook4, the `Logic` component parses the `AddCommand`, and the
 `Model` handles its execution.
 
-* In the `Model`, the `Guest` is added to Concierge. This was already
-implemented in Concierge4.
+* In the `Model`, the `Guest` is _no longer_ added to Concierge. It was
+previously the case in AddressBook4.
 * A new `Booking` object is created with the `Guest` and `BookingPeriod` as
 its parameters.
 * This `Booking` is then added to the `Room` with the `RoomNumber` specified.
