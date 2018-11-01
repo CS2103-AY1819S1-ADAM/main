@@ -35,7 +35,7 @@ public class FindCommandParserTest {
         listPredicates.add(new GuestNameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")));
         FindCommand expectedFindCommand =
                 new FindCommand(FLAG_GUEST.toString(), listPredicates, emptyRoomPredicates);
-        assertParseSuccess(parser, FLAG_GUEST + " " + PREFIX_NAME + "Alice Bob", expectedFindCommand);
+        assertParseSuccess(parser, " " + FLAG_GUEST + " " + PREFIX_NAME + "Alice Bob", expectedFindCommand);
     }
 
 }

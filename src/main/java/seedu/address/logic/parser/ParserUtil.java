@@ -151,6 +151,26 @@ public class ParserUtil {
     }
 
     /**
+     * Returns true if at least one prefix contains {@code Optional} values in the given
+     * {@code ArgumentMultimap}.
+     */
+    public static boolean areAnyPrefixPresent(ArgumentMultimap argumentMultimap,
+                                             Prefix... prefixes) {
+        return Stream.of(prefixes).anyMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
+
+    /**
+     * Returns true if at least one prefix has an empty null value
+     * {@code ArgumentMultimap}.
+     */
+    public static boolean areAnyPrefixValueNull(ArgumentMultimap argumentMultimap,
+                                              Prefix... prefixes) {
+        return Stream.of(prefixes).anyMatch(prefix -> argumentMultimap.getValue(prefix).isPresent()
+                && argumentMultimap.getValue(prefix).get().isEmpty());
+    }
+
+
+    /**
      * Returns true if suffix flags are either for listing guests (-g) or rooms (-r)
      * in the given input {@code String[]}
      */
