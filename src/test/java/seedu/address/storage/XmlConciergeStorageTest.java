@@ -26,6 +26,8 @@ public class XmlConciergeStorageTest {
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "XmlConciergeStorageTest");
     private static final String INVALID_GUEST_VALID_ROOMS_CONCIERGE = "invalidGuestAndValidRoomsConcierge.xml";
     private static final String INVALID_ROOM_VALID_GUESTS_CONCIERGE = "invalidRoomAndValidGuestsConcierge.xml";
+    private static final String INVALID_EXPENSE_CONCIERGE = "invalidExpenseConcierge.xml";
+    private static final String INVALID_ITEM_CONCIERGE = "invalidItemConcierge.xml";
     private static final String NOT_XML_FORMAT_CONCIERGE = "NotXmlFormatConcierge.xml";
     private static final String NON_EXISTENT_FILE = "NonExistentFile.xml";
 
@@ -67,6 +69,18 @@ public class XmlConciergeStorageTest {
     public void readConcierge_invalidRoomAndValidGuestsConcierge_throwDataConversionException() throws Exception {
         thrown.expect(DataConversionException.class);
         readConcierge(INVALID_ROOM_VALID_GUESTS_CONCIERGE);
+    }
+
+    @Test
+    public void readConcierge_invalidExpenseConcierge_throwDataConversionException() throws Exception {
+        thrown.expect(DataConversionException.class);
+        readConcierge(INVALID_EXPENSE_CONCIERGE);
+    }
+
+    @Test
+    public void readConcierge_invalidItemConcierge_throwsDataConversionException() throws Exception {
+        thrown.expect(DataConversionException.class);
+        readConcierge(INVALID_ITEM_CONCIERGE);
     }
 
     @Test

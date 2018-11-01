@@ -581,5 +581,44 @@
         <roomNumber>100</roomNumber>
         <capacity>SUITE</capacity>
     </rooms>
-    <menu/>
+    <menu>
+        <itemNumber>RS03</itemNumber>
+        <itemName>Room service: Thai massage</itemName>
+        <itemCost>100.00</itemCost>
+    </menu>
+    <menu>
+        <itemNumber>MB02</itemNumber>
+        <itemName>Minibar: Sprite</itemName>
+        <itemCost>3.00</itemCost>
+    </menu>
+    <menu>
+        <itemNumber>RS01</itemNumber>
+        <itemName>Room service: Red wine</itemName>
+        <itemCost>50.00</itemCost>
+    </menu>
+    <menu>
+        <itemNumber>MB01</itemNumber>
+        <itemName>Minibar: Coca cola</itemName>
+        <itemCost>3.00</itemCost>
+    </menu>
+    <menu>
+        <itemNumber>RS02</itemNumber>
+        <itemName>Room service: Beef steak</itemName>
+        <itemCost>70.00</itemCost>
+    </menu>
+    <menu>
+        <itemNumber>SP01</itemNumber>
+        <itemName>Swimming pool: Entry</itemName>
+        <itemCost>5.00</itemCost>
+    </menu>
+    <menu>
+        <itemNumber>MB04</itemNumber>
+        <itemName>Minibar: Mineral water</itemName>
+        <itemCost>3.00</itemCost>
+    </menu>
+    <menu>
+        <itemNumber>MB03</itemNumber>
+        <itemName>Minibar: Tiger beer</itemName>
+        <itemCost>6.00</itemCost>
+    </menu>
 </concierge>

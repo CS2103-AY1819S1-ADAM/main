@@ -16,6 +16,9 @@ import seedu.address.model.room.RoomNumber;
 import seedu.address.model.room.UniqueRoomList;
 import seedu.address.model.room.booking.Booking;
 import seedu.address.model.room.booking.BookingPeriod;
+import seedu.address.model.room.booking.Bookings;
+import seedu.address.model.room.booking.exceptions.NoBookingException;
+import seedu.address.model.room.booking.exceptions.RoomNotCheckedInException;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -255,7 +258,18 @@ public class Concierge implements ReadOnlyConcierge {
      * Adds an expense to the room using its room number
      */
     public void addExpense(RoomNumber roomNumber, Expense expense) {
-        rooms.getRoom(roomNumber).addExpense(expense);
+        Room room = rooms.getRoom(roomNumber);
+        Bookings bookings = room.getBookings();
+        if (bookings.getSortedBookingsSet().isEmpty()) {
+            // no bookings
+            throw new NoBookingException();
+        }
+        if (!bookings.getFirstBooking().getIsCheckedIn()) {
+            // not checked in
+            throw new RoomNotCheckedInException();
+        }
+        Room editedRoom = room.addExpense(expense);
+        rooms.setRoom(room, editedRoom);
     }
 
     //=========== Reset data =============================================================

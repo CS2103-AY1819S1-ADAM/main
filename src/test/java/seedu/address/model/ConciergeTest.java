@@ -7,6 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.TypicalConcierge.getTypicalConciergeClean;
 import static seedu.address.testutil.TypicalGuests.ALICE;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -21,11 +22,17 @@ import org.junit.rules.ExpectedException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.expenses.ExpenseType;
+import seedu.address.model.expenses.Expenses;
 import seedu.address.model.expenses.Money;
 import seedu.address.model.guest.Guest;
 import seedu.address.model.guest.exceptions.DuplicateGuestException;
 import seedu.address.model.room.Room;
+import seedu.address.model.room.booking.exceptions.NoBookingException;
+import seedu.address.model.room.booking.exceptions.RoomNotCheckedInException;
 import seedu.address.testutil.GuestBuilder;
+import seedu.address.testutil.TypicalExpenses;
+import seedu.address.testutil.TypicalRoomNumbers;
+import seedu.address.testutil.TypicalRooms;
 
 public class ConciergeTest {
 
@@ -59,7 +66,7 @@ public class ConciergeTest {
                 .build();
         List<Guest> newGuests = Arrays.asList(ALICE, editedAlice);
 
-        ConciergeStub newData = new ConciergeStub(newGuests, null);
+        ConciergeStub newData = new ConciergeStub(newGuests, new ArrayList<>());
 
         thrown.expect(DuplicateGuestException.class);
         concierge.resetData(newData);
@@ -117,6 +124,42 @@ public class ConciergeTest {
         concierge.getMenuMap().put("1", new ExpenseType("1", "-", new Money(0, 0)));
     }
 
+    //===================== Expenses Test ======================================================
+
+    @Test
+    public void addExpense_noBookings_throwsNoBookingException() {
+        concierge.setRooms(TypicalRooms.getTypicalUniqueRoomListClean().asUnmodifiableObservableList());
+        thrown.expect(NoBookingException.class);
+        concierge.addExpense(concierge.getRoomList().get(0).roomNumber, TypicalExpenses.EXPENSE_RS01);
+    }
+
+    @Test
+    public void addExpense_notCheckedIn_throwsNotCheckedInException() {
+        concierge.setRooms(TypicalRooms.getTypicalUniqueRoomList());
+        // get room 011, which is not checked in, based on TypicalRooms
+        Room notCheckedInRoom = concierge.getRoomList().stream()
+                .filter(r -> r.getRoomNumber().equals(TypicalRoomNumbers.ROOM_NUMBER_011))
+                .findFirst().get();
+        thrown.expect(RoomNotCheckedInException.class);
+        concierge.addExpense(notCheckedInRoom.getRoomNumber(), TypicalExpenses.EXPENSE_RS01);
+    }
+
+    @Test
+    public void addExpense_hasBookingAndCheckedIn_success() {
+        concierge.setRooms(TypicalRooms.getTypicalUniqueRoomList());
+        // get room 011, which is not checked in, based on TypicalRooms
+        Room room = concierge.getRoomList().stream()
+                .filter(r -> r.getRoomNumber().equals(TypicalRoomNumbers.ROOM_NUMBER_011))
+                .findFirst().get();
+        concierge.checkInRoom(room.getRoomNumber());
+        concierge.addExpense(room.getRoomNumber(), TypicalExpenses.EXPENSE_RS01);
+        Expenses actualExpenses = concierge.getRoomList().stream()
+                .filter(r -> r.getRoomNumber().equals(TypicalRoomNumbers.ROOM_NUMBER_011))
+                .findFirst().get().getExpenses();
+        Expenses expectedExpenses = new Expenses(Arrays.asList(TypicalExpenses.EXPENSE_RS01));
+        assertEquals(actualExpenses, expectedExpenses);
+    }
+
     /**
      * A stub ReadOnlyConcierge whose guests list can violate interface constraints.
      */
@@ -127,6 +170,7 @@ public class ConciergeTest {
 
         ConciergeStub(Collection<Guest> guests, Collection<Room> rooms) {
             this.guests.setAll(guests);
+            this.rooms.setAll(rooms);
         }
 
         @Override

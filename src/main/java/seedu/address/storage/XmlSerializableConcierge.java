@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import javax.xml.bind.annotation.XmlElement;
@@ -28,7 +29,8 @@ import seedu.address.model.room.exceptions.RoomMissingException;
 public class XmlSerializableConcierge {
 
     public static final String MESSAGE_DUPLICATE_GUEST = "Archived guest list contains duplicate guest(s).";
-    public static final String MESSAGE_DUPLICATE_ROOM = "Room list contains duplicate room(s)";
+    public static final String MESSAGE_DUPLICATE_ROOM = "Room list contains duplicate room(s).";
+    public static final String MESSAGE_DUPLICATE_ITEM = "Menu contains items with same number.";
     public static final String MESSAGE_ROOM_MISSING = "Room list is missing room(s) from total of "
             + RoomNumber.MAX_ROOM_NUMBER + " rooms.";
 
@@ -39,7 +41,7 @@ public class XmlSerializableConcierge {
     private List<XmlAdaptedRoom> rooms;
 
     @XmlElement
-    private HashMap<String, XmlAdaptedExpenseType> menu;
+    private List<XmlAdaptedExpenseType> menu;
 
     /**
      * Creates an empty XmlSerializableConcierge.
@@ -48,7 +50,7 @@ public class XmlSerializableConcierge {
     public XmlSerializableConcierge() {
         guests = new ArrayList<>();
         rooms = new ArrayList<>();
-        menu = new HashMap<>();
+        menu = new ArrayList<>();
     }
 
     /**
@@ -59,7 +61,7 @@ public class XmlSerializableConcierge {
         guests.addAll(src.getGuestList().stream().map(XmlAdaptedGuest::new).collect(Collectors.toList()));
         rooms.addAll(src.getRoomList().stream().map(XmlAdaptedRoom::new).collect(Collectors.toList()));
         for (Map.Entry<String, ExpenseType> mapping : src.getMenuMap().entrySet()) {
-            menu.put(mapping.getKey(), new XmlAdaptedExpenseType(mapping.getValue()));
+            menu.add(new XmlAdaptedExpenseType(mapping.getValue()));
         }
     }
 
@@ -79,8 +81,12 @@ public class XmlSerializableConcierge {
         }
 
         HashMap<String, ExpenseType> newMenu = new HashMap<>();
-        for (Map.Entry<String, XmlAdaptedExpenseType> mapping : menu.entrySet()) {
-            newMenu.put(mapping.getKey(), mapping.getValue().toModelType());
+        for (XmlAdaptedExpenseType expenseType : menu) {
+            String key = expenseType.getItemNumber();
+            if (newMenu.containsKey(key)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_ITEM);
+            }
+            newMenu.put(key, expenseType.toModelType());
         }
         concierge.setMenu(newMenu);
 
@@ -114,6 +120,13 @@ public class XmlSerializableConcierge {
         if (!(other instanceof XmlSerializableConcierge)) {
             return false;
         }
-        return guests.equals(((XmlSerializableConcierge) other).guests);
+        return guests.equals(((XmlSerializableConcierge) other).guests)
+                && rooms.equals(((XmlSerializableConcierge) other).rooms)
+                && menu.equals(((XmlSerializableConcierge) other).menu);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(guests, rooms, menu);
     }
 }

@@ -24,6 +24,7 @@ public class TypicalConcierge {
         Concierge ab = new Concierge();
         ab.setGuests(GUEST_LIST.asUnmodifiableObservableList());
         ab.setRooms(ROOM_LIST.asUnmodifiableObservableList());
+        ab.setMenu(TypicalMenu.getTypicalMenuMap());
         return ab;
     }
 

@@ -4,6 +4,7 @@ import java.util.Optional;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.expenses.Expense;
 import seedu.address.model.guest.Guest;
 import seedu.address.model.login.InvalidLogInException;
 import seedu.address.model.login.InvalidLogOutException;
@@ -29,6 +30,9 @@ public interface Model {
 
     /** Returns the Concierge */
     ReadOnlyConcierge getConcierge();
+
+    /** Returns the Menu.*/
+    Menu getMenu();
 
     // =========== Signing in. ================================================
 
@@ -93,9 +97,9 @@ public interface Model {
      * Returns an unmodifiable view of the list of checked-in {@code Guest} backed by the internal list of
      * {@code versionedConcierge}
      */
-    public ObservableList<Guest> getFilteredCheckedInGuestList();
+    ObservableList<Guest> getFilteredCheckedInGuestList();
 
-    public void updateFilteredCheckedInGuestList(Predicate<Guest> predicate);
+    void updateFilteredCheckedInGuestList(Predicate<Guest> predicate);
 
     /** Returns an unmodifiable view of the filtered room list */
     ObservableList<Room> getFilteredRoomList();
@@ -137,9 +141,15 @@ public interface Model {
     /**
      * Checks out a room's booking using its room number and the specified booking period
      */
-    public void checkoutRoom(RoomNumber roomNumber, BookingPeriod bookingPeriod);
+    void checkoutRoom(RoomNumber roomNumber, BookingPeriod bookingPeriod);
 
-    /* =========== Methods for undo and redo. =================================
+    /**
+     * Adds an Expense to a room.
+     */
+    void addExpense(RoomNumber roomNumber, Expense expense);
+
+
+    // =========== Methods for undo and redo. =================================
 
     /**
      * Returns true if the model has previous Concierge states to restore.

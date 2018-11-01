@@ -13,7 +13,8 @@ public class CliSyntax {
     public static final Prefix PREFIX_ROOM = new Prefix("r/");
     public static final Prefix PREFIX_DATE_START = new Prefix("from/");
     public static final Prefix PREFIX_DATE_END = new Prefix("to/");
-
+    public static final Prefix PREFIX_ITEM_NUMBER = new Prefix("no/");
+    public static final Prefix PREFIX_COST = new Prefix("c/");
     public static final Prefix FLAG_ROOM = new Prefix("-r");
     public static final Prefix FLAG_GUEST = new Prefix("-g");
     public static final Prefix FLAG_CHECKED_IN_GUEST = new Prefix("-cg");

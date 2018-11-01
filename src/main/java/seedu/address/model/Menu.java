@@ -52,4 +52,16 @@ public class Menu {
         }
         return numberToType.get(item);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof Menu // instanceof handles nulls
+                && numberToType.equals(((Menu) other).numberToType)); // state check
+    }
+
+    @Override
+    public int hashCode() {
+        return numberToType.hashCode();
+    }
 }
