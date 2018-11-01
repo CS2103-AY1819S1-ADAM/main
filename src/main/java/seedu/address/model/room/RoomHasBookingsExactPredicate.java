@@ -1,5 +1,6 @@
 package seedu.address.model.room;
 
+import java.util.Objects;
 import java.util.function.Predicate;
 
 /**
@@ -22,5 +23,10 @@ public class RoomHasBookingsExactPredicate implements Predicate<Room> {
         return other == this // short circuit if same object
                 || (other instanceof RoomHasBookingsExactPredicate // instanceof handles nulls
                 && hasBookings == ((RoomHasBookingsExactPredicate) other).hasBookings); // state check
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(hasBookings);
     }
 }

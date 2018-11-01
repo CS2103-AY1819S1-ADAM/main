@@ -87,6 +87,4 @@ public class FindCommand extends Command {
         Predicate<Room> predicates = roomPredicates.stream().reduce(Predicate::and).orElse(x-> true);
         return predicates;
     }
-
-
 }

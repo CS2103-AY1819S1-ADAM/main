@@ -34,4 +34,9 @@ public class RoomBookingsDateRangePredicate implements Predicate<Room> {
                 || (other instanceof RoomBookingsDateRangePredicate // instanceof handles nulls
                 && bookingPeriod.equals(((RoomBookingsDateRangePredicate) other).bookingPeriod)); // state check
     }
+
+    @Override
+    public int hashCode() {
+        return bookingPeriod.hashCode();
+    }
 }

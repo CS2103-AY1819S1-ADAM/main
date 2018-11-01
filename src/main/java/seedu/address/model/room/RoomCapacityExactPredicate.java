@@ -23,4 +23,9 @@ public class RoomCapacityExactPredicate implements Predicate<Room> {
                 || (other instanceof RoomCapacityExactPredicate // instanceof handles nulls
                 && capacity.equals(((RoomCapacityExactPredicate) other).capacity)); // state check
     }
+    @Override
+    public int hashCode() {
+        return capacity.hashCode();
+    }
+
 }

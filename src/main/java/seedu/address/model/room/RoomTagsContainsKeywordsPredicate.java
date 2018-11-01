@@ -38,4 +38,9 @@ public class RoomTagsContainsKeywordsPredicate implements Predicate<Room> {
                 || (other instanceof RoomTagsContainsKeywordsPredicate // instanceof handles nulls
                 && keywords.equals(((RoomTagsContainsKeywordsPredicate) other).keywords)); // state check
     }
+
+    @Override
+    public int hashCode() {
+        return keywords.hashCode();
+    }
 }
