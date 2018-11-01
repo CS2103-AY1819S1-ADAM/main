@@ -9,8 +9,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE_START;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ROOM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROOM_CAPACITY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ROOM_NUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Arrays;
@@ -129,18 +129,18 @@ public class FindCommandParser implements Parser<FindCommand> {
     private void getRoomPredicates(String args) throws ParseException {
 
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_ROOM_NUMBER, PREFIX_ROOM_CAPACITY,
+                ArgumentTokenizer.tokenize(args, PREFIX_ROOM, PREFIX_ROOM_CAPACITY,
                         PREFIX_TAG, FLAG_ROOM_HAS_BOOKINGS, FLAG_ROOM_NO_BOOKINGS, PREFIX_DATE_START,
                         PREFIX_DATE_END);
 
-        if (!ParserUtil.areAnyPrefixPresent(argMultimap, PREFIX_ROOM_NUMBER, PREFIX_ROOM_CAPACITY,
+        if (!ParserUtil.areAnyPrefixPresent(argMultimap, PREFIX_ROOM, PREFIX_ROOM_CAPACITY,
                 PREFIX_TAG, FLAG_ROOM_HAS_BOOKINGS, FLAG_ROOM_NO_BOOKINGS, PREFIX_DATE_START,
                 PREFIX_DATE_END)) {
             throw new ParseException(
                     String.format(MESSAGE_NO_FILTERS, FindCommand.MESSAGE_USAGE));
         }
 
-        if (ParserUtil.areAnyPrefixValueNull(argMultimap, PREFIX_ROOM_NUMBER, PREFIX_ROOM_CAPACITY,
+        if (ParserUtil.areAnyPrefixValueNull(argMultimap, PREFIX_ROOM, PREFIX_ROOM_CAPACITY,
                 PREFIX_TAG, PREFIX_DATE_START, PREFIX_DATE_END)) {
             throw new ParseException(
                     String.format(MESSAGE_NULL_FILTERS, FindCommand.MESSAGE_USAGE));
@@ -169,8 +169,8 @@ public class FindCommandParser implements Parser<FindCommand> {
             }
         }
 
-        if (ParserUtil.arePrefixesPresent(argMultimap, PREFIX_ROOM_NUMBER)) {
-            roomPredicates.add(new RoomNumberExactPredicate(argMultimap.getValue(PREFIX_ROOM_NUMBER).get()));
+        if (ParserUtil.arePrefixesPresent(argMultimap, PREFIX_ROOM)) {
+            roomPredicates.add(new RoomNumberExactPredicate(argMultimap.getValue(PREFIX_ROOM).get()));
         }
 
         if (ParserUtil.arePrefixesPresent(argMultimap, PREFIX_ROOM_CAPACITY)) {

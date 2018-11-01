@@ -44,10 +44,10 @@ public class MainWindowGuiChangeTest extends GuiUnitTest {
             @Override
             public void run() {
                 mainWindow.fillInnerParts();
-                postNow(new ListingChangedEvent(FLAG_GUEST.toString()));
-                assertMainWindowDisplaysGuestList(mainWindow);
                 postNow(new ListingChangedEvent(FLAG_ROOM.toString()));
                 assertMainWindowDisplaysRoomList(mainWindow);
+                postNow(new ListingChangedEvent(FLAG_GUEST.toString()));
+                assertMainWindowDisplaysGuestList(mainWindow);
             }
         });
 

@@ -15,7 +15,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_DATE_START = new Prefix("from/");
     public static final Prefix PREFIX_DATE_END = new Prefix("to/");
     public static final Prefix PREFIX_GUEST = new Prefix("g/");
-    public static final Prefix PREFIX_ROOM_NUMBER = new Prefix("r/");
     public static final Prefix PREFIX_ROOM_CAPACITY = new Prefix("c/");
     public static final Prefix FLAG_ROOM = new Prefix("-r");
     public static final Prefix FLAG_GUEST = new Prefix("-g");

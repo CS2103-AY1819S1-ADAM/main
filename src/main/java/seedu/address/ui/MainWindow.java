@@ -163,8 +163,8 @@ public class MainWindow extends UiPart<Stage> {
         roomDetailedPanel = new RoomDetailedPanel();
         roomDetailedPanelPlaceholder.getChildren().add(roomDetailedPanel.getRoot());
 
-        this.showGuestList();
-        this.showGuestDetailedPanel();
+        this.showRoomList();
+        this.showRoomDetailedPanel();
     }
 
     void hide() {

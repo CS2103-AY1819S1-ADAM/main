@@ -19,7 +19,6 @@ public class ListCommandParserTest {
         assertParseFailure(parser, "", String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
     }
 
-
     @Test
     public void parse_doubleFlag_throwsParseException() {
         assertParseFailure(parser, VALID_FLAG_ROOM + " " + VALID_FLAG_GUEST,
