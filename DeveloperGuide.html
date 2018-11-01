@@ -32,12 +32,13 @@
 <li><a href="#undo-redo-feature">3.1. Undo/Redo feature</a></li>
 <li><a href="#addcommand">3.2. AddCommand</a></li>
 <li><a href="#rooms-list-feature">3.3. Rooms List Feature</a></li>
-<li><a href="#command-archive-feature">3.4. Command Archive feature</a></li>
-<li><a href="#room-check-in-checkout-feature">3.5. Room Check-in/Checkout feature</a></li>
-<li><a href="#proposed-data-encryption">3.6. [Proposed] Data Encryption</a></li>
-<li><a href="#logging">3.7. Logging</a></li>
-<li><a href="#Implementation-Configuration">3.8. Configuration</a></li>
-<li><a href="#expense-expenses-and-expensetype">3.9. Expense, Expenses and ExpenseType</a></li>
+<li><a href="#find-feature">3.4. Find Feature</a></li>
+<li><a href="#command-archive-feature">3.5. Command Archive feature</a></li>
+<li><a href="#room-check-in-checkout-feature">3.6. Room Check-in/Checkout feature</a></li>
+<li><a href="#proposed-data-encryption">3.7. [Proposed] Data Encryption</a></li>
+<li><a href="#logging">3.8. Logging</a></li>
+<li><a href="#Implementation-Configuration">3.9. Configuration</a></li>
+<li><a href="#expense-expenses-and-expensetype">3.10. Expense, Expenses and ExpenseType</a></li>
 </ul>
 </li>
 <li><a href="#documentation">4. Documentation</a>
@@ -1108,7 +1109,110 @@ The GuestListPanel and RoomListPanel each has a "VBox" element encapsulating the
 </div>
 </div>
 <div class="sect2">
-<h3 id="command-archive-feature"><a class="link" href="#command-archive-feature">3.4. Command Archive feature</a></h3>
+<h3 id="find-feature"><a class="link" href="#find-feature">3.4. Find Feature</a></h3>
+<div class="paragraph">
+<p>The Find feature expands upon the originally implemented FindCommand, allowing for the searching of both rooms and guests, with several filters.</p>
+</div>
+<div class="paragraph">
+<p>The UML Diagram for the current implementation of FindCommand is as follows:</p>
+</div>
+<div class="sect3">
+<h4 id="current-implementation-4"><a class="link" href="#current-implementation-4">3.4.1. Current Implementation</a></h4>
+<div class="paragraph">
+<p>The find function is facilitated by a modified <code>FindCommand</code> class, of which the input from the CommandBox is parsed by a <code>FindCommandParser</code> class.</p>
+</div>
+<div class="paragraph">
+<p>The find function now has the ability to find either guests or rooms. The starting commands for the find function with flags are as follows:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>find -g</code> - Find guests.</p>
+</li>
+<li>
+<p><code>find -r</code> - Find rooms.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The above command must be followed up by at least 1 filter, and they are as follows:</p>
+</div>
+<div class="paragraph">
+<p>Guest Filters (-g):</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>n/ - Name</code></p>
+</li>
+<li>
+<p><code>p/ - Phone Number</code></p>
+</li>
+<li>
+<p><code>e/ - Email Address</code></p>
+</li>
+<li>
+<p><code>t/ - Tags</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Room Filters (-r):</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>r/ - Room Number</code></p>
+</li>
+<li>
+<p><code>c/ - Capacity</code></p>
+</li>
+<li>
+<p><code>t/ - Room Tags</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The following are filters for room bookings. The flags cannot be mixed.
+The flags can be used independently, or with a from/to specified date.
+Input dates must be in DD/MM/YY format.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>-hb - Has Bookings Flag</code></p>
+</li>
+<li>
+<p><code>-nb - No Bookings Flag</code></p>
+</li>
+<li>
+<p><code>from/ - Booking Start Date</code></p>
+</li>
+<li>
+<p><code>to/ - Booking End Date</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The FindCommandParser uses a tokenizer to obtain the individual arguments/filters, whether the filter is present or not. If a filter is present, the input that precedes the filter prefix will be used to create the individual predicate class.</p>
+</div>
+<div class="paragraph">
+<p>These predicate classes are collected into a list of predicates before they are combined and merged in the FindCommand class. The combined final predicate is then passed to the Model Manager to filter the guest/room list, and a listingChangedEvent is called to update the UI elements.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">3.4.2. Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-or-and-searching"><a class="link" href="#aspect-or-and-searching">Aspect: OR/AND Searching</a></h5>
+<div class="paragraph">
+<p>When searching, a few things have to be considered. Does the filter specified have an OR relationship with one another, or an AND relationship.
+An example is this: find -g n/Alex t/VIP, this can be interpreted in two ways. Finding guests with name as "Alex" AND with tag "VIP", or name "Alex" or tag "VIP.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="command-archive-feature"><a class="link" href="#command-archive-feature">3.5. Command Archive feature</a></h3>
 <div class="paragraph">
 <p>Given below is the UML diagram for the <code>CommandArchive</code> Class:</p>
 </div>
@@ -1126,7 +1230,7 @@ The GuestListPanel and RoomListPanel each has a "VBox" element encapsulating the
 </div>
 </div>
 <div class="sect3">
-<h4 id="current-implementation-4"><a class="link" href="#current-implementation-4">3.4.1. Current Implementation</a></h4>
+<h4 id="current-implementation-5"><a class="link" href="#current-implementation-5">3.5.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>The Command Archive mechanism is facilitated by <code>CommandArchive</code>.
 It utilises the <code>userInputHistory</code> to extract the latest command that the user has input and passes the <code>inputString</code>
@@ -1168,7 +1272,7 @@ in CommandArchive`.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">3.4.2. Design Considerations</a></h4>
+<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">3.5.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-how-to-extract-userinputhistory"><a class="link" href="#aspect-how-to-extract-userinputhistory">Aspect: How to extract userInputHistory</a></h5>
 <div class="ulist">
@@ -1232,9 +1336,9 @@ hence would require more effort to implement.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="room-check-in-checkout-feature"><a class="link" href="#room-check-in-checkout-feature">3.5. Room Check-in/Checkout feature</a></h3>
+<h3 id="room-check-in-checkout-feature"><a class="link" href="#room-check-in-checkout-feature">3.6. Room Check-in/Checkout feature</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-5"><a class="link" href="#current-implementation-5">3.5.1. Current Implementation</a></h4>
+<h4 id="current-implementation-6"><a class="link" href="#current-implementation-6">3.6.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>The room check-in and checkout features are facilitated by <code>UniqueRoomList</code>.
 The logic that supports the check-in and checkout operations reside in the classes in the <code>Room</code> and <code>Booking</code> packages.</p>
@@ -1353,7 +1457,7 @@ The logic that supports the check-in and checkout operations reside in the class
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">3.5.2. Design Considerations</a></h4>
+<h4 id="design-considerations-6"><a class="link" href="#design-considerations-6">3.6.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-how-check-in-checkout-executes"><a class="link" href="#aspect-how-check-in-checkout-executes">Aspect: How check-in/checkout executes</a></h5>
 <div class="ulist">
@@ -1437,20 +1541,20 @@ The ability to delete upcoming bookings is planned for v1.3.
 </div>
 </div>
 <div class="sect2">
-<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">3.6. [Proposed] Data Encryption</a></h3>
+<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">3.7. [Proposed] Data Encryption</a></h3>
 <div class="paragraph">
 <p><em>{Explain here how the data encryption feature will be implemented}</em></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">3.7. Logging</a></h3>
+<h3 id="logging"><a class="link" href="#logging">3.8. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.8, &#8220;Configuration&#8221;</a>)</p>
+<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.9, &#8220;Configuration&#8221;</a>)</p>
 </li>
 <li>
 <p>The <code>Logger</code> for a class can be obtained using <code>LogsCenter.getLogger(Class)</code> which will log messages according to the specified logging level</p>
@@ -1481,13 +1585,13 @@ The ability to delete upcoming bookings is planned for v1.3.
 </div>
 </div>
 <div class="sect2">
-<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.8. Configuration</a></h3>
+<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.9. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="expense-expenses-and-expensetype"><a class="link" href="#expense-expenses-and-expensetype">3.9. Expense, Expenses and ExpenseType</a></h3>
+<h3 id="expense-expenses-and-expensetype"><a class="link" href="#expense-expenses-and-expensetype">3.10. Expense, Expenses and ExpenseType</a></h3>
 <div class="paragraph">
 <p>In Concierge, users will be given the feature of tracking the expenditure of each individual
 guest, in order to facilitate checkout charges. Hence, the three classes, <code>Expenses</code>, <code>Expense</code>
@@ -1495,7 +1599,7 @@ and <code>ExpenseType</code> have been created for this purpose. In addition, th
 <code>menu</code> of goods and services available.</p>
 </div>
 <div class="sect3">
-<h4 id="current-implementation-6"><a class="link" href="#current-implementation-6">3.9.1. Current Implementation</a></h4>
+<h4 id="current-implementation-7"><a class="link" href="#current-implementation-7">3.10.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p><code>ExpenseType</code> objects are essentially immutable objects that represent a single item or service
 being sold at the hotel. An <code>ExpenseType</code> object contains information about its menu number,
@@ -1548,7 +1652,7 @@ chronologically) will be useful for generating a nice view of all the expenses i
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-6"><a class="link" href="#design-considerations-6">3.9.2. Design Considerations</a></h4>
+<h4 id="design-considerations-7"><a class="link" href="#design-considerations-7">3.10.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-immutability-of-menu"><a class="link" href="#aspect-immutability-of-menu">Aspect: Immutability of Menu</a></h5>
 <div class="paragraph">
@@ -3438,4 +3542,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-01 14:50:35 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-01 15:47:33 UTC</div></div></div></body></html>
