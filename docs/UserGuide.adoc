@@ -135,7 +135,7 @@ Edits the phone number and email address of the 1st guest to be `91234567` and `
 * `edit 2 n/Betsy Crower t/` +
 Edits the name of the 2nd guest to be `Betsy Crower` and clears all existing tags.
 
-=== Locating guests by name: `find` [red]#Coming in v1.3#
+=== Locating guests by name: `find` [red]#Coming in v1.4#
 
 Finds guests or rooms, depending on the input flag and the keywords. +
 Format: `find [flag] KEYWORD`
@@ -219,7 +219,7 @@ redo commands executed before the logout.
 ** This is the same as closing and re-opening Concierge after a logout.
 ****
 
-=== Selecting a guest : `select` [red]#Coming in v1.3#
+=== Selecting a guest : `select`
 
 Selects the guest identified by the index number used in the displayed list. +
 Format: `select INDEX`
@@ -246,7 +246,7 @@ Selects from displayed room list [red]#Coming in v1.4#
 then `select INDEX`) will still result in the selection being done on
 the displayed guest list.
 
-=== Provide Room Service: `service` [red]#Coming in v1.3#
+=== Provide Room Service: `service` [red]#Coming in v1.4#
 
 Charges a room service to a room  +
 Format: `service r/ROOM_NUMBER svc/SERVICE_TYPE`
