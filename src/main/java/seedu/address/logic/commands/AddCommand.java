@@ -36,8 +36,8 @@ public class AddCommand extends Command {
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ROOM + " ROOM NUMBER "
-            + PREFIX_DATE_START + " dd/MM/yyyy "
-            + PREFIX_DATE_END + " dd/MM/yyyy "
+            + PREFIX_DATE_START + "dd/MM/yyyy or dd/MM/yy "
+            + PREFIX_DATE_END + "dd/MM/yyyy or dd/MM/yy "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
@@ -48,9 +48,9 @@ public class AddCommand extends Command {
             + PREFIX_DATE_START + "03/11/2018"
             + PREFIX_DATE_END + "05/11/2018";
 
-    public static final String MESSAGE_SUCCESS =
-            "New guest added: %1$s \nMade a booking for room: %2$s \n\tfrom %3$s";
-    public static final String MESSAGE_DUPLICATE_GUEST = "This guest already exists in Concierge";
+    public static final String MESSAGE_SUCCESS = "Guest %1$s successfully made a booking for room: %2$s from %3$s";
+    public static final String MESSAGE_OVERLAPPING_BOOKING =
+            "Cannot add booking, because it overlaps with another booking in room %s";
 
     private final Guest guestToAdd;
     private final RoomNumber roomNumberToAdd;
@@ -73,17 +73,12 @@ public class AddCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasGuest(guestToAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_GUEST);
-        }
-        model.addGuest(guestToAdd);
-
         try {
             model.addBooking(roomNumberToAdd, bookingToAdd);
         } catch (RoomNotFoundException e) {
             throw new CommandException(e.getMessage());
         } catch (OverlappingBookingException e) {
-            throw new CommandException(e.getMessage());
+            throw new CommandException(String.format(MESSAGE_OVERLAPPING_BOOKING, roomNumberToAdd));
         }
 
         model.commitConcierge();

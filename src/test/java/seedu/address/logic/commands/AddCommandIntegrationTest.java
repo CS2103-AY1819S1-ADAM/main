@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.logic.commands.AddCommand.MESSAGE_OVERLAPPING_BOOKING;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalConcierge.getTypicalConciergeClean;
@@ -17,6 +18,7 @@ import seedu.address.model.room.booking.Booking;
 import seedu.address.model.room.booking.BookingPeriod;
 import seedu.address.testutil.GuestBuilder;
 import seedu.address.testutil.TypicalBookingPeriods;
+import seedu.address.testutil.TypicalGuests;
 import seedu.address.testutil.TypicalRoomNumbers;
 
 /**
@@ -33,31 +35,41 @@ public class AddCommandIntegrationTest {
     }
 
     @Test
-    public void execute_newGuest_success() {
+    public void execute_newBooking_success() {
         Guest validGuest = new GuestBuilder().withName(CommandTestUtil.VALID_NAME_BOB).build();
         RoomNumber validRoomNumber = TypicalRoomNumbers.ROOM_NUMBER_002;
         BookingPeriod validBookingPeriod = TypicalBookingPeriods.TODAY_TOMORROW;
+        Booking validBooking = new Booking(validGuest, validBookingPeriod);
+
+        String expectedMessage =
+            String.format(AddCommand.MESSAGE_SUCCESS, validGuest, validRoomNumber, validBookingPeriod);
 
         Model expectedModel = new ModelManager(model.getConcierge(), new UserPrefs());
-        expectedModel.addGuest(validGuest);
-        expectedModel.addBooking(validRoomNumber, new Booking(validGuest, validBookingPeriod));
+        expectedModel.addBooking(validRoomNumber, validBooking);
         expectedModel.commitConcierge();
 
         assertCommandSuccess(new AddCommand(validGuest, validRoomNumber, validBookingPeriod),
                 model, commandHistory,
-                String.format(AddCommand.MESSAGE_SUCCESS, validGuest,
-                        validRoomNumber, validBookingPeriod),
+                expectedMessage,
                 expectedModel);
     }
 
     @Test
-    public void execute_duplicateGuest_throwsCommandException() {
-        Guest guestInList = model.getConcierge().getGuestList().get(0);
+    public void execute_overlappingBooking_throwsCommandException() {
+        Guest validGuest = TypicalGuests.ALICE;
         RoomNumber validRoomNumber = TypicalRoomNumbers.ROOM_NUMBER_002;
         BookingPeriod validBookingPeriod = TypicalBookingPeriods.TODAY_TOMORROW;
+        Booking validBooking = new Booking(validGuest, validBookingPeriod);
 
-        assertCommandFailure(new AddCommand(guestInList, validRoomNumber, validBookingPeriod),
-                model, commandHistory, AddCommand.MESSAGE_DUPLICATE_GUEST);
+        String expectedMessage = String.format(MESSAGE_OVERLAPPING_BOOKING, validRoomNumber);
+
+        // add first time -> valid
+        model.addBooking(validRoomNumber, validBooking);
+
+        // add second time with same booking period -> throw overlapping booking exception
+        assertCommandFailure(new AddCommand(validGuest, validRoomNumber, validBookingPeriod),
+                model, commandHistory,
+                expectedMessage);
     }
 
 }

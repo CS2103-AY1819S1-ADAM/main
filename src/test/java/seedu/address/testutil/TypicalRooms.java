@@ -1,112 +1,32 @@
 package seedu.address.testutil;
 
-import seedu.address.model.room.Capacity;
+import java.util.List;
+
 import seedu.address.model.room.Room;
 import seedu.address.model.room.UniqueRoomList;
 
 /**
  * A utility class containing a list of {@code Room} objects to be used in tests.
+ * Note: ALL rooms are now gotten directly from the TypicalConcierge. The reason for this is Concierge needs to
+ * maintain synchronization between the room list and the checked-in guest list, which means any checked-in bookings
+ * must be executed via the Concierge. See TypicalConcierge for more info.
  * TODO Incorporate expenses into rooms once WEI ZHENG has implemented it
  */
 public class TypicalRooms {
 
-    public static final Room SINGLE_001 = new RoomBuilder()
-        .withRoomNumber(TypicalRoomNumbers.ROOM_NUMBER_001.toString())
-        .withCapacity(Capacity.SINGLE)
-        .withBookings(TypicalBookings.getTypicalBookingsLastWeekYesterday())
-        .withTags("maintenance")
-        .build();
-
-    public static final Room DOUBLE_002 = new RoomBuilder()
-        .withRoomNumber(TypicalRoomNumbers.ROOM_NUMBER_002.toString())
-        .withCapacity(Capacity.DOUBLE)
-        .withBookings(TypicalBookings.getTypicalBookingsLastWeekYesterdayCheckedIn())
-        .withTags("maintenance")
-        .build();
-
-    public static final Room SUITE_010 = new RoomBuilder()
-        .withRoomNumber(TypicalRoomNumbers.ROOM_NUMBER_010.toString())
-        .withCapacity(Capacity.SUITE)
-        .withBookings(TypicalBookings.getTypicalBookingsYesterdayToday())
-        .build();
-
-    public static final Room SINGLE_011 = new RoomBuilder()
-        .withRoomNumber(TypicalRoomNumbers.ROOM_NUMBER_011.toString())
-        .withCapacity(Capacity.SINGLE)
-        .withBookings(TypicalBookings.getTypicalBookingsTodayTomorrow())
-        .build();
-
-    public static final Room DOUBLE_012 = new RoomBuilder()
-        .withRoomNumber(TypicalRoomNumbers.ROOM_NUMBER_012.toString())
-        .withCapacity(Capacity.DOUBLE)
-        .withBookings(TypicalBookings.getTypicalBookingsTodayTomorrowCheckedIn())
-        .build();
-
-    public static final Room SUITE_020 = new RoomBuilder()
-        .withRoomNumber(TypicalRoomNumbers.ROOM_NUMBER_020.toString())
-        .withCapacity(Capacity.SUITE)
-        .withBookings(TypicalBookings.getTypicalBookingsTodayNextWeek())
-        .build();
-
-    public static final Room SINGLE_021 = new RoomBuilder()
-        .withRoomNumber(TypicalRoomNumbers.ROOM_NUMBER_021.toString())
-        .withCapacity(Capacity.SINGLE)
-        .withBookings(TypicalBookings.getTypicalBookingsTomorrowNextWeek())
-        .build();
-
-    public static final Room DOUBLE_022 = new RoomBuilder()
-        .withRoomNumber(TypicalRoomNumbers.ROOM_NUMBER_022.toString())
-        .withCapacity(Capacity.DOUBLE)
-        .withBookings(TypicalBookings.getMultipleBookingsSet1())
-        .build();
-
-    public static final Room SUITE_030 = new RoomBuilder()
-        .withRoomNumber(TypicalRoomNumbers.ROOM_NUMBER_030.toString())
-        .withCapacity(Capacity.SUITE)
-        .withBookings(TypicalBookings.getMultipleBookingsSet2())
-        .build();
-
-    public static final Room SINGLE_031 = new RoomBuilder()
-        .withRoomNumber(TypicalRoomNumbers.ROOM_NUMBER_031.toString())
-        .withCapacity(Capacity.SINGLE)
-        .build();
-
     /**
      * Returns a {@code UniqueRoomList} with all rooms.
      * Note: All rooms do not have bookings or expenses.
-     * Use @Before in tests to initialize bookings and expenses. However, if you use @Before, make sure to
-     * do `model = new Model(model.getConcierge(), new UserPrefs())` at the end of the @Before block. This is to
-     * ensure the model's versionedConcierge has an empty initial state list for all the tests to work.
      */
-    public static UniqueRoomList getTypicalUniqueRoomList() {
+    public static UniqueRoomList getTypicalUniqueRoomListClean() {
         return new UniqueRoomList();
     }
 
     /**
-     * Returns a {@code UniqueRoomList} with rooms that are preset with bookings:<br/>
-     * Room 001: last week - Yesterday<br/>
-     * Room 002: Last week - Yesterday (checked-in)<br/>
-     * Room 010: Yesterday - Today<br/>
-     * Room 011: Today - Tomorrow<br/>
-     * Room 012: Today - Tomorrow (checked-in)<br/>
-     * Room 020: Today - Next week<br/>
-     * Room 021: Tomorrow - Next week<br/>
-     * Room 022: Last week - Yesterday, Yesterday - Today, Today - Tomorrow, Tomorrow - Next week<br/>
-     * Room 030: Last week - Yesterday, Yesterday - Today, Today - Tomorrow (checked-in), Tomorrow - Next week<br/>
-     * Room 031: No bookings
+     * Get the typical concierge's room list with preset bookings
      */
-    public static UniqueRoomList getTypicalUniqueRoomListWithBookings() {
-        UniqueRoomList uniqueRoomList = new UniqueRoomList();
-        uniqueRoomList.setRoom(uniqueRoomList.getRoom(TypicalRoomNumbers.ROOM_NUMBER_001), SINGLE_001);
-        uniqueRoomList.setRoom(uniqueRoomList.getRoom(TypicalRoomNumbers.ROOM_NUMBER_002), DOUBLE_002);
-        uniqueRoomList.setRoom(uniqueRoomList.getRoom(TypicalRoomNumbers.ROOM_NUMBER_010), SUITE_010);
-        uniqueRoomList.setRoom(uniqueRoomList.getRoom(TypicalRoomNumbers.ROOM_NUMBER_011), SINGLE_011);
-        uniqueRoomList.setRoom(uniqueRoomList.getRoom(TypicalRoomNumbers.ROOM_NUMBER_012), DOUBLE_012);
-        uniqueRoomList.setRoom(uniqueRoomList.getRoom(TypicalRoomNumbers.ROOM_NUMBER_020), SUITE_020);
-        uniqueRoomList.setRoom(uniqueRoomList.getRoom(TypicalRoomNumbers.ROOM_NUMBER_021), SINGLE_021);
-        uniqueRoomList.setRoom(uniqueRoomList.getRoom(TypicalRoomNumbers.ROOM_NUMBER_022), DOUBLE_022);
-        uniqueRoomList.setRoom(uniqueRoomList.getRoom(TypicalRoomNumbers.ROOM_NUMBER_030), SUITE_030);
-        uniqueRoomList.setRoom(uniqueRoomList.getRoom(TypicalRoomNumbers.ROOM_NUMBER_031), SINGLE_031);
-        return uniqueRoomList;
+    public static List<Room> getTypicalUniqueRoomList() {
+        return TypicalConcierge.getTypicalConcierge().getRoomList();
     }
+
 }

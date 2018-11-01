@@ -11,10 +11,10 @@ import org.junit.rules.ExpectedException;
 
 import seedu.address.model.room.booking.Booking;
 import seedu.address.model.room.booking.exceptions.BookingNotFoundException;
-import seedu.address.model.room.booking.exceptions.ExpiredBookingsFoundException;
-import seedu.address.model.room.booking.exceptions.NoActiveBookingException;
+import seedu.address.model.room.booking.exceptions.ExpiredBookingCheckInException;
+import seedu.address.model.room.booking.exceptions.InactiveBookingCheckInException;
 import seedu.address.model.room.booking.exceptions.NoBookingException;
-import seedu.address.model.room.exceptions.OccupiedRoomCheckinException;
+import seedu.address.model.room.exceptions.BookingAlreadyCheckedInException;
 import seedu.address.testutil.RoomBuilder;
 import seedu.address.testutil.TypicalBookingPeriods;
 import seedu.address.testutil.TypicalBookings;
@@ -51,38 +51,38 @@ public class RoomTest {
 
     @Test
     public void checkIn_expiredBooking_throwsNoActiveBookingException() {
-        thrown.expect(ExpiredBookingsFoundException.class);
+        thrown.expect(ExpiredBookingCheckInException.class);
         testRoomWithLastWeekYesterdayBooking.checkIn();
     }
 
     @Test
     public void checkIn_yesterdayToday_success() {
         Room editedRoom = testRoomWithYesterdayTodayBooking.checkIn();
-        assertTrue(editedRoom.getBookings().getActiveBooking().get().getIsCheckedIn());
+        assertTrue(editedRoom.getBookings().getFirstBooking().getIsCheckedIn());
     }
 
     @Test
     public void checkIn_todayTomorrow_success() {
         Room editedRoom = testRoomWithTodayTomorrowBooking.checkIn();
-        assertTrue(editedRoom.getBookings().getActiveBooking().get().getIsCheckedIn());
+        assertTrue(editedRoom.getBookings().getFirstBooking().getIsCheckedIn());
     }
 
     @Test
     public void checkIn_upcomingBooking_throwsNoActiveBookingException() {
-        thrown.expect(NoActiveBookingException.class);
+        thrown.expect(InactiveBookingCheckInException.class);
         testRoomWithTomorrowNextWeekBooking.checkIn();
     }
 
     @Test
     public void checkIn_occupiedRoomCheckin_throwsOccupiedRoomCheckinException() {
         Room editedRoom = testRoomWithTodayTomorrowBooking.checkIn();
-        thrown.expect(OccupiedRoomCheckinException.class);
+        thrown.expect(BookingAlreadyCheckedInException.class);
         editedRoom.checkIn();
     }
 
     @Test
     public void checkIn_noBooking_throwsNoBookingException() {
-        thrown.expect(NoActiveBookingException.class);
+        thrown.expect(NoBookingException.class);
         testRoomWithoutBooking.checkIn();
     }
 

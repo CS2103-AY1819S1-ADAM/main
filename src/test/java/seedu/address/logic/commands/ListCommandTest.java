@@ -1,6 +1,9 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.parser.CliSyntax.FLAG_CHECKED_IN_GUEST;
+import static seedu.address.logic.parser.CliSyntax.FLAG_GUEST;
+import static seedu.address.logic.parser.CliSyntax.FLAG_ROOM;
 import static seedu.address.testutil.TypicalConcierge.getTypicalConciergeClean;
 
 import org.junit.Before;
@@ -28,13 +31,18 @@ public class ListCommandTest {
 
     @Test
     public void execute_listIsNotFiltered_showsSameRoomList() {
-        assertCommandSuccess(new ListCommand("list -r ".trim().split("\\s+")),
+        assertCommandSuccess(new ListCommand(FLAG_ROOM),
                 model, commandHistory, ListCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test
     public void execute_listIsNotFiltered_showsSameGuestList() {
-        assertCommandSuccess(new ListCommand("list -g ".trim().split("\\s+")),
+        assertCommandSuccess(new ListCommand(FLAG_GUEST),
                 model, commandHistory, ListCommand.MESSAGE_SUCCESS, expectedModel);
+    }
+    @Test
+    public void execute_listIsNotFiltered_showsSameCheckedInGuestList() {
+        assertCommandSuccess(new ListCommand(FLAG_CHECKED_IN_GUEST),
+            model, commandHistory, ListCommand.MESSAGE_SUCCESS, expectedModel);
     }
 }

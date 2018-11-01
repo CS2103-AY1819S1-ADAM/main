@@ -17,6 +17,7 @@ import seedu.address.model.expenses.ExpenseType;
 import seedu.address.model.guest.Guest;
 import seedu.address.model.room.Room;
 import seedu.address.model.room.RoomNumber;
+import seedu.address.model.room.booking.Booking;
 import seedu.address.model.room.exceptions.DuplicateRoomException;
 import seedu.address.model.room.exceptions.RoomMissingException;
 
@@ -26,7 +27,7 @@ import seedu.address.model.room.exceptions.RoomMissingException;
 @XmlRootElement(name = "concierge")
 public class XmlSerializableConcierge {
 
-    public static final String MESSAGE_DUPLICATE_GUEST = "Guest list contains duplicate guest(s).";
+    public static final String MESSAGE_DUPLICATE_GUEST = "Archived guest list contains duplicate guest(s).";
     public static final String MESSAGE_DUPLICATE_ROOM = "Room list contains duplicate room(s)";
     public static final String MESSAGE_ROOM_MISSING = "Room list is missing room(s) from total of "
             + RoomNumber.MAX_ROOM_NUMBER + " rooms.";
@@ -85,16 +86,23 @@ public class XmlSerializableConcierge {
 
         List<Room> modelRoomList = new LinkedList<>();
         for (XmlAdaptedRoom r : rooms) {
-            modelRoomList.add(r.toModelType(concierge.getMenu()));
+            Room room = r.toModelType(concierge.getMenu());
+            modelRoomList.add(room);
+
+            room.getBookings().getSortedBookingsSet().parallelStream()
+                    .filter(Booking::getIsCheckedIn)
+                    .map(Booking::getGuest)
+                    .forEach(concierge::addCheckedInGuest);
         }
+
         try {
             concierge.setRooms(modelRoomList);
-            return concierge;
         } catch (DuplicateRoomException e) {
             throw new IllegalValueException(MESSAGE_DUPLICATE_ROOM, e);
         } catch (RoomMissingException e) {
             throw new IllegalValueException(MESSAGE_ROOM_MISSING, e);
         }
+        return concierge;
     }
 
     @Override

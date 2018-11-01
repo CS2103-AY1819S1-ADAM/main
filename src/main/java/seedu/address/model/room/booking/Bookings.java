@@ -7,6 +7,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
+import java.util.function.Predicate;
 
 import seedu.address.model.room.booking.exceptions.BookingNotFoundException;
 import seedu.address.model.room.booking.exceptions.NoBookingException;
@@ -65,10 +66,28 @@ public class Bookings {
     }
 
     /**
-     * Returns an {@code Optional} of the active booking of this room
+     * Returns an {@code Optional} of the first active booking of this room
+     * Note 1: We return an optional here and not throw exception because only GUI elements (RoomCard and
+     * RoomDetailedCard) use this method. It makes it difficult to read the GUI code if exceptions are handled there.
+     * Note 2: There can be more than one active booking at a time.
+     * For example, Booking A ends on 01/11/18 and Booking B starts on 01/11/18. This is allowed, to simulate a
+     * turnover of rooms in the same day.
      */
-    public Optional<Booking> getActiveBooking() {
+    public Optional<Booking> getFirstActiveBooking() {
         return sortedBookingsSet.stream().filter(Booking::isActive).findFirst();
+    }
+
+    /**
+     * Return the first booking that matches the given predicate.
+     */
+    public Booking getFirstBookingByPredicate(Predicate<Booking> predicate) {
+        Optional<Booking> optionalBooking = sortedBookingsSet.stream()
+                .filter(predicate)
+                .findFirst();
+        if (!optionalBooking.isPresent()) {
+            throw new BookingNotFoundException();
+        }
+        return optionalBooking.get();
     }
 
     //=========== Operations =============================================================
@@ -173,14 +192,14 @@ public class Bookings {
      * Returns the short description of the active booking
      */
     public String toStringActiveBookingShortDescription() {
-        return getActiveBooking().map(Booking::toStringShortDescription).orElse("");
+        return getFirstActiveBooking().map(Booking::toStringShortDescription).orElse("");
     }
 
     /**
      * Returns the full description of the active booking
      */
     public String toStringActiveBooking() {
-        return getActiveBooking().map(Booking::toString).orElse("");
+        return getFirstActiveBooking().map(Booking::toString).orElse("");
     }
 
     /**
@@ -189,7 +208,7 @@ public class Bookings {
     public String toStringAllOtherBookings() {
         final StringBuilder builder = new StringBuilder();
         Bookings allOtherBookings = this;
-        Optional<Booking> optionalActiveBooking = getActiveBooking();
+        Optional<Booking> optionalActiveBooking = getFirstActiveBooking();
         if (optionalActiveBooking.isPresent()) {
             allOtherBookings = this.remove(optionalActiveBooking.get());
         }

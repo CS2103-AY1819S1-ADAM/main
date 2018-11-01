@@ -1,15 +1,16 @@
 package seedu.address.commons.events.ui;
 
 import seedu.address.commons.events.BaseEvent;
+import seedu.address.logic.parser.Prefix;
 
 /**
  * Represents a listing change in the left UI column
  */
 public class ListingChangedEvent extends BaseEvent {
 
-    private String flag;
+    private Prefix flag;
 
-    public ListingChangedEvent(String flag) {
+    public ListingChangedEvent(Prefix flag) {
         this.flag = flag;
     }
 
@@ -18,7 +19,7 @@ public class ListingChangedEvent extends BaseEvent {
         return getClass().getSimpleName();
     }
 
-    public String getFlag() {
+    public Prefix getFlag() {
         return flag;
     }
 }

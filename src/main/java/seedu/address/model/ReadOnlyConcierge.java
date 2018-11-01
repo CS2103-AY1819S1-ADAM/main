@@ -19,6 +19,12 @@ public interface ReadOnlyConcierge {
     ObservableList<Guest> getGuestList();
 
     /**
+     * Returns an unmodifiable view of the checked-in guest list.
+     * This list will not contain any duplicate guests.
+     */
+    ObservableList<Guest> getCheckedInGuestList();
+
+    /**
      * Returns an unmodifiable view of the room list.
      * This list will not contain any duplicate rooms.
      */

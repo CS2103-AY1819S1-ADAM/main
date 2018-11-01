@@ -1,8 +1,6 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.FLAG_GUEST;
-import static seedu.address.logic.parser.CliSyntax.FLAG_ROOM;
 
 import java.util.Collection;
 import java.util.HashSet;

@@ -1,7 +1,7 @@
 package seedu.address.ui;
 
 import static seedu.address.testutil.EventsUtil.postNow;
-import static seedu.address.testutil.TypicalRooms.getTypicalUniqueRoomList;
+import static seedu.address.testutil.TypicalRooms.getTypicalUniqueRoomListClean;
 import static seedu.address.ui.testutil.GuiTestAssert.assertCardDisplaysDetailedRoom;
 
 import org.junit.Before;
@@ -14,7 +14,8 @@ import seedu.address.commons.events.ui.RoomPanelSelectionChangedEvent;
 import seedu.address.model.room.Room;
 
 public class RoomDetailedPanelTest extends GuiUnitTest {
-    private static final ObservableList<Room> TYPICAL_ROOMS = getTypicalUniqueRoomList().asUnmodifiableObservableList();
+    private static final ObservableList<Room> TYPICAL_ROOMS =
+            getTypicalUniqueRoomListClean().asUnmodifiableObservableList();
 
     private RoomPanelSelectionChangedEvent selectionChangedEventStub;
 

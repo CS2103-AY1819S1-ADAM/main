@@ -1,8 +1,9 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_FLAG_GUEST;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_FLAG_ROOM;
+import static seedu.address.logic.parser.CliSyntax.FLAG_CHECKED_IN_GUEST;
+import static seedu.address.logic.parser.CliSyntax.FLAG_GUEST;
+import static seedu.address.logic.parser.CliSyntax.FLAG_ROOM;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -21,9 +22,9 @@ public class ListCommandParserTest {
 
     @Test
     public void parse_doubleFlag_throwsParseException() {
-        assertParseFailure(parser, VALID_FLAG_ROOM + " " + VALID_FLAG_GUEST,
+        assertParseFailure(parser, FLAG_ROOM + " " + FLAG_GUEST,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
-        assertParseFailure(parser, VALID_FLAG_GUEST + " " + VALID_FLAG_ROOM,
+        assertParseFailure(parser, FLAG_GUEST + " " + FLAG_ROOM,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
     }
 
@@ -36,8 +37,9 @@ public class ListCommandParserTest {
     @Test
     public void parse_validArgs_returnsListCommand() {
 
-        ListCommand expectedRoomListCommand = new ListCommand(new String[]{VALID_FLAG_ROOM});
-        ListCommand expectedGuestListCommand = new ListCommand(new String[]{VALID_FLAG_GUEST});
+        ListCommand expectedRoomListCommand = new ListCommand(FLAG_ROOM);
+        ListCommand expectedGuestListCommand = new ListCommand(FLAG_GUEST);
+        ListCommand expectedCheckedInGuestListCommand = new ListCommand(FLAG_CHECKED_IN_GUEST);
 
         // no leading and trailing whitespaces
         assertParseSuccess(parser, "-r", expectedRoomListCommand);
@@ -48,6 +50,12 @@ public class ListCommandParserTest {
         assertParseSuccess(parser, "-g", expectedGuestListCommand);
         // Newline after list
         assertParseSuccess(parser, " \n -g", expectedGuestListCommand);
+
+
+        // no leading and trailing whitespaces
+        assertParseSuccess(parser, "-cg", expectedCheckedInGuestListCommand);
+        // Newline after list
+        assertParseSuccess(parser, " \n -cg", expectedCheckedInGuestListCommand);
     }
 
 }

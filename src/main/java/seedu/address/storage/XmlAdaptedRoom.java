@@ -70,9 +70,9 @@ public class XmlAdaptedRoom {
         roomNumber = source.getRoomNumber().toString();
         capacity = source.getCapacity();
         expenses.addAll(source.getExpenses().getExpensesList().stream().map(XmlAdaptedExpense::new)
-            .collect(Collectors.toList()));
+                .collect(Collectors.toList()));
         bookings.addAll(source.getBookings().getSortedBookingsSet().stream().map(XmlAdaptedBooking::new)
-            .collect(Collectors.toList()));
+                .collect(Collectors.toList()));
         tagged = source.getTags().stream().map(XmlAdaptedTag::new).collect(Collectors.toList());
     }
 

@@ -142,9 +142,10 @@
         <capacity>DOUBLE</capacity>
         <bookings>
             <guest>
-                <name>Elle Meyer</name>
-                <phone>9482224</phone>
-                <email>werner@example.com</email>
+                <name>Daniel Meier</name>
+                <phone>87652533</phone>
+                <email>cornelia@example.com</email>
+                <tagged>friends</tagged>
             </guest>
             <bookingPeriod>
                 <startDate>1/11/2018</startDate>
@@ -218,16 +219,17 @@
         <capacity>DOUBLE</capacity>
         <bookings>
             <guest>
-                <name>Alice Pauline</name>
-                <phone>94351253</phone>
-                <email>alice@example.com</email>
+                <name>Benson Meier</name>
+                <phone>98765432</phone>
+                <email>johnd@example.com</email>
                 <tagged>vip</tagged>
+                <tagged>specialNeeds</tagged>
             </guest>
             <bookingPeriod>
                 <startDate>25/10/2018</startDate>
                 <endDate>31/10/2018</endDate>
             </bookingPeriod>
-            <isCheckedIn>false</isCheckedIn>
+            <isCheckedIn>true</isCheckedIn>
         </bookings>
         <bookings>
             <guest>

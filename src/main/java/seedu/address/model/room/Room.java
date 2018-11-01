@@ -2,10 +2,10 @@ package seedu.address.model.room;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.model.expenses.Expense;
@@ -13,10 +13,9 @@ import seedu.address.model.expenses.Expenses;
 import seedu.address.model.room.booking.Booking;
 import seedu.address.model.room.booking.BookingPeriod;
 import seedu.address.model.room.booking.Bookings;
-import seedu.address.model.room.booking.exceptions.BookingNotFoundException;
-import seedu.address.model.room.booking.exceptions.ExpiredBookingsFoundException;
-import seedu.address.model.room.booking.exceptions.NoActiveBookingException;
-import seedu.address.model.room.exceptions.OccupiedRoomCheckinException;
+import seedu.address.model.room.booking.exceptions.ExpiredBookingCheckInException;
+import seedu.address.model.room.booking.exceptions.InactiveBookingCheckInException;
+import seedu.address.model.room.exceptions.BookingAlreadyCheckedInException;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -76,6 +75,17 @@ public class Room {
         return Collections.unmodifiableSet(tags);
     }
 
+    //=========== Tags operations =============================================================
+
+    /**
+     * Returns a copy of this room with given tags added
+     */
+    public Room addTags(Tag... tags) {
+        Set<Tag> editedTags = new HashSet<>(this.tags);
+        editedTags.addAll(Arrays.asList(tags));
+        return new Room(this.roomNumber, this.capacity, this.expenses, this.bookings, editedTags);
+    }
+
     //=========== Bookings operations =============================================================
 
     /**
@@ -95,24 +105,23 @@ public class Room {
     }
 
     /**
-     * Checks in the first (earliest) booking of this room, only if:
-     * 1) there are no expired bookings
+     * Checks in the first booking of this room, only if:
+     * 1) it is not expired
      * 2) it is active
-     * 3) not already checked-in,
+     * 3) it is not already checked-in
      */
     public Room checkIn() {
-        if (bookings.hasExpiredBookings()) {
-            throw new ExpiredBookingsFoundException();
+        Booking firstBooking = bookings.getFirstBooking();
+        if (firstBooking.isExpired()) {
+            throw new ExpiredBookingCheckInException();
         }
-        Optional<Booking> optionalActiveBooking = bookings.getActiveBooking();
-        if (!optionalActiveBooking.isPresent()) {
-            throw new NoActiveBookingException();
+        if (!firstBooking.isActive()) {
+            throw new InactiveBookingCheckInException();
         }
-        Booking activeBooking = optionalActiveBooking.get();
-        if (activeBooking.getIsCheckedIn()) {
-            throw new OccupiedRoomCheckinException();
+        if (firstBooking.getIsCheckedIn()) {
+            throw new BookingAlreadyCheckedInException();
         }
-        return updateBooking(activeBooking, activeBooking.checkIn());
+        return updateBooking(firstBooking, firstBooking.checkIn());
     }
 
     /**
@@ -126,16 +135,13 @@ public class Room {
     }
 
     /**
-     * Checks out the booking identified by the booking period
+     * Checks out the given booking
      * TODO: Future features to include exporting of receipt, setting room to housekeeping status for __x__ hours.
      */
     public Room checkout(BookingPeriod bookingPeriod) {
-        for (Booking booking : bookings.getSortedBookingsSet()) {
-            if (booking.getBookingPeriod().equals(bookingPeriod)) {
-                return new Room(this.roomNumber, this.capacity, this.expenses, bookings.remove(booking), this.tags);
-            }
-        }
-        throw new BookingNotFoundException();
+        Booking bookingToCheckout = bookings
+                .getFirstBookingByPredicate(booking -> booking.getBookingPeriod().equals(bookingPeriod));
+        return new Room(this.roomNumber, this.capacity, this.expenses, bookings.remove(bookingToCheckout), this.tags);
         // expenses.report(); // TODO: wait for WZ to implement
     }
 

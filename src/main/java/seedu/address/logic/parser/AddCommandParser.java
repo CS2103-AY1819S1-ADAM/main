@@ -54,7 +54,6 @@ public class AddCommandParser implements Parser<AddCommand> {
         BookingPeriod bookingPeriod =
                 ParserUtil.parseBookingPeriod(argMultimap.getValue(PREFIX_DATE_START).get(),
                         argMultimap.getValue(PREFIX_DATE_END).get());
-
         Guest guest = new Guest(name, phone, email, tagList);
 
         return new AddCommand(guest, roomNumber, bookingPeriod);

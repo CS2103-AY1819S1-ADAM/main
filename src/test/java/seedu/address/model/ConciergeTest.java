@@ -122,6 +122,7 @@ public class ConciergeTest {
      */
     private static class ConciergeStub implements ReadOnlyConcierge {
         private final ObservableList<Guest> guests = FXCollections.observableArrayList();
+        private final ObservableList<Guest> checkedInGuests = FXCollections.observableArrayList();
         private final ObservableList<Room> rooms = FXCollections.observableArrayList();
 
         ConciergeStub(Collection<Guest> guests, Collection<Room> rooms) {
@@ -131,6 +132,11 @@ public class ConciergeTest {
         @Override
         public ObservableList<Guest> getGuestList() {
             return guests;
+        }
+
+        @Override
+        public ObservableList<Guest> getCheckedInGuestList() {
+            return checkedInGuests;
         }
 
         @Override

@@ -6,9 +6,10 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.room.RoomNumber;
-import seedu.address.model.room.booking.exceptions.ExpiredBookingsFoundException;
-import seedu.address.model.room.booking.exceptions.NoActiveBookingException;
-import seedu.address.model.room.exceptions.OccupiedRoomCheckinException;
+import seedu.address.model.room.booking.exceptions.ExpiredBookingCheckInException;
+import seedu.address.model.room.booking.exceptions.InactiveBookingCheckInException;
+import seedu.address.model.room.booking.exceptions.NoBookingException;
+import seedu.address.model.room.exceptions.BookingAlreadyCheckedInException;
 
 /**
  * Check in a room identified using its room number.
@@ -24,11 +25,13 @@ public class CheckInCommand extends Command {
             + "Example: " + COMMAND_WORD + " 001";
 
     public static final String MESSAGE_CHECKIN_ROOM_SUCCESS = "Checked in Room: %1$s";
-    public static final String MESSAGE_EXPIRED_BOOKINGS_FOUND =
+    public static final String MESSAGE_NO_BOOKING_CHECK_IN =
+        "Cannot check in Room %1$s, as it has no bookings.";
+    public static final String MESSAGE_EXPIRED_BOOKING_CHECK_IN =
         "Cannot check in Room %1$s, as it has expired bookings.";
-    public static final String MESSAGE_NO_ACTIVE_BOOKING_CHECKIN =
+    public static final String MESSAGE_INACTIVE_BOOKING_CHECKIN =
         "Cannot check in Room %1$s, as it does not have an active booking.";
-    public static final String MESSAGE_OCCUPIED_ROOM_CHECKIN =
+    public static final String MESSAGE_BOOKING_ALREADY_CHECKED_IN =
         "Cannot check in Room %1$s, as it is already checked in.";
 
     private final RoomNumber roomNumber;
@@ -44,12 +47,14 @@ public class CheckInCommand extends Command {
             model.checkInRoom(roomNumber);
             model.commitConcierge();
             return new CommandResult(String.format(MESSAGE_CHECKIN_ROOM_SUCCESS, roomNumber));
-        } catch (ExpiredBookingsFoundException e) {
-            throw new CommandException(String.format(MESSAGE_EXPIRED_BOOKINGS_FOUND, roomNumber));
-        } catch (NoActiveBookingException e) {
-            throw new CommandException(String.format(MESSAGE_NO_ACTIVE_BOOKING_CHECKIN, roomNumber));
-        } catch (OccupiedRoomCheckinException e) {
-            throw new CommandException(String.format(MESSAGE_OCCUPIED_ROOM_CHECKIN, roomNumber));
+        } catch (NoBookingException e) {
+            throw new CommandException(String.format(MESSAGE_NO_BOOKING_CHECK_IN, roomNumber));
+        } catch (ExpiredBookingCheckInException e) {
+            throw new CommandException(String.format(MESSAGE_EXPIRED_BOOKING_CHECK_IN, roomNumber));
+        } catch (InactiveBookingCheckInException e) {
+            throw new CommandException(String.format(MESSAGE_INACTIVE_BOOKING_CHECKIN, roomNumber));
+        } catch (BookingAlreadyCheckedInException e) {
+            throw new CommandException(String.format(MESSAGE_BOOKING_ALREADY_CHECKED_IN, roomNumber));
         }
     }
 

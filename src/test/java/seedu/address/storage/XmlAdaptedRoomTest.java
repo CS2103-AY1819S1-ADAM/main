@@ -28,7 +28,7 @@ import seedu.address.testutil.TypicalRooms;
  */
 public class XmlAdaptedRoomTest {
 
-    private static final Room VALID_ROOM = TypicalRooms.SINGLE_001;
+    private static final Room VALID_ROOM = TypicalRooms.getTypicalUniqueRoomList().get(0);
     private static final String VALID_ROOM_NUMBER = VALID_ROOM.getRoomNumber().toString();
     private static final Capacity VALID_CAPACITY = VALID_ROOM.getCapacity();
     private static final List<XmlAdaptedBooking> VALID_BOOKINGS = VALID_ROOM.getBookings().getSortedBookingsSet()

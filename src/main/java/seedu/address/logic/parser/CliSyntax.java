@@ -20,4 +20,5 @@ public class CliSyntax {
     public static final Prefix FLAG_GUEST = new Prefix("-g");
     public static final Prefix FLAG_ROOM_HAS_BOOKINGS = new Prefix("-hb");
     public static final Prefix FLAG_ROOM_NO_BOOKINGS = new Prefix("-nb");
+    public static final Prefix FLAG_CHECKED_IN_GUEST = new Prefix("-cg");
 }
