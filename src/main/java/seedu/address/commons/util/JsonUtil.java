@@ -14,6 +14,7 @@ import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.deser.std.FromStringDeserializer;
@@ -90,7 +91,6 @@ public class JsonUtil {
         serializeObjectToJsonFile(filePath, jsonFile);
     }
 
-
     /**
      * Converts a given string representation of a JSON data to instance of a class
      * @param <T> The generic type to create an instance of
@@ -98,6 +98,16 @@ public class JsonUtil {
      */
     public static <T> T fromJsonString(String json, Class<T> instanceClass) throws IOException {
         return objectMapper.readValue(json, instanceClass);
+    }
+
+    /**
+     * Converts a given string representation to a JsonPObject.
+     *
+     * @param json The json string to be parsed
+     * @return The JsonNode object which allows mapping of key to values.
+     */
+    public static JsonNode getNodeObject(String json) throws IOException {
+        return objectMapper.readTree(json);
     }
 
     /**

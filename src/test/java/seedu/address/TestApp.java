@@ -27,26 +27,31 @@ import systemtests.ModelHelper;
  */
 public class TestApp extends MainApp {
 
-    public static final Path SAVE_LOCATION_FOR_TESTING = TestUtil.getFilePathInSandboxFolder("sampleData.xml");
+    public static final Path CONCIERGE_LOCATION_FOR_TESTING =
+            TestUtil.getFilePathInSandboxFolder("sampleData.xml");
+    public static final Path PASSWORD_LOCATION_FOR_TESTING =
+            TestUtil.getFilePathInSandboxFolder("pass_testing.json");
+
     public static final String APP_TITLE = "Test App";
 
     protected static final Path DEFAULT_PREF_FILE_LOCATION_FOR_TESTING =
             TestUtil.getFilePathInSandboxFolder("pref_testing.json");
     protected Supplier<ReadOnlyConcierge> initialDataSupplier = () -> null;
-    protected Path saveFileLocation = SAVE_LOCATION_FOR_TESTING;
+    protected Path conciergeFileLocation = CONCIERGE_LOCATION_FOR_TESTING;
+    protected Path passwordFileLocation = PASSWORD_LOCATION_FOR_TESTING;
 
     public TestApp() {
     }
 
-    public TestApp(Supplier<ReadOnlyConcierge> initialDataSupplier, Path saveFileLocation) {
+    public TestApp(Supplier<ReadOnlyConcierge> initialDataSupplier, Path conciergeFileLocation) {
         super();
         this.initialDataSupplier = initialDataSupplier;
-        this.saveFileLocation = saveFileLocation;
+        this.conciergeFileLocation = conciergeFileLocation;
 
         // If some initial local data has been provided, write those to the file
         if (initialDataSupplier.get() != null) {
             createDataFileWithData(new XmlSerializableConcierge(this.initialDataSupplier.get()),
-                    this.saveFileLocation);
+                    this.conciergeFileLocation);
         }
     }
 
@@ -64,7 +69,8 @@ public class TestApp extends MainApp {
         double x = Screen.getPrimary().getVisualBounds().getMinX();
         double y = Screen.getPrimary().getVisualBounds().getMinY();
         userPrefs.updateLastUsedGuiSetting(new GuiSettings(600.0, 600.0, (int) x, (int) y));
-        userPrefs.setConciergeFilePath(saveFileLocation);
+        userPrefs.setConciergeFilePath(conciergeFileLocation);
+        userPrefs.setPasswordsFilePath(passwordFileLocation);
         return userPrefs;
     }
 

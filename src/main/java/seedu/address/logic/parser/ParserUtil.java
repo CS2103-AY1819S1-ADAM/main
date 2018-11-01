@@ -13,6 +13,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.guest.Email;
 import seedu.address.model.guest.Name;
 import seedu.address.model.guest.Phone;
+import seedu.address.model.login.HashingException;
 import seedu.address.model.room.RoomNumber;
 import seedu.address.model.room.booking.BookingPeriod;
 import seedu.address.model.tag.Tag;
@@ -138,6 +139,23 @@ public class ParserUtil {
         }
         return new BookingPeriod(trimmedStartDate, trimmedEndDate);
     }
+
+    /**
+     * Parses a {@code String password} into a hashed password.
+     * Strips whitespace off the password, so passwords cannot begin with a
+     * whitespace.
+     */
+    public static String parseAndHashPassword(String pw) throws ParseException {
+
+        requireNonNull(pw);
+        try {
+            return PasswordHashUtil.hash(pw.trim());
+        } catch (HashingException e) {
+            throw new ParseException(e.getMessage());
+        }
+    }
+
+
 
     /**
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given
