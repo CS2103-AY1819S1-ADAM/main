@@ -625,5 +625,4 @@
         <roomNumber>100</roomNumber>
         <capacity>SUITE</capacity>
     </rooms>
-    <menu/>
 </concierge>

@@ -15,6 +15,8 @@ import seedu.address.model.room.Capacity;
 import seedu.address.model.room.Room;
 import seedu.address.model.room.RoomNumber;
 import seedu.address.testutil.Assert;
+import seedu.address.testutil.ExpenseBuilder;
+import seedu.address.testutil.TypicalMenu;
 import seedu.address.testutil.TypicalRooms;
 
 /**
@@ -24,7 +26,6 @@ import seedu.address.testutil.TypicalRooms;
  * We do not check this field here because JAXB and Unmarshaller can only parse the correct values corresponding to
  * Capacity's enum values, meaning wrong values of Capacity will trigger an exception there, not here.
  * TODO The test for enum Capacity will be covered under XmlUtilTest.
- * TODO Update this test with actual Menu when WEI ZHENG has implemented it
  */
 public class XmlAdaptedRoomTest {
 
@@ -42,9 +43,11 @@ public class XmlAdaptedRoomTest {
     private static final String INVALID_TAG = "#friend";
     private static final XmlAdaptedBooking INVALID_BOOKING =
             new XmlAdaptedBooking(VALID_ROOM.getBookings().getFirstBooking());
+    private static final XmlAdaptedExpense INVALID_EXPENSE =
+            new XmlAdaptedExpense(ExpenseBuilder.DEFAULT_EXPENSE_TYPE.getItemNumber(),
+                    "12.345", ExpenseBuilder.DEFAULT_DATETIME.toString());
 
-    // TODO Replace this VALID_MENU_STUB with typical menu once WEI ZHENG has implemented it
-    private static final Menu VALID_MENU_STUB = new Menu();
+    private static final Menu VALID_MENU_STUB = TypicalMenu.getTypicalMenu();
 
     @Test
     public void toModelType_validRoom_returnsRoom() throws Exception {
@@ -96,4 +99,12 @@ public class XmlAdaptedRoomTest {
         Assert.assertThrows(IllegalValueException.class, () -> room.toModelType(VALID_MENU_STUB));
     }
 
+    @Test
+    public void toModelType_invalidExpense_throwsIllegalValueException() {
+        List<XmlAdaptedExpense> invalidExpenses = new ArrayList<>(VALID_EXPENSES);
+        invalidExpenses.add(INVALID_EXPENSE);
+        XmlAdaptedRoom room =
+                new XmlAdaptedRoom(VALID_ROOM_NUMBER, VALID_CAPACITY, VALID_BOOKINGS, invalidExpenses, VALID_TAGS);
+        Assert.assertThrows(IllegalValueException.class, () -> room.toModelType(VALID_MENU_STUB));
+    }
 }

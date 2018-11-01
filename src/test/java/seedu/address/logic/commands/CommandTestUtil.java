@@ -2,9 +2,11 @@ package seedu.address.logic.commands;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COST;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE_END;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE_START;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEM_NUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROOM;
@@ -49,6 +51,10 @@ public class CommandTestUtil {
             LocalDate.now().format(BookingPeriod.DATE_TO_STRING_FORMAT);
     public static final String VALID_DATE_END_BOB =
             LocalDate.now().plusWeeks(1).format(BookingPeriod.DATE_TO_STRING_FORMAT);
+    public static final String VALID_ITEM_NUMBER_RS01 = "RS01";
+    public static final String VALID_ITEM_NUMBER_RS02 = "RS02";
+    public static final String VALID_COST_1 = "123.45";
+    public static final String VALID_COST_2 = "678.90";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -68,6 +74,10 @@ public class CommandTestUtil {
             " " + PREFIX_DATE_START + " " + VALID_DATE_START_BOB;
     public static final String DATE_END_DESC_BOB =
             " " + PREFIX_DATE_END + " " + VALID_DATE_END_BOB;
+    public static final String ITEM_NUMBER_DESC_RS01 = " " + PREFIX_ITEM_NUMBER + VALID_ITEM_NUMBER_RS01;
+    public static final String ITEM_NUMBER_DESC_RS02 = " " + PREFIX_ITEM_NUMBER + VALID_ITEM_NUMBER_RS02;
+    public static final String COST_DESC_1 = " " + PREFIX_COST + VALID_COST_1;
+    public static final String COST_DESC_2 = " " + PREFIX_COST + VALID_COST_2;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
@@ -78,6 +88,7 @@ public class CommandTestUtil {
             " " + PREFIX_DATE_START + "138213"; // date has to be in dd/MM/yyyy format
     public static final String INVALID_DATE_END_DESC =
             " " + PREFIX_DATE_END + "33/33/3333"; // invalid month format
+    public static final String INVALID_COST_DESC = " " + PREFIX_COST + "123"; // must have both dollars and cents
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

@@ -7,6 +7,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_GUEST;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import org.junit.Rule;
@@ -15,6 +16,7 @@ import org.junit.rules.ExpectedException;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.expenses.Money;
 import seedu.address.model.guest.Email;
 import seedu.address.model.guest.Name;
 import seedu.address.model.guest.Phone;
@@ -179,5 +181,30 @@ public class ParserUtilTest {
         Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parseCost_null_throwsNullPointerException() throws Exception {
+        thrown.expect(NullPointerException.class);
+        ParserUtil.parseCost(null);
+    }
+
+    @Test
+    public void parseCost_emptyOptional_returnsEmptyOptionalMoney() throws Exception {
+        Optional<Money> actualOutput = ParserUtil.parseCost(Optional.empty());
+        assertEquals(actualOutput, Optional.empty());
+    }
+
+    @Test
+    public void parseCost_wrongMoneyFormat_throwsParseException() throws Exception {
+        thrown.expect(ParseException.class);
+        ParserUtil.parseCost(Optional.of("abc"));
+    }
+
+    @Test
+    public void parseCost_correctMoneyFormat_returnsOptionalMoney() throws Exception {
+        Optional<Money> actualOutput = ParserUtil.parseCost(Optional.of("123.45"));
+        assert actualOutput.isPresent();
+        assertEquals(new Money(123, 45), actualOutput.get());
     }
 }
