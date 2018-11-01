@@ -142,32 +142,58 @@ Edits the name of the 2nd guest to be `Betsy Crower` and clears all existing tag
 
 === Locating guests by name: `find` [red]#Coming in v1.4#
 
-Finds guests or rooms, depending on the input flag and the keywords. +
-Format: `find [flag] KEYWORD`
+Finds guests or rooms, depending on the input flag and the keyword filters.
+
+Format: `find [flag] FILTERS`
+
 ****
 * The search is case insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* Guests matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* Guests names and tags matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* Any number of filters can be chained and used together
 ****
 
-Examples:
+Filters for Guest (-g):
 
-* `find -g John Smith` +
-Find guest(s) with "John" or "Smith" or both in their names.
-* `find -g r/085` +
-Find guest currently staying in room 085
-* `find -r 085` +
+* `n/ - Name`
+* `p/ - Phone Number`
+* `e/ - Email Address`
+* `t/ - Tags`
+
+Filters for Rooms (-r):
+
+* `r/ - Room Number`
+* `c/ - Capacity`
+* `t/ - Room Tags`
+
+The following are filters for room bookings. The flags cannot be mixed.
+The flags can be used indepdently, or with a from/to specified date.
+Input dates must be in DD/MM/YY format.
+
+* `-hb - Has Bookings Flag`
+* `-nb - No Bookings Flag`
+* `from/ - Booking Start Date`
+* `to/ - Booking End Date`
+
+Find Command Examples:
+
+* `find -g n/Alex Yu` +
+Find guest(s) with "Alex" or "Yu" or both in their names.
+* `find -g n/Alex t/VIP` +
+Find guest(s) named Alex with tag "VIP".
+* `find -g p/81027115` +
+Find guest(s) with phone number "81027115".
+* `find -r r/085` +
 Find room 085
-* `find -r g/John Smith` +
-Find room for which guest(s) with "John" or "Smith" or both in their names, has made a booking
-* `find -r double` +
-Find all double rooms
-* `find -r avail` +
-Find all available rooms today
-* `find -r avail from/09/12/18 to/10/12/18` +
-Find rooms that are available from 09/12/18 10/12/18. Input dates must be in DD/MM/YY format.
+* `find -r c/2` +
+Find all rooms with a capacity of 2.
+* `find -r c/5 -nb from/ 01/11/2018 to/ 05/11/2018` +
+Find all rooms with a capacity of 5, without any bookings from the date range 01/11/2018 to 05/11/2018.
+* `find -r -hb` +
+Find all rooms with bookings.
+* `find -r -hb t/RoomService` +
+Find all rooms with bookings with tag "RoomService".
 
 === Listing all guests : `list`
 
@@ -250,20 +276,39 @@ Selects from displayed room list [red]#Coming in v1.4#
 then `select INDEX`) will still result in the selection being done on
 the displayed guest list.
 
-=== Provide Room Service: `service` [red]#Coming in v1.4#
+=== Provide Room Service: `service`
 
 Charges a room service to a room  +
-Format: `service r/ROOM_NUMBER svc/SERVICE_TYPE`
+Format: `service r/ROOM_NUMBER no/ITEM_NUMBER [c/COST]`
 
 ****
-* SERVICE_TYPE refers to the serial number given to each type of service offered by the hotel.
+* ITEM_NUMBER refers to the number in the menu given to each type of service offered by the hotel.
 * This could be room service, on-demand video streaming, bath supplies, mini bar, etc.
+* The cost can be specified as well, if the guest is to be charged an amount that is
+  different from the cost in the menu. Note that the cost has to follow a strict format
+  such as 100.00, i.e. with two decimal places. The dollar part of the cost should also
+  not exceed `Integer.MAX_VALUE`.
+* Any expenses added with this command will be accounted for under the Expenses portion
+  of the respective rooms.
+* The default `Menu` that comes with Concierge consists of the following items. Items
+  may be modified, added, or removed through `concierge.xml`.
+** *RS01* -- Room service: Red wine -- $50.00
+** *RS02* -- Room service: Beef steak -- $70.00
+** *RS03* -- Room service: Thai massage -- $100.00
+** *MB01* -- Minibar: Coca cola -- $3.00
+** *MB02* -- Minibar: Sprite -- $3.00
+** *MB03* -- Minibar: Tiger beer -- $6.00
+** *MB04* -- Minibar: Mineral water -- $3.00
+** *SP01* -- Swimming pool: Entry -- $5.00
 ****
 
 Examples:
 
-* `service r/085 svc/01` +
-Adds a service with the serial number *01* to the room's expenses.
+* `service r/085 no/RS01` +
+Adds an expenditure of the item *RS01* to the room's expenses.
+
+* `service r/096 no/RS03 c/12.34` +
+Adds an expenditure of the item *RS03* to the room's expenses and charge $12.34 for it.
 
 === Room maintenance: `maintenance` [red]#Coming in v2.0#
 

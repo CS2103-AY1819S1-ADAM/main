@@ -23,7 +23,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Concierge;
 import seedu.address.model.Model;
 import seedu.address.model.guest.Guest;
-import seedu.address.model.guest.NameContainsKeywordsPredicate;
+import seedu.address.model.guest.GuestNameContainsKeywordsPredicate;
 import seedu.address.model.room.booking.BookingPeriod;
 import seedu.address.testutil.EditGuestDescriptorBuilder;
 
@@ -160,7 +160,7 @@ public class CommandTestUtil {
 
         Guest guest = model.getFilteredGuestList().get(targetIndex.getZeroBased());
         final String[] splitName = guest.getName().fullName.split("\\s+");
-        model.updateFilteredGuestList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        model.updateFilteredGuestList(new GuestNameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredGuestList().size());
     }

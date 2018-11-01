@@ -3,6 +3,8 @@ package systemtests;
 import static org.junit.Assert.assertFalse;
 import static seedu.address.commons.core.Messages.MESSAGE_GUESTS_LISTED_OVERVIEW;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.CliSyntax.FLAG_GUEST;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.testutil.TypicalGuests.BENSON;
 import static seedu.address.testutil.TypicalGuests.CARL;
 import static seedu.address.testutil.TypicalGuests.DANIEL;
@@ -27,7 +29,8 @@ public class FindCommandSystemTest extends ConciergeSystemTest {
         /* Case: find multiple guests in Concierge, command with leading spaces and trailing spaces
          * -> 2 guests found
          */
-        String command = "   " + FindCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_MEIER + "   ";
+        String command = "   " + FindCommand.COMMAND_WORD + " " + FLAG_GUEST + " "
+                + PREFIX_NAME + KEYWORD_MATCHING_MEIER + "   ";
         Model expectedModel = getModel();
         ModelHelper.setFilteredGuestList(expectedModel, BENSON, DANIEL); // first names of Benson and Daniel are "Meier"
         assertCommandSuccess(command, expectedModel);
@@ -36,36 +39,36 @@ public class FindCommandSystemTest extends ConciergeSystemTest {
         /* Case: repeat previous find command where guest list is displaying the guests we are finding
          * -> 2 guests found
          */
-        command = FindCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_MEIER;
+        command = FindCommand.COMMAND_WORD + " " + FLAG_GUEST + " " + PREFIX_NAME + KEYWORD_MATCHING_MEIER;
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
         /* Case: find guest where guest list is not displaying the guest we are finding -> 1 guest found */
-        command = FindCommand.COMMAND_WORD + " Carl";
+        command = FindCommand.COMMAND_WORD + " " + FLAG_GUEST + " " + PREFIX_NAME + "Carl";
         ModelHelper.setFilteredGuestList(expectedModel, CARL);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
         /* Case: find multiple guests in Concierge, 2 keywords -> 2 guests found */
-        command = FindCommand.COMMAND_WORD + " Benson Daniel";
+        command = FindCommand.COMMAND_WORD + " " + FLAG_GUEST + " " + PREFIX_NAME + "Benson Daniel";
         ModelHelper.setFilteredGuestList(expectedModel, BENSON, DANIEL);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
         /* Case: find multiple guests in Concierge, 2 keywords in reversed order -> 2 guests found */
-        command = FindCommand.COMMAND_WORD + " Daniel Benson";
+        command = FindCommand.COMMAND_WORD + " " + FLAG_GUEST + " " + PREFIX_NAME + "Daniel Benson";
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
         /* Case: find multiple guests in Concierge, 2 keywords with 1 repeat -> 2 guests found */
-        command = FindCommand.COMMAND_WORD + " Daniel Benson Daniel";
+        command = FindCommand.COMMAND_WORD + " " + FLAG_GUEST + " " + PREFIX_NAME + "Daniel Benson Daniel";
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
         /* Case: find multiple guests in Concierge, 2 matching keywords and 1 non-matching keyword
          * -> 2 guests found
          */
-        command = FindCommand.COMMAND_WORD + " Daniel Benson NonMatchingKeyWord";
+        command = FindCommand.COMMAND_WORD + " " + FLAG_GUEST + " " + PREFIX_NAME + "Daniel Benson NonMatchingKeyWord";
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
@@ -80,40 +83,40 @@ public class FindCommandSystemTest extends ConciergeSystemTest {
         assertCommandFailure(command, expectedResultMessage);
 
         /* Case: find guest in Concierge, keyword is same as name but of different case -> 1 guest found */
-        command = FindCommand.COMMAND_WORD + " MeIeR";
+        command = FindCommand.COMMAND_WORD + " " + FLAG_GUEST + " " + PREFIX_NAME + "MeIeR";
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
         /* Case: find guest in Concierge, keyword is substring of name -> 0 guests found */
-        command = FindCommand.COMMAND_WORD + " Mei";
+        command = FindCommand.COMMAND_WORD + " " + FLAG_GUEST + " " + PREFIX_NAME + "Mei";
         ModelHelper.setFilteredGuestList(expectedModel);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
         /* Case: find guest in Concierge, name is substring of keyword -> 0 guests found */
-        command = FindCommand.COMMAND_WORD + " Meiers";
+        command = FindCommand.COMMAND_WORD + " " + FLAG_GUEST + " " + PREFIX_NAME + "Meiers";
         ModelHelper.setFilteredGuestList(expectedModel);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
         /* Case: find guest not in Concierge -> 0 guests found */
-        command = FindCommand.COMMAND_WORD + " Mark";
+        command = FindCommand.COMMAND_WORD + " " + FLAG_GUEST + " " + PREFIX_NAME + "Mark";
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: find phone number of guest in Concierge -> 0 guests found */
-        command = FindCommand.COMMAND_WORD + " " + DANIEL.getPhone().value;
+        /* Case: find phone number of guest in Concierge using name prefix -> 0 guests found */
+        command = FindCommand.COMMAND_WORD + " " + FLAG_GUEST + " " + PREFIX_NAME + DANIEL.getPhone().value;
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: find email of guest in Concierge -> 0 persons found */
-        command = FindCommand.COMMAND_WORD + " " + DANIEL.getEmail().value;
+        /* Case: find email of guest in Concierge using name prefix -> 0 persons found */
+        command = FindCommand.COMMAND_WORD + " " + FLAG_GUEST + " " + PREFIX_NAME + DANIEL.getEmail().value;
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
         /* Case: find tags of guest in Concierge -> 0 guests found */
         List<Tag> tags = new ArrayList<>(DANIEL.getTags());
-        command = FindCommand.COMMAND_WORD + " " + tags.get(0).tagName;
+        command = FindCommand.COMMAND_WORD + " " + FLAG_GUEST + " " + PREFIX_NAME + tags.get(0).tagName;
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
@@ -121,14 +124,14 @@ public class FindCommandSystemTest extends ConciergeSystemTest {
         showAllGuests();
         selectGuest(Index.fromOneBased(1));
         assertFalse(getGuestListPanel().getHandleToSelectedCard().getName().equals(DANIEL.getName().fullName));
-        command = FindCommand.COMMAND_WORD + " Daniel";
+        command = FindCommand.COMMAND_WORD + " " + FLAG_GUEST + " " + PREFIX_NAME + "Daniel";
         ModelHelper.setFilteredGuestList(expectedModel, DANIEL);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardDeselected();
 
         /* Case: find guest in empty Concierge -> 0 guests found */
         deleteAllGuests();
-        command = FindCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_MEIER;
+        command = FindCommand.COMMAND_WORD + " " + FLAG_GUEST + " " + PREFIX_NAME + KEYWORD_MATCHING_MEIER;
         expectedModel = getModel();
         ModelHelper.setFilteredGuestList(expectedModel, DANIEL);
         assertCommandSuccess(command, expectedModel);

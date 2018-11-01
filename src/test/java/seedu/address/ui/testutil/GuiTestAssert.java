@@ -86,10 +86,6 @@ public class GuiTestAssert {
     public static void assertMainWindowDisplaysGuestList(MainWindow mainWindow) {
         assertEquals(mainWindow.isGuestListVisible(), true);
         assertEquals(mainWindow.isRoomListVisible(), false);
-
-        mainWindow.showRoomList();
-        assertEquals(mainWindow.isGuestListVisible(), false);
-        assertEquals(mainWindow.isRoomListVisible(), true);
     }
 
     /**
@@ -98,10 +94,6 @@ public class GuiTestAssert {
     public static void assertMainWindowDisplaysRoomList(MainWindow mainWindow) {
         assertEquals(mainWindow.isGuestListVisible(), false);
         assertEquals(mainWindow.isRoomListVisible(), true);
-
-        mainWindow.showGuestList();
-        assertEquals(mainWindow.isGuestListVisible(), true);
-        assertEquals(mainWindow.isRoomListVisible(), false);
     }
 
     /**
