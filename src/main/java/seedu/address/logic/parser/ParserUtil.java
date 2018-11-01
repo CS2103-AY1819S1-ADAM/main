@@ -166,17 +166,4 @@ public class ParserUtil {
         return Stream.of(prefixes).anyMatch(prefix -> argumentMultimap.getValue(prefix).isPresent()
                 && argumentMultimap.getValue(prefix).get().isEmpty());
     }
-
-
-    /**
-     * Returns true if suffix flags are either for listing guests (-g) or rooms (-r)
-     * in the given input {@code String[]}
-     */
-    public static boolean areFlagsPresent(String[] splitString) {
-        if ((splitString[0].equals(FLAG_GUEST.toString()) || splitString[0].equals(FLAG_ROOM.toString()))
-            && splitString.length == 1) {
-            return true;
-        }
-        return false;
-    }
 }
