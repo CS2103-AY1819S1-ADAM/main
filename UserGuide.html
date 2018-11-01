@@ -1,6 +1,6 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]--><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Asciidoctor 1.5.6.1"><title>Concierge v1.1 - User Guide</title><link rel="stylesheet" href="stylesheets/gh-pages.css">
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]--><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Asciidoctor 1.5.6.1"><title>Concierge v1.3 - User Guide</title><link rel="stylesheet" href="stylesheets/gh-pages.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="stylesheets/coderay-asciidoctor.css"></head><body class="article"><div id="site-header"><nav class="navbar navbar-light bg-light"><div class="container"><a class="navbar-brand" href="index.html">Concierge</a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link active" href="UserGuide.html">User Guide</a></li><li class="nav-item"><a class="nav-link" href="DeveloperGuide.html">Developer Guide</a></li><li class="nav-item"><a class="nav-link" href="AboutUs.html">About Us</a></li><li class="nav-item"><a class="nav-link" href="ContactUs.html">Contact Us</a></li><li class="navitem"><a class="nav-link" href="https://github.com/CS2103-AY1819S1-F11-2/main"><span class="fa fa-github fa-lg" aria-hidden="true"></span>&nbsp;View on GitHub</a></li></ul></div></nav></div><div id="header"><h1>Concierge v1.1 - User Guide</h1></div><div id="content"><div id="preamble">
+<link rel="stylesheet" href="stylesheets/coderay-asciidoctor.css"></head><body class="article"><div id="site-header"><nav class="navbar navbar-light bg-light"><div class="container"><a class="navbar-brand" href="index.html">Concierge</a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link active" href="UserGuide.html">User Guide</a></li><li class="nav-item"><a class="nav-link" href="DeveloperGuide.html">Developer Guide</a></li><li class="nav-item"><a class="nav-link" href="AboutUs.html">About Us</a></li><li class="nav-item"><a class="nav-link" href="ContactUs.html">Contact Us</a></li><li class="navitem"><a class="nav-link" href="https://github.com/CS2103-AY1819S1-F11-2/main"><span class="fa fa-github fa-lg" aria-hidden="true"></span>&nbsp;View on GitHub</a></li></ul></div></nav></div><div id="header"><h1>Concierge v1.3 - User Guide</h1></div><div id="content"><div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
 <p>By: <code>Team SE-EDU</code>      Since: <code>Jun 2016</code>      Licence: <code>MIT</code></p>
@@ -482,17 +482,59 @@ Selects the 2nd room in the displayed list.</p>
 <h3 id="provide-room-service-code-service-code-span-class-red-coming-in-v1-3-span"><a class="link" href="#provide-room-service-code-service-code-span-class-red-coming-in-v1-3-span">3.10. Provide Room Service: <code>service</code> <span class="red">Coming in v1.3</span></a></h3>
 <div class="paragraph">
 <p>Charges a room service to a room <br>
-Format: <code>service r/ROOM_NUMBER svc/SERVICE_TYPE</code></p>
+Format: <code>service r/ROOM_NUMBER no/ITEM_NUMBER [c/COST]</code></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
 <div class="ulist">
 <ul>
 <li>
-<p>SERVICE_TYPE refers to the serial number given to each type of service offered by the hotel.</p>
+<p>ITEM_NUMBER refers to the number in the menu given to each type of service offered by the hotel.</p>
 </li>
 <li>
 <p>This could be room service, on-demand video streaming, bath supplies, mini bar, etc.</p>
+</li>
+<li>
+<p>The cost can be specified as well, if the guest is to be charged an amount that is
+different from the cost in the menu. Note that the cost has to follow a strict format
+such as 100.00, i.e. with two decimal places. The dollar part of the cost should also
+not exceed <code>Integer.MAX_VALUE</code>.</p>
+</li>
+<li>
+<p>Any expenses added with this command will be accounted for under the Expenses portion
+of the respective rooms.</p>
+</li>
+<li>
+<p>The default <code>Menu</code> that comes with Concierge consists of the following items. Items
+may be modified, added, or removed through <code>concierge.xml</code>.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>RS01</strong>&#8201;&#8212;&#8201;Room service: Red wine&#8201;&#8212;&#8201;$50.00</p>
+</li>
+<li>
+<p><strong>RS02</strong>&#8201;&#8212;&#8201;Room service: Beef steak&#8201;&#8212;&#8201;$70.00</p>
+</li>
+<li>
+<p><strong>RS03</strong>&#8201;&#8212;&#8201;Room service: Thai massage&#8201;&#8212;&#8201;$100.00</p>
+</li>
+<li>
+<p><strong>MB01</strong>&#8201;&#8212;&#8201;Minibar: Coca cola&#8201;&#8212;&#8201;$3.00</p>
+</li>
+<li>
+<p><strong>MB02</strong>&#8201;&#8212;&#8201;Minibar: Sprite&#8201;&#8212;&#8201;$3.00</p>
+</li>
+<li>
+<p><strong>MB03</strong>&#8201;&#8212;&#8201;Minibar: Tiger beer&#8201;&#8212;&#8201;$6.00</p>
+</li>
+<li>
+<p><strong>MB04</strong>&#8201;&#8212;&#8201;Minibar: Mineral water&#8201;&#8212;&#8201;$3.00</p>
+</li>
+<li>
+<p><strong>SP01</strong>&#8201;&#8212;&#8201;Swimming pool: Entry&#8201;&#8212;&#8201;$5.00</p>
+</li>
+</ul>
+</div>
 </li>
 </ul>
 </div>
@@ -504,8 +546,12 @@ Format: <code>service r/ROOM_NUMBER svc/SERVICE_TYPE</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>service r/085 svc/01</code><br>
-Adds a service with the serial number <strong>01</strong> to the room&#8217;s expenses.</p>
+<p><code>service r/085 no/RS01</code><br>
+Adds an expenditure of the item <strong>RS01</strong> to the room&#8217;s expenses.</p>
+</li>
+<li>
+<p><code>service r/096 no/RS03 c/12.34</code><br>
+Adds an expenditure of the item <strong>RS03</strong> to the room&#8217;s expenses and charge $12.34 for it.</p>
 </li>
 </ul>
 </div>
@@ -762,4 +808,4 @@ t/TAG r/ROOM_NUMBER from/START_DATE to/END_DATE</code></p>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-01 15:47:33 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-01 15:49:04 UTC</div></div></div></body></html>
