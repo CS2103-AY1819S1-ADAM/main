@@ -1,4 +1,4 @@
-= Concierge v1.2
+= Concierge v1.3
 ifdef::env-github,env-browser[:relfileprefix: docs/]
 
 https://travis-ci.org/CS2103-AY1819S1-F11-2/main[image:https://travis-ci.org/CS2103-AY1819S1-F11-2/main.svg?branch=master[Build Status]]

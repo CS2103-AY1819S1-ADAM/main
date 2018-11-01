@@ -126,34 +126,60 @@ Edits the phone number and email address of the 1st guest to be `91234567` and `
 * `edit 2 n/Betsy Crower t/` +
 Edits the name of the 2nd guest to be `Betsy Crower` and clears all existing tags.
 
-=== Locating guests by name: `find` [red]#Coming in v1.3#
+=== Locating guests and rooms : `find` [red]#Coming in v1.3#
 
-Finds guests or rooms, depending on the input flag and the keywords. +
-Format: `find [flag] KEYWORD`
+Finds guests or rooms, depending on the input flag and the keyword filters.
+
+Format: `find [flag] FILTERS`
+
 ****
 * The search is case insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* Guests matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* Guests names and tags matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* Any number of filters can be chained and used together
 ****
 
-Examples:
+Filters for Guest (-g):
 
-* `find -g John Smith` +
-Find guest(s) with "John" or "Smith" or both in their names.
-* `find -g r/085` +
-Find guest currently staying in room 085
-* `find -r 085` +
+* `n/ - Name`
+* `p/ - Phone Number`
+* `e/ - Email Address`
+* `t/ - Tags`
+
+Filters for Rooms (-r):
+
+* `r/ - Room Number`
+* `c/ - Capacity`
+* `t/ - Room Tags`
+
+The following are filters for room bookings. The flags cannot be mixed.
+The flags can be used indepdently, or with a from/to specified date.
+Input dates must be in DD/MM/YY format.
+
+* `-hb - Has Bookings Flag`
+* `-nb - No Bookings Flag`
+* `from/ - Booking Start Date`
+* `to/ - Booking End Date`
+
+Find Command Examples:
+
+* `find -g n/Alex Yu` +
+Find guest(s) with "Alex" or "Yu" or both in their names.
+* `find -g n/Alex t/VIP` +
+Find guest(s) named Alex with tag "VIP".
+* `find -g p/81027115` +
+Find guest(s) with phone number "81027115".
+* `find -r r/085` +
 Find room 085
-* `find -r g/John Smith` +
-Find room for which guest(s) with "John" or "Smith" or both in their names, has made a booking
-* `find -r double` +
-Find all double rooms
-* `find -r avail` +
-Find all available rooms today
-* `find -r avail from/09/12/18 to/10/12/18` +
-Find rooms that are available from 09/12/18 10/12/18. Input dates must be in DD/MM/YY format.
+* `find -r c/2` +
+Find all rooms with a capacity of 2.
+* `find -r c/5 -nb from/ 01/11/2018 to/ 05/11/2018` +
+Find all rooms with a capacity of 5, without any bookings from the date range 01/11/2018 to 05/11/2018.
+* `find -r -hb` +
+Find all rooms with bookings.
+* `find -r -hb t/RoomService` +
+Find all rooms with bookings with tag "RoomService".
 
 === Listing all guests : `list`
 
