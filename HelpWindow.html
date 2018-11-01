@@ -17,10 +17,10 @@
 <li><a href="#adding-a-guest-code-addx-code-span-class-red-coming-in-v2-0-span">3.2. Adding a guest: <code>addx</code> <span class="red">Coming in v2.0</span></a></li>
 <li><a href="#checkout-room-code-checkin-code">3.3. Checkout room: <code>checkin</code></a></li>
 <li><a href="#checkout-room-code-checkout-code">3.4. Checkout room: <code>checkout</code></a></li>
-<li><a href="#deleting-a-guest-code-delete-code-span-class-red-coming-in-v2-0-span">3.5. Deleting a guest : <code>delete</code> <span class="red">Coming in v2.0</span></a></li>
-<li><a href="#editing-a-guest-code-edit-code-span-class-red-coming-in-v1-3-span">3.6. Editing a guest : <code>edit</code> <span class="red">Coming in v1.3</span></a></li>
-<li><a href="#locating-guests-by-name-code-find-code-span-class-red-coming-in-v1-3-span">3.7. Locating guests by name: <code>find</code> <span class="red">Coming in v1.3</span></a></li>
-<li><a href="#listing-all-guests-code-list-code">3.8. Listing all guests : <code>list</code></a></li>
+<li><a href="#editing-a-guest-code-edit-code">3.5. Editing a guest : <code>edit</code></a></li>
+<li><a href="#locating-guests-by-name-code-find-code-span-class-red-coming-in-v1-3-span">3.6. Locating guests by name: <code>find</code> <span class="red">Coming in v1.3</span></a></li>
+<li><a href="#listing-all-guests-code-list-code">3.7. Listing all guests : <code>list</code></a></li>
+<li><a href="#login-code-login-code">3.8. Login : <code>login</code></a></li>
 <li><a href="#selecting-a-guest-code-select-code-span-class-red-coming-in-v1-3-span">3.9. Selecting a guest : <code>select</code> <span class="red">Coming in v1.3</span></a></li>
 <li><a href="#provide-room-service-code-service-code-span-class-red-coming-in-v1-3-span">3.10. Provide Room Service: <code>service</code> <span class="red">Coming in v1.3</span></a></li>
 <li><a href="#room-maintenance-code-maintenance-code-span-class-red-coming-in-v2-0-span">3.11. Room maintenance: <code>maintenance</code> <span class="red">Coming in v2.0</span></a></li>
@@ -130,8 +130,20 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <h3 id="adding-a-guest-code-add-code"><a class="link" href="#adding-a-guest-code-add-code">3.1. Adding a guest: <code>add</code></a></h3>
 <div class="paragraph">
 <p>Adds a guest to the guest list for the purpose of assigning a room<br>
-Format: <code>add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG] -r ROOM_NUMBER
+Format: <code>add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG] r/ ROOM_NUMBER
 from/START_DATE to/END_DATE</code></p>
+</div>
+<div class="paragraph">
+<p>The room number must be a 3-digit number from 001 to 100. For example, 074 is
+valid but 128 is not.</p>
+</div>
+<div class="paragraph">
+<p>The dates can be expressed in DD/MM/YY or DD/MM/YYYY.</p>
+</div>
+<div class="paragraph">
+<p>Currently, a guest can only make one booking with the hotel. This will
+subsequently be modified such that a guest can make an unlimited number of
+bookings.</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -161,7 +173,7 @@ Add a guest "John Smith" to room 085 for a period of stay from 09/12/18 to 10/12
 <h3 id="adding-a-guest-code-addx-code-span-class-red-coming-in-v2-0-span"><a class="link" href="#adding-a-guest-code-addx-code-span-class-red-coming-in-v2-0-span">3.2. Adding a guest: <code>addx</code> <span class="red">Coming in v2.0</span></a></h3>
 <div class="paragraph">
 <p>Adds a guest to the guest list NOT for the purpose of assigning a room (perhaps add to archived guest list)<br>
-Format: <code>add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]&#8230;&#8203;</code></p>
+Format: <code>addx n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]&#8230;&#8203;</code></p>
 </div>
 <div class="paragraph">
 <p>Examples:
@@ -206,51 +218,10 @@ Checks out room 085 and the guest staying in it.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="deleting-a-guest-code-delete-code-span-class-red-coming-in-v2-0-span"><a class="link" href="#deleting-a-guest-code-delete-code-span-class-red-coming-in-v2-0-span">3.5. Deleting a guest : <code>delete</code> <span class="red">Coming in v2.0</span></a></h3>
-<div class="paragraph">
-<p>Deletes the specified guest from the archived guest list.<br>
-Format: <code>delete INDEX</code></p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>Deletes the guest at the specified <code>INDEX</code>.</p>
-</li>
-<li>
-<p>The index refers to the index number shown in the displayed guest list.</p>
-</li>
-<li>
-<p>The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>list -g</code><br>
-<code>delete 2</code><br>
-Deletes the 2nd guest in the displayed guest list.</p>
-</li>
-<li>
-<p><code>find -g Betsy</code><br>
-<code>delete 1</code><br>
-Deletes the 1st guest in the results of the <code>find</code> command.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="editing-a-guest-code-edit-code-span-class-red-coming-in-v1-3-span"><a class="link" href="#editing-a-guest-code-edit-code-span-class-red-coming-in-v1-3-span">3.6. Editing a guest : <code>edit</code> <span class="red">Coming in v1.3</span></a></h3>
+<h3 id="editing-a-guest-code-edit-code"><a class="link" href="#editing-a-guest-code-edit-code">3.5. Editing a guest : <code>edit</code></a></h3>
 <div class="paragraph">
 <p>Edits an existing guest in the guest list.<br>
-Format: <code>edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]&#8230;&#8203;</code></p>
+Format: <code>edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]&#8230;&#8203;</code></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -292,7 +263,7 @@ Edits the name of the 2nd guest to be <code>Betsy Crower</code> and clears all e
 </div>
 </div>
 <div class="sect2">
-<h3 id="locating-guests-by-name-code-find-code-span-class-red-coming-in-v1-3-span"><a class="link" href="#locating-guests-by-name-code-find-code-span-class-red-coming-in-v1-3-span">3.7. Locating guests by name: <code>find</code> <span class="red">Coming in v1.3</span></a></h3>
+<h3 id="locating-guests-by-name-code-find-code-span-class-red-coming-in-v1-3-span"><a class="link" href="#locating-guests-by-name-code-find-code-span-class-red-coming-in-v1-3-span">3.6. Locating guests by name: <code>find</code> <span class="red">Coming in v1.3</span></a></h3>
 <div class="paragraph">
 <p>Finds guests or rooms, depending on the input flag and the keywords.<br>
 Format: <code>find [flag] KEYWORD</code></p>
@@ -357,7 +328,7 @@ Find rooms that are available from 09/12/18 10/12/18. Input dates must be in DD/
 </div>
 </div>
 <div class="sect2">
-<h3 id="listing-all-guests-code-list-code"><a class="link" href="#listing-all-guests-code-list-code">3.8. Listing all guests : <code>list</code></a></h3>
+<h3 id="listing-all-guests-code-list-code"><a class="link" href="#listing-all-guests-code-list-code">3.7. Listing all guests : <code>list</code></a></h3>
 <div class="paragraph">
 <p>Shows the entire list of rooms, or guests, depending on the input flag<br>
 Format: <code>list [flag]</code></p>
@@ -374,6 +345,26 @@ List all rooms</p>
 <li>
 <p><code>list -g</code><br>
 List all guests</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="login-code-login-code"><a class="link" href="#login-code-login-code">3.8. Login : <code>login</code></a></h3>
+<div class="paragraph">
+<p>Logs in to the Concierge application.<br>
+Format: <code>login user/USERNAME pw/PASSWORD</code></p>
+</div>
+<div class="paragraph">
+<p>Note: the username and password are both case-sensitive.</p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>login user/damithz pw/forgotpassword</p>
 </li>
 </ul>
 </div>
@@ -594,6 +585,10 @@ The <code>redo</code> command fails as there are no <code>undo</code> commands e
 <p>Clears all entries from the application.<br>
 Format: <code>clear</code></p>
 </div>
+<div class="paragraph">
+<p>The rooms are maintained - only all their current and future bookings are
+cleared. I.e. all maintenance requests and faults will still be recorded.</p>
+</div>
 </div>
 <div class="sect2">
 <h3 id="export-log-code-export-code-span-class-red-coming-in-v1-3-span"><a class="link" href="#export-log-code-export-code-span-class-red-coming-in-v1-3-span">3.16. Export log: <code>export</code> <span class="red">Coming in v1.3</span></a></h3>
@@ -645,7 +640,8 @@ There is no need to save manually.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Add a Guest and assign a Room</strong> : <code>add</code></p>
+<p><strong>Add a Guest and assign a Room</strong> : <code>add n/NAME p/PHONE_NUMBER e/EMAIL
+t/TAG r/ROOMNUMBER from/START_DATE to/END_DATE</code></p>
 </li>
 <li>
 <p><strong>Checkin</strong> : <code>checkin</code></p>
@@ -654,16 +650,16 @@ There is no need to save manually.</p>
 <p><strong>Checkout</strong> : <code>checkout</code></p>
 </li>
 <li>
-<p><strong>Delete</strong> : <code>delete INDEX</code></p>
-</li>
-<li>
-<p><strong>Edit</strong> : <code>edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]&#8230;&#8203;</code></p>
+<p><strong>Edit</strong> : <code>edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]&#8230;&#8203;</code></p>
 </li>
 <li>
 <p><strong>Find</strong> : <code>find KEYWORD [MORE_KEYWORDS]</code></p>
 </li>
 <li>
 <p><strong>List</strong> : <code>list</code></p>
+</li>
+<li>
+<p><strong>Login</strong> : <code>login user/USERNAME pw/PASSWORD</code></p>
 </li>
 <li>
 <p><strong>Select</strong> : <code>select INDEX</code></p>
@@ -698,4 +694,4 @@ There is no need to save manually.</p>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-29 19:17:26 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-01 12:07:31 UTC</div></div></div></body></html>
