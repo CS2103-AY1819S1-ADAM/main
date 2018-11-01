@@ -57,7 +57,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 === Adding a guest: `add`
 
 Adds a guest to the guest list for the purpose of assigning a room +
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG] r/ ROOM_NUMBER
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG] r/ROOM_NUMBER
 from/START_DATE to/END_DATE`
 
 [TIP]
@@ -79,6 +79,12 @@ Example:
 `add n/John Smith p/98765432 e/johnsmith@gmail.com t/VIP r/085 from/09/12/18 to/10/12/18`
 
 Add a guest "John Smith" to room 085 for a period of stay from 09/12/18 to 10/12/18.
+
+.Adding an active booking
+image::AddCommand-userguide-active.png[width="800"]
+
+.Adding an inactive booking (i.e. booking is in the future)
+image::AddCommand-userguide-notactive.png[width="800"]
 
 === Adding a guest: `addx` [red]#Coming in v2.0#
 
@@ -336,15 +342,15 @@ This command requires a login.
 The rooms are maintained - only all their current and future bookings are
 cleared. I.e. all maintenance requests and faults will still be recorded.
 
-.Empty room listing with all bookings deleted
+.Empty room listing with all bookings deleted and expenses reset
 image::ClearCommand-success.png[width="400"]
 
-=== Export log: `export` [red]#Coming in v1.3#
+=== Export log: `export` [red]#Coming in v1.4#
 
 Exports a log of all history of commands into a text file +
 Format: `export`
 
-=== Viewing help : `help` [red]#Coming in v1.3#
+=== Viewing help : `help`
 
 Format: `help`
 
@@ -361,7 +367,8 @@ There is no need to save manually.
 // tag::dataencryption[]
 === Encrypting data files [red]#Coming in v2.0#
 
-_{explain how the user can enable/disable data encryption}_
+Encryption of Guests' personal data is still in the works. If you are
+interested in contributing, please refer to the Developer Guide.
 // end::dataencryption[]
 
 == FAQ
