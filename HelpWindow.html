@@ -18,21 +18,22 @@
 <li><a href="#check-in-room-code-checkin-code">3.3. Check-in room: <code>checkin</code></a></li>
 <li><a href="#checkout-room-code-checkout-code">3.4. Checkout room: <code>checkout</code></a></li>
 <li><a href="#editing-a-guest-code-edit-code-span-class-red-coming-in-v2-0-span">3.5. Editing a guest : <code>edit</code> <span class="red">Coming in v2.0</span></a></li>
-<li><a href="#locating-guests-and-rooms-code-find-code-span-class-red-coming-in-v1-3-span">3.6. Locating guests and rooms : <code>find</code> <span class="red">Coming in v1.3</span></a></li>
+<li><a href="#locating-guests-by-name-code-find-code-span-class-red-coming-in-v1-4-span">3.6. Locating guests by name: <code>find</code> <span class="red">Coming in v1.4</span></a></li>
 <li><a href="#listing-all-guests-code-list-code">3.7. Listing all guests : <code>list</code></a></li>
 <li><a href="#login-code-login-code">3.8. Login : <code>login</code></a></li>
-<li><a href="#selecting-a-guest-code-select-code">3.9. Selecting a guest : <code>select</code></a></li>
-<li><a href="#provide-room-service-code-service-code-span-class-red-coming-in-v1-3-span">3.10. Provide Room Service: <code>service</code> <span class="red">Coming in v1.3</span></a></li>
-<li><a href="#room-maintenance-code-maintenance-code-span-class-red-coming-in-v2-0-span">3.11. Room maintenance: <code>maintenance</code> <span class="red">Coming in v2.0</span></a></li>
-<li><a href="#listing-entered-commands-code-history-code">3.12. Listing entered commands : <code>history</code></a></li>
-<li><a href="#undoing-previous-command-code-undo-code">3.13. Undoing previous command : <code>undo</code></a></li>
-<li><a href="#redoing-the-previously-undone-command-code-redo-code">3.14. Redoing the previously undone command : <code>redo</code></a></li>
-<li><a href="#clearing-all-entries-code-clear-code">3.15. Clearing all entries : <code>clear</code></a></li>
-<li><a href="#export-log-code-export-code-span-class-red-coming-in-v2-0-span">3.16. Export log: <code>export</code> <span class="red">Coming in v2.0</span></a></li>
-<li><a href="#viewing-help-code-help-code">3.17. Viewing help : <code>help</code></a></li>
-<li><a href="#exiting-the-program-code-exit-code">3.18. Exiting the program : <code>exit</code></a></li>
-<li><a href="#saving-the-data">3.19. Saving the data</a></li>
-<li><a href="#encrypting-data-files-span-class-red-coming-in-v2-0-span">3.20. Encrypting data files <span class="red">Coming in v2.0</span></a></li>
+<li><a href="#logout-code-logout-code">3.9. Logout : <code>logout</code></a></li>
+<li><a href="#selecting-a-guest-code-select-code">3.10. Selecting a guest : <code>select</code></a></li>
+<li><a href="#provide-room-service-code-service-code">3.11. Provide Room Service: <code>service</code></a></li>
+<li><a href="#room-maintenance-code-maintenance-code-span-class-red-coming-in-v2-0-span">3.12. Room maintenance: <code>maintenance</code> <span class="red">Coming in v2.0</span></a></li>
+<li><a href="#listing-entered-commands-code-history-code">3.13. Listing entered commands : <code>history</code></a></li>
+<li><a href="#undoing-previous-command-code-undo-code">3.14. Undoing previous command : <code>undo</code></a></li>
+<li><a href="#redoing-the-previously-undone-command-code-redo-code">3.15. Redoing the previously undone command : <code>redo</code></a></li>
+<li><a href="#clearing-all-entries-code-clear-code">3.16. Clearing all entries : <code>clear</code></a></li>
+<li><a href="#export-log-code-export-code-span-class-red-coming-in-v2-0-span">3.17. Export log: <code>export</code> <span class="red">Coming in v2.0</span></a></li>
+<li><a href="#viewing-help-code-help-code">3.18. Viewing help : <code>help</code></a></li>
+<li><a href="#exiting-the-program-code-exit-code">3.19. Exiting the program : <code>exit</code></a></li>
+<li><a href="#saving-the-data">3.20. Saving the data</a></li>
+<li><a href="#encrypting-data-files-span-class-red-coming-in-v2-0-span">3.21. Encrypting data files <span class="red">Coming in v2.0</span></a></li>
 </ul>
 </li>
 <li><a href="#faq">4. FAQ</a></li>
@@ -133,18 +134,6 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 Format: <code>add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG] r/ROOM_NUMBER
 from/START_DATE to/END_DATE</code></p>
 </div>
-<div class="paragraph">
-<p>The room number must be a 3-digit number from 001 to 100. For example, 074 is
-valid but 128 is not.</p>
-</div>
-<div class="paragraph">
-<p>The dates can be expressed in DD/MM/YY or DD/MM/YYYY.</p>
-</div>
-<div class="paragraph">
-<p>Currently, a guest can only make one booking with the hotel. This will
-subsequently be modified such that a guest can make an unlimited number of
-bookings.</p>
-</div>
 <div class="admonitionblock tip">
 <table>
 <tr>
@@ -157,16 +146,57 @@ A guest can have any number of tags (including 0)
 </tr>
 </table>
 </div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
+<div class="sidebarblock">
+<div class="content">
 <div class="ulist">
 <ul>
 <li>
-<p><code>add n/John Smith p/98765432 e/johnsmith@gmail.com t/VIP r/085 from/09/12/18 to/10/12/18</code>
-Add a guest "John Smith" to room 085 for a period of stay from 09/12/18 to 10/12/18.</p>
+<p>The room number must be a 3-digit number from 001 to 100. For example, 074 is
+valid but 128 is not.</p>
+</li>
+<li>
+<p>The dates can be expressed in DD/MM/YY or DD/MM/YYYY.</p>
+</li>
+<li>
+<p>A guest can make an unlimited number of bookings with the hotel, as long as
+the booking is valid.</p>
 </li>
 </ul>
+</div>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+A valid booking cannot clash with an existing booking
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="paragraph">
+<p><code>add n/John Smith p/98765432 e/johnsmith@gmail.com t/VIP r/085 from/09/12/18 to/10/12/18</code></p>
+</div>
+<div class="paragraph">
+<p>Add a guest "John Smith" to room 085 for a period of stay from 09/12/18 to 10/12/18.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/AddCommand-userguide-active.png" alt="AddCommand userguide active" width="800">
+</div>
+<div class="title">Figure 1. Adding an active booking</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/AddCommand-userguide-notactive.png" alt="AddCommand userguide notactive" width="800">
+</div>
+<div class="title">Figure 2. Adding an inactive booking (i.e. booking is in the future)</div>
 </div>
 </div>
 <div class="sect2">
@@ -270,7 +300,7 @@ Edits the name of the 2nd guest to be <code>Betsy Crower</code> and clears all e
 </div>
 </div>
 <div class="sect2">
-<h3 id="locating-guests-and-rooms-code-find-code-span-class-red-coming-in-v1-3-span"><a class="link" href="#locating-guests-and-rooms-code-find-code-span-class-red-coming-in-v1-3-span">3.6. Locating guests and rooms : <code>find</code> <span class="red">Coming in v1.3</span></a></h3>
+<h3 id="locating-guests-by-name-code-find-code-span-class-red-coming-in-v1-4-span"><a class="link" href="#locating-guests-by-name-code-find-code-span-class-red-coming-in-v1-4-span">3.6. Locating guests by name: <code>find</code> <span class="red">Coming in v1.4</span></a></h3>
 <div class="paragraph">
 <p>Finds guests or rooms, depending on the input flag and the keyword filters.</p>
 </div>
@@ -428,24 +458,100 @@ List all checked-in guests</p>
 <p>Logs in to the Concierge application.<br>
 Format: <code>login user/USERNAME pw/PASSWORD</code></p>
 </div>
-<div class="paragraph">
-<p>Note: the username and password are both case-sensitive.</p>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
+<div class="sidebarblock">
+<div class="content">
 <div class="ulist">
 <ul>
 <li>
-<p>login user/damithz pw/forgotpassword</p>
+<p>The username and password are both case-sensitive.</p>
+</li>
+<li>
+<p>A login allows the user to access the commands which can affect the bookings.</p>
 </li>
 </ul>
 </div>
 </div>
-<div class="sect2">
-<h3 id="selecting-a-guest-code-select-code"><a class="link" href="#selecting-a-guest-code-select-code">3.9. Selecting a guest : <code>select</code></a></h3>
+</div>
 <div class="paragraph">
-<p>Selects the guest/room identified by the index number used in the displayed list.<br>
+<p>Commands which require login:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>add</code>, <code>edit</code> <span class="red">Coming in v2.0</span></p>
+</li>
+<li>
+<p><code>checkin</code>, <code>checkout</code> <span class="red">Coming in v2.0</span></p>
+</li>
+<li>
+<p><code>clear</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Example: <code>login user/damithz pw/forgotpassword</code></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/LogInCommand-notsignedin.png" alt="LogInCommand notsignedin" width="400">
+</div>
+<div class="title">Figure 3. Without login, Concierge cannot be cleared</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/LogInCommand-loginsuccess.png" alt="LogInCommand loginsuccess" width="400">
+</div>
+<div class="title">Figure 4. Login with a valid account</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/LogInCommand-clearsuccess.png" alt="LogInCommand clearsuccess" width="400">
+</div>
+<div class="title">Figure 5. <code>clear</code> command can now be executed</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="logout-code-logout-code"><a class="link" href="#logout-code-logout-code">3.9. Logout : <code>logout</code></a></h3>
+<div class="paragraph">
+<p>Logs out of the Concierge application.<br>
+Format: <code>logout</code></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/LogOutCommand-success.png" alt="LogOutCommand success" width="400">
+</div>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>The special classes of commands (as documented in <code>login</code>) can no longer be
+executed.</p>
+</li>
+<li>
+<p>Unable to undo/ redo before logout <span class="red">Coming in v2.0</span></p>
+<div class="ulist">
+<ul>
+<li>
+<p>The <code>logout</code> command will erase the command history, so users cannot undo/
+redo commands executed before the logout.</p>
+</li>
+<li>
+<p>This is the same as closing and re-opening Concierge after a logout.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="selecting-a-guest-code-select-code"><a class="link" href="#selecting-a-guest-code-select-code">3.10. Selecting a guest : <code>select</code></a></h3>
+<div class="paragraph">
+<p>Selects the guest identified by the index number used in the displayed list.<br>
 Format: <code>select INDEX</code></p>
 </div>
 <div class="sidebarblock">
@@ -453,7 +559,7 @@ Format: <code>select INDEX</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p>Selects the guest/room and loads the information of the guest/room at the specified <code>INDEX</code>.</p>
+<p>Selects the guest and loads the information of the guest/room at the specified <code>INDEX</code>.</p>
 </li>
 <li>
 <p>The index refers to the index number shown in the displayed list.</p>
@@ -477,9 +583,24 @@ Selects the 2nd room in the displayed list.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p>Selects from displayed room list <span class="red">Coming in v1.4</span></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Currently, <code>select</code> only works on the displayed guest list.</p>
+</li>
+<li>
+<p>Select while on the displayed room list, (i.e. executing <code>list -r</code>,
+then <code>select INDEX</code>) will still result in the selection being done on
+the displayed guest list.</p>
+</li>
+</ul>
+</div>
 </div>
 <div class="sect2">
-<h3 id="provide-room-service-code-service-code-span-class-red-coming-in-v1-3-span"><a class="link" href="#provide-room-service-code-service-code-span-class-red-coming-in-v1-3-span">3.10. Provide Room Service: <code>service</code> <span class="red">Coming in v1.3</span></a></h3>
+<h3 id="provide-room-service-code-service-code"><a class="link" href="#provide-room-service-code-service-code">3.11. Provide Room Service: <code>service</code></a></h3>
 <div class="paragraph">
 <p>Charges a room service to a room <br>
 Format: <code>service r/ROOM_NUMBER no/ITEM_NUMBER [c/COST]</code></p>
@@ -557,7 +678,7 @@ Adds an expenditure of the item <strong>RS03</strong> to the room&#8217;s expens
 </div>
 </div>
 <div class="sect2">
-<h3 id="room-maintenance-code-maintenance-code-span-class-red-coming-in-v2-0-span"><a class="link" href="#room-maintenance-code-maintenance-code-span-class-red-coming-in-v2-0-span">3.11. Room maintenance: <code>maintenance</code> <span class="red">Coming in v2.0</span></a></h3>
+<h3 id="room-maintenance-code-maintenance-code-span-class-red-coming-in-v2-0-span"><a class="link" href="#room-maintenance-code-maintenance-code-span-class-red-coming-in-v2-0-span">3.12. Room maintenance: <code>maintenance</code> <span class="red">Coming in v2.0</span></a></h3>
 <div class="paragraph">
 <p>Sets the room to be under maintenance.<br>
 Format: <code>maintenance ROOM_NUMBER TRUE/FALSE</code></p>
@@ -596,7 +717,7 @@ Lifts the maintenance status on room 085.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="listing-entered-commands-code-history-code"><a class="link" href="#listing-entered-commands-code-history-code">3.12. Listing entered commands : <code>history</code></a></h3>
+<h3 id="listing-entered-commands-code-history-code"><a class="link" href="#listing-entered-commands-code-history-code">3.13. Listing entered commands : <code>history</code></a></h3>
 <div class="paragraph">
 <p>Lists all the commands that you have entered in reverse chronological order.<br>
 Format: <code>history</code></p>
@@ -617,7 +738,7 @@ Format: <code>history</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">3.13. Undoing previous command : <code>undo</code></a></h3>
+<h3 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">3.14. Undoing previous command : <code>undo</code></a></h3>
 <div class="paragraph">
 <p>Restores the concierge application to the state before the previous <em>undoable</em> command was executed.<br>
 Format: <code>undo</code></p>
@@ -662,7 +783,7 @@ The <code>undo</code> command fails as there are no undoable commands executed p
 </div>
 </div>
 <div class="sect2">
-<h3 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">3.14. Redoing the previously undone command : <code>redo</code></a></h3>
+<h3 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">3.15. Redoing the previously undone command : <code>redo</code></a></h3>
 <div class="paragraph">
 <p>Reverses the most recent <code>undo</code> command.<br>
 Format: <code>redo</code></p>
@@ -694,47 +815,57 @@ The <code>redo</code> command fails as there are no <code>undo</code> commands e
 </div>
 </div>
 <div class="sect2">
-<h3 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">3.15. Clearing all entries : <code>clear</code></a></h3>
+<h3 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">3.16. Clearing all entries : <code>clear</code></a></h3>
 <div class="paragraph">
 <p>Clears all entries from the application.<br>
 Format: <code>clear</code></p>
 </div>
 <div class="paragraph">
+<p>This command requires a login.</p>
+</div>
+<div class="paragraph">
 <p>The rooms are maintained - only all their current and future bookings are
 cleared. I.e. all maintenance requests and faults will still be recorded.</p>
 </div>
+<div class="imageblock">
+<div class="content">
+<img src="images/ClearCommand-success.png" alt="ClearCommand success" width="400">
+</div>
+<div class="title">Figure 6. Empty room listing with all bookings deleted and expenses reset</div>
+</div>
 </div>
 <div class="sect2">
-<h3 id="export-log-code-export-code-span-class-red-coming-in-v2-0-span"><a class="link" href="#export-log-code-export-code-span-class-red-coming-in-v2-0-span">3.16. Export log: <code>export</code> <span class="red">Coming in v2.0</span></a></h3>
+<h3 id="export-log-code-export-code-span-class-red-coming-in-v2-0-span"><a class="link" href="#export-log-code-export-code-span-class-red-coming-in-v2-0-span">3.17. Export log: <code>export</code> <span class="red">Coming in v2.0</span></a></h3>
 <div class="paragraph">
 <p>Exports a log of all history of commands into a text file<br>
 Format: <code>export</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="viewing-help-code-help-code"><a class="link" href="#viewing-help-code-help-code">3.17. Viewing help : <code>help</code></a></h3>
+<h3 id="viewing-help-code-help-code"><a class="link" href="#viewing-help-code-help-code">3.18. Viewing help : <code>help</code></a></h3>
 <div class="paragraph">
 <p>Format: <code>help</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">3.18. Exiting the program : <code>exit</code></a></h3>
+<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">3.19. Exiting the program : <code>exit</code></a></h3>
 <div class="paragraph">
 <p>Exits the program.<br>
 Format: <code>exit</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="saving-the-data"><a class="link" href="#saving-the-data">3.19. Saving the data</a></h3>
+<h3 id="saving-the-data"><a class="link" href="#saving-the-data">3.20. Saving the data</a></h3>
 <div class="paragraph">
 <p>Concierge data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="encrypting-data-files-span-class-red-coming-in-v2-0-span"><a class="link" href="#encrypting-data-files-span-class-red-coming-in-v2-0-span">3.20. Encrypting data files <span class="red">Coming in v2.0</span></a></h3>
+<h3 id="encrypting-data-files-span-class-red-coming-in-v2-0-span"><a class="link" href="#encrypting-data-files-span-class-red-coming-in-v2-0-span">3.21. Encrypting data files <span class="red">Coming in v2.0</span></a></h3>
 <div class="paragraph">
-<p><em>{explain how the user can enable/disable data encryption}</em></p>
+<p>Encryption of Guests' personal data is still in the works. If you are
+interested in contributing, please refer to the Developer Guide.</p>
 </div>
 </div>
 </div>
@@ -764,10 +895,10 @@ t/TAG r/ROOM_NUMBER from/START_DATE to/END_DATE</code></p>
 <p><strong>Checkout</strong> : <code>checkout</code></p>
 </li>
 <li>
-<p><strong>Edit</strong> : <code>edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]&#8230;&#8203;</code></p>
+<p><strong>Edit</strong> : <code>edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]&#8230;&#8203;</code> <span class="red">Coming in v2.0</span></p>
 </li>
 <li>
-<p><strong>Find</strong> : <code>find KEYWORD [MORE_KEYWORDS]</code></p>
+<p><strong>Find</strong> : <code>find KEYWORD [MORE_KEYWORDS]</code> <span class="red">Coming in v2.0</span></p>
 </li>
 <li>
 <p><strong>List</strong> : <code>list</code></p>
@@ -776,13 +907,16 @@ t/TAG r/ROOM_NUMBER from/START_DATE to/END_DATE</code></p>
 <p><strong>Login</strong> : <code>login user/USERNAME pw/PASSWORD</code></p>
 </li>
 <li>
+<p><strong>Logout</strong> : <code>logout</code></p>
+</li>
+<li>
 <p><strong>Select</strong> : <code>select INDEX</code></p>
 </li>
 <li>
 <p><strong>Room Service</strong> : <code>service</code></p>
 </li>
 <li>
-<p><strong>Mark Room as faulty</strong> : <code>fault</code></p>
+<p><strong>Mark Room as faulty</strong> : <code>fault</code> <span class="red">Coming in v2.0</span></p>
 </li>
 <li>
 <p><strong>History</strong> : <code>history</code></p>
@@ -797,7 +931,7 @@ t/TAG r/ROOM_NUMBER from/START_DATE to/END_DATE</code></p>
 <p><strong>Clear</strong> : <code>clear</code></p>
 </li>
 <li>
-<p><strong>Export log</strong> : <code>export</code></p>
+<p><strong>Export log</strong> : <code>export</code> <span class="red">Coming in v2.0</span></p>
 </li>
 <li>
 <p><strong>Help</strong> : <code>help</code></p>
@@ -808,4 +942,4 @@ t/TAG r/ROOM_NUMBER from/START_DATE to/END_DATE</code></p>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-01 15:49:04 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-01 16:17:27 UTC</div></div></div></body></html>
