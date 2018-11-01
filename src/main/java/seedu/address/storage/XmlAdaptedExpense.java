@@ -15,8 +15,8 @@ import seedu.address.model.expenses.Money;
  */
 public class XmlAdaptedExpense {
 
-    public static final String EXPENSETYPE_UNKNOWN_NAME = "Unknown";
-    public static final Money EXPENSETYPE_UNKNOWN_COST = new Money(0, 0);
+    public static final String EXPENSE_TYPE_UNKNOWN_NAME = "Unknown";
+    public static final Money EXPENSE_TYPE_UNKNOWN_COST = new Money(0, 0);
     public static final String MESSAGE_INVALID_COST = "The given cost is not in the correct format.";
 
     @XmlElement (required = true)
@@ -63,7 +63,7 @@ public class XmlAdaptedExpense {
     public Expense toModelType(Menu menu) throws IllegalValueException {
         ExpenseType expenseType;
         if (!menu.isValidMenuNumber(item)) {
-            expenseType = new ExpenseType(item, EXPENSETYPE_UNKNOWN_NAME, EXPENSETYPE_UNKNOWN_COST);
+            expenseType = new ExpenseType(item, EXPENSE_TYPE_UNKNOWN_NAME, EXPENSE_TYPE_UNKNOWN_COST);
         } else {
             expenseType = menu.getExpenseType(item);
         }

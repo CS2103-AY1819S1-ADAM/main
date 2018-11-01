@@ -32,12 +32,22 @@ public class CheckinCommandParserTest {
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
+        // empty string
         assertParseFailure(parser, "", String.format(MESSAGE_INVALID_COMMAND_FORMAT, CheckInCommand.MESSAGE_USAGE));
+
+        // invalid room numbers
         assertParseFailure(parser, "1", String.format(MESSAGE_INVALID_COMMAND_FORMAT, CheckInCommand.MESSAGE_USAGE));
         assertParseFailure(parser, "01", String.format(MESSAGE_INVALID_COMMAND_FORMAT, CheckInCommand.MESSAGE_USAGE));
+
+        // missing room flag
         assertParseFailure(parser, "001", String.format(MESSAGE_INVALID_COMMAND_FORMAT, CheckInCommand.MESSAGE_USAGE));
+
+        // wrong room flag
         assertParseFailure(parser, "-r 001",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, CheckInCommand.MESSAGE_USAGE));
+
+        // check-in does not take in dates
+        // TODO overload check-in method to allow checking-in by date? (not much point though)
         assertParseFailure(parser, ROOM_DESC_AMY + DATE_START_DESC_AMY,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, CheckInCommand.MESSAGE_USAGE));
         assertParseFailure(parser, ROOM_DESC_AMY + DATE_END_DESC_AMY,

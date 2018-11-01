@@ -26,6 +26,9 @@ public class ResultDisplayTest extends GuiUnitTest {
 
     @Test
     public void display() {
+        ResultDisplay resultDisplay = new ResultDisplay();
+        uiPartRule.setUiPart(resultDisplay);
+
         // default result text
         guiRobot.pauseForHuman();
         assertEquals("", resultDisplayHandle.getText());

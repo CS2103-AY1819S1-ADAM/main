@@ -3,6 +3,8 @@ package systemtests;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static seedu.address.logic.parser.CliSyntax.FLAG_GUEST;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.testutil.TypicalConcierge.getTypicalConciergeClean;
 import static seedu.address.ui.StatusBarFooter.SYNC_STATUS_INITIAL;
 import static seedu.address.ui.StatusBarFooter.SYNC_STATUS_UPDATED;
@@ -144,7 +146,7 @@ public abstract class ConciergeSystemTest {
      * Displays all guests with any parts of their names matching {@code keyword} (case-insensitive).
      */
     protected void showGuestsWithName(String keyword) {
-        executeCommand(FindCommand.COMMAND_WORD + " " + keyword);
+        executeCommand(FindCommand.COMMAND_WORD + " " + FLAG_GUEST + " " + PREFIX_NAME + keyword);
         assertTrue(getModel().getFilteredGuestList().size() < getModel().getConcierge().getGuestList().size());
     }
 
