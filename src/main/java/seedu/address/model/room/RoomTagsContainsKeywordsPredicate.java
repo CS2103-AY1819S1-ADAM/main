@@ -10,37 +10,34 @@ import seedu.address.model.tag.Tag;
  * Tests that any of a {@code Room}'s {@code tags} exactly matches {@code keyword} argument for tags.
  */
 public class RoomTagsExactKeywordsPredicate implements Predicate<Room> {
-    private final String keyword;
+    private final List<String> keywords;
 
-    public RoomTagsExactKeywordsPredicate(String keyword) {
-        this.keyword = keyword;
+    public RoomTagsExactKeywordsPredicate(List<String> keywords) {
+        this.keywords = keywords;
     }
 
     @Override
     public boolean test(Room room) {
         boolean foundTag = false;
-
         List<Tag> roomTags = new LinkedList<>();
         roomTags.addAll(room.getTags());
 
-        for (Tag tag : roomTags) {
-            if (tag.tagName.equals(keyword)) {
-                foundTag = true;
-                break;
+        for (String keywordTag : keywords) {
+            for (Tag roomTag : roomTags) {
+                if (roomTag.tagName.equals(keywordTag)) {
+                    foundTag = true;
+                    break;
+                }
             }
         }
 
-        if (!foundTag) {
-            return false;
-        }
-
-        return true;
+        return foundTag;
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof RoomTagsExactKeywordsPredicate // instanceof handles nulls
-                && keyword.equals(((RoomTagsExactKeywordsPredicate) other).keyword)); // state check
+                && keywords.equals(((RoomTagsExactKeywordsPredicate) other).keywords)); // state check
     }
 }
