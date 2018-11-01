@@ -1,4 +1,4 @@
-= Concierge v1.4 - User Guide
+= Concierge v1.3 - User Guide
 :site-section: UserGuide
 :toc:
 :toc-title:
