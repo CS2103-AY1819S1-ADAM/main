@@ -230,6 +230,11 @@ Commands which require login:
 
 Example: `login user/damithz pw/forgotpassword`
 
+There are a few default accounts which can be used:
+* `login user/admin pw/admin-pw`
+* `login user/<name> pw/<name>-pw`, where `<name>` is any of the developer
+team's GitHub username
+
 .Without login, Concierge cannot be cleared
 image::LogInCommand-notsignedin.png[width="400"]
 
