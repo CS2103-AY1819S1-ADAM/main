@@ -1,13 +1,18 @@
 package seedu.address.model;
 
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.expenses.Expense;
 import seedu.address.model.guest.Guest;
+import seedu.address.model.login.InvalidLogInException;
+import seedu.address.model.login.InvalidLogOutException;
 import seedu.address.model.room.Room;
 import seedu.address.model.room.RoomNumber;
 import seedu.address.model.room.booking.Booking;
 import seedu.address.model.room.booking.BookingPeriod;
+import seedu.address.model.tag.Tag;
 
 /**
  * The API of the Model component.
@@ -25,6 +30,33 @@ public interface Model {
 
     /** Returns the Concierge */
     ReadOnlyConcierge getConcierge();
+
+    /** Returns the Menu.*/
+    Menu getMenu();
+
+    // =========== Signing in. ================================================
+
+    /**
+     * Returns true if Concierge is currently logged in.
+     */
+    boolean isSignedIn();
+
+    /**
+     * Returns an Optional containing the username currently tagged to the
+     * session.
+     */
+    Optional<String> getUsername();
+
+    /**
+     * Attempts to sign in with username {@code username} and password {@code
+     * hashedPassword}.
+     */
+    void signIn(String username, String hashedPassword) throws InvalidLogInException;
+
+    /**
+     * Attempts to sign out of Concierge.
+     */
+    void signOut() throws InvalidLogOutException;
 
     // =========== Methods for guest. =========================================
 
@@ -61,6 +93,14 @@ public interface Model {
      */
     void updateFilteredGuestList(Predicate<Guest> predicate);
 
+    /**
+     * Returns an unmodifiable view of the list of checked-in {@code Guest} backed by the internal list of
+     * {@code versionedConcierge}
+     */
+    ObservableList<Guest> getFilteredCheckedInGuestList();
+
+    void updateFilteredCheckedInGuestList(Predicate<Guest> predicate);
+
     /** Returns an unmodifiable view of the filtered room list */
     ObservableList<Room> getFilteredRoomList();
 
@@ -73,9 +113,14 @@ public interface Model {
     //=========== Methods for room. ===========================================
 
     /**
+     * Adds given tags to the specified room
+     */
+    public void addRoomTags(RoomNumber roomNumber, Tag... tags);
+
+    /**
      * Add a booking to a room identified by its room number.
      */
-    public void addBooking(RoomNumber roomNumber, Booking booking);
+    void addBooking(RoomNumber roomNumber, Booking booking);
 
     /**
      *  Displays room list instead of guest list
@@ -96,9 +141,15 @@ public interface Model {
     /**
      * Checks out a room's booking using its room number and the specified booking period
      */
-    public void checkoutRoom(RoomNumber roomNumber, BookingPeriod bookingPeriod);
+    void checkoutRoom(RoomNumber roomNumber, BookingPeriod bookingPeriod);
 
-    /* =========== Methods for undo and redo. =================================
+    /**
+     * Adds an Expense to a room.
+     */
+    void addExpense(RoomNumber roomNumber, Expense expense);
+
+
+    // =========== Methods for undo and redo. =================================
 
     /**
      * Returns true if the model has previous Concierge states to restore.

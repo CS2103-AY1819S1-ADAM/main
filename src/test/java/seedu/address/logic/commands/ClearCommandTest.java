@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalConcierge.getTypicalConcierge;
+import static seedu.address.testutil.TypicalConcierge.getTypicalConciergeClean;
 
 import org.junit.Test;
 
@@ -26,8 +26,8 @@ public class ClearCommandTest {
 
     @Test
     public void execute_nonEmptyConcierge_success() {
-        Model model = new ModelManager(getTypicalConcierge(), new UserPrefs());
-        Model expectedModel = new ModelManager(getTypicalConcierge(), new UserPrefs());
+        Model model = new ModelManager(getTypicalConciergeClean(), new UserPrefs());
+        Model expectedModel = new ModelManager(getTypicalConciergeClean(), new UserPrefs());
         expectedModel.resetData(new Concierge());
         expectedModel.commitConcierge();
 

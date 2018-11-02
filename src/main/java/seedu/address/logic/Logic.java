@@ -24,6 +24,9 @@ public interface Logic {
     /** Returns an unmodifiable view of the filtered list of guests */
     ObservableList<Guest> getFilteredGuestList();
 
+    /** Returns an unmodifiable view of the filtered list of checked-in guests */
+    public ObservableList<Guest> getFilteredCheckedInGuestList();
+
     /** Returns an unmodifiable view of the filtered list of rooms */
     ObservableList<Room> getFilteredRoomList();
 

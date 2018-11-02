@@ -19,3 +19,9 @@ src/main/resources/docs/
 out/
 /data/
 /commands_log/*
+/src/test/data/XmlUtilTest/validConcierge.xml
+/src/test/data/XmlUtilTest/validGuest.xml
+/src/test/data/XmlUtilTest/validRoom.xml
+/src/test/data/XmlUtilTest/invalidGuest.xml
+/src/test/data/XmlUtilTest/invalidRoom.xml
+/src/test/data/XmlSerializableConciergeTest/typicalConcierge.xml

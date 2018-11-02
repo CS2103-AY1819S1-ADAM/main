@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <!-- Guest with missing name field -->
 <guests>
-    <phone>9482424</phone>
-    <email>hans@example</email>
-    <tagged>friends</tagged>
+	<phone>94351253</phone>
+	<email>alice@example.com</email>
+	<tagged>vip</tagged>
 </guests>

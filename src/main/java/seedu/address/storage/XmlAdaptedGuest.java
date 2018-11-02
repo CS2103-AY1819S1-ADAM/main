@@ -8,6 +8,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.guest.Email;
@@ -18,7 +19,9 @@ import seedu.address.model.tag.Tag;
 
 /**
  * JAXB-friendly version of the Guest.
+ * Note: Tagged as XmlRootElement for XML tests to be able to write XML files for just this class
  */
+@XmlRootElement(name = "guest")
 public class XmlAdaptedGuest {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Guest's %s field is missing!";

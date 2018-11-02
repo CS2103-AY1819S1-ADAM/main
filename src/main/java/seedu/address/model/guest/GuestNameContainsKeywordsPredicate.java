@@ -27,4 +27,9 @@ public class GuestNameContainsKeywordsPredicate implements Predicate<Guest> {
                 || (other instanceof GuestNameContainsKeywordsPredicate // instanceof handles nulls
                 && keywords.equals(((GuestNameContainsKeywordsPredicate) other).keywords)); // state check
     }
+
+    @Override
+    public int hashCode() {
+        return keywords.hashCode();
+    }
 }

@@ -478,6 +478,54 @@ The GuestListPanel and RoomListPanel each has a "VBox" element encapsulating the
 ** Pros: Cleaner looking, fully utilises empty spaces. Better visual feedback from commands as inputs.
 ** Cons: Requires heavy modification of MainWindow UI files, future features must stick with the restriction of having a list of either guests or rooms.
 
+=== Find Feature
+The Find feature expands upon the originally implemented FindCommand, allowing for the searching of both rooms and guests, with several filters.
+
+The UML Diagram for the current implementation of FindCommand is as follows:
+
+==== Current Implementation
+The find function is facilitated by a modified `FindCommand` class, of which the input from the CommandBox is parsed by a `FindCommandParser` class.
+
+The find function now has the ability to find either guests or rooms. The starting commands for the find function with flags are as follows:
+
+* `find -g` - Find guests.
+* `find -r` - Find rooms.
+
+The above command must be followed up by at least 1 filter, and they are as follows:
+
+Guest Filters (-g):
+
+* `n/ - Name`
+* `p/ - Phone Number`
+* `e/ - Email Address`
+* `t/ - Tags`
+
+Room Filters (-r):
+
+* `r/ - Room Number`
+* `c/ - Capacity`
+* `t/ - Room Tags`
+
+The following are filters for room bookings. The flags cannot be mixed.
+The flags can be used independently, or with a from/to specified date.
+Input dates must be in DD/MM/YY format.
+
+* `-hb - Has Bookings Flag`
+* `-nb - No Bookings Flag`
+* `from/ - Booking Start Date`
+* `to/ - Booking End Date`
+
+The FindCommandParser uses a tokenizer to obtain the individual arguments/filters, whether the filter is present or not. If a filter is present, the input that precedes the filter prefix will be used to create the individual predicate class.
+
+These predicate classes are collected into a list of predicates before they are combined and merged in the FindCommand class. The combined final predicate is then passed to the Model Manager to filter the guest/room list, and a listingChangedEvent is called to update the UI elements.
+
+
+==== Design Considerations
+
+===== Aspect: OR/AND Searching
+When searching, a few things have to be considered. Does the filter specified have an OR relationship with one another, or an AND relationship.
+An example is this: find -g n/Alex t/VIP, this can be interpreted in two ways. Finding guests with name as "Alex" AND with tag "VIP", or name "Alex" or tag "VIP.
+
 === Command Archive feature
 Given below is the UML diagram for the `CommandArchive` Class:
 

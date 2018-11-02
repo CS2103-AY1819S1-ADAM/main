@@ -13,6 +13,7 @@ public class UserPrefs {
 
     private GuiSettings guiSettings;
     private Path conciergeFilePath = Paths.get("data" , "concierge.xml");
+    private Path passwordsFilePath = Paths.get("data" , "passwords.json");
 
     public UserPrefs() {
         setGuiSettings(500, 500, 0, 0);
@@ -36,6 +37,14 @@ public class UserPrefs {
 
     public void setConciergeFilePath(Path conciergeFilePath) {
         this.conciergeFilePath = conciergeFilePath;
+    }
+
+    public Path getPasswordsFilePath() {
+        return passwordsFilePath;
+    }
+
+    public void setPasswordsFilePath(Path passwordsFilePath) {
+        this.passwordsFilePath = passwordsFilePath;
     }
 
     @Override

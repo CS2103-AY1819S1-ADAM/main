@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<guests>
-    <name>Hans Muster</name>
-    <phone>9482424</phone>
-    <email>hans@example</email>
-    <tagged>friends</tagged>
-</guests>
+<guest>
+    <name>Alice Pauline</name>
+    <phone>94351253</phone>
+    <email>alice@example.com</email>
+    <tagged>vip</tagged>
+</guest>

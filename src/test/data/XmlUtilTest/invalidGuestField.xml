@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<!-- Guest with an invalid phone field -->
-<guests>
-    <name>Hans Muster</name>
+<guest>
+    <name>Alice Pauline</name>
     <phone>9482asf424</phone>
-    <email>hans@example</email>
-    <address>4th street</address>
-    <tagged>friends</tagged>
-</guests>
+    <email>alice@example.com</email>
+    <tagged>vip</tagged>
+</guest>

@@ -22,8 +22,8 @@ public class UniqueRoomListTest {
     public ExpectedException thrown = ExpectedException.none();
 
     private final UniqueRoomList uniqueRoomList = new UniqueRoomList();
-    private final Room room001 = TypicalRooms.getTypicalUniqueRoomList().getRoom(ROOM_NUMBER_001);
-    private final Room room002 = TypicalRooms.getTypicalUniqueRoomList().getRoom(ROOM_NUMBER_002);
+    private final Room room001 = TypicalRooms.getTypicalUniqueRoomListClean().getRoom(ROOM_NUMBER_001);
+    private final Room room002 = TypicalRooms.getTypicalUniqueRoomListClean().getRoom(ROOM_NUMBER_002);
 
     @Test
     public void contains_nullRoom_throwsNullPointerException() {

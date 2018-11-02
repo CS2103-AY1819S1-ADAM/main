@@ -11,7 +11,7 @@ import seedu.address.model.room.booking.BookingPeriod;
  */
 public class BookingBuilder {
 
-    public static final Guest DEFAULT_GUEST = new GuestBuilder().build();
+    public static final Guest DEFAULT_GUEST = TypicalGuests.ALICE;
     public static final BookingPeriod DEFAULT_BOOKING_PERIOD_TODAY_TOMORROW =
         new BookingPeriod(LocalDate.now().format(BookingPeriod.DATE_TO_STRING_FORMAT),
             LocalDate.now().plusDays(1).format(BookingPeriod.DATE_TO_STRING_FORMAT));

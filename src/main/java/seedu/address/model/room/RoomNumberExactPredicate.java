@@ -23,4 +23,9 @@ public class RoomNumberExactPredicate implements Predicate<Room> {
                 || (other instanceof RoomNumberExactPredicate // instanceof handles nulls
                 && roomNumber.equals(((RoomNumberExactPredicate) other).roomNumber)); // state check
     }
+
+    @Override
+    public int hashCode() {
+        return roomNumber.hashCode();
+    }
 }

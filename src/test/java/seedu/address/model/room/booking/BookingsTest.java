@@ -54,13 +54,13 @@ public class BookingsTest {
 
     @Test
     public void getActiveBooking_returnsCorrectOptional_success() {
-        Optional<Booking> optionalActiveBooking = bookings.getActiveBooking();
+        Optional<Booking> optionalActiveBooking = bookings.getFirstActiveBooking();
         assertFalse(optionalActiveBooking.isPresent());
 
-        optionalActiveBooking = bookings.add(LASTWEEK_YESTERDAY).getActiveBooking();
+        optionalActiveBooking = bookings.add(LASTWEEK_YESTERDAY).getFirstActiveBooking();
         assertFalse(optionalActiveBooking.isPresent());
 
-        optionalActiveBooking = bookings.add(TODAY_TOMORROW).getActiveBooking();
+        optionalActiveBooking = bookings.add(TODAY_TOMORROW).getFirstActiveBooking();
         assertTrue(optionalActiveBooking.isPresent());
     }
 

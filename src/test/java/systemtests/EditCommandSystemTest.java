@@ -45,6 +45,7 @@ import seedu.address.model.guest.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.GuestBuilder;
 import seedu.address.testutil.GuestUtil;
+import seedu.address.testutil.RoomUtil;
 
 public class EditCommandSystemTest extends ConciergeSystemTest {
 
@@ -179,6 +180,8 @@ public class EditCommandSystemTest extends ConciergeSystemTest {
 
         /* Case: edit a guest with new values same as another guest's values -> rejected */
         executeCommand(GuestUtil.getAddCommand(BOB, ROOM_NUMBER_BOB, BOOKING_PERIOD_BOB));
+        executeCommand(RoomUtil.getCheckInCommand(ROOM_NUMBER_BOB));
+        executeCommand(RoomUtil.getCheckoutCommand(ROOM_NUMBER_BOB));
         assertTrue(getModel().getConcierge().getGuestList().contains(BOB));
         index = INDEX_FIRST_GUEST;
         assertFalse(getModel().getFilteredGuestList().get(index.getZeroBased()).equals(BOB));

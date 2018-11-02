@@ -14,12 +14,16 @@ public class ClearCommand extends Command {
     public static final String COMMAND_WORD = "clear";
     public static final String MESSAGE_SUCCESS = "Concierge has been cleared!";
 
-
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
         model.resetData(getEmptyConcierge());
         model.commitConcierge();
         return new CommandResult(MESSAGE_SUCCESS);
+    }
+
+    @Override
+    public boolean requiresSignIn() {
+        return true;
     }
 }

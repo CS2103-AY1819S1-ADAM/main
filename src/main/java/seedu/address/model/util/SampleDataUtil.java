@@ -1,5 +1,8 @@
 package seedu.address.model.util;
 
+import static java.util.Objects.requireNonNull;
+
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -8,6 +11,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import javafx.util.Pair;
 import seedu.address.model.Concierge;
 import seedu.address.model.ReadOnlyConcierge;
 import seedu.address.model.expenses.Expense;
@@ -17,6 +21,7 @@ import seedu.address.model.guest.Email;
 import seedu.address.model.guest.Guest;
 import seedu.address.model.guest.Name;
 import seedu.address.model.guest.Phone;
+import seedu.address.model.login.PasswordHashList;
 import seedu.address.model.room.Room;
 import seedu.address.model.room.RoomNumber;
 import seedu.address.model.room.UniqueRoomList;
@@ -49,9 +54,9 @@ public class SampleDataUtil {
     }
 
     /**
-     * Returns a room list initialized with the maximum number of rooms, and 1 sample booking for testing
-     * Use to see if xml file reflects changes
-     * DELETE WHEN TESTED IN UNIT TESTS
+     * Returns a room list initialized with the maximum number of rooms, and a few sample bookings
+     * Use to see if XML file reflects changes
+     * TODO DELETE WHEN TESTED IN UNIT TESTS
      */
     public static List<Room> getSampleRoomsWithBookingsExpenses() {
         UniqueRoomList uniqueRoomList = new UniqueRoomList();
@@ -133,5 +138,26 @@ public class SampleDataUtil {
         return Arrays.stream(strings)
                 .map(Tag::new)
                 .collect(Collectors.toSet());
+    }
+
+    /**
+     * Returns a PasswordHashList given pairs of keys and values.
+     */
+    public static PasswordHashList getPasswordHashList(Pair<String, String>... pairs) throws IOException {
+        requireNonNull(pairs);
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("{");
+
+        for (Pair p: pairs) {
+            sb.append(" \"");
+            sb.append(p.getKey());
+            sb.append("\" : \"");
+            sb.append(p.getValue());
+            sb.append("\" ");
+            sb.append(",");
+        }
+        sb.replace(sb.length() - 1, sb.length(), "}");
+        return new PasswordHashList(sb.toString());
     }
 }

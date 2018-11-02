@@ -30,7 +30,7 @@ hotel management tasks done faster than traditional GUI apps. Interested? Jump t
 .  Copy the file to the folder you want to use as the home folder for your Concierge.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 +
-image::Ui.jpg[width="790"]
+image::Ui.png[width="790"]
 +
 .  Type the command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
@@ -57,8 +57,17 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 === Adding a guest: `add`
 
 Adds a guest to the guest list for the purpose of assigning a room +
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG] -r ROOM_NUMBER
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG] r/ROOM_NUMBER
 from/START_DATE to/END_DATE`
+
+The room number must be a 3-digit number from 001 to 100. For example, 074 is
+valid but 128 is not.
+
+The dates can be expressed in DD/MM/YY or DD/MM/YYYY.
+
+Currently, a guest can only make one booking with the hotel. This will
+subsequently be modified such that a guest can make an unlimited number of
+bookings.
 
 [TIP]
 A guest can have any number of tags (including 0)
@@ -71,56 +80,41 @@ Add a guest "John Smith" to room 085 for a period of stay from 09/12/18 to 10/12
 === Adding a guest: `addx` [red]#Coming in v2.0#
 
 Adds a guest to the guest list NOT for the purpose of assigning a room (perhaps add to archived guest list) +
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]...`
+Format: `addx n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]...`
 
 Examples:
 * `addx n/guest p/98765432 e/johntan@hotmail.com t/bro`
 
-=== Checkout room: `checkin`
+=== Check-in room: `checkin`
 
-Checks in the room, which marks the room's current booking as checked-in.
-Format: `checkin ROOM_NUMBER`
+Checks in the room's first active booking. A booking is considered **active** if
+its start and end date includes today's date, inclusively. +
+The guest who made the booking will be added to both the checked-in guest list and the archived guest list. +
+Format: `checkin r/ROOM_NUMBER`
 
 Examples:
 
-* `checkin 085` +
+* `checkin r/085` +
 Checks in room 085 and marks room 085's current booking as checked-in.
 
 === Checkout room: `checkout`
 
-Checks out the room and the guest staying in it. The guest is deleted from the guest list and the room is then marked
-for housekeeping. +
-Format: `checkout ROOM_NUMBER`
+Checks out the room's first (i.e. earliest) booking, or its booking with the specified start and end dates.
+The guest is deleted from the checked-in guest list and added to the archived guest list. +
+A receipt is generated for his expenses. [red]#Coming in v2.0# +
+Format: `checkout r/ROOM_NUMBER [from/START_DATE to/END_DATE]`
 
 Examples:
 
-* `checkout 085` +
-Checks out room 085 and the guest staying in it.
+* `checkout r/085` +
+Checks out room 085 and the room's first booking.
+* `checkout r/085 from/01/11/18 to/02/11/18`
+Checks out the booking with start date 01/11/18 and end date 02/11/18 from room 085.
 
-=== Deleting a guest : `delete` [red]#Coming in v2.0#
-
-Deletes the specified guest from the archived guest list. +
-Format: `delete INDEX`
-
-****
-* Deletes the guest at the specified `INDEX`.
-* The index refers to the index number shown in the displayed guest list.
-* The index *must be a positive integer* 1, 2, 3, ...
-****
-
-Examples:
-
-* `list -g` +
-`delete 2` +
-Deletes the 2nd guest in the displayed guest list.
-* `find -g Betsy` +
-`delete 1` +
-Deletes the 1st guest in the results of the `find` command.
-
-=== Editing a guest : `edit` [red]#Coming in v1.3#
+=== Editing a guest : `edit` [red]#Coming in v2.0#
 
 Edits an existing guest in the guest list. +
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]...`
 
 ****
 * Edits the guest at the specified `INDEX`. The index refers to the index number shown in the displayed guest list. The index *must be a positive integer* 1, 2, 3, ...
@@ -137,38 +131,64 @@ Edits the phone number and email address of the 1st guest to be `91234567` and `
 * `edit 2 n/Betsy Crower t/` +
 Edits the name of the 2nd guest to be `Betsy Crower` and clears all existing tags.
 
-=== Locating guests by name: `find` [red]#Coming in v1.3#
+=== Locating guests and rooms : `find` [red]#Coming in v1.3#
 
-Finds guests or rooms, depending on the input flag and the keywords. +
-Format: `find [flag] KEYWORD`
+Finds guests or rooms, depending on the input flag and the keyword filters.
+
+Format: `find [flag] FILTERS`
+
 ****
 * The search is case insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* Guests matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* Guests names and tags matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* Any number of filters can be chained and used together
 ****
 
-Examples:
+Filters for Guest (-g):
 
-* `find -g John Smith` +
-Find guest(s) with "John" or "Smith" or both in their names.
-* `find -g r/085` +
-Find guest currently staying in room 085
-* `find -r 085` +
+* `n/ - Name`
+* `p/ - Phone Number`
+* `e/ - Email Address`
+* `t/ - Tags`
+
+Filters for Rooms (-r):
+
+* `r/ - Room Number`
+* `c/ - Capacity`
+* `t/ - Room Tags`
+
+The following are filters for room bookings. The flags cannot be mixed.
+The flags can be used indepdently, or with a from/to specified date.
+Input dates must be in DD/MM/YY format.
+
+* `-hb - Has Bookings Flag`
+* `-nb - No Bookings Flag`
+* `from/ - Booking Start Date`
+* `to/ - Booking End Date`
+
+Find Command Examples:
+
+* `find -g n/Alex Yu` +
+Find guest(s) with "Alex" or "Yu" or both in their names.
+* `find -g n/Alex t/VIP` +
+Find guest(s) named Alex with tag "VIP".
+* `find -g p/81027115` +
+Find guest(s) with phone number "81027115".
+* `find -r r/085` +
 Find room 085
-* `find -r g/John Smith` +
-Find room for which guest(s) with "John" or "Smith" or both in their names, has made a booking
-* `find -r double` +
-Find all double rooms
-* `find -r avail` +
-Find all available rooms today
-* `find -r avail from/09/12/18 to/10/12/18` +
-Find rooms that are available from 09/12/18 10/12/18. Input dates must be in DD/MM/YY format.
+* `find -r c/2` +
+Find all rooms with a capacity of 2.
+* `find -r c/5 -nb from/ 01/11/2018 to/ 05/11/2018` +
+Find all rooms with a capacity of 5, without any bookings from the date range 01/11/2018 to 05/11/2018.
+* `find -r -hb` +
+Find all rooms with bookings.
+* `find -r -hb t/RoomService` +
+Find all rooms with bookings with tag "RoomService".
 
 === Listing all guests : `list`
 
-Shows the entire list of rooms, or guests, depending on the input flag +
+Shows the entire list of rooms, checked-in guests, or archived guests, depending on the input flag +
 Format: `list [flag]`
 
 Examples:
@@ -176,10 +196,22 @@ Examples:
 * `list -r` +
 List all rooms
 * `list -g` +
-List all guests
+List all archived guests
+* `list -cg` +
+List all checked-in guests
 
+=== Login : `login`
 
-=== Selecting a guest : `select` [red]#Coming in v1.3#
+Logs in to the Concierge application. +
+Format: `login user/USERNAME pw/PASSWORD`
+
+Note: the username and password are both case-sensitive.
+
+Examples:
+
+* login user/damithz pw/forgotpassword
+
+=== Selecting a guest : `select`
 
 Selects the guest/room identified by the index number used in the displayed list. +
 Format: `select INDEX`
@@ -196,9 +228,6 @@ Examples:
 * `list -g` +
 `select 2` +
 Selects the 2nd room in the displayed list.
-* `find -g Betsy` +
-`select 1` +
-Selects the 1st guest in the results of the `find` command.
 
 === Provide Room Service: `service` [red]#Coming in v1.3#
 
@@ -298,12 +327,15 @@ The `redo` command fails as there are no `undo` commands executed previously.
 Clears all entries from the application. +
 Format: `clear`
 
-=== Export log: `export` [red]#Coming in v1.3#
+The rooms are maintained - only all their current and future bookings are
+cleared. I.e. all maintenance requests and faults will still be recorded.
+
+=== Export log: `export` [red]#Coming in v2.0#
 
 Exports a log of all history of commands into a text file +
 Format: `export`
 
-=== Viewing help : `help` [red]#Coming in v1.3#
+=== Viewing help : `help`
 
 Format: `help`
 
@@ -330,13 +362,14 @@ _{explain how the user can enable/disable data encryption}_
 
 == Command Summary
 
-* *Add a Guest and assign a Room* : `add`
+* *Add a Guest and assign a Room* : `add n/NAME p/PHONE_NUMBER e/EMAIL
+t/TAG r/ROOM_NUMBER from/START_DATE to/END_DATE`
 * *Checkin* : `checkin`
 * *Checkout* : `checkout`
-* *Delete* : `delete INDEX`
-* *Edit* : `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
+* *Edit* : `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]...`
 * *Find* : `find KEYWORD [MORE_KEYWORDS]`
 * *List* : `list`
+* *Login* : `login user/USERNAME pw/PASSWORD`
 * *Select* : `select INDEX`
 * *Room Service* : `service`
 * *Mark Room as faulty* : `fault`

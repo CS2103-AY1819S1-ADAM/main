@@ -8,6 +8,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.exceptions.UnauthorisedCommandException;
 import seedu.address.logic.parser.ConciergeParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
@@ -35,6 +36,9 @@ public class LogicManager extends ComponentManager implements Logic {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
         try {
             Command command = conciergeParser.parseCommand(commandText);
+            if (command.requiresSignIn() && !model.isSignedIn()) {
+                throw new UnauthorisedCommandException();
+            }
             return command.execute(model, history);
         } finally {
             history.add(commandText);
@@ -44,6 +48,11 @@ public class LogicManager extends ComponentManager implements Logic {
     @Override
     public ObservableList<Guest> getFilteredGuestList() {
         return model.getFilteredGuestList();
+    }
+
+    @Override
+    public ObservableList<Guest> getFilteredCheckedInGuestList() {
+        return model.getFilteredCheckedInGuestList();
     }
 
     @Override

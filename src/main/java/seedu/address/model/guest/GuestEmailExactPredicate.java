@@ -24,4 +24,8 @@ public class GuestEmailExactPredicate implements Predicate<Guest> {
                 && email.equals(((GuestEmailExactPredicate) other).email)); // state check
     }
 
+    @Override
+    public int hashCode() {
+        return email.hashCode();
+    }
 }

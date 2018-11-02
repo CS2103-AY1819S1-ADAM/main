@@ -32,6 +32,11 @@ public class RoomBookingsDateRangePredicate implements Predicate<Room> {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof RoomBookingsDateRangePredicate // instanceof handles nulls
-                && bookingPeriod == ((RoomBookingsDateRangePredicate) other).bookingPeriod); // state check
+                && bookingPeriod.equals(((RoomBookingsDateRangePredicate) other).bookingPeriod)); // state check
+    }
+
+    @Override
+    public int hashCode() {
+        return bookingPeriod.hashCode();
     }
 }

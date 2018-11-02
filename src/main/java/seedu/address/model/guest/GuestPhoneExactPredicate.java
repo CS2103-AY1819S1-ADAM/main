@@ -24,4 +24,8 @@ public class GuestPhoneExactPredicate implements Predicate<Guest> {
                 && phoneNumber.equals(((GuestPhoneExactPredicate) other).phoneNumber)); // state check
     }
 
+    @Override
+    public int hashCode() {
+        return phoneNumber.hashCode();
+    }
 }

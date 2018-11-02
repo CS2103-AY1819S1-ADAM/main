@@ -15,14 +15,10 @@ import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.ROOM_DESC_001;
-import static seedu.address.logic.commands.CommandTestUtil.ROOM_DESC_020;
 import static seedu.address.logic.commands.CommandTestUtil.ROOM_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.ROOM_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.testutil.TypicalBookingPeriods.BOOKING_PERIOD_AMY;
 import static seedu.address.testutil.TypicalBookingPeriods.BOOKING_PERIOD_BOB;
 import static seedu.address.testutil.TypicalBookingPeriods.TOMORROW_NEXTWEEK;
@@ -32,12 +28,11 @@ import static seedu.address.testutil.TypicalGuests.HOON;
 import static seedu.address.testutil.TypicalGuests.IDA;
 import static seedu.address.testutil.TypicalGuests.JAKOB;
 import static seedu.address.testutil.TypicalGuests.KEYWORD_MATCHING_MEIER;
-import static seedu.address.testutil.TypicalRoomNumbers.ROOM_NUMBER_001;
-import static seedu.address.testutil.TypicalRoomNumbers.ROOM_NUMBER_020;
-import static seedu.address.testutil.TypicalRoomNumbers.ROOM_NUMBER_021;
-import static seedu.address.testutil.TypicalRoomNumbers.ROOM_NUMBER_022;
-import static seedu.address.testutil.TypicalRoomNumbers.ROOM_NUMBER_099;
+import static seedu.address.testutil.TypicalRoomNumbers.ROOM_NUMBER_050;
+import static seedu.address.testutil.TypicalRoomNumbers.ROOM_NUMBER_051;
+import static seedu.address.testutil.TypicalRoomNumbers.ROOM_NUMBER_052;
 import static seedu.address.testutil.TypicalRoomNumbers.ROOM_NUMBER_AMY;
+import static seedu.address.testutil.TypicalRoomNumbers.ROOM_NUMBER_BOB;
 
 import org.junit.Test;
 
@@ -55,12 +50,9 @@ import seedu.address.model.room.RoomNumber;
 import seedu.address.model.room.booking.Booking;
 import seedu.address.model.room.booking.BookingPeriod;
 import seedu.address.model.tag.Tag;
-import seedu.address.testutil.BookingBuilder;
-import seedu.address.testutil.GuestBuilder;
 import seedu.address.testutil.GuestUtil;
-import seedu.address.testutil.TypicalBookingPeriods;
-import seedu.address.testutil.TypicalRoomNumbers;
 
+// TODO Fix and redo these tests for refactored addCommand!
 public class AddCommandSystemTest extends ConciergeSystemTest {
 
     @Test
@@ -69,13 +61,12 @@ public class AddCommandSystemTest extends ConciergeSystemTest {
 
         /* ------------------------ Perform add operations on the shown unfiltered list ----------------------------- */
 
-        /* Case: add a guest without tags to a non-empty Concierge, command with leading spaces and trailing spaces
-         * -> added
+        /* Case: add a booking to a non-empty Concierge, command with leading spaces and trailing spaces -> added
          */
         Guest guestToAdd = AMY;
-        RoomNumber roomNumberToAdd = ROOM_NUMBER_AMY;
         BookingPeriod bookingPeriodToAdd = BOOKING_PERIOD_AMY;
-        Booking bookingToAdd = new BookingBuilder().withGuest(AMY).withBookingPeriod(BOOKING_PERIOD_AMY).build();
+        RoomNumber roomNumberToAdd = ROOM_NUMBER_AMY;
+        Booking bookingToAdd = new Booking(guestToAdd, bookingPeriodToAdd);
 
         String command = "   " + AddCommand.COMMAND_WORD + "  " + NAME_DESC_AMY
                 + "  " + PHONE_DESC_AMY + " " + EMAIL_DESC_AMY + " "
@@ -90,42 +81,21 @@ public class AddCommandSystemTest extends ConciergeSystemTest {
 
         /* Case: redo adding Amy to the list -> Amy added again */
         command = RedoCommand.COMMAND_WORD;
-        model.addGuest(AMY);
-        model.addBooking(ROOM_NUMBER_AMY, bookingToAdd);
+        model.addBooking(roomNumberToAdd, bookingToAdd);
         expectedResultMessage = RedoCommand.MESSAGE_SUCCESS;
         assertCommandSuccess(command, model, expectedResultMessage);
 
-        /* Case: add a guest with all fields same as another guest in the
-        Concierge except name and room -> added */
-        guestToAdd = new GuestBuilder(AMY).withName(VALID_NAME_BOB).build();
-        roomNumberToAdd = TypicalRoomNumbers.ROOM_NUMBER_001;
-        bookingPeriodToAdd = TypicalBookingPeriods.BOOKING_PERIOD_AMY;
-        command = AddCommand.COMMAND_WORD + NAME_DESC_BOB + PHONE_DESC_AMY + EMAIL_DESC_AMY
-                + TAG_DESC_FRIEND + ROOM_DESC_001 + DATE_START_DESC_AMY + DATE_END_DESC_AMY;
-        assertCommandSuccess(command, guestToAdd, roomNumberToAdd, bookingPeriodToAdd);
-
-        /* Case: add a guest with all fields same as another guest in Concierge except phone and email
-         * -> added
-         */
-        guestToAdd = new GuestBuilder(AMY).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).build();
-        roomNumberToAdd = TypicalRoomNumbers.ROOM_NUMBER_011;
-        bookingPeriodToAdd = TypicalBookingPeriods.BOOKING_PERIOD_AMY;
-
-        command = GuestUtil.getAddCommand(guestToAdd, roomNumberToAdd, bookingPeriodToAdd);
-        assertCommandSuccess(command, guestToAdd, roomNumberToAdd, bookingPeriodToAdd);
-
         /* Case: add a guest with tags, command with parameters in random order -> added */
         guestToAdd = BOB;
-        roomNumberToAdd = ROOM_NUMBER_020;
+        roomNumberToAdd = ROOM_NUMBER_BOB;
         bookingPeriodToAdd = BOOKING_PERIOD_BOB;
         command = AddCommand.COMMAND_WORD + TAG_DESC_FRIEND
-                + DATE_END_DESC_BOB + TAG_DESC_HUSBAND + EMAIL_DESC_BOB + ROOM_DESC_020
+                + DATE_END_DESC_BOB + TAG_DESC_HUSBAND + EMAIL_DESC_BOB + ROOM_DESC_BOB
                 + DATE_START_DESC_BOB + PHONE_DESC_BOB + NAME_DESC_BOB + DATE_END_DESC_BOB;
-        assertCommandSuccess(command, guestToAdd, roomNumberToAdd,
-                 bookingPeriodToAdd);
+        assertCommandSuccess(command, guestToAdd, roomNumberToAdd, bookingPeriodToAdd);
 
         /* Case: add a guest, missing tags -> added */
-        roomNumberToAdd = ROOM_NUMBER_021;
+        roomNumberToAdd = ROOM_NUMBER_050;
         bookingPeriodToAdd = TOMORROW_NEXTWEEK;
         assertCommandSuccess(HOON, roomNumberToAdd, bookingPeriodToAdd);
 
@@ -133,46 +103,17 @@ public class AddCommandSystemTest extends ConciergeSystemTest {
 
         /* Case: filters the guest list before adding -> added */
         showGuestsWithName(KEYWORD_MATCHING_MEIER);
-        roomNumberToAdd = ROOM_NUMBER_022;
+        roomNumberToAdd = ROOM_NUMBER_051;
         assertCommandSuccess(IDA, roomNumberToAdd, bookingPeriodToAdd);
 
         /* ------------------------ Perform add operation while a guest card is selected --------------------------- */
 
         /* Case: selects first card in the guest list, add a guest -> added, card selection remains unchanged */
         selectGuest(Index.fromOneBased(1));
-        roomNumberToAdd = ROOM_NUMBER_099;
+        roomNumberToAdd = ROOM_NUMBER_052;
         assertCommandSuccess(JAKOB, roomNumberToAdd, bookingPeriodToAdd);
 
         /* ----------------------------------- Perform invalid add operations --------------------------------------- */
-
-        Guest validGuest = new GuestBuilder().build();
-        RoomNumber validRoomNumber = ROOM_NUMBER_001;
-        BookingPeriod validBookingPeriod =
-                BookingBuilder.DEFAULT_BOOKING_PERIOD_TODAY_TOMORROW;
-
-        /* Case: add a duplicate guest -> rejected */
-        command = GuestUtil.getAddCommand(HOON, validRoomNumber, validBookingPeriod);
-        assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_GUEST);
-
-        /* Case: add a duplicate guest except with different phone -> rejected */
-        guestToAdd = new GuestBuilder(HOON).withPhone(VALID_PHONE_BOB).build();
-        command = GuestUtil.getAddCommand(guestToAdd, validRoomNumber, validBookingPeriod);
-        assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_GUEST);
-
-        /* Case: add a duplicate guest except with different email -> rejected */
-        guestToAdd = new GuestBuilder(HOON).withEmail(VALID_EMAIL_BOB).build();
-        command = GuestUtil.getAddCommand(guestToAdd, validRoomNumber, validBookingPeriod);
-        assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_GUEST);
-
-        /* Case: add a duplicate guest except with different address -> rejected */
-        guestToAdd = new GuestBuilder(HOON).build();
-        command = GuestUtil.getAddCommand(guestToAdd, validRoomNumber, validBookingPeriod);
-        assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_GUEST);
-
-        /* Case: add a duplicate guest except with different tags -> rejected */
-        guestToAdd = new GuestBuilder(HOON).withTags("friends").build();
-        command = GuestUtil.getAddCommand(guestToAdd, validRoomNumber, validBookingPeriod);
-        assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_GUEST);
 
         /* Case: missing name -> rejected */
         command = AddCommand.COMMAND_WORD + PHONE_DESC_AMY + EMAIL_DESC_AMY
@@ -190,15 +131,14 @@ public class AddCommandSystemTest extends ConciergeSystemTest {
         assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
 
         /* Case: invalid keyword -> rejected */
-        command = "adds " + GuestUtil.getAddCommand(validGuest,
-                validRoomNumber, validBookingPeriod);
+        command = "adds " + NAME_DESC_AMY + PHONE_DESC_AMY
+                + ROOM_DESC_AMY + DATE_START_DESC_AMY + DATE_END_DESC_AMY;
         assertCommandFailure(command, Messages.MESSAGE_UNKNOWN_COMMAND);
 
         /* Case: invalid name -> rejected */
-        command =
-                AddCommand.COMMAND_WORD + INVALID_NAME_DESC + PHONE_DESC_AMY
-                        + EMAIL_DESC_AMY + ROOM_DESC_AMY
-                        + DATE_START_DESC_AMY + DATE_END_DESC_AMY;
+        command = AddCommand.COMMAND_WORD + INVALID_NAME_DESC + PHONE_DESC_AMY
+                    + EMAIL_DESC_AMY + ROOM_DESC_AMY
+                    + DATE_START_DESC_AMY + DATE_END_DESC_AMY;
         assertCommandFailure(command, Name.MESSAGE_NAME_CONSTRAINTS);
 
         /* Case: invalid phone -> rejected */
@@ -239,11 +179,9 @@ public class AddCommandSystemTest extends ConciergeSystemTest {
                                       RoomNumber roomNumberToAdd,
                                       BookingPeriod bookingPeriodToAdd) {
 
-        String command = GuestUtil.getAddCommand(guestToAdd,
-                roomNumberToAdd, bookingPeriodToAdd);
+        String command = GuestUtil.getAddCommand(guestToAdd, roomNumberToAdd, bookingPeriodToAdd);
 
-        assertCommandSuccess(command,
-                guestToAdd, roomNumberToAdd, bookingPeriodToAdd);
+        assertCommandSuccess(command, guestToAdd, roomNumberToAdd, bookingPeriodToAdd);
     }
 
     /**
@@ -252,16 +190,15 @@ public class AddCommandSystemTest extends ConciergeSystemTest {
      *
      * @see AddCommandSystemTest#assertCommandSuccess(Guest, RoomNumber, BookingPeriod)
      */
-    private void assertCommandSuccess(String command, Guest guestToAdd,
-                                       RoomNumber roomNumber, BookingPeriod bookingPeriod) {
+    private void assertCommandSuccess(String command,
+                                      Guest guestToAdd,
+                                      RoomNumber roomNumber,
+                                      BookingPeriod bookingPeriod) {
         Model expectedModel = getModel();
-        expectedModel.addGuest(guestToAdd);
 
         Booking expectedBooking = new Booking(guestToAdd, bookingPeriod);
         expectedModel.addBooking(roomNumber, expectedBooking);
-        String expectedResultMessage =
-                String.format(AddCommand.MESSAGE_SUCCESS, guestToAdd,
-                        roomNumber, bookingPeriod);
+        String expectedResultMessage = String.format(AddCommand.MESSAGE_SUCCESS, guestToAdd, roomNumber, bookingPeriod);
 
         assertCommandSuccess(command, expectedModel, expectedResultMessage);
     }

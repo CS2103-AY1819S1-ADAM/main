@@ -11,41 +11,41 @@ import seedu.address.model.room.booking.Booking;
 public class TypicalBookings {
 
     public static final Booking LASTWEEK_YESTERDAY = new BookingBuilder()
-        .withBookingPeriod(TypicalBookingPeriods.LASTWEEK_YESTERDAY).build();
+            .withGuest(TypicalGuests.ALICE)
+            .withBookingPeriod(TypicalBookingPeriods.LASTWEEK_YESTERDAY)
+            .build();
 
     public static final Booking LASTWEEK_YESTERDAY_CHECKED_IN = new BookingBuilder()
-        .withBookingPeriod(TypicalBookingPeriods.LASTWEEK_YESTERDAY)
-        .withCheckIn(true)
-        .build();
+            .withGuest(TypicalGuests.BENSON)
+            .withBookingPeriod(TypicalBookingPeriods.LASTWEEK_YESTERDAY)
+            .withCheckIn(true)
+            .build();
 
     public static final Booking YESTERDAY_TODAY = new BookingBuilder()
-        .withBookingPeriod(TypicalBookingPeriods.YESTERDAY_TODAY).build();
+            .withGuest(TypicalGuests.CARL)
+            .withBookingPeriod(TypicalBookingPeriods.YESTERDAY_TODAY)
+            .build();
 
     public static final Booking TODAY_TOMORROW = new BookingBuilder()
-        .withBookingPeriod(TypicalBookingPeriods.TODAY_TOMORROW).build();
+            .withGuest(TypicalGuests.DANIEL)
+            .withBookingPeriod(TypicalBookingPeriods.TODAY_TOMORROW)
+            .build();
 
     public static final Booking TODAY_TOMORROW_CHECKED_IN = new BookingBuilder()
-        .withBookingPeriod(TypicalBookingPeriods.TODAY_TOMORROW)
-        .withCheckIn(true)
-        .build();
+            .withGuest(TypicalGuests.ELLE)
+            .withBookingPeriod(TypicalBookingPeriods.TODAY_TOMORROW)
+            .withCheckIn(true)
+            .build();
 
     public static final Booking TODAY_NEXTWEEK = new BookingBuilder()
-        .withBookingPeriod(TypicalBookingPeriods.TODAY_NEXTWEEK).build();
+            .withGuest(TypicalGuests.FIONA)
+            .withBookingPeriod(TypicalBookingPeriods.TODAY_NEXTWEEK)
+            .build();
 
     public static final Booking TOMORROW_NEXTWEEK = new BookingBuilder()
-        .withBookingPeriod(TypicalBookingPeriods.TOMORROW_NEXTWEEK).build();
-
-    private static Booking[] getTypicalBookings() {
-        return new Booking[] {
-            LASTWEEK_YESTERDAY,
-            LASTWEEK_YESTERDAY_CHECKED_IN,
-            YESTERDAY_TODAY,
-            TODAY_TOMORROW_CHECKED_IN,
-            TODAY_TOMORROW,
-            TODAY_NEXTWEEK,
-            TOMORROW_NEXTWEEK
-        };
-    }
+            .withGuest(TypicalGuests.GEORGE)
+            .withBookingPeriod(TypicalBookingPeriods.TOMORROW_NEXTWEEK)
+            .build();
 
     /* ============== Bookings with single bookings ========================================================== */
     public static SortedSet<Booking> getTypicalBookingsLastWeekYesterday() {
@@ -91,20 +91,11 @@ public class TypicalBookings {
     }
 
     /* ============== Bookings with multiple bookings ========================================================== */
-    public static SortedSet<Booking> getMultipleBookingsSet1() {
+    public static SortedSet<Booking> getMultipleBookingsSet() {
         SortedSet<Booking> bookings = new TreeSet<>();
-        bookings.add(LASTWEEK_YESTERDAY);
+        bookings.add(LASTWEEK_YESTERDAY_CHECKED_IN);
         bookings.add(YESTERDAY_TODAY);
         bookings.add(TODAY_TOMORROW);
-        bookings.add(TOMORROW_NEXTWEEK);
-        return bookings;
-    }
-
-    public static SortedSet<Booking> getMultipleBookingsSet2() {
-        SortedSet<Booking> bookings = new TreeSet<>();
-        bookings.add(LASTWEEK_YESTERDAY);
-        bookings.add(YESTERDAY_TODAY);
-        bookings.add(TODAY_TOMORROW_CHECKED_IN);
         bookings.add(TOMORROW_NEXTWEEK);
         return bookings;
     }

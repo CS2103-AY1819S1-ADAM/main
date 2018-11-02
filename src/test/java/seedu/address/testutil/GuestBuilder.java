@@ -16,8 +16,8 @@ import seedu.address.model.util.SampleDataUtil;
 public class GuestBuilder {
 
     public static final String DEFAULT_NAME = "Alice Pauline";
-    public static final String DEFAULT_PHONE = "85355255";
-    public static final String DEFAULT_EMAIL = "alice@gmail.com";
+    public static final String DEFAULT_PHONE = "94351253";
+    public static final String DEFAULT_EMAIL = "alice@example.com";
 
     private Name name;
     private Phone phone;
@@ -50,14 +50,6 @@ public class GuestBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Guest} that we are building.
-     */
-    public GuestBuilder withTags(String ... tags) {
-        this.tags = SampleDataUtil.getTagSet(tags);
-        return this;
-    }
-
-    /**
      * Sets the {@code Phone} of the {@code Guest} that we are building.
      */
     public GuestBuilder withPhone(String phone) {
@@ -70,6 +62,14 @@ public class GuestBuilder {
      */
     public GuestBuilder withEmail(String email) {
         this.email = new Email(email);
+        return this;
+    }
+
+    /**
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Guest} that we are building.
+     */
+    public GuestBuilder withTags(String ... tags) {
+        this.tags = SampleDataUtil.getTagSet(tags);
         return this;
     }
 

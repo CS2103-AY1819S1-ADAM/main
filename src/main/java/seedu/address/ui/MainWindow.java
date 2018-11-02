@@ -163,8 +163,8 @@ public class MainWindow extends UiPart<Stage> {
         roomDetailedPanel = new RoomDetailedPanel();
         roomDetailedPanelPlaceholder.getChildren().add(roomDetailedPanel.getRoot());
 
-        this.showGuestList();
-        this.showGuestDetailedPanel();
+        this.showRoomList();
+        this.showRoomDetailedPanel();
     }
 
     void hide() {
@@ -257,6 +257,22 @@ public class MainWindow extends UiPart<Stage> {
         guestDetailedBox.setVisible(false);
         roomDetailedBox.setDisable(false);
         roomDetailedBox.setVisible(true);
+    }
+
+    /**
+     * Sets the observable list of the guest list panel to be the list of checked-in guests
+     */
+    public void setGuestListPanelDisplayCheckedInGuestList() {
+        guestListPanel = new GuestListPanel(logic.getFilteredCheckedInGuestList());
+        guestListPanelPlaceholder.getChildren().add(guestListPanel.getRoot());
+    }
+
+    /**
+     * Sets the observable list of the guest list panel to be the list of archived guests
+     */
+    public void setGuestListPanelDisplayGuestList() {
+        guestListPanel = new GuestListPanel(logic.getFilteredGuestList());
+        guestListPanelPlaceholder.getChildren().add(guestListPanel.getRoot());
     }
 
     public GuestListPanel getGuestListPanel() {

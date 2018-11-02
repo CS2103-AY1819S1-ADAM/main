@@ -51,8 +51,7 @@ public class SampleDataTest extends ConciergeSystemTest {
         Guest[] expectedGuestList = SampleDataUtil.getSampleGuests();
         assertGuestListMatching(getGuestListPanel(), expectedGuestList);
 
-        List<Room> expectedRoomList =
-                SampleDataUtil.getSampleRooms();
+        List<Room> expectedRoomList = SampleDataUtil.getSampleRooms();
         assertRoomListMatching(getRoomListPanel(), expectedRoomList);
 
     }

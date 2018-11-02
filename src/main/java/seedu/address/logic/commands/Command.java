@@ -18,4 +18,14 @@ public abstract class Command {
      * @throws CommandException If an error occurs during command execution.
      */
     public abstract CommandResult execute(Model model, CommandHistory history) throws CommandException;
+
+    /**
+     * Checks if a given command requires signing in to execute.
+     * The default value is false.
+     *
+     * A method is used instead of a field to prevent hiding.
+     */
+    public boolean requiresSignIn() {
+        return false;
+    }
 }

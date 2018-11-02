@@ -14,6 +14,7 @@ import seedu.address.commons.events.storage.DataSavingExceptionEvent;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.ReadOnlyConcierge;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.login.PasswordHashList;
 
 /**
  * Manages storage of Concierge data in local storage.
@@ -23,15 +24,30 @@ public class StorageManager extends ComponentManager implements Storage {
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
     private ConciergeStorage conciergeStorage;
     private UserPrefsStorage userPrefsStorage;
+    private PasswordsStorage passwordsStorage;
 
 
-    public StorageManager(ConciergeStorage conciergeStorage, UserPrefsStorage userPrefsStorage) {
+    public StorageManager(ConciergeStorage conciergeStorage,
+                          UserPrefsStorage userPrefsStorage,
+                          PasswordsStorage passwordsStorage) {
         super();
         this.conciergeStorage = conciergeStorage;
         this.userPrefsStorage = userPrefsStorage;
+        this.passwordsStorage = passwordsStorage;
+    }
+    // ================ SignIn / Password methods ==============================
+
+    @Override
+    public Path getPasswordsFilePath() {
+        return passwordsStorage.getPasswordsFilePath();
     }
 
-    // ================ UserPrefs methods ==============================
+    @Override
+    public PasswordHashList getPasswordHashList() throws IOException {
+        return passwordsStorage.getPasswordHashList();
+    }
+
+    // ================ UserPrefs methods ======================================
 
     @Override
     public Path getUserPrefsFilePath() {
