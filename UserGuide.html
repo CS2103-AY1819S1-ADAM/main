@@ -84,10 +84,10 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <div class="ulist">
 <ul>
 <li>
-<p><strong><code>list</code></strong> : lists all rooms types and cost of room</p>
+<p><strong><code>list -r</code></strong> : lists all rooms</p>
 </li>
 <li>
-<p><strong><code>checkout</code></strong><code>S9465789B</code> : checks out guest with NRIC no. S9465789B from his/her room</p>
+<p><strong><code>checkin</code></strong><code>r/085</code> : checks in the first active booking of room 085</p>
 </li>
 <li>
 <p><strong><code>exit</code></strong> : exits the app</p>
@@ -478,6 +478,24 @@ Format: <code>login user/USERNAME pw/PASSWORD</code></p>
 </div>
 <div class="paragraph">
 <p>Commands which require login:</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p><code>login user/&lt;name&gt; pw/&lt;name&gt;-pw</code>, where &lt;name&gt; is any of the developer team’s GitHub username</p>
+</li>
+<li>
+<p>As of v1.3, you must create your own passwords.json file with your username and passwords.
+For demo purposes, go to <a href="https://github.com/CS2103-AY1819S1-F11-2/main" class="bare">https://github.com/CS2103-AY1819S1-F11-2/main</a> and copy the passwords.json file there
+into the same folder as the Concierge.jar file.
+Alternatively, create a new passwords.json and use SHA-256 Hash to generate
+the hash for your password. You can use this website for this: <a href="https://passwordsgenerator.net/sha256-hash-generator/" class="bare">https://passwordsgenerator.net/sha256-hash-generator/</a></p>
+</li>
+</ul>
+</div>
+</div>
 </div>
 <div class="ulist">
 <ul>
@@ -975,4 +993,4 @@ t/TAG r/ROOM_NUMBER from/START_DATE to/END_DATE</code></p>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-02 03:08:42 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-02 04:28:42 UTC</div></div></div></body></html>
