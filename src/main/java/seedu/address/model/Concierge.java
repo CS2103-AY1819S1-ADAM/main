@@ -201,21 +201,26 @@ public class Concierge implements ReadOnlyConcierge {
         Booking bookingToCheckout = room.getBookings().getFirstBooking();
         Guest guestToCheckout = bookingToCheckout.getGuest();
 
-        // If the guest does not exist in the checked-in guest list, this block does nothing. This is expected
-        // behavior, because a guest can have multiple bookings at once and checkout one before another.
-        // Though not ideal, this is the current implementation.
-        // TODO Check if guest to remove from checked-in list still has other bookings in other rooms OR
-        // TODO Create new guest subclass that stores the room information, and add instances of that into
-        // checked-in guest list
-        if (hasCheckedInGuest(guestToCheckout)) {
-            removeCheckedInGuest(guestToCheckout);
-        }
-
         // If the guest exists in the archived guest list, this block does nothing. This is expected because a guest
         // may have stayed in the hotel before, so he would already be in the archived guest list.
         if (!hasGuest(guestToCheckout)) {
             addGuest(guestToCheckout);
         }
+
+        // If the guest does not exist in the checked-in guest list, or still has checked-in bookings in other rooms,
+        // this code below does nothing. This is expected
+        // behavior, because a guest can have multiple bookings at once and checkout one before another.
+        // Though not ideal, this is the current implementation.
+        // TODO Check if guest to remove from checked-in list still has other bookings in other rooms OR
+        // TODO Create new guest subclass that stores the room information, and add instances of that into
+        // checked-in guest list
+        if (!hasCheckedInGuest(guestToCheckout)
+                || rooms.asUnmodifiableObservableList().stream()
+                    .anyMatch(r -> r.getBookings().getSortedBookingsSet().stream()
+                        .anyMatch(b -> b.getIsCheckedIn() && b.getGuest().equals(guestToCheckout)))) {
+            return;
+        }
+        removeCheckedInGuest(guestToCheckout);
     }
 
     /**
@@ -230,24 +235,26 @@ public class Concierge implements ReadOnlyConcierge {
             .getFirstBookingByPredicate(booking -> booking.getBookingPeriod().equals(bookingPeriod));
         Guest guestToCheckout = bookingToCheckout.getGuest();
 
-        // If the guest does not exist in the checked-in guest list, this code below does nothing. This is expected
+        // If the guest exists in the archived guest list, this block does nothing. This is expected because a guest
+        // may have stayed in the hotel before, so he would already be in the archived guest list.
+        if (!hasGuest(guestToCheckout)) {
+            addGuest(guestToCheckout);
+        }
+
+        // If the guest does not exist in the checked-in guest list, or still has checked-in bookings in other rooms,
+        // this code below does nothing. This is expected
         // behavior, because a guest can have multiple bookings at once and checkout one before another.
         // Though not ideal, this is the current implementation.
         // TODO Check if guest to remove from checked-in list still has other bookings in other rooms OR
         // TODO Create new guest subclass that stores the room information, and add instances of that into
         // checked-in guest list
-        if (!hasCheckedInGuest(guestToCheckout)) {
+        if (!hasCheckedInGuest(guestToCheckout)
+                || rooms.asUnmodifiableObservableList().stream()
+                    .anyMatch(r -> r.getBookings().getSortedBookingsSet().stream()
+                        .anyMatch(b -> b.getIsCheckedIn() && b.getGuest().equals(guestToCheckout)))) {
             return;
         }
         removeCheckedInGuest(guestToCheckout);
-
-        // If the guest exists in the archived guest list, the code below does nothing. This is expected because a guest
-        // may have stayed in the hotel before, so he would already be in the archived guest list.
-        if (hasGuest(guestToCheckout)) {
-            return;
-        }
-        addGuest(guestToCheckout);
-
     }
 
     public void setMenu(Map<String, ExpenseType> menu) {

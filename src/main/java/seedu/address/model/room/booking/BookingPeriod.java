@@ -18,8 +18,9 @@ public class BookingPeriod implements Comparable<BookingPeriod> {
 
     public static final String MESSAGE_BOOKING_PERIOD_CONSTRAINTS =
             "Booking period takes in 2 dates, each of which should be in the form day/month/year. "
-                + "day can be 1 or 2 digits, month can be 1 or 2 digits, year can be 2 or 4 digits. "
-                + "Also, dates should be correct dates according to the calendar, and should not be blank.";
+                + "day can be 1 or 2 digits, month can be 1 or 2 digits, year can be 2 or 4 digits."
+                + "\nAlso, dates should be valid dates according to the Gregorian calendar,"
+                + "and should not be blank or the same date.";
 
     /**
      * Standard date format used for this hotel's bookings.
