@@ -293,6 +293,7 @@ Format: `service r/ROOM_NUMBER no/ITEM_NUMBER [c/COST]`
   not exceed `Integer.MAX_VALUE`.
 * Any expenses added with this command will be accounted for under the Expenses portion
   of the respective rooms.
+* Only occupied rooms (i.e. rooms with checked-in guests) can have expenses charged to it.
 * The default `Menu` that comes with Concierge consists of the following items. Items
   may be modified, added, or removed through `concierge.xml`.
 ** *RS01* -- Room service: Red wine -- $50.00
@@ -312,6 +313,11 @@ Adds an expenditure of the item *RS01* to the room's expenses.
 
 * `service r/096 no/RS03 c/12.34` +
 Adds an expenditure of the item *RS03* to the room's expenses and charge $12.34 for it.
+
+=== Display menu: `menu` [red]#Coming in v1.4#
+
+Displays the menu to help users in the use of the `service` command. +
+Format: `menu`
 
 === Room maintenance: `maintenance` [red]#Coming in v2.0#
 
