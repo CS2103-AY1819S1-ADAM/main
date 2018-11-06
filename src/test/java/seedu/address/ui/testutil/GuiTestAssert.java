@@ -75,7 +75,12 @@ public class GuiTestAssert {
     public static void assertCardDisplaysDetailedRoom(Room expectedRoom, RoomDetailedCardHandle actualCard) {
         assertEquals("Room: " + expectedRoom.getRoomNumber(), actualCard.getRoomNumber());
         assertEquals("Capacity: " + expectedRoom.getCapacity(), actualCard.getCapacity());
-        assertEquals("Expenses: " + expectedRoom.getExpenses().toStringTotalCost(), actualCard.getExpenses());
+        assertEquals("Expenses:\n" + expectedRoom.getExpenses().toStringSummary(),
+                actualCard.getExpenses());
+        assertEquals("Active booking:\n" + expectedRoom.getBookings().toStringActiveBooking(),
+                actualCard.getActiveBooking());
+        assertEquals("All other bookings:\n" + expectedRoom.getBookings().toStringAllOtherBookings(),
+                actualCard.getAllOtherBookings());
         assertEquals(expectedRoom.getTags().stream().map(tag -> tag.tagName).collect(Collectors.toList()),
                 actualCard.getTags());
     }

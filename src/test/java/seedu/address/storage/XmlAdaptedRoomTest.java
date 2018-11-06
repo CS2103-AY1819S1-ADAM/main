@@ -1,9 +1,12 @@
 package seedu.address.storage;
 
 import static org.junit.Assert.assertEquals;
+import static seedu.address.storage.XmlAdaptedRoom.MESSAGE_NOT_CHECKED_IN;
+import static seedu.address.storage.XmlAdaptedRoom.MESSAGE_NO_BOOKING;
 import static seedu.address.storage.XmlAdaptedRoom.MISSING_FIELD_MESSAGE_FORMAT;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -16,6 +19,7 @@ import seedu.address.model.room.Room;
 import seedu.address.model.room.RoomNumber;
 import seedu.address.testutil.Assert;
 import seedu.address.testutil.ExpenseBuilder;
+import seedu.address.testutil.TypicalBookings;
 import seedu.address.testutil.TypicalMenu;
 import seedu.address.testutil.TypicalRooms;
 
@@ -33,9 +37,12 @@ public class XmlAdaptedRoomTest {
     private static final String VALID_ROOM_NUMBER = VALID_ROOM.getRoomNumber().toString();
     private static final Capacity VALID_CAPACITY = VALID_ROOM.getCapacity();
     private static final List<XmlAdaptedBooking> VALID_BOOKINGS = VALID_ROOM.getBookings().getSortedBookingsSet()
-            .stream().map(XmlAdaptedBooking::new).collect(Collectors.toList());
-    private static final List<XmlAdaptedExpense> VALID_EXPENSES = VALID_ROOM.getExpenses().getExpensesList()
-            .stream().map(XmlAdaptedExpense::new).collect(Collectors.toList());
+            .stream().map(XmlAdaptedBooking::new).collect(Collectors.toList()); // this is empty
+    private static final XmlAdaptedExpense VALID_EXPENSE =
+            new XmlAdaptedExpense(ExpenseBuilder.DEFAULT_EXPENSE_TYPE.getItemNumber(),
+                    ExpenseBuilder.DEFAULT_COST.toString(), ExpenseBuilder.DEFAULT_DATETIME.toString());
+    private static final List<XmlAdaptedExpense> VALID_EXPENSES = new ArrayList<>(Arrays.asList(VALID_EXPENSE));
+    private static final List<XmlAdaptedExpense> VALID_EXPENSES_EMPTY = new ArrayList<>();
     private static final List<XmlAdaptedTag> VALID_TAGS = VALID_ROOM.getTags()
             .stream().map(XmlAdaptedTag::new).collect(Collectors.toList());
 
@@ -52,7 +59,8 @@ public class XmlAdaptedRoomTest {
     @Test
     public void toModelType_validRoom_returnsRoom() throws Exception {
         XmlAdaptedRoom room =
-                new XmlAdaptedRoom(VALID_ROOM_NUMBER, VALID_CAPACITY, VALID_BOOKINGS, VALID_EXPENSES, VALID_TAGS);
+                new XmlAdaptedRoom(VALID_ROOM_NUMBER, VALID_CAPACITY, VALID_BOOKINGS,
+                        VALID_EXPENSES_EMPTY, VALID_TAGS);
         assertEquals(VALID_ROOM, room.toModelType(VALID_MENU_STUB));
     }
 
@@ -106,5 +114,26 @@ public class XmlAdaptedRoomTest {
         XmlAdaptedRoom room =
                 new XmlAdaptedRoom(VALID_ROOM_NUMBER, VALID_CAPACITY, VALID_BOOKINGS, invalidExpenses, VALID_TAGS);
         Assert.assertThrows(IllegalValueException.class, () -> room.toModelType(VALID_MENU_STUB));
+    }
+
+    @Test
+    public void toModelType_roomHasNoBookingButHasExpenses_throwsIllegalValueException() {
+        XmlAdaptedRoom room =
+                new XmlAdaptedRoom(VALID_ROOM_NUMBER, VALID_CAPACITY, new ArrayList<>(), VALID_EXPENSES, VALID_TAGS);
+        Assert.assertThrows(IllegalValueException.class,
+                MESSAGE_NO_BOOKING, () -> room.toModelType(VALID_MENU_STUB));
+    }
+
+    @Test
+    public void toModelType_roomNotCheckedInButHasExpenses_throwsIllegalValueException() {
+        List<XmlAdaptedBooking> nonEmptyBookings = TypicalBookings
+                .getTypicalBookingsTodayTomorrow()
+                .stream()
+                .map(XmlAdaptedBooking::new)
+                .collect(Collectors.toList());
+        XmlAdaptedRoom room =
+                new XmlAdaptedRoom(VALID_ROOM_NUMBER, VALID_CAPACITY, nonEmptyBookings, VALID_EXPENSES, VALID_TAGS);
+        Assert.assertThrows(IllegalValueException.class,
+                MESSAGE_NOT_CHECKED_IN, () -> room.toModelType(VALID_MENU_STUB));
     }
 }

@@ -17,6 +17,7 @@ import seedu.address.model.room.booking.exceptions.BookingNotFoundException;
 import seedu.address.model.room.booking.exceptions.ExpiredBookingCheckInException;
 import seedu.address.model.room.booking.exceptions.InactiveBookingCheckInException;
 import seedu.address.model.room.booking.exceptions.NoBookingException;
+import seedu.address.model.room.booking.exceptions.RoomNotCheckedInException;
 import seedu.address.model.room.exceptions.BookingAlreadyCheckedInException;
 import seedu.address.testutil.ExpenseBuilder;
 import seedu.address.testutil.RoomBuilder;
@@ -204,9 +205,25 @@ public class RoomTest {
     @Test
     public void addExpense() {
         Expense expenseToAdd = new ExpenseBuilder().build();
-        Room editedRoom = testRoomWithTodayTomorrowBooking.addExpense(expenseToAdd);
+        Room editedRoom = testRoomWithTodayTomorrowBooking.checkIn().addExpense(expenseToAdd);
         List<Expense> actualExpenseList = editedRoom.getExpenses().getExpensesList();
         assertTrue(actualExpenseList.size() == 1);
         assertTrue(actualExpenseList.get(0).equals(expenseToAdd));
+    }
+
+    @Test
+    public void addExpense_noBookings_throwsNoBookingException() {
+        Expense expenseToAdd = new ExpenseBuilder().build();
+        Room editedRoom = testRoomWithoutBooking;
+        thrown.expect(NoBookingException.class);
+        editedRoom.addExpense(expenseToAdd);
+    }
+
+    @Test
+    public void addExpense_notCheckedIn_throwsRoomNotCheckedInException() {
+        Expense expenseToAdd = new ExpenseBuilder().build();
+        Room editedRoom = testRoomWithTodayTomorrowBooking;
+        thrown.expect(RoomNotCheckedInException.class);
+        editedRoom.addExpense(expenseToAdd);
     }
 }

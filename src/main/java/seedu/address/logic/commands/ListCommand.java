@@ -43,10 +43,12 @@ public class ListCommand extends Command {
         requireNonNull(model);
 
         // flag is guaranteed to be valid by the parser, so no need to throw exception
-        if (flag.equals(FLAG_GUEST) || flag.equals(FLAG_CHECKED_IN_GUEST)) {
+        if (flag.equals(FLAG_GUEST)) {
             model.updateFilteredGuestList(Model.PREDICATE_SHOW_ALL_GUESTS);
         } else if (flag.equals(FLAG_ROOM)) {
             model.updateFilteredRoomList(Model.PREDICATE_SHOW_ALL_ROOMS);
+        } else if (flag.equals(FLAG_CHECKED_IN_GUEST)) {
+            model.updateFilteredCheckedInGuestList(Model.PREDICATE_SHOW_ALL_GUESTS);
         }
         EventsCenter.getInstance().post(new ListingChangedEvent(flag));
         return new CommandResult(MESSAGE_SUCCESS);

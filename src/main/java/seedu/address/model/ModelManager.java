@@ -14,6 +14,8 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.ConciergeChangedEvent;
+import seedu.address.logic.parser.CliSyntax;
+import seedu.address.logic.parser.Prefix;
 import seedu.address.model.expenses.Expense;
 import seedu.address.model.guest.Guest;
 import seedu.address.model.login.InvalidLogInException;
@@ -37,6 +39,7 @@ public class ModelManager extends ComponentManager implements Model {
     private final FilteredList<Room> filteredRooms;
     private final FilteredList<Guest> filteredCheckedInGuests;
     private final LogInManager logInManager;
+    private Prefix displayedListFlag;
 
     /**
      * Initializes a ModelManager with the given concierge and userPrefs.
@@ -63,8 +66,9 @@ public class ModelManager extends ComponentManager implements Model {
         versionedConcierge = new VersionedConcierge(concierge);
         filteredGuests = new FilteredList<>(versionedConcierge.getGuestList());
         filteredRooms = new FilteredList<>(versionedConcierge.getRoomList());
-        logInManager = new LogInManager(passwordRef);
         filteredCheckedInGuests = new FilteredList<>(versionedConcierge.getCheckedInGuestList());
+        logInManager = new LogInManager(passwordRef);
+        displayedListFlag = CliSyntax.FLAG_ROOM;
     }
 
     public ModelManager() {
@@ -74,7 +78,6 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void resetData(ReadOnlyConcierge newData) {
         versionedConcierge.resetData(newData);
-        updateFilteredGuestList(PREDICATE_SHOW_ALL_GUESTS);
         indicateConciergeChanged();
     }
 
@@ -128,7 +131,6 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void addGuest(Guest guest) {
         versionedConcierge.addGuest(guest);
-        updateFilteredGuestList(PREDICATE_SHOW_ALL_GUESTS);
         indicateConciergeChanged();
     }
 
@@ -138,6 +140,18 @@ public class ModelManager extends ComponentManager implements Model {
 
         versionedConcierge.updateGuest(target, editedGuest);
         indicateConciergeChanged();
+    }
+
+    //=========== Displayed List Getter and Setter =============================================================
+
+    @Override
+    public Prefix getDisplayedListFlag() {
+        return displayedListFlag;
+    }
+
+    @Override
+    public void setDisplayedListFlag(Prefix flag) {
+        displayedListFlag = flag;
     }
 
     //=========== Filtered Guest List Accessors =============================================================
@@ -155,6 +169,7 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredGuestList(Predicate<Guest> predicate) {
         requireNonNull(predicate);
         filteredGuests.setPredicate(predicate);
+        displayedListFlag = CliSyntax.FLAG_GUEST;
     }
 
     /**
@@ -170,6 +185,7 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredCheckedInGuestList(Predicate<Guest> predicate) {
         requireNonNull(predicate);
         filteredCheckedInGuests.setPredicate(predicate);
+        displayedListFlag = CliSyntax.FLAG_CHECKED_IN_GUEST;
     }
 
     //=========== Filtered Room List Accessors =============================================================
@@ -187,6 +203,7 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredRoomList(Predicate<Room> predicate) {
         requireNonNull(predicate);
         filteredRooms.setPredicate(predicate);
+        displayedListFlag = CliSyntax.FLAG_ROOM;
     }
 
     //=========== Room =======================================================
@@ -199,25 +216,18 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void addBooking(RoomNumber roomNumber, Booking booking) {
         versionedConcierge.addBooking(roomNumber, booking);
-        updateFilteredRoomList(PREDICATE_SHOW_ALL_ROOMS);
-        updateFilteredCheckedInGuestList(PREDICATE_SHOW_ALL_GUESTS);
         indicateConciergeChanged();
     }
 
     @Override
     public void checkInRoom(RoomNumber roomNumber) {
         versionedConcierge.checkInRoom(roomNumber);
-        updateFilteredRoomList(PREDICATE_SHOW_ALL_ROOMS);
-        updateFilteredCheckedInGuestList(PREDICATE_SHOW_ALL_GUESTS);
         indicateConciergeChanged();
     }
 
     @Override
     public void checkoutRoom(RoomNumber roomNumber) {
         versionedConcierge.checkoutRoom(roomNumber);
-        updateFilteredRoomList(PREDICATE_SHOW_ALL_ROOMS);
-        updateFilteredCheckedInGuestList(PREDICATE_SHOW_ALL_GUESTS);
-        updateFilteredGuestList(PREDICATE_SHOW_ALL_GUESTS);
         indicateConciergeChanged();
     }
 
@@ -234,7 +244,6 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void addExpense(RoomNumber roomNumber, Expense expense) {
         versionedConcierge.addExpense(roomNumber, expense);
-        updateFilteredRoomList(PREDICATE_SHOW_ALL_ROOMS);
         indicateConciergeChanged();
     }
 
@@ -282,7 +291,9 @@ public class ModelManager extends ComponentManager implements Model {
         // state check
         ModelManager other = (ModelManager) obj;
         return versionedConcierge.equals(other.versionedConcierge)
-                && filteredGuests.equals(other.filteredGuests);
+                && filteredGuests.equals(other.filteredGuests)
+                && filteredCheckedInGuests.equals(other.filteredCheckedInGuests)
+                && filteredRooms.equals(other.filteredRooms);
     }
 
 }

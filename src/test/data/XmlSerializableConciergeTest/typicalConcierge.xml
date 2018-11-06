@@ -50,8 +50,8 @@
                 <tagged>vip</tagged>
             </guest>
             <bookingPeriod>
-                <startDate>25/10/2018</startDate>
-                <endDate>31/10/2018</endDate>
+                <startDate>29/10/2018</startDate>
+                <endDate>4/11/2018</endDate>
             </bookingPeriod>
             <isCheckedIn>false</isCheckedIn>
         </bookings>
@@ -69,8 +69,8 @@
                 <tagged>specialNeeds</tagged>
             </guest>
             <bookingPeriod>
-                <startDate>25/10/2018</startDate>
-                <endDate>31/10/2018</endDate>
+                <startDate>29/10/2018</startDate>
+                <endDate>4/11/2018</endDate>
             </bookingPeriod>
             <isCheckedIn>true</isCheckedIn>
         </bookings>
@@ -114,8 +114,8 @@
                 <email>heinz@example.com</email>
             </guest>
             <bookingPeriod>
-                <startDate>31/10/2018</startDate>
-                <endDate>1/11/2018</endDate>
+                <startDate>4/11/2018</startDate>
+                <endDate>5/11/2018</endDate>
             </bookingPeriod>
             <isCheckedIn>false</isCheckedIn>
         </bookings>
@@ -131,8 +131,8 @@
                 <tagged>friends</tagged>
             </guest>
             <bookingPeriod>
-                <startDate>1/11/2018</startDate>
-                <endDate>2/11/2018</endDate>
+                <startDate>5/11/2018</startDate>
+                <endDate>6/11/2018</endDate>
             </bookingPeriod>
             <isCheckedIn>false</isCheckedIn>
         </bookings>
@@ -148,8 +148,8 @@
                 <tagged>friends</tagged>
             </guest>
             <bookingPeriod>
-                <startDate>1/11/2018</startDate>
-                <endDate>2/11/2018</endDate>
+                <startDate>5/11/2018</startDate>
+                <endDate>6/11/2018</endDate>
             </bookingPeriod>
             <isCheckedIn>true</isCheckedIn>
         </bookings>
@@ -192,8 +192,8 @@
                 <email>lydia@example.com</email>
             </guest>
             <bookingPeriod>
-                <startDate>1/11/2018</startDate>
-                <endDate>8/11/2018</endDate>
+                <startDate>5/11/2018</startDate>
+                <endDate>12/11/2018</endDate>
             </bookingPeriod>
             <isCheckedIn>false</isCheckedIn>
         </bookings>
@@ -208,8 +208,8 @@
                 <email>anna@example.com</email>
             </guest>
             <bookingPeriod>
-                <startDate>2/11/2018</startDate>
-                <endDate>8/11/2018</endDate>
+                <startDate>6/11/2018</startDate>
+                <endDate>12/11/2018</endDate>
             </bookingPeriod>
             <isCheckedIn>false</isCheckedIn>
         </bookings>
@@ -226,8 +226,8 @@
                 <tagged>specialNeeds</tagged>
             </guest>
             <bookingPeriod>
-                <startDate>25/10/2018</startDate>
-                <endDate>31/10/2018</endDate>
+                <startDate>29/10/2018</startDate>
+                <endDate>4/11/2018</endDate>
             </bookingPeriod>
             <isCheckedIn>true</isCheckedIn>
         </bookings>
@@ -238,8 +238,8 @@
                 <email>heinz@example.com</email>
             </guest>
             <bookingPeriod>
-                <startDate>31/10/2018</startDate>
-                <endDate>1/11/2018</endDate>
+                <startDate>4/11/2018</startDate>
+                <endDate>5/11/2018</endDate>
             </bookingPeriod>
             <isCheckedIn>false</isCheckedIn>
         </bookings>
@@ -251,8 +251,8 @@
                 <tagged>friends</tagged>
             </guest>
             <bookingPeriod>
-                <startDate>1/11/2018</startDate>
-                <endDate>2/11/2018</endDate>
+                <startDate>5/11/2018</startDate>
+                <endDate>6/11/2018</endDate>
             </bookingPeriod>
             <isCheckedIn>false</isCheckedIn>
         </bookings>
@@ -263,8 +263,8 @@
                 <email>anna@example.com</email>
             </guest>
             <bookingPeriod>
-                <startDate>2/11/2018</startDate>
-                <endDate>8/11/2018</endDate>
+                <startDate>6/11/2018</startDate>
+                <endDate>12/11/2018</endDate>
             </bookingPeriod>
             <isCheckedIn>false</isCheckedIn>
         </bookings>

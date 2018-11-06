@@ -366,6 +366,22 @@
     -fx-font-size: 11;
 }
 
+#expenses {
+    -fx-padding: 3 0 3 0;
+    -fx-hgap: 7;
+    -fx-vgap: 3;
+}
+
+#expenses .label {
+    -fx-text-fill: white;
+    -fx-background-color: #2d7899;
+    -fx-padding: 3 5 3 5;
+    -fx-border-radius: 2;
+    -fx-background-radius: 4;
+    -fx-font-size: 13;
+    -fx-font-family: "Consolas", monospace;
+}
+
 #activeBooking {
     -fx-padding: 3 0 3 0;
     -fx-hgap: 7;

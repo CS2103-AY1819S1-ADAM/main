@@ -22,7 +22,7 @@
         </HBox>
       <Label fx:id="roomNumber" text="\$first" styleClass="cell_big_label" />
       <Label fx:id="capacity" styleClass="cell_big_label" text="\$capacity" />
-      <Label fx:id="expenses" styleClass="cell_big_label" text="\$expenses" />
+      <FlowPane fx:id="expenses" />
       <FlowPane fx:id="activeBooking" />
       <FlowPane fx:id="allOtherBookings" />
       <FlowPane fx:id="tags" />

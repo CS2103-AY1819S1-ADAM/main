@@ -17,12 +17,13 @@ import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.model.Model;
+import seedu.address.testutil.ListUtil;
 
 public class SelectCommandSystemTest extends ConciergeSystemTest {
     @Test
     public void select() {
-        /* ------------------------ Perform select operations on the shown unfiltered list -------------------------- */
-
+        /* ------------------------ Perform select operations on the shown unfiltered guest list ----------------- */
+        executeCommand(ListUtil.getListGuestCommand());
         /* Case: select the first card in the guest list, command with leading spaces and trailing spaces
          * -> selected
          */

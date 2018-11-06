@@ -33,13 +33,13 @@ public class RoomDetailedCard extends UiPart<Region> {
     @FXML
     private Label capacity;
     @FXML
-    private Label expenses;
-    @FXML
     private FlowPane activeBooking;
     @FXML
     private FlowPane allOtherBookings;
     @FXML
     private FlowPane tags;
+    @FXML
+    private FlowPane expenses;
 
     public RoomDetailedCard(Room room) {
         super(FXML);
@@ -47,7 +47,7 @@ public class RoomDetailedCard extends UiPart<Region> {
         header.setText("Room Details:");
         roomNumber.setText("Room: " + room.getRoomNumber().toString());
         capacity.setText("Capacity: " + room.getCapacity().toString());
-        expenses.setText("Expenses: " + room.getExpenses().toStringTotalCost());
+        expenses.getChildren().add(new Label("Expenses:\n" + room.getExpenses().toStringSummary()));
         activeBooking.getChildren().add(new Label("Active booking:\n" + room.getBookings().toStringActiveBooking()));
         allOtherBookings.getChildren().add(new Label("All other bookings:\n"
                 + room.getBookings().toStringAllOtherBookings()));

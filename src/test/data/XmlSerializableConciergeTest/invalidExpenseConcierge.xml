@@ -67,7 +67,8 @@
             </guest>
             <bookingPeriod>
                 <startDate>23/10/2018</startDate>
-                <endDate>29/10/2018</endDate>
+                <endDate>31/12/2099</endDate>
+                <!-- this end date is to prevent throwing exception due to no booking -->
             </bookingPeriod>
             <isCheckedIn>true</isCheckedIn>
         </bookings>

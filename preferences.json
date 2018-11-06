@@ -1,0 +1,12 @@
+{
+  "guiSettings" : {
+    "windowWidth" : 1434.6666259765625,
+    "windowHeight" : 812.4444580078125,
+    "windowCoordinates" : {
+      "x" : -4,
+      "y" : -4
+    }
+  },
+  "conciergeFilePath" : "data\\concierge.xml",
+  "passwordsFilePath" : "passwords.json"
+}

@@ -15,6 +15,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.commons.events.ui.RoomListChangedEvent;
 import seedu.address.commons.events.ui.RoomPanelSelectionChangedEvent;
+import seedu.address.logic.parser.CliSyntax;
 import seedu.address.model.room.Room;
 
 /**
@@ -62,8 +63,10 @@ public class RoomListPanel extends UiPart<Region> {
 
     @Subscribe
     private void handleJumpToListRequestEvent(JumpToListRequestEvent event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        scrollTo(event.targetIndex);
+        if (event.flag.equals(CliSyntax.FLAG_ROOM)) {
+            logger.info(LogsCenter.getEventHandlingLogMessage(event));
+            scrollTo(event.targetIndex);
+        }
     }
 
     /**

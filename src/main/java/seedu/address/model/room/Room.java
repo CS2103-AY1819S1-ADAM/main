@@ -15,6 +15,8 @@ import seedu.address.model.room.booking.BookingPeriod;
 import seedu.address.model.room.booking.Bookings;
 import seedu.address.model.room.booking.exceptions.ExpiredBookingCheckInException;
 import seedu.address.model.room.booking.exceptions.InactiveBookingCheckInException;
+import seedu.address.model.room.booking.exceptions.NoBookingException;
+import seedu.address.model.room.booking.exceptions.RoomNotCheckedInException;
 import seedu.address.model.room.exceptions.BookingAlreadyCheckedInException;
 import seedu.address.model.tag.Tag;
 
@@ -151,6 +153,14 @@ public class Room {
      * Add an expense to this room's expenses
      */
     public Room addExpense(Expense expense) {
+        if (bookings.getSortedBookingsSet().isEmpty()) {
+            // no bookings
+            throw new NoBookingException();
+        }
+        if (!bookings.getFirstBooking().getIsCheckedIn()) {
+            // not checked in
+            throw new RoomNotCheckedInException();
+        }
         Expenses editedExpenses = expenses.addExpense(expense);
         return new Room(this.roomNumber, this.capacity, editedExpenses, this.bookings, this.tags);
     }

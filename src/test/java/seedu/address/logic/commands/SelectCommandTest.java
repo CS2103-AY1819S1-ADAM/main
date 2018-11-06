@@ -18,6 +18,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.logic.CommandHistory;
+import seedu.address.logic.parser.CliSyntax;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -36,6 +37,8 @@ public class SelectCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
+        model.setDisplayedListFlag(CliSyntax.FLAG_GUEST);
+
         Index lastGuestIndex = Index.fromOneBased(model.getFilteredGuestList().size());
 
         assertExecutionSuccess(INDEX_FIRST_GUEST);
@@ -45,6 +48,8 @@ public class SelectCommandTest {
 
     @Test
     public void execute_invalidIndexUnfilteredList_failure() {
+        model.setDisplayedListFlag(CliSyntax.FLAG_GUEST);
+
         Index outOfBoundsIndex = Index.fromOneBased(model.getFilteredGuestList().size() + 1);
 
         assertExecutionFailure(outOfBoundsIndex, Messages.MESSAGE_INVALID_GUEST_DISPLAYED_INDEX);

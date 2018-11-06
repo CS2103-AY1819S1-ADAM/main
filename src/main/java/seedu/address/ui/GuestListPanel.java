@@ -13,6 +13,7 @@ import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.GuestPanelSelectionChangedEvent;
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
+import seedu.address.logic.parser.CliSyntax;
 import seedu.address.model.guest.Guest;
 
 /**
@@ -59,8 +60,10 @@ public class GuestListPanel extends UiPart<Region> {
 
     @Subscribe
     private void handleJumpToListRequestEvent(JumpToListRequestEvent event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        scrollTo(event.targetIndex);
+        if (event.flag.equals(CliSyntax.FLAG_GUEST) || event.flag.equals(CliSyntax.FLAG_CHECKED_IN_GUEST)) {
+            logger.info(LogsCenter.getEventHandlingLogMessage(event));
+            scrollTo(event.targetIndex);
+        }
     }
 
     /**

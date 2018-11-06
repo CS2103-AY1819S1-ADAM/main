@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import static seedu.address.logic.parser.CliSyntax.FLAG_CHECKED_IN_GUEST;
 import static seedu.address.logic.parser.CliSyntax.FLAG_GUEST;
 import static seedu.address.logic.parser.CliSyntax.FLAG_ROOM;
 
@@ -22,5 +23,12 @@ public class ListUtil {
      */
     public static String getListRoomCommand() {
         return ListCommand.COMMAND_WORD + " " + FLAG_ROOM;
+    }
+
+    /**
+     * Returns a list command string to list checked-in guests.
+     */
+    public static String getListCheckedInGuestCommand() {
+        return ListCommand.COMMAND_WORD + " " + FLAG_CHECKED_IN_GUEST;
     }
 }

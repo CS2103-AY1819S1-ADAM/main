@@ -2,6 +2,8 @@ package seedu.address.model.expenses;
 
 import static java.util.Objects.requireNonNull;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -57,11 +59,31 @@ public class Expenses {
      * Get the total cost of all the expenses as a string.
      */
     public String toStringTotalCost() {
-        Money totalCost = new Money(0, 0);
+        BigDecimal totalCost = new BigDecimal(0);
         for (Expense e : expenseList) {
-            totalCost = totalCost.add(e.getCost());
+            totalCost = totalCost.add(new BigDecimal(e.getCost().toString()));
+            totalCost = totalCost.setScale(2, RoundingMode.HALF_EVEN);
         }
         return totalCost.toString();
+    }
+
+    /**
+     * Returns a table-formatted string of all expenses to be displayed on the detailed panel.
+     */
+    public String toStringSummary() {
+        String format = "%1$-20s %2$-7s %3$-30s %4$13s\n"; // datetime number name cost
+        StringBuilder output = new StringBuilder();
+        for (Expense expense : expenseList) {
+            output.append(String.format(format,
+                    expense.getDateTimeString(),
+                    expense.getExpenseType().getItemNumber(),
+                    expense.getExpenseType().getItemName(),
+                    expense.getCost()));
+        }
+        // anyone who has a nicer way of writing the Total line, do edit
+        String spaces = String.join("", Collections.nCopies(29, " "));
+        output.append("\n" + spaces + String.format("%1$-30s %2$13s", "Total:", toStringTotalCost()));
+        return output.toString();
     }
 
     @Override

@@ -13,6 +13,7 @@ import org.junit.rules.ExpectedException;
 import javafx.collections.ObservableList;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.Prefix;
 import seedu.address.model.Menu;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyConcierge;
@@ -241,6 +242,16 @@ public class ServiceCommandTest {
 
         @Override
         public void updateFilteredCheckedInGuestList(Predicate<Guest> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Prefix getDisplayedListFlag() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setDisplayedListFlag(Prefix flag) {
             throw new AssertionError("This method should not be called.");
         }
     }

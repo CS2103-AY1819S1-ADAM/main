@@ -4,10 +4,16 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.ui.testutil.GuiTestAssert.assertCardDisplaysDetailedRoom;
 
+import java.time.LocalDateTime;
+
 import org.junit.Test;
 
 import guitests.guihandles.RoomDetailedCardHandle;
+import seedu.address.model.expenses.ExpenseType;
+import seedu.address.model.expenses.Money;
 import seedu.address.model.room.Room;
+import seedu.address.model.util.SampleDataUtil;
+import seedu.address.testutil.ExpenseBuilder;
 import seedu.address.testutil.RoomBuilder;
 
 public class RoomDetailedCardTest extends GuiUnitTest {
@@ -48,6 +54,25 @@ public class RoomDetailedCardTest extends GuiUnitTest {
         // different room number -> returns false
         Room differentRoom = new RoomBuilder().withRoomNumber("099").build();
         assertFalse(roomDetailedCard.equals(new RoomDetailedCard(differentRoom)));
+    }
+
+    @Test
+    public void addExpense_updatesRoomDetailedCard() {
+        Room room = SampleDataUtil.getSampleConcierge().getRoomList().get(0);
+        assertTrue(room.getBookings().getFirstActiveBooking().get().getIsCheckedIn());
+        assertCardDisplay(new RoomDetailedCard(room), room);
+        room.addExpense(new ExpenseBuilder()
+                .withExpenseType(ExpenseBuilder.DEFAULT_EXPENSE_TYPE)
+                .withCost(new Money(123, 45))
+                .withDateTime(LocalDateTime.now())
+                .build());
+        assertCardDisplay(new RoomDetailedCard(room), room);
+        room.addExpense(new ExpenseBuilder()
+                .withExpenseType(new ExpenseType("TEST", "test", new Money(81, 76)))
+                .withCost(new Money(378, 12))
+                .withDateTime(LocalDateTime.now())
+                .build());
+        assertCardDisplay(new RoomDetailedCard(room), room);
     }
 
     /**

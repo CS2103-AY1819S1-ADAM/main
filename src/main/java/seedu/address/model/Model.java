@@ -4,6 +4,7 @@ import java.util.Optional;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
+import seedu.address.logic.parser.Prefix;
 import seedu.address.model.expenses.Expense;
 import seedu.address.model.guest.Guest;
 import seedu.address.model.login.InvalidLogInException;
@@ -83,6 +84,16 @@ public interface Model {
      * The guest identity of {@code editedGuest} must not be the same as another existing guest in Concierge.
      */
     void updateGuest(Guest target, Guest editedGuest);
+
+    /**
+     * Get the flag representing the last displayed list.
+     */
+    Prefix getDisplayedListFlag();
+
+    /**
+     * Set the flag representing the last displayed list.
+     */
+    void setDisplayedListFlag(Prefix flag);
 
     /** Returns an unmodifiable view of the filtered guest list */
     ObservableList<Guest> getFilteredGuestList();

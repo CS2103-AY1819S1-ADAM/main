@@ -32,7 +32,7 @@ public class RoomDetailedPanelTest extends GuiUnitTest {
     }
 
     @Test
-    public void display() throws Exception {
+    public void display() {
         for (int i = 0; i < TYPICAL_ROOMS.size(); i++) {
             selectionChangedEventStub = new RoomPanelSelectionChangedEvent(TYPICAL_ROOMS.get(i));
             postNow(selectionChangedEventStub);

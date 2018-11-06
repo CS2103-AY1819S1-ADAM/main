@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -17,6 +18,7 @@ import seedu.address.model.expenses.Expenses;
 import seedu.address.model.room.Capacity;
 import seedu.address.model.room.Room;
 import seedu.address.model.room.RoomNumber;
+import seedu.address.model.room.booking.Booking;
 import seedu.address.model.room.booking.Bookings;
 import seedu.address.model.room.booking.exceptions.OverlappingBookingException;
 import seedu.address.model.tag.Tag;
@@ -30,6 +32,8 @@ public class XmlAdaptedRoom {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Room's %s field is missing!";
     public static final String MESSAGE_OVERLAPPING_BOOKING = "Room contains overlapping bookings!";
+    public static final String MESSAGE_NO_BOOKING = "Room has no booking to add expenses!";
+    public static final String MESSAGE_NOT_CHECKED_IN = "Room is not checked in to add expenses!";
 
     @XmlElement(required = true)
     private String roomNumber;
@@ -107,6 +111,19 @@ public class XmlAdaptedRoom {
             throw new IllegalValueException(MESSAGE_OVERLAPPING_BOOKING);
         }
 
+        // only allow expenses for rooms with checked-in guests, past expenses to be
+        // archived using receipt feature.
+        Optional<Booking> firstBooking = modelBookings.getFirstActiveBooking();
+        if (!expenses.isEmpty()) {
+            if (!firstBooking.isPresent()) {
+                // no booking
+                throw new IllegalValueException(MESSAGE_NO_BOOKING);
+            }
+            if (!firstBooking.get().getIsCheckedIn()) {
+                // not checked in
+                throw new IllegalValueException(MESSAGE_NOT_CHECKED_IN);
+            }
+        }
         final List<Expense> expenseList = new ArrayList<>();
         for (XmlAdaptedExpense expense : expenses) {
             expenseList.add(expense.toModelType(menu));

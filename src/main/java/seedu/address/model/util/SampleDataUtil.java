@@ -66,6 +66,7 @@ public class SampleDataUtil {
                 .addBooking(new Booking(getSampleGuests()[0], new BookingPeriod(
                         LocalDate.now().format(BookingPeriod.DATE_TO_STRING_FORMAT),
                         LocalDate.now().plusDays(1).format(BookingPeriod.DATE_TO_STRING_FORMAT))))
+                .checkIn()
                 .addExpense(new Expense(getSampleExpenseTypes()[0]));
         uniqueRoomList.setRoom(oldRoom001, newRoom001);
 

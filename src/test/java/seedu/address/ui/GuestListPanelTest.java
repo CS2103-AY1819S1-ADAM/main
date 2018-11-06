@@ -21,6 +21,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.XmlUtil;
+import seedu.address.logic.parser.CliSyntax;
 import seedu.address.model.guest.Guest;
 import seedu.address.model.room.RoomNumber;
 import seedu.address.storage.XmlSerializableConcierge;
@@ -29,7 +30,8 @@ public class GuestListPanelTest extends GuiUnitTest {
     private static final ObservableList<Guest> TYPICAL_GUESTS =
             FXCollections.observableList(getTypicalGuests());
 
-    private static final JumpToListRequestEvent JUMP_TO_SECOND_EVENT = new JumpToListRequestEvent(INDEX_SECOND_GUEST);
+    private static final JumpToListRequestEvent JUMP_TO_SECOND_EVENT =
+            new JumpToListRequestEvent(INDEX_SECOND_GUEST, CliSyntax.FLAG_GUEST);
 
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "sandbox");
 

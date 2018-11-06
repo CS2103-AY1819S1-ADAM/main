@@ -18,7 +18,7 @@ public class Money {
 
     public static final String MESSAGE_MONEY_CONSTRAINTS =
             "Money should be written with at least one dollars digit and two cents digits.\n"
-            + "The magnitude of each amount is limited to 2^32 - 1.\n"
+            + "The magnitude of each amount is limited to 2^31 - 1.\n"
             + "Unnecessary leading zeroes are also not allowed.";
 
     private int dollars;
