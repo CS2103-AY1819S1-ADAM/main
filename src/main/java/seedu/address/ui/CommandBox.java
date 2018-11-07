@@ -28,7 +28,6 @@ public class CommandBox extends UiPart<Region> {
     private static final String MESSAGE_AUTOCOMPLETE_AVAILABLE = "Command Suggestions: ";
     private static final String MESSAGE_NO_MORE_COMMANDS_AVAILABLE = "No more commands are available";
     private static final String SPACING = " ";
-    private static final String EMPTY_STRING = "";
 
     private final Logger logger = LogsCenter.getLogger(CommandBox.class);
     private final Logic logic;

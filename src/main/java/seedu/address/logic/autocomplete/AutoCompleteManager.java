@@ -30,17 +30,8 @@ import seedu.address.logic.parser.Prefix;
  */
 public class AutoCompleteManager {
 
-    private static final String NAME_PREFIX = "n/";
-    private static final String PHONE_PREFIX = "p/";
-    private static final String EMAIL_PREFIX = "e/";
-    private static final String TAG_PREFIX = "t/";
     private static final String ROOM_PREFIX = "r/";
-    private static final String FROM_PREFIX = "from/";
-    private static final String TO_PREFIX = "to/";
     private static final String USER_PREFIX = "user/";
-    private static final String PASSWORD_PREFIX = "pw/";
-    private static final String CAPACITY_PREFIX = "c/";
-    private static final String ITEM_PREFIX = "no/";
     private static final String EMPTY_STRING = "";
 
     private Trie commandTrie;
