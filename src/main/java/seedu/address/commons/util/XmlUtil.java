@@ -3,6 +3,7 @@ package seedu.address.commons.util;
 import static java.util.Objects.requireNonNull;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
@@ -60,6 +61,29 @@ public class XmlUtil {
         if (!Files.exists(file)) {
             throw new FileNotFoundException("File not found : " + file.toAbsolutePath());
         }
+
+        JAXBContext context = JAXBContext.newInstance(data.getClass());
+        Marshaller m = context.createMarshaller();
+        m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+
+        m.marshal(data, file.toFile());
+    }
+
+    /**
+     * Saves the data in the file in xml format. Creates the file if it doesn't yet exist.
+     *
+     * @param file Points to a valid xml file containing data that match the {@code classToConvert}.
+     *             Cannot be null.
+     * @throws IOException           Thrown if the filepath cannot be created
+     * @throws JAXBException         Thrown if there is an error during converting the data
+     *                               into xml and writing to the file.
+     */
+    public static <T> void saveDataToFileIfMissing(Path file, T data) throws JAXBException, IOException {
+
+        requireNonNull(file);
+        requireNonNull(data);
+
+        FileUtil.createIfMissing(file);
 
         JAXBContext context = JAXBContext.newInstance(data.getClass());
         Marshaller m = context.createMarshaller();

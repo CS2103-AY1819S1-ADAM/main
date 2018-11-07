@@ -5,7 +5,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTimeoutPreemptively;
 import static seedu.address.testutil.EventsUtil.postNow;
 import static seedu.address.testutil.TypicalGuests.getTypicalGuests;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_GUEST;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
 import static seedu.address.ui.testutil.GuiTestAssert.assertCardDisplaysGuest;
 import static seedu.address.ui.testutil.GuiTestAssert.assertCardEquals;
 
@@ -31,7 +31,7 @@ public class GuestListPanelTest extends GuiUnitTest {
             FXCollections.observableList(getTypicalGuests());
 
     private static final JumpToListRequestEvent JUMP_TO_SECOND_EVENT =
-            new JumpToListRequestEvent(INDEX_SECOND_GUEST, CliSyntax.FLAG_GUEST);
+            new JumpToListRequestEvent(INDEX_SECOND, CliSyntax.FLAG_GUEST);
 
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "sandbox");
 
@@ -59,7 +59,7 @@ public class GuestListPanelTest extends GuiUnitTest {
         postNow(JUMP_TO_SECOND_EVENT);
         guiRobot.pauseForHuman();
 
-        GuestCardHandle expectedGuest = guestListPanelHandle.getGuestCardHandle(INDEX_SECOND_GUEST.getZeroBased());
+        GuestCardHandle expectedGuest = guestListPanelHandle.getGuestCardHandle(INDEX_SECOND.getZeroBased());
         GuestCardHandle selectedGuest = guestListPanelHandle.getHandleToSelectedCard();
         assertCardEquals(expectedGuest, selectedGuest);
     }

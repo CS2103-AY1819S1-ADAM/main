@@ -23,6 +23,7 @@ import java.util.function.Predicate;
 import org.junit.Test;
 
 import seedu.address.logic.CommandHistory;
+import seedu.address.logic.parser.Prefix;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -103,24 +104,34 @@ public class FindCommandTest {
 
     @Test
     public void execute_zeroKeywords_noGuestFound() {
-        String expectedMessage = String.format(MESSAGE_GUESTS_LISTED_OVERVIEW, 0);
+        Prefix displayedListFlag = FLAG_GUEST;
+
         GuestNameContainsKeywordsPredicate predicate = prepareGuestNamePredicate(" ");
         List<Predicate<Guest>> guestListPredicates = new LinkedList<>();
         guestListPredicates.add(predicate);
-        FindCommand command = new FindCommand(FLAG_GUEST.toString(), guestListPredicates, null);
+        FindCommand command = new FindCommand(displayedListFlag.toString(), guestListPredicates, null);
+
+        String expectedMessage = String.format(MESSAGE_GUESTS_LISTED_OVERVIEW, 0);
         expectedModel.updateFilteredGuestList(predicate);
+        expectedModel.setDisplayedListFlag(displayedListFlag);
+
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredGuestList());
     }
 
     @Test
     public void execute_multipleKeywords_multipleGuestsFound() {
-        String expectedMessage = String.format(MESSAGE_GUESTS_LISTED_OVERVIEW, 3);
+        Prefix displayedListFlag = FLAG_GUEST;
+
         GuestNameContainsKeywordsPredicate predicate = prepareGuestNamePredicate("Kurz Elle Kunz");
         List<Predicate<Guest>> guestListPredicates = new LinkedList<>();
         guestListPredicates.add(predicate);
-        FindCommand command = new FindCommand(FLAG_GUEST.toString(), guestListPredicates, null);
+        FindCommand command = new FindCommand(displayedListFlag.toString(), guestListPredicates, null);
+
+        String expectedMessage = String.format(MESSAGE_GUESTS_LISTED_OVERVIEW, 3);
         expectedModel.updateFilteredGuestList(predicate);
+        expectedModel.setDisplayedListFlag(displayedListFlag);
+
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredGuestList());
     }
@@ -129,10 +140,15 @@ public class FindCommandTest {
     public void execute_roomFlagAndNumber_roomFound() {
         String expectedMessage = String.format(MESSAGE_ROOMS_LISTED_OVERVIEW, 1);
         RoomNumberExactPredicate predicate = new RoomNumberExactPredicate(new RoomNumber("001"));
+        Prefix displayedListFlag = FLAG_ROOM;
         List<Predicate<Room>> roomListPredicates = new LinkedList<>();
         roomListPredicates.add(predicate);
-        FindCommand command = new FindCommand(FLAG_ROOM.toString(), null, roomListPredicates);
+        FindCommand command = new FindCommand(displayedListFlag.toString(), null, roomListPredicates);
+
+        String expectedMessage = String.format(MESSAGE_ROOMS_LISTED_OVERVIEW, 1);
         expectedModel.updateFilteredRoomList(predicate);
+        expectedModel.setDisplayedListFlag(displayedListFlag);
+
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
         assertEquals("001", model.getFilteredRoomList().get(0).roomNumber.value);
     }

@@ -1,7 +1,7 @@
 package seedu.address.ui;
 
 import static seedu.address.testutil.EventsUtil.postNow;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_GUEST;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
 import static seedu.address.testutil.TypicalRooms.getTypicalUniqueRoomListClean;
 import static seedu.address.ui.testutil.GuiTestAssert.assertCardDisplaysRoom;
 import static seedu.address.ui.testutil.GuiTestAssert.assertCardEquals;
@@ -20,7 +20,7 @@ public class RoomListPanelTest extends GuiUnitTest {
             getTypicalUniqueRoomListClean().asUnmodifiableObservableList();
 
     private static final JumpToListRequestEvent JUMP_TO_SECOND_EVENT =
-            new JumpToListRequestEvent(INDEX_SECOND_GUEST, CliSyntax.FLAG_ROOM);
+            new JumpToListRequestEvent(INDEX_SECOND, CliSyntax.FLAG_ROOM);
 
 
     private RoomListPanelHandle roomListPanelHandle;
@@ -44,7 +44,7 @@ public class RoomListPanelTest extends GuiUnitTest {
         postNow(JUMP_TO_SECOND_EVENT);
         guiRobot.pauseForHuman();
 
-        RoomCardHandle expectedRoom = roomListPanelHandle.getRoomCardHandle(INDEX_SECOND_GUEST.getZeroBased());
+        RoomCardHandle expectedRoom = roomListPanelHandle.getRoomCardHandle(INDEX_SECOND.getZeroBased());
         RoomCardHandle selectedRoom = roomListPanelHandle.getHandleToSelectedCard();
         assertCardEquals(expectedRoom, selectedRoom);
     }

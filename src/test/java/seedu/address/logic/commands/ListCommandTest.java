@@ -31,17 +31,20 @@ public class ListCommandTest {
 
     @Test
     public void execute_listIsNotFiltered_showsSameRoomList() {
+        expectedModel.setDisplayedListFlag(FLAG_ROOM);
         assertCommandSuccess(new ListCommand(FLAG_ROOM),
                 model, commandHistory, ListCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test
     public void execute_listIsNotFiltered_showsSameGuestList() {
+        expectedModel.setDisplayedListFlag(FLAG_GUEST);
         assertCommandSuccess(new ListCommand(FLAG_GUEST),
                 model, commandHistory, ListCommand.MESSAGE_SUCCESS, expectedModel);
     }
     @Test
     public void execute_listIsNotFiltered_showsSameCheckedInGuestList() {
+        expectedModel.setDisplayedListFlag(FLAG_CHECKED_IN_GUEST);
         assertCommandSuccess(new ListCommand(FLAG_CHECKED_IN_GUEST),
             model, commandHistory, ListCommand.MESSAGE_SUCCESS, expectedModel);
     }

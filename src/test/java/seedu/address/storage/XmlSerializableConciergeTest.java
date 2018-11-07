@@ -36,7 +36,7 @@ public class XmlSerializableConciergeTest {
 
     @Before
     public void setupValidXmlTestFiles() throws Exception {
-        XmlUtil.saveDataToFile(TYPICAL_CONCIERGE_FILE, new XmlSerializableConcierge(TYPICAL_CONCIERGE));
+        XmlUtil.saveDataToFileIfMissing(TYPICAL_CONCIERGE_FILE, new XmlSerializableConcierge(TYPICAL_CONCIERGE));
     }
 
     @Test

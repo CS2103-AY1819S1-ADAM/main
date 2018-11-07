@@ -81,11 +81,11 @@ public class XmlUtilTest {
 
     @Before
     public void setupValidXmlTestFiles() throws Exception {
-        XmlUtil.saveDataToFile(VALID_FILE, new XmlSerializableConcierge(VALID_CONCIERGE));
-        XmlUtil.saveDataToFile(VALID_ROOM_FILE, new XmlAdaptedRoom(VALID_ROOM));
-        XmlUtil.saveDataToFile(VALID_GUEST_FILE, new XmlAdaptedGuest(VALID_GUEST));
-        XmlUtil.saveDataToFile(INVALID_ROOM_FIELD_FILE, INVALID_ROOM_FIELD_ROOM);
-        XmlUtil.saveDataToFile(INVALID_GUEST_FIELD_FILE, INVALID_GUEST_FIELD_GUEST);
+        XmlUtil.saveDataToFileIfMissing(VALID_FILE, new XmlSerializableConcierge(VALID_CONCIERGE));
+        XmlUtil.saveDataToFileIfMissing(VALID_ROOM_FILE, new XmlAdaptedRoom(VALID_ROOM));
+        XmlUtil.saveDataToFileIfMissing(VALID_GUEST_FILE, new XmlAdaptedGuest(VALID_GUEST));
+        XmlUtil.saveDataToFileIfMissing(INVALID_ROOM_FIELD_FILE, INVALID_ROOM_FIELD_ROOM);
+        XmlUtil.saveDataToFileIfMissing(INVALID_GUEST_FIELD_FILE, INVALID_GUEST_FIELD_GUEST);
     }
 
     @Test

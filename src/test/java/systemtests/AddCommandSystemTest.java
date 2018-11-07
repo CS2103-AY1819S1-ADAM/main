@@ -172,8 +172,8 @@ public class AddCommandSystemTest extends ConciergeSystemTest {
      * 5. Browser url and selected card remain unchanged.<br>
      * 6. Status bar's sync status changes.<br>
      * Verifications 1, 3 and 4 are performed by
-     * {@code ConciergeSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
-     * @see ConciergeSystemTest#assertApplicationDisplaysExpected(String, String, Model)
+     * {@code ConciergeSystemTest#assertApplicationDisplaysExpectedGuest(String, String, Model)}.<br>
+     * @see ConciergeSystemTest#assertApplicationDisplaysExpectedGuest(String, String, Model)
      */
     private void assertCommandSuccess(Guest guestToAdd,
                                       RoomNumber roomNumberToAdd,
@@ -214,8 +214,8 @@ public class AddCommandSystemTest extends ConciergeSystemTest {
      */
     private void assertCommandSuccess(String command, Model expectedModel, String expectedResultMessage) {
         executeCommand(command);
-        assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);
-        assertSelectedCardUnchanged();
+        assertApplicationDisplaysExpectedGuest("", expectedResultMessage, expectedModel);
+        assertSelectedGuestCardUnchanged();
         assertCommandBoxShowsDefaultStyle();
         assertStatusBarUnchangedExceptSyncStatus();
     }
@@ -228,15 +228,15 @@ public class AddCommandSystemTest extends ConciergeSystemTest {
      * 4. {@code Storage} and {@code GuestListPanel} remain unchanged.<br>
      * 5. Browser url, selected card and status bar remain unchanged.<br>
      * Verifications 1, 3 and 4 are performed by
-     * {@code ConciergeSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
-     * @see ConciergeSystemTest#assertApplicationDisplaysExpected(String, String, Model)
+     * {@code ConciergeSystemTest#assertApplicationDisplaysExpectedGuest(String, String, Model)}.<br>
+     * @see ConciergeSystemTest#assertApplicationDisplaysExpectedGuest(String, String, Model)
      */
     private void assertCommandFailure(String command, String expectedResultMessage) {
         Model expectedModel = getModel();
 
         executeCommand(command);
-        assertApplicationDisplaysExpected(command, expectedResultMessage, expectedModel);
-        assertSelectedCardUnchanged();
+        assertApplicationDisplaysExpectedGuest(command, expectedResultMessage, expectedModel);
+        assertSelectedGuestCardUnchanged();
         assertCommandBoxShowsErrorStyle();
         assertStatusBarUnchanged();
     }

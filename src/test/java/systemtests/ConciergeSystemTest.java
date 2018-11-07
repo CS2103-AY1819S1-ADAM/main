@@ -3,12 +3,11 @@ package systemtests;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.parser.CliSyntax.FLAG_GUEST;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.testutil.TypicalConcierge.getTypicalConciergeClean;
 import static seedu.address.ui.StatusBarFooter.SYNC_STATUS_INITIAL;
 import static seedu.address.ui.StatusBarFooter.SYNC_STATUS_UPDATED;
 import static seedu.address.ui.testutil.GuiTestAssert.assertGuestListMatching;
+import static seedu.address.ui.testutil.GuiTestAssert.assertRoomListMatching;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -33,11 +32,11 @@ import seedu.address.TestApp;
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.model.Concierge;
 import seedu.address.model.Model;
+import seedu.address.testutil.FindUtil;
+import seedu.address.testutil.ListUtil;
 import seedu.address.testutil.LogInUtil;
 import seedu.address.ui.CommandBox;
 
@@ -137,7 +136,7 @@ public abstract class ConciergeSystemTest {
      * Displays all guests in Concierge.
      */
     protected void showAllGuests() {
-        executeCommand(ListCommand.COMMAND_WORD + " -g");
+        executeCommand(ListUtil.getListGuestCommand());
         assertEquals(getModel().getConcierge().getGuestList().size(), getModel().getFilteredGuestList().size());
     }
 
@@ -146,8 +145,22 @@ public abstract class ConciergeSystemTest {
      * Displays all guests with any parts of their names matching {@code keyword} (case-insensitive).
      */
     protected void showGuestsWithName(String keyword) {
-        executeCommand(FindCommand.COMMAND_WORD + " " + FLAG_GUEST + " " + PREFIX_NAME + keyword);
+        executeCommand(FindUtil.getFindGuestCommand(keyword));
         assertTrue(getModel().getFilteredGuestList().size() < getModel().getConcierge().getGuestList().size());
+    }
+
+    /**
+     * Displays all rooms with any parts of their fields matching those found in {@code keyword} (case-insensitive).
+     */
+    protected void showRoomWithKeywords(String roomNumber, String capacity, String tag,
+                                        String hasBookingFlag, String noBookingFlag, String startDate, String endDate) {
+        executeCommand(FindUtil.getFindRoomCommand(roomNumber, capacity, tag, hasBookingFlag, noBookingFlag,
+                startDate, endDate));
+        assertTrue("filtered size: " + getModel().getFilteredRoomList().size()
+                + " unfiltered size: " + getModel().getConcierge().getRoomList().size()
+                + " command: " + FindUtil.getFindRoomCommand(roomNumber, capacity, tag, hasBookingFlag, noBookingFlag,
+            startDate, endDate),
+                getModel().getFilteredRoomList().size() < getModel().getConcierge().getRoomList().size());
     }
 
     /**
@@ -172,14 +185,29 @@ public abstract class ConciergeSystemTest {
      * {@code expectedResultMessage}, the storage contains the same guest objects as {@code expectedModel}
      * and the guest list panel displays the guests in the model correctly.
      */
-    protected void assertApplicationDisplaysExpected(String expectedCommandInput, String expectedResultMessage,
-            Model expectedModel) {
+    protected void assertApplicationDisplaysExpectedGuest(String expectedCommandInput, String expectedResultMessage,
+                                                          Model expectedModel) {
         assertEquals(expectedCommandInput, getCommandBox().getInput());
 
         assertEquals(expectedResultMessage, getResultDisplay().getText());
         assertEquals(new Concierge(expectedModel.getConcierge()), testApp.readStorageConcierge());
         assertGuestListMatching(getGuestListPanel(),
                 expectedModel.getFilteredGuestList());
+    }
+
+    /**
+     * Asserts that the {@code CommandBox} displays {@code expectedCommandInput}, the {@code ResultDisplay} displays
+     * {@code expectedResultMessage}, the storage contains the same room objects as {@code expectedModel}
+     * and the room list panel displays the rooms in the model correctly.
+     */
+    protected void assertApplicationDisplaysExpectedRoom(String expectedCommandInput, String expectedResultMessage,
+                                                          Model expectedModel) {
+        assertEquals(expectedCommandInput, getCommandBox().getInput());
+
+        assertEquals(expectedResultMessage, getResultDisplay().getText());
+        assertEquals(new Concierge(expectedModel.getConcierge()), testApp.readStorageConcierge());
+        assertRoomListMatching(getRoomListPanel(),
+            expectedModel.getFilteredRoomList());
     }
 
     /**
@@ -191,6 +219,7 @@ public abstract class ConciergeSystemTest {
         statusBarFooterHandle.rememberSaveLocation();
         statusBarFooterHandle.rememberSyncStatus();
         getGuestListPanel().rememberSelectedGuestCard();
+        getRoomListPanel().rememberSelectedRoomCard();
     }
 
     /**
@@ -198,8 +227,16 @@ public abstract class ConciergeSystemTest {
      * of the previously selected guest.
      * @see BrowserPanelHandle#isUrlChanged()
      */
-    protected void assertSelectedCardDeselected() {
+    protected void assertSelectedGuestCardDeselected() {
         assertFalse(getGuestListPanel().isAnyCardSelected());
+    }
+
+    /**
+     * Asserts that the previously selected card is now deselected and the browser's url remains displaying the details
+     * of the previously selected room.
+     */
+    protected void assertSelectedRoomCardDeselected() {
+        assertFalse(getRoomListPanel().isAnyCardSelected());
     }
 
     /**
@@ -208,10 +245,19 @@ public abstract class ConciergeSystemTest {
      * @see BrowserPanelHandle#isUrlChanged()
      * @see GuestListPanelHandle#isSelectedGuestCardChanged()
      */
-    protected void assertSelectedCardChanged(Index expectedSelectedCardIndex) {
+    protected void assertSelectedGuestCardChanged(Index expectedSelectedCardIndex) {
         getGuestListPanel().navigateToCard(getGuestListPanel().getSelectedCardIndex());
         String selectedCardName = getGuestListPanel().getHandleToSelectedCard().getName();
         assertEquals(expectedSelectedCardIndex.getZeroBased(), getGuestListPanel().getSelectedCardIndex());
+    }
+
+    /**
+     * Asserts that the browser's url is changed to display the details of the room in the room list panel at
+     * {@code expectedSelectedCardIndex}, and only the card at {@code expectedSelectedCardIndex} is selected.
+     */
+    protected void assertSelectedRoomCardChanged(Index expectedSelectedCardIndex) {
+        getRoomListPanel().navigateToCard(getRoomListPanel().getSelectedCardIndex());
+        assertEquals(expectedSelectedCardIndex.getZeroBased(), getRoomListPanel().getSelectedCardIndex());
     }
 
     /**
@@ -219,8 +265,17 @@ public abstract class ConciergeSystemTest {
      * @see BrowserPanelHandle#isUrlChanged()
      * @see GuestListPanelHandle#isSelectedGuestCardChanged()
      */
-    protected void assertSelectedCardUnchanged() {
+    protected void assertSelectedGuestCardUnchanged() {
         assertFalse(getGuestListPanel().isSelectedGuestCardChanged());
+    }
+
+    /**
+     * Asserts that the browser's url and the selected card in the room list panel remain unchanged.
+     * @see BrowserPanelHandle#isUrlChanged()
+     * @see GuestListPanelHandle#isSelectedGuestCardChanged()
+     */
+    protected void assertSelectedRoomCardUnchanged() {
+        assertFalse(getRoomListPanel().isSelectedRoomCardChanged());
     }
 
     /**

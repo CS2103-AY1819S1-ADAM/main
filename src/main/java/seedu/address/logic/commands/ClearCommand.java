@@ -3,6 +3,8 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.util.SampleDataUtil.getEmptyConcierge;
 
+import seedu.address.commons.core.EventsCenter;
+import seedu.address.commons.events.ui.DeselectGuestListEvent;
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 
@@ -18,6 +20,8 @@ public class ClearCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
         model.resetData(getEmptyConcierge());
+        EventsCenter.getInstance().post(new DeselectGuestListEvent());
+
         model.commitConcierge();
         return new CommandResult(MESSAGE_SUCCESS);
     }

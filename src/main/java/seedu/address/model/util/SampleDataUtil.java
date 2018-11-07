@@ -53,47 +53,6 @@ public class SampleDataUtil {
         return new UniqueRoomList().asUnmodifiableObservableList();
     }
 
-    /**
-     * Returns a room list initialized with the maximum number of rooms, and a few sample bookings
-     * Use to see if XML file reflects changes
-     * TODO DELETE WHEN TESTED IN UNIT TESTS
-     */
-    public static List<Room> getSampleRoomsWithBookingsExpenses() {
-        UniqueRoomList uniqueRoomList = new UniqueRoomList();
-
-        Room oldRoom001 = uniqueRoomList.getRoom(new RoomNumber("001"));
-        Room newRoom001 = oldRoom001
-                .addBooking(new Booking(getSampleGuests()[0], new BookingPeriod(
-                        LocalDate.now().format(BookingPeriod.DATE_TO_STRING_FORMAT),
-                        LocalDate.now().plusDays(1).format(BookingPeriod.DATE_TO_STRING_FORMAT))))
-                .checkIn()
-                .addExpense(new Expense(getSampleExpenseTypes()[0]));
-        uniqueRoomList.setRoom(oldRoom001, newRoom001);
-
-        Room oldRoom002 = uniqueRoomList.getRoom(new RoomNumber("002"));
-        Room newRoom002 = oldRoom002
-                .addBooking(new Booking(getSampleGuests()[1], new BookingPeriod(
-                        LocalDate.now().format(BookingPeriod.DATE_TO_STRING_FORMAT),
-                        LocalDate.now().plusDays(2).format(BookingPeriod.DATE_TO_STRING_FORMAT))));
-        uniqueRoomList.setRoom(oldRoom002, newRoom002);
-
-        Room oldRoom003 = uniqueRoomList.getRoom(new RoomNumber("003"));
-        Room newRoom003 = oldRoom003
-                .addBooking(new Booking(getSampleGuests()[2], new BookingPeriod(
-                        LocalDate.now().plusDays(1).format(BookingPeriod.DATE_TO_STRING_FORMAT),
-                        LocalDate.now().plusDays(2).format(BookingPeriod.DATE_TO_STRING_FORMAT))));
-        uniqueRoomList.setRoom(oldRoom003, newRoom003);
-
-        Room oldRoom004 = uniqueRoomList.getRoom(new RoomNumber("004"));
-        Room newRoom004 = oldRoom004
-                .addBooking(new Booking(getSampleGuests()[3], new BookingPeriod(
-                        LocalDate.now().minusDays(1).format(BookingPeriod.DATE_TO_STRING_FORMAT),
-                        LocalDate.now().plusDays(2).format(BookingPeriod.DATE_TO_STRING_FORMAT))));
-        uniqueRoomList.setRoom(oldRoom004, newRoom004);
-
-        return uniqueRoomList.asUnmodifiableObservableList();
-    }
-
     public static ExpenseType[] getSampleExpenseTypes() {
         return new ExpenseType[] {
             new ExpenseType("RS01", "Room service: Red wine", new Money(50, 0)),
@@ -127,7 +86,38 @@ public class SampleDataUtil {
         for (Guest sampleGuest : getSampleGuests()) {
             sampleAb.addGuest(sampleGuest);
         }
-        sampleAb.setRooms(getSampleRoomsWithBookingsExpenses());
+
+        sampleAb.setRooms(getSampleRooms());
+        // add bookings and expenses to room 001
+        RoomNumber roomNumberToEdit = new RoomNumber("001");
+        sampleAb.addBooking(roomNumberToEdit,
+                new Booking(getSampleGuests()[0], new BookingPeriod(
+                    LocalDate.now().format(BookingPeriod.DATE_TO_STRING_FORMAT),
+                    LocalDate.now().plusDays(1).format(BookingPeriod.DATE_TO_STRING_FORMAT))));
+        sampleAb.checkInRoom(roomNumberToEdit);
+        sampleAb.addExpense(roomNumberToEdit, new Expense(getSampleExpenseTypes()[0]));
+
+        // add bookings and expenses to room 002
+        roomNumberToEdit = new RoomNumber("002");
+        sampleAb.addBooking(roomNumberToEdit,
+            new Booking(getSampleGuests()[1], new BookingPeriod(
+                LocalDate.now().format(BookingPeriod.DATE_TO_STRING_FORMAT),
+                LocalDate.now().plusDays(2).format(BookingPeriod.DATE_TO_STRING_FORMAT))));
+
+        // add bookings and expenses to room 003
+        roomNumberToEdit = new RoomNumber("003");
+        sampleAb.addBooking(roomNumberToEdit,
+            new Booking(getSampleGuests()[2], new BookingPeriod(
+                LocalDate.now().plusDays(1).format(BookingPeriod.DATE_TO_STRING_FORMAT),
+                LocalDate.now().plusDays(2).format(BookingPeriod.DATE_TO_STRING_FORMAT))));
+
+        // add bookings and expenses to room 004
+        roomNumberToEdit = new RoomNumber("004");
+        sampleAb.addBooking(roomNumberToEdit,
+            new Booking(getSampleGuests()[3], new BookingPeriod(
+                LocalDate.now().minusDays(1).format(BookingPeriod.DATE_TO_STRING_FORMAT),
+                LocalDate.now().plusDays(2).format(BookingPeriod.DATE_TO_STRING_FORMAT))));
+
         sampleAb.setMenu(getSampleMenuMap());
         return sampleAb;
     }

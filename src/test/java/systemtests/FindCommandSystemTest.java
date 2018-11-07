@@ -35,43 +35,43 @@ public class FindCommandSystemTest extends ConciergeSystemTest {
         Model expectedModel = getModel();
         ModelHelper.setFilteredGuestList(expectedModel, BENSON, DANIEL); // first names of Benson and Daniel are "Meier"
         assertCommandSuccess(command, expectedModel);
-        assertSelectedCardUnchanged();
+        assertSelectedGuestCardUnchanged();
 
         /* Case: repeat previous find command where guest list is displaying the guests we are finding
          * -> 2 guests found
          */
         command = FindCommand.COMMAND_WORD + " " + FLAG_GUEST + " " + PREFIX_NAME + KEYWORD_MATCHING_MEIER;
         assertCommandSuccess(command, expectedModel);
-        assertSelectedCardUnchanged();
+        assertSelectedGuestCardUnchanged();
 
         /* Case: find guest where guest list is not displaying the guest we are finding -> 1 guest found */
         command = FindCommand.COMMAND_WORD + " " + FLAG_GUEST + " " + PREFIX_NAME + "Carl";
         ModelHelper.setFilteredGuestList(expectedModel, CARL);
         assertCommandSuccess(command, expectedModel);
-        assertSelectedCardUnchanged();
+        assertSelectedGuestCardUnchanged();
 
         /* Case: find multiple guests in Concierge, 2 keywords -> 2 guests found */
         command = FindCommand.COMMAND_WORD + " " + FLAG_GUEST + " " + PREFIX_NAME + "Benson Daniel";
         ModelHelper.setFilteredGuestList(expectedModel, BENSON, DANIEL);
         assertCommandSuccess(command, expectedModel);
-        assertSelectedCardUnchanged();
+        assertSelectedGuestCardUnchanged();
 
         /* Case: find multiple guests in Concierge, 2 keywords in reversed order -> 2 guests found */
         command = FindCommand.COMMAND_WORD + " " + FLAG_GUEST + " " + PREFIX_NAME + "Daniel Benson";
         assertCommandSuccess(command, expectedModel);
-        assertSelectedCardUnchanged();
+        assertSelectedGuestCardUnchanged();
 
         /* Case: find multiple guests in Concierge, 2 keywords with 1 repeat -> 2 guests found */
         command = FindCommand.COMMAND_WORD + " " + FLAG_GUEST + " " + PREFIX_NAME + "Daniel Benson Daniel";
         assertCommandSuccess(command, expectedModel);
-        assertSelectedCardUnchanged();
+        assertSelectedGuestCardUnchanged();
 
         /* Case: find multiple guests in Concierge, 2 matching keywords and 1 non-matching keyword
          * -> 2 guests found
          */
         command = FindCommand.COMMAND_WORD + " " + FLAG_GUEST + " " + PREFIX_NAME + "Daniel Benson NonMatchingKeyWord";
         assertCommandSuccess(command, expectedModel);
-        assertSelectedCardUnchanged();
+        assertSelectedGuestCardUnchanged();
 
         /* Case: undo previous find command -> rejected */
         command = UndoCommand.COMMAND_WORD;
@@ -86,35 +86,35 @@ public class FindCommandSystemTest extends ConciergeSystemTest {
         /* Case: find guest in Concierge, keyword is same as name but of different case -> 1 guest found */
         command = FindCommand.COMMAND_WORD + " " + FLAG_GUEST + " " + PREFIX_NAME + "MeIeR";
         assertCommandSuccess(command, expectedModel);
-        assertSelectedCardUnchanged();
+        assertSelectedGuestCardUnchanged();
 
         /* Case: find guest in Concierge, keyword is substring of name -> 0 guests found */
         command = FindCommand.COMMAND_WORD + " " + FLAG_GUEST + " " + PREFIX_NAME + "Mei";
         ModelHelper.setFilteredGuestList(expectedModel);
         assertCommandSuccess(command, expectedModel);
-        assertSelectedCardUnchanged();
+        assertSelectedGuestCardUnchanged();
 
         /* Case: find guest in Concierge, name is substring of keyword -> 0 guests found */
         command = FindCommand.COMMAND_WORD + " " + FLAG_GUEST + " " + PREFIX_NAME + "Meiers";
         ModelHelper.setFilteredGuestList(expectedModel);
         assertCommandSuccess(command, expectedModel);
-        assertSelectedCardUnchanged();
+        assertSelectedGuestCardUnchanged();
 
         /* Case: find guest not in Concierge -> 0 guests found */
         command = FindCommand.COMMAND_WORD + " " + FLAG_GUEST + " " + PREFIX_NAME + "Mark";
         assertCommandSuccess(command, expectedModel);
-        assertSelectedCardUnchanged();
+        assertSelectedGuestCardUnchanged();
 
         /* Case: find phone number of guest in Concierge using name prefix -> 0 guests found */
         command = FindCommand.COMMAND_WORD + " " + FLAG_GUEST + " " + PREFIX_NAME + DANIEL.getPhone().value;
         assertCommandSuccess(command, expectedModel);
-        assertSelectedCardUnchanged();
+        assertSelectedGuestCardUnchanged();
 
         /* Case: find tags of guest in Concierge -> 0 guests found */
         List<Tag> tags = new ArrayList<>(DANIEL.getTags());
         command = FindCommand.COMMAND_WORD + " " + FLAG_GUEST + " " + PREFIX_NAME + tags.get(0).tagName;
         assertCommandSuccess(command, expectedModel);
-        assertSelectedCardUnchanged();
+        assertSelectedGuestCardUnchanged();
 
         /* Case: find while a guest is selected -> selected card deselected */
         showAllGuests();
@@ -123,7 +123,7 @@ public class FindCommandSystemTest extends ConciergeSystemTest {
         command = FindCommand.COMMAND_WORD + " " + FLAG_GUEST + " " + PREFIX_NAME + "Daniel";
         ModelHelper.setFilteredGuestList(expectedModel, DANIEL);
         assertCommandSuccess(command, expectedModel);
-        assertSelectedCardDeselected();
+        assertSelectedGuestCardDeselected();
 
         /* Case: find guest in empty Concierge -> 0 guests found */
         deleteAllGuests();
@@ -131,7 +131,7 @@ public class FindCommandSystemTest extends ConciergeSystemTest {
         expectedModel = getModel();
         ModelHelper.setFilteredGuestList(expectedModel, DANIEL);
         assertCommandSuccess(command, expectedModel);
-        assertSelectedCardUnchanged();
+        assertSelectedGuestCardUnchanged();
 
         /* Case: mixed case command word -> rejected */
         command = "FiNd Meier";
@@ -149,10 +149,10 @@ public class FindCommandSystemTest extends ConciergeSystemTest {
      * box displays {@code Messages#MESSAGE_PERSONS_LISTED_OVERVIEW} with the number of people in the filtered list,
      * and the model related components equal to {@code expectedModel}.
      * These verifications are done by
-     * {@code ConciergeSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
+     * {@code ConciergeSystemTest#assertApplicationDisplaysExpectedGuest(String, String, Model)}.<br>
      * Also verifies that the status bar remains unchanged, and the command box has the default style class, and the
      * selected card updated accordingly, depending on {@code cardStatus}.
-     * @see ConciergeSystemTest#assertApplicationDisplaysExpected(String, String, Model)
+     * @see ConciergeSystemTest#assertApplicationDisplaysExpectedGuest(String, String, Model)
      */
     private void assertCommandSuccess(String command, Model expectedModel) {
         String expectedResultMessage = String.format(
@@ -160,7 +160,7 @@ public class FindCommandSystemTest extends ConciergeSystemTest {
                 expectedModel.getFilteredGuestList().size());
 
         executeCommand(command);
-        assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);
+        assertApplicationDisplaysExpectedGuest("", expectedResultMessage, expectedModel);
         assertCommandBoxShowsDefaultStyle();
         assertStatusBarUnchanged();
     }
@@ -169,17 +169,17 @@ public class FindCommandSystemTest extends ConciergeSystemTest {
      * Executes {@code command} and verifies that the command box displays {@code command}, the result display
      * box displays {@code expectedResultMessage} and the model related components equal to the current model.
      * These verifications are done by
-     * {@code ConciergeSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
+     * {@code ConciergeSystemTest#assertApplicationDisplaysExpectedGuest(String, String, Model)}.<br>
      * Also verifies that the browser url, selected card and status bar remain unchanged, and the command box has the
      * error style.
-     * @see ConciergeSystemTest#assertApplicationDisplaysExpected(String, String, Model)
+     * @see ConciergeSystemTest#assertApplicationDisplaysExpectedGuest(String, String, Model)
      */
     private void assertCommandFailure(String command, String expectedResultMessage) {
         Model expectedModel = getModel();
 
         executeCommand(command);
-        assertApplicationDisplaysExpected(command, expectedResultMessage, expectedModel);
-        assertSelectedCardUnchanged();
+        assertApplicationDisplaysExpectedGuest(command, expectedResultMessage, expectedModel);
+        assertSelectedGuestCardUnchanged();
         assertCommandBoxShowsErrorStyle();
         assertStatusBarUnchanged();
     }

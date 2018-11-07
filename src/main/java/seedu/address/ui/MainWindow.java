@@ -292,4 +292,12 @@ public class MainWindow extends UiPart<Stage> {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         handleHelp();
     }
+
+    /**
+     * Clears the guest detailed panel
+     */
+    public void clearGuestSelection() {
+        guestDetailedPanel.clearSelection();
+    }
+
 }

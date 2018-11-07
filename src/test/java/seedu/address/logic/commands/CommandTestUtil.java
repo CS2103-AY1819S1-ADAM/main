@@ -26,6 +26,8 @@ import seedu.address.model.Model;
 import seedu.address.model.guest.Guest;
 import seedu.address.model.guest.GuestNameContainsKeywordsPredicate;
 import seedu.address.model.guest.Name;
+import seedu.address.model.room.Room;
+import seedu.address.model.room.RoomNumberExactPredicate;
 import seedu.address.model.room.booking.BookingPeriod;
 import seedu.address.testutil.EditGuestDescriptorBuilder;
 
@@ -165,6 +167,33 @@ public class CommandTestUtil {
         model.updateFilteredGuestList(new GuestNameContainsKeywordsPredicate(Arrays.asList(new Name(splitName[0]))));
 
         assertEquals(1, model.getFilteredGuestList().size());
+    }
+
+    /**
+     * Updates {@code model}'s filtered list to show only the checked-in guest at the given {@code targetIndex} in the
+     * {@code model}'s Concierge.
+     */
+    public static void showCheckedInGuestAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredCheckedInGuestList().size());
+
+        Guest guest = model.getFilteredCheckedInGuestList().get(targetIndex.getZeroBased());
+        final String[] splitName = guest.getName().fullName.split("\\s+");
+        model.updateFilteredCheckedInGuestList(new GuestNameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+
+        assertEquals(1, model.getFilteredCheckedInGuestList().size());
+    }
+
+    /**
+     * Updates {@code model}'s filtered list to show only the room at the given {@code targetIndex} in the
+     * {@code model}'s Concierge.
+     */
+    public static void showRoomAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredRoomList().size());
+
+        Room room = model.getFilteredRoomList().get(targetIndex.getZeroBased());
+        model.updateFilteredRoomList(new RoomNumberExactPredicate(room.getRoomNumber().toString()));
+
+        assertEquals(1, model.getFilteredRoomList().size());
     }
 
     /**

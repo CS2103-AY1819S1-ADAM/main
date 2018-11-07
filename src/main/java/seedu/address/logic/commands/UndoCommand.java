@@ -2,7 +2,10 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_GUESTS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ROOMS;
 
+import seedu.address.commons.core.EventsCenter;
+import seedu.address.commons.events.ui.DeselectGuestListEvent;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -24,8 +27,12 @@ public class UndoCommand extends Command {
             throw new CommandException(MESSAGE_FAILURE);
         }
 
+        EventsCenter.getInstance().post(new DeselectGuestListEvent());
+
         model.undoConcierge();
         model.updateFilteredGuestList(PREDICATE_SHOW_ALL_GUESTS);
+        model.updateFilteredCheckedInGuestList(PREDICATE_SHOW_ALL_GUESTS);
+        model.updateFilteredRoomList(PREDICATE_SHOW_ALL_ROOMS);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

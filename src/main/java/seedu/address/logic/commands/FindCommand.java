@@ -51,6 +51,7 @@ public class FindCommand extends Command {
         if (flag.equals(FLAG_GUEST.toString())) {
             Predicate<Guest> combinedGuestPredicate = combineGuestFilters();
             model.updateFilteredGuestList(combinedGuestPredicate);
+            model.setDisplayedListFlag(FLAG_GUEST);
             EventsCenter.getInstance().post(new ListingChangedEvent(FLAG_GUEST));
 
             return new CommandResult(
@@ -66,6 +67,7 @@ public class FindCommand extends Command {
         } else {
             Predicate<Room> combinedRoomPredicate = combineRoomFilters();
             model.updateFilteredRoomList(combinedRoomPredicate);
+            model.setDisplayedListFlag(FLAG_ROOM);
             EventsCenter.getInstance().post(new ListingChangedEvent(FLAG_ROOM));
 
             return new CommandResult(

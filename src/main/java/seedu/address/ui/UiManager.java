@@ -18,6 +18,7 @@ import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
+import seedu.address.commons.events.ui.DeselectGuestListEvent;
 import seedu.address.commons.events.ui.ListingChangedEvent;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
@@ -138,6 +139,12 @@ public class UiManager extends ComponentManager implements Ui {
             showGuestList();
             showGuestDetailedPanel();
         }
+    }
+
+    @Subscribe
+    private void handleDeselectGuestListEvent(DeselectGuestListEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        mainWindow.clearGuestSelection();
     }
 
     //==================== UI Visibility Functions ============================================================

@@ -169,7 +169,6 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredGuestList(Predicate<Guest> predicate) {
         requireNonNull(predicate);
         filteredGuests.setPredicate(predicate);
-        displayedListFlag = CliSyntax.FLAG_GUEST;
     }
 
     /**
@@ -185,7 +184,6 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredCheckedInGuestList(Predicate<Guest> predicate) {
         requireNonNull(predicate);
         filteredCheckedInGuests.setPredicate(predicate);
-        displayedListFlag = CliSyntax.FLAG_CHECKED_IN_GUEST;
     }
 
     //=========== Filtered Room List Accessors =============================================================
@@ -203,7 +201,6 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredRoomList(Predicate<Room> predicate) {
         requireNonNull(predicate);
         filteredRooms.setPredicate(predicate);
-        displayedListFlag = CliSyntax.FLAG_ROOM;
     }
 
     //=========== Room =======================================================
@@ -293,7 +290,17 @@ public class ModelManager extends ComponentManager implements Model {
         return versionedConcierge.equals(other.versionedConcierge)
                 && filteredGuests.equals(other.filteredGuests)
                 && filteredCheckedInGuests.equals(other.filteredCheckedInGuests)
-                && filteredRooms.equals(other.filteredRooms);
+                && filteredRooms.equals(other.filteredRooms)
+                && displayedListFlag.equals(other.displayedListFlag);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("displayed list flag: ")
+            .append(displayedListFlag)
+            .append("\n");
+        return sb.toString();
     }
 
 }
