@@ -1,0 +1,65 @@
+= Tan Jiaqing - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: Concierge
+
+---
+
+== Overview
+
+Concierge is a desktop application simulating a hotel management system used by hotel owners and receptionists. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+
+== Summary of contributions
+
+* *Code contributed*: [https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=jiaqingtan[Code Contributed]]
+
+* *Major enhancements*:
+
+** *Expanding on the existing 'list' function:*
+*** What it does: It allows the user to list between seeing a list of all guests, list of checked-in guests, or a list of all the rooms in the hotel.
+*** Justification: This feature is essential to a proper, working hotel management system. The listing of information on guests and rooms is needed for receptionists to perform follow-up tasks, be it in person or within the app.
+*** Highlights: The listing function was made with the intention of listing guests and rooms separately under the same column, which required more in-depth research into JAVAFX and FXML files. (More details can be found in the "Minor Enhancements" section.)
+*** Credits: The modification of the list function was highly dependent on the underlying code that the list function initially had. Additional code was added on to expand upon the initial list function, while I slowly learnt how the code of the AddressBook application actually worked.
+
+** *Expanding on the existing 'find' function:*
+*** What it does: It allows the user to search for all guests, checked-in guests, or rooms based on a particular set of conditions/predicates related to the attributes of the guest/room.
+*** Justification: This feature is essential to a proper, working hotel management system. The find function can be used in a multitude of scenarios, such as when a quick search of rooms of an exact capacity is needed, or when a checked-in guest needs to be located immediately, in the event of an emergency.
+*** Highlights: The prefixes of the find function can be chained in any order, and in any quantity, as the predicates are all combined at the end. Each filter is has an "and" relationship with one another.
+*** Credits: The modification of the find function was dependent on its own initial code, and the style of coding and arriving at the solution was closely followed.
+
+* *Other contributions*:
+
+** *Replacing the HTML panel with a focused/detailed panel*
+*** The HTML panel was replaced with a detailed panel, which showed more details about a particular guest/room when the card in the list is clicked. The main aim was to reduce the amount of information clutter on the listing portion on the left of the UI by showing only essential information. More information can be, and will be shown only if the user needs those additional information, and clicks on the guest/room card.
+
+** *Modifying the FXML files to list guest and rooms under the same UI column/panel*
+*** This particular enhancement required extensive research into JAVAFX and FXML files, which took a bit of time to solve. We had the intention of keeping the UI clean and free of visual clutter, and the main idea was to keep the listing of guests and rooms separate by ensuring that they display under the same column. Trial and error was needed to ensure that one panel appears and the other does not overlap.
+
+** *Creation of the Concierge Icon and Logo*
+
+image::ConciergeIconFinal.png[width="200"]
+image::ConciergeFinal.png[width="600"]
+*** The icon and logo was created using Adobe Photoshop, along with my limited experience in visual design gathered from my time in Polytechnic under a Game Design course.
+
+== Contributions to the User Guide
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=find]
+
+include::../UserGuide.adoc[tag=list]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=find]
+
+include::../DeveloperGuide.adoc[tag=list]
+

@@ -6,15 +6,15 @@ import java.util.function.Predicate;
  * Tests that a {@code Guest}'s {@code email} exactly matches {@code email} argument.
  */
 public class GuestEmailExactPredicate implements Predicate<Guest> {
-    private final String email;
+    private final Email email;
 
-    public GuestEmailExactPredicate(String email) {
+    public GuestEmailExactPredicate(Email email) {
         this.email = email;
     }
 
     @Override
     public boolean test(Guest guest) {
-        return guest.getEmail().toString().equals(email);
+        return guest.getEmail().equals(email);
     }
 
     @Override

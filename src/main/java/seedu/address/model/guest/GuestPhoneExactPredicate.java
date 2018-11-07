@@ -6,26 +6,26 @@ import java.util.function.Predicate;
  * Tests that a {@code Guest}'s {@code phoneNumber} exactly matches {@code phoneNumber} argument.
  */
 public class GuestPhoneExactPredicate implements Predicate<Guest> {
-    private final String phoneNumber;
+    private final Phone phone;
 
-    public GuestPhoneExactPredicate(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public GuestPhoneExactPredicate(Phone phone) {
+        this.phone = phone;
     }
 
     @Override
     public boolean test(Guest guest) {
-        return guest.getPhone().toString().equals(phoneNumber);
+        return guest.getPhone().equals(phone);
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof GuestPhoneExactPredicate // instanceof handles nulls
-                && phoneNumber.equals(((GuestPhoneExactPredicate) other).phoneNumber)); // state check
+                && phone.equals(((GuestPhoneExactPredicate) other).phone)); // state check
     }
 
     @Override
     public int hashCode() {
-        return phoneNumber.hashCode();
+        return phone.hashCode();
     }
 }

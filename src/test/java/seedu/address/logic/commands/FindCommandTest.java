@@ -13,6 +13,7 @@ import static seedu.address.testutil.TypicalGuests.CARL;
 import static seedu.address.testutil.TypicalGuests.ELLE;
 import static seedu.address.testutil.TypicalGuests.FIONA;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedList;
@@ -27,7 +28,9 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.guest.Guest;
 import seedu.address.model.guest.GuestNameContainsKeywordsPredicate;
+import seedu.address.model.guest.Name;
 import seedu.address.model.room.Room;
+import seedu.address.model.room.RoomNumber;
 import seedu.address.model.room.RoomNumberExactPredicate;
 
 /**
@@ -47,10 +50,12 @@ public class FindCommandTest {
         List<Predicate<Room>> secondRoomPredicates = new LinkedList<>();
         List<Predicate<Room>> emptyRoomPredicates = new LinkedList<>();
 
-        firstGuestPredicates.add(new GuestNameContainsKeywordsPredicate(Collections.singletonList("first")));
-        secondGuestPredicates.add(new GuestNameContainsKeywordsPredicate(Collections.singletonList("second")));
-        firstRoomPredicates.add(new RoomNumberExactPredicate("001"));
-        secondRoomPredicates.add(new RoomNumberExactPredicate("002"));
+        firstGuestPredicates.add(new
+                GuestNameContainsKeywordsPredicate(Collections.singletonList(new Name("first"))));
+        secondGuestPredicates.add(new
+                GuestNameContainsKeywordsPredicate(Collections.singletonList(new Name("second"))));
+        firstRoomPredicates.add(new RoomNumberExactPredicate(new RoomNumber("001")));
+        secondRoomPredicates.add(new RoomNumberExactPredicate(new RoomNumber("002")));
 
         FindCommand findFirstGuestCommand = new FindCommand(FLAG_GUEST.toString(),
                 firstGuestPredicates, emptyRoomPredicates);
@@ -123,7 +128,7 @@ public class FindCommandTest {
     @Test
     public void execute_roomFlagAndNumber_roomFound() {
         String expectedMessage = String.format(MESSAGE_ROOMS_LISTED_OVERVIEW, 1);
-        RoomNumberExactPredicate predicate = new RoomNumberExactPredicate("001");
+        RoomNumberExactPredicate predicate = new RoomNumberExactPredicate(new RoomNumber("001"));
         List<Predicate<Room>> roomListPredicates = new LinkedList<>();
         roomListPredicates.add(predicate);
         FindCommand command = new FindCommand(FLAG_ROOM.toString(), null, roomListPredicates);
@@ -136,7 +141,12 @@ public class FindCommandTest {
      * Parses {@code userInput} into a {@code GuestNameContainsKeywordsPredicate}.
      */
     private GuestNameContainsKeywordsPredicate prepareGuestNamePredicate(String userInput) {
-        return new GuestNameContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
+        String[] splitString = userInput.split("\\s+");
+        List<Name> nameList = new ArrayList<>();
+        for (String string : splitString) {
+            nameList.add(new Name(string));
+        }
+        return new GuestNameContainsKeywordsPredicate(nameList);
     }
 
 }

@@ -1,5 +1,8 @@
 package seedu.address.ui;
 
+import static seedu.address.logic.parser.CliSyntax.FLAG_CHECKED_IN_GUEST;
+import static seedu.address.logic.parser.CliSyntax.FLAG_GUEST;
+
 import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
@@ -11,7 +14,9 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.events.model.ConciergeChangedEvent;
 import seedu.address.commons.events.ui.GuestPanelSelectionChangedEvent;
+import seedu.address.commons.events.ui.ListingChangedEvent;
 import seedu.address.model.guest.Guest;
 
 /**
@@ -65,6 +70,18 @@ public class GuestDetailedPanel extends UiPart<Region> {
     private void handleGuestPanelSelectionChangedEvent(GuestPanelSelectionChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         setGuestDetails(event.getNewSelection());
+    }
+
+    @Subscribe
+    private void handleConciergeChangedEvent(ConciergeChangedEvent event) {
+        guestDetailedView.setItems(null);
+    }
+
+    @Subscribe
+    private void handleListingChangedEvent(ListingChangedEvent event) {
+        if (event.getFlag().equals(FLAG_GUEST) || event.getFlag().equals(FLAG_CHECKED_IN_GUEST)) {
+            guestDetailedView.setItems(null);
+        }
     }
 
 }

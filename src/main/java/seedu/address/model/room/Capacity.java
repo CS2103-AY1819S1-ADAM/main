@@ -30,6 +30,14 @@ public enum Capacity {
         return value;
     }
 
+    /**
+     * Returns true if a given string is a valid capacity.
+     */
+    public static boolean isValidCapacity(String test) {
+        int value = Integer.parseInt(test);
+        return SINGLE.value == value || DOUBLE.value == value || SUITE.value == value;
+    }
+
     @Override
     public String toString() {
         return String.format("%d | %s", value, this.name());

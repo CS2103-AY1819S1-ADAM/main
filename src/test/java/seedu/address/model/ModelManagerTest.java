@@ -7,13 +7,15 @@ import static seedu.address.testutil.TypicalGuests.ALICE;
 import static seedu.address.testutil.TypicalGuests.BENSON;
 
 import java.nio.file.Paths;
-import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.address.model.guest.GuestNameContainsKeywordsPredicate;
+import seedu.address.model.guest.Name;
 import seedu.address.testutil.ConciergeBuilder;
 
 public class ModelManagerTest {
@@ -85,7 +87,11 @@ public class ModelManagerTest {
 
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
-        modelManager.updateFilteredGuestList(new GuestNameContainsKeywordsPredicate(Arrays.asList(keywords)));
+        List<Name> namesList = new LinkedList<>();
+        for (String name : keywords) {
+            namesList.add(new Name(name));
+        }
+        modelManager.updateFilteredGuestList(new GuestNameContainsKeywordsPredicate(namesList));
         assertFalse(modelManager.equals(new ModelManager(concierge, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests

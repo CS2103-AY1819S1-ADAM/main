@@ -9,27 +9,27 @@ import seedu.address.commons.util.StringUtil;
  * Tests that a {@code Guest}'s {@code Name} matches any of the keywords given.
  */
 public class GuestNameContainsKeywordsPredicate implements Predicate<Guest> {
-    private final List<String> keywords;
+    private final List<Name> names;
 
-    public GuestNameContainsKeywordsPredicate(List<String> keywords) {
-        this.keywords = keywords;
+    public GuestNameContainsKeywordsPredicate(List<Name> names) {
+        this.names = names;
     }
 
     @Override
     public boolean test(Guest guest) {
-        return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(guest.getName().fullName, keyword));
+        return names.stream()
+                .anyMatch(name -> StringUtil.containsWordIgnoreCase(guest.getName().fullName, name.fullName));
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof GuestNameContainsKeywordsPredicate // instanceof handles nulls
-                && keywords.equals(((GuestNameContainsKeywordsPredicate) other).keywords)); // state check
+                && names.equals(((GuestNameContainsKeywordsPredicate) other).names)); // state check
     }
 
     @Override
     public int hashCode() {
-        return keywords.hashCode();
+        return names.hashCode();
     }
 }

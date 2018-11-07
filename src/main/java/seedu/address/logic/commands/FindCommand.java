@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.FLAG_CHECKED_IN_GUEST;
 import static seedu.address.logic.parser.CliSyntax.FLAG_GUEST;
 import static seedu.address.logic.parser.CliSyntax.FLAG_ROOM;
 
@@ -54,6 +55,14 @@ public class FindCommand extends Command {
 
             return new CommandResult(
                     String.format(Messages.MESSAGE_GUESTS_LISTED_OVERVIEW, model.getFilteredGuestList().size()));
+
+        } else if (flag.equals(FLAG_CHECKED_IN_GUEST.toString())) {
+            Predicate<Guest> combinedGuestPredicate = combineGuestFilters();
+            model.updateFilteredCheckedInGuestList(combinedGuestPredicate);
+            EventsCenter.getInstance().post(new ListingChangedEvent(FLAG_CHECKED_IN_GUEST));
+
+            return new CommandResult(String.format(Messages.MESSAGE_GUESTS_LISTED_OVERVIEW,
+                            model.getFilteredCheckedInGuestList().size()));
         } else {
             Predicate<Room> combinedRoomPredicate = combineRoomFilters();
             model.updateFilteredRoomList(combinedRoomPredicate);

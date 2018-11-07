@@ -38,6 +38,7 @@ import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.guest.Guest;
 import seedu.address.model.guest.GuestNameContainsKeywordsPredicate;
+import seedu.address.model.guest.Name;
 import seedu.address.model.room.Room;
 import seedu.address.model.room.RoomNumber;
 import seedu.address.model.room.booking.BookingPeriod;
@@ -90,12 +91,13 @@ public class ConciergeParserTest {
     @Test
     public void parseCommand_find() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
+        List<Name> nameList = Arrays.asList(new Name("foo"), new Name("bar"), new Name("baz"));
         FindCommand command = (FindCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + " " + FLAG_GUEST.toString() + " " + PREFIX_NAME.toString()
                         + keywords.stream().collect(Collectors.joining(" ")));
         List<Predicate<Guest>> listPredicates = new LinkedList<>();
         List<Predicate<Room>> emptyRoomPredicates = new LinkedList<>();
-        listPredicates.add(new GuestNameContainsKeywordsPredicate(keywords));
+        listPredicates.add(new GuestNameContainsKeywordsPredicate(nameList));
         assertEquals(new FindCommand(FLAG_GUEST.toString(), listPredicates, emptyRoomPredicates), command);
     }
 

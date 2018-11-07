@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.parser.CliSyntax.FLAG_CHECKED_IN_GUEST;
 import static seedu.address.logic.parser.CliSyntax.FLAG_GUEST;
 import static seedu.address.logic.parser.CliSyntax.FLAG_ROOM;
 import static seedu.address.logic.parser.CliSyntax.FLAG_ROOM_HAS_BOOKINGS;
@@ -13,26 +14,28 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ROOM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROOM_CAPACITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.function.Predicate;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+
 import seedu.address.model.guest.Guest;
 import seedu.address.model.guest.GuestEmailExactPredicate;
 import seedu.address.model.guest.GuestNameContainsKeywordsPredicate;
 import seedu.address.model.guest.GuestPhoneExactPredicate;
 import seedu.address.model.guest.GuestTagsContainsKeywordsPredicate;
+import seedu.address.model.guest.Name;
 import seedu.address.model.room.Room;
 import seedu.address.model.room.RoomBookingsDateRangePredicate;
 import seedu.address.model.room.RoomCapacityExactPredicate;
+import seedu.address.model.room.RoomHasBookingWithGuestExactPredicate;
 import seedu.address.model.room.RoomHasBookingsExactPredicate;
 import seedu.address.model.room.RoomNumberExactPredicate;
 import seedu.address.model.room.RoomTagsContainsKeywordsPredicate;
-
 import seedu.address.model.room.booking.BookingPeriod;
+import seedu.address.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -62,10 +65,11 @@ public class FindCommandParser implements Parser<FindCommand> {
      */
     public FindCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, FLAG_ROOM, FLAG_GUEST);
+                ArgumentTokenizer.tokenize(args, FLAG_ROOM, FLAG_GUEST, FLAG_CHECKED_IN_GUEST);
 
         if ((!ParserUtil.arePrefixesPresent(argMultimap, FLAG_ROOM)
-                && !ParserUtil.arePrefixesPresent(argMultimap, FLAG_GUEST))
+                && !ParserUtil.arePrefixesPresent(argMultimap, FLAG_GUEST)
+                && !ParserUtil.arePrefixesPresent(argMultimap, FLAG_CHECKED_IN_GUEST))
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_NO_FLAGS, FindCommand.MESSAGE_USAGE));
@@ -74,6 +78,9 @@ public class FindCommandParser implements Parser<FindCommand> {
         if (ParserUtil.arePrefixesPresent(argMultimap, FLAG_GUEST)) {
             getGuestPredicates(args);
             return new FindCommand(FLAG_GUEST.toString(), guestPredicates, roomPredicates);
+        } else if (ParserUtil.arePrefixesPresent(argMultimap, FLAG_CHECKED_IN_GUEST)) {
+            getGuestPredicates(args);
+            return new FindCommand(FLAG_CHECKED_IN_GUEST.toString(), guestPredicates, roomPredicates);
         } else {
             getRoomPredicates(args);
             return new FindCommand(FLAG_ROOM.toString(), guestPredicates, roomPredicates);
@@ -85,7 +92,7 @@ public class FindCommandParser implements Parser<FindCommand> {
      * {@code suffixFilters} to find guests.
      * @throws ParseException if the user input does not conform the expected format
      */
-    private void getGuestPredicates(String args) throws ParseException {
+    private void getGuestPredicates(String args) throws ParseException, IllegalArgumentException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE,
                         PREFIX_EMAIL, PREFIX_TAG);
@@ -104,20 +111,34 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         if (ParserUtil.arePrefixesPresent(argMultimap, PREFIX_NAME)) {
             String[] nameKeywords = argMultimap.getValue(PREFIX_NAME).get().trim().split("\\s+");
-            guestPredicates.add(new GuestNameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+            List<Name> names = new LinkedList<>();
+
+            for (String name : nameKeywords) {
+                names.add(ParserUtil.parseName(name));
+            }
+
+            guestPredicates.add(new GuestNameContainsKeywordsPredicate(names));
         }
 
         if (ParserUtil.arePrefixesPresent(argMultimap, PREFIX_PHONE)) {
-            guestPredicates.add(new GuestPhoneExactPredicate(argMultimap.getValue(PREFIX_PHONE).get()));
+            guestPredicates.add(new GuestPhoneExactPredicate(
+                    ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get())));
         }
 
         if (ParserUtil.arePrefixesPresent(argMultimap, PREFIX_EMAIL)) {
-            guestPredicates.add(new GuestEmailExactPredicate(argMultimap.getValue(PREFIX_EMAIL).get()));
+            guestPredicates.add(new GuestEmailExactPredicate(
+                    ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get())));
         }
 
         if (ParserUtil.arePrefixesPresent(argMultimap, PREFIX_TAG)) {
             String[] tagsKeywords = argMultimap.getValue(PREFIX_TAG).get().trim().split("\\s+");
-            guestPredicates.add(new GuestTagsContainsKeywordsPredicate(Arrays.asList(tagsKeywords)));
+            List<Tag> tags = new LinkedList<>();
+
+            for (String tag : tagsKeywords) {
+                tags.add(ParserUtil.parseTag(tag));
+            }
+
+            guestPredicates.add(new GuestTagsContainsKeywordsPredicate(tags));
         }
     }
 
@@ -131,19 +152,13 @@ public class FindCommandParser implements Parser<FindCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_ROOM, PREFIX_ROOM_CAPACITY,
                         PREFIX_TAG, FLAG_ROOM_HAS_BOOKINGS, FLAG_ROOM_NO_BOOKINGS, PREFIX_DATE_START,
-                        PREFIX_DATE_END);
+                        PREFIX_DATE_END, PREFIX_NAME);
 
         if (!ParserUtil.areAnyPrefixPresent(argMultimap, PREFIX_ROOM, PREFIX_ROOM_CAPACITY,
                 PREFIX_TAG, FLAG_ROOM_HAS_BOOKINGS, FLAG_ROOM_NO_BOOKINGS, PREFIX_DATE_START,
-                PREFIX_DATE_END)) {
+                PREFIX_DATE_END, PREFIX_NAME)) {
             throw new ParseException(
                     String.format(MESSAGE_NO_FILTERS, FindCommand.MESSAGE_USAGE));
-        }
-
-        if (ParserUtil.areAnyPrefixValueNull(argMultimap, PREFIX_ROOM, PREFIX_ROOM_CAPACITY,
-                PREFIX_TAG, PREFIX_DATE_START, PREFIX_DATE_END)) {
-            throw new ParseException(
-                    String.format(MESSAGE_NULL_FILTERS, FindCommand.MESSAGE_USAGE));
         }
 
         if (ParserUtil.arePrefixesPresent(argMultimap, FLAG_ROOM_HAS_BOOKINGS, FLAG_ROOM_NO_BOOKINGS)) {
@@ -158,6 +173,13 @@ public class FindCommandParser implements Parser<FindCommand> {
             }
         }
 
+        if (ParserUtil.areAnyPrefixValueNull(argMultimap, PREFIX_ROOM, PREFIX_ROOM_CAPACITY,
+                PREFIX_TAG, PREFIX_DATE_START, PREFIX_DATE_END, PREFIX_NAME)) {
+            throw new ParseException(
+                    String.format(MESSAGE_NULL_FILTERS, FindCommand.MESSAGE_USAGE));
+        }
+
+
         if (ParserUtil.arePrefixesPresent(argMultimap, FLAG_ROOM_HAS_BOOKINGS)
                 || ParserUtil.arePrefixesPresent(argMultimap, FLAG_ROOM_NO_BOOKINGS)) {
             if (ParserUtil.arePrefixesPresent(argMultimap, PREFIX_DATE_START)
@@ -170,16 +192,23 @@ public class FindCommandParser implements Parser<FindCommand> {
         }
 
         if (ParserUtil.arePrefixesPresent(argMultimap, PREFIX_ROOM)) {
-            roomPredicates.add(new RoomNumberExactPredicate(argMultimap.getValue(PREFIX_ROOM).get()));
+            roomPredicates.add(new RoomNumberExactPredicate(
+                    ParserUtil.parseRoomNumber(argMultimap.getValue(PREFIX_ROOM).get())));
         }
 
         if (ParserUtil.arePrefixesPresent(argMultimap, PREFIX_ROOM_CAPACITY)) {
-            roomPredicates.add(new RoomCapacityExactPredicate(argMultimap.getValue(PREFIX_ROOM_CAPACITY).get()));
+            roomPredicates.add(new RoomCapacityExactPredicate(
+                    ParserUtil.parseCapacity(argMultimap.getValue(PREFIX_ROOM_CAPACITY).get())));
         }
 
         if (ParserUtil.arePrefixesPresent(argMultimap, PREFIX_TAG)) {
             String[] tagsKeywords = argMultimap.getValue(PREFIX_TAG).get().trim().split("\\s+");
-            roomPredicates.add(new RoomTagsContainsKeywordsPredicate(Arrays.asList(tagsKeywords)));
+            List<Tag> tags = new LinkedList<>();
+
+            for (String tag : tagsKeywords) {
+                tags.add(ParserUtil.parseTag(tag));
+            }
+            roomPredicates.add(new RoomTagsContainsKeywordsPredicate(tags));
         }
 
         if (ParserUtil.arePrefixesPresent(argMultimap, FLAG_ROOM_HAS_BOOKINGS)) {
@@ -198,6 +227,17 @@ public class FindCommandParser implements Parser<FindCommand> {
                 throw new ParseException(
                         String.format(MESSAGE_BOOKING_SAME_DATE, FindCommand.MESSAGE_USAGE));
             }
+        }
+
+        if (ParserUtil.arePrefixesPresent(argMultimap, PREFIX_NAME)) {
+            String[] nameKeywords = argMultimap.getValue(PREFIX_NAME).get().trim().split("\\s+");
+            List<Name> names = new LinkedList<>();
+
+            for (String name : nameKeywords) {
+                names.add(ParserUtil.parseName(name));
+            }
+
+            roomPredicates.add(new RoomHasBookingWithGuestExactPredicate(names));
         }
     }
 }

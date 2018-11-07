@@ -6,15 +6,15 @@ import java.util.function.Predicate;
  * Tests that a {@code Room}'s {@code RoomNumber} exactly matches {@code RoomNumber} argument.
  */
 public class RoomNumberExactPredicate implements Predicate<Room> {
-    private final String roomNumber;
+    private final RoomNumber roomNumber;
 
-    public RoomNumberExactPredicate(String roomNumber) {
+    public RoomNumberExactPredicate(RoomNumber roomNumber) {
         this.roomNumber = roomNumber;
     }
 
     @Override
     public boolean test(Room room) {
-        return room.getRoomNumber().value.equals(roomNumber);
+        return room.getRoomNumber().equals(roomNumber);
     }
 
     @Override

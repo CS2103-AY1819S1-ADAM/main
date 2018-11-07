@@ -20,6 +20,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.model.Model;
+import seedu.address.model.guest.Name;
 import seedu.address.model.tag.Tag;
 
 public class FindCommandSystemTest extends ConciergeSystemTest {
@@ -109,11 +110,6 @@ public class FindCommandSystemTest extends ConciergeSystemTest {
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: find email of guest in Concierge using name prefix -> 0 persons found */
-        command = FindCommand.COMMAND_WORD + " " + FLAG_GUEST + " " + PREFIX_NAME + DANIEL.getEmail().value;
-        assertCommandSuccess(command, expectedModel);
-        assertSelectedCardUnchanged();
-
         /* Case: find tags of guest in Concierge -> 0 guests found */
         List<Tag> tags = new ArrayList<>(DANIEL.getTags());
         command = FindCommand.COMMAND_WORD + " " + FLAG_GUEST + " " + PREFIX_NAME + tags.get(0).tagName;
@@ -140,6 +136,12 @@ public class FindCommandSystemTest extends ConciergeSystemTest {
         /* Case: mixed case command word -> rejected */
         command = "FiNd Meier";
         assertCommandFailure(command, MESSAGE_UNKNOWN_COMMAND);
+        assertSelectedCardUnchanged();
+
+        /* Case: find email of guest in Concierge using name prefix -> ParseException thrown */
+        command = FindCommand.COMMAND_WORD + " " + FLAG_GUEST + " " + PREFIX_NAME + DANIEL.getEmail().value;
+        assertCommandFailure(command, Name.MESSAGE_NAME_CONSTRAINTS);
+        assertSelectedCardUnchanged();
     }
 
     /**

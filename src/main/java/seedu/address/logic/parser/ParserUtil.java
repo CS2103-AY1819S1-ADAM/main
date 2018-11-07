@@ -16,6 +16,7 @@ import seedu.address.model.guest.Email;
 import seedu.address.model.guest.Name;
 import seedu.address.model.guest.Phone;
 import seedu.address.model.login.HashingException;
+import seedu.address.model.room.Capacity;
 import seedu.address.model.room.RoomNumber;
 import seedu.address.model.room.booking.BookingPeriod;
 import seedu.address.model.tag.Tag;
@@ -122,6 +123,20 @@ public class ParserUtil {
             throw new ParseException(RoomNumber.MESSAGE_ROOM_NUMBER_CONSTRAINTS);
         }
         return new RoomNumber(trimmedRoomNumber);
+    }
+
+    /**
+     * Parses a {@code String capacity} into a {@code Capacity}.
+     * Leading and trailing whitespaces will be trimmed.
+     * @throws ParseException if the given {@code capacity} is invalid.
+     */
+    public static String parseCapacity(String capacity) throws ParseException {
+        requireNonNull(capacity);
+        String trimmedCapacity = capacity.trim();
+        if (!Capacity.isValidCapacity(trimmedCapacity)) {
+            throw new ParseException(Capacity.MESSAGE_CAPACITY_CONSTRAINTS);
+        }
+        return capacity;
     }
 
     /**

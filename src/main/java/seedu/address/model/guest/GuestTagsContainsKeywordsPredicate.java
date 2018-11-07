@@ -10,19 +10,19 @@ import seedu.address.model.tag.Tag;
  * Tests that a {@code Guest}'s {@code tags} exactly matches a single {@code tag} keyword argument.
  */
 public class GuestTagsContainsKeywordsPredicate implements Predicate<Guest> {
-    private final List<String> keywords;
+    private final List<Tag> tags;
 
-    public GuestTagsContainsKeywordsPredicate(List<String> keywords) {
-        this.keywords = keywords;
+    public GuestTagsContainsKeywordsPredicate(List<Tag> tags) {
+        this.tags = tags;
     }
 
     @Override
     public boolean test(Guest guest) {
         List<Tag> guestTags = new LinkedList<>(guest.getTags());
 
-        for (String keywordTag : keywords) {
+        for (Tag tag : tags) {
             for (Tag guestTag : guestTags) {
-                if (guestTag.tagName.equals(keywordTag)) {
+                if (guestTag.equals(tag)) {
                     return true;
                 }
             }
@@ -35,12 +35,12 @@ public class GuestTagsContainsKeywordsPredicate implements Predicate<Guest> {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof GuestTagsContainsKeywordsPredicate // instanceof handles nulls
-                && keywords.equals(((GuestTagsContainsKeywordsPredicate) other).keywords)); // state check
+                && tags.equals(((GuestTagsContainsKeywordsPredicate) other).tags)); // state check
 
     }
 
     @Override
     public int hashCode() {
-        return keywords.hashCode();
+        return tags.hashCode();
     }
 }

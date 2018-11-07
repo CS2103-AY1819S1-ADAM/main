@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import static seedu.address.logic.parser.CliSyntax.FLAG_ROOM;
+
 import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
@@ -12,9 +14,12 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.events.model.ConciergeChangedEvent;
+import seedu.address.commons.events.ui.ListingChangedEvent;
 import seedu.address.commons.events.ui.RoomListChangedEvent;
 import seedu.address.commons.events.ui.RoomPanelSelectionChangedEvent;
 import seedu.address.model.room.Room;
+
 
 /**
  * Panel containing the list of one room.
@@ -87,4 +92,15 @@ public class RoomDetailedPanel extends UiPart<Region> {
         }
     }
 
+    @Subscribe
+    private void handleConciergeChangedEvent(ConciergeChangedEvent event) {
+        roomDetailedView.setItems(null);
+    }
+
+    @Subscribe
+    private void handleListingChangedEvent(ListingChangedEvent event) {
+        if (event.getFlag().equals(FLAG_ROOM)) {
+            roomDetailedView.setItems(null);
+        }
+    }
 }
