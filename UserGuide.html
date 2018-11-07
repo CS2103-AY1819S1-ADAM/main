@@ -17,7 +17,7 @@
 <li><a href="#adding-a-guest-code-addx-code-span-class-red-coming-in-v2-0-span">3.2. Adding a guest: <code>addx</code> <span class="red">Coming in v2.0</span></a></li>
 <li><a href="#check-in-room-code-checkin-code">3.3. Check-in room: <code>checkin</code></a></li>
 <li><a href="#checkout-room-code-checkout-code">3.4. Checkout room: <code>checkout</code></a></li>
-<li><a href="#editing-a-guest-code-edit-code-span-class-red-coming-in-v2-0-span">3.5. Editing a guest : <code>edit</code> <span class="red">Coming in v2.0</span></a></li>
+<li><a href="#editing-a-guest-code-edit-code-span-class-red-coming-in-v1-4-span">3.5. Editing a guest : <code>edit</code> <span class="red">Coming in v1.4</span></a></li>
 <li><a href="#locating-guests-and-rooms-code-find-code">3.6. Locating guests and rooms : <code>find</code></a></li>
 <li><a href="#listing-all-guests-code-list-code">3.7. Listing all guests : <code>list</code></a></li>
 <li><a href="#login-code-login-code">3.8. Login : <code>login</code></a></li>
@@ -162,6 +162,16 @@ valid but 128 is not.</p>
 <p>A guest can make an unlimited number of bookings with the hotel, as long as
 the booking is valid.</p>
 </li>
+<li>
+<p>A guest can make a booking for however long he/she wants.</p>
+</li>
+<li>
+<p>When adding a booking, the guest will <strong>not</strong> be added to the archived guest list or checked-in guest list.
+His/her information will be stored under his/her booking in the room.</p>
+</li>
+<li>
+<p>Expired bookings cannot be added. <span class="red">Coming in v1.4</span></p>
+</li>
 </ul>
 </div>
 </div>
@@ -214,9 +224,10 @@ Format: <code>addx n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]&#8230;&#8203;</code></p
 <div class="sect2">
 <h3 id="check-in-room-code-checkin-code"><a class="link" href="#check-in-room-code-checkin-code">3.3. Check-in room: <code>checkin</code></a></h3>
 <div class="paragraph">
-<p>Checks in the room&#8217;s first active booking. A booking is considered <strong>active</strong> if
-its start and end date includes today&#8217;s date, inclusively.
-The guest who made the booking will be added to both the checked-in guest list and the archived guest list.<br>
+<p>Checks in the room&#8217;s first active booking.
+A booking is considered <strong>active</strong> if its start and end date includes today&#8217;s date, inclusively.
+Upon checking in the room&#8217;s first active booking, the guest who made the booking will be added to
+the checked-in guest list.<br>
 Format: <code>checkin r/ROOM_NUMBER</code></p>
 </div>
 <div class="paragraph">
@@ -226,7 +237,8 @@ Format: <code>checkin r/ROOM_NUMBER</code></p>
 <ul>
 <li>
 <p><code>checkin r/085</code><br>
-Checks in room 085 and marks room 085&#8217;s current booking as checked-in.</p>
+Checks in room 085, marks room 085&#8217;s current booking as checked-in, and adds the guest who made the booking
+to the checked-in guest list.</p>
 </li>
 </ul>
 </div>
@@ -235,12 +247,22 @@ Checks in room 085 and marks room 085&#8217;s current booking as checked-in.</p>
 <h3 id="checkout-room-code-checkout-code"><a class="link" href="#checkout-room-code-checkout-code">3.4. Checkout room: <code>checkout</code></a></h3>
 <div class="paragraph">
 <p>Checks out the room&#8217;s first (i.e. earliest) booking, or its booking with the specified start and end dates.
-The guest is deleted from the checked-in guest list and added to the archived guest list.
-If the guest still has checked-in bookings in other rooms, he/she will not be deleted from the checked-in guest list,
-but will be added to the archived guest list the first time. Subsequently, the guest will not be added to the
-archived guest list.<br>
-A receipt is generated for his expenses. <span class="red">Coming in v2.0</span><br>
-Format: <code>checkout r/ROOM_NUMBER [from/START_DATE to/END_DATE]</code></p>
+Depending on whether the guest still has other checked-in bookings, either of the following can occur:<br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>If the guest does not have any other checked-in bookings, then he/she will be removed from the checked-in
+guest list and added to the archived guest list.</p>
+</li>
+<li>
+<p>If the guest still has other checked-in bookings, he/she will <strong>not</strong> be removed from the checked-in guest list,
+but will be added to the archived guest list.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Format: <code>checkout r/ROOM_NUMBER [from/START_DATE to/END_DATE]</code></p>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -259,23 +281,23 @@ Checks out the booking with start date 01/11/18 and end date 02/11/18 from room 
 </div>
 </div>
 <div class="sect2">
-<h3 id="editing-a-guest-code-edit-code-span-class-red-coming-in-v2-0-span"><a class="link" href="#editing-a-guest-code-edit-code-span-class-red-coming-in-v2-0-span">3.5. Editing a guest : <code>edit</code> <span class="red">Coming in v2.0</span></a></h3>
+<h3 id="editing-a-guest-code-edit-code-span-class-red-coming-in-v1-4-span"><a class="link" href="#editing-a-guest-code-edit-code-span-class-red-coming-in-v1-4-span">3.5. Editing a guest : <code>edit</code> <span class="red">Coming in v1.4</span></a></h3>
 <div class="paragraph">
-<p>Edits an existing guest in the guest list.<br>
-Format: <code>edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]&#8230;&#8203;</code></p>
+<p>Edits an existing guest in the guest list or room in the room list.<br>
+Format: <code>edit [FLAG] [IDENTIFIERS] [NEW_VALUE]</code></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
 <div class="ulist">
 <ul>
 <li>
-<p>Edits the guest at the specified <code>INDEX</code>. The index refers to the index number shown in the displayed guest list. The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+<p>First, specify the type of field you want to edit by using a FLAG.</p>
 </li>
 <li>
-<p>At least one of the optional fields must be provided.</p>
+<p>Next, specify the unique identifier of the field(s).</p>
 </li>
 <li>
-<p>Existing values will be updated to the input values.</p>
+<p>Lastly, provide the new values of the field(s).</p>
 </li>
 <li>
 <p>When editing tags, the existing tags of the guest will be removed i.e adding of tags is not cumulative.</p>
@@ -287,18 +309,121 @@ Format: <code>edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]&#8230;&#8203;</cod
 </div>
 </div>
 </div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+All new values must start with a prefix preceded by the character <code>n</code>. For example, new tag = <code>nt/</code>.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Flags for possible fields to edit:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>-r</code> - room fields</p>
+</li>
+<li>
+<p><code>-b</code> - booking period field</p>
+</li>
+<li>
+<p><code>-g</code> - guest field</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Identifiers:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>r/</code> - room number</p>
+</li>
+<li>
+<p><code>from/</code> - start date of a booking period</p>
+</li>
+<li>
+<p><code>n/</code> - guest name</p>
+</li>
+<li>
+<p><code>p/</code> - guest phone</p>
+</li>
+<li>
+<p><code>e/</code> - guest email</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>New values:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>nc/</code> - new room capacity</p>
+</li>
+<li>
+<p><code>nt/</code> - new tag (both guest and room, replaces old tags)</p>
+</li>
+<li>
+<p><code>nfrom/</code> - new start date of booking</p>
+</li>
+<li>
+<p><code>nto/</code> - new end date of booking</p>
+</li>
+<li>
+<p><code>nn/</code> - new guest name</p>
+</li>
+<li>
+<p><code>np/</code> - new guest phone</p>
+</li>
+<li>
+<p><code>ne/</code> - new guest email</p>
+</li>
+</ul>
+</div>
 <div class="paragraph">
 <p>Examples:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>edit 1 p/91234567 e/johndoe@example.com</code><br>
-Edits the phone number and email address of the 1st guest to be <code>91234567</code> and <code>johndoe@example.com</code> respectively.</p>
+<p><code>edit -r r/001 nc/1</code><br>
+Edits room 001&#8217;s capacity to be 1</p>
 </li>
 <li>
-<p><code>edit 2 n/Betsy Crower t/</code><br>
-Edits the name of the 2nd guest to be <code>Betsy Crower</code> and clears all existing tags.</p>
+<p><code>edit -r r/001 nt/vip nt/specialneeds</code><br>
+Edits room 001&#8217;s tags to be <code>vip</code> and <code>specialneeds</code></p>
+</li>
+<li>
+<p><code>edit -r r/001 nc/2 nt/</code><br>
+Edits room 001&#8217;s capacity to be 2 and clears all existing tags</p>
+</li>
+<li>
+<p><code>edit -b r/001 from/05/11/18 nfrom/09/11/18</code><br>
+Edits room 001&#8217;s booking that starts on 05/11/18 to start on 09/11/18.</p>
+</li>
+<li>
+<p><code>edit -b r/001 from/05/11/18 nfrom/09/11/18 nto/11/11/18</code><br>
+Edits room 001&#8217;s booking that starts on 05/11/18 to start on 09/11/18 and end on 11/11/18.</p>
+</li>
+<li>
+<p><code>edit -g r/001 from/05/11/18 nn/Popo np/999 ne/popo@spf.com nt/vip</code><br>
+Edits the guest of the booking that starts from 05/11/18 in room 001 to have new name <code>Popo</code>, new phone <code>999</code>,
+new email <code>popo@spf.com</code>, and new tag <code>vip</code>.</p>
+</li>
+<li>
+<p><code>edit -g r/001 n/John p/123 nn/Popo np/999</code><br>
+Edits all guests with name <code>John</code> and phone number <code>123</code> in room 001 to have new name <code>Popo</code> and new phone <code>999</code>.</p>
+</li>
+<li>
+<p><code>edit -g n/John e/john@john.com ne/phua@phua.com</code><br>
+Edits all guests with name <code>John</code> and email <code>john@john.com</code> in all rooms to have new email <code>phua@phua.com</code>.</p>
 </li>
 </ul>
 </div>
@@ -592,7 +717,7 @@ redo commands executed before the logout.</p>
 <div class="sect2">
 <h3 id="selecting-a-guest-code-select-code"><a class="link" href="#selecting-a-guest-code-select-code">3.10. Selecting a guest : <code>select</code></a></h3>
 <div class="paragraph">
-<p>Selects the guest identified by the index number used in the displayed list.<br>
+<p>Selects the guest or room identified by the index number used in the displayed list.<br>
 Format: <code>select INDEX</code></p>
 </div>
 <div class="sidebarblock">
@@ -600,7 +725,7 @@ Format: <code>select INDEX</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p>Selects the guest and loads the information of the guest/room at the specified <code>INDEX</code>.</p>
+<p>Selects the guest or room and displays its information in the detailed panel on the right.</p>
 </li>
 <li>
 <p>The index refers to the index number shown in the displayed list.</p>
@@ -620,22 +745,12 @@ Format: <code>select INDEX</code></p>
 <li>
 <p><code>list -g</code><br>
 <code>select 2</code><br>
-Selects the 2nd room in the displayed list.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Selects from displayed room list <span class="red">Coming in v1.4</span></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Currently, <code>select</code> only works on the displayed guest list.</p>
+Selects the 2nd guest in the displayed list.</p>
 </li>
 <li>
-<p>Select while on the displayed room list, (i.e. executing <code>list -r</code>,
-then <code>select INDEX</code>) will still result in the selection being done on
-the displayed guest list.</p>
+<p><code>list -r</code><br>
+<code>select 100</code><br>
+Selects the 100th room in the displayed list.</p>
 </li>
 </ul>
 </div>
@@ -993,4 +1108,4 @@ t/TAG r/ROOM_NUMBER from/START_DATE to/END_DATE</code></p>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-05 12:35:53 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-07 01:17:06 UTC</div></div></div></body></html>
