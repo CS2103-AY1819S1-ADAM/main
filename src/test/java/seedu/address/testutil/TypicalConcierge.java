@@ -15,6 +15,7 @@ import static seedu.address.testutil.TypicalRoomNumbers.ROOM_NUMBER_012;
 import static seedu.address.testutil.TypicalRoomNumbers.ROOM_NUMBER_020;
 import static seedu.address.testutil.TypicalRoomNumbers.ROOM_NUMBER_021;
 import static seedu.address.testutil.TypicalRoomNumbers.ROOM_NUMBER_022;
+import static seedu.address.testutil.TypicalTags.ROOM_TAG_MAINTENANCE;
 
 import seedu.address.model.Concierge;
 import seedu.address.model.guest.UniqueGuestList;
@@ -67,24 +68,24 @@ public class TypicalConcierge {
 
         // Rooms with single bookings
         ab.addBooking(ROOM_NUMBER_001, LASTWEEK_YESTERDAY);
-        ab.addRoomTags(ROOM_NUMBER_001, TypicalTags.ROOM_TAG_MAINTENANCE);
+        ab.addRoomTags(ROOM_NUMBER_001, ROOM_TAG_MAINTENANCE);
 
         ab.addBooking(ROOM_NUMBER_002, LASTWEEK_YESTERDAY_CHECKED_IN);
-        ab.addCheckedInGuest(LASTWEEK_YESTERDAY_CHECKED_IN.getGuest());
-        ab.addRoomTags(ROOM_NUMBER_002, TypicalTags.ROOM_TAG_MAINTENANCE);
+        ab.addCheckedInGuestIfNotPresent(LASTWEEK_YESTERDAY_CHECKED_IN.getGuest());
+        ab.addRoomTags(ROOM_NUMBER_002, ROOM_TAG_MAINTENANCE);
 
         ab.addBooking(ROOM_NUMBER_010, YESTERDAY_TODAY);
         ab.addBooking(ROOM_NUMBER_011, TODAY_TOMORROW);
 
         ab.addBooking(ROOM_NUMBER_012, TODAY_TOMORROW_CHECKED_IN);
-        ab.addCheckedInGuest(TODAY_TOMORROW_CHECKED_IN.getGuest());
+        ab.addCheckedInGuestIfNotPresent(TODAY_TOMORROW_CHECKED_IN.getGuest());
 
         ab.addBooking(ROOM_NUMBER_020, TODAY_NEXTWEEK);
         ab.addBooking(ROOM_NUMBER_021, TOMORROW_NEXTWEEK);
 
         // Rooms with multiple bookings
         TypicalBookings.getMultipleBookingsSet().forEach(booking -> ab.addBooking(ROOM_NUMBER_022, booking));
-        ab.addCheckedInGuest(LASTWEEK_YESTERDAY_CHECKED_IN.getGuest());
+        ab.addCheckedInGuestIfNotPresent(LASTWEEK_YESTERDAY_CHECKED_IN.getGuest());
 
         // Room 031 will have no bookings. This comment is put here to inform you in case you come across Room 031 in
         // any of the tests.

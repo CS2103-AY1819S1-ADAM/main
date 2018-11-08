@@ -1,5 +1,6 @@
 package seedu.address.model;
 
+import java.time.LocalDate;
 import java.util.Optional;
 import java.util.function.Predicate;
 
@@ -12,7 +13,6 @@ import seedu.address.model.login.InvalidLogOutException;
 import seedu.address.model.room.Room;
 import seedu.address.model.room.RoomNumber;
 import seedu.address.model.room.booking.Booking;
-import seedu.address.model.room.booking.BookingPeriod;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -128,6 +128,13 @@ public interface Model {
      */
     public void addRoomTags(RoomNumber roomNumber, Tag... tags);
 
+
+    /**
+     * Reassigns the booking identified by {@code startDate} in the room identified by {@code roomNumber} to the room
+     * identified by {@code newRoomNumber}
+     */
+    public void reassignRoom(RoomNumber roomNumber, LocalDate startDate, RoomNumber newRoomNumber);
+
     /**
      * Add a booking to a room identified by its room number.
      */
@@ -150,9 +157,9 @@ public interface Model {
     void checkoutRoom(RoomNumber roomNumber);
 
     /**
-     * Checks out a room's booking using its room number and the specified booking period
+     * Checks out a room's booking using its room number and the specified start date
      */
-    void checkoutRoom(RoomNumber roomNumber, BookingPeriod bookingPeriod);
+    void checkoutRoom(RoomNumber roomNumber, LocalDate startDate);
 
     /**
      * Adds an Expense to a room.

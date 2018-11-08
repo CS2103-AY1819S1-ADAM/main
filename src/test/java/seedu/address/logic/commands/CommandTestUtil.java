@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE_START;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEM_NUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_ROOM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROOM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -36,6 +37,7 @@ import seedu.address.testutil.EditGuestDescriptorBuilder;
  */
 public class CommandTestUtil {
 
+    // Utility strings
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
     public static final String VALID_PHONE_AMY = "11111111";
@@ -60,6 +62,7 @@ public class CommandTestUtil {
     public static final String VALID_COST_1 = "123.45";
     public static final String VALID_COST_2 = "678.90";
 
+    // Identifier strings
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
@@ -83,6 +86,11 @@ public class CommandTestUtil {
     public static final String COST_DESC_1 = " " + PREFIX_COST + VALID_COST_1;
     public static final String COST_DESC_2 = " " + PREFIX_COST + VALID_COST_2;
 
+    // New value strings
+    public static final String NEW_ROOM_DESC_AMY = " " + PREFIX_NEW_ROOM + " " + VALID_ROOM_NUMBER_AMY;
+    public static final String NEW_ROOM_DESC_BOB = " " + PREFIX_NEW_ROOM + " " + VALID_ROOM_NUMBER_BOB;
+
+    // Invalid strings
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol

@@ -11,13 +11,12 @@ import java.util.Set;
 import seedu.address.model.expenses.Expense;
 import seedu.address.model.expenses.Expenses;
 import seedu.address.model.room.booking.Booking;
-import seedu.address.model.room.booking.BookingPeriod;
 import seedu.address.model.room.booking.Bookings;
-import seedu.address.model.room.booking.exceptions.ExpiredBookingCheckInException;
+import seedu.address.model.room.booking.exceptions.BookingAlreadyCheckedInException;
+import seedu.address.model.room.booking.exceptions.ExpiredBookingException;
 import seedu.address.model.room.booking.exceptions.InactiveBookingCheckInException;
 import seedu.address.model.room.booking.exceptions.NoBookingException;
 import seedu.address.model.room.booking.exceptions.RoomNotCheckedInException;
-import seedu.address.model.room.exceptions.BookingAlreadyCheckedInException;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -115,7 +114,7 @@ public class Room {
     public Room checkIn() {
         Booking firstBooking = bookings.getFirstBooking();
         if (firstBooking.isExpired()) {
-            throw new ExpiredBookingCheckInException();
+            throw new ExpiredBookingException();
         }
         if (!firstBooking.isActive()) {
             throw new InactiveBookingCheckInException();
@@ -127,24 +126,11 @@ public class Room {
     }
 
     /**
-     * Checks out the first booking of this room.
-     * TODO: Future features to include exporting of receipt, setting room to housekeeping status for __x__ hours.
-     */
-    public Room checkout() {
-        Booking firstBooking = bookings.getFirstBooking();
-        return new Room(this.roomNumber, this.capacity, this.expenses, bookings.remove(firstBooking), this.tags);
-        // expenses.report(); // TODO: wait for WZ to implement
-    }
-
-    /**
      * Checks out the given booking
-     * TODO: Future features to include exporting of receipt, setting room to housekeeping status for __x__ hours.
      */
-    public Room checkout(BookingPeriod bookingPeriod) {
-        Booking bookingToCheckout = bookings
-                .getFirstBookingByPredicate(booking -> booking.getBookingPeriod().equals(bookingPeriod));
-        return new Room(this.roomNumber, this.capacity, this.expenses, bookings.remove(bookingToCheckout), this.tags);
-        // expenses.report(); // TODO: wait for WZ to implement
+    public Room checkout(Booking bookingToCheckout) {
+        return new Room(this.roomNumber, this.capacity, this.expenses.clearExpenses(),
+                bookings.remove(bookingToCheckout), this.tags);
     }
 
     //=========== Expenses operations =============================================================
@@ -166,6 +152,13 @@ public class Room {
     }
 
     //=========== Boolean checkers =============================================================
+
+    /**
+     * Returns true if this room has bookings
+     */
+    public boolean hasBookings() {
+        return !bookings.getSortedBookingsSet().isEmpty();
+    }
 
     /**
      * Returns true if both rooms of the same name have the same room number.

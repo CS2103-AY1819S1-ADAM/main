@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import java.util.List;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -23,9 +24,15 @@ public class CommandBox extends UiPart<Region> {
     public static final String ERROR_STYLE_CLASS = "error";
     private static final String FXML = "CommandBox.fxml";
 
+    private static final int DOUBLE_PRESS_DELAY = 350;
+    private static final String MESSAGE_AUTOCOMPLETE_AVAILABLE = "Command Suggestions: ";
+    private static final String MESSAGE_NO_MORE_COMMANDS_AVAILABLE = "No more commands are available";
+    private static final String SPACING = " ";
+
     private final Logger logger = LogsCenter.getLogger(CommandBox.class);
     private final Logic logic;
     private ListElementPointer historySnapshot;
+    private Long previousTabPressTime;
 
     @FXML
     private TextField commandTextField;
@@ -55,6 +62,12 @@ public class CommandBox extends UiPart<Region> {
             keyEvent.consume();
             navigateToNextInput();
             break;
+
+        case TAB:
+            keyEvent.consume();
+            autoCompleteUserInput();
+            break;
+
         default:
             // let JavaFx handle the keypress
         }
@@ -148,4 +161,78 @@ public class CommandBox extends UiPart<Region> {
         styleClass.add(ERROR_STYLE_CLASS);
     }
 
+    /**
+     * Shows the auto-completed text or suggestions in the UI
+     */
+    private void autoCompleteUserInput() {
+        if (commandTextField.getText().isEmpty()) {
+            return;
+        }
+
+        if (getCurrentText().endsWith(SPACING)) {
+            autoCompleteNextCommandParameter();
+            return;
+        }
+
+        List<String> listOfAutoComplete = logic.getAutoCompleteCommands(getCurrentText());
+        if (listOfAutoComplete.isEmpty()) {
+            return;
+        }
+
+        if (listOfAutoComplete.size() == 1) {
+            replaceText(listOfAutoComplete.get(0));
+        }
+
+        if (isTabDoubleTap()) {
+            showSuggestionsOnUi(listOfAutoComplete);
+        }
+    }
+
+    /**
+     * Shows autocomplete suggestions on the UI given the list of string suggestions
+     */
+    private void showSuggestionsOnUi(List<String> listOfAutoComplete) {
+        logger.info(MESSAGE_AUTOCOMPLETE_AVAILABLE + commandTextField.getText() + " >> "
+            + getStringFromList(listOfAutoComplete));
+        if (listOfAutoComplete.size() == 1) {
+            raise(new NewResultAvailableEvent(MESSAGE_NO_MORE_COMMANDS_AVAILABLE));
+        } else {
+            raise(new NewResultAvailableEvent(MESSAGE_AUTOCOMPLETE_AVAILABLE + getStringFromList(listOfAutoComplete)));
+        }
+    }
+
+    /**
+     * Shows auto completed next prefix parameter for completed command in UI
+     */
+    private void autoCompleteNextCommandParameter() {
+        String textToShow = getCurrentText() + logic.getAutoCompleteNextParameter(getCurrentText());
+        replaceText(textToShow);
+    }
+
+    /**
+     * Returns String representation of given list of strings
+     */
+    private String getStringFromList(List<String> listOfAutoComplete) {
+        String toString = listOfAutoComplete.toString();
+        toString = toString.substring(1, toString.length() - 1).trim();
+        return toString;
+    }
+
+    /**
+     * Returns true if TAB is pressed consecutively in quickly
+     */
+    private boolean isTabDoubleTap() {
+        if (System.currentTimeMillis() - previousTabPressTime < DOUBLE_PRESS_DELAY) {
+            return true;
+        }
+        previousTabPressTime = System.currentTimeMillis();
+        return false;
+    }
+
+    /**
+     * Returns the current text in the command box
+     */
+    private String getCurrentText() {
+        return commandTextField.getText();
+    }
 }

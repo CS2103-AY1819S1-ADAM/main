@@ -116,6 +116,13 @@ public class BookingPeriod implements Comparable<BookingPeriod> {
             && date.compareTo(endDate) <= 0;
     }
 
+    /**
+     * Returns true if this booking period starts before the other
+     */
+    public boolean startsBefore(BookingPeriod otherBookingPeriod) {
+        return startDate.isBefore(otherBookingPeriod.startDate);
+    }
+
     @Override
     public String toString() {
         String start = startDate.format(DATE_TO_STRING_FORMAT);

@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Optional;
 import java.util.function.Predicate;
@@ -24,7 +25,6 @@ import seedu.address.model.guest.Guest;
 import seedu.address.model.room.Room;
 import seedu.address.model.room.RoomNumber;
 import seedu.address.model.room.booking.Booking;
-import seedu.address.model.room.booking.BookingPeriod;
 import seedu.address.model.room.booking.exceptions.NoBookingException;
 import seedu.address.model.room.booking.exceptions.RoomNotCheckedInException;
 import seedu.address.model.tag.Tag;
@@ -191,7 +191,7 @@ public class ServiceCommandTest {
         }
 
         @Override
-        public void checkoutRoom(RoomNumber roomNumber, BookingPeriod bookingPeriod) {
+        public void checkoutRoom(RoomNumber roomNumber, LocalDate localDate) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -212,6 +212,11 @@ public class ServiceCommandTest {
 
         @Override
         public void addRoomTags(RoomNumber roomNumber, Tag... tags) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void reassignRoom(RoomNumber roomNumber, LocalDate startDate, RoomNumber newRoomNumber) {
             throw new AssertionError("This method should not be called.");
         }
 

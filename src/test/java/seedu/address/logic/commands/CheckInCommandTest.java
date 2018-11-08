@@ -4,6 +4,12 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.TypicalRoomNumbers.ROOM_NUMBER_001;
+import static seedu.address.testutil.TypicalRoomNumbers.ROOM_NUMBER_002;
+import static seedu.address.testutil.TypicalRoomNumbers.ROOM_NUMBER_010;
+import static seedu.address.testutil.TypicalRoomNumbers.ROOM_NUMBER_012;
+import static seedu.address.testutil.TypicalRoomNumbers.ROOM_NUMBER_021;
+import static seedu.address.testutil.TypicalRoomNumbers.ROOM_NUMBER_031;
 
 import org.junit.Test;
 
@@ -13,7 +19,6 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.room.RoomNumber;
 import seedu.address.testutil.TypicalConcierge;
-import seedu.address.testutil.TypicalRoomNumbers;
 
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for
@@ -26,7 +31,7 @@ public class CheckInCommandTest {
 
     @Test
     public void execute_invalidCheckinExpiredBooking_throwsExpiredBookingException() {
-        RoomNumber roomNumberToCheckIn = TypicalRoomNumbers.ROOM_NUMBER_001;
+        RoomNumber roomNumberToCheckIn = ROOM_NUMBER_001;
         CheckInCommand checkInCommand = new CheckInCommand(roomNumberToCheckIn);
 
         String expectedMessage = String.format(CheckInCommand.MESSAGE_EXPIRED_BOOKING_CHECK_IN, roomNumberToCheckIn);
@@ -36,7 +41,7 @@ public class CheckInCommandTest {
 
     @Test
     public void execute_validCheckInBooking_success() {
-        RoomNumber roomNumberToCheckIn = TypicalRoomNumbers.ROOM_NUMBER_010;
+        RoomNumber roomNumberToCheckIn = ROOM_NUMBER_010;
         CheckInCommand checkInCommand = new CheckInCommand(roomNumberToCheckIn);
 
         String expectedMessage = String.format(CheckInCommand.MESSAGE_CHECKIN_ROOM_SUCCESS, roomNumberToCheckIn);
@@ -50,17 +55,17 @@ public class CheckInCommandTest {
 
     @Test
     public void execute_invalidCheckInUpcomingBooking_throwsNoActiveBookingException() {
-        RoomNumber roomNumberToCheckIn = TypicalRoomNumbers.ROOM_NUMBER_021;
+        RoomNumber roomNumberToCheckIn = ROOM_NUMBER_021;
         CheckInCommand checkInCommand = new CheckInCommand(roomNumberToCheckIn);
 
-        String expectedMessage = String.format(CheckInCommand.MESSAGE_INACTIVE_BOOKING_CHECKIN, roomNumberToCheckIn);
+        String expectedMessage = String.format(CheckInCommand.MESSAGE_INACTIVE_BOOKING_CHECK_IN, roomNumberToCheckIn);
 
         assertCommandFailure(checkInCommand, model, commandHistory, expectedMessage);
     }
 
     @Test
     public void execute_noBookingCheckIn_throwsNoActiveBookingException() {
-        RoomNumber roomNumberToCheckIn = TypicalRoomNumbers.ROOM_NUMBER_031;
+        RoomNumber roomNumberToCheckIn = ROOM_NUMBER_031;
         CheckInCommand checkInCommand = new CheckInCommand(roomNumberToCheckIn);
 
         String expectedMessage = String.format(CheckInCommand.MESSAGE_NO_BOOKING_CHECK_IN, roomNumberToCheckIn);
@@ -71,7 +76,7 @@ public class CheckInCommandTest {
 
     @Test
     public void execute_invalidCheckInOccupiedRoomBooking_throwsOccupiedRoomCheckInException() {
-        RoomNumber roomNumberToCheckIn = TypicalRoomNumbers.ROOM_NUMBER_012;
+        RoomNumber roomNumberToCheckIn = ROOM_NUMBER_012;
         CheckInCommand checkInCommand = new CheckInCommand(roomNumberToCheckIn);
 
         String expectedMessage = String.format(CheckInCommand.MESSAGE_BOOKING_ALREADY_CHECKED_IN, roomNumberToCheckIn);
@@ -81,7 +86,7 @@ public class CheckInCommandTest {
 
     @Test
     public void executeUndoRedo_validCheckIn_success() throws Exception {
-        RoomNumber roomNumberToCheckIn = TypicalRoomNumbers.ROOM_NUMBER_010;
+        RoomNumber roomNumberToCheckIn = ROOM_NUMBER_010;
         CheckInCommand checkInCommand = new CheckInCommand(roomNumberToCheckIn);
 
         Model expectedModel = new ModelManager(model.getConcierge(), new UserPrefs());
@@ -102,7 +107,7 @@ public class CheckInCommandTest {
 
     @Test
     public void executeUndoRedo_invalidCheckIn_failure() throws Exception {
-        RoomNumber roomNumberToCheckIn = TypicalRoomNumbers.ROOM_NUMBER_012;
+        RoomNumber roomNumberToCheckIn = ROOM_NUMBER_012;
         CheckInCommand checkInCommand = new CheckInCommand(roomNumberToCheckIn);
 
         String expectedMessage = String.format(CheckInCommand.MESSAGE_BOOKING_ALREADY_CHECKED_IN, roomNumberToCheckIn);
@@ -116,14 +121,14 @@ public class CheckInCommandTest {
 
     @Test
     public void equals() {
-        CheckInCommand checkInFirstCommand = new CheckInCommand(TypicalRoomNumbers.ROOM_NUMBER_001);
-        CheckInCommand checkInSecondCommand = new CheckInCommand(TypicalRoomNumbers.ROOM_NUMBER_002);
+        CheckInCommand checkInFirstCommand = new CheckInCommand(ROOM_NUMBER_001);
+        CheckInCommand checkInSecondCommand = new CheckInCommand(ROOM_NUMBER_002);
 
         // same object -> returns true
         assertTrue(checkInFirstCommand.equals(checkInFirstCommand));
 
         // same values -> returns true
-        CheckInCommand deleteFirstCommandCopy = new CheckInCommand(TypicalRoomNumbers.ROOM_NUMBER_001);
+        CheckInCommand deleteFirstCommandCopy = new CheckInCommand(ROOM_NUMBER_001);
         assertTrue(checkInFirstCommand.equals(deleteFirstCommandCopy));
 
         // different types -> returns false

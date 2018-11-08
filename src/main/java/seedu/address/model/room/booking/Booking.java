@@ -90,6 +90,13 @@ public class Booking implements Comparable<Booking> {
     }
 
     /**
+     * Returns true if this booking starts before the other
+     */
+    public boolean startsBefore(Booking otherBooking) {
+        return this.bookingPeriod.startsBefore(otherBooking.bookingPeriod);
+    }
+
+    /**
      * Returns true if both bookings have the same identity and data fields.
      * This defines a stronger notion of equality between two bookings.
      */

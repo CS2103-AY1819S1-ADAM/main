@@ -42,6 +42,34 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 .  Refer to <<Features>> for details of each command.
 
+[[Terminology]]
+== Terminology
+
+====
+*Some important things that you need to know before using Concierge*
+
+** Room numbers must be a 3-digit number from 001 to 100. For example,
+* 001, 050, 074, 100 are valid
+* 000, 01, 99, 101 are invalid
+
+** A `Booking` is...
+* `Active` if its start and end date includes today's date, inclusively.
+* `Expired` if its end date is strictly before today's date.
+* `Upcoming` if its start date is strictly after today's date.
+
+** Date format: `d/M/y`
+* `d` - Day can be 1 or 2 digits
+* `M` - Month can be 1 or 2 digits
+* `y` - Year can be 2 or 4 digits (if 2 digits, date is assumed to be in the current century)
+
+** There are 2 guest lists:
+* Checked-in guest list contains all the guests who are currently checked-in.
+* Archived guest list contains all guests who have ever stayed in the hotel before.
+* Since the possibility of returning guests exists, there is no need to synchronize the archived guest list.
+(i.e. it is standalone).
+
+====
+
 [[Features]]
 == Features
 
@@ -64,9 +92,6 @@ from/START_DATE to/END_DATE`
 A guest can have any number of tags (including 0)
 
 ****
-* The room number must be a 3-digit number from 001 to 100. For example, 074 is
-valid but 128 is not.
-* The dates can be expressed in DD/MM/YY or DD/MM/YYYY.
 * A guest can make an unlimited number of bookings with the hotel, as long as
 the booking is valid.
 * A guest can make a booking for however long he/she wants.
@@ -101,7 +126,9 @@ Examples:
 === Check-in room: `checkin`
 
 Checks in the room's first active booking.
-A booking is considered **active** if its start and end date includes today's date, inclusively.
+[TIP]
+Expired and upcoming bookings *cannot* be checked-in.
+
 Upon checking in the room's first active booking, the guest who made the booking will be added to
 the checked-in guest list. +
 Format: `checkin r/ROOM_NUMBER`
@@ -114,7 +141,13 @@ to the checked-in guest list.
 
 === Checkout room: `checkout`
 
-Checks out the room's first (i.e. earliest) booking, or its booking with the specified start and end dates.
+Checks out the room's first (i.e. earliest) booking, or its booking with the specified start date. +
+[TIP]
+A booking can be uniquely identified by its start date.
+[TIP]
+`checkout` 's intended use is the deletion of any booking.
+ This means that you can delete a non-checked-in booking using `checkout`.
+
 Depending on whether the guest still has other checked-in bookings, either of the following can occur: +
 
 * If the guest does not have any other checked-in bookings, then he/she will be removed from the checked-in
@@ -122,14 +155,32 @@ guest list and added to the archived guest list.
 * If the guest still has other checked-in bookings, he/she will *not* be removed from the checked-in guest list,
 but will be added to the archived guest list.
 
-Format: `checkout r/ROOM_NUMBER [from/START_DATE to/END_DATE]`
+Format: `checkout r/ROOM_NUMBER [from/START_DATE]`
 
 Examples:
 
 * `checkout r/085` +
 Checks out room 085 and the room's first booking.
-* `checkout r/085 from/01/11/18 to/02/11/18`
-Checks out the booking with start date 01/11/18 and end date 02/11/18 from room 085.
+* `checkout r/085 from/01/11/18`
+Checks out the booking with start date 01/11/18 from room 085.
+
+=== Reassigning a guest to another room : `reassign`
+
+Reassigns a booking from one room to another.
+
+** You can reassign a booking only if all of the following conditions are met:
+* The new room is different from the original.
+* Neither the booking nor any of the new room's bookings are expired.
+* The booking does not overlap with any of the new room's bookings.
+* If the booking ends the same day the new room's first booking starts, the new room's first booking cannot be checked-in.
+* If the booking starts the same day the new room's first booking ends, the booking cannot be checked-in.
+
+Format: `reassign r/ROOM_NUMBER from/START_DATE`
+
+Examples:
+
+* `reassign r/085 from/01/11/18 nr/086` +
+Reassigns the booking with start date 01/11/18 in room 085 to room 086.
 
 === Editing a guest : `edit` [red]#Coming in v1.4#
 

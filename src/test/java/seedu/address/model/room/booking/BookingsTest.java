@@ -47,6 +47,12 @@ public class BookingsTest {
     }
 
     @Test
+    public void getSortedBookingsSet_modifyList_throwsUnsupportedOperationException() {
+        thrown.expect(UnsupportedOperationException.class);
+        bookings.getSortedBookingsSet().remove(0);
+    }
+
+    @Test
     public void getFirstBooking_noBooking_throwsNoBookingException() {
         thrown.expect(NoBookingException.class);
         bookings.getFirstBooking();
@@ -82,6 +88,13 @@ public class BookingsTest {
         Bookings editedBookings = bookings.add(TODAY_TOMORROW);
         thrown.expect(OverlappingBookingException.class);
         editedBookings.add(TODAY_NEXTWEEK);
+    }
+
+    @Test
+    public void add_validBooking_success() {
+        Booking bookingToAdd = TODAY_TOMORROW;
+        Bookings editedBookings = bookings.add(bookingToAdd);
+        assertTrue(editedBookings.contains(bookingToAdd));
     }
 
     @Test

@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.model.login.PasswordHashList.getEmptyPasswordHashList;
 
+import java.time.LocalDate;
 import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -25,7 +26,6 @@ import seedu.address.model.login.PasswordHashList;
 import seedu.address.model.room.Room;
 import seedu.address.model.room.RoomNumber;
 import seedu.address.model.room.booking.Booking;
-import seedu.address.model.room.booking.BookingPeriod;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -208,6 +208,13 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void addRoomTags(RoomNumber roomNumber, Tag... tags) {
         versionedConcierge.addRoomTags(roomNumber, tags);
+        indicateConciergeChanged();
+    }
+
+    @Override
+    public void reassignRoom(RoomNumber roomNumber, LocalDate startDate, RoomNumber newRoomNumber) {
+        versionedConcierge.reassignRoom(roomNumber, startDate, newRoomNumber);
+        indicateConciergeChanged();
     }
 
     @Override
@@ -228,12 +235,10 @@ public class ModelManager extends ComponentManager implements Model {
         indicateConciergeChanged();
     }
 
-    /**
-     * Checks out a room's booking using its room number and the specified booking period
-     */
     @Override
-    public void checkoutRoom(RoomNumber roomNumber, BookingPeriod bookingPeriod) {
-        versionedConcierge.checkoutRoom(roomNumber, bookingPeriod);
+    public void checkoutRoom(RoomNumber roomNumber, LocalDate startDate) {
+        versionedConcierge.checkoutRoom(roomNumber, startDate);
+        indicateConciergeChanged();
     }
 
     // ========= Expenses =================================================

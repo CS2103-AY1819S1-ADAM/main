@@ -32,8 +32,8 @@ public class XmlAdaptedRoom {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Room's %s field is missing!";
     public static final String MESSAGE_OVERLAPPING_BOOKING = "Room contains overlapping bookings!";
-    public static final String MESSAGE_NO_BOOKING = "Room has no booking to add expenses!";
-    public static final String MESSAGE_NOT_CHECKED_IN = "Room is not checked in to add expenses!";
+    public static final String MESSAGE_NO_BOOKING_TO_ADD_EXPENSES = "Room has no booking to add expenses!";
+    public static final String MESSAGE_NOT_CHECKED_IN_TO_ADD_EXPENSES = "Room is not checked in to add expenses!";
 
     @XmlElement(required = true)
     private String roomNumber;
@@ -117,11 +117,11 @@ public class XmlAdaptedRoom {
         if (!expenses.isEmpty()) {
             if (!firstBooking.isPresent()) {
                 // no booking
-                throw new IllegalValueException(MESSAGE_NO_BOOKING);
+                throw new IllegalValueException(MESSAGE_NO_BOOKING_TO_ADD_EXPENSES);
             }
             if (!firstBooking.get().getIsCheckedIn()) {
                 // not checked in
-                throw new IllegalValueException(MESSAGE_NOT_CHECKED_IN);
+                throw new IllegalValueException(MESSAGE_NOT_CHECKED_IN_TO_ADD_EXPENSES);
             }
         }
         final List<Expense> expenseList = new ArrayList<>();
