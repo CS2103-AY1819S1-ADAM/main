@@ -1,8 +1,8 @@
 package seedu.address.storage;
 
 import static org.junit.Assert.assertEquals;
-import static seedu.address.storage.XmlAdaptedRoom.MESSAGE_NOT_CHECKED_IN;
-import static seedu.address.storage.XmlAdaptedRoom.MESSAGE_NO_BOOKING;
+import static seedu.address.storage.XmlAdaptedRoom.MESSAGE_NOT_CHECKED_IN_TO_ADD_EXPENSES;
+import static seedu.address.storage.XmlAdaptedRoom.MESSAGE_NO_BOOKING_TO_ADD_EXPENSES;
 import static seedu.address.storage.XmlAdaptedRoom.MISSING_FIELD_MESSAGE_FORMAT;
 
 import java.util.ArrayList;
@@ -121,7 +121,7 @@ public class XmlAdaptedRoomTest {
         XmlAdaptedRoom room =
                 new XmlAdaptedRoom(VALID_ROOM_NUMBER, VALID_CAPACITY, new ArrayList<>(), VALID_EXPENSES, VALID_TAGS);
         Assert.assertThrows(IllegalValueException.class,
-                MESSAGE_NO_BOOKING, () -> room.toModelType(VALID_MENU_STUB));
+            MESSAGE_NO_BOOKING_TO_ADD_EXPENSES, () -> room.toModelType(VALID_MENU_STUB));
     }
 
     @Test
@@ -134,6 +134,6 @@ public class XmlAdaptedRoomTest {
         XmlAdaptedRoom room =
                 new XmlAdaptedRoom(VALID_ROOM_NUMBER, VALID_CAPACITY, nonEmptyBookings, VALID_EXPENSES, VALID_TAGS);
         Assert.assertThrows(IllegalValueException.class,
-                MESSAGE_NOT_CHECKED_IN, () -> room.toModelType(VALID_MENU_STUB));
+            MESSAGE_NOT_CHECKED_IN_TO_ADD_EXPENSES, () -> room.toModelType(VALID_MENU_STUB));
     }
 }

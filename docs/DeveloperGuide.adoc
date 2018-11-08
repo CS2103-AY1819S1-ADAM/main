@@ -594,42 +594,53 @@ hence would require more effort to implement.
 === Room Check-in/Checkout feature
 ==== Current Implementation
 
-The room check-in and checkout features are facilitated by `UniqueRoomList`.
-The logic that supports the check-in and checkout operations reside in the classes in the `Room` and `Booking` packages.
+The room check-in and checkout features makes use of `UniqueRoomList`.
+The logic that supports the check-in and checkout operations mainly reside in the `Concierge` and `Room` classes.
 
-* `UniqueRoomList#checkin(RoomNumber)` -- Checks in the active booking of the room identified by the given room number
-* `UniqueRoomList#checkout(RoomNumber)` -- Checks out the first booking in the list of bookings of the room identified by the given room number.
+* `UniqueRoomList#checkin(RoomNumber)` -- Checks in the first booking of the room identified by the given room number
+* `UniqueRoomList#checkout(RoomNumber)` -- Checks out the first booking of the room
+* `UniqueRoomList#checkout(RoomNumber, LocalDate)` -- Checks out the room's booking whose start date matches the given date
 
-Note:
+[NOTE]
+Active booking refers to a booking that includes today's date. +
+First booking refers to the earliest (i.e. first in chronological order).
+[NOTE]
+A room can be checked out regardless of its checked-in status. Thus, `checkout` doubles as a command to delete bookings.
 
-* Active booking refers to a booking that includes today's date.
-* The room maintains a sorted list of bookings. The first booking refers to the first in chronological order.
-* A room can be checked out regardless of its checked-in status. Thus, `checkout` doubles as a command to delete bookings.
-
-These operations are exposed in the `Model` interface as `Model#checkin()` and `Model#checkout()` respectively.
+These operations are exposed in the `Model` interface as `Model#checkInRoom` and `Model#checkoutRoom` respectively.
 
 Given below is an example usage scenario and how the check-in/checkout mechanism behaves at each step.
 
 Assuming there is a booking already added to room 001,
 
-* The user executes `checkin 001` when the guest arrives.
-. The `checkin` command takes in a `RoomNumber` argument and calls `Model#checkinRoom` as such: `Model.checkinRoom(roomNumber)`
-. `ModelManager#checkinRoom` (which implements Model) will call `VersionedConcierge#checkinRoom`
-. `VersionedConcierge#checkinRoom` will call `UniqueRoomList#checkinRoom`
-. `UniqueRoomList#checkinRoom` will call `UniqueRoomList#getRoom` to get the room using its RoomNumber, followed by
-`Room#checkin`
-. `Room#checkin` will
+* The user executes `checkin r/001` when the guest arrives.
+. The `checkin` command takes in a `RoomNumber` argument and calls `Model#checkInRoom` as such: `Model.checkInRoom(roomNumber)`
+. `ModelManager#checkInRoom` (which implements Model) will call `VersionedConcierge#checkInRoom`
+. `VersionedConcierge#checkInRoom` will call `UniqueRoomList#getRoom` to get the room using its RoomNumber
+. `VersionedConcierge#checkInRoom` will call `Room#checkIn`
+. `Room#checkIn` will
 .. throw `NoBookingException` if the room has no bookings
-.. throw `NoActiveBookingException` if the room has no active bookings
-.. throw `OccupiedRoomCheckInException` if the room's active booking is already checked in
-.. update the active booking as checked-in
+.. throw `ExpiredBookingException` if the room's first booking is expired
+.. throw `InactiveBookingCheckInException` if the room's first booking is not active
+.. throw `BookingAlreadyCheckedInException` if the room's first booking is already checked in
+.. update the first booking as checked-in if no exceptions were thrown
+. `VersionedConcierge#checkinRoom` will call `VersionedConcierge#addCheckedInGuestIfNotPresent`
+. `VersionedConcierge#addCheckedInGuestIfNotPresent` will add the checked-in guest to the checked-in guest list
+ if he/she is not already in it
 
-* The user executes `checkout 001` when the guest leaves.
-. The `checkout` command follows step 1 to 4 of the `checkin` command, just replace occurences of "checkin" to "checkout"
+* The user executes `checkout r/001` when the guest leaves.
+. The `checkout` command takes in a `RoomNumber` argument and calls `Model#checkoutRoom` as such: `Model.checkoutRoom(roomNumber)`
+. `ModelManager#checkoutRoom` (which implements Model) will call `VersionedConcierge#checkoutRoom`
+. `VersionedConcierge#checkoutRoom` will call `UniqueRoomList#getRoom` to get the room using its RoomNumber
+. `VersionedConcierge#checkoutRoom` will call `Room#getBookings#getFirstBooking` to get the first booking of the room
+. `VersionedConcierge#checkoutRoom` will call its own overloaded method, which calls `Room#checkout` with the first booking
 . `Room#checkout` will
-.. throw `NoBookingException` if the room has no bookings
-.. throw `NoActiveOrExpiredBookingException` if the room has no active or expired bookings
-.. delete the first booking from the list of bookings
+.. throw `BookingNotFoundException` if the room's booking does not exist
+.. delete the room's first booking
+. `VersionedConcierge#checkoutRoom` will call `VersionedConcierge#removeCheckedInGuest`
+ to remove the guest from the checked-in guest list if he/she does not have any other bookings
+. `VersionedConcierge#checkoutRoom` will call `VersionedConcierge#addGuest`
+ to add the guest to the archived guest list if he/she does not already exists in it
 
 The following sequence diagram shows how to CheckinCommand operations works:
 
@@ -637,25 +648,23 @@ image::CheckinCommandSequenceDiagram.png[width="1280"]
 
 ==== Design Considerations
 
-===== Aspect: How check-in/checkout executes
+===== Aspect: Deletion of bookings
 
-* **Alternative 1 (current choice):** Check-in only the active booking, and check-out only the first expired or active booking regardless of check-in status.
-** Pros: Natural, because the receptionist will only check-in guests who have a booking during their booking period, not before or after (even if the receptionist forgets).
-On the other hand, receptionist may forget to checkout a guest on the system, resulting in an expired booking. Thus, we allow checking out of a room with an expired booking.
-Checkout acts as a delete booking feature, since it ignores the check-in status of a room's active booking.
-[NOTE]
-The ability to delete upcoming bookings is planned for v1.3.
-** Cons: Have to check for many exceptions.
-* **Alternative 2:** Check-in only the active booking, and check-out only active booking.
-** Pros: Stricter checks on check-in/checkout, leading to less chance of error.
-** Cons: Many various real-life situations to consider.
+* **Alternative 1 (current choice):** Use `checkout` to delete any booking.
+** Pros: `checkout` doubles as a delete booking feature, so no need for a `deletebooking` command.
+** Cons: Not very natural, as `checkout` implies checking out a checked-in booking.
+* **Alternative 2:** Use `checkout` to delete only active booking, and create new command `deletebooking` to delete expired and upcoming bookings.
+** Pros: More natural, `checkout` can only do what its name implies.
+** Cons: Need to implement new command and more methods, to support the same deletion operation but with a different name.
 
 ===== Aspect: Immutability of check-in command
 
-* **Alternative 1 (current choice):** Check-in a room by creating a new copy of the room with the check-in flag set to true.
+* **Alternative 1 (current choice):** `checkIn` a room by creating a new copy of the room
+ with the `isCheckedIn` flag of the first booking set to true.
 ** Pros: Debugging is easy. Consistent with the rest of the application.
-** Cons: Check-in method becomes unintuitive, since a new room is returned from the operation, instead of a void method simply setting the room property.
-* **Alternative 2:** Check-in a room by changing its check-in flag to true.
+** Cons: `checkIn` method becomes unintuitive, since a new room is returned from the operation,
+ instead of a void method simply setting the instance property.
+* **Alternative 2:** `checkIn` a room by setting the `isCheckedIn` flag of the first booking to true.
 ** Pros: Check-in method is intuitive, and does not return a new room.
 ** Cons: Harder to debug. Tests also become troublesome since changes are made to the same referenced room.
 // end::checkin[]

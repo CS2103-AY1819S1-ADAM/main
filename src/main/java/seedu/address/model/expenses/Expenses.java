@@ -27,6 +27,10 @@ public class Expenses {
         this.expenseList = new LinkedList<>(expenseList);
     }
 
+    public List<Expense> getExpensesList() {
+        return Collections.unmodifiableList(expenseList);
+    }
+
     /**
      * Adds a new {@code Expense} to the current expenses.
      * New expense is added in front as it is more likely that recent expenses are accessed.
@@ -49,10 +53,6 @@ public class Expenses {
      */
     public Expenses clearExpenses() {
         return new Expenses();
-    }
-
-    public List<Expense> getExpensesList() {
-        return Collections.unmodifiableList(expenseList);
     }
 
     /**

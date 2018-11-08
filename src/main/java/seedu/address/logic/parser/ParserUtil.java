@@ -2,12 +2,15 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.DateTimeException;
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Stream;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -155,6 +158,30 @@ public class ParserUtil {
             throw new ParseException(BookingPeriod.MESSAGE_BOOKING_PERIOD_CONSTRAINTS);
         }
         return new BookingPeriod(trimmedStartDate, trimmedEndDate);
+    }
+
+    /**
+     * Parses a {@code date} into a {@code LocalDate}
+     * Leading and trailing whitespaces will be trimmed.
+     * @throws ParseException if {@code date} is invalid
+     */
+    public static LocalDate parseDate(String date) throws ParseException {
+        requireNonNull(date);
+        String trimmedDate = date.trim();
+        try {
+            return LocalDate.parse(trimmedDate, BookingPeriod.STRING_TO_DATE_FORMAT);
+        } catch (DateTimeException e) {
+            throw new ParseException(Messages.MESSAGE_INVALID_DATE);
+        }
+    }
+
+    /**
+     * Parses a {@code date} into {@code String}
+     * @throws ParseException if {@code date} is invalid
+     */
+    public static String parseDateToString(LocalDate date) {
+        requireNonNull(date);
+        return date.format(BookingPeriod.DATE_TO_STRING_FORMAT);
     }
 
     /**

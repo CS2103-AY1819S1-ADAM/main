@@ -6,16 +6,16 @@ import static seedu.address.logic.commands.CommandTestUtil.DATE_START_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ROOM_DESC_AMY;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.testutil.TypicalRoomNumbers.ROOM_NUMBER_AMY;
 
 import org.junit.Test;
 
 import seedu.address.logic.commands.CheckInCommand;
 import seedu.address.model.room.RoomNumber;
-import seedu.address.testutil.TypicalRoomNumbers;
 
 /**
  * As we are only doing white-box testing, our test cases do not cover path variations
- * outside of the CheckInCommand code. For example, inputs "1", "01" , and "0001" take the
+ * outside of the CheckInCommand code. For example, inputs "r/1", "r/01" , and "r/0001" take the
  * same path through the CheckInCommand, and therefore we test only one of
  * them. The path variation for those two cases occur inside the ParserUtil, and
  * therefore should be covered by the ParserUtilTest.
@@ -26,7 +26,7 @@ public class CheckinCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsCheckInCommand() {
-        RoomNumber expectedRoomNumber = TypicalRoomNumbers.ROOM_NUMBER_AMY;
+        RoomNumber expectedRoomNumber = ROOM_NUMBER_AMY;
         assertParseSuccess(parser, ROOM_DESC_AMY, new CheckInCommand(expectedRoomNumber));
     }
 
@@ -36,8 +36,8 @@ public class CheckinCommandParserTest {
         assertParseFailure(parser, "", String.format(MESSAGE_INVALID_COMMAND_FORMAT, CheckInCommand.MESSAGE_USAGE));
 
         // invalid room numbers
-        assertParseFailure(parser, "1", String.format(MESSAGE_INVALID_COMMAND_FORMAT, CheckInCommand.MESSAGE_USAGE));
-        assertParseFailure(parser, "01", String.format(MESSAGE_INVALID_COMMAND_FORMAT, CheckInCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "r/1", String.format(MESSAGE_INVALID_COMMAND_FORMAT, CheckInCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "r/01", String.format(MESSAGE_INVALID_COMMAND_FORMAT, CheckInCommand.MESSAGE_USAGE));
 
         // missing room flag
         assertParseFailure(parser, "001", String.format(MESSAGE_INVALID_COMMAND_FORMAT, CheckInCommand.MESSAGE_USAGE));
@@ -47,7 +47,6 @@ public class CheckinCommandParserTest {
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, CheckInCommand.MESSAGE_USAGE));
 
         // check-in does not take in dates
-        // TODO overload check-in method to allow checking-in by date? (not much point though)
         assertParseFailure(parser, ROOM_DESC_AMY + DATE_START_DESC_AMY,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, CheckInCommand.MESSAGE_USAGE));
         assertParseFailure(parser, ROOM_DESC_AMY + DATE_END_DESC_AMY,

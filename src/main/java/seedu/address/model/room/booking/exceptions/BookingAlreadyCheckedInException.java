@@ -1,4 +1,4 @@
-package seedu.address.model.room.exceptions;
+package seedu.address.model.room.booking.exceptions;
 
 /**
  * Signals that the operation is attempting to check-in a guest into a booking that is already checked-in

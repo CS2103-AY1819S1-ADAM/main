@@ -19,6 +19,7 @@ import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.LogInCommand;
 import seedu.address.logic.commands.LogOutCommand;
+import seedu.address.logic.commands.ReassignCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.ServiceCommand;
@@ -54,6 +55,9 @@ public class ConciergeParser {
 
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
+
+        case ReassignCommand.COMMAND_WORD:
+            return new ReassignCommandParser().parse(arguments);
 
         case CheckInCommand.COMMAND_WORD:
             return new CheckInCommandParser().parse(arguments);

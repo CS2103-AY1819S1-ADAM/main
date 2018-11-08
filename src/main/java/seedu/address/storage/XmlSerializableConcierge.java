@@ -98,7 +98,7 @@ public class XmlSerializableConcierge {
             room.getBookings().getSortedBookingsSet().parallelStream()
                     .filter(Booking::getIsCheckedIn)
                     .map(Booking::getGuest)
-                    .forEach(concierge::addCheckedInGuest);
+                    .forEach(concierge::addCheckedInGuestIfNotPresent);
         }
 
         try {

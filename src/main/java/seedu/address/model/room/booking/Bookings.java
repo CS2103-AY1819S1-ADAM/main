@@ -3,6 +3,7 @@ package seedu.address.model.room.booking;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Collections;
 import java.util.Optional;
 import java.util.Set;
 import java.util.SortedSet;
@@ -52,7 +53,7 @@ public class Bookings {
     //=========== Getters =============================================================
 
     public SortedSet<Booking> getSortedBookingsSet() {
-        return sortedBookingsSet;
+        return Collections.unmodifiableSortedSet(sortedBookingsSet);
     }
 
     /**
@@ -144,10 +145,10 @@ public class Bookings {
     //=========== Boolean checkers =============================================================
 
     /**
-     * Returns true if there are expired bookings
+     * Returns true if the booking exists in this set of bookings
      */
-    public boolean hasExpiredBookings() {
-        return sortedBookingsSet.stream().anyMatch(Booking::isExpired);
+    public boolean contains(Booking booking) {
+        return sortedBookingsSet.contains(booking);
     }
 
     /**
