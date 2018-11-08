@@ -40,7 +40,7 @@ public class CliSyntax {
     public static final Prefix FLAG_ROOM_HAS_BOOKINGS = new Prefix("-hb");
     public static final Prefix FLAG_ROOM_NO_BOOKINGS = new Prefix("-nb");
     public static final Prefix FLAG_CHECKED_IN_GUEST = new Prefix("-cg");
-    
+
     /* Login prefixes */
     public static final Prefix PREFIX_USERNAME = new Prefix("user/");
     public static final Prefix PREFIX_PASSWORD = new Prefix("pw/");
