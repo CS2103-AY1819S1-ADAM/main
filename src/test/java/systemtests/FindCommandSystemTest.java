@@ -136,12 +136,12 @@ public class FindCommandSystemTest extends ConciergeSystemTest {
         /* Case: mixed case command word -> rejected */
         command = "FiNd Meier";
         assertCommandFailure(command, MESSAGE_UNKNOWN_COMMAND);
-        assertSelectedCardUnchanged();
+        assertSelectedGuestCardUnchanged();
 
         /* Case: find email of guest in Concierge using name prefix -> ParseException thrown */
         command = FindCommand.COMMAND_WORD + " " + FLAG_GUEST + " " + PREFIX_NAME + DANIEL.getEmail().value;
         assertCommandFailure(command, Name.MESSAGE_NAME_CONSTRAINTS);
-        assertSelectedCardUnchanged();
+        assertSelectedGuestCardUnchanged();
     }
 
     /**

@@ -145,7 +145,6 @@ public class FindCommandTest {
         roomListPredicates.add(predicate);
         FindCommand command = new FindCommand(displayedListFlag.toString(), null, roomListPredicates);
 
-        String expectedMessage = String.format(MESSAGE_ROOMS_LISTED_OVERVIEW, 1);
         expectedModel.updateFilteredRoomList(predicate);
         expectedModel.setDisplayedListFlag(displayedListFlag);
 
