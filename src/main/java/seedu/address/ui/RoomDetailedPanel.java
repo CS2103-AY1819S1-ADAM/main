@@ -92,15 +92,11 @@ public class RoomDetailedPanel extends UiPart<Region> {
         }
     }
 
-    @Subscribe
-    private void handleConciergeChangedEvent(ConciergeChangedEvent event) {
-        roomDetailedView.setItems(null);
+    /**
+     * Clears the items from this list view
+     */
+    public void clearSelection() {
+        roomDetailedView.getItems().clear();
     }
 
-    @Subscribe
-    private void handleListingChangedEvent(ListingChangedEvent event) {
-        if (event.getFlag().equals(FLAG_ROOM)) {
-            roomDetailedView.setItems(null);
-        }
-    }
 }

@@ -300,4 +300,10 @@ public class MainWindow extends UiPart<Stage> {
         guestDetailedPanel.clearSelection();
     }
 
+    /**
+     * Clears the room detailed panel
+     */
+    public void clearRoomSelection() {
+        roomDetailedPanel.clearSelection();
+    }
 }

@@ -111,6 +111,8 @@ public class AddCommandSystemTest extends ConciergeSystemTest {
         /* Case: selects first card in the guest list, add a guest -> added, card selection remains unchanged */
         selectGuest(Index.fromOneBased(1));
         roomNumberToAdd = ROOM_NUMBER_052;
+        //Fix here
+
         assertCommandSuccess(JAKOB, roomNumberToAdd, bookingPeriodToAdd);
 
         /* ----------------------------------- Perform invalid add operations --------------------------------------- */

@@ -136,6 +136,7 @@ public class FindCommandTest {
         assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredGuestList());
     }
 
+
     @Test
     public void execute_roomFlagAndNumber_roomFound() {
         String expectedMessage = String.format(MESSAGE_ROOMS_LISTED_OVERVIEW, 1);

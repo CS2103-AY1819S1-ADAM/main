@@ -131,13 +131,16 @@ public class UiManager extends ComponentManager implements Ui {
             setDisplayGuestList();
             showGuestList();
             showGuestDetailedPanel();
+            mainWindow.clearGuestSelection();
         } else if (event.getFlag().equals(FLAG_ROOM)) {
             showRoomList();
             showRoomDetailedPanel();
+            mainWindow.clearRoomSelection();
         } else if (event.getFlag().equals(FLAG_CHECKED_IN_GUEST)) {
             setDisplayCheckedInGuestList();
             showGuestList();
             showGuestDetailedPanel();
+            mainWindow.clearGuestSelection();
         }
     }
 

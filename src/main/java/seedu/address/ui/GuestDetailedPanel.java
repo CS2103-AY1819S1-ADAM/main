@@ -72,19 +72,6 @@ public class GuestDetailedPanel extends UiPart<Region> {
         setGuestDetails(event.getNewSelection());
     }
 
-
-    @Subscribe
-    private void handleConciergeChangedEvent(ConciergeChangedEvent event) {
-        guestDetailedView.setItems(null);
-    }
-
-    @Subscribe
-    private void handleListingChangedEvent(ListingChangedEvent event) {
-        if (event.getFlag().equals(FLAG_GUEST) || event.getFlag().equals(FLAG_CHECKED_IN_GUEST)) {
-            guestDetailedView.setItems(null);
-        }
-    }
-
     /**
      * Clears the items from this list view
      */
