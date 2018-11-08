@@ -34,7 +34,18 @@ public enum Capacity {
      * Returns true if a given string is a valid capacity.
      */
     public static boolean isValidCapacity(String test) {
-        int value = Integer.parseInt(test);
+        int value = 0;
+
+        if(test.length() > 1){
+            return false;
+        }
+
+        try {
+            value = Integer.parseInt(test);
+        } catch (NumberFormatException e){
+            return false;
+        }
+
         return SINGLE.value == value || DOUBLE.value == value || SUITE.value == value;
     }
 
