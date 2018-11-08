@@ -36,13 +36,13 @@ public enum Capacity {
     public static boolean isValidCapacity(String test) {
         int value = 0;
 
-        if(test.length() > 1){
+        if (test.length() > 1) {
             return false;
         }
 
         try {
             value = Integer.parseInt(test);
-        } catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             return false;
         }
 
