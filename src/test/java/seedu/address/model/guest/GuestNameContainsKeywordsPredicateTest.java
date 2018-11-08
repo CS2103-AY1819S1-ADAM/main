@@ -11,7 +11,7 @@ import org.junit.Test;
 
 import seedu.address.testutil.GuestBuilder;
 
-public class NameContainsKeywordsPredicateTest {
+public class GuestNameContainsKeywordsPredicateTest {
 
     @Test
     public void equals() {
@@ -39,6 +39,12 @@ public class NameContainsKeywordsPredicateTest {
 
         // different guest -> returns false
         assertFalse(firstPredicate.equals(secondPredicate));
+
+        // Same hashcode
+        assertTrue(firstPredicate.hashCode() == firstPredicate.hashCode());
+
+        // Different hashcode
+        assertFalse(firstPredicate.hashCode() == secondPredicate.hashCode());
     }
 
     @Test

@@ -60,6 +60,7 @@ public class FindCommand extends Command {
         } else if (flag.equals(FLAG_CHECKED_IN_GUEST.toString())) {
             Predicate<Guest> combinedGuestPredicate = combineGuestFilters();
             model.updateFilteredCheckedInGuestList(combinedGuestPredicate);
+            model.setDisplayedListFlag(FLAG_CHECKED_IN_GUEST);
             EventsCenter.getInstance().post(new ListingChangedEvent(FLAG_CHECKED_IN_GUEST));
 
             return new CommandResult(String.format(Messages.MESSAGE_GUESTS_LISTED_OVERVIEW,

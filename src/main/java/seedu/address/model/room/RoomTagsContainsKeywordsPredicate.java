@@ -18,12 +18,11 @@ public class RoomTagsContainsKeywordsPredicate implements Predicate<Room> {
 
     @Override
     public boolean test(Room room) {
-        List<Tag> roomTags = new LinkedList<>();
-        roomTags.addAll(room.getTags());
+        List<Tag> roomTags = new LinkedList<>(room.getTags());
 
         for (Tag tag : tags) {
             for (Tag roomTag : roomTags) {
-                if (roomTag.equals(tag)) {
+                if (roomTag.tagName.equalsIgnoreCase(tag.tagName)) {
                     return true;
                 }
             }

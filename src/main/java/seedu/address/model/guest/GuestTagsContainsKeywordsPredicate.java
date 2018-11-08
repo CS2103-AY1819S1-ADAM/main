@@ -22,7 +22,7 @@ public class GuestTagsContainsKeywordsPredicate implements Predicate<Guest> {
 
         for (Tag tag : tags) {
             for (Tag guestTag : guestTags) {
-                if (guestTag.equals(tag)) {
+                if (guestTag.tagName.equalsIgnoreCase(tag.tagName)) {
                     return true;
                 }
             }
@@ -36,7 +36,6 @@ public class GuestTagsContainsKeywordsPredicate implements Predicate<Guest> {
         return other == this // short circuit if same object
                 || (other instanceof GuestTagsContainsKeywordsPredicate // instanceof handles nulls
                 && tags.equals(((GuestTagsContainsKeywordsPredicate) other).tags)); // state check
-
     }
 
     @Override
