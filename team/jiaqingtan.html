@@ -1,0 +1,511 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]--><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Asciidoctor 1.5.6.1"><title>Tan Jiaqing - Project Portfolio</title><link rel="stylesheet" href="../stylesheets/gh-pages.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="../stylesheets/coderay-asciidoctor.css"></head><body class="article"><div id="site-header"><nav class="navbar navbar-light bg-light"><div class="container"><a class="navbar-brand" href="../index.html">Concierge</a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="../UserGuide.html">User Guide</a></li><li class="nav-item"><a class="nav-link" href="../DeveloperGuide.html">Developer Guide</a></li><li class="nav-item"><a class="nav-link active" href="../AboutUs.html">About Us</a></li><li class="nav-item"><a class="nav-link" href="../ContactUs.html">Contact Us</a></li><li class="navitem"><a class="nav-link" href="https://github.com/CS2103-AY1819S1-F11-2/main"><span class="fa fa-github fa-lg" aria-hidden="true"></span>&nbsp;View on GitHub</a></li></ul></div></nav></div><div id="header"><h1>Tan Jiaqing - Project Portfolio</h1></div><div id="content"><div class="sect1">
+<h2 id="project-concierge"><a class="link" href="#project-concierge">PROJECT: Concierge</a></h2>
+<div class="sectionbody">
+<hr>
+</div>
+</div>
+<div class="sect1">
+<h2 id="overview"><a class="link" href="#overview">Overview</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Concierge is a desktop application simulating a hotel management system used by hotel owners and receptionists. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="summary-of-contributions"><a class="link" href="#summary-of-contributions">Summary of contributions</a></h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Code contributed</strong>: [<a href="https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&amp;search=jiaqingtan">Code Contributed</a>]</p>
+</li>
+<li>
+<p><strong>Major enhancements</strong>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Expanding on the existing 'list' function:</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p>What it does: It allows the user to list between seeing a list of all guests, list of checked-in guests, or a list of all the rooms in the hotel.</p>
+</li>
+<li>
+<p>Justification: This feature is essential to a proper, working hotel management system. The listing of information on guests and rooms is needed for receptionists to perform follow-up tasks, be it in person or within the app.</p>
+</li>
+<li>
+<p>Highlights: The listing function was made with the intention of listing guests and rooms separately under the same column, which required more in-depth research into JAVAFX and FXML files. (More details can be found in the "Minor Enhancements" section.)</p>
+</li>
+<li>
+<p>Credits: The modification of the list function was highly dependent on the underlying code that the list function initially had. Additional code was added on to expand upon the initial list function, while I slowly learnt how the code of the AddressBook application actually worked.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Expanding on the existing 'find' function:</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p>What it does: It allows the user to search for all guests, checked-in guests, or rooms based on a particular set of conditions/predicates related to the attributes of the guest/room.</p>
+</li>
+<li>
+<p>Justification: This feature is essential to a proper, working hotel management system. The find function can be used in a multitude of scenarios, such as when a quick search of rooms of an exact capacity is needed, or when a checked-in guest needs to be located immediately, in the event of an emergency.</p>
+</li>
+<li>
+<p>Highlights: The prefixes of the find function can be chained in any order, and in any quantity, as the predicates are all combined at the end. Each filter is has an "and" relationship with one another.</p>
+</li>
+<li>
+<p>Credits: The modification of the find function was dependent on its own initial code, and the style of coding and arriving at the solution was closely followed.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Other contributions</strong>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Replacing the HTML panel with a focused/detailed panel</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p>The HTML panel was replaced with a detailed panel, which showed more details about a particular guest/room when the card in the list is clicked. The main aim was to reduce the amount of information clutter on the listing portion on the left of the UI by showing only essential information. More information can be, and will be shown only if the user needs those additional information, and clicks on the guest/room card.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Modifying the FXML files to list guest and rooms under the same UI column/panel</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p>This particular enhancement required extensive research into JAVAFX and FXML files, which took a bit of time to solve. We had the intention of keeping the UI clean and free of visual clutter, and the main idea was to keep the listing of guests and rooms separate by ensuring that they display under the same column. Trial and error was needed to ensure that one panel appears and the other does not overlap.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Creation of the Concierge Icon and Logo</strong></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/ConciergeIconFinal.png" alt="ConciergeIconFinal" width="200">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/ConciergeFinal.png" alt="ConciergeFinal" width="600">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The icon and logo was created using Adobe Photoshop, along with my limited experience in visual design gathered from my time in Polytechnic under a Game Design course.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="contributions-to-the-user-guide"><a class="link" href="#contributions-to-the-user-guide">Contributions to the User Guide</a></h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users.</em></p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect2">
+<h3 id="locating-guests-and-rooms-code-find-code"><a class="link" href="#locating-guests-and-rooms-code-find-code">Locating guests and rooms : <code>find</code></a></h3>
+<div class="paragraph">
+<p>Finds guests or rooms, depending on the input flag and the keyword filters.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>find [flag] FILTERS</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>The search is case insensitive. e.g <code>hans</code> will match <code>Hans</code></p>
+</li>
+<li>
+<p>The order of the keywords does not matter. e.g. <code>Hans Bo</code> will match <code>Bo Hans</code></p>
+</li>
+<li>
+<p>Only full words will be matched e.g. <code>Han</code> will not match <code>Hans</code></p>
+</li>
+<li>
+<p>Guests names and tags matching at least one keyword will be returned (i.e. <code>OR</code> search). e.g. <code>Hans Bo</code> will return <code>Hans Gruber</code>, <code>Bo Yang</code></p>
+</li>
+<li>
+<p>Any number of filters can be chained and used together</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Filters for Guest (-g):</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>n/ - Name</code></p>
+</li>
+<li>
+<p><code>p/ - Phone Number</code></p>
+</li>
+<li>
+<p><code>e/ - Email Address</code></p>
+</li>
+<li>
+<p><code>t/ - Tags</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Filters for Rooms (-r):</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>r/ - Room Number</code></p>
+</li>
+<li>
+<p><code>c/ - Capacity</code></p>
+</li>
+<li>
+<p><code>t/ - Room Tags</code></p>
+</li>
+<li>
+<p><code>n/ - Guest name within bookings</code></p>
+</li>
+<li>
+<p><code>-hb - Has Bookings Flag</code>*</p>
+</li>
+<li>
+<p><code>-nb - No Bookings Flag</code>*</p>
+</li>
+<li>
+<p><code>from/ - Booking Start Date</code>^</p>
+</li>
+<li>
+<p><code>to/ - Booking End Date</code>^</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Flags marked with * cannot be used together in the same command.
+These flags can be used independently, or with flags marked with ^ .<br>
+Input dates must be in DD/MM/YY or DD/MM/YYYY format.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Find Command Examples:</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p><code>find -g n/Alex Yu</code><br>
+Find guest(s) with "Alex" or "Yu" or both in their names.</p>
+</li>
+<li>
+<p><code>find -g n/Alex t/VIP</code><br>
+Find guest(s) named Alex with tag "VIP".</p>
+</li>
+<li>
+<p><code>find -g p/81027115</code><br>
+Find guest(s) with phone number "81027115".</p>
+</li>
+<li>
+<p><code>find -r r/085</code><br>
+Find room 085</p>
+</li>
+<li>
+<p><code>find -r c/2</code><br>
+Find all rooms with a capacity of 2.</p>
+</li>
+<li>
+<p><code>find -r c/5 -nb from/ 01/11/2018 to/ 05/11/2018</code><br>
+Find all rooms with a capacity of 5, without any bookings from the date range 01/11/2018 to 05/11/2018.</p>
+</li>
+<li>
+<p><code>find -r -hb</code><br>
+Find all rooms with bookings.</p>
+</li>
+<li>
+<p><code>find -r -hb t/RoomService</code><br>
+Find all rooms with bookings with tag "RoomService".</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="listing-all-guests-code-list-code"><a class="link" href="#listing-all-guests-code-list-code">Listing all guests : <code>list</code></a></h3>
+<div class="paragraph">
+<p>Shows the entire list of rooms, checked-in guests, or archived guests, depending on the input flag<br>
+Format: <code>list [flag]</code></p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>list -r</code><br>
+List all rooms</p>
+</li>
+<li>
+<p><code>list -g</code><br>
+List all archived guests</p>
+</li>
+<li>
+<p><code>list -cg</code><br>
+List all checked-in guests</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="contributions-to-the-developer-guide"><a class="link" href="#contributions-to-the-developer-guide">Contributions to the Developer Guide</a></h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project.</em></p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect2">
+<h3 id="find-feature"><a class="link" href="#find-feature">Find Feature</a></h3>
+<div class="paragraph">
+<p>The Find feature expands upon the originally implemented FindCommand, allowing for the searching of both rooms and guests, with several filters.</p>
+</div>
+<div class="paragraph">
+<p>The Activity UML Diagram for the current implementation of FindCommand is as follows:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/FindCommandUml.png" alt="FindCommandUml" width="600">
+</div>
+</div>
+<div class="sect3">
+<h4 id="current-implementation"><a class="link" href="#current-implementation">Current Implementation</a></h4>
+<div class="paragraph">
+<p>The find function is facilitated by a modified <code>FindCommand</code> class, of which the input from the CommandBox is parsed by a <code>FindCommandParser</code> class.</p>
+</div>
+<div class="paragraph">
+<p>The find function now has the ability to find either guests or rooms. The starting commands for the find function with flags are as follows:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>find -g</code> - Find guests.</p>
+</li>
+<li>
+<p><code>find -cg</code> - Find checked-in guests.</p>
+</li>
+<li>
+<p><code>find -r</code> - Find rooms.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The above command must be followed up by at least 1 filter, and they are as follows:</p>
+</div>
+<div class="paragraph">
+<p>Guest Filters (-g):</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>n/ - Name</code></p>
+</li>
+<li>
+<p><code>p/ - Phone Number</code></p>
+</li>
+<li>
+<p><code>e/ - Email Address</code></p>
+</li>
+<li>
+<p><code>t/ - Tags</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Room Filters (-r):</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>r/ - Room Number</code></p>
+</li>
+<li>
+<p><code>c/ - Capacity</code></p>
+</li>
+<li>
+<p><code>t/ - Room Tags</code></p>
+</li>
+<li>
+<p><code>n/ - Name of guest with bookings</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The following are filters for room bookings. The flags cannot be mixed.
+The flags can be used independently, or with a from/to specified date.
+Input dates must be in DD/MM/YY format.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>-hb - Has Bookings Flag</code></p>
+</li>
+<li>
+<p><code>-nb - No Bookings Flag</code></p>
+</li>
+<li>
+<p><code>from/ - Booking Start Date</code></p>
+</li>
+<li>
+<p><code>to/ - Booking End Date</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The FindCommandParser uses a tokenizer to obtain the individual arguments/filters, whether the filter is present or not. If a filter is present, the input that precedes the filter prefix will be used to create the individual predicate class.</p>
+</div>
+<div class="paragraph">
+<p>These predicate classes are collected into a list of predicates before they are combined and merged in the FindCommand class. The combined final predicate is then passed to the Model Manager to filter the guest/room list, and a listingChangedEvent is called to update the UI elements.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-or-and-searching"><a class="link" href="#aspect-or-and-searching">Aspect: OR/AND Searching</a></h5>
+<div class="paragraph">
+<p>When searching, a few things have to be considered. Does the filter specified have an OR relationship with one another, or an AND relationship.
+An example is this: find -g n/Alex t/VIP, this can be interpreted in two ways. Finding guests with name as "Alex" AND with tag "VIP", or name "Alex" or tag "VIP.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="rooms-list-feature"><a class="link" href="#rooms-list-feature">Rooms List Feature</a></h3>
+<div class="paragraph">
+<p>The rooms list feature builds upon, and reuses functions from the ;originally implemented ListCommand.</p>
+</div>
+<div class="paragraph">
+<p>The Activity UML Diagram for the current implementation of ListCommand is as follows:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/ListCommandUml.png" alt="ListCommandUml" width="600">
+</div>
+</div>
+<div class="sect3">
+<h4 id="current-implementation-2"><a class="link" href="#current-implementation-2">Current Implementation</a></h4>
+<div class="paragraph">
+<p>The list function is facilitated by a modified <code>ListCommand</code> class, of which the input from the CommandBox is parsed by a <code>ListCommandParser</code> class.</p>
+</div>
+<div class="paragraph">
+<p>The list function now requires a flag after the 'list' command. Below are the two allowed list commands:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>list -g</code> - Lists all guests.</p>
+</li>
+<li>
+<p><code>list -cg</code> - Lists all checked-in guests.</p>
+</li>
+<li>
+<p><code>list -r</code> - Lists all rooms.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>A <code>ListCommandParser</code> class was created to obtain and compare the flags from inputs, which required a different approach to the rest of the commands. The input string is simply split using a String function, obtaining an array of strings, of which the flags will be at index 1.</p>
+</div>
+<div class="paragraph">
+<p>Modification of existing FXML files, and creation of new FXML files was done to achieve separate listing of guests and rooms, and the browser panel was replaced with a panel to focus on, and display more detailed information on the selected guest/room.</p>
+</div>
+<div class="paragraph">
+<p>In order to stack the UI elements on top of one another to reuse and display the separate lists under the same column, modifications were made to the <code>MainWindow.fxml</code> file.
+The GuestListPanel and RoomListPanel each has a "VBox" element encapsulating them, which visibility is toggled and the element itself enabled or disabled based on the flag that was obtained from the parser. This feature extends to the GuestDetailedPanel and RoomDetailedPanel and is achieved in the same way.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-how-to-display-each-list"><a class="link" href="#aspect-how-to-display-each-list">Aspect: How to display each list</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 :</strong> Maintain two columns on the MainWindow UI to display both rooms and guests</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easier to modify UI by adding on instead of modifying and replacing, and modifications in the future will not be too tedious.</p>
+</li>
+<li>
+<p>Cons: UI looks cluttered with an empty column when not displaying the other, not an efficient use of screen space.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2 (current choice):</strong> Separately display the two lists within the same MainWindow UI space/column.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Cleaner looking, fully utilises empty spaces. Better visual feedback from commands as inputs.</p>
+</li>
+<li>
+<p>Cons: Requires heavy modification of MainWindow UI files, future features must stick with the restriction of having a list of either guests or rooms.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-09 03:40:36 UTC</div></div></div></body></html>
