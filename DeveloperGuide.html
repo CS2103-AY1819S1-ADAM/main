@@ -83,8 +83,7 @@
 <li><a href="#instructions-for-manual-testing">Appendix H: Instructions for Manual Testing</a>
 <ul class="sectlevel2">
 <li><a href="#launch-and-shutdown">H.1. Launch and Shutdown</a></li>
-<li><a href="#deleting-a-guest">H.2. Deleting a guest</a></li>
-<li><a href="#saving-data">H.3. Saving data</a></li>
+<li><a href="#saving-data">H.2. Saving data</a></li>
 </ul>
 </li>
 </ul>
@@ -2718,7 +2717,7 @@ for <code>RemarkCommandParser</code>.</p>
 <p>Add <code>getRemark()</code> in <a href="https://github.com/CS2103-AY1819S1-F11-2/main/src/main/java/seedu/address/model/guest/Guest.java"><code>Guest</code></a>.</p>
 </li>
 <li>
-<p>You may assume that the user will not be able to use the <code>add</code> and <code>edit</code> commands to modify the remarks field (i.e. the guest will be created without a remark).</p>
+<p>You may assume that the user will not be able to use the <code>add</code> command to modify the remarks field (i.e. the guest will be created without a remark).</p>
 </li>
 <li>
 <p>Modify <a href="https://github.com/CS2103-AY1819S1-F11-2/main/src/main/java/seedu/address/model/util/SampleDataUtil.java/"><code>SampleDataUtil</code></a> to add remarks for the sample data (delete your <code>concierge.xml</code> so that the application will load the sample data when you launch it.)</p>
@@ -3530,39 +3529,7 @@ Expected: The most recent window size and location is retained.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="deleting-a-guest"><a class="link" href="#deleting-a-guest">H.2. Deleting a guest</a></h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Deleting a guest while all guests are listed</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p>Prerequisites: List all guests using the <code>list</code> command. Multiple guests in the list.</p>
-</li>
-<li>
-<p>Test case: <code>delete 1</code><br>
-Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.</p>
-</li>
-<li>
-<p>Test case: <code>delete 0</code><br>
-Expected: No guest is deleted. Error details shown in the status message. Status bar remains the same.</p>
-</li>
-<li>
-<p>Other incorrect delete commands to try: <code>delete</code>, <code>delete x</code> (where x is larger than the list size) <em>{give more}</em><br>
-Expected: Similar to previous.</p>
-</li>
-</ol>
-</div>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p><em>{ more test cases &#8230;&#8203; }</em></p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="saving-data"><a class="link" href="#saving-data">H.3. Saving data</a></h3>
+<h3 id="saving-data"><a class="link" href="#saving-data">H.2. Saving data</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -3582,4 +3549,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-09 09:43:20 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-10 01:56:47 UTC</div></div></div></body></html>
