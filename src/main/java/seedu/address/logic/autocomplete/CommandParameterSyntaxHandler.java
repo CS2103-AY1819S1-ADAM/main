@@ -29,7 +29,7 @@ import seedu.address.logic.parser.Prefix;
  */
 public class CommandParameterSyntaxHandler {
     public static final ArrayList<Prefix> ADD_COMMAND_PREFIXES = getListOfPrefix(PREFIX_NAME,
-        PREFIX_PHONE, PREFIX_EMAIL, PREFIX_TAG, PREFIX_ROOM, PREFIX_DATE_START, PREFIX_DATE_END);
+        PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ROOM, PREFIX_DATE_START, PREFIX_DATE_END, PREFIX_TAG);
 
     public static final ArrayList<Prefix> CHECKIN_COMMAND_PREFIXES = getListOfPrefix(PREFIX_ROOM);
 
