@@ -1,6 +1,7 @@
 package seedu.address.logic.autocomplete;
 
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE_END;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE_START;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -37,13 +38,13 @@ public class AutoCompleteManagerTest {
     @Test
     public void getAutoCompleteCommands_prefixKeywordInCommandTrie_notEmptyList() {
         List<String> wordList = autoCompleteManager.getAutoCompleteCommands("add");
-        assertTrue(!wordList.isEmpty());
+        assertFalse(wordList.isEmpty());
     }
 
     @Test
     public void getAutoCompleteCommands_emptyKeyword_notEmptyList() {
         List<String> wordList = autoCompleteManager.getAutoCompleteCommands("");
-        assertTrue(!wordList.isEmpty());
+        assertFalse(wordList.isEmpty());
     }
 
     @Test

@@ -25,7 +25,7 @@ public class CommandParameterSyntaxHandlerTest {
     private CommandParameterSyntaxHandler handler;
 
     @Before
-    public void setup() {
+    public void setUp() {
         handler = new CommandParameterSyntaxHandler();
     }
 
