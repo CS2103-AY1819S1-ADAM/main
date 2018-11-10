@@ -1,6 +1,6 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]--><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Asciidoctor 1.5.6.1"><title>Concierge v1.3 - User Guide</title><link rel="stylesheet" href="stylesheets/gh-pages.css">
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]--><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Asciidoctor 1.5.6.1"><title>Concierge v1.4 - User Guide</title><link rel="stylesheet" href="stylesheets/gh-pages.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="stylesheets/coderay-asciidoctor.css"></head><body class="article"><div id="header"><h1>Concierge v1.3 - User Guide</h1></div><div id="content"><div id="preamble">
+<link rel="stylesheet" href="stylesheets/coderay-asciidoctor.css"></head><body class="article"><div id="header"><h1>Concierge v1.4 - User Guide</h1></div><div id="content"><div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
 <p>By: <code>Team SE-EDU</code>      Since: <code>Jun 2016</code>      Licence: <code>MIT</code></p>
@@ -264,6 +264,11 @@ start date from today onwards.
 </tr>
 </table>
 </div>
+<div class="literalblock">
+<div class="content">
+<pre>This command requires a login.</pre>
+</div>
+</div>
 <div class="paragraph">
 <p>Example:</p>
 </div>
@@ -318,6 +323,11 @@ Expired and upcoming bookings <strong>cannot</strong> be checked-in.
 <p>Upon checking in the room&#8217;s first active booking, the guest who made the booking will be added to
 the checked-in guest list.<br>
 Format: <code>checkin r/ROOM_NUMBER</code></p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>This command requires a login.</pre>
+</div>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -380,6 +390,11 @@ but will be added to the archived guest list.</p>
 <div class="paragraph">
 <p>Format: <code>checkout r/ROOM_NUMBER [from/START_DATE]</code></p>
 </div>
+<div class="literalblock">
+<div class="content">
+<pre>This command requires a login.</pre>
+</div>
+</div>
 <div class="paragraph">
 <p>Examples:</p>
 </div>
@@ -429,6 +444,11 @@ Checks out the booking with start date 01/11/18 from room 085.</p>
 </div>
 <div class="paragraph">
 <p>Format: <code>reassign r/ROOM_NUMBER from/START_DATE</code></p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>This command requires a login.</pre>
+</div>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -613,15 +633,36 @@ List all checked-in guests</p>
 <p>Logs in to the Concierge application.<br>
 Format: <code>login user/USERNAME pw/PASSWORD</code></p>
 </div>
+<div class="paragraph">
+<p>Note: The username and password are both case-sensitive.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+A login allows the user to access the commands which can affect the
+bookings.
+</td>
+</tr>
+</table>
+</div>
 <div class="sidebarblock">
 <div class="content">
 <div class="ulist">
 <ul>
 <li>
-<p>The username and password are both case-sensitive.</p>
+<p>The default account can be accessed with <code>login user/admin pw/passw0rd</code></p>
 </li>
 <li>
-<p>A login allows the user to access the commands which can affect the bookings.</p>
+<p>More users can be added at <code>src/data/passwords.json</code>. When adding passwords
+to the reference list, be sure to add the SHA-256 hashed password.
+You can find a useful hashing tool here: <a href="https://passwordsgenerator.net/sha256-hash-generator/" class="bare">https://passwordsgenerator.net/sha256-hash-generator/</a></p>
+</li>
+<li>
+<p>[v2.0] You can create new accounts via the Concierge app.</p>
 </li>
 </ul>
 </div>
@@ -630,31 +671,22 @@ Format: <code>login user/USERNAME pw/PASSWORD</code></p>
 <div class="paragraph">
 <p>Commands which require login:</p>
 </div>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p><code>login user/&lt;name&gt; pw/&lt;name&gt;-pw</code>, where &lt;name&gt; is any of the developer team’s GitHub username</p>
-</li>
-<li>
-<p>As of v1.3, you must create your own passwords.json file with your username and passwords.
-For demo purposes, go to <a href="https://github.com/CS2103-AY1819S1-F11-2/main" class="bare">https://github.com/CS2103-AY1819S1-F11-2/main</a> and copy the passwords.json file there
-into the same folder as the Concierge.jar file.
-Alternatively, create a new passwords.json and use SHA-256 Hash to generate
-the hash for your password. You can use this website for this: <a href="https://passwordsgenerator.net/sha256-hash-generator/" class="bare">https://passwordsgenerator.net/sha256-hash-generator/</a></p>
-</li>
-</ul>
-</div>
-</div>
-</div>
 <div class="ulist">
 <ul>
 <li>
 <p><code>add</code></p>
 </li>
 <li>
-<p><code>checkin</code>, <code>checkout</code> <span class="red">Coming in v2.0</span></p>
+<p><code>checkin</code></p>
+</li>
+<li>
+<p><code>checkout</code></p>
+</li>
+<li>
+<p><code>reassign</code></p>
+</li>
+<li>
+<p><code>service</code></p>
 </li>
 <li>
 <p><code>clear</code></p>
@@ -663,25 +695,6 @@ the hash for your password. You can use this website for this: <a href="https://
 </div>
 <div class="paragraph">
 <p>Example: <code>login user/damithz pw/forgotpassword</code></p>
-</div>
-<div class="paragraph">
-<p>There are a few default accounts which can be used:
-* <code>login user/admin pw/admin-pw</code>
-* <code>login user/&lt;name&gt; pw/&lt;name&gt;-pw</code>, where <code>&lt;name&gt;</code> is any of the developer
-team&#8217;s GitHub username</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-More users can be added at <code>src/data/passwords.json</code>. When adding passwords
-to the reference list, be sure to add the SHA-256 hashed password.
-</td>
-</tr>
-</table>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -722,13 +735,10 @@ Format: <code>logout</code></p>
 executed.</p>
 </li>
 <li>
-<p>Unable to undo/ redo before logout <span class="red">Coming in v2.0</span></p>
-<div class="ulist">
-<ul>
-<li>
 <p>The <code>logout</code> command will erase the command history, so users cannot undo/
 redo commands executed before the logout.</p>
-</li>
+<div class="ulist">
+<ul>
 <li>
 <p>This is the same as closing and re-opening Concierge after a logout.</p>
 </li>
@@ -846,6 +856,11 @@ may be modified, added, or removed through <code>concierge.xml</code>.</p>
 </div>
 </div>
 </div>
+<div class="literalblock">
+<div class="content">
+<pre>This command requires a login.</pre>
+</div>
+</div>
 <div class="paragraph">
 <p>Examples:</p>
 </div>
@@ -955,9 +970,9 @@ Format: <code>undo</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>delete 1</code><br>
+<p><code>checkin r/001</code><br>
 <code>list</code><br>
-<code>undo</code> (reverses the <code>delete 1</code> command)<br></p>
+<code>undo</code> (reverses the <code>checkin r/001</code> command)<br></p>
 </li>
 <li>
 <p><code>select 1</code><br>
@@ -966,10 +981,10 @@ Format: <code>undo</code></p>
 The <code>undo</code> command fails as there are no undoable commands executed previously.</p>
 </li>
 <li>
-<p><code>delete 1</code><br>
+<p><code>checkin r/001</code><br>
 <code>clear</code><br>
 <code>undo</code> (reverses the <code>clear</code> command)<br>
-<code>undo</code> (reverses the <code>delete 1</code> command)<br></p>
+<code>undo</code> (reverses the <code>checkin r/001</code> command)<br></p>
 </li>
 </ul>
 </div>
@@ -986,21 +1001,21 @@ Format: <code>redo</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>delete 1</code><br>
-<code>undo</code> (reverses the <code>delete 1</code> command)<br>
-<code>redo</code> (reapplies the <code>delete 1</code> command)<br></p>
+<p><code>checkin r/001</code><br>
+<code>undo</code> (reverses the <code>checkin r/001</code> command)<br>
+<code>redo</code> (reapplies the <code>checkin r/001</code> command)<br></p>
 </li>
 <li>
-<p><code>delete 1</code><br>
+<p><code>checkin r/001</code><br>
 <code>redo</code><br>
 The <code>redo</code> command fails as there are no <code>undo</code> commands executed previously.</p>
 </li>
 <li>
-<p><code>delete 1</code><br>
+<p><code>checkin r/001</code><br>
 <code>clear</code><br>
 <code>undo</code> (reverses the <code>clear</code> command)<br>
-<code>undo</code> (reverses the <code>delete 1</code> command)<br>
-<code>redo</code> (reapplies the <code>delete 1</code> command)<br>
+<code>undo</code> (reverses the <code>checkin r/001</code> command)<br>
+<code>redo</code> (reapplies the <code>checkin r/001</code> command)<br>
 <code>redo</code> (reapplies the <code>clear</code> command)<br></p>
 </li>
 </ul>
@@ -1012,8 +1027,10 @@ The <code>redo</code> command fails as there are no <code>undo</code> commands e
 <p>Clears all entries from the application.<br>
 Format: <code>clear</code></p>
 </div>
-<div class="paragraph">
-<p>This command requires a login.</p>
+<div class="literalblock">
+<div class="content">
+<pre>This command requires a login.</pre>
+</div>
 </div>
 <div class="paragraph">
 <p>The rooms are maintained - only all their current and future bookings are
@@ -1098,10 +1115,10 @@ interested in contributing, please refer to the Developer Guide.</p>
 t/TAG r/ROOM_NUMBER from/START_DATE to/END_DATE</code></p>
 </li>
 <li>
-<p><strong>Checkin</strong> : <code>checkin</code></p>
+<p><strong>Checkin</strong> : <code>checkin r/ROOM_NUMBER</code></p>
 </li>
 <li>
-<p><strong>Checkout</strong> : <code>checkout</code></p>
+<p><strong>Checkout</strong> : <code>checkout r/ROOM_NUMBER [from/START_DATE]</code></p>
 </li>
 <li>
 <p><strong>Find</strong> : <code>find KEYWORD [MORE_KEYWORDS]</code> <span class="red">Coming in v2.0</span></p>
@@ -1148,4 +1165,4 @@ t/TAG r/ROOM_NUMBER from/START_DATE to/END_DATE</code></p>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-10 01:56:47 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-10 04:51:32 UTC</div></div></div></body></html>

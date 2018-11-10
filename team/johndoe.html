@@ -162,9 +162,9 @@ Format: <code>undo</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>delete 1</code><br>
+<p><code>checkin r/001</code><br>
 <code>list</code><br>
-<code>undo</code> (reverses the <code>delete 1</code> command)<br></p>
+<code>undo</code> (reverses the <code>checkin r/001</code> command)<br></p>
 </li>
 <li>
 <p><code>select 1</code><br>
@@ -173,10 +173,10 @@ Format: <code>undo</code></p>
 The <code>undo</code> command fails as there are no undoable commands executed previously.</p>
 </li>
 <li>
-<p><code>delete 1</code><br>
+<p><code>checkin r/001</code><br>
 <code>clear</code><br>
 <code>undo</code> (reverses the <code>clear</code> command)<br>
-<code>undo</code> (reverses the <code>delete 1</code> command)<br></p>
+<code>undo</code> (reverses the <code>checkin r/001</code> command)<br></p>
 </li>
 </ul>
 </div>
@@ -193,21 +193,21 @@ Format: <code>redo</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>delete 1</code><br>
-<code>undo</code> (reverses the <code>delete 1</code> command)<br>
-<code>redo</code> (reapplies the <code>delete 1</code> command)<br></p>
+<p><code>checkin r/001</code><br>
+<code>undo</code> (reverses the <code>checkin r/001</code> command)<br>
+<code>redo</code> (reapplies the <code>checkin r/001</code> command)<br></p>
 </li>
 <li>
-<p><code>delete 1</code><br>
+<p><code>checkin r/001</code><br>
 <code>redo</code><br>
 The <code>redo</code> command fails as there are no <code>undo</code> commands executed previously.</p>
 </li>
 <li>
-<p><code>delete 1</code><br>
+<p><code>checkin r/001</code><br>
 <code>clear</code><br>
 <code>undo</code> (reverses the <code>clear</code> command)<br>
-<code>undo</code> (reverses the <code>delete 1</code> command)<br>
-<code>redo</code> (reapplies the <code>delete 1</code> command)<br>
+<code>undo</code> (reverses the <code>checkin r/001</code> command)<br>
+<code>redo</code> (reapplies the <code>checkin r/001</code> command)<br>
 <code>redo</code> (reapplies the <code>clear</code> command)<br></p>
 </li>
 </ul>
@@ -453,4 +453,4 @@ If the <code>currentStatePointer</code> is at index <code>conciergeStateList.siz
 <p><em>{Optionally, you may include other projects in your portfolio.}</em></p>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-10 01:56:47 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-10 04:51:32 UTC</div></div></div></body></html>
