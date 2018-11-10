@@ -1,7 +1,7 @@
 package seedu.address.logic.autocomplete;
 
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE_END;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE_START;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
