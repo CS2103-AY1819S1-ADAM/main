@@ -213,9 +213,8 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <div class="sect2">
 <h3 id="adding-a-guest-code-add-code"><a class="link" href="#adding-a-guest-code-add-code">4.1. Adding a guest: <code>add</code></a></h3>
 <div class="paragraph">
-<p>Adds a guest to the guest list for the purpose of assigning a room<br>
-Format: <code>add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG] r/ROOM_NUMBER
-from/START_DATE to/END_DATE</code></p>
+<p>Adds a booking associated with a guest, room and booking period.<br>
+Format: <code>add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG] r/ROOM_NUMBER from/START_DATE to/END_DATE</code></p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -234,35 +233,19 @@ A guest can have any number of tags (including 0)
 <div class="ulist">
 <ul>
 <li>
-<p>A guest can make an unlimited number of bookings with the hotel, as long as
-the booking is valid.</p>
+<p>A valid booking cannot clash with an existing booking. It must also have a
+start date from today onwards (not outdated).</p>
 </li>
 <li>
-<p>A guest can make a booking for however long he/ she wants.</p>
+<p>A guest can make an unlimited number of bookings with the hotel.</p>
 </li>
 <li>
 <p>When adding a booking, the guest will <strong>not</strong> be added to the archived guest list or checked-in guest list.
 His/ her information will be stored under his/ her booking in the room.</p>
 </li>
-<li>
-<p>Expired bookings cannot be added. <span class="red">Coming in v1.4</span></p>
-</li>
 </ul>
 </div>
 </div>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-A valid booking cannot clash with an existing booking. It must also have a
-start date from today onwards.
-</td>
-</tr>
-</table>
 </div>
 <div class="literalblock">
 <div class="content">
@@ -270,13 +253,13 @@ start date from today onwards.
 </div>
 </div>
 <div class="paragraph">
-<p>Example:</p>
+<p>Example: <code>add n/John Smith p/98765432 e/johnsmith@gmail.com t/VIP r/085
+from/17/12/18
+to/19/12/18</code></p>
 </div>
 <div class="paragraph">
-<p><code>add n/John Smith p/98765432 e/johnsmith@gmail.com t/VIP r/085 from/09/12/18 to/10/12/18</code></p>
-</div>
-<div class="paragraph">
-<p>Add a guest "John Smith" to room 085 for a period of stay from 09/12/18 to 10/12/18.</p>
+<p>Add a guest "John Smith" to room 085 for the period of stay from 17/12/18 to
+19/12/18.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -284,11 +267,20 @@ start date from today onwards.
 </div>
 <div class="title">Figure 1. Adding an active booking</div>
 </div>
+<div class="paragraph">
+<p>When a booking is added and it starts today (i.e. it is active), then you can
+ preview the booking on the left room pane.</p>
+</div>
 <div class="imageblock">
 <div class="content">
 <img src="images/AddCommand-userguide-notactive.png" alt="AddCommand userguide notactive" width="800">
 </div>
 <div class="title">Figure 2. Adding an inactive booking (i.e. booking is in the future)</div>
+</div>
+<div class="paragraph">
+<p>When a booking is added and it starts on a future date, then it can only be
+viewed by clicking on the relevant room. It can be found in the "All other
+bookings" section.</p>
 </div>
 </div>
 <div class="sect2">
@@ -298,8 +290,10 @@ start date from today onwards.
 Format: <code>addx n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]&#8230;&#8203;</code></p>
 </div>
 <div class="paragraph">
-<p>Examples:
-* <code>addx n/guest p/98765432 e/johntan@hotmail.com t/bro</code></p>
+<p>Example:</p>
+</div>
+<div class="paragraph">
+<p><code>addx n/guest p/98765432 e/johntan@hotmail.com t/bro</code></p>
 </div>
 </div>
 <div class="sect2">
@@ -636,6 +630,23 @@ Format: <code>login user/USERNAME pw/PASSWORD</code></p>
 <div class="paragraph">
 <p>Note: The username and password are both case-sensitive.</p>
 </div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>The default account can be accessed with <code>login user/admin pw/passw0rd</code></p>
+</li>
+<li>
+<p><a href="#adding-a-new-account">More users can be added</a> at <code>passwords.json</code>.</p>
+</li>
+<li>
+<p>[v2.0] You can create new accounts via the Concierge app.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
 <div class="admonitionblock tip">
 <table>
 <tr>
@@ -649,47 +660,28 @@ bookings.
 </tr>
 </table>
 </div>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>The default account can be accessed with <code>login user/admin pw/passw0rd</code></p>
-</li>
-<li>
-<p>More users can be added at <code>src/data/passwords.json</code>. When adding passwords
-to the reference list, be sure to add the SHA-256 hashed password.
-You can find a useful hashing tool here: <a href="https://passwordsgenerator.net/sha256-hash-generator/" class="bare">https://passwordsgenerator.net/sha256-hash-generator/</a></p>
-</li>
-<li>
-<p>[v2.0] You can create new accounts via the Concierge app.</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
 <div class="paragraph">
 <p>Commands which require login:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>add</code></p>
+<p><a href="#adding-a-guest-code-add-code"><code>add</code></a></p>
 </li>
 <li>
-<p><code>checkin</code></p>
+<p><a href="#check-in-room-code-checkin-code"><code>checkin</code></a></p>
 </li>
 <li>
-<p><code>checkout</code></p>
+<p><a href="#checkout-room-code-checkout-code"><code>checkout</code></a></p>
 </li>
 <li>
-<p><code>reassign</code></p>
+<p><a href="#reassigning-a-guest-to-another-room-code-reassign-code"><code>reassign</code></a></p>
 </li>
 <li>
-<p><code>service</code></p>
+<p><a href="#provide-room-service-code-service-code"><code>service</code></a></p>
 </li>
 <li>
-<p><code>clear</code></p>
+<p><a href="#clearing-all-entries-code-clear-code"><code>clear</code></a></p>
 </li>
 </ul>
 </div>
@@ -698,21 +690,102 @@ You can find a useful hashing tool here: <a href="https://passwordsgenerator.net
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/LogInCommand-notsignedin.png" alt="LogInCommand notsignedin" width="400">
+<img src="images/LogInCommand-notsignedin.png" alt="LogInCommand notsignedin" width="600">
 </div>
 <div class="title">Figure 3. Without login, Concierge cannot be cleared</div>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/LogInCommand-loginsuccess.png" alt="LogInCommand loginsuccess" width="400">
+<img src="images/LogInCommand-loginsuccess.png" alt="LogInCommand loginsuccess" width="600">
 </div>
 <div class="title">Figure 4. Login with a valid account</div>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/LogInCommand-clearsuccess.png" alt="LogInCommand clearsuccess" width="400">
+<img src="images/LogInCommand-clearsuccess.png" alt="LogInCommand clearsuccess" width="600">
 </div>
-<div class="title">Figure 5. <code>clear</code> command can now be executed</div>
+<div class="title">Figure 5. After sign in, <code>clear</code> command can now be executed</div>
+</div>
+<div class="sect3">
+<h4 id="adding-a-new-account"><a class="link" href="#adding-a-new-account">4.8.1. Adding a new account</a></h4>
+<div class="literalblock">
+<div class="content">
+<pre> Currently, Concierge does not have a feature for users to add an account via
+the app. The reason is because we only _read_ from the password file.
+Nevertheless, for the adventurous users who want to create their own
+accounts, this sub-section will be useful.</pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Step 1: Open the <code>passwords.json</code> file, which should be in the same
+folder as your Concierge.jar file.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/LogInCommand-passwordsfile.png" alt="LogInCommand passwordsfile" width="900">
+</div>
+<div class="title">Figure 6. The <code>passwords.json</code> file stores a list of hashed passwords</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Step 2: Concierge uses SHA-256 password hashing. This hash can be
+generated using this <a href="https://passwordsgenerator.net/sha256-hash-generator/">tool</a>.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/LogInCommand-generatehash.png" alt="LogInCommand generatehash" width="900">
+</div>
+<div class="title">Figure 7. Enter your password in the field to generate the hash</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+ Concierge was designed to work with alphanumeric usernames and passwords in
+ mind. Do not enter symbols (!, @, %&#8230;&#8203;)
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Step 3: Add the entry to the <code>passwords.json</code> file. Note that entries are
+separate with a comma.
+Format: <code>"username" : "hashedPassword"</code></p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/LogInCommand-addpasswordentry.png" alt="LogInCommand addpasswordentry" width="900">
+</div>
+<div class="title">Figure 8. A new account with username "newUser" and password "mySecurePassw0rd" has been added</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Step 4: Close and reload the Concierge application, and your new account
+will be recognised.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/LogInCommand-newloginsuccess.png" alt="LogInCommand newloginsuccess" width="900">
+</div>
+<div class="title">Figure 9. User is now able to sign in with the new account</div>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -721,17 +794,10 @@ You can find a useful hashing tool here: <a href="https://passwordsgenerator.net
 <p>Logs out of the Concierge application.<br>
 Format: <code>logout</code></p>
 </div>
-<div class="imageblock">
-<div class="content">
-<img src="images/LogOutCommand-success.png" alt="LogOutCommand success" width="400">
-</div>
-</div>
-<div class="sidebarblock">
-<div class="content">
 <div class="ulist">
 <ul>
 <li>
-<p>The special classes of commands (as documented in <code>login</code>) can no longer be
+<p>The special classes of commands (as documented in <a href="#login-code-login-code">login</a>) can no longer be
 executed.</p>
 </li>
 <li>
@@ -740,13 +806,20 @@ redo commands executed before the logout.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>This is the same as closing and re-opening Concierge after a logout.</p>
+<p>This achieves the same effect as closing and re-opening Concierge in the
+midst of a sign-in session.</p>
 </li>
 </ul>
 </div>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p>Example: <code>logout</code></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/LogOutCommand-success.png" alt="LogOutCommand success" width="400">
 </div>
 </div>
 </div>
@@ -1036,11 +1109,14 @@ Format: <code>clear</code></p>
 <p>The rooms are maintained - only all their current and future bookings are
 cleared. I.e. all maintenance requests and faults will still be recorded.</p>
 </div>
+<div class="paragraph">
+<p>Example: <code>clear</code></p>
+</div>
 <div class="imageblock">
 <div class="content">
 <img src="images/ClearCommand-success.png" alt="ClearCommand success" width="400">
 </div>
-<div class="title">Figure 6. Empty room listing with all bookings deleted and expenses reset</div>
+<div class="title">Figure 10. Empty room listing with all bookings deleted and expenses reset</div>
 </div>
 </div>
 <div class="sect2">
@@ -1165,4 +1241,4 @@ t/TAG r/ROOM_NUMBER from/START_DATE to/END_DATE</code></p>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-10 04:51:32 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-10 11:21:10 UTC</div></div></div></body></html>
