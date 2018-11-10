@@ -1,0 +1,537 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]--><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Asciidoctor 1.5.6.1"><title>Adam Chew Yong Soon - Project Portfolio</title><link rel="stylesheet" href="../stylesheets/gh-pages.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="../stylesheets/coderay-asciidoctor.css"></head><body class="article"><div id="site-header"><nav class="navbar navbar-light bg-light"><div class="container"><a class="navbar-brand" href="../index.html">Concierge</a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="../UserGuide.html">User Guide</a></li><li class="nav-item"><a class="nav-link" href="../DeveloperGuide.html">Developer Guide</a></li><li class="nav-item"><a class="nav-link active" href="../AboutUs.html">About Us</a></li><li class="nav-item"><a class="nav-link" href="../ContactUs.html">Contact Us</a></li><li class="navitem"><a class="nav-link" href="https://github.com/CS2103-AY1819S1-F11-2/main"><span class="fa fa-github fa-lg" aria-hidden="true"></span>&nbsp;View on GitHub</a></li></ul></div></nav></div><div id="header"><h1>Adam Chew Yong Soon - Project Portfolio</h1></div><div id="content"><div class="sect1">
+<h2 id="project-concierge"><a class="link" href="#project-concierge">PROJECT: Concierge&#8482;</a></h2>
+<div class="sectionbody">
+<hr>
+</div>
+</div>
+<div class="sect1">
+<h2 id="overview"><a class="link" href="#overview">Overview</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Concierge&#8482; is a desktop application simulating a hotel management system used by hotel owners and receptionists. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="summary-of-contributions"><a class="link" href="#summary-of-contributions">Summary of contributions</a></h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Code contributed</strong>: [<a href="https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&amp;search=adamwth">Code Contributed</a>]</p>
+</li>
+<li>
+<p><strong>Major enhancements</strong>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Added <code>checkIn</code> and <code>checkout</code> features</p>
+<div class="ulist">
+<ul>
+<li>
+<p>What it does: Allows the user to check-in a room&#8217;s booking that is active, checkout any booking of a room,
+and update the checked-in guest list and archived guest list to reflect the checked-in/out guests respectively.</p>
+</li>
+<li>
+<p>Justification: This feature is a core feature that supports the daily operations of a hotel, without which the hotel will not
+be able to function. The checking-in/out of a room&#8217;s booking is a very frequent operation in a typical hotel setting.
+However, it is very cumbersome to execute these operations using the existing <code>edit</code> command as it requires many fields to fill in.
+This feature solves this problem by providing a command-line interface with minimal fields to specify, allowing smooth and fast
+checking-in/out of rooms.</p>
+</li>
+<li>
+<p>Highlights: The validity of a check-in operation requires knowledge of how a hotel manages its policy of allowing guests to check-in.
+The current implementation was finalized after experimenting with different validity checks on multiple different scenarios.
+The checkout feature was initially intended to execute similar validity checks for checking-out a booking,
+but has now expanded its scope to double as a delete-booking feature.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Other contributions</strong>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Writing the <code>Room</code> package</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Single-handedly wrote the entire <code>Room</code> package: <a href="https://github.com/CS2103-AY1819S1-F11-2/main/pull/71">#71</a></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Other features/commands</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Add <code>list -cg</code> list checked-in guests feature: <a href="https://github.com/CS2103-AY1819S1-F11-2/main/pull/178">#178</a></p>
+</li>
+<li>
+<p>Fix <code>select</code> command bug and make improvements: <a href="https://github.com/CS2103-AY1819S1-F11-2/main/pull/211">#211</a></p>
+</li>
+<li>
+<p>Add <code>deselect</code> feature: <a href="https://github.com/CS2103-AY1819S1-F11-2/main/pull/219">#219</a></p>
+</li>
+<li>
+<p>Add <code>reassign</code> command: <a href="https://github.com/CS2103-AY1819S1-F11-2/main/pull/222">#222</a></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>GUI-related</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Improve GUI display of rooms in both left and right panels:
+<a href="https://github.com/CS2103-AY1819S1-F11-2/main/pull/115">#115</a>,
+<a href="https://github.com/CS2103-AY1819S1-F11-2/main/pull/154">#154</a></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Documentation</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p>User Guide</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Update with description of usage of CheckIn, Checkout, and Reassign commands</p>
+</li>
+<li>
+<p>Add <strong>Terminology</strong> section</p>
+</li>
+<li>
+<p>Add icons to standardize way of alerting user about important information</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Developer Guide</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Update with detailed description of how CheckIn and Checkout features work</p>
+</li>
+<li>
+<p>Add Sequence and Activity diagrams for CheckIn and Checkout features as aids to explain control flow of new features</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="contributions-to-the-user-guide"><a class="link" href="#contributions-to-the-user-guide">Contributions to the User Guide</a></h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users.</em></p></td>
+</tr>
+</tbody>
+</table>
+<div class="ulist">
+<ul>
+<li>
+<p>Links to relevant sections in User Guide (for viewing on Github)</p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/CS2103-AY1819S1-F11-2/main/blob/master/docs/UserGuide.adoc#check-in-room-code-checkin-code"><code>checkin</code> command</a></p>
+</li>
+<li>
+<p><a href="https://github.com/CS2103-AY1819S1-F11-2/main/blob/master/docs/UserGuide.adoc#checkout-room-code-checkout-code"><code>checkout</code> command</a></p>
+</li>
+<li>
+<p><a href="https://github.com/CS2103-AY1819S1-F11-2/main/blob/master/docs/UserGuide.adoc#reassigning-a-guest-to-another-room-code-reassign-code"><code>reassign</code> command</a></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="check-in-room-code-checkin-code-span-class-image-img-src-images-icon-key-png-alt-icon-key-width-32-span"><a class="link" href="#check-in-room-code-checkin-code-span-class-image-img-src-images-icon-key-png-alt-icon-key-width-32-span">Check-in room: <code>checkin</code> <span class="image"><img src="../images/icon-key.png" alt="icon key" width="32"></span></a></h3>
+<div class="paragraph">
+<p>Checks in the first booking of a room. The guest who made the booking will be added to
+the checked-in guest list.</p>
+</div>
+<table class="tableblock frame-none grid-all spread">
+<colgroup>
+<col style="width: 16.6666%;">
+<col style="width: 83.3334%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-center valign-middle"><p class="tableblock"><span class="image"><img src="../images/icon-important.png" alt="Important info"></span></p></td>
+<td class="tableblock halign-left valign-middle"><div><div class="paragraph">
+<p>Expired and upcoming bookings <strong>cannot</strong> be checked-in.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Format: <code>checkin r/ROOM_NUMBER</code></p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>checkin r/085</code><br>
+Checks in room 085, marks room 085&#8217;s current booking as checked-in, and adds the guest who made the booking
+to the checked-in guest list.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="reassigning-a-guest-to-another-room-code-reassign-code-span-class-image-img-src-images-icon-key-png-alt-icon-key-width-32-span"><a class="link" href="#reassigning-a-guest-to-another-room-code-reassign-code-span-class-image-img-src-images-icon-key-png-alt-icon-key-width-32-span">Reassigning a guest to another room : <code>reassign</code> <span class="image"><img src="../images/icon-key.png" alt="icon key" width="32"></span></a></h3>
+<div class="paragraph">
+<p>Reassigns a booking from one room to another. The room&#8217;s expenses will also be ported over to the new room.</p>
+</div>
+<table class="tableblock frame-none grid-all spread">
+<colgroup>
+<col style="width: 16.6666%;">
+<col style="width: 83.3334%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-center valign-middle"><p class="tableblock"><span class="image center"><img src="../images/icon-important.png" alt="icon important"></span></p></td>
+<td class="tableblock halign-left valign-middle"><div><div class="paragraph">
+<p>You can reassign a booking only if:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The new room is different from the original.</p>
+</li>
+<li>
+<p>Neither the booking nor any of the new room&#8217;s bookings are expired.</p>
+</li>
+<li>
+<p>The booking does not overlap with any of the new room&#8217;s bookings.</p>
+</li>
+<li>
+<p>If the booking ends the same day that the new room&#8217;s first booking starts, the new room&#8217;s first booking cannot be checked-in.</p>
+</li>
+<li>
+<p>If the booking starts the same day that the new room&#8217;s first booking ends, the booking cannot be checked-in.</p>
+</li>
+</ul>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Format: <code>reassign r/ROOM_NUMBER from/START_DATE nr/NEW_ROOM_NUMBER</code></p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>reassign r/085 from/01/11/18 nr/086</code><br>
+Reassigns the booking with start date 01/11/18 in room 085 to room 086.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="contributions-to-the-developer-guide"><a class="link" href="#contributions-to-the-developer-guide">Contributions to the Developer Guide</a></h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project.</em></p></td>
+</tr>
+</tbody>
+</table>
+<div class="ulist">
+<ul>
+<li>
+<p>Links to relevant sections in Developer Guide (for viewing on Github)</p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/CS2103-AY1819S1-F11-2/main/blob/master/docs/DeveloperGuide.adoc#room-check-in-checkout-feature">Check-in/out feature</a></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="room-check-in-checkout-feature"><a class="link" href="#room-check-in-checkout-feature">Room Check-in/Checkout feature</a></h3>
+<div class="sect3">
+<h4 id="current-implementation"><a class="link" href="#current-implementation">Current Implementation</a></h4>
+<div class="paragraph">
+<p>The room check-in and checkout features makes use of <code>UniqueRoomList</code>.
+The logic that supports the check-in and checkout operations mainly reside in the <code>Concierge</code> and <code>Room</code> classes.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>UniqueRoomList#checkin(RoomNumber)</code>&#8201;&#8212;&#8201;Checks in the first booking of the room identified by the given room number</p>
+</li>
+<li>
+<p><code>UniqueRoomList#checkout(RoomNumber)</code>&#8201;&#8212;&#8201;Checks out the first booking of the room identified by the given room number</p>
+</li>
+<li>
+<p><code>UniqueRoomList#checkout(RoomNumber, LocalDate)</code>&#8201;&#8212;&#8201;Checks out the room&#8217;s booking whose start date matches the given date</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Active booking refers to a booking that includes today&#8217;s date.<br>
+First booking refers to the earliest (i.e. first in chronological order).
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+A room can be checked out regardless of its checked-in status. Thus, <code>checkout</code> doubles as a command to delete bookings.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>These operations are exposed in the <code>Model</code> interface as <code>Model#checkInRoom</code> and <code>Model#checkoutRoom</code> respectively.</p>
+</div>
+<div class="paragraph">
+<p>Given below is an example usage scenario and how the check-in/checkout mechanism behaves at each step.</p>
+</div>
+<div class="paragraph">
+<p>Assuming there is a booking already added to room 001,</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The user executes <code>checkin r/001</code> when the guest arrives.</p>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>The <code>checkin</code> command takes in a <code>RoomNumber</code> argument and calls <code>Model#checkInRoom</code> as such: <code>Model.checkInRoom(roomNumber)</code></p>
+</li>
+<li>
+<p><code>ModelManager#checkInRoom</code> (which implements Model) will call <code>VersionedConcierge#checkInRoom</code></p>
+</li>
+<li>
+<p><code>VersionedConcierge#checkInRoom</code> will call <code>UniqueRoomList#getRoom</code> to get the room using its RoomNumber</p>
+</li>
+<li>
+<p><code>VersionedConcierge#checkInRoom</code> will call <code>Room#checkIn</code></p>
+</li>
+<li>
+<p><code>Room#checkIn</code> will</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>throw <code>NoBookingException</code> if the room has no bookings</p>
+</li>
+<li>
+<p>throw <code>ExpiredBookingException</code> if the room&#8217;s first booking is expired</p>
+</li>
+<li>
+<p>throw <code>InactiveBookingCheckInException</code> if the room&#8217;s first booking is not active</p>
+</li>
+<li>
+<p>throw <code>BookingAlreadyCheckedInException</code> if the room&#8217;s first booking is already checked in</p>
+</li>
+<li>
+<p>update the first booking as checked-in if no exceptions were thrown, and replace the room with its updated version that has the first booking checked-in</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p><code>VersionedConcierge#checkinRoom</code> will call <code>VersionedConcierge#addCheckedInGuestIfNotPresent</code></p>
+</li>
+<li>
+<p><code>VersionedConcierge#addCheckedInGuestIfNotPresent</code> will add the guest of the checked-in booking to the checked-in guest list
+if he/she is not already in it</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>The user executes <code>checkout r/001</code> when the guest leaves.</p>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>The <code>checkout</code> command takes in a <code>RoomNumber</code> argument and calls <code>Model#checkoutRoom</code> as such: <code>Model.checkoutRoom(roomNumber)</code></p>
+</li>
+<li>
+<p><code>ModelManager#checkoutRoom</code> (which implements Model) will call <code>VersionedConcierge#checkoutRoom</code></p>
+</li>
+<li>
+<p><code>VersionedConcierge#checkoutRoom</code> will call <code>UniqueRoomList#getRoom</code> to get the room using its RoomNumber</p>
+</li>
+<li>
+<p><code>VersionedConcierge#checkoutRoom</code> will call <code>Room#getBookings#getFirstBooking</code> to get the first booking of the room</p>
+</li>
+<li>
+<p><code>VersionedConcierge#checkoutRoom</code> will call its own overloaded method, which calls <code>Room#checkout</code> with the first booking</p>
+</li>
+<li>
+<p><code>Room#checkout</code> will</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>throw <code>BookingNotFoundException</code> if the room&#8217;s booking does not exist</p>
+</li>
+<li>
+<p>delete the room&#8217;s first booking</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p><code>VersionedConcierge#checkoutRoom</code> will call <code>VersionedConcierge#removeCheckedInGuest</code>
+to remove the guest from the checked-in guest list if he/she does not have any other bookings</p>
+</li>
+<li>
+<p><code>VersionedConcierge#checkoutRoom</code> will call <code>VersionedConcierge#addGuest</code>
+to add the guest to the archived guest list if he/she does not already exists in it</p>
+</li>
+</ol>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The following sequence diagram shows how <code>CheckInCommand#execute</code> works:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/CheckinCommandSequenceDiagram.png" alt="CheckinCommandSequenceDiagram" width="1280">
+</div>
+<div class="title">Figure 1. <em>The sequence diagram of <code>CheckInCommand#execute</code>.</em></div>
+</div>
+<div class="paragraph">
+<p>The following activity diagram shows how <code>Concierge#checkInRoom</code> executes:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/check-in-activity-diagram.png" alt="check in activity diagram" width="800">
+</div>
+<div class="title">Figure 2. <em>The activity diagram of checking-in a room when <code>Concierge#checkInRoom</code> is executed.</em></div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-immutability-of-check-in-command"><a class="link" href="#aspect-immutability-of-check-in-command">Aspect: Immutability of check-in command</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> <code>checkIn</code> a room by creating a new copy of the room
+with the <code>isCheckedIn</code> flag of the first booking set to true.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Debugging is easy. Consistent with the rest of the application.</p>
+</li>
+<li>
+<p>Cons: <code>checkIn</code> method becomes unintuitive, since a new room is returned from the operation,
+instead of a void method simply setting the instance property.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> <code>checkIn</code> a room by setting the <code>isCheckedIn</code> flag of the first booking to true.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Check-in method is intuitive, and does not return a new room.</p>
+</li>
+<li>
+<p>Cons: Harder to debug. Tests also become troublesome since changes are made to the same referenced room.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-deletion-of-bookings"><a class="link" href="#aspect-deletion-of-bookings">Aspect: Deletion of bookings</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Use <code>checkout</code> to delete any booking.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: <code>checkout</code> doubles as a delete booking feature, so no need for a <code>deletebooking</code> command.</p>
+</li>
+<li>
+<p>Cons: Not very natural, as <code>checkout</code> implies checking out a checked-in booking.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Use <code>checkout</code> to delete only active booking, and create new command <code>deletebooking</code> to delete expired and upcoming bookings.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: More natural, <code>checkout</code> can only do what its name implies.</p>
+</li>
+<li>
+<p>Cons: Need to implement new command and more methods, to support the same deletion operation but with a different name.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-10 18:21:22 UTC</div></div></div></body></html>

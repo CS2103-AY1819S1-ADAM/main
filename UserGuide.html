@@ -1,9 +1,9 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]--><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Asciidoctor 1.5.6.1"><title>Concierge v1.4 - User Guide</title><link rel="stylesheet" href="stylesheets/gh-pages.css">
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]--><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Asciidoctor 1.5.6.1"><title>Concierge&#8482; v1.4 - User Guide</title><link rel="stylesheet" href="stylesheets/gh-pages.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="stylesheets/coderay-asciidoctor.css"></head><body class="article"><div id="site-header"><nav class="navbar navbar-light bg-light"><div class="container"><a class="navbar-brand" href="index.html">Concierge</a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link active" href="UserGuide.html">User Guide</a></li><li class="nav-item"><a class="nav-link" href="DeveloperGuide.html">Developer Guide</a></li><li class="nav-item"><a class="nav-link" href="AboutUs.html">About Us</a></li><li class="nav-item"><a class="nav-link" href="ContactUs.html">Contact Us</a></li><li class="navitem"><a class="nav-link" href="https://github.com/CS2103-AY1819S1-F11-2/main"><span class="fa fa-github fa-lg" aria-hidden="true"></span>&nbsp;View on GitHub</a></li></ul></div></nav></div><div id="header"><h1>Concierge v1.4 - User Guide</h1></div><div id="content"><div id="preamble">
+<link rel="stylesheet" href="stylesheets/coderay-asciidoctor.css"></head><body class="article"><div id="site-header"><nav class="navbar navbar-light bg-light"><div class="container"><a class="navbar-brand" href="index.html">Concierge</a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link active" href="UserGuide.html">User Guide</a></li><li class="nav-item"><a class="nav-link" href="DeveloperGuide.html">Developer Guide</a></li><li class="nav-item"><a class="nav-link" href="AboutUs.html">About Us</a></li><li class="nav-item"><a class="nav-link" href="ContactUs.html">Contact Us</a></li><li class="navitem"><a class="nav-link" href="https://github.com/CS2103-AY1819S1-F11-2/main"><span class="fa fa-github fa-lg" aria-hidden="true"></span>&nbsp;View on GitHub</a></li></ul></div></nav></div><div id="header"><h1>Concierge&#8482; v1.4 - User Guide</h1></div><div id="content"><div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>By: <code>Team SE-EDU</code>      Since: <code>Jun 2016</code>      Licence: <code>MIT</code></p>
+<p>By: <code>Team Concierge&#8482;</code>      Since: <code>Aug 2018</code>      Licence: <code>MIT</code></p>
 </div>
 </div>
 <div id="toc" class="toc">
@@ -14,32 +14,29 @@
 <li><a href="#Terminology">3. Terminology</a></li>
 <li><a href="#Features">4. Features</a>
 <ul class="sectlevel2">
-<li><a href="#adding-a-guest-code-add-code">4.1. Adding a guest: <code>add</code></a></li>
-<li><a href="#adding-a-guest-code-addx-code-span-class-red-coming-in-v2-0-span">4.2. Adding a guest: <code>addx</code> <span class="red">Coming in v2.0</span></a></li>
-<li><a href="#check-in-room-code-checkin-code">4.3. Check-in room: <code>checkin</code></a></li>
-<li><a href="#checkout-room-code-checkout-code">4.4. Checkout room: <code>checkout</code></a></li>
-<li><a href="#reassigning-a-guest-to-another-room-code-reassign-code">4.5. Reassigning a guest to another room : <code>reassign</code></a></li>
-<li><a href="#locating-guests-and-rooms-code-find-code">4.6. Locating guests and rooms : <code>find</code></a></li>
-<li><a href="#listing-all-guests-code-list-code">4.7. Listing all guests : <code>list</code></a></li>
-<li><a href="#login-code-login-code">4.8. Login : <code>login</code></a></li>
-<li><a href="#logout-code-logout-code">4.9. Logout : <code>logout</code></a></li>
-<li><a href="#selecting-a-guest-code-select-code">4.10. Selecting a guest : <code>select</code></a></li>
-<li><a href="#provide-room-service-code-service-code">4.11. Provide Room Service: <code>service</code></a></li>
-<li><a href="#display-menu-code-menu-code-span-class-red-coming-in-v1-4-span">4.12. Display menu: <code>menu</code> <span class="red">Coming in v1.4</span></a></li>
-<li><a href="#room-maintenance-code-maintenance-code-span-class-red-coming-in-v2-0-span">4.13. Room maintenance: <code>maintenance</code> <span class="red">Coming in v2.0</span></a></li>
-<li><a href="#listing-entered-commands-code-history-code">4.14. Listing entered commands : <code>history</code></a></li>
-<li><a href="#undoing-previous-command-code-undo-code">4.15. Undoing previous command : <code>undo</code></a></li>
-<li><a href="#redoing-the-previously-undone-command-code-redo-code">4.16. Redoing the previously undone command : <code>redo</code></a></li>
-<li><a href="#clearing-all-entries-code-clear-code">4.17. Clearing all entries : <code>clear</code></a></li>
-<li><a href="#export-log-code-export-code-span-class-red-coming-in-v2-0-span">4.18. Export log: <code>export</code> <span class="red">Coming in v2.0</span></a></li>
-<li><a href="#viewing-help-code-help-code">4.19. Viewing help : <code>help</code></a></li>
-<li><a href="#exiting-the-program-code-exit-code">4.20. Exiting the program : <code>exit</code></a></li>
-<li><a href="#saving-the-data">4.21. Saving the data</a></li>
-<li><a href="#encrypting-data-files-span-class-red-coming-in-v2-0-span">4.22. Encrypting data files <span class="red">Coming in v2.0</span></a></li>
+<li><a href="#adding-a-guest-code-add-code-span-class-image-img-src-images-icon-key-png-alt-icon-key-width-32-span">4.1. Adding a guest: <code>add</code> <span class="image"><img src="images/icon-key.png" alt="icon key" width="32"></span></a></li>
+<li><a href="#check-in-room-code-checkin-code-span-class-image-img-src-images-icon-key-png-alt-icon-key-width-32-span">4.2. Check-in room: <code>checkin</code> <span class="image"><img src="images/icon-key.png" alt="icon key" width="32"></span></a></li>
+<li><a href="#checkout-room-code-checkout-code-span-class-image-img-src-images-icon-key-png-alt-icon-key-width-32-span">4.3. Checkout room: <code>checkout</code> <span class="image"><img src="images/icon-key.png" alt="icon key" width="32"></span></a></li>
+<li><a href="#reassigning-a-guest-to-another-room-code-reassign-code-span-class-image-img-src-images-icon-key-png-alt-icon-key-width-32-span">4.4. Reassigning a guest to another room : <code>reassign</code> <span class="image"><img src="images/icon-key.png" alt="icon key" width="32"></span></a></li>
+<li><a href="#locating-guests-and-rooms-code-find-code">4.5. Locating guests and rooms : <code>find</code></a></li>
+<li><a href="#listing-all-guests-code-list-code">4.6. Listing all guests : <code>list</code></a></li>
+<li><a href="#login-code-login-code">4.7. Login : <code>login</code></a></li>
+<li><a href="#logout-code-logout-code">4.8. Logout : <code>logout</code></a></li>
+<li><a href="#selecting-a-guest-code-select-code">4.9. Selecting a guest : <code>select</code></a></li>
+<li><a href="#provide-room-service-code-service-code-span-class-image-img-src-images-icon-key-png-alt-icon-key-width-32-span">4.10. Provide Room Service: <code>service</code> <span class="image"><img src="images/icon-key.png" alt="icon key" width="32"></span></a></li>
+<li><a href="#listing-entered-commands-code-history-code">4.11. Listing entered commands : <code>history</code></a></li>
+<li><a href="#undoing-previous-command-code-undo-code">4.12. Undoing previous command : <code>undo</code></a></li>
+<li><a href="#redoing-the-previously-undone-command-code-redo-code">4.13. Redoing the previously undone command : <code>redo</code></a></li>
+<li><a href="#clearing-all-entries-code-clear-code-span-class-image-img-src-images-icon-key-png-alt-icon-key-width-32-span">4.14. Clearing all entries : <code>clear</code> <span class="image"><img src="images/icon-key.png" alt="icon key" width="32"></span></a></li>
+<li><a href="#export-log-code-export-code-span-class-red-coming-in-v2-0-span">4.15. Export log: <code>export</code> <span class="red">Coming in v2.0</span></a></li>
+<li><a href="#viewing-help-code-help-code">4.16. Viewing help : <code>help</code></a></li>
+<li><a href="#exiting-the-program-code-exit-code">4.17. Exiting the program : <code>exit</code></a></li>
+<li><a href="#saving-the-data">4.18. Saving the data</a></li>
 </ul>
 </li>
-<li><a href="#faq">5. FAQ</a></li>
-<li><a href="#command-summary">6. Command Summary</a></li>
+<li><a href="#command-summary">5. Command Summary</a></li>
+<li><a href="#features-planned-for-v2-0">6. Features planned for v2.0</a></li>
+<li><a href="#faq">7. FAQ</a></li>
 </ul>
 </div>
 </div>
@@ -47,9 +44,9 @@
 <h2 id="introduction"><a class="link" href="#introduction">1. Introduction</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Concierge is created for <strong>hotel managers and receptionists</strong> of small hotels looking for a simple application to <strong>assist
-the user in hotel management</strong>. More importantly, Concierge is <strong>optimized for those who prefer to work with a Command Line Interface</strong>
-(CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Concierge can get your
+<p>Concierge&#8482; is created for <strong>hotel managers and receptionists</strong> of small hotels looking for a simple application to <strong>assist
+the user in hotel management</strong>. More importantly, Concierge&#8482; is <strong>optimized for those who prefer to work with a Command Line Interface</strong>
+(CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Concierge&#8482; can get your
 hotel management tasks done faster than traditional GUI apps. Interested? Jump to the <a href="#quick-start">Section 2, &#8220;Quick Start&#8221;</a> to get started. Enjoy!</p>
 </div>
 </div>
@@ -66,7 +63,7 @@ hotel management tasks done faster than traditional GUI apps. Interested? Jump t
 <p>Download the latest <code>concierge.jar</code> <a href="https://github.com/CS2103-AY1819S1-F11-2/main/releases">here</a>.</p>
 </li>
 <li>
-<p>Copy the file to the folder you want to use as the home folder for your Concierge.</p>
+<p>Copy the file to the folder you want to use as the home folder for your Concierge&#8482;.</p>
 </li>
 <li>
 <p>Double-click the file to start the app. The GUI should appear in a few seconds.</p>
@@ -88,7 +85,7 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <p><strong><code>list -r</code></strong> : lists all rooms</p>
 </li>
 <li>
-<p><strong><code>checkin</code></strong><code>r/085</code> : checks in the first active booking of room 085</p>
+<p><strong><code>checkin</code></strong><code>r/001</code> : checks in the first booking of room 001</p>
 </li>
 <li>
 <p><strong><code>exit</code></strong> : exits the app</p>
@@ -106,15 +103,15 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <div class="sect1">
 <h2 id="Terminology"><a class="link" href="#Terminology">3. Terminology</a></h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>Some important things that you should know before using Concierge&#8482;</p>
+</div>
 <div class="exampleblock">
 <div class="content">
-<div class="paragraph">
-<p><strong>Some important things that you need to know before using Concierge</strong></p>
-</div>
 <div class="ulist">
 <ul>
 <li>
-<p>Room numbers must be a 3-digit number from 001 to 100. For example,</p>
+<p>Room numbers must be a <strong>3-digit number from 001 to 100</strong>. For example,</p>
 <div class="ulist">
 <ul>
 <li>
@@ -127,26 +124,7 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 </div>
 </li>
 <li>
-<p>A <code>Booking</code> is&#8230;&#8203;</p>
-<div class="ulist">
-<ul>
-<li>
-<p><code>Active</code> if its start and end date includes today&#8217;s date, inclusively.</p>
-</li>
-<li>
-<p><code>Upcoming</code> if its start date is strictly after today&#8217;s date.</p>
-</li>
-<li>
-<p><code>Expired</code> if its end date is strictly before today&#8217;s date.</p>
-</li>
-<li>
-<p><code>Outdated</code> if its start date is strictly before today&#8217;s date.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Date format: <code>d/M/y</code></p>
+<p>The format used for dates is <strong>d/M/y</strong>, whereby</p>
 <div class="ulist">
 <ul>
 <li>
@@ -162,25 +140,106 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 </div>
 </li>
 <li>
+<p>A <code>Booking</code> &#8230;&#8203;</p>
+<div class="ulist">
+<ul>
+<li>
+<p>is <strong>Active</strong> if the period between its start and end date includes today&#8217;s date, inclusively.</p>
+</li>
+<li>
+<p>is <strong>Upcoming</strong> if its start date is strictly after today&#8217;s date.</p>
+</li>
+<li>
+<p>is <strong>Expired</strong> if its end date is strictly before today&#8217;s date.</p>
+</li>
+<li>
+<p>is <strong>Outdated</strong> if its start date is strictly before today&#8217;s date.</p>
+</li>
+<li>
+<p>is <strong>Overlapping</strong> with another booking if its start date is strictly before the other&#8217;s end date AND the other&#8217;s start date is strictly before its end date</p>
+</li>
+<li>
+<p>can be uniquely identified by its start date.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
 <p>There are 2 guest lists:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Checked-in guest list contains all the guests who are currently checked-in.</p>
+<p><strong>Checked-in guest list</strong> contains all the guests who are currently checked-in.</p>
 </li>
 <li>
-<p>Archived guest list contains all guests who have ever stayed in the hotel before.</p>
+<p><strong>Archived guest list</strong> contains all guests who have ever stayed in the hotel before.</p>
 </li>
 <li>
-<p>Since the possibility of returning guests exists, there is no need to synchronize the archived guest list.
-(i.e. it is standalone).</p>
+<p>Therefore, it is possible for a guest who has made a booking to be in</p>
+<div class="ulist">
+<ul>
+<li>
+<p>neither lists - guest has yet to check-in and has never stayed in the hotel before</p>
+</li>
+<li>
+<p>checked-in guest list only - guest has checked-in and has never stayed in the hotel before</p>
+</li>
+<li>
+<p>archived guest list only - guest has checked-in and has stayed in the hotel before</p>
+</li>
+<li>
+<p>both lists - guest has checked-in and has stayed in the hotel before</p>
 </li>
 </ul>
 </div>
 </li>
 </ul>
 </div>
+</li>
+</ul>
 </div>
+</div>
+</div>
+<table class="tableblock frame-none grid-all spread">
+<colgroup>
+<col style="width: 16.6666%;">
+<col style="width: 83.3334%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-center valign-middle"><p class="tableblock"><span class="image"><img src="images/icon-key.png" alt="Login requirement" width="45" height="45"></span></p></td>
+<td class="tableblock halign-left valign-middle"><div><div class="paragraph">
+<p>This is a <code>login</code> icon. If a command requires login before execution, this icon will be located on its right in its title.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-none grid-all spread">
+<colgroup>
+<col style="width: 16.6666%;">
+<col style="width: 83.3334%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-center valign-middle"><p class="tableblock"><span class="image"><img src="images/icon-important.png" alt="Important info"></span></p></td>
+<td class="tableblock halign-left valign-middle"><div><div class="paragraph">
+<p>This is a <strong>important</strong> icon. You should read the information in these before executing the command, as it will likely
+affect what you can or cannot do.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+This is a <strong>tip</strong> icon. You may want to read this if you are new to Concierge&#8482;.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
@@ -211,7 +270,7 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 </div>
 </div>
 <div class="sect2">
-<h3 id="adding-a-guest-code-add-code"><a class="link" href="#adding-a-guest-code-add-code">4.1. Adding a guest: <code>add</code></a></h3>
+<h3 id="adding-a-guest-code-add-code-span-class-image-img-src-images-icon-key-png-alt-icon-key-width-32-span"><a class="link" href="#adding-a-guest-code-add-code-span-class-image-img-src-images-icon-key-png-alt-icon-key-width-32-span">4.1. Adding a guest: <code>add</code> <span class="image"><img src="images/icon-key.png" alt="icon key" width="32"></span></a></h3>
 <div class="paragraph">
 <p>Adds a booking associated with a guest, room and booking period.<br>
 Format: <code>add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG] r/ROOM_NUMBER from/START_DATE to/END_DATE</code></p>
@@ -228,30 +287,38 @@ A guest can have any number of tags (including 0)
 </tr>
 </table>
 </div>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
+<table class="tableblock frame-none grid-all spread">
+<colgroup>
+<col style="width: 16.6666%;">
+<col style="width: 83.3334%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-center valign-middle"><p class="tableblock"><span class="image"><img src="images/icon-important.png" alt="Important info"></span></p></td>
+<td class="tableblock halign-left valign-middle"><div><div class="ulist">
 <ul>
 <li>
-<p>A valid booking cannot clash with an existing booking. It must also have a
-start date from today onwards (not outdated).</p>
+<p>A valid booking cannot overlap with an existing booking.</p>
 </li>
 <li>
-<p>A guest can make an unlimited number of bookings with the hotel.</p>
+<p>A valid booking must have a start date from today onwards. This means that outdated bookings cannot be added.</p>
+</li>
+<li>
+<p>A guest can make an unlimited number of bookings with the hotel, as long as
+the booking is valid.</p>
+</li>
+<li>
+<p>A guest can make a booking for however long he/ she wants.</p>
 </li>
 <li>
 <p>When adding a booking, the guest will <strong>not</strong> be added to the archived guest list or checked-in guest list.
 His/ her information will be stored under his/ her booking in the room.</p>
 </li>
 </ul>
-</div>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>This command requires a login.</pre>
-</div>
-</div>
+</div></div></td>
+</tr>
+</tbody>
+</table>
 <div class="paragraph">
 <p>Example: <code>add n/John Smith p/98765432 e/johnsmith@gmail.com t/VIP r/085
 from/17/12/18
@@ -277,51 +344,29 @@ to/19/12/18</code></p>
 </div>
 <div class="title">Figure 2. Adding an inactive booking (i.e. booking is in the future)</div>
 </div>
-<div class="paragraph">
-<p>When a booking is added and it starts on a future date, then it can only be
-viewed by clicking on the relevant room. It can be found in the "All other
-bookings" section.</p>
-</div>
 </div>
 <div class="sect2">
-<h3 id="adding-a-guest-code-addx-code-span-class-red-coming-in-v2-0-span"><a class="link" href="#adding-a-guest-code-addx-code-span-class-red-coming-in-v2-0-span">4.2. Adding a guest: <code>addx</code> <span class="red">Coming in v2.0</span></a></h3>
+<h3 id="check-in-room-code-checkin-code-span-class-image-img-src-images-icon-key-png-alt-icon-key-width-32-span"><a class="link" href="#check-in-room-code-checkin-code-span-class-image-img-src-images-icon-key-png-alt-icon-key-width-32-span">4.2. Check-in room: <code>checkin</code> <span class="image"><img src="images/icon-key.png" alt="icon key" width="32"></span></a></h3>
 <div class="paragraph">
-<p>Adds a guest to the guest list NOT for the purpose of assigning a room (perhaps add to archived guest list)<br>
-Format: <code>addx n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]&#8230;&#8203;</code></p>
+<p>Checks in the first booking of a room. The guest who made the booking will be added to
+the checked-in guest list.</p>
 </div>
-<div class="paragraph">
-<p>Example:</p>
-</div>
-<div class="paragraph">
-<p><code>addx n/guest p/98765432 e/johntan@hotmail.com t/bro</code></p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="check-in-room-code-checkin-code"><a class="link" href="#check-in-room-code-checkin-code">4.3. Check-in room: <code>checkin</code></a></h3>
-<div class="paragraph">
-<p>Checks in the room&#8217;s first active booking.</p>
-</div>
-<div class="admonitionblock tip">
-<table>
+<table class="tableblock frame-none grid-all spread">
+<colgroup>
+<col style="width: 16.6666%;">
+<col style="width: 83.3334%;">
+</colgroup>
+<tbody>
 <tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-Expired and upcoming bookings <strong>cannot</strong> be checked-in.
-</td>
+<td class="tableblock halign-center valign-middle"><p class="tableblock"><span class="image"><img src="images/icon-important.png" alt="Important info"></span></p></td>
+<td class="tableblock halign-left valign-middle"><div><div class="paragraph">
+<p>Expired and upcoming bookings <strong>cannot</strong> be checked-in.</p>
+</div></div></td>
 </tr>
+</tbody>
 </table>
-</div>
 <div class="paragraph">
-<p>Upon checking in the room&#8217;s first active booking, the guest who made the booking will be added to
-the checked-in guest list.<br>
-Format: <code>checkin r/ROOM_NUMBER</code></p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>This command requires a login.</pre>
-</div>
+<p>Format: <code>checkin r/ROOM_NUMBER</code></p>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -337,21 +382,9 @@ to the checked-in guest list.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="checkout-room-code-checkout-code"><a class="link" href="#checkout-room-code-checkout-code">4.4. Checkout room: <code>checkout</code></a></h3>
+<h3 id="checkout-room-code-checkout-code-span-class-image-img-src-images-icon-key-png-alt-icon-key-width-32-span"><a class="link" href="#checkout-room-code-checkout-code-span-class-image-img-src-images-icon-key-png-alt-icon-key-width-32-span">4.3. Checkout room: <code>checkout</code> <span class="image"><img src="images/icon-key.png" alt="icon key" width="32"></span></a></h3>
 <div class="paragraph">
-<p>Checks out the room&#8217;s first (i.e. earliest) booking, or its booking with the specified start date.<br></p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-A booking can be uniquely identified by its start date.
-</td>
-</tr>
-</table>
+<p>Checks out the room&#8217;s first (i.e. earliest) booking, or its booking with the specified start date.</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -366,10 +399,15 @@ A booking can be uniquely identified by its start date.
 </tr>
 </table>
 </div>
-<div class="paragraph">
-<p>Depending on whether the guest still has other checked-in bookings, either of the following can occur:<br></p>
-</div>
-<div class="ulist">
+<table class="tableblock frame-none grid-all spread">
+<colgroup>
+<col style="width: 16.6666%;">
+<col style="width: 83.3334%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-center valign-middle"><p class="tableblock"><span class="image"><img src="images/icon-important.png" alt="Important info"></span></p></td>
+<td class="tableblock halign-left valign-middle"><div><div class="ulist">
 <ul>
 <li>
 <p>If the guest does not have any other checked-in bookings, then he/she will be removed from the checked-in
@@ -380,14 +418,12 @@ guest list and added to the archived guest list.</p>
 but will be added to the archived guest list.</p>
 </li>
 </ul>
-</div>
+</div></div></td>
+</tr>
+</tbody>
+</table>
 <div class="paragraph">
 <p>Format: <code>checkout r/ROOM_NUMBER [from/START_DATE]</code></p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>This command requires a login.</pre>
-</div>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -406,14 +442,21 @@ Checks out the booking with start date 01/11/18 from room 085.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="reassigning-a-guest-to-another-room-code-reassign-code"><a class="link" href="#reassigning-a-guest-to-another-room-code-reassign-code">4.5. Reassigning a guest to another room : <code>reassign</code></a></h3>
+<h3 id="reassigning-a-guest-to-another-room-code-reassign-code-span-class-image-img-src-images-icon-key-png-alt-icon-key-width-32-span"><a class="link" href="#reassigning-a-guest-to-another-room-code-reassign-code-span-class-image-img-src-images-icon-key-png-alt-icon-key-width-32-span">4.4. Reassigning a guest to another room : <code>reassign</code> <span class="image"><img src="images/icon-key.png" alt="icon key" width="32"></span></a></h3>
 <div class="paragraph">
-<p>Reassigns a booking from one room to another.</p>
+<p>Reassigns a booking from one room to another. The room&#8217;s expenses will also be ported over to the new room.</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p>You can reassign a booking only if all of the following conditions are met:</p>
+<table class="tableblock frame-none grid-all spread">
+<colgroup>
+<col style="width: 16.6666%;">
+<col style="width: 83.3334%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-center valign-middle"><p class="tableblock"><span class="image center"><img src="images/icon-important.png" alt="icon important"></span></p></td>
+<td class="tableblock halign-left valign-middle"><div><div class="paragraph">
+<p>You can reassign a booking only if:</p>
+</div>
 <div class="ulist">
 <ul>
 <li>
@@ -426,23 +469,18 @@ Checks out the booking with start date 01/11/18 from room 085.</p>
 <p>The booking does not overlap with any of the new room&#8217;s bookings.</p>
 </li>
 <li>
-<p>If the booking ends the same day the new room&#8217;s first booking starts, the new room&#8217;s first booking cannot be checked-in.</p>
+<p>If the booking ends the same day that the new room&#8217;s first booking starts, the new room&#8217;s first booking cannot be checked-in.</p>
 </li>
 <li>
-<p>If the booking starts the same day the new room&#8217;s first booking ends, the booking cannot be checked-in.</p>
+<p>If the booking starts the same day that the new room&#8217;s first booking ends, the booking cannot be checked-in.</p>
 </li>
 </ul>
-</div>
-</li>
-</ul>
-</div>
+</div></div></td>
+</tr>
+</tbody>
+</table>
 <div class="paragraph">
-<p>Format: <code>reassign r/ROOM_NUMBER from/START_DATE</code></p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>This command requires a login.</pre>
-</div>
+<p>Format: <code>reassign r/ROOM_NUMBER from/START_DATE nr/NEW_ROOM_NUMBER</code></p>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -457,7 +495,7 @@ Reassigns the booking with start date 01/11/18 in room 085 to room 086.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="locating-guests-and-rooms-code-find-code"><a class="link" href="#locating-guests-and-rooms-code-find-code">4.6. Locating guests and rooms : <code>find</code></a></h3>
+<h3 id="locating-guests-and-rooms-code-find-code"><a class="link" href="#locating-guests-and-rooms-code-find-code">4.5. Locating guests and rooms : <code>find</code></a></h3>
 <div class="paragraph">
 <p>Finds guests or rooms, depending on the input flag and the keyword filters.</p>
 </div>
@@ -596,7 +634,7 @@ Find all rooms with bookings with tag "RoomService".</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="listing-all-guests-code-list-code"><a class="link" href="#listing-all-guests-code-list-code">4.7. Listing all guests : <code>list</code></a></h3>
+<h3 id="listing-all-guests-code-list-code"><a class="link" href="#listing-all-guests-code-list-code">4.6. Listing all guests : <code>list</code></a></h3>
 <div class="paragraph">
 <p>Shows the entire list of rooms, checked-in guests, or archived guests, depending on the input flag<br>
 Format: <code>list [flag]</code></p>
@@ -622,9 +660,9 @@ List all checked-in guests</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="login-code-login-code"><a class="link" href="#login-code-login-code">4.8. Login : <code>login</code></a></h3>
+<h3 id="login-code-login-code"><a class="link" href="#login-code-login-code">4.7. Login : <code>login</code></a></h3>
 <div class="paragraph">
-<p>Logs in to the Concierge application.<br>
+<p>Logs in to the Concierge&#8482; application.<br>
 Format: <code>login user/USERNAME pw/PASSWORD</code></p>
 </div>
 <div class="paragraph">
@@ -641,7 +679,7 @@ Format: <code>login user/USERNAME pw/PASSWORD</code></p>
 <p><a href="#adding-a-new-account">More users can be added</a> at <code>passwords.json</code>.</p>
 </li>
 <li>
-<p>[v2.0] You can create new accounts via the Concierge app.</p>
+<p>[v2.0] You can create new accounts via the Concierge&#8482; app.</p>
 </li>
 </ul>
 </div>
@@ -666,22 +704,22 @@ bookings.
 <div class="ulist">
 <ul>
 <li>
-<p><a href="#adding-a-guest-code-add-code"><code>add</code></a></p>
+<p><a href="#Adding a guest: <code>add</code>"><code>add</code></a></p>
 </li>
 <li>
-<p><a href="#check-in-room-code-checkin-code"><code>checkin</code></a></p>
+<p><a href="#Check-in room: <code>checkin</code>"><code>checkin</code></a></p>
 </li>
 <li>
-<p><a href="#checkout-room-code-checkout-code"><code>checkout</code></a></p>
+<p><a href="#Checkout room: <code>checkout</code>"><code>checkout</code></a></p>
 </li>
 <li>
-<p><a href="#reassigning-a-guest-to-another-room-code-reassign-code"><code>reassign</code></a></p>
+<p><a href="#Reassigning a guest to another room : <code>reassign</code>"><code>reassign</code></a></p>
 </li>
 <li>
-<p><a href="#provide-room-service-code-service-code"><code>service</code></a></p>
+<p><a href="#Provide Room Service: <code>service</code>"><code>service</code></a></p>
 </li>
 <li>
-<p><a href="#clearing-all-entries-code-clear-code"><code>clear</code></a></p>
+<p><a href="#Clearing all entries : <code>clear</code>"><code>clear</code></a></p>
 </li>
 </ul>
 </div>
@@ -692,7 +730,7 @@ bookings.
 <div class="content">
 <img src="images/LogInCommand-notsignedin.png" alt="LogInCommand notsignedin" width="600">
 </div>
-<div class="title">Figure 3. Without login, Concierge cannot be cleared</div>
+<div class="title">Figure 3. Without login, Concierge&#8482; cannot be cleared</div>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -707,10 +745,10 @@ bookings.
 <div class="title">Figure 5. After sign in, <code>clear</code> command can now be executed</div>
 </div>
 <div class="sect3">
-<h4 id="adding-a-new-account"><a class="link" href="#adding-a-new-account">4.8.1. Adding a new account</a></h4>
+<h4 id="adding-a-new-account"><a class="link" href="#adding-a-new-account">4.7.1. Adding a new account</a></h4>
 <div class="literalblock">
 <div class="content">
-<pre> Currently, Concierge does not have a feature for users to add an account via
+<pre> Currently, Concierge(TM) does not have a feature for users to add an account via
 the app. The reason is because we only _read_ from the password file.
 Nevertheless, for the adventurous users who want to create their own
 accounts, this sub-section will be useful.</pre>
@@ -720,7 +758,7 @@ accounts, this sub-section will be useful.</pre>
 <ul>
 <li>
 <p>Step 1: Open the <code>passwords.json</code> file, which should be in the same
-folder as your Concierge.jar file.</p>
+folder as your Concierge&#8482;.jar file.</p>
 </li>
 </ul>
 </div>
@@ -733,7 +771,7 @@ folder as your Concierge.jar file.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Step 2: Concierge uses SHA-256 password hashing. This hash can be
+<p>Step 2: Concierge&#8482; uses SHA-256 password hashing. This hash can be
 generated using this <a href="https://passwordsgenerator.net/sha256-hash-generator/">tool</a>.</p>
 </li>
 </ul>
@@ -751,7 +789,7 @@ generated using this <a href="https://passwordsgenerator.net/sha256-hash-generat
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
- Concierge was designed to work with alphanumeric usernames and passwords in
+ Concierge&#8482; was designed to work with alphanumeric usernames and passwords in
  mind. Do not enter symbols (!, @, %&#8230;&#8203;)
 </td>
 </tr>
@@ -775,7 +813,7 @@ Format: <code>"username" : "hashedPassword"</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p>Step 4: Close and reload the Concierge application, and your new account
+<p>Step 4: Close and reload the Concierge&#8482; application, and your new account
 will be recognised.</p>
 </li>
 </ul>
@@ -789,9 +827,9 @@ will be recognised.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="logout-code-logout-code"><a class="link" href="#logout-code-logout-code">4.9. Logout : <code>logout</code></a></h3>
+<h3 id="logout-code-logout-code"><a class="link" href="#logout-code-logout-code">4.8. Logout : <code>logout</code></a></h3>
 <div class="paragraph">
-<p>Logs out of the Concierge application.<br>
+<p>Logs out of the Concierge&#8482; application.<br>
 Format: <code>logout</code></p>
 </div>
 <div class="ulist">
@@ -806,7 +844,7 @@ redo commands executed before the logout.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>This achieves the same effect as closing and re-opening Concierge in the
+<p>This achieves the same effect as closing and re-opening Concierge&#8482; in the
 midst of a sign-in session.</p>
 </li>
 </ul>
@@ -824,7 +862,7 @@ midst of a sign-in session.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="selecting-a-guest-code-select-code"><a class="link" href="#selecting-a-guest-code-select-code">4.10. Selecting a guest : <code>select</code></a></h3>
+<h3 id="selecting-a-guest-code-select-code"><a class="link" href="#selecting-a-guest-code-select-code">4.9. Selecting a guest : <code>select</code></a></h3>
 <div class="paragraph">
 <p>Selects the guest or room identified by the index number used in the displayed list.<br>
 Format: <code>select INDEX</code></p>
@@ -865,7 +903,7 @@ Selects the 100th room in the displayed list.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="provide-room-service-code-service-code"><a class="link" href="#provide-room-service-code-service-code">4.11. Provide Room Service: <code>service</code></a></h3>
+<h3 id="provide-room-service-code-service-code-span-class-image-img-src-images-icon-key-png-alt-icon-key-width-32-span"><a class="link" href="#provide-room-service-code-service-code-span-class-image-img-src-images-icon-key-png-alt-icon-key-width-32-span">4.10. Provide Room Service: <code>service</code> <span class="image"><img src="images/icon-key.png" alt="icon key" width="32"></span></a></h3>
 <div class="paragraph">
 <p>Charges a room service to a room <br>
 Format: <code>service r/ROOM_NUMBER no/ITEM_NUMBER [c/COST]</code></p>
@@ -894,7 +932,7 @@ of the respective rooms.</p>
 <p>Only occupied rooms (i.e. rooms with checked-in guests) can have expenses charged to it.</p>
 </li>
 <li>
-<p>The default <code>Menu</code> that comes with Concierge consists of the following items. Items
+<p>The default <code>Menu</code> that comes with Concierge&#8482; consists of the following items. Items
 may be modified, added, or removed through <code>concierge.xml</code>.</p>
 <div class="ulist">
 <ul>
@@ -929,11 +967,6 @@ may be modified, added, or removed through <code>concierge.xml</code>.</p>
 </div>
 </div>
 </div>
-<div class="literalblock">
-<div class="content">
-<pre>This command requires a login.</pre>
-</div>
-</div>
 <div class="paragraph">
 <p>Examples:</p>
 </div>
@@ -951,53 +984,7 @@ Adds an expenditure of the item <strong>RS03</strong> to the room&#8217;s expens
 </div>
 </div>
 <div class="sect2">
-<h3 id="display-menu-code-menu-code-span-class-red-coming-in-v1-4-span"><a class="link" href="#display-menu-code-menu-code-span-class-red-coming-in-v1-4-span">4.12. Display menu: <code>menu</code> <span class="red">Coming in v1.4</span></a></h3>
-<div class="paragraph">
-<p>Displays the menu to help users in the use of the <code>service</code> command.<br>
-Format: <code>menu</code></p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="room-maintenance-code-maintenance-code-span-class-red-coming-in-v2-0-span"><a class="link" href="#room-maintenance-code-maintenance-code-span-class-red-coming-in-v2-0-span">4.13. Room maintenance: <code>maintenance</code> <span class="red">Coming in v2.0</span></a></h3>
-<div class="paragraph">
-<p>Sets the room to be under maintenance.<br>
-Format: <code>maintenance ROOM_NUMBER TRUE/FALSE</code></p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>A room under maintenance does not affect any of the other system operations.</p>
-</li>
-<li>
-<p>The receptionist should handle this situation on the ground using his judgment, be it to swap rooms for the guest</p>
-</li>
-<li>
-<p>or ask the guest to wait until the maintenance is over (e.g. leave luggage at hotel and talk a walk outside).</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>maintenance 085 TRUE</code><br>
-Sets room 085 to be under maintenance.</p>
-</li>
-<li>
-<p><code>maintenance 085 FALSE</code><br>
-Lifts the maintenance status on room 085.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="listing-entered-commands-code-history-code"><a class="link" href="#listing-entered-commands-code-history-code">4.14. Listing entered commands : <code>history</code></a></h3>
+<h3 id="listing-entered-commands-code-history-code"><a class="link" href="#listing-entered-commands-code-history-code">4.11. Listing entered commands : <code>history</code></a></h3>
 <div class="paragraph">
 <p>Lists all the commands that you have entered in reverse chronological order.<br>
 Format: <code>history</code></p>
@@ -1018,7 +1005,7 @@ Format: <code>history</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">4.15. Undoing previous command : <code>undo</code></a></h3>
+<h3 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">4.12. Undoing previous command : <code>undo</code></a></h3>
 <div class="paragraph">
 <p>Restores the concierge application to the state before the previous <em>undoable</em> command was executed.<br>
 Format: <code>undo</code></p>
@@ -1031,7 +1018,7 @@ Format: <code>undo</code></p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>Undoable commands: those commands that modify Concierge&#8217;s content (<code>add</code>, <code>checkin</code>, <code>checkout</code> and <code>clear</code>).</p>
+<p>Undoable commands: those commands that modify Concierge&#8482;'s content (<code>add</code>, <code>checkin</code>, <code>checkout</code> and <code>clear</code>).</p>
 </div>
 </td>
 </tr>
@@ -1063,7 +1050,7 @@ The <code>undo</code> command fails as there are no undoable commands executed p
 </div>
 </div>
 <div class="sect2">
-<h3 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">4.16. Redoing the previously undone command : <code>redo</code></a></h3>
+<h3 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">4.13. Redoing the previously undone command : <code>redo</code></a></h3>
 <div class="paragraph">
 <p>Reverses the most recent <code>undo</code> command.<br>
 Format: <code>redo</code></p>
@@ -1095,15 +1082,10 @@ The <code>redo</code> command fails as there are no <code>undo</code> commands e
 </div>
 </div>
 <div class="sect2">
-<h3 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">4.17. Clearing all entries : <code>clear</code></a></h3>
+<h3 id="clearing-all-entries-code-clear-code-span-class-image-img-src-images-icon-key-png-alt-icon-key-width-32-span"><a class="link" href="#clearing-all-entries-code-clear-code-span-class-image-img-src-images-icon-key-png-alt-icon-key-width-32-span">4.14. Clearing all entries : <code>clear</code> <span class="image"><img src="images/icon-key.png" alt="icon key" width="32"></span></a></h3>
 <div class="paragraph">
 <p>Clears all entries from the application.<br>
 Format: <code>clear</code></p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>This command requires a login.</pre>
-</div>
 </div>
 <div class="paragraph">
 <p>The rooms are maintained - only all their current and future bookings are
@@ -1120,14 +1102,14 @@ cleared. I.e. all maintenance requests and faults will still be recorded.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="export-log-code-export-code-span-class-red-coming-in-v2-0-span"><a class="link" href="#export-log-code-export-code-span-class-red-coming-in-v2-0-span">4.18. Export log: <code>export</code> <span class="red">Coming in v2.0</span></a></h3>
+<h3 id="export-log-code-export-code-span-class-red-coming-in-v2-0-span"><a class="link" href="#export-log-code-export-code-span-class-red-coming-in-v2-0-span">4.15. Export log: <code>export</code> <span class="red">Coming in v2.0</span></a></h3>
 <div class="paragraph">
 <p>Exports a log of all history of commands into a text file<br>
 Format: <code>export</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="viewing-help-code-help-code"><a class="link" href="#viewing-help-code-help-code">4.19. Viewing help : <code>help</code></a></h3>
+<h3 id="viewing-help-code-help-code"><a class="link" href="#viewing-help-code-help-code">4.16. Viewing help : <code>help</code></a></h3>
 <div class="paragraph">
 <p>Format: <code>help</code></p>
 </div>
@@ -1150,39 +1132,23 @@ Format: <code>export</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">4.20. Exiting the program : <code>exit</code></a></h3>
+<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">4.17. Exiting the program : <code>exit</code></a></h3>
 <div class="paragraph">
 <p>Exits the program.<br>
 Format: <code>exit</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="saving-the-data"><a class="link" href="#saving-the-data">4.21. Saving the data</a></h3>
+<h3 id="saving-the-data"><a class="link" href="#saving-the-data">4.18. Saving the data</a></h3>
 <div class="paragraph">
-<p>Concierge data are saved in the hard disk automatically after any command that changes the data.<br>
+<p>Concierge&#8482; data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.</p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="encrypting-data-files-span-class-red-coming-in-v2-0-span"><a class="link" href="#encrypting-data-files-span-class-red-coming-in-v2-0-span">4.22. Encrypting data files <span class="red">Coming in v2.0</span></a></h3>
-<div class="paragraph">
-<p>Encryption of Guests' personal data is still in the works. If you are
-interested in contributing, please refer to the Developer Guide.</p>
-</div>
-</div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="faq"><a class="link" href="#faq">5. FAQ</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p><strong>Q</strong>: How do I transfer my data to another Computer?<br>
-<strong>A</strong>: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Concierge folder.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="command-summary"><a class="link" href="#command-summary">6. Command Summary</a></h2>
+<h2 id="command-summary"><a class="link" href="#command-summary">5. Command Summary</a></h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
@@ -1197,7 +1163,10 @@ t/TAG r/ROOM_NUMBER from/START_DATE to/END_DATE</code></p>
 <p><strong>Checkout</strong> : <code>checkout r/ROOM_NUMBER [from/START_DATE]</code></p>
 </li>
 <li>
-<p><strong>Find</strong> : <code>find KEYWORD [MORE_KEYWORDS]</code> <span class="red">Coming in v2.0</span></p>
+<p><strong>Reassign</strong> : <code>reassign r/ROOM_NUMBER from/START_DATE nr/NEW_ROOM_NUMBER</code></p>
+</li>
+<li>
+<p><strong>Find</strong> : <code>find KEYWORD [MORE_KEYWORDS]</code></p>
 </li>
 <li>
 <p><strong>List</strong> : <code>list</code></p>
@@ -1213,9 +1182,6 @@ t/TAG r/ROOM_NUMBER from/START_DATE to/END_DATE</code></p>
 </li>
 <li>
 <p><strong>Room Service</strong> : <code>service</code></p>
-</li>
-<li>
-<p><strong>Mark Room as faulty</strong> : <code>fault</code> <span class="red">Coming in v2.0</span></p>
 </li>
 <li>
 <p><strong>History</strong> : <code>history</code></p>
@@ -1241,4 +1207,61 @@ t/TAG r/ROOM_NUMBER from/START_DATE to/END_DATE</code></p>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-10 11:21:10 UTC</div></div></div></body></html>
+</div>
+<div class="sect1">
+<h2 id="features-planned-for-v2-0"><a class="link" href="#features-planned-for-v2-0">6. Features planned for v2.0</a></h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Commands</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>addx</code> - Add a guest to the archived guest list without needing to add a booking</p>
+</li>
+<li>
+<p><code>maintenance</code> - Tag a room as under maintenance</p>
+</li>
+<li>
+<p><code>export</code> - Export the logs of the current session to a text-editable file</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Other features</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Displaying the checked-in guest&#8217;s room&#8217;s information when selecting the checked-in guests</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="faq"><a class="link" href="#faq">7. FAQ</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Q</strong>: How do I transfer my data to another Computer?<br>
+<strong>A</strong>: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Concierge&#8482; folder.</p>
+</div>
+<div class="paragraph">
+<p><strong>Q</strong>: What platform is this application available on?<br>
+<strong>A</strong>: This application is cross-platform, and can be used on both Windows and Mac OS.</p>
+</div>
+<div class="paragraph">
+<p><strong>Q</strong>: Where can I go to purchase this application?<br>
+<strong>A</strong>: This application is 100% free-of-charge, and is open-source for any and all to contribute to make it better.</p>
+</div>
+<div class="paragraph">
+<p><strong>Q</strong>: I&#8217;ve found a bug in the application! How can I report it?<br>
+<strong>A</strong>: Please open an issue in the issue section and we will see to it as soon as possible. Bug reports only serve to
+make our application better, so do not hesitate to report them to us!</p>
+</div>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-10 18:21:22 UTC</div></div></div></body></html>
