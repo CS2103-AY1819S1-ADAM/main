@@ -702,6 +702,18 @@ format. This is useful as some of the commands require several inputs
 from the user and hence this will save time and commands can be
 executed faster.
 
+A quick-clear has also been added as part of this feature, so that
+the user can again, save time.Press kbd:[Alt] to quick-clear the
+`CommandBox` (saves time for user when he wants to clear the box).
+
+The command box before kbd:[Alt] is pressed:
+
+image::service pre clear.jpg[width="419"]
+
+The command box aft kbd:[Alt] is pressed:
+
+image::service post clear.jpg[width="371"]
+
 ==== Example of how feature works
 
 **Step 1**: Launch application
@@ -758,7 +770,6 @@ The Autocomplete mechanism is facilitated by `AutoCompleteManager`, which
 can be found in `LogicManager`. It supports the auto completion of incomplete
 commands by providing a list of auto completed commands from a given incomplete
 command.
-
 
 An underlying `Trie` data structure is used to facilitate the `AutocompleteManager`.
 `Trie` only supports autocompletion of commands that are provided by the

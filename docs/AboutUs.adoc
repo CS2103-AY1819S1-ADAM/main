@@ -52,7 +52,7 @@ Side-responsiblities: Code quality
 
 === Neil Mehta
 image::neilish3re.png[width="150", align="left"]
-{empty}[http://github.com/neilish3re[github]] [<<johndoe#, portfolio>>]
+{empty}[http://github.com/neilish3re[github]] [<<neilish3re#, portfolio>>]
 
 Role: Developer +
 Responsibilities: Testing, Commons Component, JUnit expert +

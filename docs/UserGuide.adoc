@@ -543,11 +543,20 @@ Format: `archive`
 
 Auto-completes a partially typed in command by a user.
 
-Format: Enter `COMMAND_WORD`, followed by kbd:[Ctrl] key.
+**Function** Press kbd:[Alt] to quick-clear the `CommandBox` (saves time
+             for user when he wants to clear the box).
 
-Function: Press kbd:[Ctrl] key again to proceed to the next prefix. +
-          Press kbd:[Alt] to quick-clear the `CommandBox` (saves time
-          for user when he wants to clear the box).
+The command box before kbd:[Alt] is pressed:
+
+image::service pre clear.jpg[width="419"]
+
+The command box aft kbd:[Alt] is pressed:
+
+image::service post clear.jpg[width="371"]
+
+**Format**: Enter `COMMAND_WORD`, followed by kbd:[Ctrl] key.
+
+**Function**: Press kbd:[Ctrl] key again to proceed to the next prefix.
 
 Example: +
 **Step 1**: User enters `a` in `CommandBox`.
