@@ -20,8 +20,8 @@ Concierge is a desktop application simulating a hotel management system used by 
 ** *Expanding on the existing `list` function:*
 *** *What it does:* It allows the user to list between seeing a list of all guests, list of checked-in guests, or a list of all the rooms in the hotel.
 *** *Justification:* This feature is essential to a proper, working hotel management system. The listing of information on guests and rooms is needed for receptionists to perform follow-up tasks, be it in person or within the app.
-*** *Highlights:* The listing function was made with the intention of listing guests and rooms separately under the same column, which required more in-depth research into JAVAFX and FXML files. (More details can be found in the "Minor Enhancements" section.)
-*** *Credits:* The modification of the list function was highly dependent on the underlying code that the list function initially had. Additional code was added on to expand upon the initial list function, while I slowly learnt how the code of the AddressBook application actually worked. Additional credit should also be given to my groupmate *Adam Chew (adamwth)*, who added the functionality of list checked-in guests with the `list -cg` command.
+*** *Highlights:* The listing function was made with the intention of listing guests and rooms separately under the same column by modifying JAVAFX and FXML files.
+*** *Credits:* Additional credit should also be given to my groupmate *Adam Chew (adamwth)*, who added the functionality of list checked-in guests with the `list -cg` command.
 
 ** *Expanding on the existing `find` function:*
 *** *What it does:* It allows the user to search for all guests, checked-in guests, or rooms based on a particular set of conditions/predicates related to the attributes of the guest/room.
@@ -32,16 +32,10 @@ Concierge is a desktop application simulating a hotel management system used by 
 * *Other contributions*:
 
 ** *Replacing the HTML panel with a focused/detailed panel* - https://github.com/CS2103-AY1819S1-F11-2/main/pull/145[#145]
-*** The HTML panel was replaced with a detailed panel, which showed more details about a particular guest/room when the card in the list is clicked. The main aim was to reduce the amount of information clutter on the listing portion on the left of the UI by showing only essential information. More information can be, and will be shown only if the user needs those additional information, and clicks on the guest/room card.
 
 ** *Modifying the FXML files to list guest and rooms under the same UI column/panel* - https://github.com/CS2103-AY1819S1-F11-2/main/pull/145[#145]
-*** This particular enhancement required extensive research into JAVAFX and FXML files, which took a bit of time to solve. We had the intention of keeping the UI clean and free of visual clutter, and the main idea was to keep the listing of guests and rooms separate by ensuring that they display under the same column. Trial and error was needed to ensure that one panel appears and the other does not overlap.
 
 ** *Creation of the Concierge Icon and Logo* - https://github.com/CS2103-AY1819S1-F11-2/main/pull/46[#46]
-
-image::ConciergeIconFinal.png[width="200"]
-image::ConciergeFinal.png[width="600"]
-*** The icon and logo was created using Adobe Photoshop, along with my limited experience in visual design gathered from my time in Polytechnic under a Game Design course.
 
 == Contributions to the User Guide
 
