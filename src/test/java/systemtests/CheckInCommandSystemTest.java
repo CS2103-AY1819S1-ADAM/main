@@ -30,7 +30,7 @@ import seedu.address.testutil.RoomUtil;
 public class CheckInCommandSystemTest extends ConciergeSystemTest {
 
     @Test
-    public void checkin() {
+    public void checkIn() {
 
         /* Signs in to Concierge first */
         String command = LogInUtil.getValidLogInCommand();

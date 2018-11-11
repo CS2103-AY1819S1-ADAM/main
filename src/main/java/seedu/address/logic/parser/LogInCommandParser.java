@@ -17,8 +17,9 @@ public class LogInCommandParser implements Parser<LogInCommand> {
      * Parses the given {@code String} of arguments in the context of the
      * LogInCommand and returns a LogInCommand object for execution.
      *
-     * The password supplies will be hashed for security reasons.
-     * @throws ParseException if the user input does not conform the expected format
+     * The password supplied will be hashed immediately, so sensitive data is
+     * immediately handled.
+     * @throws ParseException if the user input does not conform the expected format.
      */
     public LogInCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =

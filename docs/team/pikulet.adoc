@@ -18,7 +18,7 @@ using a CLI, and it has a GUI created with JavaFX. It is written in Java, and
 
 [TIP]
 Access my contributed code here: +
-https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=pikulet.
+https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=pikulet
 
 *Major enhancement*: added *the ability to login/logout* of the system. +
 
@@ -30,40 +30,58 @@ still be accessed without signing in. By combining this with the ability
  to export the command history, the auditing process for rogue commands is
  expedited.
 * Highlights:
-** The login/logout feature is dynamic and multiple logins/ logouts can
-happen in the same session. This means that there is a very close integration
- with the existing commands to verify whether these commands are restricted.
+** The login/logout feature is dynamic - the users are not prompted to sign in
+upon starting Concierge, and users can logout and log back in within the same
+ session. This means that there is a very close integration with the existing
+  commands to verify the sign-in status and whether the commands are
+  restricted.
 ** This feature is complete - I worked with the different architectural
 components of Concierge, from command parsing (`Logic`) to login verification
  (`Model`) and even password storage (`Storage`).
 ** The feature attempts to achieve some level of security with SHA-256
 hashing.
-* Credits: The password hash algorithm was taken from https://www.baeldung
-.com/sha-256-hashing-java.
-* These features were mainly achieved in #168 and #226.
+* Credits: The password hash algorithm was taken from https://www.baeldung.com/sha-256-hashing-java.
+* These features were mainly achieved in
+https://github.com/CS2103-AY1819S1-F11-2/main/pull/168[#168] and
+https://github.com/CS2103-AY1819S1-F11-2/main/pull/226[#226].
 
 *Minor enhancements/ code contributed*:
 
-* Renamed the existing classes and methods from `Person` to `Guest` [#133]
-* Removed `Address` a field in `Person` [#143], removed the edit [#233] and
-delete [#139] commands
-* Modified the `add` command to take in room and date details [#104]. Room
-and Booking page not done by me
-* Modified the `clear` command to maintain empty hotel rooms [#162]
-* Added function for GUI verification of rooms [#162]
+* Renamed the existing classes and methods from `Person` to `Guest`
+https://github.com/CS2103-AY1819S1-F11-2/main/pull/133[#133]
+* Removed `Address` a field in `Person`
+https://github.com/CS2103-AY1819S1-F11-2/main/pull/143[#143], removed the edit
+https://github.com/CS2103-AY1819S1-F11-2/main/pull/233[#233] and delete
+https://github.com/CS2103-AY1819S1-F11-2/main/pull/139[#139] commands
+* Modified the `add` command to take in room and date details
+https://github.com/CS2103-AY1819S1-F11-2/main/pull/104[#104]. Room
+and Booking package by others.
+* Modified the `clear` command to maintain empty hotel rooms
+https://github.com/CS2103-AY1819S1-F11-2/main/pull/162[#162]
+* Added function for GUI verification of rooms
+https://github.com/CS2103-AY1819S1-F11-2/main/pull/162[#162]
+* Added most of the Appendices in the Developer Guide
+https://github.com/CS2103-AY1819S1-F11-2/main/pull/42[#42]
 
 *Project Management*:
 
 * Managed the team's issue tracker
-* Encouraged team to use clean PRs and TODO
-* Set up RepoSense for the team [#159]
+* Encouraged team to use clean PRs, TODO and Codacy
+* Set up RepoSense for the team
+https://github.com/CS2103-AY1819S1-F11-2/main/pull/159[#159]
 * Community
-** PRs reviewed (with non-trivial review comments): #157, #71, #156, #111,
-#100, #222, #219
-** Reported bugs and suggestions for other teams in the class:
-*** https://github.com/CS2103-AY1819S1-W14-3/main/issues/161[Discovered impersistence in data]
-*** https://github.com/CS2103-AY1819S1-W14-3/main/issues/148[Discovered hidden bug by rearranging command]
-*** https://github.com/CS2103-AY1819S1-W14-3/main/issues/157[Made suggestion on bounds checking]
+** PRs reviewed (with non-trivial review comments):
+https://github.com/CS2103-AY1819S1-F11-2/main/pull/157[#157],
+https://github.com/CS2103-AY1819S1-F11-2/main/pull/71[#71],
+https://github.com/CS2103-AY1819S1-F11-2/main/pull/156[#156],
+https://github.com/CS2103-AY1819S1-F11-2/main/pull/111[#111],
+https://github.com/CS2103-AY1819S1-F11-2/main/pull/100[#100],
+https://github.com/CS2103-AY1819S1-F11-2/main/pull/222[#222],
+https://github.com/CS2103-AY1819S1-F11-2/main/pull/219[#219]
+** Reported bugs for another team: https://github.com/CS2103-AY1819S1-W14-3/main/issues
+*** Discovered impersistence in data (#161),
+Discovered hidden bug by rearranging command (#148),
+Made suggestion on bounds checking (#157)
 
 == Contributions to the User Guide
 

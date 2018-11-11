@@ -4,6 +4,9 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.TypicalBookingPeriods.TODAY_TOMORROW;
+import static seedu.address.testutil.TypicalGuests.ALICE;
+import static seedu.address.testutil.TypicalRoomNumbers.ROOM_NUMBER_002;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -18,9 +21,7 @@ import seedu.address.model.room.RoomNumber;
 import seedu.address.model.room.booking.Booking;
 import seedu.address.model.room.booking.BookingPeriod;
 import seedu.address.testutil.GuestBuilder;
-import seedu.address.testutil.TypicalBookingPeriods;
 import seedu.address.testutil.TypicalConcierge;
-import seedu.address.testutil.TypicalRoomNumbers;
 
 /**
  * Refactored to use actual Model, removed ModelStubs
@@ -36,17 +37,32 @@ public class AddCommandTest {
     @Test
     public void constructor_nullGuest_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        RoomNumber validRoomNumber = TypicalRoomNumbers.ROOM_NUMBER_002;
-        BookingPeriod validBookingPeriod = TypicalBookingPeriods.TODAY_TOMORROW;
+        RoomNumber validRoomNumber = ROOM_NUMBER_002;
+        BookingPeriod validBookingPeriod = TODAY_TOMORROW;
 
         new AddCommand(null, validRoomNumber, validBookingPeriod);
     }
 
     @Test
+    public void constructor_nullRoomNumber_throwsNullPointerException() {
+        thrown.expect(NullPointerException.class);
+        Guest validGuest = ALICE;
+        BookingPeriod validBookingPeriod = TODAY_TOMORROW;
+        new AddCommand(validGuest, null, validBookingPeriod);
+    }
+    @Test
+    public void constructor_nullBookingPeriod_throwsNullPointerException() {
+        thrown.expect(NullPointerException.class);
+        Guest validGuest = ALICE;
+        RoomNumber validRoomNumber = ROOM_NUMBER_002;
+        new AddCommand(validGuest, validRoomNumber, null);
+    }
+
+    @Test
     public void execute_bookingAcceptedByModel_addSuccessful() {
         Guest validGuest = new GuestBuilder().build();
-        RoomNumber validRoomNumber = TypicalRoomNumbers.ROOM_NUMBER_002;
-        BookingPeriod validBookingPeriod = TypicalBookingPeriods.TODAY_TOMORROW;
+        RoomNumber validRoomNumber = ROOM_NUMBER_002;
+        BookingPeriod validBookingPeriod = TODAY_TOMORROW;
         Booking validBooking = new Booking(validGuest, validBookingPeriod);
         AddCommand addCommand = new AddCommand(validGuest, validRoomNumber, validBookingPeriod);
 
@@ -63,8 +79,8 @@ public class AddCommandTest {
     @Test
     public void execute_overlappingBooking_throwsCommandException() {
         Guest validGuest = new GuestBuilder().build();
-        RoomNumber validRoomNumber = TypicalRoomNumbers.ROOM_NUMBER_002;
-        BookingPeriod validBookingPeriod = TypicalBookingPeriods.TODAY_TOMORROW;
+        RoomNumber validRoomNumber = ROOM_NUMBER_002;
+        BookingPeriod validBookingPeriod = TODAY_TOMORROW;
         Booking validBooking = new Booking(validGuest, validBookingPeriod);
 
         String expectedMessage = String.format(AddCommand.MESSAGE_OVERLAPPING_BOOKING, validRoomNumber);
@@ -82,8 +98,8 @@ public class AddCommandTest {
     public void equals() {
         Guest alice = new GuestBuilder().withName("Alice").build();
         Guest bob = new GuestBuilder().withName("Bob").build();
-        RoomNumber validRoomNumber = TypicalRoomNumbers.ROOM_NUMBER_002;
-        BookingPeriod validBookingPeriod = TypicalBookingPeriods.TODAY_TOMORROW;
+        RoomNumber validRoomNumber = ROOM_NUMBER_002;
+        BookingPeriod validBookingPeriod = TODAY_TOMORROW;
 
         AddCommand addAliceCommand = new AddCommand(alice, validRoomNumber, validBookingPeriod);
         AddCommand addBobCommand = new AddCommand(bob, validRoomNumber, validBookingPeriod);

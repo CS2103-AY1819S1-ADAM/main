@@ -10,44 +10,51 @@ import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 /**
- * Represents a password hash list, and is used in the {@code LogInHelper}.
+ * Represents a key-value reference list for usernames and passwords, and is
+ * used in the {@code LogInHelper}.
  */
 public class PasswordHashList {
 
+    // Name of the JsonNode variable, used to extract the key-value pairs
     private static final String PASSWORD_REF_NAME = "passwordReferenceList";
-    private JsonNode passwordRef; // The JSON password reference list
-    // The json key that wraps the other key-value pairs
+
+    // The JSON password reference list, also the JSON key that wraps the other key-value pairs
+    private JsonNode passwordReferenceList;
 
     /**
      * Returns an empty password hash list with no username or passwords
      */
     public PasswordHashList() {
-        this.passwordRef = JsonNodeFactory.instance.objectNode();
+        this.passwordReferenceList = JsonNodeFactory.instance.objectNode();
     }
 
     /**
      * This method creates a new PasswordHashList using a JsonNode with a
-     * {@code PASSWORD_REF_NAME} wrapper object. This facilitates the
+     * {@code PASSWORD_REF_NAME} wrapper key. This facilitates the
      * serialising and storage component handled by {@code JsonUtil}.
-     * @param passwordRef
+     * @param passwordReferenceList
      */
-    public PasswordHashList(JsonNode passwordRef) {
-        requireNonNull(passwordRef);
-        this.passwordRef = passwordRef.get(PASSWORD_REF_NAME);
+    public PasswordHashList(JsonNode passwordReferenceList) {
+        requireNonNull(passwordReferenceList);
+        this.passwordReferenceList = passwordReferenceList.get(PASSWORD_REF_NAME);
     }
 
     /**
      * Returns a new {@code PasswordHashList} with the username and password
-     * entry added.
+     * entry added. Currently used for testing, but could be extended to
+     * allow users to add new accounts.
      */
     public PasswordHashList addEntry(String username, String password) {
         requireNonNull(username, password);
 
-        ObjectNode newPasswordRef = (ObjectNode) passwordRef;
+        // JsonNode is read-only, while ObjectNode can be written to
+        ObjectNode newPasswordRef = (ObjectNode) passwordReferenceList;
         newPasswordRef.put(username, hash(password));
 
+        // The current constructor that takes in a JsonNode object expects a
+        // wrapper {@code PASSWORD_REF_NAME} key.
         PasswordHashList passwordHashList = new PasswordHashList();
-        passwordHashList.passwordRef = passwordRef;
+        passwordHashList.passwordReferenceList = passwordReferenceList;
 
         return passwordHashList;
     }
@@ -61,7 +68,7 @@ public class PasswordHashList {
     protected Optional<String> getExpectedPassword(String username) {
         requireNonNull(username);
 
-        JsonNode expectedPasswordNode = passwordRef.get(username);
+        JsonNode expectedPasswordNode = passwordReferenceList.get(username);
 
         if (expectedPasswordNode == null) {
             return Optional.empty();
@@ -72,7 +79,7 @@ public class PasswordHashList {
 
     @Override
     public String toString() {
-        return "Number of users: " + passwordRef.size();
+        return passwordReferenceList.toString();
     }
 
     @Override
@@ -83,7 +90,7 @@ public class PasswordHashList {
             return false;
         }
 
-        return ((PasswordHashList) other).passwordRef.equals(passwordRef);
+        return ((PasswordHashList) other).passwordReferenceList.equals(passwordReferenceList);
     }
 
 }

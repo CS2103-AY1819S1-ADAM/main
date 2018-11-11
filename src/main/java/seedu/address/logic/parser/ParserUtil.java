@@ -199,8 +199,8 @@ public class ParserUtil {
 
     /**
      * Parses a {@code String password} into a hashed password.
-     * Strips whitespace off the password, so passwords cannot begin with a
-     * whitespace.
+     * Strips whitespace off the password, so passwords cannot begin or end
+     * with whitespaces.
      */
     public static String parseAndHashPassword(String password) {
         requireNonNull(password);

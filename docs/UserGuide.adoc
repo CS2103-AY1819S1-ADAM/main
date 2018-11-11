@@ -329,7 +329,8 @@ https://passwordsgenerator.net/sha256-hash-generator/[tool].
 
 [NOTE]
  Concierge(TM) is designed to work for alphanumeric usernames and passwords in
- mind. Do not enter symbols (!, @, %...).
+ mind. Do not enter symbols (!, @, %...). Do not begin or end your passwords
+ with whitespaces.
 
 Step 2: Add the entry to the `passwords.json` file. This should be in the
 same location as `concierge.jar`. Note that entries are separated with a

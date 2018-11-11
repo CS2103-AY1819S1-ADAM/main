@@ -14,6 +14,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROOM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_USERNAME;
+import static seedu.address.logic.parser.PasswordHashUtil.hash;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -64,7 +65,9 @@ public class CommandTestUtil {
     public static final String VALID_USERNAME_1 = "user1";
     public static final String VALID_USERNAME_2 = "USER!@2";
     public static final String VALID_PASSWORD_1 = "%%%%";
+    public static final String HASHED_PASSWORD_1 = hash(VALID_PASSWORD_1);
     public static final String VALID_PASSWORD_2 = "^@!*&#^*&@!SADSA";
+    public static final String HASHED_PASSWORD_2 = hash(VALID_PASSWORD_2);
 
     // Identifier strings
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
@@ -73,18 +76,16 @@ public class CommandTestUtil {
     public static final String PHONE_DESC_BOB = " " + PREFIX_PHONE + VALID_PHONE_BOB;
     public static final String EMAIL_DESC_AMY = " " + PREFIX_EMAIL + VALID_EMAIL_AMY;
     public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
+    public static final String GUEST_DESC_AMY = " " + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY;
+    public static final String GUEST_DESC_BOB = " " + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
     public static final String ROOM_DESC_AMY = " " + PREFIX_ROOM + VALID_ROOM_NUMBER_AMY;
     public static final String ROOM_DESC_BOB = " " + PREFIX_ROOM + VALID_ROOM_NUMBER_BOB;
-    public static final String DATE_START_DESC_AMY =
-            " " + PREFIX_DATE_START + " " + VALID_DATE_START_AMY;
-    public static final String DATE_END_DESC_AMY =
-            " " + PREFIX_DATE_END + " " + VALID_DATE_END_AMY;
-    public static final String DATE_START_DESC_BOB =
-            " " + PREFIX_DATE_START + " " + VALID_DATE_START_BOB;
-    public static final String DATE_END_DESC_BOB =
-            " " + PREFIX_DATE_END + " " + VALID_DATE_END_BOB;
+    public static final String DATE_START_DESC_AMY = " " + PREFIX_DATE_START + " " + VALID_DATE_START_AMY;
+    public static final String DATE_END_DESC_AMY = " " + PREFIX_DATE_END + " " + VALID_DATE_END_AMY;
+    public static final String DATE_START_DESC_BOB = " " + PREFIX_DATE_START + " " + VALID_DATE_START_BOB;
+    public static final String DATE_END_DESC_BOB = " " + PREFIX_DATE_END + " " + VALID_DATE_END_BOB;
     public static final String ITEM_NUMBER_DESC_RS01 = " " + PREFIX_ITEM_NUMBER + VALID_ITEM_NUMBER_RS01;
     public static final String ITEM_NUMBER_DESC_RS02 = " " + PREFIX_ITEM_NUMBER + VALID_ITEM_NUMBER_RS02;
     public static final String COST_DESC_1 = " " + PREFIX_COST + VALID_COST_1;

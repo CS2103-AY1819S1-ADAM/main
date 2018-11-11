@@ -7,9 +7,13 @@ import static seedu.address.logic.commands.CommandTestUtil.DATE_START_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DATE_START_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.GUEST_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_DATE_END_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_DATE_START_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_ROOM_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
@@ -24,12 +28,14 @@ import static seedu.address.testutil.TypicalBookingPeriods.BOOKING_PERIOD_AMY;
 import static seedu.address.testutil.TypicalBookingPeriods.BOOKING_PERIOD_BOB;
 import static seedu.address.testutil.TypicalBookingPeriods.TODAY_TOMORROW;
 import static seedu.address.testutil.TypicalBookingPeriods.TOMORROW_NEXTWEEK;
+import static seedu.address.testutil.TypicalBookingPeriods.YESTERDAY_TODAY;
 import static seedu.address.testutil.TypicalGuests.AMY;
 import static seedu.address.testutil.TypicalGuests.BOB;
 import static seedu.address.testutil.TypicalGuests.HOON;
 import static seedu.address.testutil.TypicalGuests.IDA;
 import static seedu.address.testutil.TypicalGuests.JAKOB;
 import static seedu.address.testutil.TypicalGuests.KEYWORD_MATCHING_MEIER;
+import static seedu.address.testutil.TypicalRoomNumbers.ROOM_NUMBER_012;
 import static seedu.address.testutil.TypicalRoomNumbers.ROOM_NUMBER_050;
 import static seedu.address.testutil.TypicalRoomNumbers.ROOM_NUMBER_051;
 import static seedu.address.testutil.TypicalRoomNumbers.ROOM_NUMBER_052;
@@ -55,7 +61,6 @@ import seedu.address.model.tag.Tag;
 import seedu.address.testutil.BookingUtil;
 import seedu.address.testutil.LogInUtil;
 
-// TODO Fix and redo these tests for refactored addCommand!
 public class AddCommandSystemTest extends ConciergeSystemTest {
 
     @Test
@@ -68,8 +73,8 @@ public class AddCommandSystemTest extends ConciergeSystemTest {
 
         /* ------------------------ Perform add operations on the shown unfiltered list ----------------------------- */
 
-        /* Case: add a booking to a non-empty Concierge, command with leading spaces and trailing spaces -> added
-         */
+        /* Case: add an active booking to a non-empty Concierge,
+        command with leading spaces and trailing spaces -> added */
         Guest guestToAdd = AMY;
         BookingPeriod bookingPeriodToAdd = BOOKING_PERIOD_AMY;
         RoomNumber roomNumberToAdd = ROOM_NUMBER_AMY;
@@ -99,6 +104,19 @@ public class AddCommandSystemTest extends ConciergeSystemTest {
         command = AddCommand.COMMAND_WORD + TAG_DESC_FRIEND
                 + DATE_END_DESC_BOB + TAG_DESC_HUSBAND + EMAIL_DESC_BOB + ROOM_DESC_BOB
                 + DATE_START_DESC_BOB + PHONE_DESC_BOB + NAME_DESC_BOB + DATE_END_DESC_BOB;
+        assertCommandSuccess(command, guestToAdd, roomNumberToAdd, bookingPeriodToAdd);
+
+        /* Case: Add overlapping booking -> rejected */
+        command = BookingUtil.getAddCommand(BOB, ROOM_NUMBER_BOB, BOOKING_PERIOD_BOB);
+        assertCommandFailure(command,
+                String.format(AddCommand.MESSAGE_OVERLAPPING_BOOKING, ROOM_NUMBER_BOB));
+
+        /* Case: Add an inactive booking -> added */
+        guestToAdd = BOB;
+        roomNumberToAdd = ROOM_NUMBER_012;
+        bookingPeriodToAdd = TOMORROW_NEXTWEEK;
+        command = BookingUtil.getAddCommand(BOB, ROOM_NUMBER_012,
+                TOMORROW_NEXTWEEK);
         assertCommandSuccess(command, guestToAdd, roomNumberToAdd, bookingPeriodToAdd);
 
         /* Case: add a guest, missing tags -> added */
@@ -137,8 +155,23 @@ public class AddCommandSystemTest extends ConciergeSystemTest {
                 + ROOM_DESC_AMY + DATE_START_DESC_AMY + DATE_END_DESC_AMY;
         assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
 
+        /* Case: missing room number -> rejected */
+        command = AddCommand.COMMAND_WORD + GUEST_DESC_AMY
+                + DATE_START_DESC_AMY + DATE_END_DESC_AMY;
+        assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+
+        /* Case: missing booking start date -> rejected */
+        command = AddCommand.COMMAND_WORD + GUEST_DESC_AMY
+                + ROOM_DESC_AMY + DATE_END_DESC_AMY;
+        assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+
+        /* Case: missing booking end date -> rejected */
+        command = AddCommand.COMMAND_WORD + GUEST_DESC_AMY
+                + ROOM_DESC_AMY + DATE_START_DESC_AMY;
+        assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+
         /* Case: invalid keyword -> rejected */
-        command = "adds " + NAME_DESC_AMY + PHONE_DESC_AMY
+        command = "adds " + GUEST_DESC_AMY
                 + ROOM_DESC_AMY + DATE_START_DESC_AMY + DATE_END_DESC_AMY;
         assertCommandFailure(command, Messages.MESSAGE_UNKNOWN_COMMAND);
 
@@ -165,6 +198,25 @@ public class AddCommandSystemTest extends ConciergeSystemTest {
                 + EMAIL_DESC_AMY + INVALID_TAG_DESC + ROOM_DESC_AMY
                 + DATE_START_DESC_AMY + DATE_END_DESC_AMY;
         assertCommandFailure(command, Tag.MESSAGE_TAG_CONSTRAINTS);
+
+        /* Case: invalid room number -> rejected */
+        command = AddCommand.COMMAND_WORD + GUEST_DESC_AMY
+                + INVALID_ROOM_DESC + DATE_START_DESC_AMY + DATE_END_DESC_AMY;
+        assertCommandFailure(command, RoomNumber.MESSAGE_ROOM_NUMBER_CONSTRAINTS);
+
+        /* Case: invalid booking start date -> rejected */
+        command = AddCommand.COMMAND_WORD + GUEST_DESC_AMY
+                + ROOM_DESC_AMY + INVALID_DATE_START_DESC + DATE_END_DESC_AMY;
+        assertCommandFailure(command, BookingPeriod.MESSAGE_BOOKING_PERIOD_CONSTRAINTS);
+
+        /* Case: invalid booking end date -> rejected */
+        command = AddCommand.COMMAND_WORD + GUEST_DESC_AMY
+                + ROOM_DESC_AMY + DATE_START_DESC_AMY + INVALID_DATE_END_DESC;
+        assertCommandFailure(command, BookingPeriod.MESSAGE_BOOKING_PERIOD_CONSTRAINTS);
+
+        /* Case: Add outdated booking -> rejected */
+        command = BookingUtil.getAddCommand(BOB, ROOM_NUMBER_BOB, YESTERDAY_TODAY);
+        assertCommandFailure(command, AddCommand.MESSAGE_OUTDATED_BOOKING);
 
         // Unable to execute command after sign out
         executeCommand(LogInUtil.getLogOutCommand());

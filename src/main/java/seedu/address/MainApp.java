@@ -1,7 +1,7 @@
 package seedu.address;
 
+import static seedu.address.model.util.SampleDataUtil.getDefaultPasswordHashList;
 import static seedu.address.model.util.SampleDataUtil.getSampleConcierge;
-import static seedu.address.model.util.SampleDataUtil.getSamplePasswordHashList;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -184,7 +184,6 @@ public class MainApp extends Application {
         return initializedPrefs;
     }
 
-
     /**
      * Returns a {@code PasswordHashList} using the storage data.
      * If there is an invalid or missing passwords.json file, then an empty
@@ -194,23 +193,22 @@ public class MainApp extends Application {
         PasswordHashList passwords;
 
         try {
-            Optional<PasswordHashList> passwordsOptional =
-                    storage.readPasswordRef();
+            Optional<PasswordHashList> passwordsOptional = storage.readPasswordRef();
             if (!passwordsOptional.isPresent()) {
                 logger.info("Password file not found. "
                         + "Will be starting with a sample login account.");
             }
 
             passwords =
-                    passwordsOptional.orElseGet(SampleDataUtil::getSamplePasswordHashList);
+                    passwordsOptional.orElseGet(SampleDataUtil::getDefaultPasswordHashList);
         } catch (DataConversionException e) {
-            logger.warning("Problem while reading from the password file. "
+            logger.warning("Data file not in the correct format. "
                     + "Will be starting with a sample login account.");
-            passwords = getSamplePasswordHashList();
+            passwords = getDefaultPasswordHashList();
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. "
                     + "Will be starting with a sample login account.");
-            passwords = getSamplePasswordHashList();
+            passwords = getDefaultPasswordHashList();
         }
 
         // Update prefs file in case it was missing to begin with or there are new/unused fields

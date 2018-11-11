@@ -136,7 +136,7 @@ public class SampleDataUtil {
      * credentials.
      * Username: admin, Password: passw0rd
      */
-    public static PasswordHashList getSamplePasswordHashList() {
+    public static PasswordHashList getDefaultPasswordHashList() {
         return getPasswordHashList(
                 new Pair<>("admin", "passw0rd"));
     }

@@ -3,10 +3,13 @@ package seedu.address.model.login;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.parser.PasswordHashUtil.hash;
+import static seedu.address.logic.commands.CommandTestUtil.HASHED_PASSWORD_1;
+import static seedu.address.logic.commands.CommandTestUtil.HASHED_PASSWORD_2;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PASSWORD_1;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PASSWORD_2;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_USERNAME_1;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_USERNAME_2;
 import static seedu.address.testutil.Assert.assertThrows;
-
-import java.io.IOException;
 
 import org.junit.Test;
 
@@ -16,8 +19,8 @@ import seedu.address.model.util.SampleDataUtil;
 public class PasswordHashListTest {
 
     public static PasswordHashList getSamplePasswordHashList() {
-        Pair<String, String> firstUser = new Pair("user1", "passw0rd");
-        Pair<String, String> secondUser = new Pair("USER2", "passw1rd");
+        Pair<String, String> firstUser = new Pair(VALID_USERNAME_1, VALID_PASSWORD_1);
+        Pair<String, String> secondUser = new Pair(VALID_USERNAME_2, VALID_PASSWORD_2);
         return SampleDataUtil.getPasswordHashList(firstUser, secondUser);
     }
 
@@ -26,40 +29,22 @@ public class PasswordHashListTest {
         assertThrows(NullPointerException.class, () -> new PasswordHashList(null));
     }
 
-    // TODO: Add support to assert the success of parsing
-    /*
     @Test
-    public void constructor_validString_success() throws IOException {
-
-        // empty json string
-        String passwordRef = " { } "
-        new PasswordHashList(passwordRef);
-
-        // one entry
-        passwordRef = "{ \"user\" : \"passw0rd\" }";
-        new PasswordHashList(passwordRef);
-
-        // multiple entries
-        getSamplePasswordHashList();
-    }
-    */
-
-    @Test
-    public void getExpectedPassword_success() throws IOException {
+    public void getExpectedPassword_success() {
         PasswordHashList passwordRef = getSamplePasswordHashList();
 
         // correct username, first user
-        String retrievedPassword = passwordRef.getExpectedPassword("user1").get();
-        assertEquals(retrievedPassword, hash("passw0rd"));
+        String retrievedPassword = passwordRef.getExpectedPassword(VALID_USERNAME_1).get();
+        assertEquals(retrievedPassword, HASHED_PASSWORD_1);
 
         // correct username, second user
-        retrievedPassword = passwordRef.getExpectedPassword("USER2").get();
-        assertEquals(retrievedPassword, hash("passw1rd"));
+        retrievedPassword = passwordRef.getExpectedPassword(VALID_USERNAME_2).get();
+        assertEquals(retrievedPassword, HASHED_PASSWORD_2);
     }
 
 
     @Test
-    public void getExpectedPassword_invalidUsername() throws IOException {
+    public void getExpectedPassword_invalidUsername() {
         PasswordHashList passwordRef = getSamplePasswordHashList();
 
         // null username -> throws NullPointerException
@@ -69,22 +54,10 @@ public class PasswordHashListTest {
         assertFalse(passwordRef.getExpectedPassword("user0").isPresent());
 
         // incorrect username case -> returns empty optional
-        assertFalse(passwordRef.getExpectedPassword("USER1").isPresent());
+        assertFalse(passwordRef.getExpectedPassword(VALID_USERNAME_1.toUpperCase()).isPresent());
 
         // whitespace in preamble of username -> returns empty optional
-        assertFalse(passwordRef.getExpectedPassword(" user1").isPresent());
-    }
-
-    @Test
-    public void toString_success() throws IOException {
-
-        // empty
-        PasswordHashList passwordRef = new PasswordHashList();
-        assertEquals(passwordRef.toString(), "Number of users: 0");
-
-        // multiple entries
-        passwordRef = getSamplePasswordHashList();
-        assertEquals(passwordRef.toString(), "Number of users: 2");
+        assertFalse(passwordRef.getExpectedPassword(" " + VALID_USERNAME_1).isPresent());
     }
 
     @Test
@@ -99,8 +72,8 @@ public class PasswordHashListTest {
 
         // same values -> returns true
         assertTrue(passwordRef.equals(new PasswordHashList()
-                .addEntry("user1", "passw0rd")
-                .addEntry("USER2", "passw1rd")));
+                .addEntry(VALID_USERNAME_1, VALID_PASSWORD_1)
+                .addEntry(VALID_USERNAME_2, VALID_PASSWORD_2)));
 
         // different json nodes -> returns false
         assertFalse(passwordRef.equals(new PasswordHashList()));

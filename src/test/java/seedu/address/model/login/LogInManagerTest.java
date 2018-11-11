@@ -2,7 +2,8 @@ package seedu.address.model.login;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.parser.PasswordHashUtil.hash;
+import static seedu.address.logic.commands.CommandTestUtil.HASHED_PASSWORD_1;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_USERNAME_1;
 import static seedu.address.model.login.InvalidLogInException.MESSAGE_INVALID_PASSWORD;
 import static seedu.address.model.login.InvalidLogInException.MESSAGE_INVALID_USERNAME;
 import static seedu.address.model.login.PasswordHashListTest.getSamplePasswordHashList;
@@ -31,11 +32,11 @@ public class LogInManagerTest {
 
         // after failed sign-in attempt -> not signed in
         assertThrows(InvalidLogInException.class, () -> new LogInManager(passwordRef).signIn(
-                "user1", "wrongpassword"));
+                VALID_USERNAME_1, "wrongpassword"));
         assertFalse(logInManager.isSignedIn());
 
         // after correct sign-in attempt -> signed in
-        logInManager.signIn("user1", hash("passw0rd"));
+        logInManager.signIn(VALID_USERNAME_1, HASHED_PASSWORD_1);
         assertTrue(logInManager.isSignedIn());
 
         // after sign out -> not signed in
@@ -54,7 +55,7 @@ public class LogInManagerTest {
 
         // username in reference list, but of a different case
         assertThrows(InvalidLogInException.class,
-                MESSAGE_INVALID_USERNAME, () -> logInManager.signIn("USER1", "dummy"));
+                MESSAGE_INVALID_USERNAME, () -> logInManager.signIn(VALID_USERNAME_1.toUpperCase(), "dummy"));
     }
 
     @Test
@@ -64,7 +65,7 @@ public class LogInManagerTest {
 
         // hashed password does not match at all
         assertThrows(InvalidLogInException.class,
-                MESSAGE_INVALID_PASSWORD, () -> logInManager.signIn("user1", "incorrectpassword"));
+                MESSAGE_INVALID_PASSWORD, () -> logInManager.signIn(VALID_USERNAME_1, "incorrectpassword"));
     }
 
     @Test
@@ -74,7 +75,7 @@ public class LogInManagerTest {
 
         // (hashed) password is of a different case -> accepted
         // note that two case-sensitive passwords would produce different hashes
-        logInManager.signIn("user1", hash("passw0rd").toUpperCase());
+        logInManager.signIn(VALID_USERNAME_1, HASHED_PASSWORD_1.toUpperCase());
         assertTrue(logInManager.isSignedIn());
     }
 
@@ -99,7 +100,7 @@ public class LogInManagerTest {
         assertTrue(logInManager.equals(logInManagerCopy));
 
         // different usernames -> returns false
-        logInManagerCopy.signIn("user1", hash("passw0rd"));
+        logInManagerCopy.signIn(VALID_USERNAME_1, HASHED_PASSWORD_1);
         assertFalse(logInManager.equals(logInManagerCopy));
 
         // different password lists -> returns false

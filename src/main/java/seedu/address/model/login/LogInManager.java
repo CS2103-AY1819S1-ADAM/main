@@ -9,12 +9,14 @@ import java.util.Optional;
 import seedu.address.logic.commands.LogInCommand;
 
 /**
- * A helper class to manage the login process.
+ * A helper class to manage the login and logout process.
  */
 public class LogInManager {
 
-    // The username currently associated with the model
+    // The username currently associated with the session
     private Optional<String> username = Optional.empty();
+
+    // The password reference list of key-value pairs
     private final PasswordHashList passwordRef;
 
     /**
@@ -38,6 +40,7 @@ public class LogInManager {
 
     /**
      * Returns an Optional of the username associated with the session.
+     * Returns Optional.empty() if the session is not signed in.
      */
     public Optional<String> getUsername() {
         return this.username;
@@ -47,7 +50,7 @@ public class LogInManager {
      * Attempts to sign in with the given {@code username} and the
      * {@code hashed password}.
      *
-     * @throws InvalidLogInException Thrown when the username is not present,
+     * @throws InvalidLogInException when the username is not present,
      * or the password does not match the username.
      */
     public void signIn(String username, String hashedPassword) throws InvalidLogInException {
@@ -60,6 +63,7 @@ public class LogInManager {
         Optional<String> expectedPassword = passwordRef.getExpectedPassword(username);
 
         if (!expectedPassword.isPresent()) {
+            // No match found for the given username
             throw new InvalidLogInException(MESSAGE_INVALID_USERNAME);
         } else if (!hashedPassword.equalsIgnoreCase(expectedPassword.get())) {
             throw new InvalidLogInException(MESSAGE_INVALID_PASSWORD);

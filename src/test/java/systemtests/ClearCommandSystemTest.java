@@ -13,6 +13,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.testutil.LogInUtil;
 
+// TODO: Add support to assert the success of auxiliary commands (login, logout)
 public class ClearCommandSystemTest extends ConciergeSystemTest {
 
     @Test
@@ -22,7 +23,6 @@ public class ClearCommandSystemTest extends ConciergeSystemTest {
         /* Signs in to Concierge first */
         String command = LogInUtil.getValidLogInCommand();
         executeCommand(command);
-        // TODO: Add support to assert the success of this command
 
         /* Case: clear non-empty Concierge, command with leading spaces and trailing alphanumeric characters and
          * spaces -> cleared

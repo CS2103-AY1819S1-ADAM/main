@@ -175,20 +175,16 @@ public class CommandBox extends UiPart<Region> {
     private void autoCompleteUserInput() {
         if (getCurrentText().isEmpty()) {
             return;
-        }
-        else if (getCurrentText().endsWith(SPACING)) {
+        } else if (getCurrentText().endsWith(SPACING)) {
             autoCompleteNextCommandParameter();
             return;
         }
         List<String> listOfAutoComplete = logic.getAutoCompleteCommands(getCurrentText());
         if (listOfAutoComplete.isEmpty()) {
             return;
-        }
-        else if (listOfAutoComplete.size() == 1) {
+        } else if (listOfAutoComplete.size() == 1) {
             replaceText(listOfAutoComplete.get(0));
-        }
-
-        else if (isCtrlDoubleTap()) {
+        } else if (isCtrlDoubleTap()) {
             showSuggestionsOnUi(listOfAutoComplete);
         }
     }
