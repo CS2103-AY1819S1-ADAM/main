@@ -176,7 +176,7 @@ public class CommandBox extends UiPart<Region> {
         if (getCurrentText().isEmpty()) {
             return;
         }
-        if (getCurrentText().endsWith(SPACING)) {
+        else if (getCurrentText().endsWith(SPACING)) {
             autoCompleteNextCommandParameter();
             return;
         }
@@ -184,14 +184,15 @@ public class CommandBox extends UiPart<Region> {
         if (listOfAutoComplete.isEmpty()) {
             return;
         }
-        if (listOfAutoComplete.size() == 1) {
+        else if (listOfAutoComplete.size() == 1) {
             replaceText(listOfAutoComplete.get(0));
         }
 
-        if (isCtrlDoubleTap()) {
+        else if (isCtrlDoubleTap()) {
             showSuggestionsOnUi(listOfAutoComplete);
         }
     }
+
     /**
      * Shows autocomplete suggestions on the UI given the list of string suggestions
      */
@@ -204,6 +205,7 @@ public class CommandBox extends UiPart<Region> {
             raise(new NewResultAvailableEvent(MESSAGE_AUTOCOMPLETE_AVAILABLE + getStringFromList(listOfAutoComplete)));
         }
     }
+
     /**
      * Shows auto completed next prefix parameter for completed command in UI
      */

@@ -2,6 +2,10 @@ package seedu.address.logic.autocomplete;
 
 import static java.util.Objects.requireNonNull;
 
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ROOM;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_USERNAME;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -30,9 +34,6 @@ import seedu.address.logic.parser.Prefix;
  */
 public class AutoCompleteManager {
 
-    private static final String NAME_PREFIX = "n/";
-    private static final String ROOM_PREFIX = "r/";
-    private static final String USER_PREFIX = "user/";
     private static final String EMPTY_STRING = "";
 
     private Trie commandTrie;
@@ -59,12 +60,12 @@ public class AutoCompleteManager {
         commandTrie.insertWord(SelectCommand.COMMAND_WORD);
         commandTrie.insertWord(UndoCommand.COMMAND_WORD);
 
-        commandTrie.insertWord(AddCommand.COMMAND_WORD + " " + NAME_PREFIX);
-        commandTrie.insertWord(CheckInCommand.COMMAND_WORD + " " + ROOM_PREFIX);
-        commandTrie.insertWord(CheckoutCommand.COMMAND_WORD + " " + ROOM_PREFIX);
-        commandTrie.insertWord(LogInCommand.COMMAND_WORD + " " + USER_PREFIX);
-        commandTrie.insertWord(ReassignCommand.COMMAND_WORD + " " + ROOM_PREFIX);
-        commandTrie.insertWord(ServiceCommand.COMMAND_WORD + " " + ROOM_PREFIX);
+        commandTrie.insertWord(AddCommand.COMMAND_WORD + " " + PREFIX_NAME);
+        commandTrie.insertWord(CheckInCommand.COMMAND_WORD + " " + PREFIX_ROOM);
+        commandTrie.insertWord(CheckoutCommand.COMMAND_WORD + " " + PREFIX_ROOM);
+        commandTrie.insertWord(LogInCommand.COMMAND_WORD + " " + PREFIX_USERNAME);
+        commandTrie.insertWord(ReassignCommand.COMMAND_WORD + " " + PREFIX_ROOM);
+        commandTrie.insertWord(ServiceCommand.COMMAND_WORD + " " + PREFIX_ROOM);
 
     }
 

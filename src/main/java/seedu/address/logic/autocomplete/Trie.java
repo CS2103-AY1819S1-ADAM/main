@@ -5,7 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.Map.Entry;
 
 /**
  * Trie data structure for word auto-complete
@@ -96,7 +96,7 @@ public class Trie {
         if (next != null) {
             s += next;
         }
-        for (Map.Entry<Character, Node> entry : node.children.entrySet()) {
+        for (Entry<Character, Node> entry : node.children.entrySet()) {
             listOfPostFix = getAllPostFix(entry.getValue(), s, entry.getKey(), listOfPostFix);
         }
         if (node.isCompleteWord) {
