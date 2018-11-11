@@ -14,7 +14,7 @@
 <li><a href="#Terminology">3. Terminology</a></li>
 <li><a href="#Features">4. Features</a>
 <ul class="sectlevel2">
-<li><a href="#adding-a-guest-code-add-code-span-class-image-img-src-images-icon-key-png-alt-icon-key-width-32-span">4.1. Adding a guest: <code>add</code> <span class="image"><img src="images/icon-key.png" alt="icon key" width="32"></span></a></li>
+<li><a href="#adding-a-booking-code-add-code-span-class-image-img-src-images-icon-key-png-alt-icon-key-width-32-span">4.1. Adding a booking: <code>add</code> <span class="image"><img src="images/icon-key.png" alt="icon key" width="32"></span></a></li>
 <li><a href="#check-in-room-code-checkin-code-span-class-image-img-src-images-icon-key-png-alt-icon-key-width-32-span">4.2. Check-in room: <code>checkin</code> <span class="image"><img src="images/icon-key.png" alt="icon key" width="32"></span></a></li>
 <li><a href="#checkout-room-code-checkout-code-span-class-image-img-src-images-icon-key-png-alt-icon-key-width-32-span">4.3. Checkout room: <code>checkout</code> <span class="image"><img src="images/icon-key.png" alt="icon key" width="32"></span></a></li>
 <li><a href="#reassigning-a-guest-to-another-room-code-reassign-code-span-class-image-img-src-images-icon-key-png-alt-icon-key-width-32-span">4.4. Reassigning a guest to another room : <code>reassign</code> <span class="image"><img src="images/icon-key.png" alt="icon key" width="32"></span></a></li>
@@ -270,79 +270,59 @@ This is a <strong>tip</strong> icon. You may want to read this if you are new to
 </div>
 </div>
 <div class="sect2">
-<h3 id="adding-a-guest-code-add-code-span-class-image-img-src-images-icon-key-png-alt-icon-key-width-32-span"><a class="link" href="#adding-a-guest-code-add-code-span-class-image-img-src-images-icon-key-png-alt-icon-key-width-32-span">4.1. Adding a guest: <code>add</code> <span class="image"><img src="images/icon-key.png" alt="icon key" width="32"></span></a></h3>
+<h3 id="adding-a-booking-code-add-code-span-class-image-img-src-images-icon-key-png-alt-icon-key-width-32-span"><a class="link" href="#adding-a-booking-code-add-code-span-class-image-img-src-images-icon-key-png-alt-icon-key-width-32-span">4.1. Adding a booking: <code>add</code> <span class="image"><img src="images/icon-key.png" alt="icon key" width="32"></span></a></h3>
 <div class="paragraph">
 <p>Adds a booking associated with a guest, room and booking period.<br>
 Format: <code>add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG] r/ROOM_NUMBER from/START_DATE to/END_DATE</code></p>
 </div>
-<div class="admonitionblock tip">
+<div class="admonitionblock note">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
+<i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-A guest can have any number of tags (including 0)
+A valid booking cannot clash with an existing booking. It must also have a
+  start date from today onwards (i.e. not outdated).
 </td>
 </tr>
 </table>
 </div>
-<table class="tableblock frame-none grid-all spread">
-<colgroup>
-<col style="width: 8.3333%;">
-<col style="width: 91.6667%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-center valign-middle"><p class="tableblock"><span class="image"><img src="images/icon-important.png" alt="Important info"></span></p></td>
-<td class="tableblock halign-left valign-middle"><div><div class="ulist">
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
 <ul>
 <li>
-<p>A valid booking cannot overlap with an existing booking.</p>
+<p>A guest can have any number of tags (including 0)</p>
 </li>
 <li>
-<p>A valid booking must have a start date from today onwards. This means that outdated bookings cannot be added.</p>
-</li>
-<li>
-<p>A guest can make an unlimited number of bookings with the hotel, as long as
-the booking is valid.</p>
-</li>
-<li>
-<p>A guest can make a booking for however long he/ she wants.</p>
+<p>A guest can make an unlimited number of bookings with the hotel.</p>
 </li>
 <li>
 <p>When adding a booking, the guest will <strong>not</strong> be added to the archived guest list or checked-in guest list.
 His/ her information will be stored under his/ her booking in the room.</p>
 </li>
 </ul>
-</div></div></td>
-</tr>
-</tbody>
-</table>
+</div>
+</div>
+</div>
 <div class="paragraph">
 <p>Example: <code>add n/John Smith p/98765432 e/johnsmith@gmail.com t/VIP r/085
-from/17/12/18
-to/19/12/18</code></p>
+from/17/12/18 to/19/12/18</code></p>
 </div>
 <div class="paragraph">
 <p>Add a guest "John Smith" to room 085 for the period of stay from 17/12/18 to
 19/12/18.</p>
 </div>
-<div class="imageblock">
-<div class="content">
-<img src="images/AddCommand-userguide-active.png" alt="AddCommand userguide active" width="800">
-</div>
-<div class="title">Figure 1. Adding an active booking</div>
-</div>
 <div class="paragraph">
-<p>When a booking is added and it starts today (i.e. it is active), then you can
- preview the booking on the left room pane.</p>
+<p>Adding an inactive booking: you can view the booking by selecting the
+relevant room, under "All other bookings". Only active bookings (i.e. start
+date is today) can be seen on the left room pane.</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/AddCommand-userguide-notactive.png" alt="AddCommand userguide notactive" width="800">
 </div>
-<div class="title">Figure 2. Adding an inactive booking (i.e. booking is in the future)</div>
 </div>
 </div>
 <div class="sect2">
@@ -667,23 +647,6 @@ Format: <code>login user/USERNAME pw/PASSWORD</code></p>
 <div class="paragraph">
 <p>Note: The username and password are both case-sensitive.</p>
 </div>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>The default account can be accessed with <code>login user/admin pw/passw0rd</code></p>
-</li>
-<li>
-<p><a href="#adding-a-new-account">More users can be added</a> at <code>passwords.json</code>.</p>
-</li>
-<li>
-<p>[v2.0] You can create new accounts via the Concierge&#8482; app.</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
 <div class="admonitionblock tip">
 <table>
 <tr>
@@ -691,95 +654,43 @@ Format: <code>login user/USERNAME pw/PASSWORD</code></p>
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-A login allows the user to access the commands which can affect the
-bookings.
+The default account can be accessed with <code>login user/admin pw/passw0rd</code>
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>Commands which require login:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="#Adding a guest: <code>add</code>"><code>add</code></a></p>
-</li>
-<li>
-<p><a href="#Check-in room: <code>checkin</code>"><code>checkin</code></a></p>
-</li>
-<li>
-<p><a href="#Checkout room: <code>checkout</code>"><code>checkout</code></a></p>
-</li>
-<li>
-<p><a href="#Reassigning a guest to another room : <code>reassign</code>"><code>reassign</code></a></p>
-</li>
-<li>
-<p><a href="#Provide Room Service: <code>service</code>"><code>service</code></a></p>
-</li>
-<li>
-<p><a href="#Clearing all entries : <code>clear</code>"><code>clear</code></a></p>
-</li>
-</ul>
+<p>A login allows the user to access the commands which can affect the
+bookings. Commands which require login: <code>add</code>, <code>checkin</code>, <code>checkout</code>, <code>reassign</code>,
+<code>service</code> and <code>clear</code>.</p>
 </div>
 <div class="paragraph">
-<p>Example: <code>login user/damithz pw/forgotpassword</code></p>
+<p>Example: <code>login user/admin pw/passw0rd</code></p>
 </div>
-<div class="imageblock">
-<div class="content">
-<img src="images/LogInCommand-notsignedin.png" alt="LogInCommand notsignedin" width="600">
+<div class="paragraph">
+<p><code>clear</code><br>
+<code>"This command requires you to sign in."</code><br>
+Attempting to clear Concierge&#8482; without a login is not allowed.</p>
 </div>
-<div class="title">Figure 3. Without login, Concierge&#8482; cannot be cleared</div>
+<div class="paragraph">
+<p><code>login user/admin pw/passw0rd</code><br>
+<code>"Successfully signed in as: admin"</code><br>
+Login with a valid account, such as the default one provided.</p>
 </div>
-<div class="imageblock">
-<div class="content">
-<img src="images/LogInCommand-loginsuccess.png" alt="LogInCommand loginsuccess" width="600">
-</div>
-<div class="title">Figure 4. Login with a valid account</div>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/LogInCommand-clearsuccess.png" alt="LogInCommand clearsuccess" width="600">
-</div>
-<div class="title">Figure 5. After sign in, <code>clear</code> command can now be executed</div>
+<div class="paragraph">
+<p>After signing in, the <code>clear</code> command can now be executed.</p>
 </div>
 <div class="sect3">
 <h4 id="adding-a-new-account"><a class="link" href="#adding-a-new-account">4.7.1. Adding a new account</a></h4>
 <div class="literalblock">
 <div class="content">
-<pre> Currently, Concierge(TM) does not have a feature for users to add an account via
-the app. The reason is because we only _read_ from the password file.
-Nevertheless, for the adventurous users who want to create their own
-accounts, this sub-section will be useful.</pre>
+<pre>Currently, Concierge(TM) does not have a feature for users to add an account via the app. Nevertheless, for the adventurous users who want to do so, this sub-section will be useful.</pre>
 </div>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p>Step 1: Open the <code>passwords.json</code> file, which should be in the same
-folder as your Concierge&#8482;.jar file.</p>
-</li>
-</ul>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/LogInCommand-passwordsfile.png" alt="LogInCommand passwordsfile" width="900">
-</div>
-<div class="title">Figure 6. The <code>passwords.json</code> file stores a list of hashed passwords</div>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Step 2: Concierge&#8482; uses SHA-256 password hashing. This hash can be
-generated using this <a href="https://passwordsgenerator.net/sha256-hash-generator/">tool</a>.</p>
-</li>
-</ul>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/LogInCommand-generatehash.png" alt="LogInCommand generatehash" width="900">
-</div>
-<div class="title">Figure 7. Enter your password in the field to generate the hash</div>
+<div class="paragraph">
+<p>Step 1: Concierge&#8482; uses SHA-256 password hashing. This hash for your
+<strong>password</strong> can be generated using this
+<a href="https://passwordsgenerator.net/sha256-hash-generator/">tool</a>.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -788,40 +699,45 @@ generated using this <a href="https://passwordsgenerator.net/sha256-hash-generat
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
- Concierge&#8482; was designed to work with alphanumeric usernames and passwords in
- mind. Do not enter symbols (!, @, %&#8230;&#8203;)
+ Concierge&#8482; is designed to work for alphanumeric usernames and passwords in
+ mind. Do not enter symbols (!, @, %&#8230;&#8203;).
 </td>
 </tr>
 </table>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p>Step 3: Add the entry to the <code>passwords.json</code> file. Note that entries are
-separate with a comma.
+<div class="paragraph">
+<p>Step 2: Add the entry to the <code>passwords.json</code> file. This should be in the
+same location as <code>concierge.jar</code>. Note that entries are separated with a
+comma.<br>
 Format: <code>"username" : "hashedPassword"</code></p>
-</li>
-</ul>
+</div>
+<div class="paragraph">
+<p>In the image below, a new account with username "newUser" and password
+"mySecurePassw0rd" has been added.</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/LogInCommand-addpasswordentry.png" alt="LogInCommand addpasswordentry" width="900">
 </div>
-<div class="title">Figure 8. A new account with username "newUser" and password "mySecurePassw0rd" has been added</div>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p>Step 4: Close and reload the Concierge&#8482; application, and your new account
+<div class="paragraph">
+<p>Step 3: Close and reload the Concierge&#8482; application, and your new account
 will be recognised.</p>
-</li>
-</ul>
 </div>
-<div class="imageblock">
-<div class="content">
-<img src="images/LogInCommand-newloginsuccess.png" alt="LogInCommand newloginsuccess" width="900">
-</div>
-<div class="title">Figure 9. User is now able to sign in with the new account</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+ The parsing of the <code>passwords.json</code> file is delicate. Currently, if you
+ enter a valid json file format but an incorrect password reference list
+ format, you will end up with no default account. To resolve this, delete the
+  <code>passwords.json</code> file and re-run Concierge&#8482;.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
@@ -834,8 +750,7 @@ Format: <code>logout</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p>The special classes of commands (as documented in <a href="#login-code-login-code">login</a>) can no longer be
-executed.</p>
+<p>The special classes of commands (as documented in <a href="#login-code-login-code">login</a>) can no longer be executed.</p>
 </li>
 <li>
 <p>The <code>logout</code> command will erase the command history, so users cannot undo/
@@ -843,8 +758,11 @@ redo commands executed before the logout.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>This achieves the same effect as closing and re-opening Concierge&#8482; in the
-midst of a sign-in session.</p>
+<p>Even if you login again, you cannot undo your previous actions.</p>
+</li>
+<li>
+<p>This achieves the same effect as closing and re-opening Concierge&#8482;
+after a logout.</p>
 </li>
 </ul>
 </div>
@@ -853,11 +771,6 @@ midst of a sign-in session.</p>
 </div>
 <div class="paragraph">
 <p>Example: <code>logout</code></p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/LogOutCommand-success.png" alt="LogOutCommand success" width="400">
-</div>
 </div>
 </div>
 <div class="sect2">
@@ -1006,7 +919,8 @@ Format: <code>history</code></p>
 <div class="sect2">
 <h3 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">4.12. Undoing previous command : <code>undo</code></a></h3>
 <div class="paragraph">
-<p>Restores the concierge application to the state before the previous <em>undoable</em> command was executed.<br>
+<p>Restores the Concierge&#8482; application to the state before the previous
+<em>undoable</em> command was executed.<br>
 Format: <code>undo</code></p>
 </div>
 <div class="admonitionblock note">
@@ -1097,7 +1011,7 @@ cleared. I.e. all maintenance requests and faults will still be recorded.</p>
 <div class="content">
 <img src="images/ClearCommand-success.png" alt="ClearCommand success" width="400">
 </div>
-<div class="title">Figure 10. Empty room listing with all bookings deleted and expenses reset</div>
+<div class="title">Figure 1. Empty room listing with all bookings deleted and expenses reset</div>
 </div>
 </div>
 <div class="sect2">
@@ -1220,6 +1134,9 @@ t/TAG r/ROOM_NUMBER from/START_DATE to/END_DATE</code></p>
 <p><code>addx</code> - Add a guest to the archived guest list without needing to add a booking</p>
 </li>
 <li>
+<p><code>menu</code> - Display the default Concierge&#8482; menu</p>
+</li>
+<li>
 <p><code>maintenance</code> - Tag a room as under maintenance</p>
 </li>
 <li>
@@ -1263,4 +1180,4 @@ t/TAG r/ROOM_NUMBER from/START_DATE to/END_DATE</code></p>
 make our application better, so do not hesitate to report them to us!</p>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-11 10:07:32 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-11 14:25:58 UTC</div></div></div></body></html>

@@ -30,7 +30,7 @@
 <li><a href="#implementation">3. Implementation</a>
 <ul class="sectlevel2">
 <li><a href="#undo-redo-feature">3.1. Undo/Redo feature</a></li>
-<li><a href="#addcommand">3.2. AddCommand</a></li>
+<li><a href="#adding-a-booking">3.2. Adding a Booking</a></li>
 <li><a href="#rooms-list-feature">3.3. Rooms List Feature</a></li>
 <li><a href="#find-feature">3.4. Find Feature</a></li>
 <li><a href="#room-check-in-checkout-feature">3.5. Room Check-in/Checkout feature</a></li>
@@ -84,8 +84,10 @@
 <li><a href="#market-survey">Appendix H: Market Survey</a></li>
 <li><a href="#instructions-for-manual-testing">Appendix I: Instructions for Manual Testing</a>
 <ul class="sectlevel2">
-<li><a href="#launch-and-shutdown">I.1. Launch and Shutdown</a></li>
-<li><a href="#saving-data">I.2. Saving data</a></li>
+<li><a href="#adding-a-booking-2">I.1. Adding a Booking</a></li>
+<li><a href="#login-logout">I.2. Login/ logout</a></li>
+<li><a href="#launch-and-shutdown">I.3. Launch and Shutdown</a></li>
+<li><a href="#saving-data">I.4. Saving data</a></li>
 </ul>
 </li>
 </ul>
@@ -299,6 +301,9 @@ Having both Travis and AppVeyor ensures your App works on both Unix-based platfo
 <div class="sect1">
 <h2 id="design"><a class="link" href="#design">2. Design</a></h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>[NOTE] The diagrams in this section are intended to be updated only in v.1.5.</p>
+</div>
 <div class="sect2">
 <h3 id="Design-Architecture"><a class="link" href="#Design-Architecture">2.1. Architecture</a></h3>
 <div class="imageblock">
@@ -594,8 +599,19 @@ As a more OOP model, we can store a <code>Tag</code> list in <code>Concierge</co
 </div>
 <div class="sect2">
 <h3 id="undo-redo-feature"><a class="link" href="#undo-redo-feature">3.1. Undo/Redo feature</a></h3>
-<div class="sect3">
-<h4 id="current-implementation"><a class="link" href="#current-implementation">3.1.1. Current Implementation</a></h4>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Diagrammatic references to "AddressBook" are intended to be removed in v.1.5.
+==== Current Implementation
+</td>
+</tr>
+</table>
+</div>
 <div class="paragraph">
 <p>The undo/redo mechanism is facilitated by <code>VersionedConcierge</code>.
 It extends <code>Concierge</code> with an undo/redo history, stored internally as an <code>conciergeStateList</code> and <code>currentStatePointer</code>.
@@ -723,9 +739,8 @@ If the <code>currentStatePointer</code> is at index <code>conciergeStateList.siz
 <img src="images/UndoRedoActivityDiagram.png" alt="UndoRedoActivityDiagram" width="650">
 </div>
 </div>
-</div>
 <div class="sect3">
-<h4 id="design-considerations"><a class="link" href="#design-considerations">3.1.2. Design Considerations</a></h4>
+<h4 id="design-considerations"><a class="link" href="#design-considerations">3.1.1. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-how-undo-redo-executes"><a class="link" href="#aspect-how-undo-redo-executes">Aspect: How undo &amp; redo executes</a></h5>
 <div class="ulist">
@@ -795,27 +810,25 @@ If the <code>currentStatePointer</code> is at index <code>conciergeStateList.siz
 </div>
 </div>
 <div class="sect2">
-<h3 id="addcommand"><a class="link" href="#addcommand">3.2. AddCommand</a></h3>
+<h3 id="adding-a-booking"><a class="link" href="#adding-a-booking">3.2. Adding a Booking</a></h3>
 <div class="paragraph">
 <p>The <code>add</code> command is used by the receptionist to add the guest to the hotel,
 and assign him a room.</p>
 </div>
 <div class="sect3">
-<h4 id="current-implementation-2"><a class="link" href="#current-implementation-2">3.2.1. Current Implementation</a></h4>
+<h4 id="current-implementation"><a class="link" href="#current-implementation">3.2.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>We currently accept a <code>Guest</code>, <code>RoomNumber</code> and <code>BookingPeriod</code>
-as parameters for the <code>AddCommand</code> constructor.</p>
-</div>
-<div class="paragraph">
-<p>An example of its usage:
-* <code>add n/Madith p/83141592 e/madith@themyth.com a/Recluse Street -r 041 from/
-29/10/2018 to/ 03/11/2018</code></p>
+as parameters for the <code>AddCommand</code> constructor. An example of its usage:
+<code>add n/Madith p/83141592 e/madith@themyth.com r/041 from/29/11/2018 to/ 03/12/2018</code></p>
 </div>
 <div class="paragraph">
 <p>The parsing of the <code>AddCommand</code> is very similar to what was already
 implemented in AddressBook4. More parameters were added, namely the
 <code>RoomNumber</code> and <code>BookingPeriod</code>. These are parsed to create the respective
-objects - <code>Guest</code>, <code>RoomNumber</code> and <code>BookingPeriod</code>.</p>
+objects - <code>Guest</code>, <code>RoomNumber</code> and <code>BookingPeriod</code>.
+* In v2.0, users can enter a start date and duration to specify their booking
+period.</p>
 </div>
 <div class="paragraph">
 <p>As in AddressBook4, the <code>Logic</code> component parses the <code>AddCommand</code>, and the
@@ -832,61 +845,75 @@ previously the case in AddressBook4.</p>
 its parameters.</p>
 </li>
 <li>
-<p>This <code>Booking</code> is then added to the <code>Room</code> with the <code>RoomNumber</code> specified.</p>
+<p>This <code>Booking</code> is then added to the <code>Room</code> with the <code>RoomNumber</code> specified. Every <code>Room</code> maintains a <code>SortedSet&lt;Booking&gt;</code> which is encapsulated in the
+<code>Bookings</code> (plural) class.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>An Activity Diagram for the execution of <code>execute(Model model, CommandHistory
- history)</code> is shown below.</p>
+<p>An Activity Diagram for the execution of <code>AddCommand#execute</code> is shown below.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/AddCommand-activity-diagram.png" alt="AddCommand activity diagram" width="600">
+<img src="images/AddCommand-activity-diagram.png" alt="AddCommand activity diagram" width="400">
 </div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The <code>AddCommandParser</code> already checks that <code>ROOM_NUMBER</code> is a valid
+string from <code>001</code> to <code>100</code>, and the initialisation of Concierge checks that
+there are 100 rooms. The <code>RoomNotFoundException</code> is not expected to occur
+for any user input, but is left there as a defensive measure.
+</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="sect3">
 <h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">3.2.2. Design Considerations</a></h4>
 <div class="sect4">
-<h5 id="aspect-how-to-recognise-a-code-bookingperiod-code-from-the-user-input"><a class="link" href="#aspect-how-to-recognise-a-code-bookingperiod-code-from-the-user-input">Aspect: How to recognise a <code>BookingPeriod</code> from the user input?</a></h5>
+<h5 id="aspect-check-for-outdated-bookings"><a class="link" href="#aspect-check-for-outdated-bookings">Aspect: Check for outdated bookings</a></h5>
 <div class="paragraph">
-<p>The relationship we defined between a <code>Room</code> and <code>Booking</code> is that a <code>Room</code>
-has a <code>Booking</code>. The <code>Booking</code> then comprises a <code>Guest</code> and <code>BookingPeriod</code>
-field.</p>
-</div>
-<div class="paragraph">
-<p>However, it is troublesome to enter a <code>BookingPeriod</code> manually, as it entails
- entering two dates in the DD/MM/YYYY format.</p>
+<p>Outdated bookings are those which have a start date before today. Concierge
+disallows users to <code>add</code> outdated bookings.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice):</strong> Enter the start and end date of
-<code>BookingPeriod</code></p>
+<p><strong>Alternative 1 (current choice):</strong> Do the check in <code>AddCommand#execute</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Very easy to parse. The checks for dates all occur at the
-<code>BookingPeriod</code> class. There is no conversion needed to track the exact date,
- which is useful to check for the booking status of rooms on a particular date.</p>
+<p>Pros: Very easy to implement. A simple check in the <code>execute</code> method will
+suffice. Only have to check that the <code>AddCommandSystemTest</code> uses cases
+without outdated bookings.</p>
 </li>
 <li>
-<p>Cons: Not user-friendly. Requires user to enter two dates.</p>
+<p>Cons: The actual <code>Model#addBooking</code> does not do any check on the
+<code>BookingPeriod</code> being outdated, opening the possibly of outdated <code>Booking</code> s
+being added from elsewhere.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><strong>Alternative 2 (coming in v1.5):</strong> Enter the start date and a duration</p>
+<p><strong>Alternative 2:</strong> Do the check in <code>Room#addBooking</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Very intuitive and user-friendly.</p>
+<p>Pros: Centralises exceptions thrown related to <code>Booking</code> s in the
+<code>Bookings</code> class. Increases the cohesiveness of this class.</p>
 </li>
 <li>
-<p>Cons: The duration has to be parsed and converted to an end date. The
-current implementation of <code>BookingPeriod</code> does not support this method.</p>
+<p>Cons: All the existing tests and sample data calling the <code>addBooking</code>
+method with outdated bookings have to be changed. It also becomes difficult
+to do unit tests on checking in bookings which are outdated but not expired,
+since these bookings can no longer be added to the model.</p>
 </li>
 </ul>
 </div>
@@ -895,86 +922,13 @@ current implementation of <code>BookingPeriod</code> does not support this metho
 </div>
 </div>
 <div class="sect4">
-<h5 id="aspect-reducing-redundancy-in-code-uniqueguestlist-code-and-code-uniqueroomlist-code"><a class="link" href="#aspect-reducing-redundancy-in-code-uniqueguestlist-code-and-code-uniqueroomlist-code">Aspect: Reducing redundancy in <code>UniqueGuestList</code> and <code>UniqueRoomList</code></a></h5>
-<div class="paragraph">
-<p>As one can observe in the current implementation, <code>Guest</code> is added to the
-guest list of Concierge and is then used again to make a <code>Booking</code>. The
-<code>Booking</code> is added to Concierge, this time under the room list.</p>
-</div>
-<div class="paragraph">
-<p>There is a repetition of the addition of a guest - it is added to both the
-<code>UniqueGuestList</code> and the <code>UniqueRoomList</code>. In an actual use case of
-Concierge, we rarely if not never add the <code>Guest</code> to the <code>UniqueGuestList</code>
-without assigning him a <code>Room</code> under the <code>UniqueRoomList</code>.</p>
-</div>
-<div class="paragraph">
-<p>In its cleanest case, the structure of Concierge would be as follows:</p>
-</div>
-<div class="paragraph">
-<p>Concierge contains a <code>UniqueRoomList</code>. Each room in this internalList may
-consist multiple <code>Booking</code> s. Each <code>Booking</code> is tagged to one <code>Guest</code> and one
-<code>BookingPeriod</code>. An illustration of this relationship is shown below.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/addCommand-class-diagram.png" alt="addCommand class diagram" width="800">
-</div>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Alternative 1 (current choice):</strong> Keep both the <code>UniqueGuestList</code> and
-<code>UniqueRoomList</code></p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Maintaining a separate list of guests currently allows us to quickly
-check for the <code>DuplicateGuestException</code>.</p>
-</li>
-<li>
-<p>Cons: The list is only useful for guest-specific functions. To find the
-<code>Room</code> the guest is assigned to, we still have to work through the
-<code>UniqueRoomList</code>.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><strong>Alternative 2:</strong> Remove the <code>UniqueGuestList</code></p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Remove the redundancy in maintaining two lists. Improved storage space.</p>
-</li>
-<li>
-<p>Cons: Unable to quickly check for a <code>DuplicateGuestException</code>. However, we
-must also note that the <code>DuplicateGuestException</code> is something we may want
-to remove in future iterations. That is, a <code>Guest</code> should be able to make
-multiple <code>Booking</code> s. However, this would lead to more complications -
-during <code>checkout</code>, we have to look through all the <code>Booking</code> s and ensure
-that the <code>Guest</code> is no longer needed in the Concierge system. Only then can
-we move the <code>Guest</code> to an archive or remove him from the system.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="aspect-reduce-coupling-between-code-room-code-and-code-guest-code"><a class="link" href="#aspect-reduce-coupling-between-code-room-code-and-code-guest-code">3.2.3. Aspect: Reduce coupling between <code>Room</code> and <code>Guest</code></a></h4>
+<h5 id="aspect-reduce-coupling-between-code-room-code-and-code-guest-code"><a class="link" href="#aspect-reduce-coupling-between-code-room-code-and-code-guest-code">Aspect: Reduce coupling between <code>Room</code> and <code>Guest</code></a></h5>
 <div class="paragraph">
 <p>Semantically, we can observe a strong coupling and dependency between <code>Room</code>
 and <code>Guest</code>. A <code>Room</code> contains a <code>Guest</code>, and a <code>Guest</code> also has a <code>Room</code>.
-This coupling is more binding than that between <code>UniqueGuestList</code> and
-<code>UniqueRoomList</code> as described above.</p>
-</div>
-<div class="paragraph">
-<p>Having to keep track of both sides of the coin introduces an unnecessary
-coupling between these two classes. Our team decided to record <code>Guest</code> in
-<code>Room</code> instead of recording <code>Room</code> in <code>Guest</code>. The difference between these
-two selections lies in the time needed for different operations.</p>
+Maintaining this coupling allows for very quick lookup both ways, either
+given a <code>Guest</code> (which is common at the reception desk) or given a <code>Room</code>
+(which is common for housekeeping).</p>
 </div>
 <div class="ulist">
 <ul>
@@ -983,28 +937,15 @@ two selections lies in the time needed for different operations.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: An efficient for managing bookings. All the <code>Booking</code> s tied to a
-particular <code>Room</code> can be put together, allowing the Receptionist to determine
- if a <code>Room</code> can be booked in <code>O(m)</code> time, where <code>m</code> is the number of
- <code>Booking</code> s in a room. In the context of Concierge, there is a rare chance
- that a <code>Room</code> will have a large number of advanced bookings being made.</p>
+<p>Pros: An efficient way for managing bookings. Receptionist can quickly
+determine if the <code>Room</code> is free to book. Besides, <code>Room</code> s are not expected
+to have a large number of advanced bookings made.</p>
 </li>
 <li>
-<p>Cons: It is difficult to find the <code>Room</code> given the <code>Guest</code>. When a
-<code>Guest</code> has made and advanced booking and wishes to cancel it, we have
-to search through all the <code>Room</code> s for bookings on the particular date
-tagged to the <code>Guest</code>. However, given the <code>BookingPeriod</code> of the
-<code>Guest</code>, this can be done in <code>O(1)</code> time since the number of <code>Room</code> s is
-constant.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>For most uses of Concierge, we expect <code>Guest</code> s to be aware of their
-<code>Room</code> s. When the <code>Guest</code> calls for room service, we can tag the service
-to the <code>Room</code> instead.</p>
-</li>
-</ul>
-</div>
+<p>Cons: Difficult to find the <code>Room</code> given the <code>Guest</code>. When a <code>Guest</code> has made
+an advanced booking and wishes to cancel it, we have to search through all
+the <code>Room</code> s. Nevertheless, for most uses of Concierge we expect <code>Guest</code> s to
+ be aware of their <code>Room</code> s.</p>
 </li>
 </ul>
 </div>
@@ -1014,19 +955,27 @@ to the <code>Room</code> instead.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Very customer-centric design. Allows the receptionist to find the
-<code>Room</code> or <code>Booking</code> details of a <code>Guest</code> in <code>O(1)</code> time.</p>
+<p>Pros: Very customer-centric design. Centralises all the information about
+the <code>Guest</code>, including <code>Booking</code> s made and <code>Expense</code> s incurred.</p>
 </li>
 <li>
 <p>Cons: Making a new <code>Booking</code> with a new <code>Guest</code> is highly inefficient.
-Because the <code>Booking</code> information is now scattered across individual
-<code>Guest</code> s, the search space for <code>Concierge</code> to decide if a <code>Room</code> is free to
-book is the entire <code>UniqueGuestList</code>.</p>
+<code>Booking</code> information is now scattered across individual <code>Guest</code> s.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>[v1.4] On top of the list of rooms, we maintain a separate list of
+checked-in guests. This list does not retain any <code>Booking</code> information, as it
+ is meant to help the user quickly look up the <code>Guest</code> 's particulars.</p>
 </li>
 </ul>
 </div>
 </li>
 </ul>
+</div>
+</li>
+</ul>
+</div>
 </div>
 </div>
 </div>
@@ -1044,7 +993,7 @@ book is the entire <code>UniqueGuestList</code>.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="current-implementation-3"><a class="link" href="#current-implementation-3">3.3.1. Current Implementation</a></h4>
+<h4 id="current-implementation-2"><a class="link" href="#current-implementation-2">3.3.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>The list function is facilitated by a modified <code>ListCommand</code> class, of which the input from the CommandBox is parsed by a <code>ListCommandParser</code> class.</p>
 </div>
@@ -1126,7 +1075,7 @@ The GuestListPanel and RoomListPanel each has a "VBox" element encapsulating the
 </div>
 </div>
 <div class="sect3">
-<h4 id="current-implementation-4"><a class="link" href="#current-implementation-4">3.4.1. Current Implementation</a></h4>
+<h4 id="current-implementation-3"><a class="link" href="#current-implementation-3">3.4.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>The find function is facilitated by a modified <code>FindCommand</code> class, of which the input from the CommandBox is parsed by a <code>FindCommandParser</code> class.</p>
 </div>
@@ -1229,7 +1178,7 @@ An example is this: find -g n/Alex t/VIP, this can be interpreted in two ways. F
 <div class="sect2">
 <h3 id="room-check-in-checkout-feature"><a class="link" href="#room-check-in-checkout-feature">3.5. Room Check-in/Checkout feature</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-5"><a class="link" href="#current-implementation-5">3.5.1. Current Implementation</a></h4>
+<h4 id="current-implementation-4"><a class="link" href="#current-implementation-4">3.5.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>The room check-in and checkout features makes use of <code>UniqueRoomList</code>.
 The logic that supports the check-in and checkout operations mainly reside in the <code>Concierge</code> and <code>Room</code> classes.</p>
@@ -1476,7 +1425,7 @@ and <code>ExpenseType</code> have been created for this purpose. In addition, th
 <code>menu</code> of goods and services available.</p>
 </div>
 <div class="sect3">
-<h4 id="current-implementation-6"><a class="link" href="#current-implementation-6">3.6.1. Current Implementation</a></h4>
+<h4 id="current-implementation-5"><a class="link" href="#current-implementation-5">3.6.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p><code>ExpenseType</code> objects are essentially immutable objects that represent a single item or service
 being sold at the hotel. An <code>ExpenseType</code> object contains information about its menu number,
@@ -1563,13 +1512,263 @@ possible to modify the default information through editing the XML file.</p>
 </div>
 <div class="sect2">
 <h3 id="login-and-logout"><a class="link" href="#login-and-logout">3.7. Login and Logout</a></h3>
+<div class="paragraph">
+<p>The <code>login</code> feature allows hotel managers to tag every command entered with a
+ specific user, creating a blame to help trace rogue commands. Managers can also
+ control which receptionists have full access to Concierge.</p>
+</div>
 <div class="sect3">
-<h4 id="current-implementation-7"><a class="link" href="#current-implementation-7">3.7.1. Current Implementation</a></h4>
-
+<h4 id="current-implementation-6"><a class="link" href="#current-implementation-6">3.7.1. Current Implementation</a></h4>
+<div class="paragraph">
+<p>Currently, <code>login</code> is implemented as a dynamic feature, so users are not
+prompted to sign in upon starting Concierge. Instead, they only have to sign
+in when executing commands which would mutate the data, such as <code>add</code>,
+<code>checkin</code>, <code>checkout</code>, <code>reassign</code>, <code>service</code> and <code>clear</code>.</p>
+</div>
+<div class="sect4">
+<h5 id="logic"><a class="link" href="#logic">Logic</a></h5>
+<div class="paragraph">
+<p>Given the nature of the <code>login</code> command being dynamic (can be entered at any
+point in time, between any commands), it is then natural to implement it like
+a normal command, extending the abstract <code>Command</code> class. The <code>logout</code> command
+ is also implemented in this way.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="model"><a class="link" href="#model">Model</a></h5>
+<div class="paragraph">
+<p>The model handles the signing-in, using its attribute <code>LogInManager</code>. The
+Class Diagram of the <code>LogInManager</code> module is shown below.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/LogInCommand-LogInManager-classdiagram.png" alt="LogInCommand LogInManager classdiagram" width="400">
+</div>
+</div>
+<div class="paragraph">
+<p><code>LogInManager</code> uses an optional <code>username</code> to keep track of whether
+the user is currently signed in. The <code>passwordRef</code> provides an
+immutable key-value lookup for usernames and passwords.<br></p>
+</div>
+<div class="paragraph">
+<p><code>LogInManager</code> implements the following operations.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>LogInManager#isSignedIn()</code> - checks if the user is currently signed in.</p>
+</li>
+<li>
+<p><code>LogInManager#signIn(String, String)</code> - attempts to sign in with the given
+username and hashed password. This is handled by the <code>PasswordHashList</code>. A
+case-insensitive comparison is used on the hash.</p>
+</li>
+<li>
+<p><code>LogInManager#signOut()</code> - signs out Concierge.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>A new method <code>resetUndoRedoHistory</code> was added to the
+<code>VersionedConcierge</code>. This is used to clear the command history upon a
+<code>logout</code> command, so users cannot undo important commands or redo accidental
+commands after signing out.</p>
+</div>
+<div class="sect5">
+<h6 id="login"><a class="link" href="#login">Login</a></h6>
+<div class="paragraph">
+<p>Shown here is the sequence diagram for executing a <code>login</code> command.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/LogInCommand-sequencediagram.png" alt="LogInCommand sequencediagram" width="1000">
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="storage"><a class="link" href="#storage">Storage</a></h5>
+<div class="paragraph">
+<p>The <code>passwords.json</code> file is read when Concierge is opened (i.e. in
+<code>MainApp#init</code>), and is never written to again. This function is managed by
+the <code>JsonPasswordsStorage</code> class, which is very similar to the
+<code>JsonUserPrefsStorage</code> class. Intuitively, the usernames and passwords are
+stored as key-value pairs for quick look-up.</p>
+</div>
+<div class="paragraph">
+<p>A SHA-256 hash was used in building up this feature. In future, this hashing
+algorithm can be changed to a HMAC hash which adds a username salt as well.
+Then, different users will not know if they have chosen the same passwords.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="check-for-sign-in-requirement-of-commands"><a class="link" href="#check-for-sign-in-requirement-of-commands">Check for sign-in requirement of commands</a></h5>
+<div class="paragraph">
+<p><code>LogicManager</code> does the checks for whether a command requires a sign in, and
+whether the model is signed in.</p>
+</div>
+<div class="paragraph">
+<p>The <code>Command</code> class exposes a new <code>requiresSignIn()</code> method that returns
+false by default. This means that to make new command require signing-in, one
+ only has to overwrite this method.</p>
+</div>
+</div>
 </div>
 <div class="sect3">
 <h4 id="design-considerations-7"><a class="link" href="#design-considerations-7">3.7.2. Design Considerations</a></h4>
-
+<div class="sect4">
+<h5 id="aspect-accessing-features-of-concierge-with-without-login"><a class="link" href="#aspect-accessing-features-of-concierge-with-without-login">Aspect: Accessing features of Concierge with/ without login</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Login is needed only for some features</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Manager can implement some level of access control within Concierge.
+Some of the more commonly used Concierge features (<code>list</code>, <code>find</code>) are
+read-only features.
+This is quicker than mandating a sign-in at the start and creating different user views
+based on the account privilege (admin vs normal).</p>
+</li>
+<li>
+<p>Cons: Not very intuitive to users. They have to enter commands before being
+told they need to sign in. The <code>requiresSignIn()</code> check takes place after the
+parsing of the command, so a user can is told they cannot execute the command
+without a sign-in after their command is parsed correctly.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Login is needed for all features</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Very easy to check login validity. This only occurs when Concierge is
+first loaded. Subsequent commands can be executed without additional checks
+on the sign-in requirement.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-check-for-sign-in-requirement-of-commands"><a class="link" href="#aspect-check-for-sign-in-requirement-of-commands">Aspect: Check for sign-in requirement of commands</a></h5>
+<div class="paragraph">
+<p>Given that sign-in is only required for some commands, the priority in
+designing this aspect is the ability to easily mandate/ disable compulsory
+the login requirement for current and future commands.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Do the check in <code>LogInManager#execute</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Ensures that commands are checked before any execution. Users will not
+inadvertently change the model before doing the sign-in checks.</p>
+</li>
+<li>
+<p>Cons: Unable to implement commands that can do some actions without
+sign-in. For example, a future developer may want to make the <code>add</code> command
+such that when the user is not signed-in, a tag is added to the <code>Guest</code> that
+reminds the manager to verify the booking.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Do the check in <code>Command#execute</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Increases cohesiveness of <code>Command</code> class. The compulsory sign-in is
+an attribute of a <code>Command</code>, so these internal checks can be done. By
+implementing a method <code>checkSignIn(Model)</code>, commands which require sign-ins
+can call this method in their respective <code>execute</code> methods.</p>
+</li>
+<li>
+<p>Cons: While increasing cohesion, this implementation makes less semantic sense.
+The logical misstep comes because one is executing the method, then checking
+ if the method can be executed, then "reversing" the execution.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-storage-of-passwords"><a class="link" href="#aspect-storage-of-passwords">Aspect: Storage of Passwords</a></h5>
+<div class="paragraph">
+<p>The password file is currently read at <code>MainApp#init</code>, and saved once.
+Unlike the Concierge data, this file is no longer referred to when Concierge
+is in use.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Store passwords in JSON file</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: JSON is very easy to work with.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Able to utilise existing <code>JsonUtil</code> methods used by the <code>UserPrefs</code> and
+<code>Config</code> classes.</p>
+</li>
+<li>
+<p>Easily parse data into key-value pairs, which semantically matches our needs.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Cons: <code>JsonUtil</code> file is not completely suitable for a data type that has
+potentially an unlimited number of entries, since this utility serialises the
+ data.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Store passwords in same XML file as all other
+Concierge data.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Centralises data storage in Concierge. There is only one single
+source of truth for all data-related concerns.</p>
+</li>
+<li>
+<p>Cons: The XML file is too complicated for the needs of password storage.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Concierge does not need to write the the passwords file when in use.
+While, <code>concierge.xml</code> is constantly being written to, this is an unnecessary feature
+for the passwords component.</p>
+</li>
+<li>
+<p>Furthermore, creating a new password entry is difficult since once has to add all
+the layers of XML tags involved. Nevertheless, users are not expected to be
+adding new accounts on a regular basis.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -1591,7 +1790,7 @@ possible to modify the default information through editing the XML file.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="current-implementation-8"><a class="link" href="#current-implementation-8">3.8.1. Current Implementation</a></h4>
+<h4 id="current-implementation-7"><a class="link" href="#current-implementation-7">3.8.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>The Command Archive mechanism is facilitated by <code>CommandArchive</code>.
 It utilises the <code>userInputHistory</code> to extract the latest command that the user has input and passes the <code>inputString</code>
@@ -3520,6 +3719,76 @@ identifications details, thus the responsibility of the guest(s) under that book
 <div class="paragraph">
 <p>Given below are instructions to test the app manually.</p>
 </div>
+<div class="sect2">
+<h3 id="adding-a-booking-2"><a class="link" href="#adding-a-booking-2">I.1. Adding a Booking</a></h3>
+<div class="paragraph">
+<p><code>add n/Pikachu p/81726354 e/pi@ka.chu t/wheelchair r/047 from/20/11/2018 to/23/11/2018</code><br>
+Unable to execute command because you have not signed-in to Concierge.</p>
+</div>
+<div class="paragraph">
+<p><code>login user/admin pw/passw0rd</code><br>
+Successfully signed-in to Concierge. The previous booking can be successfully
+ made.</p>
+</div>
+<div class="paragraph">
+<p><code>add n/Pikachu p/81726354 e/pi@ka.chu r/049 from/20/11/2018 to/23/11/2018</code><br>
+Pikachu can make a new (inactive)** booking in the same time period but a
+different room.</p>
+</div>
+<div class="paragraph">
+<p><code>add n/Pikachu p/81726354 e/pi@ka.chu r/049 from/16/11/2018 to/20/11/2018</code><br>
+Pikachu can make a new (active)** booking.</p>
+</div>
+<div class="paragraph">
+<p><code>add n/Pikachu p/81726354 e/pi@ka.chu r/047 from/19/11/2018 to/21/11/2018</code><br>
+Unable to make booking because it overlaps with the previous booking.</p>
+</div>
+<div class="paragraph">
+<p><code>add n/Pikachu p/81726354 e/pi@ka.chu r/047 from/14/11/2018 to/17/11/2018</code><br>
+Unable to make booking because it is outdated.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>As of CS2103 Practical Exam which is expected to be on 16 November 2018.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="login-logout"><a class="link" href="#login-logout">I.2. Login/ logout</a></h3>
+<div class="paragraph">
+<p><code>clear</code><br>
+Unable to clear because user is not signed in.</p>
+</div>
+<div class="paragraph">
+<p><code>login user/peanuts pw/peanut0</code><br>
+Invalid login account.</p>
+</div>
+<div class="paragraph">
+<p><code>login user/admin pw/passw0rD</code><br>
+Invalid password. Password is case-sensitive.</p>
+</div>
+<div class="paragraph">
+<p><code>login user/admin pw/passw0rd</code><br>
+Successful login.</p>
+</div>
+<div class="paragraph">
+<p><code>clear</code><br>
+Able to clear Concierge.</p>
+</div>
+<div class="paragraph">
+<p><code>logout</code><br>
+Sign out of Concierge.</p>
+</div>
+<div class="paragraph">
+<p><code>clear</code><br>
+Unable to clear because user is not signed in.</p>
+</div>
+<div class="paragraph">
+<p><code>undo</code><br>
+Unable to undo because the revision history was erased.</p>
+</div>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -3532,8 +3801,9 @@ These instructions only provide a starting point for testers to work on; testers
 </tr>
 </table>
 </div>
+</div>
 <div class="sect2">
-<h3 id="launch-and-shutdown"><a class="link" href="#launch-and-shutdown">I.1. Launch and Shutdown</a></h3>
+<h3 id="launch-and-shutdown"><a class="link" href="#launch-and-shutdown">I.3. Launch and Shutdown</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -3571,7 +3841,7 @@ Expected: The most recent window size and location is retained.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="saving-data"><a class="link" href="#saving-data">I.2. Saving data</a></h3>
+<h3 id="saving-data"><a class="link" href="#saving-data">I.4. Saving data</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -3591,4 +3861,4 @@ Expected: The most recent window size and location is retained.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-11 10:07:32 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-11 14:25:58 UTC</div></div></div></body></html>
