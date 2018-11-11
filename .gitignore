@@ -8,7 +8,6 @@ lib/*
 *.log
 *.log.*
 *.csv
-config.json
 passwords.json
 preferences.json
 src/test/data/sandbox/
