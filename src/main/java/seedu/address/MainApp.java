@@ -45,7 +45,7 @@ import seedu.address.ui.UiManager;
  */
 public class MainApp extends Application {
 
-    public static final Version VERSION = new Version(1, 3, 0, true);
+    public static final Version VERSION = new Version(1, 4, 0, true);
 
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
@@ -117,40 +117,6 @@ public class MainApp extends Application {
     }
 
     /**
-     * Returns a {@code PasswordHashList} using the storage data.
-     * If there is an invalid or missing passwords.json file, then an empty
-     * one with the default data will be created.
-     */
-    protected PasswordHashList initPasswordStorage(Storage storage) {
-        PasswordHashList passwords;
-
-        try {
-            Optional<PasswordHashList> passwordsOptional =
-                    storage.getPasswordHashList();
-            if (!passwordsOptional.isPresent()) {
-                logger.info("Password file not found. "
-                        + "Will be starting with a sample login account.");
-            }
-
-            passwords =
-                    passwordsOptional.orElseGet(SampleDataUtil::getSamplePasswordHashList);
-        } catch (DataConversionException e) {
-            logger.warning("Problem while reading from the password file. "
-                    + "Will be starting with a sample login account.");
-            passwords = getSamplePasswordHashList();
-        }
-
-        // Update prefs file in case it was missing to begin with or there are new/unused fields
-        try {
-            storage.savePasswordRef(passwords);
-        } catch (IOException e) {
-            logger.warning("Failed to save password file : " + StringUtil.getDetails(e));
-        }
-
-        return passwords;
-    }
-
-    /**
      * Returns a {@code Config} using the file at {@code configFilePath}. <br>
      * The default file path {@code Config#DEFAULT_CONFIG_FILE} will be used instead
      * if {@code configFilePath} is null.
@@ -216,6 +182,45 @@ public class MainApp extends Application {
         }
 
         return initializedPrefs;
+    }
+
+
+    /**
+     * Returns a {@code PasswordHashList} using the storage data.
+     * If there is an invalid or missing passwords.json file, then an empty
+     * one with the default data will be created.
+     */
+    protected PasswordHashList initPasswordStorage(Storage storage) {
+        PasswordHashList passwords;
+
+        try {
+            Optional<PasswordHashList> passwordsOptional =
+                    storage.readPasswordRef();
+            if (!passwordsOptional.isPresent()) {
+                logger.info("Password file not found. "
+                        + "Will be starting with a sample login account.");
+            }
+
+            passwords =
+                    passwordsOptional.orElseGet(SampleDataUtil::getSamplePasswordHashList);
+        } catch (DataConversionException e) {
+            logger.warning("Problem while reading from the password file. "
+                    + "Will be starting with a sample login account.");
+            passwords = getSamplePasswordHashList();
+        } catch (IOException e) {
+            logger.warning("Problem while reading from the file. "
+                    + "Will be starting with a sample login account.");
+            passwords = getSamplePasswordHashList();
+        }
+
+        // Update prefs file in case it was missing to begin with or there are new/unused fields
+        try {
+            storage.savePasswordRef(passwords);
+        } catch (IOException e) {
+            logger.warning("Failed to save password file : " + StringUtil.getDetails(e));
+        }
+
+        return passwords;
     }
 
     private void initEventsCenter() {

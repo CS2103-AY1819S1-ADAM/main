@@ -1,64 +1,69 @@
-= Joyce Yeo - Project Portfolio
+= Joyce Yeo Shuhui - Project Portfolio
 :site-section: AboutUs
 :imagesDir: ../images
 :stylesDir: ../stylesheets
 
-== PROJECT: Concierge
+== PROJECT: image:ConciergeFinal.png[width="200"]
 
 ---
 
 == Overview
 
-Concierge is a desktop hotel management application used as an all-in-one
-platform for receptionists to handle potential bookings and current guests. The
-user interacts with it using a CLI, and it has a GUI created with JavaFX. It
-is written in Java, and has about 10 kLoC.
+Concierge(TM) is a desktop hotel management application for receptionists to
+handle potential bookings and current guests. The user interacts with it
+using a CLI, and it has a GUI created with JavaFX. It is written in Java, and
+ has about 10 kLoC.
 
 == Summary of contributions
-Access my contributed code https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=pikulet[here].
 
-*Major enhancement*: added *the ability to login/logout* of the system
+[TIP]
+Access my contributed code here: +
+https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=pikulet.
 
-* What it does: Allow users to login to Concierge and access restricted
-commands which mutate the data
+*Major enhancement*: added *the ability to login/logout* of the system. +
+
+* What it does: Allows users to login to Concierge and access restricted
+commands which mutate the data.
 * Significance:  With this feature, hotel managers can implement some level
-of access control. By combining this with the ability to export the command
-history, the auditing process for rogue commands is expedited.
+of access control. Some features more commonly used (`find`, `list`) can
+still be accessed without signing in. By combining this with the ability
+ to export the command history, the auditing process for rogue commands is
+ expedited.
 * Highlights:
 ** The login/logout feature is dynamic and multiple logins/ logouts can
-happen in the same session. What this means is that there is a very close
-integration with the existing commands as there is a need to verify whether
-these commands are restricted.
-** This feature is complete - there was a need to work with the different
-architectural components of Concierge, from command parsing (`Logic`) to login
-verification (`Model`) and even password storage (`Storage`).
-** The feature attempts to achieve some level of security as the passwords
-are strong as a SHA-256 hash instead of in plaintext.
-* Credits: The password hash algorithm was taken from https://www.baeldung.com/sha-256-hashing-java.
+happen in the same session. This means that there is a very close integration
+ with the existing commands to verify whether these commands are restricted.
+** This feature is complete - I worked with the different architectural
+components of Concierge, from command parsing (`Logic`) to login verification
+ (`Model`) and even password storage (`Storage`).
+** The feature attempts to achieve some level of security with SHA-256
+hashing.
+* Credits: The password hash algorithm was taken from https://www.baeldung
+.com/sha-256-hashing-java.
+* These features were mainly achieved in #168 and #226.
 
-*Minor enhancements*:
+*Minor enhancements/ code contributed*:
 
-* Renamed the existing classes and methods from `Person` to `Guest`
-* Modified the `add` command to take in more parameters, namely the room and
-date details) in a hotel booking. Note that the actual `Room` and `Booking`
-modules were not done by me
-* Modified the `clear` command to maintain empty hotel rooms. Previously,
-`clear` removed all data
-* Removed `address` as a field in `Person`
-* Removed the `edit` and `delete` commands
+* Renamed the existing classes and methods from `Person` to `Guest` [#133]
+* Removed `Address` a field in `Person` [#143], removed the edit [#233] and
+delete [#139] commands
+* Modified the `add` command to take in room and date details [#104]. Room
+and Booking page not done by me
+* Modified the `clear` command to maintain empty hotel rooms [#162]
+* Added function for GUI verification of rooms [#162]
 
 *Project Management*:
 
 * Managed the team's issue tracker
-* Encouraged team to use clean PRs
-* Encouraged team to use TODO to manage their work
-* Set up RepoSense for the team
+* Encouraged team to use clean PRs and TODO
+* Set up RepoSense for the team [#159]
 * Community
-** PRs reviewed (with non-trivial review comments):
-** Reported bugs and suggestions for other teams in the class (example:
-https://github.com/CS2103-AY1819S1-W14-3/main/issues/161[discovered impersistence in data],
-https://github.com/CS2103-AY1819S1-W14-3/main/issues/148[rearranged command parameters to discover hidden bug],
-https://github.com/CS2103-AY1819S1-W14-3/main/issues/157[made suggestion])
+** PRs reviewed (with non-trivial review comments): #157, #71, #156, #111,
+#100, #222, #219
+** Reported bugs and suggestions for other teams in the class:
+*** https://github.com/CS2103-AY1819S1-W14-3/main/issues/161[Discovered impersistence in data]
+*** https://github.com/CS2103-AY1819S1-W14-3/main/issues/148[Discovered hidden bug by rearranging command]
+*** https://github.com/CS2103-AY1819S1-W14-3/main/issues/157[Made suggestion on bounds checking]
 
 == Contributions to the User Guide
 
@@ -71,8 +76,6 @@ include::../UserGuide.adoc[tag=add]
 
 include::../UserGuide.adoc[tag=loginlogout]
 
-include::../UserGuide.adoc[tag=clear]
-
 == Contributions to the Developer Guide
 
 |===
@@ -83,3 +86,9 @@ technical documentation and the technical depth of my contributions to the proje
 include::../DeveloperGuide.adoc[tag=add]
 
 include::../DeveloperGuide.adoc[tag=loginlogout]
+
+== End Note
+
+I am grateful to have had the opportunity to work on this project with
+amazing team members who each contributed with their own strengths. Thank
+you, @adamwth @teowz46 @JiaqingTan @neilish3re.

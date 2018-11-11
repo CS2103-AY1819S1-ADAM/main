@@ -25,7 +25,7 @@ public class JsonPasswordsStorage implements PasswordsStorage {
     }
 
     @Override
-    public Optional<PasswordHashList> getPasswordHashList() throws DataConversionException {
+    public Optional<PasswordHashList> readPasswordRef() throws DataConversionException {
         return JsonUtil.readJsonFile(filePath, PasswordHashList.class);
     }
 

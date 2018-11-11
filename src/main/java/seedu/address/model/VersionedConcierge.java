@@ -75,8 +75,8 @@ public class VersionedConcierge extends Concierge {
      * NoRedoableStateException}.
      */
     public void resetUndoRedoHistory() {
-        currentStatePointer = 0;
-        removeStatesAfterCurrentPointer();
+        currentStatePointer = -1;
+        commit();
     }
 
     @Override

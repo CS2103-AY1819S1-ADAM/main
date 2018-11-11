@@ -20,7 +20,7 @@ Side-responsiblities: Scheduling and tracking, Integration
 
 '''
 
-=== Joyce Yeo Shu Hui
+=== Joyce Yeo Shuhui
 image::pikulet.png[width="150", align="left"]
 {empty}[http://github.com/pikulet[github]] [<<pikulet#, portfolio>>]
 

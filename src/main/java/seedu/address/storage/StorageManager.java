@@ -43,8 +43,8 @@ public class StorageManager extends ComponentManager implements Storage {
     }
 
     @Override
-    public Optional<PasswordHashList> getPasswordHashList() throws DataConversionException {
-        return passwordsStorage.getPasswordHashList();
+    public Optional<PasswordHashList> readPasswordRef() throws DataConversionException, IOException {
+        return passwordsStorage.readPasswordRef();
     }
 
     @Override

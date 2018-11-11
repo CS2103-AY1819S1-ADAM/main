@@ -28,47 +28,65 @@ checking-in/out of rooms.
 
 *** Highlights: The validity of a check-in operation requires knowledge of how a hotel manages its policy of allowing guests to check-in.
 The current implementation was finalized after experimenting with different validity checks on multiple different scenarios.
-The checkout feature was initially intended to execute similar validity checks for checking-out a booking,
-but has now expanded its scope to double as a delete-booking feature.
+Refer to the <<Contributions to the User Guide, User Guide>> and <<Contributions to the Developer Guide, Developer Guide>>
+for more information on these checks.
+As for the checkout feature, though it was initially intended to execute similar validity checks for checking-out a booking,
+it has now expanded its scope to double as a delete-booking feature.
 
-* *Other contributions*:
-
-** *Writing the `Room` package*
-*** Single-handedly wrote the entire `Room` package: https://github.com/CS2103-AY1819S1-F11-2/main/pull/71[#71]
-
-** *Other features/commands*
+* *Minor enhancements*:
 *** Add `list -cg` list checked-in guests feature: https://github.com/CS2103-AY1819S1-F11-2/main/pull/178[#178]
-*** Fix `select` command bug and make improvements: https://github.com/CS2103-AY1819S1-F11-2/main/pull/211[#211]
 *** Add `deselect` feature: https://github.com/CS2103-AY1819S1-F11-2/main/pull/219[#219]
 *** Add `reassign` command: https://github.com/CS2103-AY1819S1-F11-2/main/pull/222[#222]
 
-** *GUI-related*
+* *Other contributions*:
+
+** Project Management
+*** Managed releases `v1.2` - `v1.4` (5 releases) on GitHub
+*** Added Coveralls, Appveyor, and Codacy support for team repo
+
+** Writing the `Room` package
+*** Single-handedly wrote the entire `Room` package: https://github.com/CS2103-AY1819S1-F11-2/main/pull/71[#71]
+
+** Enhancements to existing features:
 *** Improve GUI display of rooms in both left and right panels:
 https://github.com/CS2103-AY1819S1-F11-2/main/pull/115[#115],
 https://github.com/CS2103-AY1819S1-F11-2/main/pull/154[#154]
+*** Fix `select` command bug and make improvements: https://github.com/CS2103-AY1819S1-F11-2/main/pull/211[#211]
 
-** *Documentation*
+** Documentation
 
 *** User Guide
 **** Update with description of usage of CheckIn, Checkout, and Reassign commands
-**** Add *Terminology* section
-**** Add icons to standardize way of alerting user about important information
+**** Did cosmetic tweaks to existing contents of the User Guide: https://github.com/CS2103-AY1819S1-F11-2/main/pull/238[#238]
 
 *** Developer Guide
 **** Update with detailed description of how CheckIn and Checkout features work
-**** Add Sequence and Activity diagrams for CheckIn and Checkout features as aids to explain control flow of new features
+**** Add Sequence and Activity diagrams for CheckIn and Checkout features as aids to explain control flow:
+https://github.com/CS2103-AY1819S1-F11-2/main/pull/150[#150],
+https://github.com/CS2103-AY1819S1-F11-2/main/pull/238[#238]
+
+** Community
+*** PRs reviewed (with non-trivial review comments), giving praise and encouragement where it is due:
+https://github.com/CS2103-AY1819S1-F11-2/main/pull/63[#63],
+https://github.com/CS2103-AY1819S1-F11-2/main/pull/89[#89],
+https://github.com/CS2103-AY1819S1-F11-2/main/pull/105[#105],
+https://github.com/CS2103-AY1819S1-F11-2/main/pull/155[#155],
+https://github.com/CS2103-AY1819S1-F11-2/main/pull/158[#158],
+https://github.com/CS2103-AY1819S1-F11-2/main/pull/169[#169],
+https://github.com/CS2103-AY1819S1-F11-2/main/pull/226[#226]
+
 
 == Contributions to the User Guide
 
 |===
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
-* Links to relevant sections in User Guide (for viewing on Github)
-** https://github.com/CS2103-AY1819S1-F11-2/main/blob/master/docs/UserGuide.adoc#check-in-room-code-checkin-code[`checkin` command]
-** https://github.com/CS2103-AY1819S1-F11-2/main/blob/master/docs/UserGuide.adoc#checkout-room-code-checkout-code[`checkout` command]
-** https://github.com/CS2103-AY1819S1-F11-2/main/blob/master/docs/UserGuide.adoc#reassigning-a-guest-to-another-room-code-reassign-code[`reassign` command]
+
+include::../UserGuide.adoc[tag=terminology]
 
 include::../UserGuide.adoc[tag=checkin]
+
+include::../UserGuide.adoc[tag=checkout]
 
 include::../UserGuide.adoc[tag=reassign]
 
@@ -77,8 +95,6 @@ include::../UserGuide.adoc[tag=reassign]
 |===
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
-* Links to relevant sections in Developer Guide (for viewing on Github)
-** https://github.com/CS2103-AY1819S1-F11-2/main/blob/master/docs/DeveloperGuide.adoc#room-check-in-checkout-feature[Check-in/out feature]
 
 include::../DeveloperGuide.adoc[tag=checkin]
 

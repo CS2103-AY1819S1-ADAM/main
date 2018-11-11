@@ -14,7 +14,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
  */
 public class PasswordHashList {
 
-    private static final String PASSWORD_REF_NAME = "passwordRef";
+    private static final String PASSWORD_REF_NAME = "passwordReferenceList";
     private JsonNode passwordRef; // The JSON password reference list
     // The json key that wraps the other key-value pairs
 

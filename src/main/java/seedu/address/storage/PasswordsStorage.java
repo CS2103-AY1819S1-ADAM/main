@@ -18,9 +18,12 @@ public interface PasswordsStorage {
     Path getPasswordsFilePath();
 
     /**
-     * Retrieve the password list from storage.
+     * Returns password list from storage
+     * Returns {@code Optional.empty()} if storage file is not found.
+     * @throws DataConversionException if the data in storage is not in the expected format.
+     * @throws IOException if there was any problem when reading from the storage.
      */
-    Optional<PasswordHashList> getPasswordHashList() throws DataConversionException;
+    Optional<PasswordHashList> readPasswordRef() throws DataConversionException, IOException;
 
     /**
      * Saves the given {@link seedu.address.model.login.PasswordHashList} to the storage.

@@ -202,9 +202,9 @@ public class ParserUtil {
      * Strips whitespace off the password, so passwords cannot begin with a
      * whitespace.
      */
-    public static String parseAndHashPassword(String pw) throws ParseException {
-        requireNonNull(pw);
-        return PasswordHashUtil.hash(pw.trim());
+    public static String parseAndHashPassword(String password) {
+        requireNonNull(password);
+        return PasswordHashUtil.hash(password.trim());
     }
 
     /**

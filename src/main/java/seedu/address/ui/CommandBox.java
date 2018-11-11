@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import java.util.List;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -22,10 +23,17 @@ public class CommandBox extends UiPart<Region> {
 
     public static final String ERROR_STYLE_CLASS = "error";
     private static final String FXML = "CommandBox.fxml";
+    private static final int DOUBLE_PRESS_DELAY = 300;
+    private static final String MESSAGE_AUTOCOMPLETE_AVAILABLE = "Command Suggestions: ";
+    private static final String MESSAGE_NO_MORE_COMMANDS_AVAILABLE = "No more commands are available";
+    private static final String SPACING = " ";
+    private static final String EMPTY_STRING = "";
 
     private final Logger logger = LogsCenter.getLogger(CommandBox.class);
     private final Logic logic;
     private ListElementPointer historySnapshot;
+
+    private long previousCtrlPressTime;
 
     @FXML
     private TextField commandTextField;
@@ -36,6 +44,7 @@ public class CommandBox extends UiPart<Region> {
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
         historySnapshot = logic.getHistorySnapshot();
+        previousCtrlPressTime = 0;
     }
 
     /**
@@ -43,18 +52,30 @@ public class CommandBox extends UiPart<Region> {
      */
     @FXML
     private void handleKeyPress(KeyEvent keyEvent) {
+
         switch (keyEvent.getCode()) {
         case UP:
             // As up and down buttons will alter the position of the caret,
             // consuming it causes the caret's position to remain unchanged
             keyEvent.consume();
-
             navigateToPreviousInput();
             break;
+
         case DOWN:
             keyEvent.consume();
             navigateToNextInput();
             break;
+
+        case CONTROL:
+            keyEvent.consume();
+            autoCompleteUserInput();
+            break;
+
+        case ALT:
+            keyEvent.consume();
+            clearCommandBox();
+            break;
+
         default:
             // let JavaFx handle the keypress
         }
@@ -146,6 +167,84 @@ public class CommandBox extends UiPart<Region> {
         }
 
         styleClass.add(ERROR_STYLE_CLASS);
+    }
+
+    /**
+     * Shows the auto-completed text or suggestions in the UI
+     */
+    private void autoCompleteUserInput() {
+        if (getCurrentText().isEmpty()) {
+            return;
+        }
+        else if (getCurrentText().endsWith(SPACING)) {
+            autoCompleteNextCommandParameter();
+            return;
+        }
+        List<String> listOfAutoComplete = logic.getAutoCompleteCommands(getCurrentText());
+        if (listOfAutoComplete.isEmpty()) {
+            return;
+        }
+        else if (listOfAutoComplete.size() == 1) {
+            replaceText(listOfAutoComplete.get(0));
+        }
+
+        else if (isCtrlDoubleTap()) {
+            showSuggestionsOnUi(listOfAutoComplete);
+        }
+    }
+
+    /**
+     * Shows autocomplete suggestions on the UI given the list of string suggestions
+     */
+    private void showSuggestionsOnUi(List<String> listOfAutoComplete) {
+        logger.info(MESSAGE_AUTOCOMPLETE_AVAILABLE + commandTextField.getText() + " >> "
+                + getStringFromList(listOfAutoComplete));
+        if (listOfAutoComplete.size() == 1) {
+            raise(new NewResultAvailableEvent(MESSAGE_NO_MORE_COMMANDS_AVAILABLE));
+        } else {
+            raise(new NewResultAvailableEvent(MESSAGE_AUTOCOMPLETE_AVAILABLE + getStringFromList(listOfAutoComplete)));
+        }
+    }
+
+    /**
+     * Shows auto completed next prefix parameter for completed command in UI
+     */
+    private void autoCompleteNextCommandParameter() {
+        String textToShow = getCurrentText() + logic.getAutoCompleteNextParameter(getCurrentText());
+        replaceText(textToShow);
+    }
+    /**
+     * Returns String representation of given list of strings
+     */
+    private String getStringFromList(List<String> listOfAutoComplete) {
+        String toString = listOfAutoComplete.toString();
+        toString = toString.substring(1, toString.length() - 1).trim();
+        return toString;
+    }
+
+    /**
+     * Returns true if CONTROL is pressed in quick succession
+     */
+    private boolean isCtrlDoubleTap() {
+        if (System.currentTimeMillis() - previousCtrlPressTime < DOUBLE_PRESS_DELAY) {
+            return true;
+        }
+        previousCtrlPressTime = System.currentTimeMillis();
+        return false;
+    }
+
+    /**
+     * Returns the current text in the command box
+     */
+    private String getCurrentText() {
+        return commandTextField.getText();
+    }
+
+    /**
+     * Clear Command Box
+     */
+    private void clearCommandBox() {
+        replaceText(EMPTY_STRING);
     }
 
 }
