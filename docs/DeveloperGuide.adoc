@@ -690,8 +690,141 @@ possible to modify the default information through editing the XML file.
 
 // end::loginlogout[]
 
+// tag::autocomplete[]
+=== Autocomplete: kbd:[Ctrl], kbd:[Alt]
+
+==== Overview
+
+The Autocomplete feature allows the user to seamlessly type in the
+full command and prefixes without having to worry if he/she missed
+out on any prefix. This feature helps the user by prompting the correct
+format. This is useful as some of the commands require several inputs
+from the user and hence this will save time and commands can be
+executed faster.
+
+==== Example of how feature works
+
+**Step 1**: Launch application
+
+**Step 2**: User enters `a` in `CommandBox` then presses kbd:[Ctrl].
+`AutoCompleteManager()` compares `input` through the list of
+`initCommandKeyWords`and proceeds to display the command in the
+`CommandBox` because `a` is an applicable `COMMAND_WORD`.
+
+image::add.jpg[width="579"]
+
+After kbd:[Ctrl] has been pressed, it automatically inserts the
+first prefix `PREFIX_NAME` in the command line.
+
+image::add PREFIX_NAME.jpg[width="581"]
+
+**Step 3**: After the user fills up the `PREFIX_NAME` field, he can press
+kbd:[Space] to move on to the next prefix. After pressing kbd:[Space], then
+he can press kbd:[Ctrl]. At this point, `AutoCompleteManager()` is
+called again but this time instead of calling the `getAutoCompleteCommands()`
+it calls `getAutoCompleteNextMissingParameter` since it will detect
+the presence of the `PREFIX_NAME` parameter.
+
+This is the expected outcome before pressing kbd:[Ctrl]
+
+image::anthony space.jpg[width="581"]
+
+This is the expected outcome after pressing kbd:[Ctrl]
+
+image::after anthony space.jpg[width="581"]
+
+**Step 4**: The user repeats Step 3 until all parameters are input by the user
+and then presses kbd:[Enter] to execute the command.
+Note: For `AddCommand`, the final parameter `PREFIX_TAG` is optional, so
+the user can just delete it if he chooses not to add a tag.
+
+This is the expected outcome after all the parameters are filled.
+
+image::full add autocomplete.jpg[width="953"]
+
+Press kbd:[Enter] to execute the command.
+
+Given below is the activity diagram for the Autocomplete feature.
+
+**Activity Diagram :**
+
+image::Autocomplete Activity Diagram.jpg[width="331"]
+
+Activity Diagram demonstrates what happens when user presses kbd:[Ctrl]
+
+==== Current Implementation
+
+The Autocomplete mechanism is facilitated by `AutoCompleteManager`, which
+can be found in `LogicManager`. It supports the auto completion of incomplete
+commands by providing a list of auto completed commands from a given incomplete
+command.
+
+
+An underlying `Trie` data structure is used to facilitate the `AutocompleteManager`.
+`Trie` only supports autocompletion of commands that are provided by the
+`AutocompleteManager`. The `CommandParameterSyntaxHandler` that is found in
+`AutocompleteManager` supports the autocompletion of parameters for commands.
+
+Given below is the class diagram for the Autocomplete feature.
+
+**Autocomplete Class Diagram :**
+
+image::Autocomplete Class Diagram.jpg[width="719"]
+
+The `CommandBox` interacts with the `AutocompleteManager` using `LogicManager`.
+When the user presses kbd:[Ctrl] in the command box, the `CommandBox` will
+handle the Ctrl key press event and will execute the `AutoCompleteUserInput()`
+method.
+
+Given below is the sequence diagram for the Autocomplete feature.
+
+**Autocomplete Sequence Diagram :**
+
+image::Autocomplete Sequence Diagram.jpg[width="926"]
+
+==== Design Considerations
+
+===== Aspect: Implementation of Autocomplete
+
+* **Alternative 1 (current choice): ** Use a manager (`AutoCompleteManager`)
+to handle the autocomplete helper methods.
+
+** Pros:
+Allows for better usability and more code abstraction.
+** Cons:
+The amount of time taken for a new developer to to understand all the
+interaction between methods will be longer.
+
+* **Alternative 2: ** Iterate through all possible commands to find match prefix.
+
+** Pros:
+Implementation of this alternative would be easier.
+** Cons:
+If there are too many commands being input consecutively, the application
+might start to lag due to possible loss of performance.
+
+===== Aspect: Implementation of Algorithm
+
+* **Alternative 1 (current choice): ** Trie Data Structure
+
+** Pros:
+Performance of application will be better.
+** Cons:
+The complexity of implementation is higher.
+
+* **Alternative 2: ** Iterate through all possible commands to find
+match prefix.
+
+** Pros:
+Implementation of this alternative would be easier.
+** Cons:
+If there are too many commands being input consecutively, the application
+might start to lag due to possible loss of performance.
+
+// end::autocomplete[]
+
 // tag::archive[]
-=== Command Archive feature
+=== [Proposed] Command Archive feature
 Given below is the UML diagram for the `CommandArchive` Class:
 
 image::CommandArchive_class.png[width="280"]
@@ -703,47 +836,64 @@ image::CommandHistory_class.png[width="345"]
 ==== Current Implementation
 
 The Command Archive mechanism is facilitated by `CommandArchive`.
-It utilises the `userInputHistory` to extract the latest command that the user has input and passes the `inputString`
-to `stringToFile` method in `CommandArchive` class. The `inputString` is then appended to the `CommandFile.txt` file. Additionally, it
-implements the following operations:
+It utilises the `userInputHistory` to extract the latest command that the user
+has input and passes the `inputString`to `stringToFile` method in `CommandArchive`
+class. The `inputString` is then appended to the `CommandFile.txt` file.
+Additionally, it implements the following operations:
 
-* `StringBuilder()` -- The main operations of the `StringBuilder` are the `append` and `insert` methods which can
-be overloaded to accept data of any type. The `append` method always adds these characters at the end of the builder.
-This operation can be found in `CommandHistory`.
-* `toString()` -- Converts the StringBuilder object into a string named `inputString` so it can be passed to the
-`CommandArchive` class. This operation can be found in `CommandHistory`.
-* `getLogger()` -- Creates `LOGGER` so that it can log any `IOExceptions` that are caught in the catch blocks of the
-methods found in `stringToFile` method of `CommandArchive`.
-* `substring()` -- Extracts the latest command from the `userInputHistory`. This is required because the
-`userInputHistory` appends all the older commands into the LinkedList as well. This is done by looking for the first
- newLine character occurrence of the `inputString`. The substring is then extracted as `latestUserCommand`.
-This operation can be found in `CommandArchive`.
- * `simpleDateFormat()` -- Creates a `timeStamp` in DD/MM/YYY format that can later be appended to
+* `StringBuilder()` -- The main operations of the `StringBuilder` are the `append`
+and `insert` methods which can be overloaded to accept data of any type. The `append`
+method always adds these characters at the end of the builder.This operation
+can be found in `CommandHistory`.
+
+* `toString()` -- Converts the StringBuilder object into a string named
+`inputString` so it can be passed to the `CommandArchive` class. This operation
+can be found in `CommandHistory`.* `getLogger()` -- Creates `LOGGER` so that it
+can log any `IOExceptions` that are caught in the catch blocks of the methods
+found in `stringToFile` method of `CommandArchive`.
+
+* `substring()` -- Extracts the latest command from the `userInputHistory`.
+This is required because the `userInputHistory` appends all the older commands
+into the LinkedList as well. This is done by looking for the first newLine character
+occurrence of the `inputString`. The substring is then extracted as
 `latestUserCommand`. This operation can be found in `CommandArchive`.
- * `fileWriter` -- Writes the stream of characters (which is `latestUserCommand`) to `commandHistory` file. This will
-eventually be the output that is written into `commandFile.txt` via `PrintWriter`. The `PrintWriter` also appends
-`timeStamp` to the latest entry (which is eventually `timeStamp` + `latestUserCommand`). This operation can be found
-in CommandArchive`.
+
+ * `simpleDateFormat()` -- Creates a `timeStamp` in DD/MM/YYY format that can later
+ be appended to `latestUserCommand`. This operation can be found in `CommandArchive`.
+
+ * `fileWriter` -- Writes the stream of characters (which is `latestUserCommand`)
+to `commandHistory` file. This will eventually be the output that is written into
+`commandFile.txt` via `PrintWriter`. The `PrintWriter` also appends `timeStamp`
+to the latest entry (which is eventually `timeStamp` + `latestUserCommand`). This
+operation can be found in CommandArchive`.
+
+ This command requires a login.
 
 ==== Design Considerations
 
 ===== Aspect: How to extract userInputHistory
 
-* **Alternative 1 (current choice):** `userInputHistory` is first put into a `stringBuilder` and then converted to
-string to then pass to `CommandArchive`.
+* **Alternative 1 (current choice):** `userInputHistory` is first put into a
+`stringBuilder` and then converted to string to then pass to `CommandArchive`.
+
 ** Pros:
-1. Easy to implement because `StringBuilder` can utilise `append` and `insert` methods, which can be overloaded
-to accept any data.
+1. Easy to implement because `StringBuilder` can utilise `append` and `insert`
+methods, which can be overloaded to accept any data.
 2. Faster than `StringBuffer` under most implementations.
 3. StringBuilder is mutable while String is immutable.
-** Cons: String is more optimised especially if you don't need the extra features of `StringBuilder`
-* **Alternative 2:** Create a KeyLogger class that implements KeyListener to capture userInput.
-** Pros: It is more secure and can only be accessed for audits and other administrative access purposes and is hidden
-from the user.
+** Cons: String is more optimised especially if you don't need the extra features
+of `StringBuilder`
+* **Alternative 2:** Create a KeyLogger class that implements KeyListener
+to capture userInput.
+** Pros: It is more secure and can only be accessed for audits and other
+administrative access purposes and is hidden from the user.
 ** Cons:
-1. If implemented wrongly, it will become a global KeyLogger that captures userInput outside of application.
-2. Does not utilise the existing infrastructure and data found in the base level program class `CommandHistory` and
-hence would require more effort to implement.
+1. If implemented wrongly, it will become a global KeyLogger that captures
+userInput outside of application.
+
+2. Does not utilise the existing infrastructure
+and data found in the base level program class `CommandHistory` and hence
+would require more effort to implement.
 // end::archive[]
 
 // tag::dataencryption[]

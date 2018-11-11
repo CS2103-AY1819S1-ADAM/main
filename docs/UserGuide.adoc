@@ -525,10 +525,62 @@ Example: `clear`
 image::ClearCommand-success.png[width="400"]
 // end::clear[]
 
-=== Export log: `export` [red]#Coming in v2.0#
+// tag::archive[]
+=== Command Archive: `archive` [red]#Coming in v2.0#
 
-Exports a log of all history of commands into a text file +
-Format: `export`
+All user input is captured and saved onto a log. All keystrokes are
+captured, including invalid/mistyped and login commands.
+
+To open this log, input the archive command +
+Format: `archive`
+
+ This command requires a login.
+
+// end::archive[]
+
+// tag::autocomplete[]
+=== Autocomplete: kbd:[Ctrl], kbd:[Alt]
+
+Auto-completes a partially typed in command by a user.
+
+Format: Enter `COMMAND_WORD`, followed by kbd:[Ctrl] key.
+
+Function: Press kbd:[Ctrl] key again to proceed to the next prefix. +
+          Press kbd:[Alt] to quick-clear the `CommandBox` (saves time
+          for user when he wants to clear the box).
+
+Example: +
+**Step 1**: User enters `a` in `CommandBox`.
+
+image::add.jpg[width="579"]
+
+**Step 2**: After kbd:[Ctrl] has been pressed, it automatically inserts the
+        command and the first parameter `PREFIX_NAME` in the command line.
+
+image::add PREFIX_NAME.jpg[width="581"]
+
+**Step 3**: After filling up the name field, e.g. with Anthony, then press
+        kbd:[Space]. Finally, to insert the next parameter `PREFIX_PHONE`
+        press kbd:[Ctrl].
+
+image::after anthony space.jpg[width="581"]
+
+**Step 4**: Repeat Step 3 until all the parameters are input, then press
+        kbd:[Enter] to execute the command.
+
+image::full add autocomplete.jpg[width="953"]
+
+**Note(s)**:
+
+* For finishing entering a prefix field e.g. 'n/John Doe', user
+has to insert kbd:[Space] on his/her own before pressing kbd:[Ctrl]
+again, to autocomplete the next prefix. +
+
+* For commands such as `checkin` and `checkout`, user has to specify
+up till at least `checki` or `checko` because the application
+is unable to distinguish from the two commands without sufficient
+information. The subsequent prefixes will follow suit accordingly.
+// end::autocomplete[]
 
 === Viewing help : `help`
 
