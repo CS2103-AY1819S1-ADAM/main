@@ -43,7 +43,7 @@ public class AddCommand extends Command {
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
-            + PREFIX_TAG + "friends "
+            + PREFIX_TAG + "VIP "
             + PREFIX_ROOM + "056 "
             + PREFIX_DATE_START + "03/11/2018 "
             + PREFIX_DATE_END + "05/11/2018";
@@ -51,6 +51,8 @@ public class AddCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Guest %1$s successfully made a booking for room: %2$s from %3$s";
     public static final String MESSAGE_OVERLAPPING_BOOKING =
             "Cannot add booking, because it overlaps with another booking in room %s";
+    public static final String MESSAGE_OUTDATED_BOOKING =
+            "Cannot add booking, because it starts on a past date";
 
     private final Guest guestToAdd;
     private final RoomNumber roomNumberToAdd;
@@ -73,6 +75,10 @@ public class AddCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
+        if (bookingToAdd.isOutdated()) {
+            throw new CommandException(MESSAGE_OUTDATED_BOOKING);
+        }
+
         try {
             model.addBooking(roomNumberToAdd, bookingToAdd);
         } catch (RoomNotFoundException e) {
@@ -84,6 +90,11 @@ public class AddCommand extends Command {
         model.commitConcierge();
         return new CommandResult(String.format(MESSAGE_SUCCESS, guestToAdd,
                 roomNumberToAdd, bookingToAdd.getBookingPeriod()));
+    }
+
+    @Override
+    public boolean requiresSignIn() {
+        return true;
     }
 
     @Override

@@ -1,4 +1,4 @@
-= Concierge v1.3
+= Concierge(TM) v1.4
 ifdef::env-github,env-browser[:relfileprefix: docs/]
 
 https://travis-ci.org/CS2103-AY1819S1-F11-2/main[image:https://travis-ci.org/CS2103-AY1819S1-F11-2/main.svg?branch=master[Build Status]]
@@ -13,13 +13,12 @@ endif::[]
 
 image::docs/images/ConciergeFinal.png[width="600"]
 
-* Concierge is a desktop Hotel Management application. It has a GUI but most of the user interactions happen using a CLI (Command Line Interface).
+* Concierge(TM) is a desktop Hotel Management application. It has a GUI but most of the user interactions happen using a CLI (Command Line Interface).
 * It is a concise Java application intended for small hotels looking for a simple application to manage basic hotel features.
 * Value Proposition
-** A simple, intuitive and free command line tool for managing a small-scale hotel.
+** A simple, intuitive and free command line tool for managing a small-scale hotel (~ 100 rooms).
 ** Hassle-free for receptionists in managing day-to-day hotel operations.
-** A logistics tool that generates insightful reports for hotel managers to
-assess hotel efficiency.
+** Protects against error-prone situations in the context of managing hotel bookings.
 
 == Site Map
 
@@ -33,6 +32,6 @@ assess hotel efficiency.
 * Some parts of this sample application were inspired by the excellent http://code.makery.ch/library/javafx-8-tutorial/[Java FX tutorial] by
 _Marco Jakob_.
 * Libraries used: https://github.com/TestFX/TestFX[TextFX], https://bitbucket.org/controlsfx/controlsfx/[ControlsFX], https://github.com/FasterXML/jackson[Jackson], https://github.com/google/guava[Guava], https://github.com/junit-team/junit5[JUnit5]
-* The original source of the code is Concierge - level 4 : https://github.com/se-edu/
+* The original source of the code is AddressBook - level 4 : https://github.com/se-edu/
 
 == Licence : link:LICENSE[MIT]

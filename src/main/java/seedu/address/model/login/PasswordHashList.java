@@ -1,45 +1,55 @@
 package seedu.address.model.login;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.PasswordHashUtil.hash;
 
-import java.io.IOException;
 import java.util.Optional;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
-
-import seedu.address.commons.util.JsonUtil;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 /**
  * Represents a password hash list, and is used in the {@code LogInHelper}.
  */
 public class PasswordHashList {
 
+    private static final String PASSWORD_REF_NAME = "passwordRef";
     private JsonNode passwordRef; // The JSON password reference list
+    // The json key that wraps the other key-value pairs
 
-    public PasswordHashList(String passwordRefString) throws IOException {
-        requireNonNull(passwordRefString);
-
-        try {
-            this.passwordRef = JsonUtil.getNodeObject(passwordRefString);
-        } catch (IOException e) {
-            // Caught and rethrown to wrap subclass exception com.fasterxml.jackson.core.JsonParseException
-            // as JsonParseException.isAssignableFrom(IOException) returns false in {@code Assert.assertThrows}
-            throw new IOException(e.getMessage());
-        }
-    }
-
-    private PasswordHashList(JsonNode passwordRef) {
-        requireNonNull(passwordRef);
-
-        this.passwordRef = passwordRef;
+    /**
+     * Returns an empty password hash list with no username or passwords
+     */
+    public PasswordHashList() {
+        this.passwordRef = JsonNodeFactory.instance.objectNode();
     }
 
     /**
-     * @return An empty password hash list with no username or passwords
+     * This method creates a new PasswordHashList using a JsonNode with a
+     * {@code PASSWORD_REF_NAME} wrapper object. This facilitates the
+     * serialising and storage component handled by {@code JsonUtil}.
+     * @param passwordRef
      */
-    public static PasswordHashList getEmptyPasswordHashList() {
-        return new PasswordHashList(JsonNodeFactory.instance.objectNode());
+    public PasswordHashList(JsonNode passwordRef) {
+        requireNonNull(passwordRef);
+        this.passwordRef = passwordRef.get(PASSWORD_REF_NAME);
+    }
+
+    /**
+     * Returns a new {@code PasswordHashList} with the username and password
+     * entry added.
+     */
+    public PasswordHashList addEntry(String username, String password) {
+        requireNonNull(username, password);
+
+        ObjectNode newPasswordRef = (ObjectNode) passwordRef;
+        newPasswordRef.put(username, hash(password));
+
+        PasswordHashList passwordHashList = new PasswordHashList();
+        passwordHashList.passwordRef = passwordRef;
+
+        return passwordHashList;
     }
 
     /**
@@ -63,6 +73,17 @@ public class PasswordHashList {
     @Override
     public String toString() {
         return "Number of users: " + passwordRef.size();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        } else if (!(other instanceof PasswordHashList)) {
+            return false;
+        }
+
+        return ((PasswordHashList) other).passwordRef.equals(passwordRef);
     }
 
 }

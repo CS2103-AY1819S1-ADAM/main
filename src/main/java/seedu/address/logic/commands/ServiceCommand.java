@@ -84,6 +84,11 @@ public class ServiceCommand extends Command {
     }
 
     @Override
+    public boolean requiresSignIn() {
+        return true;
+    }
+
+    @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof ServiceCommand // instanceof handles nulls

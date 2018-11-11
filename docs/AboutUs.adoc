@@ -12,7 +12,7 @@ We are a team based in the http://www.comp.nus.edu.sg[School of Computing, Natio
 
 === Adam Chew Yong Soon
 image::adamwth.png[width="150", align="left"]
-{empty}[https://github.com/adamwth[github]] [<<johndoe#, portfolio>>]
+{empty}[https://github.com/adamwth[github]] [<<adamwth#, portfolio>>]
 
 Role: Team Lead +
 Responsibilities: UI Design, Model Component, JavaFX expert +
@@ -22,7 +22,7 @@ Side-responsiblities: Scheduling and tracking, Integration
 
 === Joyce Yeo Shu Hui
 image::pikulet.png[width="150", align="left"]
-{empty}[http://github.com/pikulet[github]] [<<johndoe#, portfolio>>]
+{empty}[http://github.com/pikulet[github]] [<<pikulet#, portfolio>>]
 
 Role: Developer +
 Responsibilities: Documentation, Storage Component, IntelliJ expert +
@@ -42,7 +42,7 @@ Side-responsiblities: Deliverables and deadlines
 
 === Tan Jia Qing
 image::jiaqingtan.png[width="150", align="left"]
-{empty}[http://github.com/JiaqingTan[github]] [<<johndoe#, portfolio>>]
+{empty}[http://github.com/JiaqingTan[github]] [<<jiaqingtan#, portfolio>>]
 
 Role: Developer +
 Responsibilities: UI Design & Implementation, UI Component, JavaFX expert +

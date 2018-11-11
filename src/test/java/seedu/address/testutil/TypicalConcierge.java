@@ -38,11 +38,11 @@ public class TypicalConcierge {
      * ensure the model's versionedConcierge has an empty initial state list for all the tests to work.
      */
     public static Concierge getTypicalConciergeClean() {
-        Concierge ab = new Concierge();
-        ab.setGuests(GUEST_LIST.asUnmodifiableObservableList());
-        ab.setRooms(ROOM_LIST.asUnmodifiableObservableList());
-        ab.setMenu(TypicalMenu.getTypicalMenuMap());
-        return ab;
+        Concierge concierge = new Concierge();
+        concierge.setGuests(GUEST_LIST.asUnmodifiableObservableList());
+        concierge.setRooms(ROOM_LIST.asUnmodifiableObservableList());
+        concierge.setMenu(TypicalMenu.getTypicalMenuMap());
+        return concierge;
     }
 
     /**
@@ -64,32 +64,32 @@ public class TypicalConcierge {
      * Room 031: No bookings
      */
     public static Concierge getTypicalConcierge() {
-        Concierge ab = getTypicalConciergeClean();
+        Concierge concierge = getTypicalConciergeClean();
 
         // Rooms with single bookings
-        ab.addBooking(ROOM_NUMBER_001, LASTWEEK_YESTERDAY);
-        ab.addRoomTags(ROOM_NUMBER_001, ROOM_TAG_MAINTENANCE);
+        concierge.addBooking(ROOM_NUMBER_001, LASTWEEK_YESTERDAY);
+        concierge.addRoomTags(ROOM_NUMBER_001, ROOM_TAG_MAINTENANCE);
 
-        ab.addBooking(ROOM_NUMBER_002, LASTWEEK_YESTERDAY_CHECKED_IN);
-        ab.addCheckedInGuestIfNotPresent(LASTWEEK_YESTERDAY_CHECKED_IN.getGuest());
-        ab.addRoomTags(ROOM_NUMBER_002, ROOM_TAG_MAINTENANCE);
+        concierge.addBooking(ROOM_NUMBER_002, LASTWEEK_YESTERDAY_CHECKED_IN);
+        concierge.addCheckedInGuestIfNotPresent(LASTWEEK_YESTERDAY_CHECKED_IN.getGuest());
+        concierge.addRoomTags(ROOM_NUMBER_002, ROOM_TAG_MAINTENANCE);
 
-        ab.addBooking(ROOM_NUMBER_010, YESTERDAY_TODAY);
-        ab.addBooking(ROOM_NUMBER_011, TODAY_TOMORROW);
+        concierge.addBooking(ROOM_NUMBER_010, YESTERDAY_TODAY);
+        concierge.addBooking(ROOM_NUMBER_011, TODAY_TOMORROW);
 
-        ab.addBooking(ROOM_NUMBER_012, TODAY_TOMORROW_CHECKED_IN);
-        ab.addCheckedInGuestIfNotPresent(TODAY_TOMORROW_CHECKED_IN.getGuest());
+        concierge.addBooking(ROOM_NUMBER_012, TODAY_TOMORROW_CHECKED_IN);
+        concierge.addCheckedInGuestIfNotPresent(TODAY_TOMORROW_CHECKED_IN.getGuest());
 
-        ab.addBooking(ROOM_NUMBER_020, TODAY_NEXTWEEK);
-        ab.addBooking(ROOM_NUMBER_021, TOMORROW_NEXTWEEK);
+        concierge.addBooking(ROOM_NUMBER_020, TODAY_NEXTWEEK);
+        concierge.addBooking(ROOM_NUMBER_021, TOMORROW_NEXTWEEK);
 
         // Rooms with multiple bookings
-        TypicalBookings.getMultipleBookingsSet().forEach(booking -> ab.addBooking(ROOM_NUMBER_022, booking));
-        ab.addCheckedInGuestIfNotPresent(LASTWEEK_YESTERDAY_CHECKED_IN.getGuest());
+        TypicalBookings.getMultipleBookingsSet().forEach(booking -> concierge.addBooking(ROOM_NUMBER_022, booking));
+        concierge.addCheckedInGuestIfNotPresent(LASTWEEK_YESTERDAY_CHECKED_IN.getGuest());
 
         // Room 031 will have no bookings. This comment is put here to inform you in case you come across Room 031 in
         // any of the tests.
 
-        return ab;
+        return concierge;
     }
 }

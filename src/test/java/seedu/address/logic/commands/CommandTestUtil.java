@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COST;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE_END;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE_START;
@@ -10,9 +9,11 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEM_NUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_ROOM;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROOM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_USERNAME;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -30,7 +31,6 @@ import seedu.address.model.guest.Name;
 import seedu.address.model.room.Room;
 import seedu.address.model.room.RoomNumberExactPredicate;
 import seedu.address.model.room.booking.BookingPeriod;
-import seedu.address.testutil.EditGuestDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -61,6 +61,10 @@ public class CommandTestUtil {
     public static final String VALID_ITEM_NUMBER_RS02 = "RS02";
     public static final String VALID_COST_1 = "123.45";
     public static final String VALID_COST_2 = "678.90";
+    public static final String VALID_USERNAME_1 = "user1";
+    public static final String VALID_USERNAME_2 = "USER!@2";
+    public static final String VALID_PASSWORD_1 = "%%%%";
+    public static final String VALID_PASSWORD_2 = "^@!*&#^*&@!SADSA";
 
     // Identifier strings
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
@@ -71,8 +75,8 @@ public class CommandTestUtil {
     public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
-    public static final String ROOM_DESC_AMY = " " + PREFIX_ROOM + " " + VALID_ROOM_NUMBER_AMY;
-    public static final String ROOM_DESC_BOB = " " + PREFIX_ROOM + " " + VALID_ROOM_NUMBER_BOB;
+    public static final String ROOM_DESC_AMY = " " + PREFIX_ROOM + VALID_ROOM_NUMBER_AMY;
+    public static final String ROOM_DESC_BOB = " " + PREFIX_ROOM + VALID_ROOM_NUMBER_BOB;
     public static final String DATE_START_DESC_AMY =
             " " + PREFIX_DATE_START + " " + VALID_DATE_START_AMY;
     public static final String DATE_END_DESC_AMY =
@@ -85,6 +89,10 @@ public class CommandTestUtil {
     public static final String ITEM_NUMBER_DESC_RS02 = " " + PREFIX_ITEM_NUMBER + VALID_ITEM_NUMBER_RS02;
     public static final String COST_DESC_1 = " " + PREFIX_COST + VALID_COST_1;
     public static final String COST_DESC_2 = " " + PREFIX_COST + VALID_COST_2;
+    public static final String USERNAME_DESC_1 = " " + PREFIX_USERNAME + VALID_USERNAME_1;
+    public static final String USERNAME_DESC_2 = " " + PREFIX_USERNAME + VALID_USERNAME_2;
+    public static final String PASSWORD_DESC_1 = " " + PREFIX_PASSWORD + VALID_USERNAME_1;
+    public static final String PASSWORD_DESC_2 = " " + PREFIX_PASSWORD + VALID_PASSWORD_2;
 
     // New value strings
     public static final String NEW_ROOM_DESC_AMY = " " + PREFIX_NEW_ROOM + " " + VALID_ROOM_NUMBER_AMY;
@@ -104,18 +112,6 @@ public class CommandTestUtil {
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
-
-    public static final EditCommand.EditGuestDescriptor DESC_AMY;
-    public static final EditCommand.EditGuestDescriptor DESC_BOB;
-
-    static {
-        DESC_AMY = new EditGuestDescriptorBuilder().withName(VALID_NAME_AMY)
-                .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY)
-                .withTags(VALID_TAG_FRIEND).build();
-        DESC_BOB = new EditGuestDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
-    }
 
     /**
      * Executes the given {@code command}, confirms that <br>

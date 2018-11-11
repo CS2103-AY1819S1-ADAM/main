@@ -1,5 +1,8 @@
 package seedu.address;
 
+import static seedu.address.testutil.LogInUtil.VALID_PASSWORD;
+import static seedu.address.testutil.LogInUtil.VALID_USERNAME;
+
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.function.Supplier;
@@ -16,6 +19,8 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyConcierge;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.login.PasswordHashList;
+import seedu.address.storage.Storage;
 import seedu.address.storage.UserPrefsStorage;
 import seedu.address.storage.XmlSerializableConcierge;
 import seedu.address.testutil.TestUtil;
@@ -72,6 +77,12 @@ public class TestApp extends MainApp {
         userPrefs.setConciergeFilePath(conciergeFileLocation);
         userPrefs.setPasswordsFilePath(passwordFileLocation);
         return userPrefs;
+    }
+
+    @Override
+    protected PasswordHashList initPasswordStorage(Storage storage) {
+        return new PasswordHashList()
+                .addEntry(VALID_USERNAME, VALID_PASSWORD);
     }
 
     /**

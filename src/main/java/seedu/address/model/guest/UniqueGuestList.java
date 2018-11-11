@@ -47,26 +47,6 @@ public class UniqueGuestList implements Iterable<Guest> {
     }
 
     /**
-     * Replaces the guest {@code target} in the list with {@code editedGuest}.
-     * {@code target} must exist in the list.
-     * The guest identity of {@code editedGuest} must not be the same as another existing guest in the list.
-     */
-    public void setGuest(Guest target, Guest editedGuest) {
-        requireAllNonNull(target, editedGuest);
-
-        int index = internalList.indexOf(target);
-        if (index == -1) {
-            throw new GuestNotFoundException();
-        }
-
-        if (!target.isSameGuest(editedGuest) && contains(editedGuest)) {
-            throw new DuplicateGuestException();
-        }
-
-        internalList.set(index, editedGuest);
-    }
-
-    /**
      * Removes the equivalent guest from the list.
      * The guest must exist in the list.
      */

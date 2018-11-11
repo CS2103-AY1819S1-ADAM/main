@@ -11,7 +11,7 @@ import seedu.address.model.room.Room;
 /**
  * A utility class to help with building Concierge objects.
  * Example usage: <br>
- *     {@code Concierge ab = new ConciergeBuilder().withGuest("John", "Doe").build();}
+ *     {@code Concierge concierge = new ConciergeBuilder().withGuest("John", "Doe").build();}
  */
 public class ConciergeBuilder {
 

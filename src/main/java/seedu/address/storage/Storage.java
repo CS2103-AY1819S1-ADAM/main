@@ -35,7 +35,10 @@ public interface Storage extends ConciergeStorage, UserPrefsStorage, PasswordsSt
     Path getPasswordsFilePath();
 
     @Override
-    PasswordHashList getPasswordHashList() throws IOException;
+    Optional<PasswordHashList> getPasswordHashList() throws DataConversionException;
+
+    @Override
+    void savePasswordRef(PasswordHashList passwordRef) throws IOException;
 
     /**
      * Saves the current version of Concierge to the hard disk.

@@ -1,0 +1,84 @@
+= Adam Chew Yong Soon - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: Concierge(TM)
+
+---
+
+== Overview
+
+Concierge(TM) is a desktop application simulating a hotel management system used by hotel owners and receptionists. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+
+== Summary of contributions
+
+* *Code contributed*: [https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=adamwth[Code Contributed]]
+
+* *Major enhancements*:
+
+** Added `checkIn` and `checkout` features
+*** What it does: Allows the user to check-in a room's booking that is active, checkout any booking of a room,
+and update the checked-in guest list and archived guest list to reflect the checked-in/out guests respectively.
+*** Justification: This feature is a core feature that supports the daily operations of a hotel, without which the hotel will not
+be able to function. The checking-in/out of a room's booking is a very frequent operation in a typical hotel setting.
+However, it is very cumbersome to execute these operations using the existing `edit` command as it requires many fields to fill in.
+This feature solves this problem by providing a command-line interface with minimal fields to specify, allowing smooth and fast
+checking-in/out of rooms.
+
+*** Highlights: The validity of a check-in operation requires knowledge of how a hotel manages its policy of allowing guests to check-in.
+The current implementation was finalized after experimenting with different validity checks on multiple different scenarios.
+The checkout feature was initially intended to execute similar validity checks for checking-out a booking,
+but has now expanded its scope to double as a delete-booking feature.
+
+* *Other contributions*:
+
+** *Writing the `Room` package*
+*** Single-handedly wrote the entire `Room` package: https://github.com/CS2103-AY1819S1-F11-2/main/pull/71[#71]
+
+** *Other features/commands*
+*** Add `list -cg` list checked-in guests feature: https://github.com/CS2103-AY1819S1-F11-2/main/pull/178[#178]
+*** Fix `select` command bug and make improvements: https://github.com/CS2103-AY1819S1-F11-2/main/pull/211[#211]
+*** Add `deselect` feature: https://github.com/CS2103-AY1819S1-F11-2/main/pull/219[#219]
+*** Add `reassign` command: https://github.com/CS2103-AY1819S1-F11-2/main/pull/222[#222]
+
+** *GUI-related*
+*** Improve GUI display of rooms in both left and right panels:
+https://github.com/CS2103-AY1819S1-F11-2/main/pull/115[#115],
+https://github.com/CS2103-AY1819S1-F11-2/main/pull/154[#154]
+
+** *Documentation*
+
+*** User Guide
+**** Update with description of usage of CheckIn, Checkout, and Reassign commands
+**** Add *Terminology* section
+**** Add icons to standardize way of alerting user about important information
+
+*** Developer Guide
+**** Update with detailed description of how CheckIn and Checkout features work
+**** Add Sequence and Activity diagrams for CheckIn and Checkout features as aids to explain control flow of new features
+
+== Contributions to the User Guide
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+* Links to relevant sections in User Guide (for viewing on Github)
+** https://github.com/CS2103-AY1819S1-F11-2/main/blob/master/docs/UserGuide.adoc#check-in-room-code-checkin-code[`checkin` command]
+** https://github.com/CS2103-AY1819S1-F11-2/main/blob/master/docs/UserGuide.adoc#checkout-room-code-checkout-code[`checkout` command]
+** https://github.com/CS2103-AY1819S1-F11-2/main/blob/master/docs/UserGuide.adoc#reassigning-a-guest-to-another-room-code-reassign-code[`reassign` command]
+
+include::../UserGuide.adoc[tag=checkin]
+
+include::../UserGuide.adoc[tag=reassign]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+* Links to relevant sections in Developer Guide (for viewing on Github)
+** https://github.com/CS2103-AY1819S1-F11-2/main/blob/master/docs/DeveloperGuide.adoc#room-check-in-checkout-feature[Check-in/out feature]
+
+include::../DeveloperGuide.adoc[tag=checkin]
+

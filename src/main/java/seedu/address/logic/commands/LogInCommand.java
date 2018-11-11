@@ -19,12 +19,12 @@ public class LogInCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Signs in to Concierge. Both username and password are case-sensitive."
-            + "Parameters: "
+            + "\nParameters: "
             + PREFIX_USERNAME + "USERNAME "
             + PREFIX_PASSWORD + "PASSWORD "
-            + "Example: " + COMMAND_WORD + " "
-            + PREFIX_USERNAME + "themythz "
-            + PREFIX_PASSWORD + "two1o3b3stmod.k";
+            + "\nExample: " + COMMAND_WORD + " "
+            + PREFIX_USERNAME + "admin "
+            + PREFIX_PASSWORD + "passw0rd ";
 
     public static final String MESSAGE_SUCCESS = "Successfully signed in as: %1$s";
     public static final String MESSAGE_SIGNED_IN_ALREADY = "You are already signed in.";

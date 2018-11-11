@@ -19,8 +19,10 @@ import static seedu.address.logic.commands.CommandTestUtil.ROOM_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ROOM_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
+import static seedu.address.logic.commands.LogInCommand.MESSAGE_NOT_SIGNED_IN;
 import static seedu.address.testutil.TypicalBookingPeriods.BOOKING_PERIOD_AMY;
 import static seedu.address.testutil.TypicalBookingPeriods.BOOKING_PERIOD_BOB;
+import static seedu.address.testutil.TypicalBookingPeriods.TODAY_TOMORROW;
 import static seedu.address.testutil.TypicalBookingPeriods.TOMORROW_NEXTWEEK;
 import static seedu.address.testutil.TypicalGuests.AMY;
 import static seedu.address.testutil.TypicalGuests.BOB;
@@ -50,7 +52,8 @@ import seedu.address.model.room.RoomNumber;
 import seedu.address.model.room.booking.Booking;
 import seedu.address.model.room.booking.BookingPeriod;
 import seedu.address.model.tag.Tag;
-import seedu.address.testutil.GuestUtil;
+import seedu.address.testutil.BookingUtil;
+import seedu.address.testutil.LogInUtil;
 
 // TODO Fix and redo these tests for refactored addCommand!
 public class AddCommandSystemTest extends ConciergeSystemTest {
@@ -58,6 +61,10 @@ public class AddCommandSystemTest extends ConciergeSystemTest {
     @Test
     public void add() {
         Model model = getModel();
+
+        /* Signs in to Concierge first */
+        String command = LogInUtil.getValidLogInCommand();
+        executeCommand(command);
 
         /* ------------------------ Perform add operations on the shown unfiltered list ----------------------------- */
 
@@ -68,7 +75,7 @@ public class AddCommandSystemTest extends ConciergeSystemTest {
         RoomNumber roomNumberToAdd = ROOM_NUMBER_AMY;
         Booking bookingToAdd = new Booking(guestToAdd, bookingPeriodToAdd);
 
-        String command = "   " + AddCommand.COMMAND_WORD + "  " + NAME_DESC_AMY
+        command = "   " + AddCommand.COMMAND_WORD + "  " + NAME_DESC_AMY
                 + "  " + PHONE_DESC_AMY + " " + EMAIL_DESC_AMY + " "
                 + "   " + TAG_DESC_FRIEND + " "
                 + ROOM_DESC_AMY + " " + DATE_START_DESC_AMY + " " + DATE_END_DESC_AMY + "   ";
@@ -111,8 +118,6 @@ public class AddCommandSystemTest extends ConciergeSystemTest {
         /* Case: selects first card in the guest list, add a guest -> added, card selection remains unchanged */
         selectGuest(Index.fromOneBased(1));
         roomNumberToAdd = ROOM_NUMBER_052;
-        //Fix here
-
         assertCommandSuccess(JAKOB, roomNumberToAdd, bookingPeriodToAdd);
 
         /* ----------------------------------- Perform invalid add operations --------------------------------------- */
@@ -160,6 +165,11 @@ public class AddCommandSystemTest extends ConciergeSystemTest {
                 + EMAIL_DESC_AMY + INVALID_TAG_DESC + ROOM_DESC_AMY
                 + DATE_START_DESC_AMY + DATE_END_DESC_AMY;
         assertCommandFailure(command, Tag.MESSAGE_TAG_CONSTRAINTS);
+
+        // Unable to execute command after sign out
+        executeCommand(LogInUtil.getLogOutCommand());
+        command = BookingUtil.getAddCommand(BOB, ROOM_NUMBER_BOB, TODAY_TOMORROW);
+        assertCommandFailure(command, MESSAGE_NOT_SIGNED_IN);
     }
 
     /**
@@ -181,7 +191,7 @@ public class AddCommandSystemTest extends ConciergeSystemTest {
                                       RoomNumber roomNumberToAdd,
                                       BookingPeriod bookingPeriodToAdd) {
 
-        String command = GuestUtil.getAddCommand(guestToAdd, roomNumberToAdd, bookingPeriodToAdd);
+        String command = BookingUtil.getAddCommand(guestToAdd, roomNumberToAdd, bookingPeriodToAdd);
 
         assertCommandSuccess(command, guestToAdd, roomNumberToAdd, bookingPeriodToAdd);
     }

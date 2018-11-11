@@ -69,6 +69,13 @@ public class Booking implements Comparable<Booking> {
     }
 
     /**
+     * Checks if this booking is outdated.
+     */
+    public boolean isOutdated() {
+        return getBookingPeriod().isOutdated();
+    }
+
+    /**
      * Checks if this booking is active.
      */
     public boolean isActive() {

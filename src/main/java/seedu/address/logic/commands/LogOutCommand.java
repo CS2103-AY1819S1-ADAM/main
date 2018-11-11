@@ -22,6 +22,7 @@ public class LogOutCommand extends Command {
         requireNonNull(model);
 
         try {
+            model.resetUndoRedoHistory();
             model.signOut();
         } catch (InvalidLogOutException e) {
             throw new CommandException(e.getMessage());

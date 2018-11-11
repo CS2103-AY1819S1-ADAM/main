@@ -87,18 +87,6 @@ public class Concierge implements ReadOnlyConcierge {
     //=========== Guest operations =============================================================
 
     /**
-     * Replaces the given guest {@code target} in the guest list with {@code editedGuest}.
-     * {@code target} must exist in Concierge's guest list.
-     * The guest identity of {@code editedGuest} must not be the same as another existing guest in Concierge's
-     * guest list.
-     */
-    public void updateGuest(Guest target, Guest editedGuest) {
-        requireNonNull(editedGuest);
-
-        guests.setGuest(target, editedGuest);
-    }
-
-    /**
      * Replaces the contents of the guest list with {@code guests}.
      * {@code guests} must not contain duplicate guests.
      */

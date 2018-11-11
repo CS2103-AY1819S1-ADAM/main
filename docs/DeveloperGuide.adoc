@@ -1,4 +1,4 @@
-= Concierge Level 4 - Developer Guide
+= Concierge(TM) - Developer Guide
 :site-section: DeveloperGuide
 :toc:
 :toc-title:
@@ -14,7 +14,7 @@ ifdef::env-github[]
 endif::[]
 :repoURL: https://github.com/CS2103-AY1819S1-F11-2/main
 
-By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
+By: `Team Concierge(TM)`      Since: `Aug 2018`      Licence: `MIT`
 
 == Setting up
 
@@ -319,6 +319,7 @@ image::UndoRedoActivityDiagram.png[width="650"]
 ** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things.
 // end::undoredo[]
 
+// tag::add[]
 === AddCommand
 
 The `add` command is used by the receptionist to add the guest to the hotel,
@@ -445,6 +446,7 @@ constant.
 Because the `Booking` information is now scattered across individual
 `Guest` s, the search space for `Concierge` to decide if a `Room` is free to
 book is the entire `UniqueGuestList`.
+// end::add[]
 
 // tag::list[]
 === Rooms List Feature
@@ -479,7 +481,6 @@ The GuestListPanel and RoomListPanel each has a "VBox" element encapsulating the
 * **Alternative 2 (current choice):** Separately display the two lists within the same MainWindow UI space/column.
 ** Pros: Cleaner looking, fully utilises empty spaces. Better visual feedback from commands as inputs.
 ** Cons: Requires heavy modification of MainWindow UI files, future features must stick with the restriction of having a list of either guests or rooms.
-
 // end::list[]
 
 // tag::find[]
@@ -536,60 +537,6 @@ When searching, a few things have to be considered. Does the filter specified ha
 An example is this: find -g n/Alex t/VIP, this can be interpreted in two ways. Finding guests with name as "Alex" AND with tag "VIP", or name "Alex" or tag "VIP.
 // end::find[]
 
-=== Command Archive feature
-Given below is the UML diagram for the `CommandArchive` Class:
-
-image::CommandArchive_class.png[width="280"]
-
-Given below is the UML diagram for the `CommandHistory` Class:
-
-image::CommandHistory_class.png[width="345"]
-
-==== Current Implementation
-
-The Command Archive mechanism is facilitated by `CommandArchive`.
-It utilises the `userInputHistory` to extract the latest command that the user has input and passes the `inputString`
-to `stringToFile` method in `CommandArchive` class. The `inputString` is then appended to the `CommandFile.txt` file. Additionally, it
-implements the following operations:
-
-* `StringBuilder()` -- The main operations of the `StringBuilder` are the `append` and `insert` methods which can
-be overloaded to accept data of any type. The `append` method always adds these characters at the end of the builder.
-This operation can be found in `CommandHistory`.
-* `toString()` -- Converts the StringBuilder object into a string named `inputString` so it can be passed to the
-`CommandArchive` class. This operation can be found in `CommandHistory`.
-* `getLogger()` -- Creates `LOGGER` so that it can log any `IOExceptions` that are caught in the catch blocks of the
-methods found in `stringToFile` method of `CommandArchive`.
-* `substring()` -- Extracts the latest command from the `userInputHistory`. This is required because the
-`userInputHistory` appends all the older commands into the LinkedList as well. This is done by looking for the first
- newLine character occurrence of the `inputString`. The substring is then extracted as `latestUserCommand`.
-This operation can be found in `CommandArchive`.
- * `simpleDateFormat()` -- Creates a `timeStamp` in DD/MM/YYY format that can later be appended to
-`latestUserCommand`. This operation can be found in `CommandArchive`.
- * `fileWriter` -- Writes the stream of characters (which is `latestUserCommand`) to `commandHistory` file. This will
-eventually be the output that is written into `commandFile.txt` via `PrintWriter`. The `PrintWriter` also appends
-`timeStamp` to the latest entry (which is eventually `timeStamp` + `latestUserCommand`). This operation can be found
-in CommandArchive`.
-
-==== Design Considerations
-
-===== Aspect: How to extract userInputHistory
-
-* **Alternative 1 (current choice):** `userInputHistory` is first put into a `stringBuilder` and then converted to
-string to then pass to `CommandArchive`.
-** Pros:
-1. Easy to implement because `StringBuilder` can utilise `append` and `insert` methods, which can be overloaded
-to accept any data.
-2. Faster than `StringBuffer` under most implementations.
-3. StringBuilder is mutable while String is immutable.
-** Cons: String is more optimised especially if you don't need the extra features of `StringBuilder`
-* **Alternative 2:** Create a KeyLogger class that implements KeyListener to capture userInput.
-** Pros: It is more secure and can only be accessed for audits and other administrative access purposes and is hidden
-from the user.
-** Cons:
-1. If implemented wrongly, it will become a global KeyLogger that captures userInput outside of application.
-2. Does not utilise the existing infrastructure and data found in the base level program class `CommandHistory` and
-hence would require more effort to implement.
-
 // tag::checkin[]
 === Room Check-in/Checkout feature
 ==== Current Implementation
@@ -598,7 +545,7 @@ The room check-in and checkout features makes use of `UniqueRoomList`.
 The logic that supports the check-in and checkout operations mainly reside in the `Concierge` and `Room` classes.
 
 * `UniqueRoomList#checkin(RoomNumber)` -- Checks in the first booking of the room identified by the given room number
-* `UniqueRoomList#checkout(RoomNumber)` -- Checks out the first booking of the room
+* `UniqueRoomList#checkout(RoomNumber)` -- Checks out the first booking of the room identified by the given room number
 * `UniqueRoomList#checkout(RoomNumber, LocalDate)` -- Checks out the room's booking whose start date matches the given date
 
 [NOTE]
@@ -623,9 +570,9 @@ Assuming there is a booking already added to room 001,
 .. throw `ExpiredBookingException` if the room's first booking is expired
 .. throw `InactiveBookingCheckInException` if the room's first booking is not active
 .. throw `BookingAlreadyCheckedInException` if the room's first booking is already checked in
-.. update the first booking as checked-in if no exceptions were thrown
+.. update the first booking as checked-in if no exceptions were thrown, and replace the room with its updated version that has the first booking checked-in
 . `VersionedConcierge#checkinRoom` will call `VersionedConcierge#addCheckedInGuestIfNotPresent`
-. `VersionedConcierge#addCheckedInGuestIfNotPresent` will add the checked-in guest to the checked-in guest list
+. `VersionedConcierge#addCheckedInGuestIfNotPresent` will add the guest of the checked-in booking to the checked-in guest list
  if he/she is not already in it
 
 * The user executes `checkout r/001` when the guest leaves.
@@ -642,20 +589,17 @@ Assuming there is a booking already added to room 001,
 . `VersionedConcierge#checkoutRoom` will call `VersionedConcierge#addGuest`
  to add the guest to the archived guest list if he/she does not already exists in it
 
-The following sequence diagram shows how to CheckinCommand operations works:
+The following sequence diagram shows how `CheckInCommand#execute` works:
 
+._The sequence diagram of `CheckInCommand#execute`._
 image::CheckinCommandSequenceDiagram.png[width="1280"]
 
+The following activity diagram shows how `Concierge#checkInRoom` executes:
+
+._The activity diagram of checking-in a room when `Concierge#checkInRoom` is executed._
+image::check-in-activity-diagram.png[width="800"]
+
 ==== Design Considerations
-
-===== Aspect: Deletion of bookings
-
-* **Alternative 1 (current choice):** Use `checkout` to delete any booking.
-** Pros: `checkout` doubles as a delete booking feature, so no need for a `deletebooking` command.
-** Cons: Not very natural, as `checkout` implies checking out a checked-in booking.
-* **Alternative 2:** Use `checkout` to delete only active booking, and create new command `deletebooking` to delete expired and upcoming bookings.
-** Pros: More natural, `checkout` can only do what its name implies.
-** Cons: Need to implement new command and more methods, to support the same deletion operation but with a different name.
 
 ===== Aspect: Immutability of check-in command
 
@@ -667,34 +611,17 @@ image::CheckinCommandSequenceDiagram.png[width="1280"]
 * **Alternative 2:** `checkIn` a room by setting the `isCheckedIn` flag of the first booking to true.
 ** Pros: Check-in method is intuitive, and does not return a new room.
 ** Cons: Harder to debug. Tests also become troublesome since changes are made to the same referenced room.
+
+===== Aspect: Deletion of bookings
+
+* **Alternative 1 (current choice):** Use `checkout` to delete any booking.
+** Pros: `checkout` doubles as a delete booking feature, so no need for a `deletebooking` command.
+** Cons: Not very natural, as `checkout` implies checking out a checked-in booking.
+* **Alternative 2:** Use `checkout` to delete only active booking, and create new command `deletebooking` to delete expired and upcoming bookings.
+** Pros: More natural, `checkout` can only do what its name implies.
+** Cons: Need to implement new command and more methods, to support the same deletion operation but with a different name.
+
 // end::checkin[]
-
-// tag::dataencryption[]
-=== [Proposed] Data Encryption
-
-_{Explain here how the data encryption feature will be implemented}_
-
-// end::dataencryption[]
-
-=== Logging
-
-We are using `java.util.logging` package for logging. The `LogsCenter` class is used to manage the logging levels and logging destinations.
-
-* The logging level can be controlled using the `logLevel` setting in the configuration file (See <<Implementation-Configuration>>)
-* The `Logger` for a class can be obtained using `LogsCenter.getLogger(Class)` which will log messages according to the specified logging level
-* Currently log messages are output through: `Console` and to a `.log` file.
-
-*Logging Levels*
-
-* `SEVERE` : Critical problem detected which may possibly cause the termination of the application
-* `WARNING` : Can continue, but with caution
-* `INFO` : Information showing the noteworthy actions by the App
-* `FINE` : Details that is not usually noteworthy but may be useful in debugging e.g. print the actual list instead of just its size
-
-[[Implementation-Configuration]]
-=== Configuration
-
-Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: `config.json`).
 
 // tag::expenses[]
 === Expense, Expenses and ExpenseType
@@ -759,8 +686,98 @@ account for cases such as the guest having a personalised discount due to
 the usage of vouchers or certain credit cards. Thus, ExpenseType does not
 need to be modified by users in the application. Nonetheless, it is still
 possible to modify the default information through editing the XML file.
+// end::expenses[]
 
-// end::expense[]
+// tag::loginlogout[]
+=== Login and Logout
+
+==== Current Implementation
+
+==== Design Considerations
+
+// end::loginlogout[]
+
+// tag::archive[]
+=== Command Archive feature
+Given below is the UML diagram for the `CommandArchive` Class:
+
+image::CommandArchive_class.png[width="280"]
+
+Given below is the UML diagram for the `CommandHistory` Class:
+
+image::CommandHistory_class.png[width="345"]
+
+==== Current Implementation
+
+The Command Archive mechanism is facilitated by `CommandArchive`.
+It utilises the `userInputHistory` to extract the latest command that the user has input and passes the `inputString`
+to `stringToFile` method in `CommandArchive` class. The `inputString` is then appended to the `CommandFile.txt` file. Additionally, it
+implements the following operations:
+
+* `StringBuilder()` -- The main operations of the `StringBuilder` are the `append` and `insert` methods which can
+be overloaded to accept data of any type. The `append` method always adds these characters at the end of the builder.
+This operation can be found in `CommandHistory`.
+* `toString()` -- Converts the StringBuilder object into a string named `inputString` so it can be passed to the
+`CommandArchive` class. This operation can be found in `CommandHistory`.
+* `getLogger()` -- Creates `LOGGER` so that it can log any `IOExceptions` that are caught in the catch blocks of the
+methods found in `stringToFile` method of `CommandArchive`.
+* `substring()` -- Extracts the latest command from the `userInputHistory`. This is required because the
+`userInputHistory` appends all the older commands into the LinkedList as well. This is done by looking for the first
+ newLine character occurrence of the `inputString`. The substring is then extracted as `latestUserCommand`.
+This operation can be found in `CommandArchive`.
+ * `simpleDateFormat()` -- Creates a `timeStamp` in DD/MM/YYY format that can later be appended to
+`latestUserCommand`. This operation can be found in `CommandArchive`.
+ * `fileWriter` -- Writes the stream of characters (which is `latestUserCommand`) to `commandHistory` file. This will
+eventually be the output that is written into `commandFile.txt` via `PrintWriter`. The `PrintWriter` also appends
+`timeStamp` to the latest entry (which is eventually `timeStamp` + `latestUserCommand`). This operation can be found
+in CommandArchive`.
+
+==== Design Considerations
+
+===== Aspect: How to extract userInputHistory
+
+* **Alternative 1 (current choice):** `userInputHistory` is first put into a `stringBuilder` and then converted to
+string to then pass to `CommandArchive`.
+** Pros:
+1. Easy to implement because `StringBuilder` can utilise `append` and `insert` methods, which can be overloaded
+to accept any data.
+2. Faster than `StringBuffer` under most implementations.
+3. StringBuilder is mutable while String is immutable.
+** Cons: String is more optimised especially if you don't need the extra features of `StringBuilder`
+* **Alternative 2:** Create a KeyLogger class that implements KeyListener to capture userInput.
+** Pros: It is more secure and can only be accessed for audits and other administrative access purposes and is hidden
+from the user.
+** Cons:
+1. If implemented wrongly, it will become a global KeyLogger that captures userInput outside of application.
+2. Does not utilise the existing infrastructure and data found in the base level program class `CommandHistory` and
+hence would require more effort to implement.
+// end::archive[]
+
+// tag::dataencryption[]
+=== [Proposed] Data Encryption
+
+_{Explain here how the data encryption feature will be implemented}_
+// end::dataencryption[]
+
+=== Logging
+
+We are using `java.util.logging` package for logging. The `LogsCenter` class is used to manage the logging levels and logging destinations.
+
+* The logging level can be controlled using the `logLevel` setting in the configuration file (See <<Implementation-Configuration>>)
+* The `Logger` for a class can be obtained using `LogsCenter.getLogger(Class)` which will log messages according to the specified logging level
+* Currently log messages are output through: `Console` and to a `.log` file.
+
+*Logging Levels*
+
+* `SEVERE` : Critical problem detected which may possibly cause the termination of the application
+* `WARNING` : Can continue, but with caution
+* `INFO` : Information showing the noteworthy actions by the App
+* `FINE` : Details that is not usually noteworthy but may be useful in debugging e.g. print the actual list instead of just its size
+
+[[Implementation-Configuration]]
+=== Configuration
+
+Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: `config.json`).
 
 == Documentation
 
@@ -1178,7 +1195,7 @@ Now we have the `Remark` class, we need to actually use it inside link:{repoURL}
 **Main:**
 
 . Add `getRemark()` in link:{repoURL}/src/main/java/seedu/address/model/guest/Guest.java[`Guest`].
-. You may assume that the user will not be able to use the `add` and `edit` commands to modify the remarks field (i.e. the guest will be created without a remark).
+. You may assume that the user will not be able to use the `add` command to modify the remarks field (i.e. the guest will be created without a remark).
 . Modify link:{repoURL}/src/main/java/seedu/address/model/util/SampleDataUtil.java/[`SampleDataUtil`] to add remarks for the sample data (delete your `concierge.xml` so that the application will load the sample data when you launch it.)
 
 ===== [Step 6] Storage: Add `Remark` field to `XmlAdaptedGuest` class
@@ -1521,6 +1538,15 @@ Facilities: Any form of services provided within the hotel. These include the sp
 * Guest history available
 
 [appendix]
+== Market Survey
+
+*Hotel Rendezvous*
+
+* Interviewed via phone about hotel operations
+* For instance, using Hotel Rendezvous as reference, we discovered that hotels only require 1 guest of a booking to provide
+identifications details, thus the responsibility of the guest(s) under that booking falls to him/her.
+
+[appendix]
 == Instructions for Manual Testing
 
 Given below are instructions to test the app manually.
@@ -1541,20 +1567,6 @@ These instructions only provide a starting point for testers to work on; testers
 .. Resize the window to an optimum size. Move the window to a different location. Close the window.
 .. Re-launch the app by double-clicking the jar file. +
    Expected: The most recent window size and location is retained.
-
-_{ more test cases ... }_
-
-=== Deleting a guest
-
-. Deleting a guest while all guests are listed
-
-.. Prerequisites: List all guests using the `list` command. Multiple guests in the list.
-.. Test case: `delete 1` +
-   Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
-.. Test case: `delete 0` +
-   Expected: No guest is deleted. Error details shown in the status message. Status bar remains the same.
-.. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) _{give more}_ +
-   Expected: Similar to previous.
 
 _{ more test cases ... }_
 

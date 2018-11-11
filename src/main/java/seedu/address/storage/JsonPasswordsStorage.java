@@ -2,8 +2,10 @@ package seedu.address.storage;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.Optional;
 
-import seedu.address.commons.util.FileUtil;
+import seedu.address.commons.exceptions.DataConversionException;
+import seedu.address.commons.util.JsonUtil;
 import seedu.address.model.login.PasswordHashList;
 
 /**
@@ -23,9 +25,13 @@ public class JsonPasswordsStorage implements PasswordsStorage {
     }
 
     @Override
-    public PasswordHashList getPasswordHashList() throws IOException {
-        String fileContent = FileUtil.readFromFile(filePath);
-        return new PasswordHashList(fileContent);
+    public Optional<PasswordHashList> getPasswordHashList() throws DataConversionException {
+        return JsonUtil.readJsonFile(filePath, PasswordHashList.class);
+    }
+
+    @Override
+    public void savePasswordRef(PasswordHashList passwordHashList) throws IOException {
+        JsonUtil.saveJsonFile(passwordHashList, filePath);
     }
 
 }

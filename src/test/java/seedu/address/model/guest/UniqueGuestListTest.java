@@ -64,61 +64,6 @@ public class UniqueGuestListTest {
     }
 
     @Test
-    public void setGuest_nullTargetGuest_throwsNullPointerException() {
-        thrown.expect(NullPointerException.class);
-        uniqueGuestList.setGuest(null, ALICE);
-    }
-
-    @Test
-    public void setGuest_nullEditedGuest_throwsNullPointerException() {
-        thrown.expect(NullPointerException.class);
-        uniqueGuestList.setGuest(ALICE, null);
-    }
-
-    @Test
-    public void setGuest_targetGuestNotInList_throwsGuestNotFoundException() {
-        thrown.expect(GuestNotFoundException.class);
-        uniqueGuestList.setGuest(ALICE, ALICE);
-    }
-
-    @Test
-    public void setGuest_editedGuestIsSameGuest_success() {
-        uniqueGuestList.add(ALICE);
-        uniqueGuestList.setGuest(ALICE, ALICE);
-        UniqueGuestList expectedUniqueGuestList = new UniqueGuestList();
-        expectedUniqueGuestList.add(ALICE);
-        assertEquals(expectedUniqueGuestList, uniqueGuestList);
-    }
-
-    @Test
-    public void setGuest_editedGuestHasSameIdentity_success() {
-        uniqueGuestList.add(ALICE);
-        Guest editedAlice = new GuestBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
-                .build();
-        uniqueGuestList.setGuest(ALICE, editedAlice);
-        UniqueGuestList expectedUniqueGuestList = new UniqueGuestList();
-        expectedUniqueGuestList.add(editedAlice);
-        assertEquals(expectedUniqueGuestList, uniqueGuestList);
-    }
-
-    @Test
-    public void setGuest_editedGuestHasDifferentIdentity_success() {
-        uniqueGuestList.add(ALICE);
-        uniqueGuestList.setGuest(ALICE, BOB);
-        UniqueGuestList expectedUniqueGuestList = new UniqueGuestList();
-        expectedUniqueGuestList.add(BOB);
-        assertEquals(expectedUniqueGuestList, uniqueGuestList);
-    }
-
-    @Test
-    public void setGuest_editedGuestHasNonUniqueIdentity_throwsDuplicateGuestException() {
-        uniqueGuestList.add(ALICE);
-        uniqueGuestList.add(BOB);
-        thrown.expect(DuplicateGuestException.class);
-        uniqueGuestList.setGuest(ALICE, BOB);
-    }
-
-    @Test
     public void remove_nullGuest_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
         uniqueGuestList.remove(null);

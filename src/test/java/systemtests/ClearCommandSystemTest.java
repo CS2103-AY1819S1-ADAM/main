@@ -6,6 +6,7 @@ import static seedu.address.testutil.TypicalGuests.KEYWORD_MATCHING_MEIER;
 import org.junit.Test;
 
 import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.LogInCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.model.Model;
@@ -59,6 +60,10 @@ public class ClearCommandSystemTest extends ConciergeSystemTest {
 
         /* Case: mixed case command word -> rejected */
         assertCommandFailure("ClEaR", MESSAGE_UNKNOWN_COMMAND);
+
+        /* Case: Signs out of Concierge -> rejected */
+        executeCommand(LogInUtil.getLogOutCommand());
+        assertCommandFailure(ClearCommand.COMMAND_WORD, LogInCommand.MESSAGE_NOT_SIGNED_IN);
     }
 
     /**

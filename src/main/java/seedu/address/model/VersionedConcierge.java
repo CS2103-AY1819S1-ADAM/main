@@ -69,6 +69,16 @@ public class VersionedConcierge extends Concierge {
         return currentStatePointer < conciergeStateList.size() - 1;
     }
 
+    /**
+     * Resets the undo and redo history. {@code undo()} and {@code redo()}
+     * will throw the respective {@code NoUndoableStateException} and {@code
+     * NoRedoableStateException}.
+     */
+    public void resetUndoRedoHistory() {
+        currentStatePointer = 0;
+        removeStatesAfterCurrentPointer();
+    }
+
     @Override
     public boolean equals(Object other) {
         // short circuit if same object

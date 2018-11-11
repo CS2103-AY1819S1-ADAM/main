@@ -4,8 +4,6 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-import seedu.address.model.login.HashingException;
-
 /**
  * A utility class for hashing passwords.
  * The code is taken from https://www.baeldung.com/sha-256-hashing-java.
@@ -16,18 +14,18 @@ public class PasswordHashUtil {
 
     /**
      * Uses the SHA-256 algorithm to hash a string.
-     * @param pw The password supplied by the user
+     * @param password The password supplied by the user
      * @return The SHA-256 hash of the supplied password
-     * @throws HashingException
      */
-    public static String hash(String pw) throws HashingException {
+    public static String hash(String password) {
         try {
             MessageDigest digest = MessageDigest.getInstance(SHA_256_ALGORITHM);
             byte[] encodedHash =
-                    digest.digest(pw.getBytes(StandardCharsets.UTF_8));
+                    digest.digest(password.getBytes(StandardCharsets.UTF_8));
             return bytesToHex(encodedHash);
         } catch (NoSuchAlgorithmException e) {
-            throw new HashingException();
+            // TODO: Handle this exception. By right, it is a default program
+            return "";
         }
     }
 
