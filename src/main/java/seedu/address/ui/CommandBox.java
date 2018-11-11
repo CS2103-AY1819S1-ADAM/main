@@ -223,7 +223,7 @@ public class CommandBox extends UiPart<Region> {
     }
 
     /**
-     * Returns true if TAB is pressed in quick succession
+     * Returns true if CONTROL is pressed in quick succession
      */
     private boolean isCtrlDoubleTap() {
         if (System.currentTimeMillis() - previousCtrlPressTime < DOUBLE_PRESS_DELAY) {
