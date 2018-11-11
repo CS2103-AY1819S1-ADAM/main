@@ -1,0 +1,635 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]--><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Asciidoctor 1.5.6.1"><title>Neil Mehta - Project Portfolio</title><link rel="stylesheet" href="../stylesheets/gh-pages.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="../stylesheets/coderay-asciidoctor.css"></head><body class="article"><div id="site-header"><nav class="navbar navbar-light bg-light"><div class="container"><a class="navbar-brand" href="../index.html">Concierge</a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="../UserGuide.html">User Guide</a></li><li class="nav-item"><a class="nav-link" href="../DeveloperGuide.html">Developer Guide</a></li><li class="nav-item"><a class="nav-link active" href="../AboutUs.html">About Us</a></li><li class="nav-item"><a class="nav-link" href="../ContactUs.html">Contact Us</a></li><li class="navitem"><a class="nav-link" href="https://github.com/CS2103-AY1819S1-F11-2/main"><span class="fa fa-github fa-lg" aria-hidden="true"></span>&nbsp;View on GitHub</a></li></ul></div></nav></div><div id="header"><h1>Neil Mehta - Project Portfolio</h1></div><div id="content"><div class="sect1">
+<h2 id="project-span-class-image-img-src-images-conciergefinal-png-alt-conciergefinal-width-200-span"><a class="link" href="#project-span-class-image-img-src-images-conciergefinal-png-alt-conciergefinal-width-200-span">PROJECT: <span class="image"><img src="../images/ConciergeFinal.png" alt="ConciergeFinal" width="200"></span></a></h2>
+<div class="sectionbody">
+<hr>
+</div>
+</div>
+<div class="sect1">
+<h2 id="overview"><a class="link" href="#overview">Overview</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Concierge&#8482; is a desktop hotel management application for receptionists to
+handle potential bookings and current guests. The user interacts with it
+using a CLI, and it has a GUI created with JavaFX. It is written in Java, and
+has about 10 kLoC.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="summary-of-contributions"><a class="link" href="#summary-of-contributions">Summary of contributions</a></h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Code contributed</strong>: [<a href="https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&amp;search=neilish3re">Code Contributed</a>]</p>
+</li>
+<li>
+<p><strong>Major enhancements</strong>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Implemented Autocomplete Feature</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p>What it does: Ihe Autocomplete feature allows the user to seamlessly type
+in user commands with the autocompletion of an incomplete command that is
+input by the user. This feature helps the user by prompting the correct
+format.</p>
+</li>
+<li>
+<p>Justification: This feature is not mandatory to have, however it would
+save the user a lot of time, especially if he/she is dealing with many
+different commands (in our case, many guests waiting to check in at the same
+time).</p>
+</li>
+<li>
+<p>Highlights: It also eliminates the need for the user to remember all
+the prefixes because my implementation not only fills in the command, but fills in
+subsequent prefixes for the user as well which makes the feature more effective
+and efficient.</p>
+</li>
+<li>
+<p>Credits: [<a href="https://github.com/CS2103-AY1819S1-T09-4/main/blob/master/docs/DeveloperGuide.adoc#autocomplete-feature">Idea</a>]
+Got the idea of implementing the autocomplete feature replete with prefixes
+and the various parameters pre-filled in from the link given. However, I decided
+to implement it with a Control button press so as to minimise the user having
+to navigate back and forth in the Command Box and it will also make for quicker
+typing once the user gets a flow of the autocomplete feature.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Minor enhancements</strong>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Implemented Command Archive feature</strong> (Shifted to v2.0)</p>
+<div class="ulist">
+<ul>
+<li>
+<p>What it does: This feature keeps an archive of all the commands (both
+valid and invalid) input by a user and adds a time stamp plus user tag. This is
+different from the history command because this information will be exported
+into a txt/xml file instead of being destroyed at the end of the session as
+is seen in AB4</p>
+</li>
+<li>
+<p>Justification: This feature is not mandatory, however it would serve an
+important purpose to hotel managers or the person-in-charge. This feature is
+aimed at tracking and identifying any suspicious activity and also to serve
+as data that could either be used in the future for monthly audits and even
+possibly generating statistics as to what items/facilities are patronised
+most by the guests.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Other contributions</strong>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Setting up the initial user guide with all the new commands we aimed to
+implement</p>
+</li>
+<li>
+<p>PRs reviewed (with some review comments):
+#133, #139, #140, #143, #153, #162, #191, #229, #235, #236</p>
+</li>
+<li>
+<p>Reported bugs and suggestions for other teams in the class:
+<a href="https://github.com/CS2103-AY1819S1-W16-3/main/issues/170">unclear usage of find feature</a>,
+<a href="https://github.com/CS2103-AY1819S1-W16-3/main/issues/167">unable to edit multiple parameters at once</a>,
+<a href="https://github.com/CS2103-AY1819S1-W16-3/main/issues/164">unclear purpose of back command</a>
+<a href="https://github.com/CS2103-AY1819S1-W16-3/main/issues/160">/bk prompt of add command</a></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="contributions-to-the-user-guide"><a class="link" href="#contributions-to-the-user-guide">Contributions to the User Guide</a></h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Given below are sections I contributed to the User Guide. They showcase my
+ability to write documentation targeting end-users.</em></p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect2">
+<h3 id="autocomplete-kbd-ctrl-kbd-kbd-alt-kbd"><a class="link" href="#autocomplete-kbd-ctrl-kbd-kbd-alt-kbd">Autocomplete: <kbd>Ctrl</kbd>, <kbd>Alt</kbd></a></h3>
+<div class="paragraph">
+<p>Auto-completes a partially typed in command by a user.</p>
+</div>
+<div class="paragraph">
+<p><strong>Function</strong> Press <kbd>Alt</kbd> to quick-clear the <code>CommandBox</code> (saves time
+             for user when he wants to clear the box).</p>
+</div>
+<div class="paragraph">
+<p>The command box before <kbd>Alt</kbd> is pressed:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/service%20pre%20clear.jpg" alt="service pre clear" width="419">
+</div>
+</div>
+<div class="paragraph">
+<p>The command box aft <kbd>Alt</kbd> is pressed:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/service%20post%20clear.jpg" alt="service post clear" width="371">
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Format</strong>: Enter <code>COMMAND_WORD</code>, followed by <kbd>Ctrl</kbd> key.</p>
+</div>
+<div class="paragraph">
+<p><strong>Function</strong>: Press <kbd>Ctrl</kbd> key again to proceed to the next prefix.</p>
+</div>
+<div class="paragraph">
+<p>Example:<br>
+<strong>Step 1</strong>: User enters <code>a</code> in <code>CommandBox</code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/add.jpg" alt="add" width="579">
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Step 2</strong>: After <kbd>Ctrl</kbd> has been pressed, it automatically inserts the
+        command and the first parameter <code>PREFIX_NAME</code> in the command line.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/add%20PREFIX_NAME.jpg" alt="add PREFIX NAME" width="581">
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Step 3</strong>: After filling up the name field, e.g. with Anthony, then press
+        <kbd>Space</kbd>. Finally, to insert the next parameter <code>PREFIX_PHONE</code>
+        press <kbd>Ctrl</kbd>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/after%20anthony%20space.jpg" alt="after anthony space" width="581">
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Step 4</strong>: Repeat Step 3 until all the parameters are input, then press
+        <kbd>Enter</kbd> to execute the command.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/full%20add%20autocomplete.jpg" alt="full add autocomplete" width="953">
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Note(s)</strong>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>For finishing entering a prefix field e.g. 'n/John Doe', user
+has to insert <kbd>Space</kbd> on his/her own before pressing <kbd>Ctrl</kbd>
+again, to autocomplete the next prefix.<br></p>
+</li>
+<li>
+<p>For commands such as <code>checkin</code> and <code>checkout</code>, user has to specify
+up till at least <code>checki</code> or <code>checko</code> because the application
+is unable to distinguish from the two commands without sufficient
+information. The subsequent prefixes will follow suit accordingly.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="command-archive-code-archive-code-span-class-red-coming-in-v2-0-span"><a class="link" href="#command-archive-code-archive-code-span-class-red-coming-in-v2-0-span">Command Archive: <code>archive</code> <span class="red">Coming in v2.0</span></a></h3>
+<div class="paragraph">
+<p>All user input is captured and saved onto a log. All keystrokes are
+captured, including invalid/mistyped and login commands.</p>
+</div>
+<div class="paragraph">
+<p>To open this log, input the archive command<br>
+Format: <code>archive</code></p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>This command requires a login.</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="contributions-to-the-developer-guide"><a class="link" href="#contributions-to-the-developer-guide">Contributions to the Developer Guide</a></h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Given below are sections I contributed to the Developer Guide. They
+showcase my ability to write technical documentation and the technical depth
+of my contributions to the project.</em></p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect2">
+<h3 id="autocomplete-kbd-ctrl-kbd-kbd-alt-kbd-2"><a class="link" href="#autocomplete-kbd-ctrl-kbd-kbd-alt-kbd-2">Autocomplete: <kbd>Ctrl</kbd>, <kbd>Alt</kbd></a></h3>
+<div class="sect3">
+<h4 id="overview-2"><a class="link" href="#overview-2">Overview</a></h4>
+<div class="paragraph">
+<p>The Autocomplete feature allows the user to seamlessly type in the
+full command and prefixes without having to worry if he/she missed
+out on any prefix. This feature helps the user by prompting the correct
+format. This is useful as some of the commands require several inputs
+from the user and hence this will save time and commands can be
+executed faster.</p>
+</div>
+<div class="paragraph">
+<p>A quick-clear has also been added as part of this feature, so that
+the user can again, save time.Press <kbd>Alt</kbd> to quick-clear the
+<code>CommandBox</code> (saves time for user when he wants to clear the box).</p>
+</div>
+<div class="paragraph">
+<p>The command box before <kbd>Alt</kbd> is pressed:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/service%20pre%20clear.jpg" alt="service pre clear" width="419">
+</div>
+</div>
+<div class="paragraph">
+<p>The command box aft <kbd>Alt</kbd> is pressed:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/service%20post%20clear.jpg" alt="service post clear" width="371">
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="example-of-how-feature-works"><a class="link" href="#example-of-how-feature-works">Example of how feature works</a></h4>
+<div class="paragraph">
+<p><strong>Step 1</strong>: Launch application</p>
+</div>
+<div class="paragraph">
+<p><strong>Step 2</strong>: User enters <code>a</code> in <code>CommandBox</code> then presses <kbd>Ctrl</kbd>.
+<code>AutoCompleteManager()</code> compares <code>input</code> through the list of
+<code>initCommandKeyWords`and proceeds to display the command in the
+`CommandBox</code> because <code>a</code> is an applicable <code>COMMAND_WORD</code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/add.jpg" alt="add" width="579">
+</div>
+</div>
+<div class="paragraph">
+<p>After <kbd>Ctrl</kbd> has been pressed, it automatically inserts the
+first prefix <code>PREFIX_NAME</code> in the command line.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/add%20PREFIX_NAME.jpg" alt="add PREFIX NAME" width="581">
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Step 3</strong>: After the user fills up the <code>PREFIX_NAME</code> field, he can press
+<kbd>Space</kbd> to move on to the next prefix. After pressing <kbd>Space</kbd>, then
+he can press <kbd>Ctrl</kbd>. At this point, <code>AutoCompleteManager()</code> is
+called again but this time instead of calling the <code>getAutoCompleteCommands()</code>
+it calls <code>getAutoCompleteNextMissingParameter</code> since it will detect
+the presence of the <code>PREFIX_NAME</code> parameter.</p>
+</div>
+<div class="paragraph">
+<p>This is the expected outcome before pressing <kbd>Ctrl</kbd></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/anthony%20space.jpg" alt="anthony space" width="581">
+</div>
+</div>
+<div class="paragraph">
+<p>This is the expected outcome after pressing <kbd>Ctrl</kbd></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/after%20anthony%20space.jpg" alt="after anthony space" width="581">
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Step 4</strong>: The user repeats Step 3 until all parameters are input by the user
+and then presses <kbd>Enter</kbd> to execute the command.
+Note: For <code>AddCommand</code>, the final parameter <code>PREFIX_TAG</code> is optional, so
+the user can just delete it if he chooses not to add a tag.</p>
+</div>
+<div class="paragraph">
+<p>This is the expected outcome after all the parameters are filled.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/full%20add%20autocomplete.jpg" alt="full add autocomplete" width="953">
+</div>
+</div>
+<div class="paragraph">
+<p>Press <kbd>Enter</kbd> to execute the command.</p>
+</div>
+<div class="paragraph">
+<p>Given below is the activity diagram for the Autocomplete feature.</p>
+</div>
+<div class="paragraph">
+<p><strong>Activity Diagram :</strong></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/Autocomplete%20Activity%20Diagram.jpg" alt="Autocomplete Activity Diagram" width="331">
+</div>
+</div>
+<div class="paragraph">
+<p>Activity Diagram demonstrates what happens when user presses <kbd>Ctrl</kbd></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="current-implementation"><a class="link" href="#current-implementation">Current Implementation</a></h4>
+<div class="paragraph">
+<p>The Autocomplete mechanism is facilitated by <code>AutoCompleteManager</code>, which
+can be found in <code>LogicManager</code>. It supports the auto completion of incomplete
+commands by providing a list of auto completed commands from a given incomplete
+command.</p>
+</div>
+<div class="paragraph">
+<p>An underlying <code>Trie</code> data structure is used to facilitate the <code>AutocompleteManager</code>.
+<code>Trie</code> only supports autocompletion of commands that are provided by the
+<code>AutocompleteManager</code>. The <code>CommandParameterSyntaxHandler</code> that is found in
+<code>AutocompleteManager</code> supports the autocompletion of parameters for commands.</p>
+</div>
+<div class="paragraph">
+<p>Given below is the class diagram for the Autocomplete feature.</p>
+</div>
+<div class="paragraph">
+<p><strong>Autocomplete Class Diagram :</strong></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/Autocomplete%20Class%20Diagram.jpg" alt="Autocomplete Class Diagram" width="719">
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>CommandBox</code> interacts with the <code>AutocompleteManager</code> using <code>LogicManager</code>.
+When the user presses <kbd>Ctrl</kbd> in the command box, the <code>CommandBox</code> will
+handle the Ctrl key press event and will execute the <code>AutoCompleteUserInput()</code>
+method.</p>
+</div>
+<div class="paragraph">
+<p>Given below is the sequence diagram for the Autocomplete feature.</p>
+</div>
+<div class="paragraph">
+<p><strong>Autocomplete Sequence Diagram :</strong></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/Autocomplete%20Sequence%20Diagram.jpg" alt="Autocomplete Sequence Diagram" width="926">
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-implementation-of-autocomplete"><a class="link" href="#aspect-implementation-of-autocomplete">Aspect: Implementation of Autocomplete</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice): </strong> Use a manager (<code>AutoCompleteManager</code>)
+to handle the autocomplete helper methods.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros:
+Allows for better usability and more code abstraction.</p>
+</li>
+<li>
+<p>Cons:
+The amount of time taken for a new developer to to understand all the
+interaction between methods will be longer.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2: </strong> Iterate through all possible commands to find match prefix.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros:
+Implementation of this alternative would be easier.</p>
+</li>
+<li>
+<p>Cons:
+If there are too many commands being input consecutively, the application
+might start to lag due to possible loss of performance.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-implementation-of-algorithm"><a class="link" href="#aspect-implementation-of-algorithm">Aspect: Implementation of Algorithm</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice): </strong> Trie Data Structure</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros:
+Performance of application will be better.</p>
+</li>
+<li>
+<p>Cons:
+The complexity of implementation is higher.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2: </strong> Iterate through all possible commands to find
+match prefix.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros:
+Implementation of this alternative would be easier.</p>
+</li>
+<li>
+<p>Cons:
+If there are too many commands being input consecutively, the application
+might start to lag due to possible loss of performance.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="proposed-command-archive-feature"><a class="link" href="#proposed-command-archive-feature">[Proposed] Command Archive feature</a></h3>
+<div class="paragraph">
+<p>Given below is the UML diagram for the <code>CommandArchive</code> Class:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/CommandArchive_class.png" alt="CommandArchive class" width="280">
+</div>
+</div>
+<div class="paragraph">
+<p>Given below is the UML diagram for the <code>CommandHistory</code> Class:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/CommandHistory_class.png" alt="CommandHistory class" width="345">
+</div>
+</div>
+<div class="sect3">
+<h4 id="current-implementation-2"><a class="link" href="#current-implementation-2">Current Implementation</a></h4>
+<div class="paragraph">
+<p>The Command Archive mechanism is facilitated by <code>CommandArchive</code>.
+It utilises the <code>userInputHistory</code> to extract the latest command that the user
+has input and passes the <code>inputString`to `stringToFile</code> method in <code>CommandArchive</code>
+class. The <code>inputString</code> is then appended to the <code>CommandFile.txt</code> file.
+Additionally, it implements the following operations:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>StringBuilder()</code>&#8201;&#8212;&#8201;The main operations of the <code>StringBuilder</code> are the <code>append</code>
+and <code>insert</code> methods which can be overloaded to accept data of any type. The <code>append</code>
+method always adds these characters at the end of the builder.This operation
+can be found in <code>CommandHistory</code>.</p>
+</li>
+<li>
+<p><code>toString()</code>&#8201;&#8212;&#8201;Converts the StringBuilder object into a string named
+<code>inputString</code> so it can be passed to the <code>CommandArchive</code> class. This operation
+can be found in <code>CommandHistory</code>.* <code>getLogger()</code>&#8201;&#8212;&#8201;Creates <code>LOGGER</code> so that it
+can log any <code>IOExceptions</code> that are caught in the catch blocks of the methods
+found in <code>stringToFile</code> method of <code>CommandArchive</code>.</p>
+</li>
+<li>
+<p><code>substring()</code>&#8201;&#8212;&#8201;Extracts the latest command from the <code>userInputHistory</code>.
+This is required because the <code>userInputHistory</code> appends all the older commands
+into the LinkedList as well. This is done by looking for the first newLine character
+occurrence of the <code>inputString</code>. The substring is then extracted as
+<code>latestUserCommand</code>. This operation can be found in <code>CommandArchive</code>.</p>
+</li>
+<li>
+<p><code>simpleDateFormat()</code>&#8201;&#8212;&#8201;Creates a <code>timeStamp</code> in DD/MM/YYY format that can later
+be appended to <code>latestUserCommand</code>. This operation can be found in <code>CommandArchive</code>.</p>
+</li>
+<li>
+<p><code>fileWriter</code>&#8201;&#8212;&#8201;Writes the stream of characters (which is <code>latestUserCommand</code>)
+to <code>commandHistory</code> file. This will eventually be the output that is written into
+<code>commandFile.txt</code> via <code>PrintWriter</code>. The <code>PrintWriter</code> also appends <code>timeStamp</code>
+to the latest entry (which is eventually <code>timeStamp</code> + <code>latestUserCommand</code>). This
+operation can be found in CommandArchive`.</p>
+<div class="literalblock">
+<div class="content">
+<pre>This command requires a login.</pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-how-to-extract-userinputhistory"><a class="link" href="#aspect-how-to-extract-userinputhistory">Aspect: How to extract userInputHistory</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> <code>userInputHistory</code> is first put into a
+<code>stringBuilder</code> and then converted to string to then pass to <code>CommandArchive</code>.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros:</p>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Easy to implement because <code>StringBuilder</code> can utilise <code>append</code> and <code>insert</code>
+methods, which can be overloaded to accept any data.</p>
+</li>
+<li>
+<p>Faster than <code>StringBuffer</code> under most implementations.</p>
+</li>
+<li>
+<p>StringBuilder is mutable while String is immutable.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Cons: String is more optimised especially if you don&#8217;t need the extra features
+of <code>StringBuilder</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Create a KeyLogger class that implements KeyListener
+to capture userInput.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: It is more secure and can only be accessed for audits and other
+administrative access purposes and is hidden from the user.</p>
+</li>
+<li>
+<p>Cons:</p>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>If implemented wrongly, it will become a global KeyLogger that captures
+userInput outside of application.</p>
+</li>
+<li>
+<p>Does not utilise the existing infrastructure
+and data found in the base level program class <code>CommandHistory</code> and hence
+would require more effort to implement.</p>
+</li>
+</ol>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-11 18:06:45 UTC</div></div></div></body></html>

@@ -28,10 +28,11 @@
 <li><a href="#undoing-previous-command-code-undo-code">4.12. Undoing previous command : <code>undo</code></a></li>
 <li><a href="#redoing-the-previously-undone-command-code-redo-code">4.13. Redoing the previously undone command : <code>redo</code></a></li>
 <li><a href="#clearing-all-entries-code-clear-code-span-class-image-img-src-images-icon-key-png-alt-icon-key-width-32-span">4.14. Clearing all entries : <code>clear</code> <span class="image"><img src="images/icon-key.png" alt="icon key" width="32"></span></a></li>
-<li><a href="#export-log-code-export-code-span-class-red-coming-in-v2-0-span">4.15. Export log: <code>export</code> <span class="red">Coming in v2.0</span></a></li>
-<li><a href="#viewing-help-code-help-code">4.16. Viewing help : <code>help</code></a></li>
-<li><a href="#exiting-the-program-code-exit-code">4.17. Exiting the program : <code>exit</code></a></li>
-<li><a href="#saving-the-data">4.18. Saving the data</a></li>
+<li><a href="#command-archive-code-archive-code-span-class-red-coming-in-v2-0-span">4.15. Command Archive: <code>archive</code> <span class="red">Coming in v2.0</span></a></li>
+<li><a href="#autocomplete-kbd-ctrl-kbd-kbd-alt-kbd">4.16. Autocomplete: <kbd>Ctrl</kbd>, <kbd>Alt</kbd></a></li>
+<li><a href="#viewing-help-code-help-code">4.17. Viewing help : <code>help</code></a></li>
+<li><a href="#exiting-the-program-code-exit-code">4.18. Exiting the program : <code>exit</code></a></li>
+<li><a href="#saving-the-data">4.19. Saving the data</a></li>
 </ul>
 </li>
 <li><a href="#command-summary">5. Command Summary</a></li>
@@ -1016,14 +1017,110 @@ cleared. I.e. all maintenance requests and faults will still be recorded.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="export-log-code-export-code-span-class-red-coming-in-v2-0-span"><a class="link" href="#export-log-code-export-code-span-class-red-coming-in-v2-0-span">4.15. Export log: <code>export</code> <span class="red">Coming in v2.0</span></a></h3>
+<h3 id="command-archive-code-archive-code-span-class-red-coming-in-v2-0-span"><a class="link" href="#command-archive-code-archive-code-span-class-red-coming-in-v2-0-span">4.15. Command Archive: <code>archive</code> <span class="red">Coming in v2.0</span></a></h3>
 <div class="paragraph">
-<p>Exports a log of all history of commands into a text file<br>
-Format: <code>export</code></p>
+<p>All user input is captured and saved onto a log. All keystrokes are
+captured, including invalid/mistyped and login commands.</p>
+</div>
+<div class="paragraph">
+<p>To open this log, input the archive command<br>
+Format: <code>archive</code></p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>This command requires a login.</pre>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="viewing-help-code-help-code"><a class="link" href="#viewing-help-code-help-code">4.16. Viewing help : <code>help</code></a></h3>
+<h3 id="autocomplete-kbd-ctrl-kbd-kbd-alt-kbd"><a class="link" href="#autocomplete-kbd-ctrl-kbd-kbd-alt-kbd">4.16. Autocomplete: <kbd>Ctrl</kbd>, <kbd>Alt</kbd></a></h3>
+<div class="paragraph">
+<p>Auto-completes a partially typed in command by a user.</p>
+</div>
+<div class="paragraph">
+<p><strong>Function</strong> Press <kbd>Alt</kbd> to quick-clear the <code>CommandBox</code> (saves time
+             for user when he wants to clear the box).</p>
+</div>
+<div class="paragraph">
+<p>The command box before <kbd>Alt</kbd> is pressed:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/service%20pre%20clear.jpg" alt="service pre clear" width="419">
+</div>
+</div>
+<div class="paragraph">
+<p>The command box aft <kbd>Alt</kbd> is pressed:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/service%20post%20clear.jpg" alt="service post clear" width="371">
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Format</strong>: Enter <code>COMMAND_WORD</code>, followed by <kbd>Ctrl</kbd> key.</p>
+</div>
+<div class="paragraph">
+<p><strong>Function</strong>: Press <kbd>Ctrl</kbd> key again to proceed to the next prefix.</p>
+</div>
+<div class="paragraph">
+<p>Example:<br>
+<strong>Step 1</strong>: User enters <code>a</code> in <code>CommandBox</code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/add.jpg" alt="add" width="579">
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Step 2</strong>: After <kbd>Ctrl</kbd> has been pressed, it automatically inserts the
+        command and the first parameter <code>PREFIX_NAME</code> in the command line.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/add%20PREFIX_NAME.jpg" alt="add PREFIX NAME" width="581">
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Step 3</strong>: After filling up the name field, e.g. with Anthony, then press
+        <kbd>Space</kbd>. Finally, to insert the next parameter <code>PREFIX_PHONE</code>
+        press <kbd>Ctrl</kbd>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/after%20anthony%20space.jpg" alt="after anthony space" width="581">
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Step 4</strong>: Repeat Step 3 until all the parameters are input, then press
+        <kbd>Enter</kbd> to execute the command.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/full%20add%20autocomplete.jpg" alt="full add autocomplete" width="953">
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Note(s)</strong>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>For finishing entering a prefix field e.g. 'n/John Doe', user
+has to insert <kbd>Space</kbd> on his/her own before pressing <kbd>Ctrl</kbd>
+again, to autocomplete the next prefix.<br></p>
+</li>
+<li>
+<p>For commands such as <code>checkin</code> and <code>checkout</code>, user has to specify
+up till at least <code>checki</code> or <code>checko</code> because the application
+is unable to distinguish from the two commands without sufficient
+information. The subsequent prefixes will follow suit accordingly.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="viewing-help-code-help-code"><a class="link" href="#viewing-help-code-help-code">4.17. Viewing help : <code>help</code></a></h3>
 <div class="paragraph">
 <p>Format: <code>help</code></p>
 </div>
@@ -1046,14 +1143,14 @@ Format: <code>export</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">4.17. Exiting the program : <code>exit</code></a></h3>
+<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">4.18. Exiting the program : <code>exit</code></a></h3>
 <div class="paragraph">
 <p>Exits the program.<br>
 Format: <code>exit</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="saving-the-data"><a class="link" href="#saving-the-data">4.18. Saving the data</a></h3>
+<h3 id="saving-the-data"><a class="link" href="#saving-the-data">4.19. Saving the data</a></h3>
 <div class="paragraph">
 <p>Concierge&#8482; data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.</p>
@@ -1181,4 +1278,4 @@ t/TAG r/ROOM_NUMBER from/START_DATE to/END_DATE</code></p>
 make our application better, so do not hesitate to report them to us!</p>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-11 17:47:47 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-11 18:06:44 UTC</div></div></div></body></html>

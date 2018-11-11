@@ -36,10 +36,11 @@
 <li><a href="#room-check-in-checkout-feature">3.5. Room Check-in/Checkout feature</a></li>
 <li><a href="#expense-expenses-and-expensetype">3.6. Expense, Expenses and ExpenseType</a></li>
 <li><a href="#login-and-logout">3.7. Login and Logout</a></li>
-<li><a href="#command-archive-feature">3.8. Command Archive feature</a></li>
-<li><a href="#proposed-data-encryption">3.9. [Proposed] Data Encryption</a></li>
-<li><a href="#logging">3.10. Logging</a></li>
-<li><a href="#Implementation-Configuration">3.11. Configuration</a></li>
+<li><a href="#autocomplete-kbd-ctrl-kbd-kbd-alt-kbd">3.8. Autocomplete: <kbd>Ctrl</kbd>, <kbd>Alt</kbd></a></li>
+<li><a href="#proposed-command-archive-feature">3.9. [Proposed] Command Archive feature</a></li>
+<li><a href="#proposed-data-encryption">3.10. [Proposed] Data Encryption</a></li>
+<li><a href="#logging">3.11. Logging</a></li>
+<li><a href="#Implementation-Configuration">3.12. Configuration</a></li>
 </ul>
 </li>
 <li><a href="#documentation">4. Documentation</a>
@@ -1774,7 +1775,248 @@ adding new accounts on a regular basis.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="command-archive-feature"><a class="link" href="#command-archive-feature">3.8. Command Archive feature</a></h3>
+<h3 id="autocomplete-kbd-ctrl-kbd-kbd-alt-kbd"><a class="link" href="#autocomplete-kbd-ctrl-kbd-kbd-alt-kbd">3.8. Autocomplete: <kbd>Ctrl</kbd>, <kbd>Alt</kbd></a></h3>
+<div class="sect3">
+<h4 id="overview"><a class="link" href="#overview">3.8.1. Overview</a></h4>
+<div class="paragraph">
+<p>The Autocomplete feature allows the user to seamlessly type in the
+full command and prefixes without having to worry if he/she missed
+out on any prefix. This feature helps the user by prompting the correct
+format. This is useful as some of the commands require several inputs
+from the user and hence this will save time and commands can be
+executed faster.</p>
+</div>
+<div class="paragraph">
+<p>A quick-clear has also been added as part of this feature, so that
+the user can again, save time.Press <kbd>Alt</kbd> to quick-clear the
+<code>CommandBox</code> (saves time for user when he wants to clear the box).</p>
+</div>
+<div class="paragraph">
+<p>The command box before <kbd>Alt</kbd> is pressed:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/service%20pre%20clear.jpg" alt="service pre clear" width="419">
+</div>
+</div>
+<div class="paragraph">
+<p>The command box aft <kbd>Alt</kbd> is pressed:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/service%20post%20clear.jpg" alt="service post clear" width="371">
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="example-of-how-feature-works"><a class="link" href="#example-of-how-feature-works">3.8.2. Example of how feature works</a></h4>
+<div class="paragraph">
+<p><strong>Step 1</strong>: Launch application</p>
+</div>
+<div class="paragraph">
+<p><strong>Step 2</strong>: User enters <code>a</code> in <code>CommandBox</code> then presses <kbd>Ctrl</kbd>.
+<code>AutoCompleteManager()</code> compares <code>input</code> through the list of
+<code>initCommandKeyWords`and proceeds to display the command in the
+`CommandBox</code> because <code>a</code> is an applicable <code>COMMAND_WORD</code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/add.jpg" alt="add" width="579">
+</div>
+</div>
+<div class="paragraph">
+<p>After <kbd>Ctrl</kbd> has been pressed, it automatically inserts the
+first prefix <code>PREFIX_NAME</code> in the command line.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/add%20PREFIX_NAME.jpg" alt="add PREFIX NAME" width="581">
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Step 3</strong>: After the user fills up the <code>PREFIX_NAME</code> field, he can press
+<kbd>Space</kbd> to move on to the next prefix. After pressing <kbd>Space</kbd>, then
+he can press <kbd>Ctrl</kbd>. At this point, <code>AutoCompleteManager()</code> is
+called again but this time instead of calling the <code>getAutoCompleteCommands()</code>
+it calls <code>getAutoCompleteNextMissingParameter</code> since it will detect
+the presence of the <code>PREFIX_NAME</code> parameter.</p>
+</div>
+<div class="paragraph">
+<p>This is the expected outcome before pressing <kbd>Ctrl</kbd></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/anthony%20space.jpg" alt="anthony space" width="581">
+</div>
+</div>
+<div class="paragraph">
+<p>This is the expected outcome after pressing <kbd>Ctrl</kbd></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/after%20anthony%20space.jpg" alt="after anthony space" width="581">
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Step 4</strong>: The user repeats Step 3 until all parameters are input by the user
+and then presses <kbd>Enter</kbd> to execute the command.
+Note: For <code>AddCommand</code>, the final parameter <code>PREFIX_TAG</code> is optional, so
+the user can just delete it if he chooses not to add a tag.</p>
+</div>
+<div class="paragraph">
+<p>This is the expected outcome after all the parameters are filled.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/full%20add%20autocomplete.jpg" alt="full add autocomplete" width="953">
+</div>
+</div>
+<div class="paragraph">
+<p>Press <kbd>Enter</kbd> to execute the command.</p>
+</div>
+<div class="paragraph">
+<p>Given below is the activity diagram for the Autocomplete feature.</p>
+</div>
+<div class="paragraph">
+<p><strong>Activity Diagram :</strong></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/Autocomplete%20Activity%20Diagram.jpg" alt="Autocomplete Activity Diagram" width="331">
+</div>
+</div>
+<div class="paragraph">
+<p>Activity Diagram demonstrates what happens when user presses <kbd>Ctrl</kbd></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="current-implementation-7"><a class="link" href="#current-implementation-7">3.8.3. Current Implementation</a></h4>
+<div class="paragraph">
+<p>The Autocomplete mechanism is facilitated by <code>AutoCompleteManager</code>, which
+can be found in <code>LogicManager</code>. It supports the auto completion of incomplete
+commands by providing a list of auto completed commands from a given incomplete
+command.</p>
+</div>
+<div class="paragraph">
+<p>An underlying <code>Trie</code> data structure is used to facilitate the <code>AutocompleteManager</code>.
+<code>Trie</code> only supports autocompletion of commands that are provided by the
+<code>AutocompleteManager</code>. The <code>CommandParameterSyntaxHandler</code> that is found in
+<code>AutocompleteManager</code> supports the autocompletion of parameters for commands.</p>
+</div>
+<div class="paragraph">
+<p>Given below is the class diagram for the Autocomplete feature.</p>
+</div>
+<div class="paragraph">
+<p><strong>Autocomplete Class Diagram :</strong></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/Autocomplete%20Class%20Diagram.jpg" alt="Autocomplete Class Diagram" width="719">
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>CommandBox</code> interacts with the <code>AutocompleteManager</code> using <code>LogicManager</code>.
+When the user presses <kbd>Ctrl</kbd> in the command box, the <code>CommandBox</code> will
+handle the Ctrl key press event and will execute the <code>AutoCompleteUserInput()</code>
+method.</p>
+</div>
+<div class="paragraph">
+<p>Given below is the sequence diagram for the Autocomplete feature.</p>
+</div>
+<div class="paragraph">
+<p><strong>Autocomplete Sequence Diagram :</strong></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/Autocomplete%20Sequence%20Diagram.jpg" alt="Autocomplete Sequence Diagram" width="926">
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-8"><a class="link" href="#design-considerations-8">3.8.4. Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-implementation-of-autocomplete"><a class="link" href="#aspect-implementation-of-autocomplete">Aspect: Implementation of Autocomplete</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice): </strong> Use a manager (<code>AutoCompleteManager</code>)
+to handle the autocomplete helper methods.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros:
+Allows for better usability and more code abstraction.</p>
+</li>
+<li>
+<p>Cons:
+The amount of time taken for a new developer to to understand all the
+interaction between methods will be longer.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2: </strong> Iterate through all possible commands to find match prefix.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros:
+Implementation of this alternative would be easier.</p>
+</li>
+<li>
+<p>Cons:
+If there are too many commands being input consecutively, the application
+might start to lag due to possible loss of performance.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-implementation-of-algorithm"><a class="link" href="#aspect-implementation-of-algorithm">Aspect: Implementation of Algorithm</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice): </strong> Trie Data Structure</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros:
+Performance of application will be better.</p>
+</li>
+<li>
+<p>Cons:
+The complexity of implementation is higher.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2: </strong> Iterate through all possible commands to find
+match prefix.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros:
+Implementation of this alternative would be easier.</p>
+</li>
+<li>
+<p>Cons:
+If there are too many commands being input consecutively, the application
+might start to lag due to possible loss of performance.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="proposed-command-archive-feature"><a class="link" href="#proposed-command-archive-feature">3.9. [Proposed] Command Archive feature</a></h3>
 <div class="paragraph">
 <p>Given below is the UML diagram for the <code>CommandArchive</code> Class:</p>
 </div>
@@ -1792,56 +2034,64 @@ adding new accounts on a regular basis.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="current-implementation-7"><a class="link" href="#current-implementation-7">3.8.1. Current Implementation</a></h4>
+<h4 id="current-implementation-8"><a class="link" href="#current-implementation-8">3.9.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>The Command Archive mechanism is facilitated by <code>CommandArchive</code>.
-It utilises the <code>userInputHistory</code> to extract the latest command that the user has input and passes the <code>inputString</code>
-to <code>stringToFile</code> method in <code>CommandArchive</code> class. The <code>inputString</code> is then appended to the <code>CommandFile.txt</code> file. Additionally, it
-implements the following operations:</p>
+It utilises the <code>userInputHistory</code> to extract the latest command that the user
+has input and passes the <code>inputString`to `stringToFile</code> method in <code>CommandArchive</code>
+class. The <code>inputString</code> is then appended to the <code>CommandFile.txt</code> file.
+Additionally, it implements the following operations:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>StringBuilder()</code>&#8201;&#8212;&#8201;The main operations of the <code>StringBuilder</code> are the <code>append</code> and <code>insert</code> methods which can
-be overloaded to accept data of any type. The <code>append</code> method always adds these characters at the end of the builder.
-This operation can be found in <code>CommandHistory</code>.</p>
+<p><code>StringBuilder()</code>&#8201;&#8212;&#8201;The main operations of the <code>StringBuilder</code> are the <code>append</code>
+and <code>insert</code> methods which can be overloaded to accept data of any type. The <code>append</code>
+method always adds these characters at the end of the builder.This operation
+can be found in <code>CommandHistory</code>.</p>
 </li>
 <li>
-<p><code>toString()</code>&#8201;&#8212;&#8201;Converts the StringBuilder object into a string named <code>inputString</code> so it can be passed to the
-<code>CommandArchive</code> class. This operation can be found in <code>CommandHistory</code>.</p>
+<p><code>toString()</code>&#8201;&#8212;&#8201;Converts the StringBuilder object into a string named
+<code>inputString</code> so it can be passed to the <code>CommandArchive</code> class. This operation
+can be found in <code>CommandHistory</code>.* <code>getLogger()</code>&#8201;&#8212;&#8201;Creates <code>LOGGER</code> so that it
+can log any <code>IOExceptions</code> that are caught in the catch blocks of the methods
+found in <code>stringToFile</code> method of <code>CommandArchive</code>.</p>
 </li>
 <li>
-<p><code>getLogger()</code>&#8201;&#8212;&#8201;Creates <code>LOGGER</code> so that it can log any <code>IOExceptions</code> that are caught in the catch blocks of the
-methods found in <code>stringToFile</code> method of <code>CommandArchive</code>.</p>
-</li>
-<li>
-<p><code>substring()</code>&#8201;&#8212;&#8201;Extracts the latest command from the <code>userInputHistory</code>. This is required because the
-<code>userInputHistory</code> appends all the older commands into the LinkedList as well. This is done by looking for the first
- newLine character occurrence of the <code>inputString</code>. The substring is then extracted as <code>latestUserCommand</code>.
-This operation can be found in <code>CommandArchive</code>.</p>
-</li>
-<li>
-<p><code>simpleDateFormat()</code>&#8201;&#8212;&#8201;Creates a <code>timeStamp</code> in DD/MM/YYY format that can later be appended to
+<p><code>substring()</code>&#8201;&#8212;&#8201;Extracts the latest command from the <code>userInputHistory</code>.
+This is required because the <code>userInputHistory</code> appends all the older commands
+into the LinkedList as well. This is done by looking for the first newLine character
+occurrence of the <code>inputString</code>. The substring is then extracted as
 <code>latestUserCommand</code>. This operation can be found in <code>CommandArchive</code>.</p>
 </li>
 <li>
-<p><code>fileWriter</code>&#8201;&#8212;&#8201;Writes the stream of characters (which is <code>latestUserCommand</code>) to <code>commandHistory</code> file. This will
-eventually be the output that is written into <code>commandFile.txt</code> via <code>PrintWriter</code>. The <code>PrintWriter</code> also appends
-<code>timeStamp</code> to the latest entry (which is eventually <code>timeStamp</code> + <code>latestUserCommand</code>). This operation can be found
-in CommandArchive`.</p>
+<p><code>simpleDateFormat()</code>&#8201;&#8212;&#8201;Creates a <code>timeStamp</code> in DD/MM/YYY format that can later
+be appended to <code>latestUserCommand</code>. This operation can be found in <code>CommandArchive</code>.</p>
+</li>
+<li>
+<p><code>fileWriter</code>&#8201;&#8212;&#8201;Writes the stream of characters (which is <code>latestUserCommand</code>)
+to <code>commandHistory</code> file. This will eventually be the output that is written into
+<code>commandFile.txt</code> via <code>PrintWriter</code>. The <code>PrintWriter</code> also appends <code>timeStamp</code>
+to the latest entry (which is eventually <code>timeStamp</code> + <code>latestUserCommand</code>). This
+operation can be found in CommandArchive`.</p>
+<div class="literalblock">
+<div class="content">
+<pre>This command requires a login.</pre>
+</div>
+</div>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-8"><a class="link" href="#design-considerations-8">3.8.2. Design Considerations</a></h4>
+<h4 id="design-considerations-9"><a class="link" href="#design-considerations-9">3.9.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-how-to-extract-userinputhistory"><a class="link" href="#aspect-how-to-extract-userinputhistory">Aspect: How to extract userInputHistory</a></h5>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice):</strong> <code>userInputHistory</code> is first put into a <code>stringBuilder</code> and then converted to
-string to then pass to <code>CommandArchive</code>.</p>
+<p><strong>Alternative 1 (current choice):</strong> <code>userInputHistory</code> is first put into a
+<code>stringBuilder</code> and then converted to string to then pass to <code>CommandArchive</code>.</p>
 <div class="ulist">
 <ul>
 <li>
@@ -1849,8 +2099,8 @@ string to then pass to <code>CommandArchive</code>.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Easy to implement because <code>StringBuilder</code> can utilise <code>append</code> and <code>insert</code> methods, which can be overloaded
-to accept any data.</p>
+<p>Easy to implement because <code>StringBuilder</code> can utilise <code>append</code> and <code>insert</code>
+methods, which can be overloaded to accept any data.</p>
 </li>
 <li>
 <p>Faster than <code>StringBuffer</code> under most implementations.</p>
@@ -1862,29 +2112,33 @@ to accept any data.</p>
 </div>
 </li>
 <li>
-<p>Cons: String is more optimised especially if you don&#8217;t need the extra features of <code>StringBuilder</code></p>
+<p>Cons: String is more optimised especially if you don&#8217;t need the extra features
+of <code>StringBuilder</code></p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><strong>Alternative 2:</strong> Create a KeyLogger class that implements KeyListener to capture userInput.</p>
+<p><strong>Alternative 2:</strong> Create a KeyLogger class that implements KeyListener
+to capture userInput.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: It is more secure and can only be accessed for audits and other administrative access purposes and is hidden
-from the user.</p>
+<p>Pros: It is more secure and can only be accessed for audits and other
+administrative access purposes and is hidden from the user.</p>
 </li>
 <li>
 <p>Cons:</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>If implemented wrongly, it will become a global KeyLogger that captures userInput outside of application.</p>
+<p>If implemented wrongly, it will become a global KeyLogger that captures
+userInput outside of application.</p>
 </li>
 <li>
-<p>Does not utilise the existing infrastructure and data found in the base level program class <code>CommandHistory</code> and
-hence would require more effort to implement.</p>
+<p>Does not utilise the existing infrastructure
+and data found in the base level program class <code>CommandHistory</code> and hence
+would require more effort to implement.</p>
 </li>
 </ol>
 </div>
@@ -1898,20 +2152,20 @@ hence would require more effort to implement.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">3.9. [Proposed] Data Encryption</a></h3>
+<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">3.10. [Proposed] Data Encryption</a></h3>
 <div class="paragraph">
 <p><em>{Explain here how the data encryption feature will be implemented}</em></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">3.10. Logging</a></h3>
+<h3 id="logging"><a class="link" href="#logging">3.11. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.11, &#8220;Configuration&#8221;</a>)</p>
+<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.12, &#8220;Configuration&#8221;</a>)</p>
 </li>
 <li>
 <p>The <code>Logger</code> for a class can be obtained using <code>LogsCenter.getLogger(Class)</code> which will log messages according to the specified logging level</p>
@@ -1942,7 +2196,7 @@ hence would require more effort to implement.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.11. Configuration</a></h3>
+<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.12. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
@@ -3147,4 +3401,4 @@ Expected: The most recent window size and location is retained.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-11 17:47:47 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-11 18:06:44 UTC</div></div></div></body></html>
