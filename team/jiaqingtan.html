@@ -27,39 +27,39 @@
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Expanding on the existing 'list' function:</strong></p>
+<p><strong>Expanding on the existing <code>list</code> function:</strong></p>
 <div class="ulist">
 <ul>
 <li>
-<p>What it does: It allows the user to list between seeing a list of all guests, list of checked-in guests, or a list of all the rooms in the hotel.</p>
+<p><strong>What it does:</strong> It allows the user to list between seeing a list of all guests, list of checked-in guests, or a list of all the rooms in the hotel.</p>
 </li>
 <li>
-<p>Justification: This feature is essential to a proper, working hotel management system. The listing of information on guests and rooms is needed for receptionists to perform follow-up tasks, be it in person or within the app.</p>
+<p><strong>Justification:</strong> This feature is essential to a proper, working hotel management system. The listing of information on guests and rooms is needed for receptionists to perform follow-up tasks, be it in person or within the app.</p>
 </li>
 <li>
-<p>Highlights: The listing function was made with the intention of listing guests and rooms separately under the same column, which required more in-depth research into JAVAFX and FXML files. (More details can be found in the "Minor Enhancements" section.)</p>
+<p><strong>Highlights:</strong> The listing function was made with the intention of listing guests and rooms separately under the same column by modifying JAVAFX and FXML files.</p>
 </li>
 <li>
-<p>Credits: The modification of the list function was highly dependent on the underlying code that the list function initially had. Additional code was added on to expand upon the initial list function, while I slowly learnt how the code of the AddressBook application actually worked.</p>
+<p><strong>Credits:</strong> Additional credit should also be given to my groupmate <strong>Adam Chew (adamwth)</strong>, who added the functionality of list checked-in guests with the <code>list -cg</code> command.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><strong>Expanding on the existing 'find' function:</strong></p>
+<p><strong>Expanding on the existing <code>find</code> function:</strong></p>
 <div class="ulist">
 <ul>
 <li>
-<p>What it does: It allows the user to search for all guests, checked-in guests, or rooms based on a particular set of conditions/predicates related to the attributes of the guest/room.</p>
+<p><strong>What it does:</strong> It allows the user to search for all guests, checked-in guests, or rooms based on a particular set of conditions/predicates related to the attributes of the guest/room.</p>
 </li>
 <li>
-<p>Justification: This feature is essential to a proper, working hotel management system. The find function can be used in a multitude of scenarios, such as when a quick search of rooms of an exact capacity is needed, or when a checked-in guest needs to be located immediately, in the event of an emergency.</p>
+<p><strong>Justification:</strong> This feature is essential to a proper, working hotel management system. The find function can be used in a multitude of scenarios, such as when a quick search of rooms of an exact capacity is needed, or when a checked-in guest needs to be located immediately, in the event of an emergency.</p>
 </li>
 <li>
-<p>Highlights: The prefixes of the find function can be chained in any order, and in any quantity, as the predicates are all combined at the end. Each filter is has an "and" relationship with one another.</p>
+<p><strong>Highlights:</strong> The prefixes of the find function can be chained in any order, and in any quantity, as the predicates are all combined at the end. Each filter is has an "and" relationship with one another.</p>
 </li>
 <li>
-<p>Credits: The modification of the find function was dependent on its own initial code, and the style of coding and arriving at the solution was closely followed.</p>
+<p><strong>Credits:</strong> The modification of the find function was dependent on its own initial code, and the style of coding and arriving at the solution was closely followed.</p>
 </li>
 </ul>
 </div>
@@ -72,47 +72,16 @@
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Replacing the HTML panel with a focused/detailed panel</strong></p>
-<div class="ulist">
-<ul>
+<p><strong>Replacing the HTML panel with a focused/detailed panel</strong> - <a href="https://github.com/CS2103-AY1819S1-F11-2/main/pull/145">#145</a></p>
+</li>
 <li>
-<p>The HTML panel was replaced with a detailed panel, which showed more details about a particular guest/room when the card in the list is clicked. The main aim was to reduce the amount of information clutter on the listing portion on the left of the UI by showing only essential information. More information can be, and will be shown only if the user needs those additional information, and clicks on the guest/room card.</p>
+<p><strong>Modifying the FXML files to list guest and rooms under the same UI column/panel</strong> - <a href="https://github.com/CS2103-AY1819S1-F11-2/main/pull/145">#145</a></p>
+</li>
+<li>
+<p><strong>Creation of the Concierge Icon and Logo</strong> - <a href="https://github.com/CS2103-AY1819S1-F11-2/main/pull/46">#46</a></p>
 </li>
 </ul>
 </div>
-</li>
-<li>
-<p><strong>Modifying the FXML files to list guest and rooms under the same UI column/panel</strong></p>
-<div class="ulist">
-<ul>
-<li>
-<p>This particular enhancement required extensive research into JAVAFX and FXML files, which took a bit of time to solve. We had the intention of keeping the UI clean and free of visual clutter, and the main idea was to keep the listing of guests and rooms separate by ensuring that they display under the same column. Trial and error was needed to ensure that one panel appears and the other does not overlap.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><strong>Creation of the Concierge Icon and Logo</strong></p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/ConciergeIconFinal.png" alt="ConciergeIconFinal" width="200">
-</div>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/ConciergeFinal.png" alt="ConciergeFinal" width="600">
-</div>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>The icon and logo was created using Adobe Photoshop, along with my limited experience in visual design gathered from my time in Polytechnic under a Game Design course.</p>
 </li>
 </ul>
 </div>
@@ -321,7 +290,7 @@ List all checked-in guests</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/FindCommandUml.png" alt="FindCommandUml" width="600">
+<img src="../images/FindCommandUml.png" alt="FindCommandUml" width="400">
 </div>
 </div>
 <div class="sect3">
@@ -435,7 +404,7 @@ An example is this: find -g n/Alex t/VIP, this can be interpreted in two ways. F
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/ListCommandUml.png" alt="ListCommandUml" width="600">
+<img src="../images/ListCommandUml.png" alt="ListCommandUml" width="400">
 </div>
 </div>
 <div class="sect3">
@@ -508,4 +477,4 @@ The GuestListPanel and RoomListPanel each has a "VBox" element encapsulating the
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-11 17:23:36 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-11 17:47:47 UTC</div></div></div></body></html>
