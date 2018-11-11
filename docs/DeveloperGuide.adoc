@@ -814,11 +814,11 @@ the user can again, save time.Press kbd:[Alt] to quick-clear the
 
 The command box before kbd:[Alt] is pressed:
 
-image::service pre clear.jpg[width="419"]
+image::service pre clear.PNG[width="419"]
 
 The command box aft kbd:[Alt] is pressed:
 
-image::service post clear.jpg[width="371"]
+image::service post clear.PNG[width="371"]
 
 ==== Example of how feature works
 
@@ -829,12 +829,12 @@ image::service post clear.jpg[width="371"]
 `initCommandKeyWords`and proceeds to display the command in the
 `CommandBox` because `a` is an applicable `COMMAND_WORD`.
 
-image::add.jpg[width="579"]
+image::add.PNG[width="579"]
 
 After kbd:[Ctrl] has been pressed, it automatically inserts the
 first prefix `PREFIX_NAME` in the command line.
 
-image::add PREFIX_NAME.jpg[width="581"]
+image::add PREFIX_NAME.PNG[width="581"]
 
 **Step 3**: After the user fills up the `PREFIX_NAME` field, he can press
 kbd:[Space] to move on to the next prefix. After pressing kbd:[Space], then
@@ -845,11 +845,11 @@ the presence of the `PREFIX_NAME` parameter.
 
 This is the expected outcome before pressing kbd:[Ctrl]
 
-image::anthony space.jpg[width="581"]
+image::anthony space.PNG[width="581"]
 
 This is the expected outcome after pressing kbd:[Ctrl]
 
-image::after anthony space.jpg[width="581"]
+image::after anthony space.PNG[width="581"]
 
 **Step 4**: The user repeats Step 3 until all parameters are input by the user
 and then presses kbd:[Enter] to execute the command.
@@ -858,7 +858,7 @@ the user can just delete it if he chooses not to add a tag.
 
 This is the expected outcome after all the parameters are filled.
 
-image::full add autocomplete.jpg[width="953"]
+image::full add autocomplete.PNG[width="953"]
 
 Press kbd:[Enter] to execute the command.
 
@@ -866,7 +866,7 @@ Given below is the activity diagram for the Autocomplete feature.
 
 **Activity Diagram :**
 
-image::Autocomplete Activity Diagram.jpg[width="331"]
+image::Autocomplete Activity Diagram.PNG[width="331"]
 
 Activity Diagram demonstrates what happens when user presses kbd:[Ctrl]
 
@@ -886,7 +886,7 @@ Given below is the class diagram for the Autocomplete feature.
 
 **Autocomplete Class Diagram :**
 
-image::Autocomplete Class Diagram.jpg[width="719"]
+image::Autocomplete Class Diagram.PNG[width="719"]
 
 The `CommandBox` interacts with the `AutocompleteManager` using `LogicManager`.
 When the user presses kbd:[Ctrl] in the command box, the `CommandBox` will
@@ -897,7 +897,7 @@ Given below is the sequence diagram for the Autocomplete feature.
 
 **Autocomplete Sequence Diagram :**
 
-image::Autocomplete Sequence Diagram.jpg[width="926"]
+image::Autocomplete Sequence Diagram.PNG[width="926"]
 
 ==== Design Considerations
 

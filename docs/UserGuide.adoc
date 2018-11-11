@@ -522,11 +522,11 @@ Auto-completes a partially typed in command by a user.
 
 The command box before kbd:[Alt] is pressed:
 
-image::service pre clear.jpg[width="419"]
+image::service pre clear.PNG[width="419"]
 
 The command box aft kbd:[Alt] is pressed:
 
-image::service post clear.jpg[width="371"]
+image::service post clear.PNG[width="371"]
 
 **Format**: Enter `COMMAND_WORD`, followed by kbd:[Ctrl] key.
 
@@ -535,23 +535,23 @@ image::service post clear.jpg[width="371"]
 Example: +
 **Step 1**: User enters `a` in `CommandBox`.
 
-image::add.jpg[width="579"]
+image::add.PNG[width="579"]
 
 **Step 2**: After kbd:[Ctrl] has been pressed, it automatically inserts the
         command and the first parameter `PREFIX_NAME` in the command line.
 
-image::add PREFIX_NAME.jpg[width="581"]
+image::add PREFIX_NAME.PNG[width="581"]
 
 **Step 3**: After filling up the name field, e.g. with Anthony, then press
         kbd:[Space]. Finally, to insert the next parameter `PREFIX_PHONE`
         press kbd:[Ctrl].
 
-image::after anthony space.jpg[width="581"]
+image::after anthony space.PNG[width="581"]
 
 **Step 4**: Repeat Step 3 until all the parameters are input, then press
         kbd:[Enter] to execute the command.
 
-image::full add autocomplete.jpg[width="953"]
+image::full add autocomplete.PNG[width="953"]
 
 **Note(s)**:
 
