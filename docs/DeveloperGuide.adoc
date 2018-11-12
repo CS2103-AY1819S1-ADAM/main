@@ -1693,6 +1693,50 @@ Unable to undo because the revision history was erased.
 [NOTE]
 These instructions only provide a starting point for testers to work on; testers are expected to do more _exploratory_ testing.
 
+=== Service
+This section assumes that the default `Concierge` is being used.
+
+`select 1` +
+The room details panel should be displayed on the right.
+
+`service r/001 no/RS01` +
+Unable to execute as user is not signed in (assuming user did not already sign in).
+
+`login user/admin pw/passw0rd` +
+Successful login.
+
+`service r/001 no/RS01` +
+Expense was successfully added to the room. Notice that the right panel shows the
+updated expenses.
+
+`undo` +
+Previously added expense was removed, as seen in the right panel.
+
+`redo` +
+Expense is added back.
+
+`service r/001 no/RS02 c/123.45` +
+Expense was successfully added to the room. Note that the cost is 123.45.
+
+`service r/001 no/XX01 c/-5.00` +
+Expense was successfully added to the room. Note that the total cost decreased.
+
+`service r/001 no/abcde` +
+No such item in the menu, command cannot be executed.
+
+`service r/001 no/RS03 c/123` +
+Money not in correct format, command cannot be executed. There are many different
+failing conditions for the money format, they will not all be listed here.
+
+`service r/002 no/RS01` +
+No guests in room 002, command cannot be executed.
+
+`service r/999 no/RS01` +
+Invalid room number, command cannot be executed.
+
+`checkout r/001` +
+Expenses are deleted in the right panel.
+
 === Launch and Shutdown
 
 . Initial launch
