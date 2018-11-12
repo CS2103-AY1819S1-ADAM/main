@@ -219,7 +219,7 @@ Reassigns the booking with start date 01/11/18 in room 085 to room 086.
 
 Finds guests or rooms, depending on the input flag and the keyword filters.
 
-Format: `find [flag] FILTERS`
+Format: `find FLAG FILTER [MOREFILTERS]`
 
 ****
 * The search is case insensitive. e.g `hans` will match `Hans`
@@ -229,7 +229,7 @@ Format: `find [flag] FILTERS`
 * Any number of filters can be chained and used together
 ****
 
-Filters for Guest (-g):
+Filters for Guest / Checked-in Guests (-g/-cg):
 
 * `n/ - Name`
 * `p/ - Phone Number`
@@ -260,8 +260,10 @@ Find Command Examples:
 Find guest(s) with "Alex" or "Yu" or both in their names.
 * `find -g n/Alex t/VIP` +
 Find guest(s) named Alex with tag "VIP".
-* `find -g p/81027115` +
-Find guest(s) with phone number "81027115".
+* `find -cg p/81027115` +
+Find checked-in guest(s) with phone number "81027115".
+* `find -cg t/VIP` +
+Find checked-in guest(s) with tag "VIP".
 * `find -r r/085` +
 Find room 085
 * `find -r c/2` +
@@ -280,7 +282,7 @@ Find all rooms with bookings with tag "RoomService".
 === Listing all guests : `list`
 
 Shows the entire list of rooms, checked-in guests, or archived guests, depending on the input flag +
-Format: `list [flag]`
+Format: `list FLAG`
 
 Examples:
 
@@ -606,8 +608,8 @@ t/TAG r/ROOM_NUMBER from/START_DATE to/END_DATE`
 * *Checkin* : `checkin r/ROOM_NUMBER`
 * *Checkout* : `checkout r/ROOM_NUMBER [from/START_DATE]`
 * *Reassign* : `reassign r/ROOM_NUMBER from/START_DATE nr/NEW_ROOM_NUMBER`
-* *Find* : `find KEYWORD [MORE_KEYWORDS]`
-* *List* : `list`
+* *Find* : `find FLAG FILTER [MOREFILTERS]`
+* *List* : `list FLAG`
 * *Login* : `login user/USERNAME pw/PASSWORD`
 * *Logout* : `logout`
 * *Select* : `select INDEX`
