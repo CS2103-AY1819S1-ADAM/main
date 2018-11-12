@@ -822,34 +822,10 @@ Selects the 100th room in the displayed list.</p>
 <p>Charges a room service to a room <br>
 Format: <code>service r/ROOM_NUMBER no/ITEM_NUMBER [c/COST]</code></p>
 </div>
-<table class="tableblock frame-none grid-all spread">
-<colgroup>
-<col style="width: 8.3333%;">
-<col style="width: 91.6667%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-center valign-middle"><p class="tableblock"><span class="image center"><img src="images/icon-important.png" alt="icon important"></span></p></td>
-<td class="tableblock halign-left valign-middle"><div><div class="ulist">
-<ul>
-<li>
-<p>ITEM_NUMBER refers to the number in the menu given to each type of service offered by the hotel.
-Refer to the Menu below.</p>
-</li>
-<li>
-<p>The cost can be specified as well, if the guest is to be charged an amount that is
-different from the cost in the menu. Note that the cost has to follow a strict format
-such as 100.00, i.e. with two decimal places. The dollar part of the cost should also
-not exceed <code>Integer.MAX_VALUE</code>.</p>
-</li>
-<li>
-<p>Only occupied rooms (i.e. rooms with checked-in guests) can have expenses charged to it.</p>
-</li>
-<li>
-<p>The default <code>Menu</code> that comes with Concierge&#8482; consists of the following items. Items
-may be modified, added, or removed through <code>concierge.xml</code>. Only item numbers from the
-<code>Menu</code> (case-sensitive) may be used in the <code>service</code> command. Future versions will allow
-displaying of the <code>Menu</code> on the main app.</p>
+<div class="paragraph">
+<p><code>ITEM_NUMBER</code> refers to the number in the menu given to each type of service offered by the hotel.
+The default Menu that comes with Concierge&#8482; consists of the following items:</p>
+</div>
 <div class="ulist">
 <ul>
 <li>
@@ -884,6 +860,29 @@ displaying of the <code>Menu</code> on the main app.</p>
 </li>
 </ul>
 </div>
+<table class="tableblock frame-none grid-all spread">
+<colgroup>
+<col style="width: 8.3333%;">
+<col style="width: 91.6667%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-center valign-middle"><p class="tableblock"><span class="image center"><img src="images/icon-important.png" alt="icon important"></span></p></td>
+<td class="tableblock halign-left valign-middle"><div><div class="ulist">
+<ul>
+<li>
+<p>The cost can be specified if the guest is to be charged an amount that is
+different from the cost in the menu. Note that the cost has to follow a strict format
+such as 100.00, i.e. with two decimal places. The dollar part of the cost should also
+not exceed <code>Integer.MAX_VALUE</code>.</p>
+</li>
+<li>
+<p>Only occupied rooms (i.e. rooms with checked-in guests) can have expenses charged to it.</p>
+</li>
+<li>
+<p>Items in the Menu may be modified, added, or removed through <code>concierge.xml</code>.
+Only item numbers from the Menu (case-sensitive) may be used in the <code>service</code> command.
+Future versions will allow displaying of the Menu on the main app.</p>
 </li>
 </ul>
 </div></div></td>
@@ -1302,4 +1301,4 @@ t/TAG r/ROOM_NUMBER from/START_DATE to/END_DATE</code></p>
 make our application better, so do not hesitate to report them to us!</p>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 04:36:22 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 05:36:46 UTC</div></div></div></body></html>
