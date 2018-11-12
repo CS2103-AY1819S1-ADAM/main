@@ -83,8 +83,9 @@
 <ul class="sectlevel2">
 <li><a href="#adding-a-booking-2">H.1. Adding a Booking</a></li>
 <li><a href="#login-logout">H.2. Login/ logout</a></li>
-<li><a href="#launch-and-shutdown">H.3. Launch and Shutdown</a></li>
-<li><a href="#saving-data">H.4. Saving data</a></li>
+<li><a href="#service">H.3. Service</a></li>
+<li><a href="#launch-and-shutdown">H.4. Launch and Shutdown</a></li>
+<li><a href="#saving-data">H.5. Saving data</a></li>
 </ul>
 </li>
 </ul>
@@ -3523,7 +3524,67 @@ These instructions only provide a starting point for testers to work on; testers
 </div>
 </div>
 <div class="sect2">
-<h3 id="launch-and-shutdown"><a class="link" href="#launch-and-shutdown">H.3. Launch and Shutdown</a></h3>
+<h3 id="service"><a class="link" href="#service">H.3. Service</a></h3>
+<div class="paragraph">
+<p>This section assumes that the default <code>Concierge</code> is being used.</p>
+</div>
+<div class="paragraph">
+<p><code>select 1</code><br>
+The room details panel should be displayed on the right.</p>
+</div>
+<div class="paragraph">
+<p><code>service r/001 no/RS01</code><br>
+Unable to execute as user is not signed in (assuming user did not already sign in).</p>
+</div>
+<div class="paragraph">
+<p><code>login user/admin pw/passw0rd</code><br>
+Successful login.</p>
+</div>
+<div class="paragraph">
+<p><code>service r/001 no/RS01</code><br>
+Expense was successfully added to the room. Notice that the right panel shows the
+updated expenses.</p>
+</div>
+<div class="paragraph">
+<p><code>undo</code><br>
+Previously added expense was removed, as seen in the right panel.</p>
+</div>
+<div class="paragraph">
+<p><code>redo</code><br>
+Expense is added back.</p>
+</div>
+<div class="paragraph">
+<p><code>service r/001 no/RS02 c/123.45</code><br>
+Expense was successfully added to the room. Note that the cost is 123.45.</p>
+</div>
+<div class="paragraph">
+<p><code>service r/001 no/XX01 c/-5.00</code><br>
+Expense was successfully added to the room. Note that the total cost decreased.</p>
+</div>
+<div class="paragraph">
+<p><code>service r/001 no/abcde</code><br>
+No such item in the menu, command cannot be executed.</p>
+</div>
+<div class="paragraph">
+<p><code>service r/001 no/RS03 c/123</code><br>
+Money not in correct format, command cannot be executed. There are many different
+failing conditions for the money format, they will not all be listed here.</p>
+</div>
+<div class="paragraph">
+<p><code>service r/002 no/RS01</code><br>
+No guests in room 002, command cannot be executed.</p>
+</div>
+<div class="paragraph">
+<p><code>service r/999 no/RS01</code><br>
+Invalid room number, command cannot be executed.</p>
+</div>
+<div class="paragraph">
+<p><code>checkout r/001</code><br>
+Expenses are deleted in the right panel.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="launch-and-shutdown"><a class="link" href="#launch-and-shutdown">H.4. Launch and Shutdown</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -3561,7 +3622,7 @@ Expected: The most recent window size and location is retained.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="saving-data"><a class="link" href="#saving-data">H.4. Saving data</a></h3>
+<h3 id="saving-data"><a class="link" href="#saving-data">H.5. Saving data</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -3581,4 +3642,4 @@ Expected: The most recent window size and location is retained.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 15:59:33 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 16:52:14 UTC</div></div></div></body></html>
