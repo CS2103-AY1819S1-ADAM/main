@@ -537,7 +537,7 @@ Reassigns the booking with start date 01/11/18 in room 085 to room 086.</p>
 <p>Finds guests or rooms, depending on the input flag and the keyword filters.</p>
 </div>
 <div class="paragraph">
-<p>Format: <code>find [flag] FILTERS</code></p>
+<p>Format: <code>find FLAG FILTER [MOREFILTERS]</code></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -563,7 +563,7 @@ Reassigns the booking with start date 01/11/18 in room 085 to room 086.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Filters for Guest (-g):</p>
+<p>Filters for Guest / Checked-in Guests (-g/-cg):</p>
 </div>
 <div class="ulist">
 <ul>
@@ -643,8 +643,12 @@ Find guest(s) with "Alex" or "Yu" or both in their names.</p>
 Find guest(s) named Alex with tag "VIP".</p>
 </li>
 <li>
-<p><code>find -g p/81027115</code><br>
-Find guest(s) with phone number "81027115".</p>
+<p><code>find -cg p/81027115</code><br>
+Find checked-in guest(s) with phone number "81027115".</p>
+</li>
+<li>
+<p><code>find -cg t/VIP</code><br>
+Find checked-in guest(s) with tag "VIP".</p>
 </li>
 <li>
 <p><code>find -r r/085</code><br>
@@ -675,7 +679,7 @@ Find all rooms with bookings with tag "RoomService".</p>
 <h3 id="listing-all-guests-code-list-code"><a class="link" href="#listing-all-guests-code-list-code">4.6. Listing all guests : <code>list</code></a></h3>
 <div class="paragraph">
 <p>Shows the entire list of rooms, checked-in guests, or archived guests, depending on the input flag<br>
-Format: <code>list [flag]</code></p>
+Format: <code>list FLAG</code></p>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -1242,10 +1246,10 @@ t/TAG r/ROOM_NUMBER from/START_DATE to/END_DATE</code></p>
 <p><strong>Reassign</strong> : <code>reassign r/ROOM_NUMBER from/START_DATE nr/NEW_ROOM_NUMBER</code></p>
 </li>
 <li>
-<p><strong>Find</strong> : <code>find KEYWORD [MORE_KEYWORDS]</code></p>
+<p><strong>Find</strong> : <code>find FLAG FILTER [MOREFILTERS]</code></p>
 </li>
 <li>
-<p><strong>List</strong> : <code>list</code></p>
+<p><strong>List</strong> : <code>list FLAG</code></p>
 </li>
 <li>
 <p><strong>Login</strong> : <code>login user/USERNAME pw/PASSWORD</code></p>
@@ -1344,4 +1348,4 @@ captured, including invalid/mistyped and login commands.</p>
 make our application better, so do not hesitate to report them to us!</p>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 14:19:47 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 14:27:48 UTC</div></div></div></body></html>
