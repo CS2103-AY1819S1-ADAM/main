@@ -1,0 +1,589 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]--><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Asciidoctor 1.5.6.1"><title>Teo Wei Zheng - Project Portfolio</title><link rel="stylesheet" href="../stylesheets/gh-pages.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="../stylesheets/coderay-asciidoctor.css"></head><body class="article"><div id="site-header"><nav class="navbar navbar-light bg-light"><div class="container"><a class="navbar-brand" href="../index.html">Concierge</a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="../UserGuide.html">User Guide</a></li><li class="nav-item"><a class="nav-link" href="../DeveloperGuide.html">Developer Guide</a></li><li class="nav-item"><a class="nav-link active" href="../AboutUs.html">About Us</a></li><li class="nav-item"><a class="nav-link" href="../ContactUs.html">Contact Us</a></li><li class="navitem"><a class="nav-link" href="https://github.com/CS2103-AY1819S1-F11-2/main"><span class="fa fa-github fa-lg" aria-hidden="true"></span>&nbsp;View on GitHub</a></li></ul></div></nav></div><div id="header"><h1>Teo Wei Zheng - Project Portfolio</h1></div><div id="content"><div class="sect1">
+<h2 id="project-concierge"><a class="link" href="#project-concierge">PROJECT: Concierge&#8482;</a></h2>
+<div class="sectionbody">
+<hr>
+</div>
+</div>
+<div class="sect1">
+<h2 id="overview"><a class="link" href="#overview">Overview</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Concierge&#8482; is a desktop application simulating a hotel management system used by hotel
+owners and receptionists. The user interacts with it using a CLI, and it has a GUI created
+with JavaFX. It is written in Java, and has about 10 kLoC.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="summary-of-contributions"><a class="link" href="#summary-of-contributions">Summary of contributions</a></h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Code contributed</strong>: [<a href="https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&amp;search=teowz46">Code Contributed</a>]</p>
+</li>
+<li>
+<p><strong>Major enhancement</strong>: Implemented the entire <code>service</code> architecture and command</p>
+<div class="ulist">
+<ul>
+<li>
+<p>What it does: The <code>service</code> command allows for the integration of all the hotel&#8217;s goods
+and services into Concierge&#8482;. Users will be able to use Concierge&#8482; to charge and
+keep track of the expenditure of all guests on the hotel&#8217;s goods and services.</p>
+</li>
+<li>
+<p>Justification: A hotel often provides many different kinds of goods and services, such as
+room service, restaurants, minibar, swimming pool, etc. Since all of these goods and
+services belong to the hotel, there should be a centralised system to keep track of all
+the expenditure on the hotel&#8217;s goods and services, such that the expenses can be compiled
+and presented to the guest conveniently during checkout.</p>
+</li>
+<li>
+<p>Highlights: This functionality required the implementation of several different classes
+to serve as the architecture. Firstly, <code>Expenses</code> and <code>Expense</code> were required to hold the
+information regarding the <code>Room&#8217;s total expenditure and each individual expenditure
+respectively. Secondly, a `Menu</code> of <code>ExpenseType</code> objects were required to serve as the
+main reference of all the items that are sold in the hotel. This serves as the catalogue
+for the hotel. Finally, a <code>Money</code> class was created to handle monetary values. In addition,
+the information in all of these classes need to be stored in XML, and therefore implementing
+this required significant effort to convert each class into an <code>XmlAdaptedClass</code> and to
+handle all the possible errors that can be introduced by modifying the values in the XML.
+Testing also required significant effort in adding several new test files and implementing
+several new utility methods, besides writing tests for all the classes mentioned above.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Minor enhancement</strong>: added a GUI panel that displays the expenditure details of every room.</p>
+</li>
+<li>
+<p><strong>Other contributions</strong>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Refactoring:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Replaced all instances and variants of "Address Book" with "Concierge".</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Documentation:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Modified the existing Model UML diagram with our architecture: <a href="https://github.com/CS2103-AY1819S1-F11-2/main/pull/247">#247</a></p>
+</li>
+<li>
+<p>Updated user stories in developer guide, made basic changes to the website: <a href="https://github.com/CS2103-AY1819S1-F11-2/main/pull/45">#45</a></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Community:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>PRs reviewed (with non-trivial review comments):
+<a href="https://github.com/CS2103-AY1819S1-F11-2/main/pull/90">#90</a>,
+<a href="https://github.com/CS2103-AY1819S1-F11-2/main/pull/169">#169</a></p>
+</li>
+<li>
+<p>Reported bugs and suggestions for other teams in the class (examples:
+<a href="https://github.com/CS2103-AY1819S1-T13-1/main/issues/130">1</a>,
+<a href="https://github.com/CS2103-AY1819S1-T13-1/main/issues/137">2</a>,
+<a href="https://github.com/CS2103-AY1819S1-T13-1/main/issues/139">3</a>,
+<a href="https://github.com/CS2103-AY1819S1-T13-1/main/issues/147">4</a>,
+<a href="https://github.com/CS2103-AY1819S1-T13-1/main/issues/153">5</a>,
+<a href="https://github.com/CS2103-AY1819S1-T13-1/main/issues/157">6</a>,
+<a href="https://github.com/CS2103-AY1819S1-T13-1/main/issues/158">7</a>, )</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Tools:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Integrated Travis CI to the project.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="contributions-to-the-user-guide"><a class="link" href="#contributions-to-the-user-guide">Contributions to the User Guide</a></h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users.</em></p></td>
+</tr>
+</tbody>
+</table>
+<div class="ulist">
+<ul>
+<li>
+<p>Links to relevant sections in User Guide (for viewing on Github)</p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/CS2103-AY1819S1-F11-2/main/blob/master/docs/UserGuide.adoc#provide-room-service-code-service-code-span-class-image-img-src-images-icon-key-png-alt-icon-key-width-32-span"><code>service</code> command</a></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="provide-room-service-code-service-code-span-class-image-img-src-images-icon-key-png-alt-icon-key-width-32-span"><a class="link" href="#provide-room-service-code-service-code-span-class-image-img-src-images-icon-key-png-alt-icon-key-width-32-span">Provide Room Service: <code>service</code> <span class="image"><img src="../images/icon-key.png" alt="icon key" width="32"></span></a></h3>
+<div class="paragraph">
+<p>Charges a room service to a room <br>
+Format: <code>service r/ROOM_NUMBER no/ITEM_NUMBER [c/COST]</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>ITEM_NUMBER refers to the number in the menu given to each type of service offered by the hotel.</p>
+</li>
+<li>
+<p>The cost can be specified as well, if the guest is to be charged an amount that is
+different from the cost in the menu. Note that the cost has to follow a strict format
+such as 100.00, i.e. with two decimal places. The dollar part of the cost should also
+not exceed <code>Integer.MAX_VALUE</code>.</p>
+</li>
+<li>
+<p>Any expenses added with this command will be accounted for under the Expenses portion
+of the respective rooms. The Expenses of the room will also be displayed on the
+right panel.</p>
+</li>
+<li>
+<p>Only occupied rooms (i.e. rooms with checked-in guests) can have expenses charged to it.</p>
+</li>
+<li>
+<p>It is possible to charge negative values as well. This can be used in cases such as when
+a guest uses a voucher, hence allowing the total expenses to be reduced. Negative
+values can also be charged if the user wants to remove or adjust an existing expense.
+Two expense types, XX01 and XX02, were thus created for the purpose of adjustments.</p>
+</li>
+<li>
+<p>The default <code>Menu</code> that comes with Concierge&#8482; consists of the following items. Items
+may be modified, added, or removed through <code>concierge.xml</code>. Only item numbers from the
+<code>Menu</code> (case-sensitive) may be used in the <code>service</code> command. Future versions will allow
+displaying of the <code>Menu</code> on the main app.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>RS01</strong>&#8201;&#8212;&#8201;Room service: Red wine&#8201;&#8212;&#8201;$50.00</p>
+</li>
+<li>
+<p><strong>RS02</strong>&#8201;&#8212;&#8201;Room service: Beef steak&#8201;&#8212;&#8201;$70.00</p>
+</li>
+<li>
+<p><strong>RS03</strong>&#8201;&#8212;&#8201;Room service: Thai massage&#8201;&#8212;&#8201;$100.00</p>
+</li>
+<li>
+<p><strong>MB01</strong>&#8201;&#8212;&#8201;Minibar: Coca cola&#8201;&#8212;&#8201;$3.00</p>
+</li>
+<li>
+<p><strong>MB02</strong>&#8201;&#8212;&#8201;Minibar: Sprite&#8201;&#8212;&#8201;$3.00</p>
+</li>
+<li>
+<p><strong>MB03</strong>&#8201;&#8212;&#8201;Minibar: Tiger beer&#8201;&#8212;&#8201;$6.00</p>
+</li>
+<li>
+<p><strong>MB04</strong>&#8201;&#8212;&#8201;Minibar: Mineral water&#8201;&#8212;&#8201;$3.00</p>
+</li>
+<li>
+<p><strong>SP01</strong>&#8201;&#8212;&#8201;Swimming pool: Entry&#8201;&#8212;&#8201;$5.00</p>
+</li>
+<li>
+<p><strong>XX01</strong>&#8201;&#8212;&#8201;Adjustment: Discount&#8201;&#8212;&#8201;$0.00</p>
+</li>
+<li>
+<p><strong>XX02</strong>&#8201;&#8212;&#8201;Adjustment: Typo&#8201;&#8212;&#8201;$0.00</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>service r/085 no/RS01</code><br>
+Adds an expenditure of the item <strong>RS01</strong> to the room&#8217;s expenses.</p>
+</li>
+<li>
+<p><code>service r/096 no/RS03 c/12.34</code><br>
+Adds an expenditure of the item <strong>RS03</strong> to the room&#8217;s expenses and charge $12.34 for it.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="contributions-to-the-developer-guide"><a class="link" href="#contributions-to-the-developer-guide">Contributions to the Developer Guide</a></h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project.</em></p></td>
+</tr>
+</tbody>
+</table>
+<div class="ulist">
+<ul>
+<li>
+<p>Links to relevant sections in Developer Guide (for viewing on Github)</p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/CS2103-AY1819S1-F11-2/main/blob/master/docs/DeveloperGuide.adoc#expense-expenses-and-expensetype">Expense, Expenses, and ExpenseType</a></p>
+</li>
+<li>
+<p><a href="https://github.com/CS2103-AY1819S1-F11-2/main/blob/master/docs/DeveloperGuide.adoc#money">Money</a></p>
+</li>
+<li>
+<p><a href="https://github.com/CS2103-AY1819S1-F11-2/main/blob/master/docs/DeveloperGuide.adoc#servicecommand">ServiceCommand</a></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="expense-expenses-and-expensetype"><a class="link" href="#expense-expenses-and-expensetype">Expense, Expenses and ExpenseType</a></h3>
+<div class="paragraph">
+<p>In Concierge, users will be given the feature of tracking the expenditure of each individual
+guest, in order to facilitate checkout charges. Hence, the three classes, <code>Expenses</code>, <code>Expense</code>
+and <code>ExpenseType</code> have been created for this purpose. In addition, the hotel also has a
+<code>Menu</code> of goods and services available.</p>
+</div>
+<div class="sect3">
+<h4 id="current-implementation"><a class="link" href="#current-implementation">Current Implementation</a></h4>
+<div class="paragraph">
+<p><code>ExpenseType</code> objects are essentially immutable objects that represent a single item or service
+being sold at the hotel. An <code>ExpenseType</code> object contains information about its menu number,
+usual price, and description. The main purpose of this class is for convenience; users may
+charge a customer by simply providing the menu number of the item and the cost and description
+of the item will be able to be referenced. <code>ExpenseType</code> information is stored in a <code>Menu</code>
+object, which is then stored on the hard disk, since users should have the ability to modify
+the menu manually. The <code>Menu</code> object is internally represented with a <code>HashMap&lt;String, ExpenseType&gt;</code>,
+with the menu number as keys and the <code>ExpenseType</code> objects as values.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1: Use a List&lt;ExpenseType&gt; to store the menu.</strong> While there may be negligible
+differences for a small menu, searching for an <code>ExpenseType</code> object still takes linear time
+and there may be significant performance drops for a large menu.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>An <code>Expense</code> object contains information about one individual expenditure by a guest. An
+<code>Expense</code> object encapsulates the cost, <code>ExpenseType</code> of the item bought, and the date and time
+of expenditure.</p>
+</div>
+<div class="paragraph">
+<p>The <code>Expenses</code> object is essentially a <code>List&lt;Expense&gt;</code>. Every room contains an <code>Expenses</code>
+object, to represent the collection of all the expenses of the guests in the room.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1: Use a <code>List&lt;Expense&gt;</code> object</strong>: Defining the <code>Expenses</code> class allows us
+to restrict access to the collection, and only allow certain methods such as adding an
+<code>Expense</code> or displaying on screen.</p>
+</li>
+<li>
+<p><strong>Alternative 2: Use a <code>Set&lt;Expense&gt;</code> object</strong>: Having the expenses ordered (e.g.
+chronologically) will be useful for generating a nice view of all the expenses incurred.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Here is a simple UML describing the roles of these classes.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/expense_uml.png" alt="expense uml" width="600">
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-immutability-of-menu"><a class="link" href="#aspect-immutability-of-menu">Aspect: Immutability of Menu</a></h5>
+<div class="paragraph">
+<p>While it is conceivable that the items sold may change from time to time,
+for various reasons such as unpopularity or seasonal products, giving users
+the ability to add and remove items from the menu may result in more
+problems than benefits. We expect that alterations to the menu will not be
+performed frequently, and that the majority of our users, receptionists,
+will not be required to add and remove items to the menu. The menu also does
+not have to be altered during operational hours. Hence, by making
+<code>Menu</code> immutable, we eliminate the possibility of making accidental or
+unwarranted changes to the menu. The only method to modify <code>Menu</code> would
+thus be through the XML file, which we believe is suitable for these
+purposes.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-immutability-of-expensetype"><a class="link" href="#aspect-immutability-of-expensetype">Aspect: Immutability of ExpenseType</a></h5>
+<div class="paragraph">
+<p>The <code>ExpenseType</code> object is meant to hold the default values of the name and
+price of each item. In other words, since an <code>Expense</code> object references an
+<code>ExpenseType</code> object, the <code>Expense</code> object is allowed to have a cost that
+is different from the cost in the corresponding <code>ExpenseType</code> object, to
+account for cases such as the guest having a personalised discount due to
+the usage of vouchers or certain credit cards. Thus, ExpenseType does not
+need to be modified by users in the application. Nonetheless, it is still
+possible to modify the default information through editing the XML file.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-assignment-of-the-expenses-object"><a class="link" href="#aspect-assignment-of-the-expenses-object">Aspect: Assignment of the Expenses object</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Assign <code>expenses</code> to each <code>Room</code>.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Suitable for current architecture. Each <code>Booking</code> only has one <code>Guest</code>,
+and each <code>Guest</code> will only stay in one <code>Room</code>. Makes more sense to assign to
+<code>Room</code> such that it represents the expenditure of the entire <code>Room</code> and not
+one <code>Guest</code>, since the occupants of the <code>Room</code> can only contribute to one single
+<code>Expenses</code> object. <code>Room</code> is a more natural choice over <code>Booking</code> as <code>Booking</code>
+is meant to encapsulate booking information such as timing and <code>Room</code>.
+Not much difference in implementation no matter which one of the three classes
+it is assigned to.</p>
+</li>
+<li>
+<p>Cons: May be confusing to implement. Need to ensure that there are no expenses
+for rooms that have no guests.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Assign <code>expenses</code> to each <code>Guest</code>.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Can track <code>expenses</code> of each <code>Guest</code>, can find out who are the heavy
+spenders. Can use this information for promotional activities such as vouchers
+or membership.</p>
+</li>
+<li>
+<p>Cons: Not all guests that will stay in the hotel are registered in the guest
+list, since each <code>Booking</code> only requires the name of one <code>Guest</code>, regardless of
+the <code>Room</code>. Will require a major refactoring of the <code>add</code> command.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 3:</strong> Assign <code>expenses</code> to each <code>Booking</code>.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Can allow tracking of the booker&#8217;s expenditure, less confusing to implement
+than <code>Room</code>, can allow for expenses to be recorded before the guest checks in.</p>
+</li>
+<li>
+<p>Cons: May violate SRP, since <code>Booking</code> should ideally only deal with booking
+information.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="money"><a class="link" href="#money">Money</a></h3>
+<div class="sect3">
+<h4 id="current-implementation-2"><a class="link" href="#current-implementation-2">Current Implementation</a></h4>
+<div class="paragraph">
+<p><code>Money</code> is a class used to store monetary values. This class was created to
+enforce the restriction that monetary values should always have at most two
+decimal places, which could be inconvenient if using Java data types such
+as <code>double</code> or <code>BigDecimal</code>. <code>Money</code> objects can be created by the user
+through the <code>service</code> command (details in the next section).</p>
+</div>
+<div class="paragraph">
+<p>The <code>Money</code> class contains two main attributes, <code>dollars</code> and <code>cents</code>, both
+of which are <code>int`s, since it is unlikely that the cost of any one item will
+exceed `Integer.MAX_VALUE</code> dollars.</p>
+</div>
+<div class="paragraph">
+<p>The main method of creating <code>Money</code> objects is through the <code>service</code> command,
+with the <code>Money</code> class parsing a string to convert into a <code>Money</code> object.
+The method <code>isValidMoneyFormat()</code> handles the checking of the string format,
+and the list of requirements are as follows:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Can be negative.</p>
+</li>
+<li>
+<p>Format of the string should be {1 to 10 digits}.{2 digits}, e.g. <code>12.34</code>.
+<code>123</code>, <code>.50</code>, <code>12.9</code>, <code>12345612345.00</code> are not allowed.</p>
+</li>
+<li>
+<p>The <code>dollars</code> section can be 0 but cannot have leading 0, i.e. 0.12 is allowed
+but 01.23 is not allowed.</p>
+</li>
+<li>
+<p>The <code>dollars</code> section should not exceed <code>Integer.MAX_VALUE</code>.</p>
+</li>
+<li>
+<p>Cannot have characters that are not digits or <code>.</code> or <code>-</code>.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-immutability-of-money"><a class="link" href="#aspect-immutability-of-money">Aspect: Immutability of Money</a></h5>
+<div class="paragraph">
+<p><code>Money</code> does not have to be mutable. Adjustment of <code>Expenses</code> are to be done
+through the <code>service</code> command. <code>Money</code> is simply a data type, much like
+<code>Double</code> and <code>Integer</code>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="servicecommand"><a class="link" href="#servicecommand">ServiceCommand</a></h3>
+<div class="sect3">
+<h4 id="current-implementation-3"><a class="link" href="#current-implementation-3">Current Implementation</a></h4>
+<div class="paragraph">
+<p>The <code>service</code> command is used for charging expenses to rooms. This
+functionality is the main reason that the classes Expenses, Expense,
+ExpenseType, Menu and Money were implemented. The format for the <code>service</code>
+command is as such:</p>
+</div>
+<div class="paragraph">
+<p><code>service r/ROOM_NUMBER no/ITEM_NUMBER [c/COST]</code></p>
+</div>
+<div class="paragraph">
+<p>The cost is made optional for the convenience of the user. We expect that
+most of the time, the cost of items are more or less fixed. Instead of
+having the user type in the same cost all of the time, the field is made
+optional. This functionality is enabled by the use of <code>ExpenseType</code> and
+<code>Menu</code>, which stores the default cost of items. If the cost is not specified,
+the default cost of the item will be used.</p>
+</div>
+<div class="paragraph">
+<p>As in AddressBook4, the ConciergeParser (aka AddressBookParser) will parse
+the user input and create a <code>ServiceCommandParser</code> object to parse a <code>service</code>
+command. The <code>ServiceCommandParser</code> is responsible for checking that the
+<code>RoomNumber</code> and cost (a <code>Money</code> object) are in the correct format. Note that
+the item number is not checked here, since the <code>Menu</code> object of <code>Concierge</code>
+has to be available in order to check that the given item number is a valid
+item. Hence, any string will be accepted by the parser. Since <code>ServiceCommand</code>
+has access to the <code>Model</code> and thus the <code>Menu</code>, the checking is given to
+<code>ServiceCommand</code> instead. A successful parse will then return a
+<code>ServiceCommand(RoomNumber roomNumber, String itemNumber, Optional&lt;Money&gt; itemCost)</code>
+object.</p>
+</div>
+<div class="paragraph">
+<p>The following flowchart describes what happens when the <code>execute</code> method
+of a <code>ServiceCommand</code> is called.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/ServiceCommand-flowchart.png" alt="ServiceCommand flowchart" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>model.addExpense()</code> method call was not illustrated in detail in the flowchart,
+thus it is illustrated in this sequence diagram.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/AddExpenseSequenceDiagram.png" alt="AddExpenseSequenceDiagram" width="900">
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-deleting-and-editing-expenses"><a class="link" href="#aspect-deleting-and-editing-expenses">Aspect: Deleting and editing Expenses</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Use <code>service</code> to edit `Expense`s.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Simply keying in `Expense`s with negative values is easy to implement,
+and does not stray far from real-life implementations, e.g. receipts often
+contain cost subtractions for discounts and promotions.</p>
+</li>
+<li>
+<p>Cons: May not be elegant, <code>Expenses</code> may become cluttered if there&#8217;s too many
+corrections.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Create new commands to edit and delete `Expense`s.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: The <code>Expenses</code> will contain all the `Expense`s at their correct prices.</p>
+</li>
+<li>
+<p>Cons: More effort to implement, difficult to implement, e.g. may need to implement
+listing out all <code>Expense`s of a `Room</code> with the <code>list</code> command in order to select
+the <code>Expense</code> to delete or edit. Information on discounts and corrections will
+also be lost.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 03:12:05 UTC</div></div></div></body></html>

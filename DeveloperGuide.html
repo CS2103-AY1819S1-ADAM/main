@@ -35,12 +35,14 @@
 <li><a href="#find-feature">3.4. Find Feature</a></li>
 <li><a href="#room-check-in-checkout-feature">3.5. Room Check-in/Checkout feature</a></li>
 <li><a href="#expense-expenses-and-expensetype">3.6. Expense, Expenses and ExpenseType</a></li>
-<li><a href="#login-and-logout">3.7. Login and Logout</a></li>
-<li><a href="#autocomplete-kbd-ctrl-kbd-kbd-alt-kbd">3.8. Autocomplete: <kbd>Ctrl</kbd>, <kbd>Alt</kbd></a></li>
-<li><a href="#proposed-command-archive-feature">3.9. [Proposed] Command Archive feature</a></li>
-<li><a href="#proposed-data-encryption">3.10. [Proposed] Data Encryption</a></li>
-<li><a href="#logging">3.11. Logging</a></li>
-<li><a href="#Implementation-Configuration">3.12. Configuration</a></li>
+<li><a href="#money">3.7. Money</a></li>
+<li><a href="#servicecommand">3.8. ServiceCommand</a></li>
+<li><a href="#login-and-logout">3.9. Login and Logout</a></li>
+<li><a href="#autocomplete-kbd-ctrl-kbd-kbd-alt-kbd">3.10. Autocomplete: <kbd>Ctrl</kbd>, <kbd>Alt</kbd></a></li>
+<li><a href="#proposed-command-archive-feature">3.11. [Proposed] Command Archive feature</a></li>
+<li><a href="#proposed-data-encryption">3.12. [Proposed] Data Encryption</a></li>
+<li><a href="#logging">3.13. Logging</a></li>
+<li><a href="#Implementation-Configuration">3.14. Configuration</a></li>
 </ul>
 </li>
 <li><a href="#documentation">4. Documentation</a>
@@ -545,7 +547,7 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-As a more OOP model, we can store a <code>Tag</code> list in <code>Concierge</code>, which <code>Guest</code> can reference. This would allow <code>Concierge</code> to only require one <code>Tag</code> object per unique <code>Tag</code>, instead of each <code>Guest</code> needing their own <code>Tag</code> object. An example of how such a model may look like is given below.<br>
+As a more OOP model, we can store a <code>Tag</code> list in <code>Concierge</code>, which <code>Guest</code> can reference. This would allow <code>Concierge</code> to only require one <code>Tag</code> object per unique <code>Tag</code>, instead of each <code>Guest</code> needing their own <code>Tag</code> object. An example of how such a model may look like is given below. Only UniqueGuestList is shown for simplicity.<br>
 <br>
 <span class="image"><img src="images/ModelClassBetterOopDiagram.png" alt="ModelClassBetterOopDiagram" width="800"></span>
 </td>
@@ -1422,7 +1424,7 @@ instead of a void method simply setting the instance property.</p>
 <p>In Concierge, users will be given the feature of tracking the expenditure of each individual
 guest, in order to facilitate checkout charges. Hence, the three classes, <code>Expenses</code>, <code>Expense</code>
 and <code>ExpenseType</code> have been created for this purpose. In addition, the hotel also has a
-<code>menu</code> of goods and services available.</p>
+<code>Menu</code> of goods and services available.</p>
 </div>
 <div class="sect3">
 <h4 id="current-implementation-5"><a class="link" href="#current-implementation-5">3.6.1. Current Implementation</a></h4>
@@ -1434,8 +1436,7 @@ charge a customer by simply providing the menu number of the item and the cost a
 of the item will be able to be referenced. <code>ExpenseType</code> information is stored in a <code>Menu</code>
 object, which is then stored on the hard disk, since users should have the ability to modify
 the menu manually. The <code>Menu</code> object is internally represented with a <code>HashMap&lt;String, ExpenseType&gt;</code>,
-with the menu number as keys and the <code>ExpenseType</code> objects as values. This allows for the
-serialisation of the <code>Menu</code> into XML, since <code>HashMap</code> is supported by JAXB.</p>
+with the menu number as keys and the <code>ExpenseType</code> objects as values.</p>
 </div>
 <div class="ulist">
 <ul>
@@ -1508,17 +1509,229 @@ need to be modified by users in the application. Nonetheless, it is still
 possible to modify the default information through editing the XML file.</p>
 </div>
 </div>
+<div class="sect4">
+<h5 id="aspect-assignment-of-the-expenses-object"><a class="link" href="#aspect-assignment-of-the-expenses-object">Aspect: Assignment of the Expenses object</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Assign <code>expenses</code> to each <code>Room</code>.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Suitable for current architecture. Each <code>Booking</code> only has one <code>Guest</code>,
+and each <code>Guest</code> will only stay in one <code>Room</code>. Makes more sense to assign to
+<code>Room</code> such that it represents the expenditure of the entire <code>Room</code> and not
+one <code>Guest</code>, since the occupants of the <code>Room</code> can only contribute to one single
+<code>Expenses</code> object. <code>Room</code> is a more natural choice over <code>Booking</code> as <code>Booking</code>
+is meant to encapsulate booking information such as timing and <code>Room</code>.
+Not much difference in implementation no matter which one of the three classes
+it is assigned to.</p>
+</li>
+<li>
+<p>Cons: May be confusing to implement. Need to ensure that there are no expenses
+for rooms that have no guests.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Assign <code>expenses</code> to each <code>Guest</code>.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Can track <code>expenses</code> of each <code>Guest</code>, can find out who are the heavy
+spenders. Can use this information for promotional activities such as vouchers
+or membership.</p>
+</li>
+<li>
+<p>Cons: Not all guests that will stay in the hotel are registered in the guest
+list, since each <code>Booking</code> only requires the name of one <code>Guest</code>, regardless of
+the <code>Room</code>. Will require a major refactoring of the <code>add</code> command.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 3:</strong> Assign <code>expenses</code> to each <code>Booking</code>.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Can allow tracking of the booker&#8217;s expenditure, less confusing to implement
+than <code>Room</code>, can allow for expenses to be recorded before the guest checks in.</p>
+</li>
+<li>
+<p>Cons: May violate SRP, since <code>Booking</code> should ideally only deal with booking
+information.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="login-and-logout"><a class="link" href="#login-and-logout">3.7. Login and Logout</a></h3>
+<h3 id="money"><a class="link" href="#money">3.7. Money</a></h3>
+<div class="sect3">
+<h4 id="current-implementation-6"><a class="link" href="#current-implementation-6">3.7.1. Current Implementation</a></h4>
+<div class="paragraph">
+<p><code>Money</code> is a class used to store monetary values. This class was created to
+enforce the restriction that monetary values should always have at most two
+decimal places, which could be inconvenient if using Java data types such
+as <code>double</code> or <code>BigDecimal</code>. <code>Money</code> objects can be created by the user
+through the <code>service</code> command (details in the next section).</p>
+</div>
+<div class="paragraph">
+<p>The <code>Money</code> class contains two main attributes, <code>dollars</code> and <code>cents</code>, both
+of which are <code>int`s, since it is unlikely that the cost of any one item will
+exceed `Integer.MAX_VALUE</code> dollars.</p>
+</div>
+<div class="paragraph">
+<p>The main method of creating <code>Money</code> objects is through the <code>service</code> command,
+with the <code>Money</code> class parsing a string to convert into a <code>Money</code> object.
+The method <code>isValidMoneyFormat()</code> handles the checking of the string format,
+and the list of requirements are as follows:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Can be negative.</p>
+</li>
+<li>
+<p>Format of the string should be {1 to 10 digits}.{2 digits}, e.g. <code>12.34</code>.
+<code>123</code>, <code>.50</code>, <code>12.9</code>, <code>12345612345.00</code> are not allowed.</p>
+</li>
+<li>
+<p>The <code>dollars</code> section can be 0 but cannot have leading 0, i.e. 0.12 is allowed
+but 01.23 is not allowed.</p>
+</li>
+<li>
+<p>The <code>dollars</code> section should not exceed <code>Integer.MAX_VALUE</code>.</p>
+</li>
+<li>
+<p>Cannot have characters that are not digits or <code>.</code> or <code>-</code>.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-7"><a class="link" href="#design-considerations-7">3.7.2. Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-immutability-of-money"><a class="link" href="#aspect-immutability-of-money">Aspect: Immutability of Money</a></h5>
+<div class="paragraph">
+<p><code>Money</code> does not have to be mutable. Adjustment of <code>Expenses</code> are to be done
+through the <code>service</code> command. <code>Money</code> is simply a data type, much like
+<code>Double</code> and <code>Integer</code>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="servicecommand"><a class="link" href="#servicecommand">3.8. ServiceCommand</a></h3>
+<div class="sect3">
+<h4 id="current-implementation-7"><a class="link" href="#current-implementation-7">3.8.1. Current Implementation</a></h4>
+<div class="paragraph">
+<p>The <code>service</code> command is used for charging expenses to rooms. This
+functionality is the main reason that the classes Expenses, Expense,
+ExpenseType, Menu and Money were implemented. The format for the <code>service</code>
+command is as such:</p>
+</div>
+<div class="paragraph">
+<p><code>service r/ROOM_NUMBER no/ITEM_NUMBER [c/COST]</code></p>
+</div>
+<div class="paragraph">
+<p>The cost is made optional for the convenience of the user. We expect that
+most of the time, the cost of items are more or less fixed. Instead of
+having the user type in the same cost all of the time, the field is made
+optional. This functionality is enabled by the use of <code>ExpenseType</code> and
+<code>Menu</code>, which stores the default cost of items. If the cost is not specified,
+the default cost of the item will be used.</p>
+</div>
+<div class="paragraph">
+<p>As in AddressBook4, the ConciergeParser (aka AddressBookParser) will parse
+the user input and create a <code>ServiceCommandParser</code> object to parse a <code>service</code>
+command. The <code>ServiceCommandParser</code> is responsible for checking that the
+<code>RoomNumber</code> and cost (a <code>Money</code> object) are in the correct format. Note that
+the item number is not checked here, since the <code>Menu</code> object of <code>Concierge</code>
+has to be available in order to check that the given item number is a valid
+item. Hence, any string will be accepted by the parser. Since <code>ServiceCommand</code>
+has access to the <code>Model</code> and thus the <code>Menu</code>, the checking is given to
+<code>ServiceCommand</code> instead. A successful parse will then return a
+<code>ServiceCommand(RoomNumber roomNumber, String itemNumber, Optional&lt;Money&gt; itemCost)</code>
+object.</p>
+</div>
+<div class="paragraph">
+<p>The following flowchart describes what happens when the <code>execute</code> method
+of a <code>ServiceCommand</code> is called.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/ServiceCommand-flowchart.png" alt="ServiceCommand flowchart" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>model.addExpense()</code> method call was not illustrated in detail in the flowchart,
+thus it is illustrated in this sequence diagram.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/AddExpenseSequenceDiagram.png" alt="AddExpenseSequenceDiagram" width="900">
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-8"><a class="link" href="#design-considerations-8">3.8.2. Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-deleting-and-editing-expenses"><a class="link" href="#aspect-deleting-and-editing-expenses">Aspect: Deleting and editing Expenses</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Use <code>service</code> to edit `Expense`s.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Simply keying in `Expense`s with negative values is easy to implement,
+and does not stray far from real-life implementations, e.g. receipts often
+contain cost subtractions for discounts and promotions.</p>
+</li>
+<li>
+<p>Cons: May not be elegant, <code>Expenses</code> may become cluttered if there&#8217;s too many
+corrections.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Create new commands to edit and delete `Expense`s.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: The <code>Expenses</code> will contain all the `Expense`s at their correct prices.</p>
+</li>
+<li>
+<p>Cons: More effort to implement, difficult to implement, e.g. may need to implement
+listing out all <code>Expense`s of a `Room</code> with the <code>list</code> command in order to select
+the <code>Expense</code> to delete or edit. Information on discounts and corrections will
+also be lost.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="login-and-logout"><a class="link" href="#login-and-logout">3.9. Login and Logout</a></h3>
 <div class="paragraph">
 <p>The <code>login</code> feature allows hotel managers to tag commands entered with a
  specific user, creating a blame history to trace rogue commands. Managers
  can also control which receptionists have full access to Concierge.</p>
 </div>
 <div class="sect3">
-<h4 id="current-implementation-6"><a class="link" href="#current-implementation-6">3.7.1. Current Implementation</a></h4>
+<h4 id="current-implementation-8"><a class="link" href="#current-implementation-8">3.9.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>Currently, <code>login</code> is implemented as a
 <a href="#aspect-accessing-features-of-concierge-with-without-login">dynamic feature</a>,
@@ -1619,7 +1832,7 @@ overwrite this method in that command.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-7"><a class="link" href="#design-considerations-7">3.7.2. Design Considerations</a></h4>
+<h4 id="design-considerations-9"><a class="link" href="#design-considerations-9">3.9.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-accessing-features-of-concierge-with-without-login"><a class="link" href="#aspect-accessing-features-of-concierge-with-without-login">Aspect: Accessing features of Concierge with/ without login</a></h5>
 <div class="ulist">
@@ -1775,9 +1988,9 @@ adding new accounts on a regular basis.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="autocomplete-kbd-ctrl-kbd-kbd-alt-kbd"><a class="link" href="#autocomplete-kbd-ctrl-kbd-kbd-alt-kbd">3.8. Autocomplete: <kbd>Ctrl</kbd>, <kbd>Alt</kbd></a></h3>
+<h3 id="autocomplete-kbd-ctrl-kbd-kbd-alt-kbd"><a class="link" href="#autocomplete-kbd-ctrl-kbd-kbd-alt-kbd">3.10. Autocomplete: <kbd>Ctrl</kbd>, <kbd>Alt</kbd></a></h3>
 <div class="sect3">
-<h4 id="overview"><a class="link" href="#overview">3.8.1. Overview</a></h4>
+<h4 id="overview"><a class="link" href="#overview">3.10.1. Overview</a></h4>
 <div class="paragraph">
 <p>The Autocomplete feature allows the user to seamlessly type in the
 full command and prefixes without having to worry if he/she missed
@@ -1809,7 +2022,7 @@ the user can again, save time.Press <kbd>Alt</kbd> to quick-clear the
 </div>
 </div>
 <div class="sect3">
-<h4 id="example-of-how-feature-works"><a class="link" href="#example-of-how-feature-works">3.8.2. Example of how feature works</a></h4>
+<h4 id="example-of-how-feature-works"><a class="link" href="#example-of-how-feature-works">3.10.2. Example of how feature works</a></h4>
 <div class="paragraph">
 <p><strong>Step 1</strong>: Launch application</p>
 </div>
@@ -1890,7 +2103,7 @@ the user can just delete it if he chooses not to add a tag.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="current-implementation-7"><a class="link" href="#current-implementation-7">3.8.3. Current Implementation</a></h4>
+<h4 id="current-implementation-9"><a class="link" href="#current-implementation-9">3.10.3. Current Implementation</a></h4>
 <div class="paragraph">
 <p>The Autocomplete mechanism is facilitated by <code>AutoCompleteManager</code>, which
 can be found in <code>LogicManager</code>. It supports the auto completion of incomplete
@@ -1933,7 +2146,7 @@ method.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-8"><a class="link" href="#design-considerations-8">3.8.4. Design Considerations</a></h4>
+<h4 id="design-considerations-10"><a class="link" href="#design-considerations-10">3.10.4. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-implementation-of-autocomplete"><a class="link" href="#aspect-implementation-of-autocomplete">Aspect: Implementation of Autocomplete</a></h5>
 <div class="ulist">
@@ -2016,7 +2229,7 @@ might start to lag due to possible loss of performance.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="proposed-command-archive-feature"><a class="link" href="#proposed-command-archive-feature">3.9. [Proposed] Command Archive feature</a></h3>
+<h3 id="proposed-command-archive-feature"><a class="link" href="#proposed-command-archive-feature">3.11. [Proposed] Command Archive feature</a></h3>
 <div class="paragraph">
 <p>Given below is the UML diagram for the <code>CommandArchive</code> Class:</p>
 </div>
@@ -2034,7 +2247,7 @@ might start to lag due to possible loss of performance.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="current-implementation-8"><a class="link" href="#current-implementation-8">3.9.1. Current Implementation</a></h4>
+<h4 id="current-implementation-10"><a class="link" href="#current-implementation-10">3.11.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>The Command Archive mechanism is facilitated by <code>CommandArchive</code>.
 It utilises the <code>userInputHistory</code> to extract the latest command that the user
@@ -2084,7 +2297,7 @@ operation can be found in CommandArchive`.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-9"><a class="link" href="#design-considerations-9">3.9.2. Design Considerations</a></h4>
+<h4 id="design-considerations-11"><a class="link" href="#design-considerations-11">3.11.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-how-to-extract-userinputhistory"><a class="link" href="#aspect-how-to-extract-userinputhistory">Aspect: How to extract userInputHistory</a></h5>
 <div class="ulist">
@@ -2152,20 +2365,20 @@ would require more effort to implement.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">3.10. [Proposed] Data Encryption</a></h3>
+<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">3.12. [Proposed] Data Encryption</a></h3>
 <div class="paragraph">
 <p><em>{Explain here how the data encryption feature will be implemented}</em></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">3.11. Logging</a></h3>
+<h3 id="logging"><a class="link" href="#logging">3.13. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.12, &#8220;Configuration&#8221;</a>)</p>
+<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.14, &#8220;Configuration&#8221;</a>)</p>
 </li>
 <li>
 <p>The <code>Logger</code> for a class can be obtained using <code>LogsCenter.getLogger(Class)</code> which will log messages according to the specified logging level</p>
@@ -2196,7 +2409,7 @@ would require more effort to implement.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.12. Configuration</a></h3>
+<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.14. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
@@ -3401,4 +3614,4 @@ Expected: The most recent window size and location is retained.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-11 19:34:32 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 03:12:05 UTC</div></div></div></body></html>
