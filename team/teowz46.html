@@ -158,12 +158,19 @@ several new utility methods, besides writing tests for all the classes mentioned
 <p>Charges a room service to a room <br>
 Format: <code>service r/ROOM_NUMBER no/ITEM_NUMBER [c/COST]</code></p>
 </div>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
+<table class="tableblock frame-none grid-all spread">
+<colgroup>
+<col style="width: 8.3333%;">
+<col style="width: 91.6667%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-center valign-middle"><p class="tableblock"><span class="image center"><img src="../images/icon-important.png" alt="icon important"></span></p></td>
+<td class="tableblock halign-left valign-middle"><div><div class="ulist">
 <ul>
 <li>
-<p>ITEM_NUMBER refers to the number in the menu given to each type of service offered by the hotel.</p>
+<p>ITEM_NUMBER refers to the number in the menu given to each type of service offered by the hotel.
+Refer to the Menu below.</p>
 </li>
 <li>
 <p>The cost can be specified as well, if the guest is to be charged an amount that is
@@ -172,18 +179,7 @@ such as 100.00, i.e. with two decimal places. The dollar part of the cost should
 not exceed <code>Integer.MAX_VALUE</code>.</p>
 </li>
 <li>
-<p>Any expenses added with this command will be accounted for under the Expenses portion
-of the respective rooms. The Expenses of the room will also be displayed on the
-right panel.</p>
-</li>
-<li>
 <p>Only occupied rooms (i.e. rooms with checked-in guests) can have expenses charged to it.</p>
-</li>
-<li>
-<p>It is possible to charge negative values as well. This can be used in cases such as when
-a guest uses a voucher, hence allowing the total expenses to be reduced. Negative
-values can also be charged if the user wants to remove or adjust an existing expense.
-Two expense types, XX01 and XX02, were thus created for the purpose of adjustments.</p>
 </li>
 <li>
 <p>The default <code>Menu</code> that comes with Concierge&#8482; consists of the following items. Items
@@ -226,8 +222,24 @@ displaying of the <code>Menu</code> on the main app.</p>
 </div>
 </li>
 </ul>
-</div>
-</div>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Negative values can be used in <code>service</code> command. This can be used in cases such as when
+a guest uses a voucher, hence allowing the total expenses to be reduced. Negative
+values can also be charged if the user wants to remove or edit an existing expense.
+The two expense types, XX01 and XX02, were thus created for the purpose of adjustments.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -408,7 +420,9 @@ or membership.</p>
 <li>
 <p>Cons: Not all guests that will stay in the hotel are registered in the guest
 list, since each <code>Booking</code> only requires the name of one <code>Guest</code>, regardless of
-the <code>Room</code>. Will require a major refactoring of the <code>add</code> command.</p>
+the <code>Room</code>. Will require a major refactoring of the <code>add</code> command. Complications
+may also arise if a <code>Guest</code> has multiple bookings simultaneously and there is a
+need to track the <code>Expenses</code> over different rooms.</p>
 </li>
 </ul>
 </div>
@@ -586,4 +600,4 @@ also be lost.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 03:29:24 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 04:36:22 UTC</div></div></div></body></html>
