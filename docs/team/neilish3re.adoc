@@ -1,0 +1,98 @@
+= Neil Mehta - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: image:ConciergeFinal.png[width="200"]
+
+---
+
+== Overview
+
+Concierge(TM) is a desktop hotel management application for receptionists to
+handle potential bookings and current guests. The user interacts with it
+using a CLI, and it has a GUI created with JavaFX. It is written in Java, and
+has about 10 kLoC.
+
+== Summary of contributions
+
+* *Code contributed*: [https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=neilish3re[Code Contributed]]
+
+* *Major enhancements*:
+** *Implemented Autocomplete Feature*
+
+*** What it does: Ihe Autocomplete feature allows the user to seamlessly type
+in user commands with the autocompletion of an incomplete command that is
+input by the user. This feature helps the user by prompting the correct
+format.
+
+*** Justification: This feature is not mandatory to have, however it would
+save the user a lot of time, especially if he/she is dealing with many
+different commands (in our case, many guests waiting to check in at the same
+time).
+
+*** Highlights: It also eliminates the need for the user to remember all
+the prefixes because my implementation not only fills in the command, but fills in
+subsequent prefixes for the user as well which makes the feature more effective
+and efficient.
+
+*** Credits: [https://github.com/CS2103-AY1819S1-T09-4/main/blob/master/docs/DeveloperGuide.adoc#autocomplete-feature[Idea]]
+Got the idea of implementing the autocomplete feature replete with prefixes
+and the various parameters pre-filled in from the link given. However, I decided
+to implement it with a Control button press so as to minimise the user having
+to navigate back and forth in the Command Box and it will also make for quicker
+typing once the user gets a flow of the autocomplete feature.
+
+* *Minor enhancements*:
+** *Implemented Command Archive feature* (Shifted to v2.0)
+
+*** What it does: This feature keeps an archive of all the commands (both
+valid and invalid) input by a user and adds a time stamp plus user tag. This is
+different from the history command because this information will be exported
+into a txt/xml file instead of being destroyed at the end of the session as
+is seen in AB4
+
+*** Justification: This feature is not mandatory, however it would serve an
+important purpose to hotel managers or the person-in-charge. This feature is
+aimed at tracking and identifying any suspicious activity and also to serve
+as data that could either be used in the future for monthly audits and even
+possibly generating statistics as to what items/facilities are patronised
+most by the guests.
+
+* *Other contributions*:
+
+** Setting up the initial user guide with all the new commands we aimed to
+implement
+** PRs reviewed (with some review comments):
+#133, #139, #140, #143, #153, #162, #191, #229, #235, #236
+** Reported bugs and suggestions for other teams in the class:
+https://github.com/CS2103-AY1819S1-W16-3/main/issues/170[unclear usage of find feature],
+https://github.com/CS2103-AY1819S1-W16-3/main/issues/167[unable to edit multiple parameters at once],
+https://github.com/CS2103-AY1819S1-W16-3/main/issues/164[unclear purpose of back command]
+https://github.com/CS2103-AY1819S1-W16-3/main/issues/160[/bk prompt of add command]
+
+== Contributions to the User Guide
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my
+ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=autocomplete]
+
+include::../UserGuide.adoc[tag=archive]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They
+showcase my ability to write technical documentation and the technical depth
+of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=autocomplete]
+
+include::../DeveloperGuide.adoc[tag=archive]
+
+
+

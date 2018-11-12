@@ -388,32 +388,45 @@ Selects the 2nd guest in the displayed list.
 `select 100` +
 Selects the 100th room in the displayed list.
 
+// tag::service[]
 === Provide Room Service: `service` image:icon-key.png[width="32"]
 
 Charges a room service to a room  +
 Format: `service r/ROOM_NUMBER no/ITEM_NUMBER [c/COST]`
 
-****
-* ITEM_NUMBER refers to the number in the menu given to each type of service offered by the hotel.
-* This could be room service, on-demand video streaming, bath supplies, mini bar, etc.
-* The cost can be specified as well, if the guest is to be charged an amount that is
+`ITEM_NUMBER` refers to the number in the menu given to each type of service offered by the hotel.
+The default Menu that comes with Concierge(TM) consists of the following items:
+
+* *RS01* -- Room service: Red wine -- $50.00
+* *RS02* -- Room service: Beef steak -- $70.00
+* *RS03* -- Room service: Thai massage -- $100.00
+* *MB01* -- Minibar: Coca cola -- $3.00
+* *MB02* -- Minibar: Sprite -- $3.00
+* *MB03* -- Minibar: Tiger beer -- $6.00
+* *MB04* -- Minibar: Mineral water -- $3.00
+* *SP01* -- Swimming pool: Entry -- $5.00
+* *XX01* -- Adjustment: Discount -- $0.00
+* *XX02* -- Adjustment: Typo -- $0.00
+
+[cols="^.^1,<.^11a", frame=none]
+|===
+|image:icon-important.png[role="center"]
+|
+* The cost can be specified if the guest is to be charged an amount that is
   different from the cost in the menu. Note that the cost has to follow a strict format
   such as 100.00, i.e. with two decimal places. The dollar part of the cost should also
   not exceed `Integer.MAX_VALUE`.
-* Any expenses added with this command will be accounted for under the Expenses portion
-  of the respective rooms.
 * Only occupied rooms (i.e. rooms with checked-in guests) can have expenses charged to it.
-* The default `Menu` that comes with Concierge(TM) consists of the following items. Items
-  may be modified, added, or removed through `concierge.xml`.
-** *RS01* -- Room service: Red wine -- $50.00
-** *RS02* -- Room service: Beef steak -- $70.00
-** *RS03* -- Room service: Thai massage -- $100.00
-** *MB01* -- Minibar: Coca cola -- $3.00
-** *MB02* -- Minibar: Sprite -- $3.00
-** *MB03* -- Minibar: Tiger beer -- $6.00
-** *MB04* -- Minibar: Mineral water -- $3.00
-** *SP01* -- Swimming pool: Entry -- $5.00
-****
+* Items in the Menu may be modified, added, or removed through `concierge.xml`.
+  Only item numbers from the Menu (case-sensitive) may be used in the `service` command.
+  Future versions will allow displaying of the Menu on the main app.
+|===
+
+[TIP]
+Negative values can be used in `service` command. This can be used in cases such as when
+a guest uses a voucher, hence allowing the total expenses to be reduced. Negative
+values can also be charged if the user wants to remove or edit an existing expense.
+The two expense types, XX01 and XX02, were thus created for the purpose of adjustments.
 
 Examples:
 
@@ -422,6 +435,7 @@ Adds an expenditure of the item *RS01* to the room's expenses.
 
 * `service r/096 no/RS03 c/12.34` +
 Adds an expenditure of the item *RS03* to the room's expenses and charge $12.34 for it.
+// end::service[]
 
 === Listing entered commands : `history`
 
@@ -499,10 +513,71 @@ Example: `clear`
 image::ClearCommand-success.png[width="400"]
 // end::clear[]
 
-=== Export log: `export` [red]#Coming in v2.0#
+// tag::archive[]
+=== Command Archive: `archive` [red]#Coming in v2.0#
 
-Exports a log of all history of commands into a text file +
-Format: `export`
+All user input is captured and saved onto a log. All keystrokes are
+captured, including invalid/mistyped and login commands.
+
+To open this log, input the archive command +
+Format: `archive`
+
+ This command requires a login.
+
+// end::archive[]
+
+// tag::autocomplete[]
+=== Autocomplete: kbd:[Ctrl], kbd:[Alt]
+
+Auto-completes a partially typed in command by a user.
+
+**Function** Press kbd:[Alt] to quick-clear the `CommandBox` (saves time
+             for user when he wants to clear the box).
+
+The command box before kbd:[Alt] is pressed:
+
+image::servicepreclear.png[width="419"]
+
+The command box aft kbd:[Alt] is pressed:
+
+image::servicepostclear.png[width="371"]
+
+**Format**: Enter `COMMAND_WORD`, followed by kbd:[Ctrl] key.
+
+**Function**: Press kbd:[Ctrl] key again to proceed to the next prefix.
+
+Example: +
+**Step 1**: User enters `a` in `CommandBox`.
+
+image::add.png[width="579"]
+
+**Step 2**: After kbd:[Ctrl] has been pressed, it automatically inserts the
+        command and the first parameter `PREFIX_NAME` in the command line.
+
+image::addPREFIX_NAME.png[width="581"]
+
+**Step 3**: After filling up the name field, e.g. with Anthony, then press
+        kbd:[Space]. Finally, to insert the next parameter `PREFIX_PHONE`
+        press kbd:[Ctrl].
+
+image::afteranthonyspace.png[width="581"]
+
+**Step 4**: Repeat Step 3 until all the parameters are input, then press
+        kbd:[Enter] to execute the command.
+
+image::fulladdautocomplete.png[width="953"]
+
+**Note(s)**:
+
+* For finishing entering a prefix field e.g. 'n/John Doe', user
+has to insert kbd:[Space] on his/her own before pressing kbd:[Ctrl]
+again, to autocomplete the next prefix. +
+
+* For commands such as `checkin` and `checkout`, user has to specify
+up till at least `checki` or `checko` because the application
+is unable to distinguish from the two commands without sufficient
+information. The subsequent prefixes will follow suit accordingly.
+// end::autocomplete[]
 
 === Viewing help : `help`
 

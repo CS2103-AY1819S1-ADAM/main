@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -20,6 +19,7 @@ import seedu.address.model.room.Room;
 import seedu.address.model.room.RoomNumber;
 import seedu.address.model.room.booking.Booking;
 import seedu.address.model.room.booking.Bookings;
+import seedu.address.model.room.booking.exceptions.NoBookingException;
 import seedu.address.model.room.booking.exceptions.OverlappingBookingException;
 import seedu.address.model.tag.Tag;
 
@@ -111,24 +111,28 @@ public class XmlAdaptedRoom {
             throw new IllegalValueException(MESSAGE_OVERLAPPING_BOOKING);
         }
 
-        // only allow expenses for rooms with checked-in guests, past expenses to be
-        // archived using receipt feature.
-        Optional<Booking> firstBooking = modelBookings.getFirstActiveBooking();
+        // only allow expenses for checked-in rooms.
+        // expenses are allowed for checked-in bookings that are expired;
+        // user may have exited the app without checking out a booking and
+        // the next day, the booking expired.
+        Expenses modelExpenses = new Expenses();
         if (!expenses.isEmpty()) {
-            if (!firstBooking.isPresent()) {
-                // no booking
+            Booking firstBooking;
+            try {
+                firstBooking = modelBookings.getFirstBooking();
+            } catch (NoBookingException nbe) {
                 throw new IllegalValueException(MESSAGE_NO_BOOKING_TO_ADD_EXPENSES);
             }
-            if (!firstBooking.get().getIsCheckedIn()) {
-                // not checked in
+            if (!firstBooking.getIsCheckedIn()) {
                 throw new IllegalValueException(MESSAGE_NOT_CHECKED_IN_TO_ADD_EXPENSES);
             }
+
+            final List<Expense> expenseList = new ArrayList<>();
+            for (XmlAdaptedExpense expense : expenses) {
+                expenseList.add(expense.toModelType(menu));
+            }
+            modelExpenses = new Expenses(expenseList);
         }
-        final List<Expense> expenseList = new ArrayList<>();
-        for (XmlAdaptedExpense expense : expenses) {
-            expenseList.add(expense.toModelType(menu));
-        }
-        final Expenses modelExpenses = new Expenses(expenseList);
 
         final List<Tag> roomTags = new ArrayList<>();
         for (XmlAdaptedTag tag : tagged) {

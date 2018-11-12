@@ -1,6 +1,7 @@
 package seedu.address.storage;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static seedu.address.storage.XmlAdaptedRoom.MESSAGE_NOT_CHECKED_IN_TO_ADD_EXPENSES;
 import static seedu.address.storage.XmlAdaptedRoom.MESSAGE_NO_BOOKING_TO_ADD_EXPENSES;
 import static seedu.address.storage.XmlAdaptedRoom.MISSING_FIELD_MESSAGE_FORMAT;
@@ -135,5 +136,29 @@ public class XmlAdaptedRoomTest {
                 new XmlAdaptedRoom(VALID_ROOM_NUMBER, VALID_CAPACITY, nonEmptyBookings, VALID_EXPENSES, VALID_TAGS);
         Assert.assertThrows(IllegalValueException.class,
             MESSAGE_NOT_CHECKED_IN_TO_ADD_EXPENSES, () -> room.toModelType(VALID_MENU_STUB));
+    }
+
+    @Test
+    public void toString_testEquals() {
+        XmlAdaptedRoom room =
+                new XmlAdaptedRoom(VALID_ROOM_NUMBER, VALID_CAPACITY, VALID_BOOKINGS, VALID_EXPENSES, VALID_TAGS);
+        assertEquals(room.toString(),
+                VALID_ROOM_NUMBER + VALID_CAPACITY + VALID_EXPENSES + VALID_BOOKINGS + VALID_TAGS);
+    }
+
+    @Test
+    public void equals_test() {
+        XmlAdaptedRoom room =
+                new XmlAdaptedRoom(VALID_ROOM_NUMBER, VALID_CAPACITY, VALID_BOOKINGS, VALID_EXPENSES, VALID_TAGS);
+        // null
+        XmlAdaptedRoom testRoomNull = null;
+        assertNotEquals(room, testRoomNull);
+        // not XmlAdaptedRoom
+        Object testObject = new Object();
+        assertNotEquals(room, testObject);
+        // correct
+        XmlAdaptedRoom testRoomCorrect =
+                new XmlAdaptedRoom(VALID_ROOM_NUMBER, VALID_CAPACITY, VALID_BOOKINGS, VALID_EXPENSES, VALID_TAGS);
+        assertEquals(room, testRoomCorrect);
     }
 }
