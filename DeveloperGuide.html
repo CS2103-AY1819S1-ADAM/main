@@ -81,11 +81,17 @@
 <li><a href="#market-survey">Appendix G: Market Survey</a></li>
 <li><a href="#instructions-for-manual-testing">Appendix H: Instructions for Manual Testing</a>
 <ul class="sectlevel2">
-<li><a href="#adding-a-booking-2">H.1. Adding a Booking</a></li>
-<li><a href="#login-logout">H.2. Login/ logout</a></li>
-<li><a href="#service">H.3. Service</a></li>
-<li><a href="#launch-and-shutdown">H.4. Launch and Shutdown</a></li>
-<li><a href="#saving-data">H.5. Saving data</a></li>
+<li><a href="#autocomplete">H.1. Autocomplete</a></li>
+<li><a href="#adding-a-booking-2">H.2. Adding a Booking</a></li>
+<li><a href="#check-in">H.3. Check-in</a></li>
+<li><a href="#checkout">H.4. Checkout</a></li>
+<li><a href="#reassign">H.5. Reassign</a></li>
+<li><a href="#login-logout">H.6. Login/ logout</a></li>
+<li><a href="#list">H.7. List</a></li>
+<li><a href="#find">H.8. Find</a></li>
+<li><a href="#service">H.9. Service</a></li>
+<li><a href="#launch-and-shutdown">H.10. Launch and Shutdown</a></li>
+<li><a href="#saving-data">H.11. Saving data</a></li>
 </ul>
 </li>
 </ul>
@@ -3441,7 +3447,30 @@ identifications details, thus the responsibility of the guest(s) under that book
 <p>Given below are instructions to test the app manually.</p>
 </div>
 <div class="sect2">
-<h3 id="adding-a-booking-2"><a class="link" href="#adding-a-booking-2">H.1. Adding a Booking</a></h3>
+<h3 id="autocomplete"><a class="link" href="#autocomplete">H.1. Autocomplete</a></h3>
+<div class="paragraph">
+<p>Enter <code>a</code> in the command box and press <kbd>Ctrl</kbd><br>
+Add command word is autocompleted with n/ prefix.</p>
+</div>
+<div class="paragraph">
+<p>Fill in a name, press <kbd>Space</kbd> and <kbd>Ctrl</kbd><br>
+You will be prompted with the next parameter.</p>
+</div>
+<div class="paragraph">
+<p>Optional parameters (e.g. [t/TAG] in <code>add</code>) are at the back, and are up to you
+ to include.</p>
+</div>
+<div class="paragraph">
+<p>Press <kbd>Alt</kbd> to clear your command box.</p>
+</div>
+<div class="paragraph">
+<p>Enter <code>c</code> in the command box and press <kbd>Ctrl</kbd><br>
+No autocompletion is in place because there is no unique command that starts
+with <code>c</code>. <code>checkin</code> and <code>checkout</code> are both possible options.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="adding-a-booking-2"><a class="link" href="#adding-a-booking-2">H.2. Adding a Booking</a></h3>
 <div class="paragraph">
 <p><code>add n/Pikachu p/81726354 e/pi@ka.chu t/wheelchair r/047 from/20/11/2018 to/23/11/2018</code><br>
 Unable to execute command because you have not signed-in to Concierge.</p>
@@ -3461,7 +3490,7 @@ different room.</p>
 Pikachu can make a new (active)** booking.</p>
 </div>
 <div class="paragraph">
-<p><code>add n/Pikachu p/81726354 e/pi@ka.chu r/047 from/19/11/2018 to/21/11/2018</code><br>
+<p><code>add n/Pikachu p/81726354 e/pi@ka.chu r/049 from/19/11/2018 to/21/11/2018</code><br>
 Unable to make booking because it overlaps with the previous booking.</p>
 </div>
 <div class="paragraph">
@@ -3477,7 +3506,150 @@ Unable to make booking because it is outdated.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="login-logout"><a class="link" href="#login-logout">H.2. Login/ logout</a></h3>
+<h3 id="check-in"><a class="link" href="#check-in">H.3. Check-in</a></h3>
+<div class="paragraph">
+<p>First, ensure that you have signed in by doing <code>login user/admin pw/passw0rd</code>.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Checking in a room that has an active first booking (i.e. booking period includes today&#8217;s date)</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Prerequisites: There is a booking in the room you want to check in. Add an active booking to an empty room by doing:<br>
+<code>add n/Pikachu p/81726354 e/pika@chu r/010 from/16/11/2018 to/20/11/2018</code></p>
+</li>
+<li>
+<p>Test case: <code>checkin r/010</code><br>
+Expected: Checks-in the guest Pikachu&#8217;s booking and adds him to the checked-in guest list.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Checking in a room that has an expired first booking (i.e. ends before today&#8217;s date)</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Prerequisites: There is a booking in the room you want to check in. Room 006 has a preloaded expired booking for you to test.</p>
+</li>
+<li>
+<p>Test case: <code>checkin r/010</code><br>
+Expected: Cannot check-in room 010 as first booking is already expired.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Checking in a room that has a upcoming first booking (i.e. starts after today&#8217;s date)</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Prerequisites: There is a booking in the room you want to check in. Add an upcoming booking to an empty room by doing:<br>
+<code>add n/Pikachu p/81726354 e/pika@chu r/011 from/01/12/2018 to/02/12/2018</code></p>
+</li>
+<li>
+<p>Test case: <code>checkin r/011</code><br>
+Expected: Cannot check-in room 011 as first booking is not active.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="checkout"><a class="link" href="#checkout">H.4. Checkout</a></h3>
+<div class="paragraph">
+<p>First, ensure that you have signed in by doing <code>login user/admin pw/passw0rd</code>.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Checking out first booking of a room that is not checked-in</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Prerequisites: There is a booking in the room you want to check out. Room 002 has a preloaded non-checked-in booking for you to test.</p>
+</li>
+<li>
+<p>Test case: <code>checkout r/002</code><br>
+Expected: First booking is deleted. Guest of booking is not added into checked-in guest list nor archived guest list.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Checking out first booking of a room that is checked-in</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Prerequisites: There is a booking in the room you want to check out. Room 001 has a preloaded checked-in booking for you to test.</p>
+</li>
+<li>
+<p>Test case: <code>checkout r/001</code><br>
+Expected: First booking is deleted. Guest Alex Yeoh is removed from the checked-in guest list and added to the archived guest list.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Checking out specified booking of a room that is not checked-in</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Prerequisites: There is a booking in the room you want to check out. Room 003 has a preloaded upcoming booking for you to test.</p>
+</li>
+<li>
+<p>Test case: <code>checkout r/003 from/14/11/18</code><br>
+Expected: Booking is deleted. Guest of booking is not added into checked-in guest list nor archived guest list.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="reassign"><a class="link" href="#reassign">H.5. Reassign</a></h3>
+<div class="paragraph">
+<p>First, ensure that you have signed in by doing <code>login user/admin pw/passw0rd</code>.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Reassigning a non-checked-in booking to another</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Prerequisites: There is a booking in the room you want to reassign. Room 004 has a preloaded booking for you to test.</p>
+</li>
+<li>
+<p>Test case: <code>reassign r/004 from/12/11/18 nr/007</code><br>
+Expected: Booking in room 004 that starts from 12/11/18 is reassigned to room 007 (which has no bookings prior).</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Incorrect commands to try:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>reassign r/001 from/32/11/18 nr/002</code> (no such date)</p>
+</li>
+<li>
+<p><code>reassign r/005 from/12/11/18 nr/101</code> (no such rooms)</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="login-logout"><a class="link" href="#login-logout">H.6. Login/ logout</a></h3>
 <div class="paragraph">
 <p><code>clear</code><br>
 Unable to clear because user is not signed in.</p>
@@ -3510,6 +3682,86 @@ Unable to clear because user is not signed in.</p>
 <p><code>undo</code><br>
 Unable to undo because the revision history was erased.</p>
 </div>
+</div>
+<div class="sect2">
+<h3 id="list"><a class="link" href="#list">H.7. List</a></h3>
+<div class="paragraph">
+<p><code>list -cg</code><br>
+This is the list of guests currently checked-in.</p>
+</div>
+<div class="paragraph">
+<p><code>login user/admin pw/passw0rd</code><br>
+Sign in to Concierge.</p>
+</div>
+<div class="paragraph">
+<p><code>add n/Pikachu p/81726354 e/pi@ka.chu r/059 from/16/11/2018 to/20/11/2018</code><br>
+Add a booking to Concierge.</p>
+</div>
+<div class="paragraph">
+<p><code>checkin r/059</code><br>
+Checks in Pikachu to Concierge.</p>
+</div>
+<div class="paragraph">
+<p><code>list -cg</code><br>
+Pikachu is added to the list of checked-in guests.</p>
+</div>
+<div class="paragraph">
+<p><code>list -r</code><br>
+This is the list of rooms and bookings. The room view is the default view of
+Concierge&#8482;.</p>
+</div>
+<div class="paragraph">
+<p><code>list -g</code><br>
+This is the view of archived guests. It contains people who have ever checked
+ out of Concierge.</p>
+</div>
+<div class="paragraph">
+<p><code>checkout r/059</code><br>
+Checks out Pikachu from Concierge.</p>
+</div>
+<div class="paragraph">
+<p><code>list -g</code><br>
+Pikachu is added to the list of archived guests.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="find"><a class="link" href="#find">H.8. Find</a></h3>
+<div class="paragraph">
+<p><code>find -g n/Alex Yu</code><br>
+Find guest(s) with "Alex" or "Yu" or both in their names.</p>
+</div>
+<div class="paragraph">
+<p><code>find -g n/Alex t/VIP</code><br>
+Find guest(s) named Alex with tag "VIP".</p>
+</div>
+<div class="paragraph">
+<p><code>find -cg p/81027115</code><br>
+Find checked-in guest(s) with phone number "81027115".</p>
+</div>
+<div class="paragraph">
+<p><code>find -cg t/VIP</code><br>
+Find checked-in guest(s) with tag "VIP".</p>
+</div>
+<div class="paragraph">
+<p><code>find -r r/085</code><br>
+Find room 085</p>
+</div>
+<div class="paragraph">
+<p><code>find -r c/2</code><br>
+Find all rooms with a capacity of 2.</p>
+</div>
+<div class="paragraph">
+<p><code>find -r c/5 -nb from/ 01/11/2018 to/ 05/11/2018</code><br>
+Find all rooms with a capacity of 5, without any bookings from the date range 01/11/2018 to 05/11/2018.</p>
+</div>
+<div class="paragraph">
+<p><code>find -r -hb</code><br>
+Find all rooms with bookings.</p>
+</div>
+<div class="paragraph">
+<p><code>find -r -hb t/RoomService</code><br>
+Find all rooms with bookings with tag "RoomService".</p>
+</div>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -3524,7 +3776,7 @@ These instructions only provide a starting point for testers to work on; testers
 </div>
 </div>
 <div class="sect2">
-<h3 id="service"><a class="link" href="#service">H.3. Service</a></h3>
+<h3 id="service"><a class="link" href="#service">H.9. Service</a></h3>
 <div class="paragraph">
 <p>This section assumes that the default <code>Concierge</code> is being used.</p>
 </div>
@@ -3584,7 +3836,7 @@ Expenses are deleted in the right panel.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="launch-and-shutdown"><a class="link" href="#launch-and-shutdown">H.4. Launch and Shutdown</a></h3>
+<h3 id="launch-and-shutdown"><a class="link" href="#launch-and-shutdown">H.10. Launch and Shutdown</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -3622,7 +3874,7 @@ Expected: The most recent window size and location is retained.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="saving-data"><a class="link" href="#saving-data">H.5. Saving data</a></h3>
+<h3 id="saving-data"><a class="link" href="#saving-data">H.11. Saving data</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -3642,4 +3894,4 @@ Expected: The most recent window size and location is retained.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 16:52:14 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 16:56:33 UTC</div></div></div></body></html>
