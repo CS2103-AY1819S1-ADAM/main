@@ -1,7 +1,7 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]--><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Asciidoctor 1.5.6.1"><title>Adam Chew Yong Soon - Project Portfolio</title><link rel="stylesheet" href="../stylesheets/gh-pages.css">
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]--><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Asciidoctor 1.5.6.1"><title>Chew Yong Soon - Project Portfolio</title><link rel="stylesheet" href="../stylesheets/gh-pages.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="../stylesheets/coderay-asciidoctor.css"></head><body class="article"><div id="site-header"><nav class="navbar navbar-light bg-light"><div class="container"><a class="navbar-brand" href="../index.html">Concierge</a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="../UserGuide.html">User Guide</a></li><li class="nav-item"><a class="nav-link" href="../DeveloperGuide.html">Developer Guide</a></li><li class="nav-item"><a class="nav-link active" href="../AboutUs.html">About Us</a></li><li class="nav-item"><a class="nav-link" href="../ContactUs.html">Contact Us</a></li><li class="navitem"><a class="nav-link" href="https://github.com/CS2103-AY1819S1-F11-2/main"><span class="fa fa-github fa-lg" aria-hidden="true"></span>&nbsp;View on GitHub</a></li></ul></div></nav></div><div id="header"><h1>Adam Chew Yong Soon - Project Portfolio</h1></div><div id="content"><div class="sect1">
-<h2 id="project-concierge"><a class="link" href="#project-concierge">PROJECT: Concierge&#8482;</a></h2>
+<link rel="stylesheet" href="../stylesheets/coderay-asciidoctor.css"></head><body class="article"><div id="site-header"><nav class="navbar navbar-light bg-light"><div class="container"><a class="navbar-brand" href="../index.html">Concierge</a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="../UserGuide.html">User Guide</a></li><li class="nav-item"><a class="nav-link" href="../DeveloperGuide.html">Developer Guide</a></li><li class="nav-item"><a class="nav-link active" href="../AboutUs.html">About Us</a></li><li class="nav-item"><a class="nav-link" href="../ContactUs.html">Contact Us</a></li><li class="navitem"><a class="nav-link" href="https://github.com/CS2103-AY1819S1-F11-2/main"><span class="fa fa-github fa-lg" aria-hidden="true"></span>&nbsp;View on GitHub</a></li></ul></div></nav></div><div id="header"><h1>Chew Yong Soon - Project Portfolio</h1></div><div id="content"><div class="sect1">
+<h2 id="project-span-class-image-img-src-images-conciergefinal-png-alt-conciergefinal-width-200-span"><a class="link" href="#project-span-class-image-img-src-images-conciergefinal-png-alt-conciergefinal-width-200-span">PROJECT: <span class="image"><img src="../images/ConciergeFinal.png" alt="ConciergeFinal" width="200"></span></a></h2>
 <div class="sectionbody">
 <hr>
 </div>
@@ -23,11 +23,11 @@
 <p><strong>Code contributed</strong>: [<a href="https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&amp;search=adamwth">Code Contributed</a>]</p>
 </li>
 <li>
-<p><strong>Major enhancements</strong>:</p>
+<p><strong>Major enhancement</strong>:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Added <code>checkIn</code> and <code>checkout</code> features</p>
+<p>Implemented <code>checkIn</code> and <code>checkout</code> commands</p>
 <div class="ulist">
 <ul>
 <li>
@@ -42,12 +42,29 @@ This feature solves this problem by providing a command-line interface with mini
 checking-in/out of rooms.</p>
 </li>
 <li>
-<p>Highlights: The validity of a check-in operation requires knowledge of how a hotel manages its policy of allowing guests to check-in.
+<p>Highlights:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>The validity of a check-in operation requires knowledge of how a hotel manages its policy of allowing guests to check-in.
 The current implementation was finalized after experimenting with different validity checks on multiple different scenarios.
 Refer to the <a href="#contributions-to-the-user-guide">User Guide</a> and <a href="#contributions-to-the-developer-guide">Developer Guide</a>
-for more information on these checks.
-As for the checkout feature, though it was initially intended to execute similar validity checks for checking-out a booking,
+for more information on these checks.</p>
+</li>
+<li>
+<p>As for the checkout feature, though it was initially intended to execute similar validity checks for checking-out a booking,
 it has now expanded its scope to double as a delete-booking feature.</p>
+</li>
+<li>
+<p>Before these commands could be implemented, the underlying <code>Room</code> architecture had to be written first. Extensive
+trial-and-error was conducted to decide the better alternative between mutable and immutable data, from which
+the immutability paradigm emerged the victor, as it was easy to debug and made writing unit, integration, and system tests much easier.
+As for the data structure of Room, Guests, and Bookings, cyclic references were shunned in favor of one-way references
+(i.e. Room contains Bookings; each Booking contains a Guest). This was chosen to minimize the risk of data corruption, as it
+removed the need for maintaining the synchronization of the same data in multiple places.</p>
+</li>
+</ul>
+</div>
 </li>
 </ul>
 </div>
@@ -82,18 +99,15 @@ it has now expanded its scope to double as a delete-booking feature.</p>
 <li>
 <p>Managed releases <code>v1.2</code> - <code>v1.4</code> (5 releases) on GitHub</p>
 </li>
-<li>
-<p>Added Coveralls, Appveyor, and Codacy support for team repo</p>
-</li>
 </ul>
 </div>
 </li>
 <li>
-<p>Writing the <code>Room</code> package</p>
+<p>Writing and testing the <code>Room</code> package</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Single-handedly wrote the entire <code>Room</code> package: <a href="https://github.com/CS2103-AY1819S1-F11-2/main/pull/71">#71</a></p>
+<p>Single-handedly wrote and tested the entire <code>Room</code> package: <a href="https://github.com/CS2103-AY1819S1-F11-2/main/pull/71">#71</a></p>
 </li>
 </ul>
 </div>
@@ -125,7 +139,7 @@ it has now expanded its scope to double as a delete-booking feature.</p>
 <p>Update with description of usage of CheckIn, Checkout, and Reassign commands</p>
 </li>
 <li>
-<p>Did cosmetic tweaks to existing contents of the User Guide: <a href="https://github.com/CS2103-AY1819S1-F11-2/main/pull/238">#238</a></p>
+<p>Did cosmetic tweaks (icons and format) to existing contents of the User Guide: <a href="https://github.com/CS2103-AY1819S1-F11-2/main/pull/238">#238</a></p>
 </li>
 </ul>
 </div>
@@ -149,11 +163,27 @@ it has now expanded its scope to double as a delete-booking feature.</p>
 </div>
 </li>
 <li>
+<p>Tools</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Added Coveralls, Appveyor, and Codacy support for the team</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
 <p>Community</p>
 <div class="ulist">
 <ul>
 <li>
-<p>PRs reviewed (with non-trivial review comments), giving praise and encouragement where it is due:
+<p>Opened 40+ <a href="https://github.com/CS2103-AY1819S1-F11-2/main/pulls?q=is%3Apr+assignee%3Aadamwth+is%3Aclosed">pull requests</a></p>
+</li>
+<li>
+<p>Reviewed 40+ <a href="https://github.com/CS2103-AY1819S1-F11-2/main/pulls?q=is%3Apr+reviewed-by%3Aadamwth+is%3Aclosed">pull requests</a></p>
+</li>
+<li>
+<p>Some examples of PRs reviewed (with non-trivial review comments), giving praise and encouragement where it is due:
 <a href="https://github.com/CS2103-AY1819S1-F11-2/main/pull/63">#63</a>,
 <a href="https://github.com/CS2103-AY1819S1-F11-2/main/pull/89">#89</a>,
 <a href="https://github.com/CS2103-AY1819S1-F11-2/main/pull/105">#105</a>,
@@ -215,13 +245,13 @@ it has now expanded its scope to double as a delete-booking feature.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>d</code> - Day can be 1 or 2 digits</p>
+<p><strong>d</strong> - Day can be 1 or 2 digits</p>
 </li>
 <li>
-<p><code>M</code> - Month can be 1 or 2 digits</p>
+<p><strong>M</strong> - Month can be 1 or 2 digits</p>
 </li>
 <li>
-<p><code>y</code> - Year can be 2 or 4 digits (if 2 digits, date is assumed to be in the current century)</p>
+<p><strong>y</strong> - Year can be 2 or 4 digits (if 2 digits, date is assumed to be in the current century)</p>
 </li>
 </ul>
 </div>
@@ -247,6 +277,22 @@ it has now expanded its scope to double as a delete-booking feature.</p>
 </li>
 <li>
 <p>can be uniquely identified by its start date.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Two <strong>guests</strong> are&#8230;&#8203;</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>different</strong> if they have different names</p>
+</li>
+<li>
+<p><strong>different</strong> if they have the same name AND both their phone numbers and emails are different</p>
+</li>
+<li>
+<p><strong>same</strong> if they have the same name AND either their phone number or email, or both, are the same</p>
 </li>
 </ul>
 </div>
@@ -334,6 +380,32 @@ This is a <strong>tip</strong> icon. You may want to read this if you are new to
 <p>Checks in the first booking of a room. The guest who made the booking will be added to
 the checked-in guest list.</p>
 </div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>If the guest&#8217;s name is not found in any of the entries in the checked-in guest list, then a new entry will be created.</p>
+</li>
+<li>
+<p>Suppose there is already an entry with the same name as the guest in the checked-in guest list.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>If both the guest&#8217;s phone number and email are the same as the ones found in the entry, or only one of them is different,
+then he/she is <strong>treated as the same guest as the one in the entry, and thus the entry will not be updated</strong>.</p>
+</li>
+<li>
+<p>If both the guest&#8217;s phone number and email are different from the ones found in the entry,
+then he/she is <strong>treated as a different guest from the one in the entry, and a new entry will be created</strong>.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
 <table class="tableblock frame-none grid-all spread">
 <colgroup>
 <col style="width: 8.3333%;">
@@ -367,7 +439,45 @@ to the checked-in guest list.</p>
 <div class="sect2">
 <h3 id="checkout-room-code-checkout-code-span-class-image-img-src-images-icon-key-png-alt-icon-key-width-32-span"><a class="link" href="#checkout-room-code-checkout-code-span-class-image-img-src-images-icon-key-png-alt-icon-key-width-32-span">Checkout room: <code>checkout</code> <span class="image"><img src="../images/icon-key.png" alt="icon key" width="32"></span></a></h3>
 <div class="paragraph">
-<p>Checks out the room&#8217;s first (i.e. earliest) booking, or its booking with the specified start date.</p>
+<p>Checks out the room&#8217;s first (i.e. earliest) booking, or its booking with the specified start date.
+Also updates the checked-in guest list and archived guest list with the guest who made the booking.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>If the guest does not have any other checked-in bookings, then he/she will be removed from the checked-in
+guest list. Otherwise, he/she will <strong>not</strong> be removed from the checked-in guest list.</p>
+</li>
+<li>
+<p>If the guest has checked-in, he/she will be added to the archived guest list.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>If the guest&#8217;s name is not found in any of the entries in the archived guest list, then a new entry will be created.</p>
+</li>
+<li>
+<p>Suppose there is already an entry with the same name as the guest in the archived guest list.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>If both the guest&#8217;s phone number and email are the same as the ones found in the entry, or only one of them is different,
+then he/she is <strong>treated as the same guest as the one in the entry, and thus the entry will not be updated</strong>.</p>
+</li>
+<li>
+<p>If both the guest&#8217;s phone number and email are different from the ones found in the entry,
+then he/she is <strong>treated as a different guest from the one in the entry, and a new entry will be created</strong>.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -382,28 +492,6 @@ to the checked-in guest list.</p>
 </tr>
 </table>
 </div>
-<table class="tableblock frame-none grid-all spread">
-<colgroup>
-<col style="width: 8.3333%;">
-<col style="width: 91.6667%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-center valign-middle"><p class="tableblock"><span class="image"><img src="../images/icon-important.png" alt="Important info"></span></p></td>
-<td class="tableblock halign-left valign-middle"><div><div class="ulist">
-<ul>
-<li>
-<p>If the guest does not have any other checked-in bookings, then he/she will be removed from the checked-in
-guest list. Otherwise, he/she will <strong>not</strong> be removed from the checked-in guest list.</p>
-</li>
-<li>
-<p>If the guest has checked-in, he/she will be added to the archived guest list.</p>
-</li>
-</ul>
-</div></div></td>
-</tr>
-</tbody>
-</table>
 <div class="paragraph">
 <p>Format: <code>checkout r/ROOM_NUMBER [from/START_DATE]</code></p>
 </div>
@@ -541,7 +629,7 @@ A room can be checked out regardless of its checked-in status. Thus, <code>check
 <p>These operations are exposed in the <code>Model</code> interface as <code>Model#checkInRoom</code> and <code>Model#checkoutRoom</code> respectively.</p>
 </div>
 <div class="paragraph">
-<p>Given below is an example usage scenario and how the check-in/checkout mechanism behaves at each step.</p>
+<p>Given below is an example usage scenario and the flow of the check-in feature.</p>
 </div>
 <div class="paragraph">
 <p>Assuming there is a booking already added to room 001,</p>
@@ -596,53 +684,10 @@ if he/she is not already in it</p>
 </ol>
 </div>
 </li>
-<li>
-<p>The user executes <code>checkout r/001</code> when the guest leaves.</p>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>The <code>checkout</code> command takes in a <code>RoomNumber</code> argument and calls <code>Model#checkoutRoom</code> as such: <code>Model.checkoutRoom(roomNumber)</code></p>
-</li>
-<li>
-<p><code>ModelManager#checkoutRoom</code> (which implements Model) will call <code>VersionedConcierge#checkoutRoom</code></p>
-</li>
-<li>
-<p><code>VersionedConcierge#checkoutRoom</code> will call <code>UniqueRoomList#getRoom</code> to get the room using its RoomNumber</p>
-</li>
-<li>
-<p><code>VersionedConcierge#checkoutRoom</code> will call <code>Room#getBookings#getFirstBooking</code> to get the first booking of the room</p>
-</li>
-<li>
-<p><code>VersionedConcierge#checkoutRoom</code> will call its own overloaded method, which calls <code>Room#checkout</code> with the first booking</p>
-</li>
-<li>
-<p><code>Room#checkout</code> will</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p>throw <code>BookingNotFoundException</code> if the room&#8217;s booking does not exist</p>
-</li>
-<li>
-<p>delete the room&#8217;s first booking</p>
-</li>
-</ol>
-</div>
-</li>
-<li>
-<p><code>VersionedConcierge#checkoutRoom</code> will call <code>VersionedConcierge#removeCheckedInGuest</code>
-to remove the guest from the checked-in guest list if he/she does not have any other bookings</p>
-</li>
-<li>
-<p><code>VersionedConcierge#checkoutRoom</code> will call <code>VersionedConcierge#addGuest</code>
-to add the guest to the archived guest list if he/she does not already exists in it</p>
-</li>
-</ol>
-</div>
-</li>
 </ul>
 </div>
 <div class="paragraph">
-<p>The following sequence diagram shows how <code>CheckInCommand#execute</code> works:</p>
+<p>The following sequence diagram shows how <code>CheckInCommand#execute</code> works, from the Logic up to the Model:</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -651,7 +696,8 @@ to add the guest to the archived guest list if he/she does not already exists in
 <div class="title">Figure 1. <em>The sequence diagram of <code>CheckInCommand#execute</code>.</em></div>
 </div>
 <div class="paragraph">
-<p>The following activity diagram shows how <code>Concierge#checkInRoom</code> executes:</p>
+<p>Since the Model simply calls <code>VersionedConcierge#checkInRoom</code>, the following activity diagram will illustrate how
+<code>Concierge#checkInRoom</code> works:</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -733,4 +779,4 @@ instead of a void method simply setting the instance property.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 13:50:38 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 14:19:47 UTC</div></div></div></body></html>

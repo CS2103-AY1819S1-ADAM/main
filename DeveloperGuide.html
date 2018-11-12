@@ -1227,7 +1227,7 @@ A room can be checked out regardless of its checked-in status. Thus, <code>check
 <p>These operations are exposed in the <code>Model</code> interface as <code>Model#checkInRoom</code> and <code>Model#checkoutRoom</code> respectively.</p>
 </div>
 <div class="paragraph">
-<p>Given below is an example usage scenario and how the check-in/checkout mechanism behaves at each step.</p>
+<p>Given below is an example usage scenario and the flow of the check-in feature.</p>
 </div>
 <div class="paragraph">
 <p>Assuming there is a booking already added to room 001,</p>
@@ -1282,53 +1282,10 @@ if he/she is not already in it</p>
 </ol>
 </div>
 </li>
-<li>
-<p>The user executes <code>checkout r/001</code> when the guest leaves.</p>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>The <code>checkout</code> command takes in a <code>RoomNumber</code> argument and calls <code>Model#checkoutRoom</code> as such: <code>Model.checkoutRoom(roomNumber)</code></p>
-</li>
-<li>
-<p><code>ModelManager#checkoutRoom</code> (which implements Model) will call <code>VersionedConcierge#checkoutRoom</code></p>
-</li>
-<li>
-<p><code>VersionedConcierge#checkoutRoom</code> will call <code>UniqueRoomList#getRoom</code> to get the room using its RoomNumber</p>
-</li>
-<li>
-<p><code>VersionedConcierge#checkoutRoom</code> will call <code>Room#getBookings#getFirstBooking</code> to get the first booking of the room</p>
-</li>
-<li>
-<p><code>VersionedConcierge#checkoutRoom</code> will call its own overloaded method, which calls <code>Room#checkout</code> with the first booking</p>
-</li>
-<li>
-<p><code>Room#checkout</code> will</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p>throw <code>BookingNotFoundException</code> if the room&#8217;s booking does not exist</p>
-</li>
-<li>
-<p>delete the room&#8217;s first booking</p>
-</li>
-</ol>
-</div>
-</li>
-<li>
-<p><code>VersionedConcierge#checkoutRoom</code> will call <code>VersionedConcierge#removeCheckedInGuest</code>
-to remove the guest from the checked-in guest list if he/she does not have any other bookings</p>
-</li>
-<li>
-<p><code>VersionedConcierge#checkoutRoom</code> will call <code>VersionedConcierge#addGuest</code>
-to add the guest to the archived guest list if he/she does not already exists in it</p>
-</li>
-</ol>
-</div>
-</li>
 </ul>
 </div>
 <div class="paragraph">
-<p>The following sequence diagram shows how <code>CheckInCommand#execute</code> works:</p>
+<p>The following sequence diagram shows how <code>CheckInCommand#execute</code> works, from the Logic up to the Model:</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -1337,7 +1294,8 @@ to add the guest to the archived guest list if he/she does not already exists in
 <div class="title">Figure 10. <em>The sequence diagram of <code>CheckInCommand#execute</code>.</em></div>
 </div>
 <div class="paragraph">
-<p>The following activity diagram shows how <code>Concierge#checkInRoom</code> executes:</p>
+<p>Since the Model simply calls <code>VersionedConcierge#checkInRoom</code>, the following activity diagram will illustrate how
+<code>Concierge#checkInRoom</code> works:</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -3616,4 +3574,4 @@ Expected: The most recent window size and location is retained.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 13:50:38 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 14:19:47 UTC</div></div></div></body></html>

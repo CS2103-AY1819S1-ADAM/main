@@ -28,11 +28,10 @@
 <li><a href="#undoing-previous-command-code-undo-code">4.12. Undoing previous command : <code>undo</code></a></li>
 <li><a href="#redoing-the-previously-undone-command-code-redo-code">4.13. Redoing the previously undone command : <code>redo</code></a></li>
 <li><a href="#clearing-all-entries-code-clear-code-span-class-image-img-src-images-icon-key-png-alt-icon-key-width-32-span">4.14. Clearing all entries : <code>clear</code> <span class="image"><img src="images/icon-key.png" alt="icon key" width="32"></span></a></li>
-<li><a href="#command-archive-code-archive-code-span-class-red-coming-in-v2-0-span">4.15. Command Archive: <code>archive</code> <span class="red">Coming in v2.0</span></a></li>
-<li><a href="#autocomplete-kbd-ctrl-kbd-kbd-alt-kbd">4.16. Autocomplete: <kbd>Ctrl</kbd>, <kbd>Alt</kbd></a></li>
-<li><a href="#viewing-help-code-help-code">4.17. Viewing help : <code>help</code></a></li>
-<li><a href="#exiting-the-program-code-exit-code">4.18. Exiting the program : <code>exit</code></a></li>
-<li><a href="#saving-the-data">4.19. Saving the data</a></li>
+<li><a href="#autocomplete-kbd-ctrl-kbd-kbd-alt-kbd">4.15. Autocomplete: <kbd>Ctrl</kbd>, <kbd>Alt</kbd></a></li>
+<li><a href="#viewing-help-code-help-code">4.16. Viewing help : <code>help</code></a></li>
+<li><a href="#exiting-the-program-code-exit-code">4.17. Exiting the program : <code>exit</code></a></li>
+<li><a href="#saving-the-data">4.18. Saving the data</a></li>
 </ul>
 </li>
 <li><a href="#command-summary">5. Command Summary</a></li>
@@ -129,13 +128,13 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <div class="ulist">
 <ul>
 <li>
-<p><code>d</code> - Day can be 1 or 2 digits</p>
+<p><strong>d</strong> - Day can be 1 or 2 digits</p>
 </li>
 <li>
-<p><code>M</code> - Month can be 1 or 2 digits</p>
+<p><strong>M</strong> - Month can be 1 or 2 digits</p>
 </li>
 <li>
-<p><code>y</code> - Year can be 2 or 4 digits (if 2 digits, date is assumed to be in the current century)</p>
+<p><strong>y</strong> - Year can be 2 or 4 digits (if 2 digits, date is assumed to be in the current century)</p>
 </li>
 </ul>
 </div>
@@ -161,6 +160,22 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 </li>
 <li>
 <p>can be uniquely identified by its start date.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Two <strong>guests</strong> are&#8230;&#8203;</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>different</strong> if they have different names</p>
+</li>
+<li>
+<p><strong>different</strong> if they have the same name AND both their phone numbers and emails are different</p>
+</li>
+<li>
+<p><strong>same</strong> if they have the same name AND either their phone number or email, or both, are the same</p>
 </li>
 </ul>
 </div>
@@ -332,6 +347,32 @@ date is today) can be seen on the left room pane.</p>
 <p>Checks in the first booking of a room. The guest who made the booking will be added to
 the checked-in guest list.</p>
 </div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>If the guest&#8217;s name is not found in any of the entries in the checked-in guest list, then a new entry will be created.</p>
+</li>
+<li>
+<p>Suppose there is already an entry with the same name as the guest in the checked-in guest list.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>If both the guest&#8217;s phone number and email are the same as the ones found in the entry, or only one of them is different,
+then he/she is <strong>treated as the same guest as the one in the entry, and thus the entry will not be updated</strong>.</p>
+</li>
+<li>
+<p>If both the guest&#8217;s phone number and email are different from the ones found in the entry,
+then he/she is <strong>treated as a different guest from the one in the entry, and a new entry will be created</strong>.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
 <table class="tableblock frame-none grid-all spread">
 <colgroup>
 <col style="width: 8.3333%;">
@@ -365,7 +406,45 @@ to the checked-in guest list.</p>
 <div class="sect2">
 <h3 id="checkout-room-code-checkout-code-span-class-image-img-src-images-icon-key-png-alt-icon-key-width-32-span"><a class="link" href="#checkout-room-code-checkout-code-span-class-image-img-src-images-icon-key-png-alt-icon-key-width-32-span">4.3. Checkout room: <code>checkout</code> <span class="image"><img src="images/icon-key.png" alt="icon key" width="32"></span></a></h3>
 <div class="paragraph">
-<p>Checks out the room&#8217;s first (i.e. earliest) booking, or its booking with the specified start date.</p>
+<p>Checks out the room&#8217;s first (i.e. earliest) booking, or its booking with the specified start date.
+Also updates the checked-in guest list and archived guest list with the guest who made the booking.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>If the guest does not have any other checked-in bookings, then he/she will be removed from the checked-in
+guest list. Otherwise, he/she will <strong>not</strong> be removed from the checked-in guest list.</p>
+</li>
+<li>
+<p>If the guest has checked-in, he/she will be added to the archived guest list.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>If the guest&#8217;s name is not found in any of the entries in the archived guest list, then a new entry will be created.</p>
+</li>
+<li>
+<p>Suppose there is already an entry with the same name as the guest in the archived guest list.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>If both the guest&#8217;s phone number and email are the same as the ones found in the entry, or only one of them is different,
+then he/she is <strong>treated as the same guest as the one in the entry, and thus the entry will not be updated</strong>.</p>
+</li>
+<li>
+<p>If both the guest&#8217;s phone number and email are different from the ones found in the entry,
+then he/she is <strong>treated as a different guest from the one in the entry, and a new entry will be created</strong>.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -380,28 +459,6 @@ to the checked-in guest list.</p>
 </tr>
 </table>
 </div>
-<table class="tableblock frame-none grid-all spread">
-<colgroup>
-<col style="width: 8.3333%;">
-<col style="width: 91.6667%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-center valign-middle"><p class="tableblock"><span class="image"><img src="images/icon-important.png" alt="Important info"></span></p></td>
-<td class="tableblock halign-left valign-middle"><div><div class="ulist">
-<ul>
-<li>
-<p>If the guest does not have any other checked-in bookings, then he/she will be removed from the checked-in
-guest list. Otherwise, he/she will <strong>not</strong> be removed from the checked-in guest list.</p>
-</li>
-<li>
-<p>If the guest has checked-in, he/she will be added to the archived guest list.</p>
-</li>
-</ul>
-</div></div></td>
-</tr>
-</tbody>
-</table>
 <div class="paragraph">
 <p>Format: <code>checkout r/ROOM_NUMBER [from/START_DATE]</code></p>
 </div>
@@ -511,16 +568,16 @@ Reassigns the booking with start date 01/11/18 in room 085 to room 086.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>n/ - Name</code></p>
+<p><code>n/</code> - Name</p>
 </li>
 <li>
-<p><code>p/ - Phone Number</code></p>
+<p><code>p/</code> - Phone Number</p>
 </li>
 <li>
-<p><code>e/ - Email Address</code></p>
+<p><code>e/</code> - Email Address</p>
 </li>
 <li>
-<p><code>t/ - Tags</code></p>
+<p><code>t/</code> - Tags</p>
 </li>
 </ul>
 </div>
@@ -530,47 +587,48 @@ Reassigns the booking with start date 01/11/18 in room 085 to room 086.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>r/ - Room Number</code></p>
+<p><code>r/</code> - Room Number</p>
 </li>
 <li>
-<p><code>c/ - Capacity</code></p>
+<p><code>c/</code> - Capacity</p>
 </li>
 <li>
-<p><code>t/ - Room Tags</code></p>
+<p><code>t/</code> - Room Tags</p>
 </li>
 <li>
-<p><code>n/ - Guest name within bookings</code></p>
+<p><code>n/</code> - Guest name within bookings</p>
 </li>
 <li>
-<p><code>-hb - Has Bookings Flag</code>*</p>
+<p><code>-hb</code> - Has Bookings Flag*</p>
 </li>
 <li>
-<p><code>-nb - No Bookings Flag</code>*</p>
+<p><code>-nb</code> - No Bookings Flag*</p>
 </li>
 <li>
-<p><code>from/ - Booking Start Date</code>^</p>
+<p><code>from/</code> - Booking Start Date^</p>
 </li>
 <li>
-<p><code>to/ - Booking End Date</code>^</p>
+<p><code>to/</code> - Booking End Date^</p>
 </li>
 </ul>
 </div>
-<div class="admonitionblock tip">
-<table>
+<table class="tableblock frame-none grid-all spread">
+<colgroup>
+<col style="width: 8.3333%;">
+<col style="width: 91.6667%;">
+</colgroup>
+<tbody>
 <tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-Flags marked with * cannot be used together in the same command.
-These flags can be used independently, or with flags marked with ^ .<br>
-Input dates must be in DD/MM/YY or DD/MM/YYYY format.
-</td>
+<td class="tableblock halign-center valign-middle"><p class="tableblock"><span class="image"><img src="images/icon-important.png" alt="Important info"></span></p></td>
+<td class="tableblock halign-left valign-middle"><div><div class="paragraph">
+<p>Flags marked with * cannot be used together in the same command.<br>
+These flags can be used independently, or with flags marked with ^ .</p>
+</div></div></td>
 </tr>
+</tbody>
 </table>
-</div>
 <div class="paragraph">
-<p>Find Command Examples:</p>
+<p>Examples:</p>
 </div>
 <div class="exampleblock">
 <div class="content">
@@ -1040,23 +1098,7 @@ cleared. I.e. all maintenance requests and faults will still be recorded.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="command-archive-code-archive-code-span-class-red-coming-in-v2-0-span"><a class="link" href="#command-archive-code-archive-code-span-class-red-coming-in-v2-0-span">4.15. Command Archive: <code>archive</code> <span class="red">Coming in v2.0</span></a></h3>
-<div class="paragraph">
-<p>All user input is captured and saved onto a log. All keystrokes are
-captured, including invalid/mistyped and login commands.</p>
-</div>
-<div class="paragraph">
-<p>To open this log, input the archive command<br>
-Format: <code>archive</code></p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>This command requires a login.</pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="autocomplete-kbd-ctrl-kbd-kbd-alt-kbd"><a class="link" href="#autocomplete-kbd-ctrl-kbd-kbd-alt-kbd">4.16. Autocomplete: <kbd>Ctrl</kbd>, <kbd>Alt</kbd></a></h3>
+<h3 id="autocomplete-kbd-ctrl-kbd-kbd-alt-kbd"><a class="link" href="#autocomplete-kbd-ctrl-kbd-kbd-alt-kbd">4.15. Autocomplete: <kbd>Ctrl</kbd>, <kbd>Alt</kbd></a></h3>
 <div class="paragraph">
 <p>Auto-completes a partially typed in command by a user.</p>
 </div>
@@ -1143,7 +1185,7 @@ information. The subsequent prefixes will follow suit accordingly.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="viewing-help-code-help-code"><a class="link" href="#viewing-help-code-help-code">4.17. Viewing help : <code>help</code></a></h3>
+<h3 id="viewing-help-code-help-code"><a class="link" href="#viewing-help-code-help-code">4.16. Viewing help : <code>help</code></a></h3>
 <div class="paragraph">
 <p>Format: <code>help</code></p>
 </div>
@@ -1166,14 +1208,14 @@ information. The subsequent prefixes will follow suit accordingly.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">4.18. Exiting the program : <code>exit</code></a></h3>
+<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">4.17. Exiting the program : <code>exit</code></a></h3>
 <div class="paragraph">
 <p>Exits the program.<br>
 Format: <code>exit</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="saving-the-data"><a class="link" href="#saving-the-data">4.19. Saving the data</a></h3>
+<h3 id="saving-the-data"><a class="link" href="#saving-the-data">4.18. Saving the data</a></h3>
 <div class="paragraph">
 <p>Concierge&#8482; data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.</p>
@@ -1230,9 +1272,6 @@ t/TAG r/ROOM_NUMBER from/START_DATE to/END_DATE</code></p>
 <p><strong>Clear</strong> : <code>clear</code></p>
 </li>
 <li>
-<p><strong>Export log</strong> : <code>export</code> <span class="red">Coming in v2.0</span></p>
-</li>
-<li>
 <p><strong>Help</strong> : <code>help</code></p>
 </li>
 <li>
@@ -1262,6 +1301,10 @@ t/TAG r/ROOM_NUMBER from/START_DATE to/END_DATE</code></p>
 </li>
 <li>
 <p><code>export</code> - Export the logs of the current session to a text-editable file</p>
+</li>
+<li>
+<p><code>archive</code> - Opens the log where all user input is captured and saved. All keystrokes are
+captured, including invalid/mistyped and login commands.</p>
 </li>
 </ul>
 </div>
@@ -1301,4 +1344,4 @@ t/TAG r/ROOM_NUMBER from/START_DATE to/END_DATE</code></p>
 make our application better, so do not hesitate to report them to us!</p>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 13:50:38 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 14:19:47 UTC</div></div></div></body></html>
