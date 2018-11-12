@@ -24,7 +24,8 @@ public class PasswordHashUtil {
                     digest.digest(password.getBytes(StandardCharsets.UTF_8));
             return bytesToHex(encodedHash);
         } catch (NoSuchAlgorithmException e) {
-            // TODO: Handle this exception. By right, it is a default program
+            // TODO: Handle this exception. By right, it is a default program by MessageDigest.
+            // We supply a valid String as algorithm. RuntimeExceptions not expected.
             return "";
         }
     }

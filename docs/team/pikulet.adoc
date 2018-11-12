@@ -33,8 +33,8 @@ still be accessed without signing in. By combining this with the ability
 ** The login/logout feature is dynamic - the users are not prompted to sign in
 upon starting Concierge, and users can logout and log back in within the same
  session. This means that there is a very close integration with the existing
-  commands to verify the sign-in status and whether the commands are
-  restricted.
+  commands to verify the sign-in status and whether the commands require
+  signing-in.
 ** This feature is complete - I worked with the different architectural
 components of Concierge, from command parsing (`Logic`) to login verification
  (`Model`) and even password storage (`Storage`).

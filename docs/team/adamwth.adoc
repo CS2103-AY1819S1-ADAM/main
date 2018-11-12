@@ -1,9 +1,9 @@
-= Adam Chew Yong Soon - Project Portfolio
+= Chew Yong Soon - Project Portfolio
 :site-section: AboutUs
 :imagesDir: ../images
 :stylesDir: ../stylesheets
 
-== PROJECT: Concierge(TM)
+== PROJECT: image:ConciergeFinal.png[width="200"]
 
 ---
 
@@ -15,9 +15,9 @@ Concierge(TM) is a desktop application simulating a hotel management system used
 
 * *Code contributed*: [https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=adamwth[Code Contributed]]
 
-* *Major enhancements*:
+* *Major enhancement*:
 
-** Added `checkIn` and `checkout` features
+** Implemented `checkIn` and `checkout` commands
 *** What it does: Allows the user to check-in a room's booking that is active, checkout any booking of a room,
 and update the checked-in guest list and archived guest list to reflect the checked-in/out guests respectively.
 *** Justification: This feature is a core feature that supports the daily operations of a hotel, without which the hotel will not
@@ -26,12 +26,20 @@ However, it is very cumbersome to execute these operations using the existing `e
 This feature solves this problem by providing a command-line interface with minimal fields to specify, allowing smooth and fast
 checking-in/out of rooms.
 
-*** Highlights: The validity of a check-in operation requires knowledge of how a hotel manages its policy of allowing guests to check-in.
+*** Highlights:
+**** The validity of a check-in operation requires knowledge of how a hotel manages its policy of allowing guests to check-in.
 The current implementation was finalized after experimenting with different validity checks on multiple different scenarios.
 Refer to the <<Contributions to the User Guide, User Guide>> and <<Contributions to the Developer Guide, Developer Guide>>
 for more information on these checks.
-As for the checkout feature, though it was initially intended to execute similar validity checks for checking-out a booking,
+**** As for the checkout feature, though it was initially intended to execute similar validity checks for checking-out a booking,
 it has now expanded its scope to double as a delete-booking feature.
+**** Before these commands could be implemented, the underlying `Room` architecture had to be written first. Extensive
+trial-and-error was conducted to decide the better alternative between mutable and immutable data, from which
+the immutability paradigm emerged the victor, as it was easy to debug and made writing unit, integration, and system tests much easier.
+As for the data structure of Room, Guests, and Bookings, cyclic references were shunned in favor of one-way references
+(i.e. Room contains Bookings; each Booking contains a Guest). This was chosen to minimize the risk of data corruption, as it
+removed the need for maintaining the synchronization of the same data in multiple places.
+
 
 * *Minor enhancements*:
 *** Add `list -cg` list checked-in guests feature: https://github.com/CS2103-AY1819S1-F11-2/main/pull/178[#178]
@@ -42,10 +50,9 @@ it has now expanded its scope to double as a delete-booking feature.
 
 ** Project Management
 *** Managed releases `v1.2` - `v1.4` (5 releases) on GitHub
-*** Added Coveralls, Appveyor, and Codacy support for team repo
 
-** Writing the `Room` package
-*** Single-handedly wrote the entire `Room` package: https://github.com/CS2103-AY1819S1-F11-2/main/pull/71[#71]
+** Writing and testing the `Room` package
+*** Single-handedly wrote and tested the entire `Room` package: https://github.com/CS2103-AY1819S1-F11-2/main/pull/71[#71]
 
 ** Enhancements to existing features:
 *** Improve GUI display of rooms in both left and right panels:
@@ -54,10 +61,9 @@ https://github.com/CS2103-AY1819S1-F11-2/main/pull/154[#154]
 *** Fix `select` command bug and make improvements: https://github.com/CS2103-AY1819S1-F11-2/main/pull/211[#211]
 
 ** Documentation
-
 *** User Guide
 **** Update with description of usage of CheckIn, Checkout, and Reassign commands
-**** Did cosmetic tweaks to existing contents of the User Guide: https://github.com/CS2103-AY1819S1-F11-2/main/pull/238[#238]
+**** Did cosmetic tweaks (icons and format) to existing contents of the User Guide: https://github.com/CS2103-AY1819S1-F11-2/main/pull/238[#238]
 
 *** Developer Guide
 **** Update with detailed description of how CheckIn and Checkout features work
@@ -65,8 +71,13 @@ https://github.com/CS2103-AY1819S1-F11-2/main/pull/154[#154]
 https://github.com/CS2103-AY1819S1-F11-2/main/pull/150[#150],
 https://github.com/CS2103-AY1819S1-F11-2/main/pull/238[#238]
 
+** Tools
+*** Added Coveralls, Appveyor, and Codacy support for the team
+
 ** Community
-*** PRs reviewed (with non-trivial review comments), giving praise and encouragement where it is due:
+*** Opened 40+ https://github.com/CS2103-AY1819S1-F11-2/main/pulls?q=is%3Apr+assignee%3Aadamwth+is%3Aclosed[pull requests]
+*** Reviewed 40+ https://github.com/CS2103-AY1819S1-F11-2/main/pulls?q=is%3Apr+reviewed-by%3Aadamwth+is%3Aclosed[pull requests]
+*** Some examples of PRs reviewed (with non-trivial review comments), giving praise and encouragement where it is due:
 https://github.com/CS2103-AY1819S1-F11-2/main/pull/63[#63],
 https://github.com/CS2103-AY1819S1-F11-2/main/pull/89[#89],
 https://github.com/CS2103-AY1819S1-F11-2/main/pull/105[#105],

@@ -404,7 +404,7 @@ the `Room` s. Nevertheless, we expect most guests to be aware of their rooms.
 * **Alternative 2:** Add `Room` as a field in `Guest`
 ** Pros: Very customer-centric design. Centralises all the information about
 the `Guest`, including `Booking` s made and `Expense` s incurred.
-** Cons: Making a new `Booking` with a new `Guest` is highly inefficient.
+** Cons: Making a new `Booking` with a `Guest` is highly inefficient.
 `Booking` information is now scattered across individual `Guest` s.
 *** [v1.4] On top of the list of rooms, we maintain a separate list of
 checked-in guests. This list does not retain any booking information, as it
@@ -519,7 +519,7 @@ A room can be checked out regardless of its checked-in status. Thus, `checkout` 
 
 These operations are exposed in the `Model` interface as `Model#checkInRoom` and `Model#checkoutRoom` respectively.
 
-Given below is an example usage scenario and how the check-in/checkout mechanism behaves at each step.
+Given below is an example usage scenario and the flow of the check-in feature.
 
 Assuming there is a booking already added to room 001,
 
@@ -538,26 +538,13 @@ Assuming there is a booking already added to room 001,
 . `VersionedConcierge#addCheckedInGuestIfNotPresent` will add the guest of the checked-in booking to the checked-in guest list
  if he/she is not already in it
 
-* The user executes `checkout r/001` when the guest leaves.
-. The `checkout` command takes in a `RoomNumber` argument and calls `Model#checkoutRoom` as such: `Model.checkoutRoom(roomNumber)`
-. `ModelManager#checkoutRoom` (which implements Model) will call `VersionedConcierge#checkoutRoom`
-. `VersionedConcierge#checkoutRoom` will call `UniqueRoomList#getRoom` to get the room using its RoomNumber
-. `VersionedConcierge#checkoutRoom` will call `Room#getBookings#getFirstBooking` to get the first booking of the room
-. `VersionedConcierge#checkoutRoom` will call its own overloaded method, which calls `Room#checkout` with the first booking
-. `Room#checkout` will
-.. throw `BookingNotFoundException` if the room's booking does not exist
-.. delete the room's first booking
-. `VersionedConcierge#checkoutRoom` will call `VersionedConcierge#removeCheckedInGuest`
- to remove the guest from the checked-in guest list if he/she does not have any other bookings
-. `VersionedConcierge#checkoutRoom` will call `VersionedConcierge#addGuest`
- to add the guest to the archived guest list if he/she does not already exists in it
-
-The following sequence diagram shows how `CheckInCommand#execute` works:
+The following sequence diagram shows how `CheckInCommand#execute` works, from the Logic up to the Model:
 
 ._The sequence diagram of `CheckInCommand#execute`._
 image::CheckinCommandSequenceDiagram.png[width="1280"]
 
-The following activity diagram shows how `Concierge#checkInRoom` executes:
+Since the Model simply calls `VersionedConcierge#checkInRoom`, the following activity diagram will illustrate how
+`Concierge#checkInRoom` works:
 
 ._The activity diagram of checking-in a room when `Concierge#checkInRoom` is executed._
 image::check-in-activity-diagram.png[width="800"]
@@ -773,9 +760,9 @@ image::AddExpenseSequenceDiagram.png[width="900"]
 // tag::loginlogout[]
 === Login and Logout
 
-The `login` feature allows hotel managers to tag commands entered with a
- specific user, creating a blame history to trace rogue commands. Managers
- can also control which receptionists have full access to Concierge.
+The `login` feature allows hotel managers to control which receptionists
+have full access to Concierge. When paired with the CommandArchive feature,
+they can also create a blame history to trace rogue commands.
 
 ==== Current Implementation
 
@@ -828,9 +815,8 @@ image::LogInCommand-sequencediagram.png[width=1000]
 
 The `passwords.json` file is read when Concierge is first opened (i.e. in
 `MainApp#init`), and is never written to again. The storage function is
-managed by the `JsonPasswordsStorage` class. Intuitively, the usernames and
-passwords are stored as <<Aspect: Storage of Passwords, key-value pairs>> for
- quick look-up.
+managed by the `JsonPasswordsStorage` class. Intuitively, passwords are stored as
+<<Aspect: Storage of Passwords, key-value pairs>> for quick look-up.
 
 A SHA-256 hash was used in building this feature. In future, this hashing
 algorithm can be changed to a HMAC hash, which adds a username salt. Then,
@@ -878,6 +864,8 @@ inadvertently change the model before doing the sign-in checks.
 sign-in. For example, a future developer may want to make the `add` command
 such that when the user is not signed-in, the booking is still added but a tag
  is added to the `Guest`, reminding the manager to verify the booking.
+*** Violates the Single Responsibility Principle. The job of `LogicManager`
+is to parse and execute commands.
 
 * **Alternative 2:** Do the check in `Command#execute`
 ** Pros: Increases cohesiveness of `Command` class. The compulsory sign-in is
@@ -903,7 +891,7 @@ is in use.
 potentially an unlimited number of entries, since this utility serialises the
  data to match the class attributes.
 * **Alternative 2:** Store passwords in same XML file as all other
-Concierge data.
+Concierge data
 ** Pros: Centralises data storage in Concierge. There is only one single
 source of truth for all data.
 ** Cons: The XML file is too complicated for the needs of password storage.

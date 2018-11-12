@@ -4,13 +4,13 @@
 :imagesDir: images
 :stylesDir: stylesheets
 
-Concierge was developed by the CS2103 F11-2 team. +
+Concierge(TM) was developed by the CS2103 F11-2 team. +
 {empty} +
 We are a team based in the http://www.comp.nus.edu.sg[School of Computing, National University of Singapore].
 
 == Project Team
 
-=== Adam Chew Yong Soon
+=== Chew Yong Soon
 image::adamwth.png[width="150", align="left"]
 {empty}[https://github.com/adamwth[github]] [<<adamwth#, portfolio>>]
 
