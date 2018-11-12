@@ -57,8 +57,8 @@ still be accessed without signing in. By combining this with the ability
 <p>The login/logout feature is dynamic - the users are not prompted to sign in
 upon starting Concierge, and users can logout and log back in within the same
  session. This means that there is a very close integration with the existing
-  commands to verify the sign-in status and whether the commands are
-  restricted.</p>
+  commands to verify the sign-in status and whether the commands require
+  signing-in.</p>
 </li>
 <li>
 <p>This feature is complete - I worked with the different architectural
@@ -209,7 +209,7 @@ A valid booking cannot clash with an existing booking. It must also have a
 </li>
 <li>
 <p>When adding a booking, the guest will <strong>not</strong> be added to the archived guest list or checked-in guest list.
-His/ her information will be stored under his/ her booking in the room.</p>
+Their personal information will be stored under their booking in the room.</p>
 </li>
 </ul>
 </div>
@@ -257,8 +257,9 @@ The default account can be accessed with <code>login user/admin pw/passw0rd</cod
 </div>
 <div class="paragraph">
 <p>A login allows the user to access the commands which can affect the
-bookings. Commands which require login: <code>add</code>, <code>checkin</code>, <code>checkout</code>, <code>reassign</code>,
-<code>service</code> and <code>clear</code>.</p>
+bookings.<br>
+Commands which require login: <code>add</code>, <code>checkin</code>, <code>checkout</code>,
+<code>reassign</code>, <code>service</code> and <code>clear</code>.</p>
 </div>
 <div class="paragraph">
 <p>Example: <code>login user/admin pw/passw0rd</code></p>
@@ -355,7 +356,8 @@ redo commands executed before the logout.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Even if you login again, you cannot undo your previous actions.</p>
+<p>Even if you login again, you cannot
+undo your previous actions.</p>
 </li>
 <li>
 <p>This achieves the same effect as closing and re-opening Concierge&#8482;
@@ -541,7 +543,7 @@ the <code>Room</code> s. Nevertheless, we expect most guests to be aware of thei
 the <code>Guest</code>, including <code>Booking</code> s made and <code>Expense</code> s incurred.</p>
 </li>
 <li>
-<p>Cons: Making a new <code>Booking</code> with a new <code>Guest</code> is highly inefficient.
+<p>Cons: Making a new <code>Booking</code> with a <code>Guest</code> is highly inefficient.
 <code>Booking</code> information is now scattered across individual <code>Guest</code> s.</p>
 <div class="ulist">
 <ul>
@@ -564,9 +566,9 @@ checked-in guests. This list does not retain any booking information, as it
 <div class="sect2">
 <h3 id="login-and-logout"><a class="link" href="#login-and-logout">Login and Logout</a></h3>
 <div class="paragraph">
-<p>The <code>login</code> feature allows hotel managers to tag commands entered with a
- specific user, creating a blame history to trace rogue commands. Managers
- can also control which receptionists have full access to Concierge.</p>
+<p>The <code>login</code> feature allows hotel managers to control which receptionists
+have full access to Concierge. When paired with the CommandArchive feature,
+they can also create a blame history to trace rogue commands.</p>
 </div>
 <div class="sect3">
 <h4 id="current-implementation-2"><a class="link" href="#current-implementation-2">Current Implementation</a></h4>
@@ -645,9 +647,8 @@ requirement of commands.</p>
 <div class="paragraph">
 <p>The <code>passwords.json</code> file is read when Concierge is first opened (i.e. in
 <code>MainApp#init</code>), and is never written to again. The storage function is
-managed by the <code>JsonPasswordsStorage</code> class. Intuitively, the usernames and
-passwords are stored as <a href="#aspect-storage-of-passwords">key-value pairs</a> for
- quick look-up.</p>
+managed by the <code>JsonPasswordsStorage</code> class. Intuitively, passwords are stored as
+<a href="#aspect-storage-of-passwords">key-value pairs</a> for quick look-up.</p>
 </div>
 <div class="paragraph">
 <p>A SHA-256 hash was used in building this feature. In future, this hashing
@@ -731,6 +732,14 @@ inadvertently change the model before doing the sign-in checks.</p>
 sign-in. For example, a future developer may want to make the <code>add</code> command
 such that when the user is not signed-in, the booking is still added but a tag
  is added to the <code>Guest</code>, reminding the manager to verify the booking.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Violates the Single Responsibility Principle. The job of <code>LogicManager</code>
+is to parse and execute commands.</p>
+</li>
+</ul>
+</div>
 </li>
 </ul>
 </div>
@@ -793,7 +802,7 @@ potentially an unlimited number of entries, since this utility serialises the
 </li>
 <li>
 <p><strong>Alternative 2:</strong> Store passwords in same XML file as all other
-Concierge data.</p>
+Concierge data</p>
 <div class="ulist">
 <ul>
 <li>
@@ -836,4 +845,4 @@ amazing team members who each contributed with their own strengths. Thank
 you, @adamwth @teowz46 @JiaqingTan @neilish3re.</p>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 14:27:48 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 14:40:34 UTC</div></div></div></body></html>

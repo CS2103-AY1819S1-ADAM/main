@@ -961,7 +961,7 @@ the <code>Room</code> s. Nevertheless, we expect most guests to be aware of thei
 the <code>Guest</code>, including <code>Booking</code> s made and <code>Expense</code> s incurred.</p>
 </li>
 <li>
-<p>Cons: Making a new <code>Booking</code> with a new <code>Guest</code> is highly inefficient.
+<p>Cons: Making a new <code>Booking</code> with a <code>Guest</code> is highly inefficient.
 <code>Booking</code> information is now scattered across individual <code>Guest</code> s.</p>
 <div class="ulist">
 <ul>
@@ -1686,9 +1686,9 @@ also be lost.</p>
 <div class="sect2">
 <h3 id="login-and-logout"><a class="link" href="#login-and-logout">3.9. Login and Logout</a></h3>
 <div class="paragraph">
-<p>The <code>login</code> feature allows hotel managers to tag commands entered with a
- specific user, creating a blame history to trace rogue commands. Managers
- can also control which receptionists have full access to Concierge.</p>
+<p>The <code>login</code> feature allows hotel managers to control which receptionists
+have full access to Concierge. When paired with the CommandArchive feature,
+they can also create a blame history to trace rogue commands.</p>
 </div>
 <div class="sect3">
 <h4 id="current-implementation-8"><a class="link" href="#current-implementation-8">3.9.1. Current Implementation</a></h4>
@@ -1767,9 +1767,8 @@ requirement of commands.</p>
 <div class="paragraph">
 <p>The <code>passwords.json</code> file is read when Concierge is first opened (i.e. in
 <code>MainApp#init</code>), and is never written to again. The storage function is
-managed by the <code>JsonPasswordsStorage</code> class. Intuitively, the usernames and
-passwords are stored as <a href="#aspect-storage-of-passwords">key-value pairs</a> for
- quick look-up.</p>
+managed by the <code>JsonPasswordsStorage</code> class. Intuitively, passwords are stored as
+<a href="#aspect-storage-of-passwords">key-value pairs</a> for quick look-up.</p>
 </div>
 <div class="paragraph">
 <p>A SHA-256 hash was used in building this feature. In future, this hashing
@@ -1853,6 +1852,14 @@ inadvertently change the model before doing the sign-in checks.</p>
 sign-in. For example, a future developer may want to make the <code>add</code> command
 such that when the user is not signed-in, the booking is still added but a tag
  is added to the <code>Guest</code>, reminding the manager to verify the booking.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Violates the Single Responsibility Principle. The job of <code>LogicManager</code>
+is to parse and execute commands.</p>
+</li>
+</ul>
+</div>
 </li>
 </ul>
 </div>
@@ -1915,7 +1922,7 @@ potentially an unlimited number of entries, since this utility serialises the
 </li>
 <li>
 <p><strong>Alternative 2:</strong> Store passwords in same XML file as all other
-Concierge data.</p>
+Concierge data</p>
 <div class="ulist">
 <ul>
 <li>
@@ -3574,4 +3581,4 @@ Expected: The most recent window size and location is retained.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 14:27:48 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 14:40:34 UTC</div></div></div></body></html>

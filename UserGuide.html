@@ -316,7 +316,7 @@ A valid booking cannot clash with an existing booking. It must also have a
 </li>
 <li>
 <p>When adding a booking, the guest will <strong>not</strong> be added to the archived guest list or checked-in guest list.
-His/ her information will be stored under his/ her booking in the room.</p>
+Their personal information will be stored under their booking in the room.</p>
 </li>
 </ul>
 </div>
@@ -724,8 +724,9 @@ The default account can be accessed with <code>login user/admin pw/passw0rd</cod
 </div>
 <div class="paragraph">
 <p>A login allows the user to access the commands which can affect the
-bookings. Commands which require login: <code>add</code>, <code>checkin</code>, <code>checkout</code>, <code>reassign</code>,
-<code>service</code> and <code>clear</code>.</p>
+bookings.<br>
+Commands which require login: <code>add</code>, <code>checkin</code>, <code>checkout</code>,
+<code>reassign</code>, <code>service</code> and <code>clear</code>.</p>
 </div>
 <div class="paragraph">
 <p>Example: <code>login user/admin pw/passw0rd</code></p>
@@ -822,7 +823,8 @@ redo commands executed before the logout.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Even if you login again, you cannot undo your previous actions.</p>
+<p>Even if you login again, you cannot
+undo your previous actions.</p>
 </li>
 <li>
 <p>This achieves the same effect as closing and re-opening Concierge&#8482;
@@ -988,20 +990,21 @@ Adds an expenditure of the item <strong>RS03</strong> to the room&#8217;s expens
 <p>Lists all the commands that you have entered in reverse chronological order.<br>
 Format: <code>history</code></p>
 </div>
-<div class="admonitionblock note">
-<table>
+<table class="tableblock frame-none grid-all spread">
+<colgroup>
+<col style="width: 8.3333%;">
+<col style="width: 91.6667%;">
+</colgroup>
+<tbody>
 <tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>Pressing the <kbd>&uarr;</kbd> and <kbd>&darr;</kbd> arrows will display the previous and next input respectively in the command box.</p>
-</div>
-</td>
+<td class="tableblock halign-center valign-middle"><p class="tableblock"><span class="image"><img src="images/icon-important.png" alt="Important info"></span></p></td>
+<td class="tableblock halign-left valign-middle"><div><div class="paragraph">
+<p>Pressing the <kbd>&uarr;</kbd> and <kbd>&darr;</kbd> arrows will display the previous
+and next input respectively in the command box.</p>
+</div></div></td>
 </tr>
+</tbody>
 </table>
-</div>
 </div>
 <div class="sect2">
 <h3 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">4.12. Undoing previous command : <code>undo</code></a></h3>
@@ -1010,20 +1013,21 @@ Format: <code>history</code></p>
 <em>undoable</em> command was executed.<br>
 Format: <code>undo</code></p>
 </div>
-<div class="admonitionblock note">
-<table>
+<table class="tableblock frame-none grid-all spread">
+<colgroup>
+<col style="width: 8.3333%;">
+<col style="width: 91.6667%;">
+</colgroup>
+<tbody>
 <tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>Undoable commands: those commands that modify Concierge&#8482;'s content (<code>add</code>, <code>checkin</code>, <code>checkout</code> and <code>clear</code>).</p>
-</div>
-</td>
+<td class="tableblock halign-center valign-middle"><p class="tableblock"><span class="image"><img src="images/icon-important.png" alt="Important info"></span></p></td>
+<td class="tableblock halign-left valign-middle"><div><div class="paragraph">
+<p>Undoable commands: those commands that modify Concierge&#8482;'s content
+(<code>add</code>, <code>checkin</code>, <code>checkout</code>, <code>reassign</code>, <code>service</code> and <code>clear</code>).</p>
+</div></div></td>
 </tr>
+</tbody>
 </table>
-</div>
 <div class="paragraph">
 <p>Examples:</p>
 </div>
@@ -1098,7 +1102,6 @@ cleared. I.e. all maintenance requests and faults will still be recorded.</p>
 <div class="content">
 <img src="images/ClearCommand-success.png" alt="ClearCommand success" width="400">
 </div>
-<div class="title">Figure 1. Empty room listing with all bookings deleted and expenses reset</div>
 </div>
 </div>
 <div class="sect2">
@@ -1261,7 +1264,7 @@ t/TAG r/ROOM_NUMBER from/START_DATE to/END_DATE</code></p>
 <p><strong>Select</strong> : <code>select INDEX</code></p>
 </li>
 <li>
-<p><strong>Room Service</strong> : <code>service</code></p>
+<p><strong>Room Service</strong> : <code>service r/ROOM_NUMBER no/ITEM_NUMBER [c/COST]</code></p>
 </li>
 <li>
 <p><strong>History</strong> : <code>history</code></p>
@@ -1348,4 +1351,4 @@ captured, including invalid/mistyped and login commands.</p>
 make our application better, so do not hesitate to report them to us!</p>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 14:27:48 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 14:40:34 UTC</div></div></div></body></html>
