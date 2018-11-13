@@ -3535,8 +3535,8 @@ Expected: Checks-in the guest Pikachu&#8217;s booking and adds him to the checke
 <p>Prerequisites: There is a booking in the room you want to check in. Room 006 has a preloaded expired booking for you to test.</p>
 </li>
 <li>
-<p>Test case: <code>checkin r/010</code><br>
-Expected: Cannot check-in room 010 as first booking is already expired.</p>
+<p>Test case: <code>checkin r/006</code><br>
+Expected: Cannot check-in room 006 as first booking is already expired.</p>
 </li>
 </ul>
 </div>
@@ -3556,7 +3556,22 @@ Expected: Cannot check-in room 011 as first booking is not active.</p>
 </ul>
 </div>
 </li>
+<li>
+<p>Refer to the user guide to test more edge cases</p>
+</li>
 </ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+These instructions only provide a starting point for testers to work on; testers are expected to do more <em>exploratory</em> testing.
+</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="sect2">
@@ -3571,10 +3586,11 @@ Expected: Cannot check-in room 011 as first booking is not active.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Prerequisites: There is a booking in the room you want to check out. Room 002 has a preloaded non-checked-in booking for you to test.</p>
+<p>Prerequisites: There is a booking in the room you want to check out. Add a booking to an empty room by doing:<br>
+<code>add n/Pikachu p/81726354 e/pika@chu r/020 from/16/11/2018 to/20/11/2018</code></p>
 </li>
 <li>
-<p>Test case: <code>checkout r/002</code><br>
+<p>Test case: <code>checkout r/020</code><br>
 Expected: First booking is deleted. Guest of booking is not added into checked-in guest list nor archived guest list.</p>
 </li>
 </ul>
@@ -3585,11 +3601,13 @@ Expected: First booking is deleted. Guest of booking is not added into checked-i
 <div class="ulist">
 <ul>
 <li>
-<p>Prerequisites: There is a booking in the room you want to check out. Room 001 has a preloaded checked-in booking for you to test.</p>
+<p>Prerequisites: There is a booking in the room you want to check out. Add an active booking to an empty room by doing:<br>
+<code>add n/Raichu p/81726354 e/pika@chu r/021 from/16/11/2018 to/20/11/2018</code> and check-in by doing <code>checkin r/021</code></p>
 </li>
 <li>
-<p>Test case: <code>checkout r/001</code><br>
-Expected: First booking is deleted. Guest Alex Yeoh is removed from the checked-in guest list and added to the archived guest list.</p>
+<p>Test case: <code>checkout r/021</code><br>
+Expected: First booking is deleted. Guest Raichu is removed from the checked-in guest list as he does not have any other checked-in bookings,
+and is added to the archived guest list.</p>
 </li>
 </ul>
 </div>
@@ -3599,16 +3617,32 @@ Expected: First booking is deleted. Guest Alex Yeoh is removed from the checked-
 <div class="ulist">
 <ul>
 <li>
-<p>Prerequisites: There is a booking in the room you want to check out. Room 003 has a preloaded upcoming booking for you to test.</p>
+<p>Prerequisites: There is a booking in the room you want to check out. Add a booking to an empty room by doing:<br>
+<code>add n/Pichu p/81726354 e/pika@chu r/022 from/16/11/2018 to/20/11/2018</code></p>
 </li>
 <li>
-<p>Test case: <code>checkout r/003 from/14/11/18</code><br>
-Expected: Booking is deleted. Guest of booking is not added into checked-in guest list nor archived guest list.</p>
+<p>Test case: <code>checkout r/022 from/16/11/18</code><br>
+Expected: Booking is deleted. Guest Pichu is not added into checked-in guest list nor archived guest list.</p>
 </li>
 </ul>
 </div>
 </li>
+<li>
+<p>Refer to the user guide to test more edge cases</p>
+</li>
 </ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+These instructions only provide a starting point for testers to work on; testers are expected to do more <em>exploratory</em> testing.
+</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="sect2">
@@ -3619,15 +3653,16 @@ Expected: Booking is deleted. Guest of booking is not added into checked-in gues
 <div class="ulist">
 <ul>
 <li>
-<p>Reassigning a non-checked-in booking to another</p>
+<p>Reassigning a booking to another room</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Prerequisites: There is a booking in the room you want to reassign. Room 004 has a preloaded booking for you to test.</p>
+<p>Prerequisites: There is a booking in the room you want to reassign. Room 001 with its preloaded bookings and expenses is a good example to test this.</p>
 </li>
 <li>
-<p>Test case: <code>reassign r/004 from/12/11/18 nr/007</code><br>
-Expected: Booking in room 004 that starts from 12/11/18 is reassigned to room 007 (which has no bookings prior).</p>
+<p>Test case: <code>reassign r/001 from/16/11/18 nr/030</code><br>
+Expected: Booking in room 001 that starts from 16/11/18 is reassigned to room 030 (which has no bookings prior). Expenses from room 001 are
+also ported over.</p>
 </li>
 </ul>
 </div>
@@ -3637,15 +3672,36 @@ Expected: Booking in room 004 that starts from 12/11/18 is reassigned to room 00
 <div class="ulist">
 <ul>
 <li>
-<p><code>reassign r/001 from/32/11/18 nr/002</code> (no such date)</p>
+<p><code>reassign r/001 from/32/11/18 nr/002</code> (invalid command, no such date)</p>
 </li>
 <li>
-<p><code>reassign r/005 from/12/11/18 nr/101</code> (no such rooms)</p>
+<p><code>reassign r/005 from/12/11/18 nr/101</code> (invalid command, no such new room)</p>
+</li>
+<li>
+<p><code>reassign r/006 from/1/1/18 nr/007</code> (room 006 has no such booking)</p>
+</li>
+<li>
+<p><code>reassign r/006 from/9/11/18 nr/007</code> (cannot reassign booking, because room 006 booking is expired)</p>
 </li>
 </ul>
 </div>
 </li>
+<li>
+<p>Refer to the user guide to test more edge cases</p>
+</li>
 </ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+These instructions only provide a starting point for testers to work on; testers are expected to do more <em>exploratory</em> testing.
+</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="sect2">
@@ -3894,4 +3950,4 @@ Expected: The most recent window size and location is retained.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 16:56:33 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-13 10:37:21 UTC</div></div></div></body></html>
